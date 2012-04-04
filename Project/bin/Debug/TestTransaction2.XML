@@ -1,0 +1,2965 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TestTransaction2</name>
+    </assembly>
+    <members>
+        <member name="T:customerInfo">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.ssn">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.dob">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.dobSpecified">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerRegistrationDate">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerRegistrationDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerType">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.incomeAmount">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.incomeAmountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.incomeCurrency">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerCheckingAccount">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerCheckingAccountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerSavingAccount">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerSavingAccountSpecified">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.employerName">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.customerWorkTelephone">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.residenceStatus">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.residenceStatusSpecified">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.yearsAtResidence">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.yearsAtResidenceSpecified">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.yearsAtEmployer">
+            <remarks/>
+        </member>
+        <member name="P:customerInfo.yearsAtEmployerSpecified">
+            <remarks/>
+        </member>
+        <member name="T:customerInfoCustomerType">
+            <remarks/>
+        </member>
+        <member name="F:customerInfoCustomerType.New">
+            <remarks/>
+        </member>
+        <member name="F:customerInfoCustomerType.Existing">
+            <remarks/>
+        </member>
+        <member name="T:currencyCodeEnum">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.AUD">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.CAD">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.CHF">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.DKK">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.EUR">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.GBP">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.HKD">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.JPY">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.NOK">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.NZD">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.SEK">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.SGD">
+            <remarks/>
+        </member>
+        <member name="F:currencyCodeEnum.USD">
+            <remarks/>
+        </member>
+        <member name="T:customerInfoResidenceStatus">
+            <remarks/>
+        </member>
+        <member name="F:customerInfoResidenceStatus.Own">
+            <remarks/>
+        </member>
+        <member name="F:customerInfoResidenceStatus.Rent">
+            <remarks/>
+        </member>
+        <member name="F:customerInfoResidenceStatus.Other">
+            <remarks/>
+        </member>
+        <member name="T:baseRequest">
+            <remarks/>
+        </member>
+        <member name="P:baseRequest.authentication">
+            <remarks/>
+        </member>
+        <member name="P:baseRequest.Item">
+            <remarks/>
+        </member>
+        <member name="P:baseRequest.version">
+            <remarks/>
+        </member>
+        <member name="T:authentication">
+            <remarks/>
+        </member>
+        <member name="P:authentication.user">
+            <remarks/>
+        </member>
+        <member name="P:authentication.password">
+            <remarks/>
+        </member>
+        <member name="T:authReversal">
+            <remarks/>
+        </member>
+        <member name="T:transactionTypeWithReportGroup">
+            <remarks/>
+        </member>
+        <member name="T:transactionType">
+            <remarks/>
+        </member>
+        <member name="P:transactionType.id">
+            <remarks/>
+        </member>
+        <member name="P:transactionType.customerId">
+            <remarks/>
+        </member>
+        <member name="P:transactionTypeWithReportGroup.reportGroup">
+            <remarks/>
+        </member>
+        <member name="P:authReversal.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:authReversal.amount">
+            <remarks/>
+        </member>
+        <member name="P:authReversal.payPalNotes">
+            <remarks/>
+        </member>
+        <member name="T:transactionTypeOptionReportGroup">
+            <remarks/>
+        </member>
+        <member name="P:transactionTypeOptionReportGroup.reportGroup">
+            <remarks/>
+        </member>
+        <member name="T:transactionTypeWithReportGroupAndPartial">
+            <remarks/>
+        </member>
+        <member name="P:transactionTypeWithReportGroupAndPartial.reportGroup">
+            <remarks/>
+        </member>
+        <member name="P:transactionTypeWithReportGroupAndPartial.partial">
+            <remarks/>
+        </member>
+        <member name="P:transactionTypeWithReportGroupAndPartial.partialSpecified">
+            <remarks/>
+        </member>
+        <member name="T:authorization">
+            <remarks/>
+        </member>
+        <member name="P:authorization.Items">
+            <remarks/>
+        </member>
+        <member name="P:authorization.ItemsElementName">
+            <remarks/>
+        </member>
+        <member name="T:amexAggregatorData">
+            <remarks/>
+        </member>
+        <member name="P:amexAggregatorData.sellerId">
+            <remarks/>
+        </member>
+        <member name="P:amexAggregatorData.sellerMerchantCategoryCode">
+            <remarks/>
+        </member>
+        <member name="T:billMeLaterRequest">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.bmlMerchantId">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.bmlMerchantIdSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.bmlProductType">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.termsAndConditions">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.termsAndConditionsSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.preapprovalNumber">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.merchantPromotionalCode">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.merchantPromotionalCodeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.customerPasswordChanged">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.customerPasswordChangedSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.customerBillingAddressChanged">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.customerBillingAddressChangedSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.customerEmailChanged">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.customerEmailChangedSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.customerPhoneChanged">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.customerPhoneChangedSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.secretQuestionCode">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.secretQuestionAnswer">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.virtualAuthenticationKeyPresenceIndicator">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.virtualAuthenticationKeyData">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.itemCategoryCode">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.itemCategoryCodeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterRequest.authorizationSourcePlatform">
+            <remarks/>
+        </member>
+        <member name="T:contact">
+            <remarks/>
+        </member>
+        <member name="P:contact.name">
+            <remarks/>
+        </member>
+        <member name="P:contact.firstName">
+            <remarks/>
+        </member>
+        <member name="P:contact.middleInitial">
+            <remarks/>
+        </member>
+        <member name="P:contact.lastName">
+            <remarks/>
+        </member>
+        <member name="P:contact.companyName">
+            <remarks/>
+        </member>
+        <member name="P:contact.addressLine1">
+            <remarks/>
+        </member>
+        <member name="P:contact.addressLine2">
+            <remarks/>
+        </member>
+        <member name="P:contact.addressLine3">
+            <remarks/>
+        </member>
+        <member name="P:contact.city">
+            <remarks/>
+        </member>
+        <member name="P:contact.state">
+            <remarks/>
+        </member>
+        <member name="P:contact.zip">
+            <remarks/>
+        </member>
+        <member name="P:contact.country">
+            <remarks/>
+        </member>
+        <member name="P:contact.countrySpecified">
+            <remarks/>
+        </member>
+        <member name="P:contact.email">
+            <remarks/>
+        </member>
+        <member name="P:contact.phone">
+            <remarks/>
+        </member>
+        <member name="T:countryTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.USA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AX">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.DZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AD">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AQ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BD">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BB">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BJ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BQ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BV">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CV">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TD">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CX">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CC">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CD">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.HR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.DK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.DJ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.DM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.DO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.EC">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.EG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SV">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GQ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ER">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.EE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ET">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.FK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.FO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.FJ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.FI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.FR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.DE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GD">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GP">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.HT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.HM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.HN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.HK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.HU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ID">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IQ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.IT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.JM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.JP">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.JE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.JO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KP">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LV">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LB">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MV">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ML">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MQ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.YT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MX">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.FM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MD">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MC">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NP">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NC">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MP">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.NO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.OM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.QA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.RE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.RO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.RU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.RW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.BL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.KN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LC">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.MF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.VC">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.WS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ST">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SC">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SL">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SX">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SB">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ZA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ES">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.LK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.PM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SD">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SJ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.CH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.SY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TJ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TK">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TO">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TT">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TR">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TC">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.TV">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.UG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.UA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.AE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.GB">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.US">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.UM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.UY">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.UZ">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.VU">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.VA">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.VE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.VN">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.VG">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.VI">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.WF">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.EH">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.YE">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ZM">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ZW">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.RS">
+            <remarks/>
+        </member>
+        <member name="F:countryTypeEnum.ME">
+            <remarks/>
+        </member>
+        <member name="T:cardType">
+            <remarks/>
+        </member>
+        <member name="P:cardType.Items">
+            <remarks/>
+        </member>
+        <member name="P:cardType.ItemsElementName">
+            <remarks/>
+        </member>
+        <member name="P:cardType.cardValidationNum">
+            <remarks/>
+        </member>
+        <member name="T:methodOfPaymentTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.MC">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.VI">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.AX">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.DC">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.DI">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.PP">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.JC">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.BL">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.EC">
+            <remarks/>
+        </member>
+        <member name="F:methodOfPaymentTypeEnum.Item">
+            <remarks/>
+        </member>
+        <member name="T:ItemsChoiceType">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType.expDate">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType.number">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType.track">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType.type">
+            <remarks/>
+        </member>
+        <member name="T:fraudCheckType">
+            <remarks/>
+        </member>
+        <member name="P:fraudCheckType.authenticationValue">
+            <remarks/>
+        </member>
+        <member name="P:fraudCheckType.authenticationTransactionId">
+            <remarks/>
+        </member>
+        <member name="P:fraudCheckType.customerIpAddress">
+            <remarks/>
+        </member>
+        <member name="P:fraudCheckType.authenticatedByMerchant">
+            <remarks/>
+        </member>
+        <member name="P:fraudCheckType.authenticatedByMerchantSpecified">
+            <remarks/>
+        </member>
+        <member name="T:customBilling">
+            <remarks/>
+        </member>
+        <member name="P:customBilling.Item">
+            <remarks/>
+        </member>
+        <member name="P:customBilling.ItemElementName">
+            <remarks/>
+        </member>
+        <member name="P:customBilling.descriptor">
+            <remarks/>
+        </member>
+        <member name="T:ItemChoiceType1">
+            <remarks/>
+        </member>
+        <member name="F:ItemChoiceType1.city">
+            <remarks/>
+        </member>
+        <member name="F:ItemChoiceType1.phone">
+            <remarks/>
+        </member>
+        <member name="F:ItemChoiceType1.url">
+            <remarks/>
+        </member>
+        <member name="T:enhancedData">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.customerReference">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.salesTax">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.deliveryType">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.taxExempt">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.taxExemptSpecified">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.discountAmount">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.shippingAmount">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.dutyAmount">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.shipFromPostalCode">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.destinationPostalCode">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.destinationCountryCode">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.destinationCountryCodeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.invoiceReferenceNumber">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.orderDate">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.orderDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.detailTax">
+            <remarks/>
+        </member>
+        <member name="P:enhancedData.lineItemData">
+            <remarks/>
+        </member>
+        <member name="T:enhancedDataDeliveryType">
+            <remarks/>
+        </member>
+        <member name="F:enhancedDataDeliveryType.CNC">
+            <remarks/>
+        </member>
+        <member name="F:enhancedDataDeliveryType.DIG">
+            <remarks/>
+        </member>
+        <member name="F:enhancedDataDeliveryType.PHY">
+            <remarks/>
+        </member>
+        <member name="F:enhancedDataDeliveryType.SVC">
+            <remarks/>
+        </member>
+        <member name="F:enhancedDataDeliveryType.TBD">
+            <remarks/>
+        </member>
+        <member name="T:detailTax">
+            <remarks/>
+        </member>
+        <member name="P:detailTax.taxIncludedInTotal">
+            <remarks/>
+        </member>
+        <member name="P:detailTax.taxIncludedInTotalSpecified">
+            <remarks/>
+        </member>
+        <member name="P:detailTax.taxAmount">
+            <remarks/>
+        </member>
+        <member name="P:detailTax.taxRate">
+            <remarks/>
+        </member>
+        <member name="P:detailTax.taxRateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:detailTax.taxTypeIdentifier">
+            <remarks/>
+        </member>
+        <member name="P:detailTax.taxTypeIdentifierSpecified">
+            <remarks/>
+        </member>
+        <member name="P:detailTax.cardAcceptorTaxId">
+            <remarks/>
+        </member>
+        <member name="T:taxTypeIdentifierEnum">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item00">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item01">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item02">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item03">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item04">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item05">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item06">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item10">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item11">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item12">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item13">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item14">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item20">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item21">
+            <remarks/>
+        </member>
+        <member name="F:taxTypeIdentifierEnum.Item22">
+            <remarks/>
+        </member>
+        <member name="T:lineItemData">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.itemSequenceNumber">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.itemDescription">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.productCode">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.quantity">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.quantitySpecified">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.unitOfMeasure">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.taxAmount">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.lineItemTotal">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.lineItemTotalWithTax">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.itemDiscountAmount">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.commodityCode">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.unitCost">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.unitCostSpecified">
+            <remarks/>
+        </member>
+        <member name="P:lineItemData.detailTax">
+            <remarks/>
+        </member>
+        <member name="T:filteringType">
+            <remarks/>
+        </member>
+        <member name="P:filteringType.prepaid">
+            <remarks/>
+        </member>
+        <member name="P:filteringType.prepaidSpecified">
+            <remarks/>
+        </member>
+        <member name="P:filteringType.international">
+            <remarks/>
+        </member>
+        <member name="P:filteringType.internationalSpecified">
+            <remarks/>
+        </member>
+        <member name="P:filteringType.chargeback">
+            <remarks/>
+        </member>
+        <member name="P:filteringType.chargebackSpecified">
+            <remarks/>
+        </member>
+        <member name="T:healthcareIIAS">
+            <remarks/>
+        </member>
+        <member name="P:healthcareIIAS.healthcareAmounts">
+            <remarks/>
+        </member>
+        <member name="P:healthcareIIAS.IIASFlag">
+            <remarks/>
+        </member>
+        <member name="T:healthcareAmounts">
+            <remarks/>
+        </member>
+        <member name="P:healthcareAmounts.totalHealthcareAmount">
+            <remarks/>
+        </member>
+        <member name="P:healthcareAmounts.RxAmount">
+            <remarks/>
+        </member>
+        <member name="P:healthcareAmounts.visionAmount">
+            <remarks/>
+        </member>
+        <member name="P:healthcareAmounts.clinicOtherAmount">
+            <remarks/>
+        </member>
+        <member name="P:healthcareAmounts.dentalAmount">
+            <remarks/>
+        </member>
+        <member name="T:IIASFlagType">
+            <remarks/>
+        </member>
+        <member name="F:IIASFlagType.Y">
+            <remarks/>
+        </member>
+        <member name="T:orderSourceType">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.ecommerce">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.installment">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.mailorder">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.recurring">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.retail">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.telephone">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.Item3dsAuthenticated">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.Item3dsAttempted">
+            <remarks/>
+        </member>
+        <member name="F:orderSourceType.recurringtel">
+            <remarks/>
+        </member>
+        <member name="T:cardPaypageType">
+            <remarks/>
+        </member>
+        <member name="P:cardPaypageType.paypageRegistrationId">
+            <remarks/>
+        </member>
+        <member name="P:cardPaypageType.expDate">
+            <remarks/>
+        </member>
+        <member name="P:cardPaypageType.cardValidationNum">
+            <remarks/>
+        </member>
+        <member name="P:cardPaypageType.type">
+            <remarks/>
+        </member>
+        <member name="P:cardPaypageType.typeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:payPal">
+            <remarks/>
+        </member>
+        <member name="P:payPal.payerId">
+            <remarks/>
+        </member>
+        <member name="P:payPal.token">
+            <remarks/>
+        </member>
+        <member name="P:payPal.transactionId">
+            <remarks/>
+        </member>
+        <member name="T:pos">
+            <remarks/>
+        </member>
+        <member name="P:pos.capability">
+            <remarks/>
+        </member>
+        <member name="P:pos.entryMode">
+            <remarks/>
+        </member>
+        <member name="P:pos.cardholderId">
+            <remarks/>
+        </member>
+        <member name="T:posCapabilityTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:posCapabilityTypeEnum.notused">
+            <remarks/>
+        </member>
+        <member name="F:posCapabilityTypeEnum.magstripe">
+            <remarks/>
+        </member>
+        <member name="F:posCapabilityTypeEnum.keyedonly">
+            <remarks/>
+        </member>
+        <member name="T:posEntryModeTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:posEntryModeTypeEnum.notused">
+            <remarks/>
+        </member>
+        <member name="F:posEntryModeTypeEnum.keyed">
+            <remarks/>
+        </member>
+        <member name="F:posEntryModeTypeEnum.track1">
+            <remarks/>
+        </member>
+        <member name="F:posEntryModeTypeEnum.track2">
+            <remarks/>
+        </member>
+        <member name="F:posEntryModeTypeEnum.completeread">
+            <remarks/>
+        </member>
+        <member name="T:posCardholderIdTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:posCardholderIdTypeEnum.signature">
+            <remarks/>
+        </member>
+        <member name="F:posCardholderIdTypeEnum.pin">
+            <remarks/>
+        </member>
+        <member name="F:posCardholderIdTypeEnum.nopin">
+            <remarks/>
+        </member>
+        <member name="F:posCardholderIdTypeEnum.directmarket">
+            <remarks/>
+        </member>
+        <member name="T:processingInstructions">
+            <remarks/>
+        </member>
+        <member name="P:processingInstructions.bypassVelocityCheck">
+            <remarks/>
+        </member>
+        <member name="P:processingInstructions.bypassVelocityCheckSpecified">
+            <remarks/>
+        </member>
+        <member name="T:taxBilling">
+            <remarks/>
+        </member>
+        <member name="P:taxBilling.taxAuthority">
+            <remarks/>
+        </member>
+        <member name="P:taxBilling.state">
+            <remarks/>
+        </member>
+        <member name="P:taxBilling.govtTxnType">
+            <remarks/>
+        </member>
+        <member name="T:govtTaxTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:govtTaxTypeEnum.payment">
+            <remarks/>
+        </member>
+        <member name="F:govtTaxTypeEnum.fee">
+            <remarks/>
+        </member>
+        <member name="T:cardTokenType">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenType.litleToken">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenType.expDate">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenType.cardValidationNum">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenType.type">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenType.typeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:ItemsChoiceType1">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.allowPartialAuth">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.amexAggregatorData">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.amount">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.billMeLaterRequest">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.billToAddress">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.card">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.cardholderAuthentication">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.customBilling">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.customerInfo">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.enhancedData">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.filtering">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.healthcareIIAS">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.orderId">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.orderSource">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.paypage">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.paypal">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.pos">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.processingInstructions">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.shipToAddress">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.taxBilling">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType1.token">
+            <remarks/>
+        </member>
+        <member name="T:capture">
+            <remarks/>
+        </member>
+        <member name="P:capture.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:capture.amount">
+            <remarks/>
+        </member>
+        <member name="P:capture.enhancedData">
+            <remarks/>
+        </member>
+        <member name="P:capture.processingInstructions">
+            <remarks/>
+        </member>
+        <member name="P:capture.payPalOrderComplete">
+            <remarks/>
+        </member>
+        <member name="P:capture.payPalOrderCompleteSpecified">
+            <remarks/>
+        </member>
+        <member name="P:capture.payPalNotes">
+            <remarks/>
+        </member>
+        <member name="T:captureGivenAuth">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.orderId">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.authInformation">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.amount">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.orderSource">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.billToAddress">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.shipToAddress">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.Item">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.customBilling">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.taxBilling">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.billMeLaterRequest">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.enhancedData">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.processingInstructions">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.pos">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuth.amexAggregatorData">
+            <remarks/>
+        </member>
+        <member name="T:authInformation">
+            <remarks/>
+        </member>
+        <member name="P:authInformation.authDate">
+            <remarks/>
+        </member>
+        <member name="P:authInformation.authCode">
+            <remarks/>
+        </member>
+        <member name="P:authInformation.fraudResult">
+            <remarks/>
+        </member>
+        <member name="P:authInformation.authAmount">
+            <remarks/>
+        </member>
+        <member name="T:fraudResult">
+            <remarks/>
+        </member>
+        <member name="P:fraudResult.avsResult">
+            <remarks/>
+        </member>
+        <member name="P:fraudResult.cardValidationResult">
+            <remarks/>
+        </member>
+        <member name="P:fraudResult.authenticationResult">
+            <remarks/>
+        </member>
+        <member name="P:fraudResult.advancedAVSResult">
+            <remarks/>
+        </member>
+        <member name="T:credit">
+            <remarks/>
+        </member>
+        <member name="P:credit.Items">
+            <remarks/>
+        </member>
+        <member name="P:credit.ItemsElementName">
+            <remarks/>
+        </member>
+        <member name="P:credit.payPalNotes">
+            <remarks/>
+        </member>
+        <member name="T:creditPaypal">
+            <remarks/>
+        </member>
+        <member name="P:creditPaypal.Item">
+            <remarks/>
+        </member>
+        <member name="P:creditPaypal.ItemElementName">
+            <remarks/>
+        </member>
+        <member name="T:ItemChoiceType2">
+            <remarks/>
+        </member>
+        <member name="F:ItemChoiceType2.payerEmail">
+            <remarks/>
+        </member>
+        <member name="F:ItemChoiceType2.payerId">
+            <remarks/>
+        </member>
+        <member name="T:ItemsChoiceType2">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.amexAggregatorData">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.amount">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.billMeLaterRequest">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.billToAddress">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.card">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.customBilling">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.enhancedData">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.orderId">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.orderSource">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.paypage">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.paypal">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.pos">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.processingInstructions">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.taxBilling">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType2.token">
+            <remarks/>
+        </member>
+        <member name="T:baseRequestTransactionEcheckCredit">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckCredit.Items">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckCredit.ItemsElementName">
+            <remarks/>
+        </member>
+        <member name="T:echeckType">
+            <remarks/>
+        </member>
+        <member name="P:echeckType.accType">
+            <remarks/>
+        </member>
+        <member name="P:echeckType.accNum">
+            <remarks/>
+        </member>
+        <member name="P:echeckType.routingNum">
+            <remarks/>
+        </member>
+        <member name="P:echeckType.checkNum">
+            <remarks/>
+        </member>
+        <member name="T:echeckAccountTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:echeckAccountTypeEnum.Checking">
+            <remarks/>
+        </member>
+        <member name="F:echeckAccountTypeEnum.Savings">
+            <remarks/>
+        </member>
+        <member name="F:echeckAccountTypeEnum.Corporate">
+            <remarks/>
+        </member>
+        <member name="F:echeckAccountTypeEnum.CorpSavings">
+            <remarks/>
+        </member>
+        <member name="T:echeckTokenType">
+            <remarks/>
+        </member>
+        <member name="P:echeckTokenType.litleToken">
+            <remarks/>
+        </member>
+        <member name="P:echeckTokenType.routingNum">
+            <remarks/>
+        </member>
+        <member name="P:echeckTokenType.accType">
+            <remarks/>
+        </member>
+        <member name="P:echeckTokenType.checkNum">
+            <remarks/>
+        </member>
+        <member name="T:ItemsChoiceType4">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.amount">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.billToAddress">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.customBilling">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.echeck">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.echeckOrEcheckToken">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.echeckToken">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.orderId">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType4.orderSource">
+            <remarks/>
+        </member>
+        <member name="T:baseRequestTransactionEcheckRedeposit">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckRedeposit.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckRedeposit.Item">
+            <remarks/>
+        </member>
+        <member name="T:echeckSale">
+            <remarks/>
+        </member>
+        <member name="P:echeckSale.Items">
+            <remarks/>
+        </member>
+        <member name="P:echeckSale.ItemsElementName">
+            <remarks/>
+        </member>
+        <member name="T:ItemsChoiceType5">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.amount">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.billToAddress">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.customBilling">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.echeck">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.echeckOrEcheckToken">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.echeckToken">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.orderId">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.orderSource">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.shipToAddress">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType5.verify">
+            <remarks/>
+        </member>
+        <member name="T:baseRequestTransactionEcheckVerification">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckVerification.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckVerification.litleTxnIdSpecified">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckVerification.orderId">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckVerification.amount">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckVerification.orderSource">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckVerification.billToAddress">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckVerification.Item">
+            <remarks/>
+        </member>
+        <member name="T:baseRequestTransactionEcheckVoid">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionEcheckVoid.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="T:forceCapture">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.orderId">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.amount">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.orderSource">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.billToAddress">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.Item">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.customBilling">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.taxBilling">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.enhancedData">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.processingInstructions">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.pos">
+            <remarks/>
+        </member>
+        <member name="P:forceCapture.amexAggregatorData">
+            <remarks/>
+        </member>
+        <member name="T:registerTokenRequestType">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenRequestType.orderId">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenRequestType.Item">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenRequestType.ItemElementName">
+            <remarks/>
+        </member>
+        <member name="T:echeckForTokenType">
+            <remarks/>
+        </member>
+        <member name="P:echeckForTokenType.accNum">
+            <remarks/>
+        </member>
+        <member name="P:echeckForTokenType.routingNum">
+            <remarks/>
+        </member>
+        <member name="T:ItemChoiceType">
+            <remarks/>
+        </member>
+        <member name="F:ItemChoiceType.accountNumber">
+            <remarks/>
+        </member>
+        <member name="F:ItemChoiceType.echeckForToken">
+            <remarks/>
+        </member>
+        <member name="F:ItemChoiceType.paypageRegistrationId">
+            <remarks/>
+        </member>
+        <member name="T:sale">
+            <remarks/>
+        </member>
+        <member name="P:sale.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:sale.litleTxnIdSpecified">
+            <remarks/>
+        </member>
+        <member name="P:sale.orderId">
+            <remarks/>
+        </member>
+        <member name="P:sale.amount">
+            <remarks/>
+        </member>
+        <member name="P:sale.orderSource">
+            <remarks/>
+        </member>
+        <member name="P:sale.customerInfo">
+            <remarks/>
+        </member>
+        <member name="P:sale.billToAddress">
+            <remarks/>
+        </member>
+        <member name="P:sale.shipToAddress">
+            <remarks/>
+        </member>
+        <member name="P:sale.Item">
+            <remarks/>
+        </member>
+        <member name="P:sale.billMeLaterRequest">
+            <remarks/>
+        </member>
+        <member name="P:sale.Item1">
+            <remarks/>
+        </member>
+        <member name="P:sale.Item1ElementName">
+            <remarks/>
+        </member>
+        <member name="P:sale.customBilling">
+            <remarks/>
+        </member>
+        <member name="P:sale.taxBilling">
+            <remarks/>
+        </member>
+        <member name="P:sale.enhancedData">
+            <remarks/>
+        </member>
+        <member name="P:sale.processingInstructions">
+            <remarks/>
+        </member>
+        <member name="P:sale.pos">
+            <remarks/>
+        </member>
+        <member name="P:sale.payPalOrderComplete">
+            <remarks/>
+        </member>
+        <member name="P:sale.payPalOrderCompleteSpecified">
+            <remarks/>
+        </member>
+        <member name="P:sale.payPalNotes">
+            <remarks/>
+        </member>
+        <member name="P:sale.amexAggregatorData">
+            <remarks/>
+        </member>
+        <member name="P:sale.allowPartialAuth">
+            <remarks/>
+        </member>
+        <member name="P:sale.allowPartialAuthSpecified">
+            <remarks/>
+        </member>
+        <member name="P:sale.healthcareIIAS">
+            <remarks/>
+        </member>
+        <member name="P:sale.filtering">
+            <remarks/>
+        </member>
+        <member name="T:Item1ChoiceType">
+            <remarks/>
+        </member>
+        <member name="F:Item1ChoiceType.cardholderAuthentication">
+            <remarks/>
+        </member>
+        <member name="F:Item1ChoiceType.fraudCheck">
+            <remarks/>
+        </member>
+        <member name="T:baseRequestTransactionVoid">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionVoid.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:baseRequestTransactionVoid.processingInstructions">
+            <remarks/>
+        </member>
+        <member name="T:driversLicenseInfo">
+            <remarks/>
+        </member>
+        <member name="P:driversLicenseInfo.licenseNumber">
+            <remarks/>
+        </member>
+        <member name="P:driversLicenseInfo.state">
+            <remarks/>
+        </member>
+        <member name="P:driversLicenseInfo.dateOfBirth">
+            <remarks/>
+        </member>
+        <member name="T:recycleAdviceType">
+            <remarks/>
+        </member>
+        <member name="P:recycleAdviceType.Item">
+            <remarks/>
+        </member>
+        <member name="T:recyclingType">
+            <remarks/>
+        </member>
+        <member name="P:recyclingType.recycleAdvice">
+            <remarks/>
+        </member>
+        <member name="T:tokenResponseType">
+            <remarks/>
+        </member>
+        <member name="P:tokenResponseType.litleToken">
+            <remarks/>
+        </member>
+        <member name="P:tokenResponseType.tokenResponseCode">
+            <remarks/>
+        </member>
+        <member name="P:tokenResponseType.tokenMessage">
+            <remarks/>
+        </member>
+        <member name="P:tokenResponseType.type">
+            <remarks/>
+        </member>
+        <member name="P:tokenResponseType.typeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:tokenResponseType.bin">
+            <remarks/>
+        </member>
+        <member name="P:tokenResponseType.eCheckAccountSuffix">
+            <remarks/>
+        </member>
+        <member name="T:cardTokenInfoType">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenInfoType.litleToken">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenInfoType.type">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenInfoType.expDate">
+            <remarks/>
+        </member>
+        <member name="P:cardTokenInfoType.bin">
+            <remarks/>
+        </member>
+        <member name="T:extendedCardResponseType">
+            <remarks/>
+        </member>
+        <member name="P:extendedCardResponseType.message">
+            <remarks/>
+        </member>
+        <member name="P:extendedCardResponseType.code">
+            <remarks/>
+        </member>
+        <member name="T:cardAccountInfoType">
+            <remarks/>
+        </member>
+        <member name="P:cardAccountInfoType.type">
+            <remarks/>
+        </member>
+        <member name="P:cardAccountInfoType.number">
+            <remarks/>
+        </member>
+        <member name="P:cardAccountInfoType.expDate">
+            <remarks/>
+        </member>
+        <member name="T:echeckTokenInfoType">
+            <remarks/>
+        </member>
+        <member name="P:echeckTokenInfoType.accType">
+            <remarks/>
+        </member>
+        <member name="P:echeckTokenInfoType.litleToken">
+            <remarks/>
+        </member>
+        <member name="P:echeckTokenInfoType.routingNum">
+            <remarks/>
+        </member>
+        <member name="T:echeckAccountInfoType">
+            <remarks/>
+        </member>
+        <member name="P:echeckAccountInfoType.accType">
+            <remarks/>
+        </member>
+        <member name="P:echeckAccountInfoType.accNum">
+            <remarks/>
+        </member>
+        <member name="P:echeckAccountInfoType.routingNum">
+            <remarks/>
+        </member>
+        <member name="T:accountInfoType">
+            <remarks/>
+        </member>
+        <member name="P:accountInfoType.type">
+            <remarks/>
+        </member>
+        <member name="P:accountInfoType.number">
+            <remarks/>
+        </member>
+        <member name="T:billMeLaterResponseData">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.bmlMerchantId">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.promotionalOfferCode">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.approvedTermsCode">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.approvedTermsCodeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.creditLine">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.addressIndicator">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.loanToValueEstimator">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.riskEstimator">
+            <remarks/>
+        </member>
+        <member name="P:billMeLaterResponseData.riskQueueAssignment">
+            <remarks/>
+        </member>
+        <member name="T:registerTokenResponse">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.litleToken">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.bin">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.type">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.typeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.eCheckAccountSuffix">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:registerTokenResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="T:authorizationResponse">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.cardProductId">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.authCode">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.authorizationResponseSubCode">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.approvedAmount">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.accountInformation">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.accountUpdater">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.fraudResult">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.billMeLaterResponseData">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.enhancedAuthResponse">
+            <remarks/>
+        </member>
+        <member name="P:authorizationResponse.recycling">
+            <remarks/>
+        </member>
+        <member name="T:accountUpdater">
+            <remarks/>
+        </member>
+        <member name="P:accountUpdater.Items">
+            <remarks/>
+        </member>
+        <member name="P:accountUpdater.ItemsElementName">
+            <remarks/>
+        </member>
+        <member name="T:ItemsChoiceType3">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.extendedCardResponse">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.newAccountInfo">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.newCardInfo">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.newCardTokenInfo">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.newTokenInfo">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.originalAccountInfo">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.originalCardInfo">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.originalCardTokenInfo">
+            <remarks/>
+        </member>
+        <member name="F:ItemsChoiceType3.originalTokenInfo">
+            <remarks/>
+        </member>
+        <member name="T:enhancedAuthResponse">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponse.fundingSource">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponse.affluence">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponse.affluenceSpecified">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponse.issuerCountry">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponse.cardProductType">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponse.cardProductTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="T:enhancedAuthResponseFundingSource">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponseFundingSource.type">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponseFundingSource.availableBalance">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponseFundingSource.reloadable">
+            <remarks/>
+        </member>
+        <member name="P:enhancedAuthResponseFundingSource.prepaidCardType">
+            <remarks/>
+        </member>
+        <member name="T:fundingSourceTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:fundingSourceTypeEnum.UNKNOWN">
+            <remarks/>
+        </member>
+        <member name="F:fundingSourceTypeEnum.PREPAID">
+            <remarks/>
+        </member>
+        <member name="F:fundingSourceTypeEnum.FSA">
+            <remarks/>
+        </member>
+        <member name="F:fundingSourceTypeEnum.CREDIT">
+            <remarks/>
+        </member>
+        <member name="F:fundingSourceTypeEnum.DEBIT">
+            <remarks/>
+        </member>
+        <member name="T:affluenceTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:affluenceTypeEnum.AFFLUENT">
+            <remarks/>
+        </member>
+        <member name="F:affluenceTypeEnum.MASSAFFLUENT">
+            <remarks/>
+        </member>
+        <member name="T:cardProductTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:cardProductTypeEnum.UNKNOWN">
+            <remarks/>
+        </member>
+        <member name="F:cardProductTypeEnum.COMMERCIAL">
+            <remarks/>
+        </member>
+        <member name="F:cardProductTypeEnum.CONSUMER">
+            <remarks/>
+        </member>
+        <member name="T:authReversalResponse">
+            <remarks/>
+        </member>
+        <member name="P:authReversalResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:authReversalResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:authReversalResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:authReversalResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:authReversalResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:authReversalResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:authReversalResponse.message">
+            <remarks/>
+        </member>
+        <member name="T:captureResponse">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.accountUpdater">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.duplicate">
+            <remarks/>
+        </member>
+        <member name="P:captureResponse.duplicateSpecified">
+            <remarks/>
+        </member>
+        <member name="T:forceCaptureResponse">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="P:forceCaptureResponse.accountUpdater">
+            <remarks/>
+        </member>
+        <member name="T:captureGivenAuthResponse">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuthResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuthResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuthResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuthResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuthResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuthResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuthResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:captureGivenAuthResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="T:saleResponse">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.cardProductId">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.authCode">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.authorizationResponseSubCode">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.approvedAmount">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.accountInformation">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.fraudResult">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.billMeLaterResponseData">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.enhancedAuthResponse">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.accountUpdater">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.recycling">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.duplicate">
+            <remarks/>
+        </member>
+        <member name="P:saleResponse.duplicateSpecified">
+            <remarks/>
+        </member>
+        <member name="T:creditResponse">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.duplicate">
+            <remarks/>
+        </member>
+        <member name="P:creditResponse.duplicateSpecified">
+            <remarks/>
+        </member>
+        <member name="T:echeckSalesResponse">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.verificationCode">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.accountUpdater">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.duplicate">
+            <remarks/>
+        </member>
+        <member name="P:echeckSalesResponse.duplicateSpecified">
+            <remarks/>
+        </member>
+        <member name="T:echeckCreditResponse">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.accountUpdater">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.duplicate">
+            <remarks/>
+        </member>
+        <member name="P:echeckCreditResponse.duplicateSpecified">
+            <remarks/>
+        </member>
+        <member name="T:echeckVerificationResponse">
+            <remarks/>
+        </member>
+        <member name="P:echeckVerificationResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:echeckVerificationResponse.orderId">
+            <remarks/>
+        </member>
+        <member name="P:echeckVerificationResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:echeckVerificationResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:echeckVerificationResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:echeckVerificationResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:echeckVerificationResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:echeckVerificationResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="T:echeckRedepositResponse">
+            <remarks/>
+        </member>
+        <member name="P:echeckRedepositResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:echeckRedepositResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:echeckRedepositResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:echeckRedepositResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:echeckRedepositResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:echeckRedepositResponse.postDateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:echeckRedepositResponse.accountUpdater">
+            <remarks/>
+        </member>
+        <member name="P:echeckRedepositResponse.tokenResponse">
+            <remarks/>
+        </member>
+        <member name="T:litleOnlineRequest">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineRequest.merchantId">
+            <remarks/>
+        </member>
+        <member name="T:litleOnlineResponse">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponse.Item">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponse.version">
+            <remarks/>
+        </member>
+        <member name="T:litleOnlineResponseTransactionResponseEcheckVoidResponse">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseEcheckVoidResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseEcheckVoidResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseEcheckVoidResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseEcheckVoidResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseEcheckVoidResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseEcheckVoidResponse.duplicate">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseEcheckVoidResponse.duplicateSpecified">
+            <remarks/>
+        </member>
+        <member name="T:litleOnlineResponseTransactionResponseVoidResponse">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseVoidResponse.litleTxnId">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseVoidResponse.response">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseVoidResponse.responseTime">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseVoidResponse.postDate">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseVoidResponse.message">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseVoidResponse.duplicate">
+            <remarks/>
+        </member>
+        <member name="P:litleOnlineResponseTransactionResponseVoidResponse.duplicateSpecified">
+            <remarks/>
+        </member>
+        <member name="T:SerializeAndDeserializeXML">
+            Simple example code to create XML from objects and objects from response XML
+        </member>
+        <member name="M:communications.HttpPost(System.String,System.String)">
+            
+            This method does a simple Http post to the URI indicated
+            This URI should be pointing at the Litle test system, a host and port will be provided by the Litle Implementations team
+            we'll need to configure access for your organization since the Litle test system is protected by firewalls
+            
+            Also note that communications to the Litle system will utilize HTTPS for secure transmission of data
+            
+            Error handling is omitted for this simple example 
+            However communication errors are something that should be handled according to your needs
+        </member>
+    </members>
+</doc>
