@@ -13,3 +13,6 @@ C:\Documents and Settings\rganmukh\Desktop\DOT NET\C#_example_ project\TestTrans
 C:\Documents and Settings\rganmukh\Desktop\DOT NET\C#_example_ project\TestTransaction2\bin\Debug\TestTransaction2.exe
 C:\Documents and Settings\rganmukh\Desktop\DOT NET\C#_example_ project\TestTransaction2\bin\Debug\TestTransaction2.pdb
 C:\Documents and Settings\rganmukh\Desktop\DOT NET\C#_example_ project\TestTransaction2\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\msysgit\litle-sdk-for-dotNet\Project\bin\Debug\TestTransaction2.XML
+C:\msysgit\litle-sdk-for-dotNet\Project\obj\x86\Debug\TestTransaction2.exe
+C:\msysgit\litle-sdk-for-dotNet\Project\obj\x86\Debug\TestTransaction2.pdb
