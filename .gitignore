@@ -1,0 +1,6 @@
+# git ignore file
+Project.sln
+Project.suo
+Project/TestTransaction2.csproj 	
+Project/TestTransaction2.csproj.user
+Project/TestTransaction2.suo
