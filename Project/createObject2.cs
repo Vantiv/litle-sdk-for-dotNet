@@ -15,11 +15,11 @@ using System.Text;
         public static litleOnlineRequest createSaleObject()
         {
             litleOnlineRequest onlineReq = new litleOnlineRequest();
-            onlineReq.merchantId = "000052";
+            onlineReq.merchantId = "101";
             onlineReq.version = "8.8";
             authentication authentication = new authentication();
-            authentication.password = "password";
-            authentication.user = "XMLTESTV3";
+            authentication.password = "certpass";
+            authentication.user = "PHXMLTEST";
             onlineReq.authentication = authentication;
 
             sale sale = new sale();

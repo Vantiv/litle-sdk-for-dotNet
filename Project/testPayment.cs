@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Xml.XPath;
 using System.Collections.Generic;
-
+using System.Net;
 /*
  * This class calls the methods and classes to create all four sample transactions one at a time and send them to the server 
  * Also will display the request and the response onto the console
@@ -38,7 +38,7 @@ public class testPayment
         String xmlOut = SerializeAndDeserializeXML.SerializeObject(onlineReq);// create data from Object
         Console.WriteLine(xmlOut);//write the post to console
 
-        String resp = communications.HttpPost("http://l-gdake-t5500:8081/sandbox/communicator/online", xmlOut);//send data to Litle Servers
+        String resp = communications.HttpPost("https://cert.litle.com/vap/communicator/online", xmlOut);//send data to Litle Servers
         Console.WriteLine(" ");
         Console.WriteLine("--- WebClient result ---");
         Console.WriteLine(resp);//write the response to console

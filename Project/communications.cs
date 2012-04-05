@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using System.Diagnostics;
 using System.Text;
 using System.Xml.XPath;
+using System.Net;
 
 public class communications
 {
@@ -52,6 +53,10 @@ public class communications
 
         req.ContentType = "text/xml";
         req.Method = "POST";
+        WebProxy myproxy = new WebProxy("smoothproxy",8080);
+       // WebProxy myproxy = new WebProxy();
+        myproxy.BypassProxyOnLocal = true;
+        req.Proxy = myproxy;
         req.ContentLength = bytes.Length;
         return req;
     }
