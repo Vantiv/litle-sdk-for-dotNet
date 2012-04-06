@@ -20177,7 +20177,7 @@ namespace Xsd2Code.TestUnit {
         private contact shipToAddressField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private object echeckOrEcheckTokenField;
+        private object itemField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
         private customBilling customBilling1Field;
@@ -20352,20 +20352,20 @@ namespace Xsd2Code.TestUnit {
             }
         }
         
-        public object echeckOrEcheckToken {
+        public object Item {
             get {
-                return this.echeckOrEcheckTokenField;
+                return this.itemField;
             }
             set {
-                if ((this.echeckOrEcheckTokenField != null)) {
-                    if ((echeckOrEcheckTokenField.Equals(value) != true)) {
-                        this.echeckOrEcheckTokenField = value;
-                        this.OnPropertyChanged("echeckOrEcheckToken");
+                if ((this.itemField != null)) {
+                    if ((itemField.Equals(value) != true)) {
+                        this.itemField = value;
+                        this.OnPropertyChanged("Item");
                     }
                 }
                 else {
-                    this.echeckOrEcheckTokenField = value;
-                    this.OnPropertyChanged("echeckOrEcheckToken");
+                    this.itemField = value;
+                    this.OnPropertyChanged("Item");
                 }
             }
         }
@@ -20603,7 +20603,7 @@ namespace Xsd2Code.TestUnit {
         private contact billToAddressField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private object echeckOrEcheckTokenField;
+        private object itemField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
         private customBilling customBilling1Field;
@@ -20734,20 +20734,20 @@ namespace Xsd2Code.TestUnit {
             }
         }
         
-        public object echeckOrEcheckToken {
+        public object Item {
             get {
-                return this.echeckOrEcheckTokenField;
+                return this.itemField;
             }
             set {
-                if ((this.echeckOrEcheckTokenField != null)) {
-                    if ((echeckOrEcheckTokenField.Equals(value) != true)) {
-                        this.echeckOrEcheckTokenField = value;
-                        this.OnPropertyChanged("echeckOrEcheckToken");
+                if ((this.itemField != null)) {
+                    if ((itemField.Equals(value) != true)) {
+                        this.itemField = value;
+                        this.OnPropertyChanged("Item");
                     }
                 }
                 else {
-                    this.echeckOrEcheckTokenField = value;
-                    this.OnPropertyChanged("echeckOrEcheckToken");
+                    this.itemField = value;
+                    this.OnPropertyChanged("Item");
                 }
             }
         }
@@ -20982,7 +20982,7 @@ namespace Xsd2Code.TestUnit {
         private contact billToAddressField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private object echeckOrEcheckTokenField;
+        private object itemField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
         
@@ -21081,20 +21081,20 @@ namespace Xsd2Code.TestUnit {
             }
         }
         
-        public object echeckOrEcheckToken {
+        public object Item {
             get {
-                return this.echeckOrEcheckTokenField;
+                return this.itemField;
             }
             set {
-                if ((this.echeckOrEcheckTokenField != null)) {
-                    if ((echeckOrEcheckTokenField.Equals(value) != true)) {
-                        this.echeckOrEcheckTokenField = value;
-                        this.OnPropertyChanged("echeckOrEcheckToken");
+                if ((this.itemField != null)) {
+                    if ((itemField.Equals(value) != true)) {
+                        this.itemField = value;
+                        this.OnPropertyChanged("Item");
                     }
                 }
                 else {
-                    this.echeckOrEcheckTokenField = value;
-                    this.OnPropertyChanged("echeckOrEcheckToken");
+                    this.itemField = value;
+                    this.OnPropertyChanged("Item");
                 }
             }
         }
@@ -22383,7 +22383,7 @@ namespace Xsd2Code.TestUnit {
         private long litleTxnIdField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private object echeckOrEcheckTokenField;
+        private object itemField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
         
@@ -22399,20 +22399,20 @@ namespace Xsd2Code.TestUnit {
             }
         }
         
-        public object echeckOrEcheckToken {
+        public object Item {
             get {
-                return this.echeckOrEcheckTokenField;
+                return this.itemField;
             }
             set {
-                if ((this.echeckOrEcheckTokenField != null)) {
-                    if ((echeckOrEcheckTokenField.Equals(value) != true)) {
-                        this.echeckOrEcheckTokenField = value;
-                        this.OnPropertyChanged("echeckOrEcheckToken");
+                if ((this.itemField != null)) {
+                    if ((itemField.Equals(value) != true)) {
+                        this.itemField = value;
+                        this.OnPropertyChanged("Item");
                     }
                 }
                 else {
-                    this.echeckOrEcheckTokenField = value;
-                    this.OnPropertyChanged("echeckOrEcheckToken");
+                    this.itemField = value;
+                    this.OnPropertyChanged("Item");
                 }
             }
         }
@@ -22917,27 +22917,69 @@ namespace Xsd2Code.TestUnit {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class litleOnlineRequest : baseRequest, System.ComponentModel.INotifyPropertyChanged {
+    public partial class driversLicenseInfo : System.ComponentModel.INotifyPropertyChanged {
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private string merchantIdField;
+        private string licenseNumberField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string stateField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string dateOfBirthField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
         
-        public string merchantId {
+        public string licenseNumber {
             get {
-                return this.merchantIdField;
+                return this.licenseNumberField;
             }
             set {
-                if ((this.merchantIdField != null)) {
-                    if ((merchantIdField.Equals(value) != true)) {
-                        this.merchantIdField = value;
-                        this.OnPropertyChanged("merchantId");
+                if ((this.licenseNumberField != null)) {
+                    if ((licenseNumberField.Equals(value) != true)) {
+                        this.licenseNumberField = value;
+                        this.OnPropertyChanged("licenseNumber");
                     }
                 }
                 else {
-                    this.merchantIdField = value;
-                    this.OnPropertyChanged("merchantId");
+                    this.licenseNumberField = value;
+                    this.OnPropertyChanged("licenseNumber");
+                }
+            }
+        }
+        
+        public string state {
+            get {
+                return this.stateField;
+            }
+            set {
+                if ((this.stateField != null)) {
+                    if ((stateField.Equals(value) != true)) {
+                        this.stateField = value;
+                        this.OnPropertyChanged("state");
+                    }
+                }
+                else {
+                    this.stateField = value;
+                    this.OnPropertyChanged("state");
+                }
+            }
+        }
+        
+        public string dateOfBirth {
+            get {
+                return this.dateOfBirthField;
+            }
+            set {
+                if ((this.dateOfBirthField != null)) {
+                    if ((dateOfBirthField.Equals(value) != true)) {
+                        this.dateOfBirthField = value;
+                        this.OnPropertyChanged("dateOfBirth");
+                    }
+                }
+                else {
+                    this.dateOfBirthField = value;
+                    this.OnPropertyChanged("dateOfBirth");
                 }
             }
         }
@@ -22945,7 +22987,7 @@ namespace Xsd2Code.TestUnit {
         private static System.Xml.Serialization.XmlSerializer Serializer {
             get {
                 if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(litleOnlineRequest));
+                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(driversLicenseInfo));
                 }
                 return serializer;
             }
@@ -22962,7 +23004,7 @@ namespace Xsd2Code.TestUnit {
         
         #region Serialize/Deserialize
         /// <summary>
-        /// Serializes current litleOnlineRequest object into an XML document
+        /// Serializes current driversLicenseInfo object into an XML document
         /// </summary>
         /// <returns>string XML value</returns>
         public virtual string Serialize() {
@@ -22986,15 +23028,15 @@ namespace Xsd2Code.TestUnit {
         }
         
         /// <summary>
-        /// Deserializes workflow markup into an litleOnlineRequest object
+        /// Deserializes workflow markup into an driversLicenseInfo object
         /// </summary>
         /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output litleOnlineRequest object</param>
+        /// <param name="obj">Output driversLicenseInfo object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out litleOnlineRequest obj, out System.Exception exception) {
+        public static bool Deserialize(string xml, out driversLicenseInfo obj, out System.Exception exception) {
             exception = null;
-            obj = default(litleOnlineRequest);
+            obj = default(driversLicenseInfo);
             try {
                 obj = Deserialize(xml);
                 return true;
@@ -23005,16 +23047,16 @@ namespace Xsd2Code.TestUnit {
             }
         }
         
-        public static bool Deserialize(string xml, out litleOnlineRequest obj) {
+        public static bool Deserialize(string xml, out driversLicenseInfo obj) {
             System.Exception exception = null;
             return Deserialize(xml, out obj, out exception);
         }
         
-        public static litleOnlineRequest Deserialize(string xml) {
+        public static driversLicenseInfo Deserialize(string xml) {
             System.IO.StringReader stringReader = null;
             try {
                 stringReader = new System.IO.StringReader(xml);
-                return ((litleOnlineRequest)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
+                return ((driversLicenseInfo)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
             }
             finally {
                 if ((stringReader != null)) {
@@ -23024,7 +23066,7 @@ namespace Xsd2Code.TestUnit {
         }
         
         /// <summary>
-        /// Serializes current litleOnlineRequest object into file
+        /// Serializes current driversLicenseInfo object into file
         /// </summary>
         /// <param name="fileName">full path of outupt xml file</param>
         /// <param name="exception">output Exception value if failed</param>
@@ -23058,15 +23100,15 @@ namespace Xsd2Code.TestUnit {
         }
         
         /// <summary>
-        /// Deserializes xml markup from file into an litleOnlineRequest object
+        /// Deserializes xml markup from file into an driversLicenseInfo object
         /// </summary>
         /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output litleOnlineRequest object</param>
+        /// <param name="obj">Output driversLicenseInfo object</param>
         /// <param name="exception">output Exception value if deserialize failed</param>
         /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out litleOnlineRequest obj, out System.Exception exception) {
+        public static bool LoadFromFile(string fileName, out driversLicenseInfo obj, out System.Exception exception) {
             exception = null;
-            obj = default(litleOnlineRequest);
+            obj = default(driversLicenseInfo);
             try {
                 obj = LoadFromFile(fileName);
                 return true;
@@ -23077,12 +23119,12 @@ namespace Xsd2Code.TestUnit {
             }
         }
         
-        public static bool LoadFromFile(string fileName, out litleOnlineRequest obj) {
+        public static bool LoadFromFile(string fileName, out driversLicenseInfo obj) {
             System.Exception exception = null;
             return LoadFromFile(fileName, out obj, out exception);
         }
         
-        public static litleOnlineRequest LoadFromFile(string fileName) {
+        public static driversLicenseInfo LoadFromFile(string fileName) {
             System.IO.FileStream file = null;
             System.IO.StreamReader sr = null;
             try {
@@ -23106,1519 +23148,10 @@ namespace Xsd2Code.TestUnit {
         
         #region Clone method
         /// <summary>
-        /// Create a clone of this litleOnlineRequest object
+        /// Create a clone of this driversLicenseInfo object
         /// </summary>
-        public virtual litleOnlineRequest Clone() {
-            return ((litleOnlineRequest)(this.MemberwiseClone()));
-        }
-        #endregion
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class baseRequest : System.ComponentModel.INotifyPropertyChanged {
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private authentication authenticationField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private transactionTypeWithReportGroup itemField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private string versionField;
-        
-        private static System.Xml.Serialization.XmlSerializer serializer;
-        
-        public baseRequest() {
-            this.itemField = new transactionTypeWithReportGroup();
-            this.authenticationField = new authentication();
-        }
-        
-        public authentication authentication {
-            get {
-                return this.authenticationField;
-            }
-            set {
-                if ((this.authenticationField != null)) {
-                    if ((authenticationField.Equals(value) != true)) {
-                        this.authenticationField = value;
-                        this.OnPropertyChanged("authentication");
-                    }
-                }
-                else {
-                    this.authenticationField = value;
-                    this.OnPropertyChanged("authentication");
-                }
-            }
-        }
-        
-        public transactionTypeWithReportGroup Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                if ((this.itemField != null)) {
-                    if ((itemField.Equals(value) != true)) {
-                        this.itemField = value;
-                        this.OnPropertyChanged("Item");
-                    }
-                }
-                else {
-                    this.itemField = value;
-                    this.OnPropertyChanged("Item");
-                }
-            }
-        }
-        
-        public string version {
-            get {
-                return this.versionField;
-            }
-            set {
-                if ((this.versionField != null)) {
-                    if ((versionField.Equals(value) != true)) {
-                        this.versionField = value;
-                        this.OnPropertyChanged("version");
-                    }
-                }
-                else {
-                    this.versionField = value;
-                    this.OnPropertyChanged("version");
-                }
-            }
-        }
-        
-        private static System.Xml.Serialization.XmlSerializer Serializer {
-            get {
-                if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(baseRequest));
-                }
-                return serializer;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        #region Serialize/Deserialize
-        /// <summary>
-        /// Serializes current baseRequest object into an XML document
-        /// </summary>
-        /// <returns>string XML value</returns>
-        public virtual string Serialize() {
-            System.IO.StreamReader streamReader = null;
-            System.IO.MemoryStream memoryStream = null;
-            try {
-                memoryStream = new System.IO.MemoryStream();
-                Serializer.Serialize(memoryStream, this);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                streamReader = new System.IO.StreamReader(memoryStream);
-                return streamReader.ReadToEnd();
-            }
-            finally {
-                if ((streamReader != null)) {
-                    streamReader.Dispose();
-                }
-                if ((memoryStream != null)) {
-                    memoryStream.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes workflow markup into an baseRequest object
-        /// </summary>
-        /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output baseRequest object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out baseRequest obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequest);
-            try {
-                obj = Deserialize(xml);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool Deserialize(string xml, out baseRequest obj) {
-            System.Exception exception = null;
-            return Deserialize(xml, out obj, out exception);
-        }
-        
-        public static baseRequest Deserialize(string xml) {
-            System.IO.StringReader stringReader = null;
-            try {
-                stringReader = new System.IO.StringReader(xml);
-                return ((baseRequest)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
-            }
-            finally {
-                if ((stringReader != null)) {
-                    stringReader.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Serializes current baseRequest object into file
-        /// </summary>
-        /// <param name="fileName">full path of outupt xml file</param>
-        /// <param name="exception">output Exception value if failed</param>
-        /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
-            exception = null;
-            try {
-                SaveToFile(fileName);
-                return true;
-            }
-            catch (System.Exception e) {
-                exception = e;
-                return false;
-            }
-        }
-        
-        public virtual void SaveToFile(string fileName) {
-            System.IO.StreamWriter streamWriter = null;
-            try {
-                string xmlString = Serialize();
-                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
-                streamWriter = xmlFile.CreateText();
-                streamWriter.WriteLine(xmlString);
-                streamWriter.Close();
-            }
-            finally {
-                if ((streamWriter != null)) {
-                    streamWriter.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes xml markup from file into an baseRequest object
-        /// </summary>
-        /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output baseRequest object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out baseRequest obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequest);
-            try {
-                obj = LoadFromFile(fileName);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool LoadFromFile(string fileName, out baseRequest obj) {
-            System.Exception exception = null;
-            return LoadFromFile(fileName, out obj, out exception);
-        }
-        
-        public static baseRequest LoadFromFile(string fileName) {
-            System.IO.FileStream file = null;
-            System.IO.StreamReader sr = null;
-            try {
-                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
-                sr = new System.IO.StreamReader(file);
-                string xmlString = sr.ReadToEnd();
-                sr.Close();
-                file.Close();
-                return Deserialize(xmlString);
-            }
-            finally {
-                if ((file != null)) {
-                    file.Dispose();
-                }
-                if ((sr != null)) {
-                    sr.Dispose();
-                }
-            }
-        }
-        #endregion
-        
-        #region Clone method
-        /// <summary>
-        /// Create a clone of this baseRequest object
-        /// </summary>
-        public virtual baseRequest Clone() {
-            return ((baseRequest)(this.MemberwiseClone()));
-        }
-        #endregion
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class baseRequestTransactionEcheckVoid : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private long litleTxnIdField;
-        
-        private static System.Xml.Serialization.XmlSerializer serializer;
-        
-        public long litleTxnId {
-            get {
-                return this.litleTxnIdField;
-            }
-            set {
-                if ((litleTxnIdField.Equals(value) != true)) {
-                    this.litleTxnIdField = value;
-                    this.OnPropertyChanged("litleTxnId");
-                }
-            }
-        }
-        
-        private static System.Xml.Serialization.XmlSerializer Serializer {
-            get {
-                if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(baseRequestTransactionEcheckVoid));
-                }
-                return serializer;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        #region Serialize/Deserialize
-        /// <summary>
-        /// Serializes current baseRequestTransactionEcheckVoid object into an XML document
-        /// </summary>
-        /// <returns>string XML value</returns>
-        public virtual string Serialize() {
-            System.IO.StreamReader streamReader = null;
-            System.IO.MemoryStream memoryStream = null;
-            try {
-                memoryStream = new System.IO.MemoryStream();
-                Serializer.Serialize(memoryStream, this);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                streamReader = new System.IO.StreamReader(memoryStream);
-                return streamReader.ReadToEnd();
-            }
-            finally {
-                if ((streamReader != null)) {
-                    streamReader.Dispose();
-                }
-                if ((memoryStream != null)) {
-                    memoryStream.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes workflow markup into an baseRequestTransactionEcheckVoid object
-        /// </summary>
-        /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output baseRequestTransactionEcheckVoid object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out baseRequestTransactionEcheckVoid obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequestTransactionEcheckVoid);
-            try {
-                obj = Deserialize(xml);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool Deserialize(string xml, out baseRequestTransactionEcheckVoid obj) {
-            System.Exception exception = null;
-            return Deserialize(xml, out obj, out exception);
-        }
-        
-        public static baseRequestTransactionEcheckVoid Deserialize(string xml) {
-            System.IO.StringReader stringReader = null;
-            try {
-                stringReader = new System.IO.StringReader(xml);
-                return ((baseRequestTransactionEcheckVoid)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
-            }
-            finally {
-                if ((stringReader != null)) {
-                    stringReader.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Serializes current baseRequestTransactionEcheckVoid object into file
-        /// </summary>
-        /// <param name="fileName">full path of outupt xml file</param>
-        /// <param name="exception">output Exception value if failed</param>
-        /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
-            exception = null;
-            try {
-                SaveToFile(fileName);
-                return true;
-            }
-            catch (System.Exception e) {
-                exception = e;
-                return false;
-            }
-        }
-        
-        public virtual void SaveToFile(string fileName) {
-            System.IO.StreamWriter streamWriter = null;
-            try {
-                string xmlString = Serialize();
-                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
-                streamWriter = xmlFile.CreateText();
-                streamWriter.WriteLine(xmlString);
-                streamWriter.Close();
-            }
-            finally {
-                if ((streamWriter != null)) {
-                    streamWriter.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes xml markup from file into an baseRequestTransactionEcheckVoid object
-        /// </summary>
-        /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output baseRequestTransactionEcheckVoid object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out baseRequestTransactionEcheckVoid obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequestTransactionEcheckVoid);
-            try {
-                obj = LoadFromFile(fileName);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool LoadFromFile(string fileName, out baseRequestTransactionEcheckVoid obj) {
-            System.Exception exception = null;
-            return LoadFromFile(fileName, out obj, out exception);
-        }
-        
-        public static baseRequestTransactionEcheckVoid LoadFromFile(string fileName) {
-            System.IO.FileStream file = null;
-            System.IO.StreamReader sr = null;
-            try {
-                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
-                sr = new System.IO.StreamReader(file);
-                string xmlString = sr.ReadToEnd();
-                sr.Close();
-                file.Close();
-                return Deserialize(xmlString);
-            }
-            finally {
-                if ((file != null)) {
-                    file.Dispose();
-                }
-                if ((sr != null)) {
-                    sr.Dispose();
-                }
-            }
-        }
-        #endregion
-        
-        #region Clone method
-        /// <summary>
-        /// Create a clone of this baseRequestTransactionEcheckVoid object
-        /// </summary>
-        public virtual baseRequestTransactionEcheckVoid Clone() {
-            return ((baseRequestTransactionEcheckVoid)(this.MemberwiseClone()));
-        }
-        #endregion
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class baseRequestTransactionVoid : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private long litleTxnIdField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private processingInstructions processingInstructionsField;
-        
-        private static System.Xml.Serialization.XmlSerializer serializer;
-        
-        public baseRequestTransactionVoid() {
-            this.processingInstructionsField = new processingInstructions();
-        }
-        
-        public long litleTxnId {
-            get {
-                return this.litleTxnIdField;
-            }
-            set {
-                if ((litleTxnIdField.Equals(value) != true)) {
-                    this.litleTxnIdField = value;
-                    this.OnPropertyChanged("litleTxnId");
-                }
-            }
-        }
-        
-        public processingInstructions processingInstructions {
-            get {
-                return this.processingInstructionsField;
-            }
-            set {
-                if ((this.processingInstructionsField != null)) {
-                    if ((processingInstructionsField.Equals(value) != true)) {
-                        this.processingInstructionsField = value;
-                        this.OnPropertyChanged("processingInstructions");
-                    }
-                }
-                else {
-                    this.processingInstructionsField = value;
-                    this.OnPropertyChanged("processingInstructions");
-                }
-            }
-        }
-        
-        private static System.Xml.Serialization.XmlSerializer Serializer {
-            get {
-                if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(baseRequestTransactionVoid));
-                }
-                return serializer;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        #region Serialize/Deserialize
-        /// <summary>
-        /// Serializes current baseRequestTransactionVoid object into an XML document
-        /// </summary>
-        /// <returns>string XML value</returns>
-        public virtual string Serialize() {
-            System.IO.StreamReader streamReader = null;
-            System.IO.MemoryStream memoryStream = null;
-            try {
-                memoryStream = new System.IO.MemoryStream();
-                Serializer.Serialize(memoryStream, this);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                streamReader = new System.IO.StreamReader(memoryStream);
-                return streamReader.ReadToEnd();
-            }
-            finally {
-                if ((streamReader != null)) {
-                    streamReader.Dispose();
-                }
-                if ((memoryStream != null)) {
-                    memoryStream.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes workflow markup into an baseRequestTransactionVoid object
-        /// </summary>
-        /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output baseRequestTransactionVoid object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out baseRequestTransactionVoid obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequestTransactionVoid);
-            try {
-                obj = Deserialize(xml);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool Deserialize(string xml, out baseRequestTransactionVoid obj) {
-            System.Exception exception = null;
-            return Deserialize(xml, out obj, out exception);
-        }
-        
-        public static baseRequestTransactionVoid Deserialize(string xml) {
-            System.IO.StringReader stringReader = null;
-            try {
-                stringReader = new System.IO.StringReader(xml);
-                return ((baseRequestTransactionVoid)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
-            }
-            finally {
-                if ((stringReader != null)) {
-                    stringReader.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Serializes current baseRequestTransactionVoid object into file
-        /// </summary>
-        /// <param name="fileName">full path of outupt xml file</param>
-        /// <param name="exception">output Exception value if failed</param>
-        /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
-            exception = null;
-            try {
-                SaveToFile(fileName);
-                return true;
-            }
-            catch (System.Exception e) {
-                exception = e;
-                return false;
-            }
-        }
-        
-        public virtual void SaveToFile(string fileName) {
-            System.IO.StreamWriter streamWriter = null;
-            try {
-                string xmlString = Serialize();
-                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
-                streamWriter = xmlFile.CreateText();
-                streamWriter.WriteLine(xmlString);
-                streamWriter.Close();
-            }
-            finally {
-                if ((streamWriter != null)) {
-                    streamWriter.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes xml markup from file into an baseRequestTransactionVoid object
-        /// </summary>
-        /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output baseRequestTransactionVoid object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out baseRequestTransactionVoid obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequestTransactionVoid);
-            try {
-                obj = LoadFromFile(fileName);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool LoadFromFile(string fileName, out baseRequestTransactionVoid obj) {
-            System.Exception exception = null;
-            return LoadFromFile(fileName, out obj, out exception);
-        }
-        
-        public static baseRequestTransactionVoid LoadFromFile(string fileName) {
-            System.IO.FileStream file = null;
-            System.IO.StreamReader sr = null;
-            try {
-                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
-                sr = new System.IO.StreamReader(file);
-                string xmlString = sr.ReadToEnd();
-                sr.Close();
-                file.Close();
-                return Deserialize(xmlString);
-            }
-            finally {
-                if ((file != null)) {
-                    file.Dispose();
-                }
-                if ((sr != null)) {
-                    sr.Dispose();
-                }
-            }
-        }
-        #endregion
-        
-        #region Clone method
-        /// <summary>
-        /// Create a clone of this baseRequestTransactionVoid object
-        /// </summary>
-        public virtual baseRequestTransactionVoid Clone() {
-            return ((baseRequestTransactionVoid)(this.MemberwiseClone()));
-        }
-        #endregion
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class litleOnlineResponse : System.ComponentModel.INotifyPropertyChanged {
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private transactionTypeWithReportGroup itemField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private string responseField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private string messageField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private string versionField;
-        
-        private static System.Xml.Serialization.XmlSerializer serializer;
-        
-        public litleOnlineResponse() {
-            this.itemField = new transactionTypeWithReportGroup();
-        }
-        
-        public transactionTypeWithReportGroup Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                if ((this.itemField != null)) {
-                    if ((itemField.Equals(value) != true)) {
-                        this.itemField = value;
-                        this.OnPropertyChanged("Item");
-                    }
-                }
-                else {
-                    this.itemField = value;
-                    this.OnPropertyChanged("Item");
-                }
-            }
-        }
-        
-        public string response {
-            get {
-                return this.responseField;
-            }
-            set {
-                if ((this.responseField != null)) {
-                    if ((responseField.Equals(value) != true)) {
-                        this.responseField = value;
-                        this.OnPropertyChanged("response");
-                    }
-                }
-                else {
-                    this.responseField = value;
-                    this.OnPropertyChanged("response");
-                }
-            }
-        }
-        
-        public string message {
-            get {
-                return this.messageField;
-            }
-            set {
-                if ((this.messageField != null)) {
-                    if ((messageField.Equals(value) != true)) {
-                        this.messageField = value;
-                        this.OnPropertyChanged("message");
-                    }
-                }
-                else {
-                    this.messageField = value;
-                    this.OnPropertyChanged("message");
-                }
-            }
-        }
-        
-        public string version {
-            get {
-                return this.versionField;
-            }
-            set {
-                if ((this.versionField != null)) {
-                    if ((versionField.Equals(value) != true)) {
-                        this.versionField = value;
-                        this.OnPropertyChanged("version");
-                    }
-                }
-                else {
-                    this.versionField = value;
-                    this.OnPropertyChanged("version");
-                }
-            }
-        }
-        
-        private static System.Xml.Serialization.XmlSerializer Serializer {
-            get {
-                if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(litleOnlineResponse));
-                }
-                return serializer;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        #region Serialize/Deserialize
-        /// <summary>
-        /// Serializes current litleOnlineResponse object into an XML document
-        /// </summary>
-        /// <returns>string XML value</returns>
-        public virtual string Serialize() {
-            System.IO.StreamReader streamReader = null;
-            System.IO.MemoryStream memoryStream = null;
-            try {
-                memoryStream = new System.IO.MemoryStream();
-                Serializer.Serialize(memoryStream, this);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                streamReader = new System.IO.StreamReader(memoryStream);
-                return streamReader.ReadToEnd();
-            }
-            finally {
-                if ((streamReader != null)) {
-                    streamReader.Dispose();
-                }
-                if ((memoryStream != null)) {
-                    memoryStream.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes workflow markup into an litleOnlineResponse object
-        /// </summary>
-        /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output litleOnlineResponse object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out litleOnlineResponse obj, out System.Exception exception) {
-            exception = null;
-            obj = default(litleOnlineResponse);
-            try {
-                obj = Deserialize(xml);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool Deserialize(string xml, out litleOnlineResponse obj) {
-            System.Exception exception = null;
-            return Deserialize(xml, out obj, out exception);
-        }
-        
-        public static litleOnlineResponse Deserialize(string xml) {
-            System.IO.StringReader stringReader = null;
-            try {
-                stringReader = new System.IO.StringReader(xml);
-                return ((litleOnlineResponse)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
-            }
-            finally {
-                if ((stringReader != null)) {
-                    stringReader.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Serializes current litleOnlineResponse object into file
-        /// </summary>
-        /// <param name="fileName">full path of outupt xml file</param>
-        /// <param name="exception">output Exception value if failed</param>
-        /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
-            exception = null;
-            try {
-                SaveToFile(fileName);
-                return true;
-            }
-            catch (System.Exception e) {
-                exception = e;
-                return false;
-            }
-        }
-        
-        public virtual void SaveToFile(string fileName) {
-            System.IO.StreamWriter streamWriter = null;
-            try {
-                string xmlString = Serialize();
-                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
-                streamWriter = xmlFile.CreateText();
-                streamWriter.WriteLine(xmlString);
-                streamWriter.Close();
-            }
-            finally {
-                if ((streamWriter != null)) {
-                    streamWriter.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes xml markup from file into an litleOnlineResponse object
-        /// </summary>
-        /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output litleOnlineResponse object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out litleOnlineResponse obj, out System.Exception exception) {
-            exception = null;
-            obj = default(litleOnlineResponse);
-            try {
-                obj = LoadFromFile(fileName);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool LoadFromFile(string fileName, out litleOnlineResponse obj) {
-            System.Exception exception = null;
-            return LoadFromFile(fileName, out obj, out exception);
-        }
-        
-        public static litleOnlineResponse LoadFromFile(string fileName) {
-            System.IO.FileStream file = null;
-            System.IO.StreamReader sr = null;
-            try {
-                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
-                sr = new System.IO.StreamReader(file);
-                string xmlString = sr.ReadToEnd();
-                sr.Close();
-                file.Close();
-                return Deserialize(xmlString);
-            }
-            finally {
-                if ((file != null)) {
-                    file.Dispose();
-                }
-                if ((sr != null)) {
-                    sr.Dispose();
-                }
-            }
-        }
-        #endregion
-        
-        #region Clone method
-        /// <summary>
-        /// Create a clone of this litleOnlineResponse object
-        /// </summary>
-        public virtual litleOnlineResponse Clone() {
-            return ((litleOnlineResponse)(this.MemberwiseClone()));
-        }
-        #endregion
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class litleOnlineResponseTransactionResponseEcheckVoidResponse : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private long litleTxnIdField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private string responseField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private System.DateTime responseTimeField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private System.DateTime postDateField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private string messageField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private bool duplicateField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private bool duplicateFieldSpecified;
-        
-        private static System.Xml.Serialization.XmlSerializer serializer;
-        
-        public long litleTxnId {
-            get {
-                return this.litleTxnIdField;
-            }
-            set {
-                if ((litleTxnIdField.Equals(value) != true)) {
-                    this.litleTxnIdField = value;
-                    this.OnPropertyChanged("litleTxnId");
-                }
-            }
-        }
-        
-        public string response {
-            get {
-                return this.responseField;
-            }
-            set {
-                if ((this.responseField != null)) {
-                    if ((responseField.Equals(value) != true)) {
-                        this.responseField = value;
-                        this.OnPropertyChanged("response");
-                    }
-                }
-                else {
-                    this.responseField = value;
-                    this.OnPropertyChanged("response");
-                }
-            }
-        }
-        
-        public System.DateTime responseTime {
-            get {
-                return this.responseTimeField;
-            }
-            set {
-                if ((responseTimeField.Equals(value) != true)) {
-                    this.responseTimeField = value;
-                    this.OnPropertyChanged("responseTime");
-                }
-            }
-        }
-        
-        public System.DateTime postDate {
-            get {
-                return this.postDateField;
-            }
-            set {
-                if ((postDateField.Equals(value) != true)) {
-                    this.postDateField = value;
-                    this.OnPropertyChanged("postDate");
-                }
-            }
-        }
-        
-        public string message {
-            get {
-                return this.messageField;
-            }
-            set {
-                if ((this.messageField != null)) {
-                    if ((messageField.Equals(value) != true)) {
-                        this.messageField = value;
-                        this.OnPropertyChanged("message");
-                    }
-                }
-                else {
-                    this.messageField = value;
-                    this.OnPropertyChanged("message");
-                }
-            }
-        }
-        
-        public bool duplicate {
-            get {
-                return this.duplicateField;
-            }
-            set {
-                if ((duplicateField.Equals(value) != true)) {
-                    this.duplicateField = value;
-                    this.OnPropertyChanged("duplicate");
-                }
-            }
-        }
-        
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified {
-            get {
-                return this.duplicateFieldSpecified;
-            }
-            set {
-                if ((duplicateFieldSpecified.Equals(value) != true)) {
-                    this.duplicateFieldSpecified = value;
-                    this.OnPropertyChanged("duplicateSpecified");
-                }
-            }
-        }
-        
-        private static System.Xml.Serialization.XmlSerializer Serializer {
-            get {
-                if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(litleOnlineResponseTransactionResponseEcheckVoidResponse));
-                }
-                return serializer;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        #region Serialize/Deserialize
-        /// <summary>
-        /// Serializes current litleOnlineResponseTransactionResponseEcheckVoidResponse object into an XML document
-        /// </summary>
-        /// <returns>string XML value</returns>
-        public virtual string Serialize() {
-            System.IO.StreamReader streamReader = null;
-            System.IO.MemoryStream memoryStream = null;
-            try {
-                memoryStream = new System.IO.MemoryStream();
-                Serializer.Serialize(memoryStream, this);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                streamReader = new System.IO.StreamReader(memoryStream);
-                return streamReader.ReadToEnd();
-            }
-            finally {
-                if ((streamReader != null)) {
-                    streamReader.Dispose();
-                }
-                if ((memoryStream != null)) {
-                    memoryStream.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes workflow markup into an litleOnlineResponseTransactionResponseEcheckVoidResponse object
-        /// </summary>
-        /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output litleOnlineResponseTransactionResponseEcheckVoidResponse object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out litleOnlineResponseTransactionResponseEcheckVoidResponse obj, out System.Exception exception) {
-            exception = null;
-            obj = default(litleOnlineResponseTransactionResponseEcheckVoidResponse);
-            try {
-                obj = Deserialize(xml);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool Deserialize(string xml, out litleOnlineResponseTransactionResponseEcheckVoidResponse obj) {
-            System.Exception exception = null;
-            return Deserialize(xml, out obj, out exception);
-        }
-        
-        public static litleOnlineResponseTransactionResponseEcheckVoidResponse Deserialize(string xml) {
-            System.IO.StringReader stringReader = null;
-            try {
-                stringReader = new System.IO.StringReader(xml);
-                return ((litleOnlineResponseTransactionResponseEcheckVoidResponse)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
-            }
-            finally {
-                if ((stringReader != null)) {
-                    stringReader.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Serializes current litleOnlineResponseTransactionResponseEcheckVoidResponse object into file
-        /// </summary>
-        /// <param name="fileName">full path of outupt xml file</param>
-        /// <param name="exception">output Exception value if failed</param>
-        /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
-            exception = null;
-            try {
-                SaveToFile(fileName);
-                return true;
-            }
-            catch (System.Exception e) {
-                exception = e;
-                return false;
-            }
-        }
-        
-        public virtual void SaveToFile(string fileName) {
-            System.IO.StreamWriter streamWriter = null;
-            try {
-                string xmlString = Serialize();
-                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
-                streamWriter = xmlFile.CreateText();
-                streamWriter.WriteLine(xmlString);
-                streamWriter.Close();
-            }
-            finally {
-                if ((streamWriter != null)) {
-                    streamWriter.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes xml markup from file into an litleOnlineResponseTransactionResponseEcheckVoidResponse object
-        /// </summary>
-        /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output litleOnlineResponseTransactionResponseEcheckVoidResponse object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out litleOnlineResponseTransactionResponseEcheckVoidResponse obj, out System.Exception exception) {
-            exception = null;
-            obj = default(litleOnlineResponseTransactionResponseEcheckVoidResponse);
-            try {
-                obj = LoadFromFile(fileName);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool LoadFromFile(string fileName, out litleOnlineResponseTransactionResponseEcheckVoidResponse obj) {
-            System.Exception exception = null;
-            return LoadFromFile(fileName, out obj, out exception);
-        }
-        
-        public static litleOnlineResponseTransactionResponseEcheckVoidResponse LoadFromFile(string fileName) {
-            System.IO.FileStream file = null;
-            System.IO.StreamReader sr = null;
-            try {
-                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
-                sr = new System.IO.StreamReader(file);
-                string xmlString = sr.ReadToEnd();
-                sr.Close();
-                file.Close();
-                return Deserialize(xmlString);
-            }
-            finally {
-                if ((file != null)) {
-                    file.Dispose();
-                }
-                if ((sr != null)) {
-                    sr.Dispose();
-                }
-            }
-        }
-        #endregion
-        
-        #region Clone method
-        /// <summary>
-        /// Create a clone of this litleOnlineResponseTransactionResponseEcheckVoidResponse object
-        /// </summary>
-        public virtual litleOnlineResponseTransactionResponseEcheckVoidResponse Clone() {
-            return ((litleOnlineResponseTransactionResponseEcheckVoidResponse)(this.MemberwiseClone()));
-        }
-        #endregion
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class litleOnlineResponseTransactionResponseVoidResponse : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private long litleTxnIdField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private string responseField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private System.DateTime responseTimeField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private System.DateTime postDateField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private string messageField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private bool duplicateField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private bool duplicateFieldSpecified;
-        
-        private static System.Xml.Serialization.XmlSerializer serializer;
-        
-        public long litleTxnId {
-            get {
-                return this.litleTxnIdField;
-            }
-            set {
-                if ((litleTxnIdField.Equals(value) != true)) {
-                    this.litleTxnIdField = value;
-                    this.OnPropertyChanged("litleTxnId");
-                }
-            }
-        }
-        
-        public string response {
-            get {
-                return this.responseField;
-            }
-            set {
-                if ((this.responseField != null)) {
-                    if ((responseField.Equals(value) != true)) {
-                        this.responseField = value;
-                        this.OnPropertyChanged("response");
-                    }
-                }
-                else {
-                    this.responseField = value;
-                    this.OnPropertyChanged("response");
-                }
-            }
-        }
-        
-        public System.DateTime responseTime {
-            get {
-                return this.responseTimeField;
-            }
-            set {
-                if ((responseTimeField.Equals(value) != true)) {
-                    this.responseTimeField = value;
-                    this.OnPropertyChanged("responseTime");
-                }
-            }
-        }
-        
-        public System.DateTime postDate {
-            get {
-                return this.postDateField;
-            }
-            set {
-                if ((postDateField.Equals(value) != true)) {
-                    this.postDateField = value;
-                    this.OnPropertyChanged("postDate");
-                }
-            }
-        }
-        
-        public string message {
-            get {
-                return this.messageField;
-            }
-            set {
-                if ((this.messageField != null)) {
-                    if ((messageField.Equals(value) != true)) {
-                        this.messageField = value;
-                        this.OnPropertyChanged("message");
-                    }
-                }
-                else {
-                    this.messageField = value;
-                    this.OnPropertyChanged("message");
-                }
-            }
-        }
-        
-        public bool duplicate {
-            get {
-                return this.duplicateField;
-            }
-            set {
-                if ((duplicateField.Equals(value) != true)) {
-                    this.duplicateField = value;
-                    this.OnPropertyChanged("duplicate");
-                }
-            }
-        }
-        
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified {
-            get {
-                return this.duplicateFieldSpecified;
-            }
-            set {
-                if ((duplicateFieldSpecified.Equals(value) != true)) {
-                    this.duplicateFieldSpecified = value;
-                    this.OnPropertyChanged("duplicateSpecified");
-                }
-            }
-        }
-        
-        private static System.Xml.Serialization.XmlSerializer Serializer {
-            get {
-                if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(litleOnlineResponseTransactionResponseVoidResponse));
-                }
-                return serializer;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        #region Serialize/Deserialize
-        /// <summary>
-        /// Serializes current litleOnlineResponseTransactionResponseVoidResponse object into an XML document
-        /// </summary>
-        /// <returns>string XML value</returns>
-        public virtual string Serialize() {
-            System.IO.StreamReader streamReader = null;
-            System.IO.MemoryStream memoryStream = null;
-            try {
-                memoryStream = new System.IO.MemoryStream();
-                Serializer.Serialize(memoryStream, this);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                streamReader = new System.IO.StreamReader(memoryStream);
-                return streamReader.ReadToEnd();
-            }
-            finally {
-                if ((streamReader != null)) {
-                    streamReader.Dispose();
-                }
-                if ((memoryStream != null)) {
-                    memoryStream.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes workflow markup into an litleOnlineResponseTransactionResponseVoidResponse object
-        /// </summary>
-        /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output litleOnlineResponseTransactionResponseVoidResponse object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out litleOnlineResponseTransactionResponseVoidResponse obj, out System.Exception exception) {
-            exception = null;
-            obj = default(litleOnlineResponseTransactionResponseVoidResponse);
-            try {
-                obj = Deserialize(xml);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool Deserialize(string xml, out litleOnlineResponseTransactionResponseVoidResponse obj) {
-            System.Exception exception = null;
-            return Deserialize(xml, out obj, out exception);
-        }
-        
-        public static litleOnlineResponseTransactionResponseVoidResponse Deserialize(string xml) {
-            System.IO.StringReader stringReader = null;
-            try {
-                stringReader = new System.IO.StringReader(xml);
-                return ((litleOnlineResponseTransactionResponseVoidResponse)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
-            }
-            finally {
-                if ((stringReader != null)) {
-                    stringReader.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Serializes current litleOnlineResponseTransactionResponseVoidResponse object into file
-        /// </summary>
-        /// <param name="fileName">full path of outupt xml file</param>
-        /// <param name="exception">output Exception value if failed</param>
-        /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
-            exception = null;
-            try {
-                SaveToFile(fileName);
-                return true;
-            }
-            catch (System.Exception e) {
-                exception = e;
-                return false;
-            }
-        }
-        
-        public virtual void SaveToFile(string fileName) {
-            System.IO.StreamWriter streamWriter = null;
-            try {
-                string xmlString = Serialize();
-                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
-                streamWriter = xmlFile.CreateText();
-                streamWriter.WriteLine(xmlString);
-                streamWriter.Close();
-            }
-            finally {
-                if ((streamWriter != null)) {
-                    streamWriter.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes xml markup from file into an litleOnlineResponseTransactionResponseVoidResponse object
-        /// </summary>
-        /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output litleOnlineResponseTransactionResponseVoidResponse object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out litleOnlineResponseTransactionResponseVoidResponse obj, out System.Exception exception) {
-            exception = null;
-            obj = default(litleOnlineResponseTransactionResponseVoidResponse);
-            try {
-                obj = LoadFromFile(fileName);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool LoadFromFile(string fileName, out litleOnlineResponseTransactionResponseVoidResponse obj) {
-            System.Exception exception = null;
-            return LoadFromFile(fileName, out obj, out exception);
-        }
-        
-        public static litleOnlineResponseTransactionResponseVoidResponse LoadFromFile(string fileName) {
-            System.IO.FileStream file = null;
-            System.IO.StreamReader sr = null;
-            try {
-                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
-                sr = new System.IO.StreamReader(file);
-                string xmlString = sr.ReadToEnd();
-                sr.Close();
-                file.Close();
-                return Deserialize(xmlString);
-            }
-            finally {
-                if ((file != null)) {
-                    file.Dispose();
-                }
-                if ((sr != null)) {
-                    sr.Dispose();
-                }
-            }
-        }
-        #endregion
-        
-        #region Clone method
-        /// <summary>
-        /// Create a clone of this litleOnlineResponseTransactionResponseVoidResponse object
-        /// </summary>
-        public virtual litleOnlineResponseTransactionResponseVoidResponse Clone() {
-            return ((litleOnlineResponseTransactionResponseVoidResponse)(this.MemberwiseClone()));
+        public virtual driversLicenseInfo Clone() {
+            return ((driversLicenseInfo)(this.MemberwiseClone()));
         }
         #endregion
     }
