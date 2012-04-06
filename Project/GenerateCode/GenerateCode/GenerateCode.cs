@@ -16,13 +16,13 @@ namespace GenerateCode
 
         public static void Main()
         {
-            GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\dotNetGenerateCode\\GenerateCode\\GenerateCode\\xsd\\litleOnline_v8.10.xsd"));
+            GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\litle-sdk-for-dotNet\\Project\\GenerateCode\\GenerateCode\\xsd\\litleOnline_v8.10.xsd"));
             Result<string> result = xsdGen.Generate();
 
-            xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\dotNetGenerateCode\\GenerateCode\\GenerateCode\\xsd\\litleCommon_v8.10.xsd"));
+            xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\litle-sdk-for-dotNet\\Project\\GenerateCode\\GenerateCode\\xsd\\litleTransaction_v8.10.xsd"));
             result = xsdGen.Generate();
 
-            xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\dotNetGenerateCode\\GenerateCode\\GenerateCode\\xsd\\litleTransaction_v8.10.xsd"));
+            xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\litle-sdk-for-dotNet\\Project\\GenerateCode\\GenerateCode\\xsd\\litleCommon_v8.10.xsd"));
             result = xsdGen.Generate();
         }
 

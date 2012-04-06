@@ -49,7 +49,7 @@
   <ItemGroup>
     <None Include="xsd\litleCommon_v8.10.xsd" />
     <None Include="xsd\litleOnline_v8.10.xsd" />
-    <None Include="xsd\litleTransaction_v8.10.xsd" />
+    <None Include="xsd\litleTransaction_v8.10_orig.xsd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Xsd2Code.Library\Xsd2Code.Library.csproj">
