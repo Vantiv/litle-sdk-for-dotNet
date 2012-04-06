@@ -1,0 +1,5 @@
+C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForNet.dll
+C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForNet.pdb
+C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNet\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNet\obj\Debug\LitleSdkForNet.dll
+C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNet\obj\Debug\LitleSdkForNet.pdb
