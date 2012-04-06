@@ -1,0 +1,10 @@
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.exe
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.pdb
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit-console-runner.dll
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit.framework.dll
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit.util.dll
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit.core.interfaces.dll
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit.core.dll
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\LitleSdkForNetTest.exe
+C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\LitleSdkForNetTest.pdb
