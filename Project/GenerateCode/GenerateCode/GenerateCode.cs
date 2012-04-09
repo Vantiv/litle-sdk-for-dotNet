@@ -34,10 +34,13 @@ namespace GenerateCode
             foreach (string fileName in fileArrayToGenerateFrom)
             {
                 pathToPass = System.IO.Path.GetFullPath(fileName);
-                GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams(pathToPass));
-                Result<string> result = xsdGen.Generate();
-                // delete the modified xsd file.
-                File.Delete(fileName);
+               // if (pathToPass.IndexOf("litleOnline") != -1)
+                {
+                    GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams(pathToPass));
+                    Result<string> result = xsdGen.Generate();
+                    // delete the modified xsd file.
+                    //File.Delete(fileName);
+                }
             }
 
             BuildGeneratedCode();
@@ -86,19 +89,13 @@ namespace GenerateCode
 
         public static void BuildGeneratedCode()
         {
-            String[] arrayOfFiles;
-            arrayOfFiles = new String[3];
-            arrayOfFiles[0] = generatedCodeDir + "\\generated\\litleCommon.cs";
-            arrayOfFiles[1] = generatedCodeDir + "\\generated\\litleCommon.cs";
-            arrayOfFiles[2] = generatedCodeDir + "\\generated\\litleCommon.cs";
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             CompilerParameters cp = new CompilerParameters();
-            //cp.GenerateInMemory = false;
-            cp.OutputAssembly = "litleXSDGenerated.dll";
+            cp.OutputAssembly = generatedCodeDir + "\\generated\\litleXSDGenerated.dll";
+            cp.ReferencedAssemblies.Add("System.dll");
+            cp.ReferencedAssemblies.Add("System.Xml.dll");
 
-            CompilerResults result = provider.CompileAssemblyFromFile(cp, arrayOfFiles);
-            int something = 0;
-            something = 5;
+            CompilerResults result = provider.CompileAssemblyFromFile(cp, (generatedCodeDir + "\\generated\\litleOnline.cs"));
         }
     }
 }

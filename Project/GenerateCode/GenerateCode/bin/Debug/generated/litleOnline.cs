@@ -4991,55 +4991,84 @@ namespace LitleXSDGenerated {
     public partial class cardType : System.ComponentModel.INotifyPropertyChanged {
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<object> itemsField;
+        private methodOfPaymentTypeEnum typeField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<ItemsChoiceType> itemsElementNameField;
+        private string numberField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string expDateField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string trackField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
         private string cardValidationNumField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
         
-        public cardType() {
-            this.itemsElementNameField = new ObservableCollection<ItemsChoiceType>();
-            this.itemsField = new ObservableCollection<object>();
-        }
-        
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public ObservableCollection<object> Items {
+        public methodOfPaymentTypeEnum type {
             get {
-                return this.itemsField;
+                return this.typeField;
             }
             set {
-                if ((this.itemsField != null)) {
-                    if ((itemsField.Equals(value) != true)) {
-                        this.itemsField = value;
-                        this.OnPropertyChanged("Items");
-                    }
-                }
-                else {
-                    this.itemsField = value;
-                    this.OnPropertyChanged("Items");
+                if ((typeField.Equals(value) != true)) {
+                    this.typeField = value;
+                    this.OnPropertyChanged("type");
                 }
             }
         }
         
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ObservableCollection<ItemsChoiceType> ItemsElementName {
+        public string number {
             get {
-                return this.itemsElementNameField;
+                return this.numberField;
             }
             set {
-                if ((this.itemsElementNameField != null)) {
-                    if ((itemsElementNameField.Equals(value) != true)) {
-                        this.itemsElementNameField = value;
-                        this.OnPropertyChanged("ItemsElementName");
+                if ((this.numberField != null)) {
+                    if ((numberField.Equals(value) != true)) {
+                        this.numberField = value;
+                        this.OnPropertyChanged("number");
                     }
                 }
                 else {
-                    this.itemsElementNameField = value;
-                    this.OnPropertyChanged("ItemsElementName");
+                    this.numberField = value;
+                    this.OnPropertyChanged("number");
+                }
+            }
+        }
+        
+        public string expDate {
+            get {
+                return this.expDateField;
+            }
+            set {
+                if ((this.expDateField != null)) {
+                    if ((expDateField.Equals(value) != true)) {
+                        this.expDateField = value;
+                        this.OnPropertyChanged("expDate");
+                    }
+                }
+                else {
+                    this.expDateField = value;
+                    this.OnPropertyChanged("expDate");
+                }
+            }
+        }
+        
+        public string track {
+            get {
+                return this.trackField;
+            }
+            set {
+                if ((this.trackField != null)) {
+                    if ((trackField.Equals(value) != true)) {
+                        this.trackField = value;
+                        this.OnPropertyChanged("track");
+                    }
+                }
+                else {
+                    this.trackField = value;
+                    this.OnPropertyChanged("track");
                 }
             }
         }
@@ -5266,21 +5295,6 @@ namespace LitleXSDGenerated {
         /// <remarks/>
         [System.Xml.Serialization.XmlEnumAttribute("")]
         Item,
-    }
-    
-    public enum ItemsChoiceType {
-        
-        /// <remarks/>
-        expDate,
-        
-        /// <remarks/>
-        number,
-        
-        /// <remarks/>
-        track,
-        
-        /// <remarks/>
-        type,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -12689,10 +12703,61 @@ namespace LitleXSDGenerated {
     public partial class credit : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<object> itemsField;
+        private long litleTxnIdField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<ItemsChoiceType1> itemsElementNameField;
+        private string amountField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private customBilling customBillingField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private enhancedData enhancedDataField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private processingInstructions processingInstructionsField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string orderIdField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string amount1Field;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private orderSourceType orderSourceField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private contact billToAddressField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private object itemField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private customBilling customBilling1Field;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private govtTaxTypeEnum taxTypeField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private bool taxTypeFieldSpecified;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private billMeLaterRequest billMeLaterRequestField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private enhancedData enhancedData1Field;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private processingInstructions processingInstructions1Field;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private pos posField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private amexAggregatorData amexAggregatorDataField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private merchantDataType merchantDataField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
         private string payPalNotesField;
@@ -12700,44 +12765,334 @@ namespace LitleXSDGenerated {
         private static System.Xml.Serialization.XmlSerializer serializer;
         
         public credit() {
-            this.itemsElementNameField = new ObservableCollection<ItemsChoiceType1>();
-            this.itemsField = new ObservableCollection<object>();
+            this.merchantDataField = new merchantDataType();
+            this.amexAggregatorDataField = new amexAggregatorData();
+            this.posField = new pos();
+            this.processingInstructions1Field = new processingInstructions();
+            this.enhancedData1Field = new enhancedData();
+            this.billMeLaterRequestField = new billMeLaterRequest();
+            this.customBilling1Field = new customBilling();
+            this.billToAddressField = new contact();
+            this.processingInstructionsField = new processingInstructions();
+            this.enhancedDataField = new enhancedData();
+            this.customBillingField = new customBilling();
         }
         
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public ObservableCollection<object> Items {
+        public long litleTxnId {
             get {
-                return this.itemsField;
+                return this.litleTxnIdField;
             }
             set {
-                if ((this.itemsField != null)) {
-                    if ((itemsField.Equals(value) != true)) {
-                        this.itemsField = value;
-                        this.OnPropertyChanged("Items");
+                if ((litleTxnIdField.Equals(value) != true)) {
+                    this.litleTxnIdField = value;
+                    this.OnPropertyChanged("litleTxnId");
+                }
+            }
+        }
+        
+        public string amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                if ((this.amountField != null)) {
+                    if ((amountField.Equals(value) != true)) {
+                        this.amountField = value;
+                        this.OnPropertyChanged("amount");
                     }
                 }
                 else {
-                    this.itemsField = value;
-                    this.OnPropertyChanged("Items");
+                    this.amountField = value;
+                    this.OnPropertyChanged("amount");
+                }
+            }
+        }
+        
+        public customBilling customBilling {
+            get {
+                return this.customBillingField;
+            }
+            set {
+                if ((this.customBillingField != null)) {
+                    if ((customBillingField.Equals(value) != true)) {
+                        this.customBillingField = value;
+                        this.OnPropertyChanged("customBilling");
+                    }
+                }
+                else {
+                    this.customBillingField = value;
+                    this.OnPropertyChanged("customBilling");
+                }
+            }
+        }
+        
+        public enhancedData enhancedData {
+            get {
+                return this.enhancedDataField;
+            }
+            set {
+                if ((this.enhancedDataField != null)) {
+                    if ((enhancedDataField.Equals(value) != true)) {
+                        this.enhancedDataField = value;
+                        this.OnPropertyChanged("enhancedData");
+                    }
+                }
+                else {
+                    this.enhancedDataField = value;
+                    this.OnPropertyChanged("enhancedData");
+                }
+            }
+        }
+        
+        public processingInstructions processingInstructions {
+            get {
+                return this.processingInstructionsField;
+            }
+            set {
+                if ((this.processingInstructionsField != null)) {
+                    if ((processingInstructionsField.Equals(value) != true)) {
+                        this.processingInstructionsField = value;
+                        this.OnPropertyChanged("processingInstructions");
+                    }
+                }
+                else {
+                    this.processingInstructionsField = value;
+                    this.OnPropertyChanged("processingInstructions");
+                }
+            }
+        }
+        
+        public string orderId {
+            get {
+                return this.orderIdField;
+            }
+            set {
+                if ((this.orderIdField != null)) {
+                    if ((orderIdField.Equals(value) != true)) {
+                        this.orderIdField = value;
+                        this.OnPropertyChanged("orderId");
+                    }
+                }
+                else {
+                    this.orderIdField = value;
+                    this.OnPropertyChanged("orderId");
+                }
+            }
+        }
+        
+        public string amount1 {
+            get {
+                return this.amount1Field;
+            }
+            set {
+                if ((this.amount1Field != null)) {
+                    if ((amount1Field.Equals(value) != true)) {
+                        this.amount1Field = value;
+                        this.OnPropertyChanged("amount1");
+                    }
+                }
+                else {
+                    this.amount1Field = value;
+                    this.OnPropertyChanged("amount1");
+                }
+            }
+        }
+        
+        public orderSourceType orderSource {
+            get {
+                return this.orderSourceField;
+            }
+            set {
+                if ((orderSourceField.Equals(value) != true)) {
+                    this.orderSourceField = value;
+                    this.OnPropertyChanged("orderSource");
+                }
+            }
+        }
+        
+        public contact billToAddress {
+            get {
+                return this.billToAddressField;
+            }
+            set {
+                if ((this.billToAddressField != null)) {
+                    if ((billToAddressField.Equals(value) != true)) {
+                        this.billToAddressField = value;
+                        this.OnPropertyChanged("billToAddress");
+                    }
+                }
+                else {
+                    this.billToAddressField = value;
+                    this.OnPropertyChanged("billToAddress");
+                }
+            }
+        }
+        
+        public object Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                if ((this.itemField != null)) {
+                    if ((itemField.Equals(value) != true)) {
+                        this.itemField = value;
+                        this.OnPropertyChanged("Item");
+                    }
+                }
+                else {
+                    this.itemField = value;
+                    this.OnPropertyChanged("Item");
+                }
+            }
+        }
+        
+        public customBilling customBilling1 {
+            get {
+                return this.customBilling1Field;
+            }
+            set {
+                if ((this.customBilling1Field != null)) {
+                    if ((customBilling1Field.Equals(value) != true)) {
+                        this.customBilling1Field = value;
+                        this.OnPropertyChanged("customBilling1");
+                    }
+                }
+                else {
+                    this.customBilling1Field = value;
+                    this.OnPropertyChanged("customBilling1");
+                }
+            }
+        }
+        
+        public govtTaxTypeEnum taxType {
+            get {
+                return this.taxTypeField;
+            }
+            set {
+                if ((taxTypeField.Equals(value) != true)) {
+                    this.taxTypeField = value;
+                    this.OnPropertyChanged("taxType");
                 }
             }
         }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ObservableCollection<ItemsChoiceType1> ItemsElementName {
+        public bool taxTypeSpecified {
             get {
-                return this.itemsElementNameField;
+                return this.taxTypeFieldSpecified;
             }
             set {
-                if ((this.itemsElementNameField != null)) {
-                    if ((itemsElementNameField.Equals(value) != true)) {
-                        this.itemsElementNameField = value;
-                        this.OnPropertyChanged("ItemsElementName");
+                if ((taxTypeFieldSpecified.Equals(value) != true)) {
+                    this.taxTypeFieldSpecified = value;
+                    this.OnPropertyChanged("taxTypeSpecified");
+                }
+            }
+        }
+        
+        public billMeLaterRequest billMeLaterRequest {
+            get {
+                return this.billMeLaterRequestField;
+            }
+            set {
+                if ((this.billMeLaterRequestField != null)) {
+                    if ((billMeLaterRequestField.Equals(value) != true)) {
+                        this.billMeLaterRequestField = value;
+                        this.OnPropertyChanged("billMeLaterRequest");
                     }
                 }
                 else {
-                    this.itemsElementNameField = value;
-                    this.OnPropertyChanged("ItemsElementName");
+                    this.billMeLaterRequestField = value;
+                    this.OnPropertyChanged("billMeLaterRequest");
+                }
+            }
+        }
+        
+        public enhancedData enhancedData1 {
+            get {
+                return this.enhancedData1Field;
+            }
+            set {
+                if ((this.enhancedData1Field != null)) {
+                    if ((enhancedData1Field.Equals(value) != true)) {
+                        this.enhancedData1Field = value;
+                        this.OnPropertyChanged("enhancedData1");
+                    }
+                }
+                else {
+                    this.enhancedData1Field = value;
+                    this.OnPropertyChanged("enhancedData1");
+                }
+            }
+        }
+        
+        public processingInstructions processingInstructions1 {
+            get {
+                return this.processingInstructions1Field;
+            }
+            set {
+                if ((this.processingInstructions1Field != null)) {
+                    if ((processingInstructions1Field.Equals(value) != true)) {
+                        this.processingInstructions1Field = value;
+                        this.OnPropertyChanged("processingInstructions1");
+                    }
+                }
+                else {
+                    this.processingInstructions1Field = value;
+                    this.OnPropertyChanged("processingInstructions1");
+                }
+            }
+        }
+        
+        public pos pos {
+            get {
+                return this.posField;
+            }
+            set {
+                if ((this.posField != null)) {
+                    if ((posField.Equals(value) != true)) {
+                        this.posField = value;
+                        this.OnPropertyChanged("pos");
+                    }
+                }
+                else {
+                    this.posField = value;
+                    this.OnPropertyChanged("pos");
+                }
+            }
+        }
+        
+        public amexAggregatorData amexAggregatorData {
+            get {
+                return this.amexAggregatorDataField;
+            }
+            set {
+                if ((this.amexAggregatorDataField != null)) {
+                    if ((amexAggregatorDataField.Equals(value) != true)) {
+                        this.amexAggregatorDataField = value;
+                        this.OnPropertyChanged("amexAggregatorData");
+                    }
+                }
+                else {
+                    this.amexAggregatorDataField = value;
+                    this.OnPropertyChanged("amexAggregatorData");
+                }
+            }
+        }
+        
+        public merchantDataType merchantData {
+            get {
+                return this.merchantDataField;
+            }
+            set {
+                if ((this.merchantDataField != null)) {
+                    if ((merchantDataField.Equals(value) != true)) {
+                        this.merchantDataField = value;
+                        this.OnPropertyChanged("merchantData");
+                    }
+                }
+                else {
+                    this.merchantDataField = value;
+                    this.OnPropertyChanged("merchantData");
                 }
             }
         }
@@ -13154,60 +13509,6 @@ namespace LitleXSDGenerated {
         
         /// <remarks/>
         payerId,
-    }
-    
-    public enum ItemsChoiceType1 {
-        
-        /// <remarks/>
-        amexAggregatorData,
-        
-        /// <remarks/>
-        amount,
-        
-        /// <remarks/>
-        billMeLaterRequest,
-        
-        /// <remarks/>
-        billToAddress,
-        
-        /// <remarks/>
-        card,
-        
-        /// <remarks/>
-        customBilling,
-        
-        /// <remarks/>
-        enhancedData,
-        
-        /// <remarks/>
-        litleTxnId,
-        
-        /// <remarks/>
-        merchantData,
-        
-        /// <remarks/>
-        orderId,
-        
-        /// <remarks/>
-        orderSource,
-        
-        /// <remarks/>
-        paypage,
-        
-        /// <remarks/>
-        paypal,
-        
-        /// <remarks/>
-        pos,
-        
-        /// <remarks/>
-        processingInstructions,
-        
-        /// <remarks/>
-        taxType,
-        
-        /// <remarks/>
-        token,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -14336,12 +14637,12 @@ namespace LitleXSDGenerated {
         private ObservableCollection<object> itemsField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<ItemsChoiceType2> itemsElementNameField;
+        private ObservableCollection<ItemsChoiceType> itemsElementNameField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
         
         public accountUpdater() {
-            this.itemsElementNameField = new ObservableCollection<ItemsChoiceType2>();
+            this.itemsElementNameField = new ObservableCollection<ItemsChoiceType>();
             this.itemsField = new ObservableCollection<object>();
         }
         
@@ -14365,7 +14666,7 @@ namespace LitleXSDGenerated {
         }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ObservableCollection<ItemsChoiceType2> ItemsElementName {
+        public ObservableCollection<ItemsChoiceType> ItemsElementName {
             get {
                 return this.itemsElementNameField;
             }
@@ -15747,7 +16048,7 @@ namespace LitleXSDGenerated {
         #endregion
     }
     
-    public enum ItemsChoiceType2 {
+    public enum ItemsChoiceType {
         
         /// <remarks/>
         extendedCardResponse,
@@ -19846,52 +20147,261 @@ namespace LitleXSDGenerated {
     public partial class echeckSale : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<object> itemsField;
+        private long litleTxnIdField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<ItemsChoiceType3> itemsElementNameField;
+        private string amountField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private customBilling customBillingField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string orderIdField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private bool verifyField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private bool verifyFieldSpecified;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string amount1Field;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private orderSourceType orderSourceField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private contact billToAddressField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private contact shipToAddressField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private object echeckOrEcheckTokenField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private customBilling customBilling1Field;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private merchantDataType merchantDataField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
         
         public echeckSale() {
-            this.itemsElementNameField = new ObservableCollection<ItemsChoiceType3>();
-            this.itemsField = new ObservableCollection<object>();
+            this.merchantDataField = new merchantDataType();
+            this.customBilling1Field = new customBilling();
+            this.shipToAddressField = new contact();
+            this.billToAddressField = new contact();
+            this.customBillingField = new customBilling();
         }
         
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public ObservableCollection<object> Items {
+        public long litleTxnId {
             get {
-                return this.itemsField;
+                return this.litleTxnIdField;
             }
             set {
-                if ((this.itemsField != null)) {
-                    if ((itemsField.Equals(value) != true)) {
-                        this.itemsField = value;
-                        this.OnPropertyChanged("Items");
+                if ((litleTxnIdField.Equals(value) != true)) {
+                    this.litleTxnIdField = value;
+                    this.OnPropertyChanged("litleTxnId");
+                }
+            }
+        }
+        
+        public string amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                if ((this.amountField != null)) {
+                    if ((amountField.Equals(value) != true)) {
+                        this.amountField = value;
+                        this.OnPropertyChanged("amount");
                     }
                 }
                 else {
-                    this.itemsField = value;
-                    this.OnPropertyChanged("Items");
+                    this.amountField = value;
+                    this.OnPropertyChanged("amount");
+                }
+            }
+        }
+        
+        public customBilling customBilling {
+            get {
+                return this.customBillingField;
+            }
+            set {
+                if ((this.customBillingField != null)) {
+                    if ((customBillingField.Equals(value) != true)) {
+                        this.customBillingField = value;
+                        this.OnPropertyChanged("customBilling");
+                    }
+                }
+                else {
+                    this.customBillingField = value;
+                    this.OnPropertyChanged("customBilling");
+                }
+            }
+        }
+        
+        public string orderId {
+            get {
+                return this.orderIdField;
+            }
+            set {
+                if ((this.orderIdField != null)) {
+                    if ((orderIdField.Equals(value) != true)) {
+                        this.orderIdField = value;
+                        this.OnPropertyChanged("orderId");
+                    }
+                }
+                else {
+                    this.orderIdField = value;
+                    this.OnPropertyChanged("orderId");
+                }
+            }
+        }
+        
+        public bool verify {
+            get {
+                return this.verifyField;
+            }
+            set {
+                if ((verifyField.Equals(value) != true)) {
+                    this.verifyField = value;
+                    this.OnPropertyChanged("verify");
                 }
             }
         }
         
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ObservableCollection<ItemsChoiceType3> ItemsElementName {
+        public bool verifySpecified {
             get {
-                return this.itemsElementNameField;
+                return this.verifyFieldSpecified;
             }
             set {
-                if ((this.itemsElementNameField != null)) {
-                    if ((itemsElementNameField.Equals(value) != true)) {
-                        this.itemsElementNameField = value;
-                        this.OnPropertyChanged("ItemsElementName");
+                if ((verifyFieldSpecified.Equals(value) != true)) {
+                    this.verifyFieldSpecified = value;
+                    this.OnPropertyChanged("verifySpecified");
+                }
+            }
+        }
+        
+        public string amount1 {
+            get {
+                return this.amount1Field;
+            }
+            set {
+                if ((this.amount1Field != null)) {
+                    if ((amount1Field.Equals(value) != true)) {
+                        this.amount1Field = value;
+                        this.OnPropertyChanged("amount1");
                     }
                 }
                 else {
-                    this.itemsElementNameField = value;
-                    this.OnPropertyChanged("ItemsElementName");
+                    this.amount1Field = value;
+                    this.OnPropertyChanged("amount1");
+                }
+            }
+        }
+        
+        public orderSourceType orderSource {
+            get {
+                return this.orderSourceField;
+            }
+            set {
+                if ((orderSourceField.Equals(value) != true)) {
+                    this.orderSourceField = value;
+                    this.OnPropertyChanged("orderSource");
+                }
+            }
+        }
+        
+        public contact billToAddress {
+            get {
+                return this.billToAddressField;
+            }
+            set {
+                if ((this.billToAddressField != null)) {
+                    if ((billToAddressField.Equals(value) != true)) {
+                        this.billToAddressField = value;
+                        this.OnPropertyChanged("billToAddress");
+                    }
+                }
+                else {
+                    this.billToAddressField = value;
+                    this.OnPropertyChanged("billToAddress");
+                }
+            }
+        }
+        
+        public contact shipToAddress {
+            get {
+                return this.shipToAddressField;
+            }
+            set {
+                if ((this.shipToAddressField != null)) {
+                    if ((shipToAddressField.Equals(value) != true)) {
+                        this.shipToAddressField = value;
+                        this.OnPropertyChanged("shipToAddress");
+                    }
+                }
+                else {
+                    this.shipToAddressField = value;
+                    this.OnPropertyChanged("shipToAddress");
+                }
+            }
+        }
+        
+        public object echeckOrEcheckToken {
+            get {
+                return this.echeckOrEcheckTokenField;
+            }
+            set {
+                if ((this.echeckOrEcheckTokenField != null)) {
+                    if ((echeckOrEcheckTokenField.Equals(value) != true)) {
+                        this.echeckOrEcheckTokenField = value;
+                        this.OnPropertyChanged("echeckOrEcheckToken");
+                    }
+                }
+                else {
+                    this.echeckOrEcheckTokenField = value;
+                    this.OnPropertyChanged("echeckOrEcheckToken");
+                }
+            }
+        }
+        
+        public customBilling customBilling1 {
+            get {
+                return this.customBilling1Field;
+            }
+            set {
+                if ((this.customBilling1Field != null)) {
+                    if ((customBilling1Field.Equals(value) != true)) {
+                        this.customBilling1Field = value;
+                        this.OnPropertyChanged("customBilling1");
+                    }
+                }
+                else {
+                    this.customBilling1Field = value;
+                    this.OnPropertyChanged("customBilling1");
+                }
+            }
+        }
+        
+        public merchantDataType merchantData {
+            get {
+                return this.merchantDataField;
+            }
+            set {
+                if ((this.merchantDataField != null)) {
+                    if ((merchantDataField.Equals(value) != true)) {
+                        this.merchantDataField = value;
+                        this.OnPropertyChanged("merchantData");
+                    }
+                }
+                else {
+                    this.merchantDataField = value;
+                    this.OnPropertyChanged("merchantData");
                 }
             }
         }
@@ -20068,89 +20578,212 @@ namespace LitleXSDGenerated {
         #endregion
     }
     
-    public enum ItemsChoiceType3 {
-        
-        /// <remarks/>
-        amount,
-        
-        /// <remarks/>
-        billToAddress,
-        
-        /// <remarks/>
-        customBilling,
-        
-        /// <remarks/>
-        echeckOrEcheckToken,
-        
-        /// <remarks/>
-        litleTxnId,
-        
-        /// <remarks/>
-        merchantData,
-        
-        /// <remarks/>
-        orderId,
-        
-        /// <remarks/>
-        orderSource,
-        
-        /// <remarks/>
-        shipToAddress,
-        
-        /// <remarks/>
-        verify,
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     public partial class echeckCredit : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<object> itemsField;
+        private long litleTxnIdField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private ObservableCollection<ItemsChoiceType4> itemsElementNameField;
+        private string amountField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private customBilling customBillingField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string orderIdField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private string amount1Field;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private orderSourceType orderSourceField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private contact billToAddressField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private object echeckOrEcheckTokenField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private customBilling customBilling1Field;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private merchantDataType merchantDataField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
         
         public echeckCredit() {
-            this.itemsElementNameField = new ObservableCollection<ItemsChoiceType4>();
-            this.itemsField = new ObservableCollection<object>();
+            this.merchantDataField = new merchantDataType();
+            this.customBilling1Field = new customBilling();
+            this.billToAddressField = new contact();
+            this.customBillingField = new customBilling();
         }
         
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public ObservableCollection<object> Items {
+        public long litleTxnId {
             get {
-                return this.itemsField;
+                return this.litleTxnIdField;
             }
             set {
-                if ((this.itemsField != null)) {
-                    if ((itemsField.Equals(value) != true)) {
-                        this.itemsField = value;
-                        this.OnPropertyChanged("Items");
-                    }
-                }
-                else {
-                    this.itemsField = value;
-                    this.OnPropertyChanged("Items");
+                if ((litleTxnIdField.Equals(value) != true)) {
+                    this.litleTxnIdField = value;
+                    this.OnPropertyChanged("litleTxnId");
                 }
             }
         }
         
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ObservableCollection<ItemsChoiceType4> ItemsElementName {
+        public string amount {
             get {
-                return this.itemsElementNameField;
+                return this.amountField;
             }
             set {
-                if ((this.itemsElementNameField != null)) {
-                    if ((itemsElementNameField.Equals(value) != true)) {
-                        this.itemsElementNameField = value;
-                        this.OnPropertyChanged("ItemsElementName");
+                if ((this.amountField != null)) {
+                    if ((amountField.Equals(value) != true)) {
+                        this.amountField = value;
+                        this.OnPropertyChanged("amount");
                     }
                 }
                 else {
-                    this.itemsElementNameField = value;
-                    this.OnPropertyChanged("ItemsElementName");
+                    this.amountField = value;
+                    this.OnPropertyChanged("amount");
+                }
+            }
+        }
+        
+        public customBilling customBilling {
+            get {
+                return this.customBillingField;
+            }
+            set {
+                if ((this.customBillingField != null)) {
+                    if ((customBillingField.Equals(value) != true)) {
+                        this.customBillingField = value;
+                        this.OnPropertyChanged("customBilling");
+                    }
+                }
+                else {
+                    this.customBillingField = value;
+                    this.OnPropertyChanged("customBilling");
+                }
+            }
+        }
+        
+        public string orderId {
+            get {
+                return this.orderIdField;
+            }
+            set {
+                if ((this.orderIdField != null)) {
+                    if ((orderIdField.Equals(value) != true)) {
+                        this.orderIdField = value;
+                        this.OnPropertyChanged("orderId");
+                    }
+                }
+                else {
+                    this.orderIdField = value;
+                    this.OnPropertyChanged("orderId");
+                }
+            }
+        }
+        
+        public string amount1 {
+            get {
+                return this.amount1Field;
+            }
+            set {
+                if ((this.amount1Field != null)) {
+                    if ((amount1Field.Equals(value) != true)) {
+                        this.amount1Field = value;
+                        this.OnPropertyChanged("amount1");
+                    }
+                }
+                else {
+                    this.amount1Field = value;
+                    this.OnPropertyChanged("amount1");
+                }
+            }
+        }
+        
+        public orderSourceType orderSource {
+            get {
+                return this.orderSourceField;
+            }
+            set {
+                if ((orderSourceField.Equals(value) != true)) {
+                    this.orderSourceField = value;
+                    this.OnPropertyChanged("orderSource");
+                }
+            }
+        }
+        
+        public contact billToAddress {
+            get {
+                return this.billToAddressField;
+            }
+            set {
+                if ((this.billToAddressField != null)) {
+                    if ((billToAddressField.Equals(value) != true)) {
+                        this.billToAddressField = value;
+                        this.OnPropertyChanged("billToAddress");
+                    }
+                }
+                else {
+                    this.billToAddressField = value;
+                    this.OnPropertyChanged("billToAddress");
+                }
+            }
+        }
+        
+        public object echeckOrEcheckToken {
+            get {
+                return this.echeckOrEcheckTokenField;
+            }
+            set {
+                if ((this.echeckOrEcheckTokenField != null)) {
+                    if ((echeckOrEcheckTokenField.Equals(value) != true)) {
+                        this.echeckOrEcheckTokenField = value;
+                        this.OnPropertyChanged("echeckOrEcheckToken");
+                    }
+                }
+                else {
+                    this.echeckOrEcheckTokenField = value;
+                    this.OnPropertyChanged("echeckOrEcheckToken");
+                }
+            }
+        }
+        
+        public customBilling customBilling1 {
+            get {
+                return this.customBilling1Field;
+            }
+            set {
+                if ((this.customBilling1Field != null)) {
+                    if ((customBilling1Field.Equals(value) != true)) {
+                        this.customBilling1Field = value;
+                        this.OnPropertyChanged("customBilling1");
+                    }
+                }
+                else {
+                    this.customBilling1Field = value;
+                    this.OnPropertyChanged("customBilling1");
+                }
+            }
+        }
+        
+        public merchantDataType merchantData {
+            get {
+                return this.merchantDataField;
+            }
+            set {
+                if ((this.merchantDataField != null)) {
+                    if ((merchantDataField.Equals(value) != true)) {
+                        this.merchantDataField = value;
+                        this.OnPropertyChanged("merchantData");
+                    }
+                }
+                else {
+                    this.merchantDataField = value;
+                    this.OnPropertyChanged("merchantData");
                 }
             }
         }
@@ -20325,33 +20958,6 @@ namespace LitleXSDGenerated {
             return ((echeckCredit)(this.MemberwiseClone()));
         }
         #endregion
-    }
-    
-    public enum ItemsChoiceType4 {
-        
-        /// <remarks/>
-        amount,
-        
-        /// <remarks/>
-        billToAddress,
-        
-        /// <remarks/>
-        customBilling,
-        
-        /// <remarks/>
-        echeckOrEcheckToken,
-        
-        /// <remarks/>
-        litleTxnId,
-        
-        /// <remarks/>
-        merchantData,
-        
-        /// <remarks/>
-        orderId,
-        
-        /// <remarks/>
-        orderSource,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
