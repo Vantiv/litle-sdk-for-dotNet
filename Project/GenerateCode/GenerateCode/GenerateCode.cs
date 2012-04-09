@@ -16,14 +16,21 @@ namespace GenerateCode
 
         public static void Main()
         {
-            GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\litle-sdk-for-dotNet\\Project\\GenerateCode\\GenerateCode\\xsd\\litleOnline_v8.10.xsd"));
-            Result<string> result = xsdGen.Generate();
-
-            xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\litle-sdk-for-dotNet\\Project\\GenerateCode\\GenerateCode\\xsd\\litleTransaction_v8.10.xsd"));
-            result = xsdGen.Generate();
-
-            xsdGen = new GeneratorFacade(GetGeneratorParams("C:\\msysgit\\litle-sdk-for-dotNet\\Project\\GenerateCode\\GenerateCode\\xsd\\litleCommon_v8.10.xsd"));
-            result = xsdGen.Generate();
+            ModifyXSDs mdfxsdObj = new ModifyXSDs("8.11");
+            string[] fileArrayToGenerateFrom = mdfxsdObj.getXSDFileList();
+            String pathToPass = "";
+            System.Threading.Thread.Sleep(3000);
+            // calls to generate the code
+            foreach (string fileName in fileArrayToGenerateFrom)
+            {
+                pathToPass = System.IO.Path.GetFullPath(fileName);
+                if (System.IO.File.Exists(fileName))
+                {
+                    pathToPass = System.IO.Path.GetFullPath(fileName);
+                }
+                GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams(pathToPass));
+                Result<string> result = xsdGen.Generate();
+            }
         }
 
         private static GeneratorParams GetGeneratorParams(string inputFilePath)
