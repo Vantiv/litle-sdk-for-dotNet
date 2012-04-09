@@ -18,7 +18,7 @@ namespace GenerateCode
 
         private static string generatedCodeDir = "";
 
-        public static string versionToGenerate = "8.11";
+        public static string versionToGenerate = "8.10";
 
         public static void Main(string[] args)
         {
@@ -34,12 +34,12 @@ namespace GenerateCode
             foreach (string fileName in fileArrayToGenerateFrom)
             {
                 pathToPass = System.IO.Path.GetFullPath(fileName);
-               // if (pathToPass.IndexOf("litleOnline") != -1)
+               if (pathToPass.IndexOf("litleOnline") != -1)
                 {
                     GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams(pathToPass));
                     Result<string> result = xsdGen.Generate();
                     // delete the modified xsd file.
-                    //File.Delete(fileName);
+                    File.Delete(fileName);
                 }
             }
 

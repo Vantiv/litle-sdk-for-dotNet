@@ -51,7 +51,7 @@ namespace GenerateCode
         {
             String pathToReturn = "";
             pathToReturn = filepath.Replace(".xsd", "_toGenerate.xsd");
-            //Process.Start("modifyXSD.vbs", (filepath + " " + pathToReturn));
+            Process.Start("modifyXSD.vbs", (filepath + " " + pathToReturn));
             return pathToReturn;
         }
     }
