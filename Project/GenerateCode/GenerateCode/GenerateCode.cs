@@ -7,16 +7,26 @@ using System.Diagnostics;
 using System.IO;
 using Xsd2Code.Library;
 using Xsd2Code.Library.Helpers;
+using Microsoft.CSharp;
+using System.CodeDom.Compiler;
 
 namespace GenerateCode
 {
     public class GenerateCode
     {
-        private const string CodeGenerationNamespace = "Xsd2Code.TestUnit";
+        private const string CodeGenerationNamespace = "LitleXSDGenerated";
 
-        public static void Main()
+        private static string generatedCodeDir = "";
+
+        public static string versionToGenerate = "8.11";
+
+        public static void Main(string[] args)
         {
-            ModifyXSDs mdfxsdObj = new ModifyXSDs("8.11");
+            if (args.Length > 0)
+            {
+                versionToGenerate = args[0];
+            }
+            ModifyXSDs mdfxsdObj = new ModifyXSDs(versionToGenerate);
             string[] fileArrayToGenerateFrom = mdfxsdObj.getXSDFileList();
             String pathToPass = "";
             System.Threading.Thread.Sleep(3000);
@@ -24,13 +34,13 @@ namespace GenerateCode
             foreach (string fileName in fileArrayToGenerateFrom)
             {
                 pathToPass = System.IO.Path.GetFullPath(fileName);
-                if (System.IO.File.Exists(fileName))
-                {
-                    pathToPass = System.IO.Path.GetFullPath(fileName);
-                }
                 GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams(pathToPass));
                 Result<string> result = xsdGen.Generate();
+                // delete the modified xsd file.
+                File.Delete(fileName);
             }
+
+            BuildGeneratedCode();
         }
 
         private static GeneratorParams GetGeneratorParams(string inputFilePath)
@@ -52,10 +62,43 @@ namespace GenerateCode
             return generatorParams;
         }
 
-        static private string GetOutputFilePath(string inputFilePath)
+        private static string GetOutputFilePath(string inputFilePath)
         {
-            return Path.ChangeExtension(inputFilePath, ".TestGenerated.cs");
+            String directoryForFile = Path.GetDirectoryName(Path.GetDirectoryName(inputFilePath));
+            generatedCodeDir = directoryForFile;
+            String valToReturn = "";
+
+            if (inputFilePath.IndexOf("litleCommon") != -1)
+            {
+                valToReturn = directoryForFile + "\\generated\\litleCommon.cs";
+            }
+            else if (inputFilePath.IndexOf("litleOnline") != -1)
+            {
+                valToReturn = directoryForFile + "\\generated\\litleOnline.cs";
+            }
+            else if (inputFilePath.IndexOf("litleTransaction") != -1)
+            {
+                valToReturn = directoryForFile + "\\generated\\litleTransaction.cs";
+            }
+
+            return valToReturn;
         }
 
+        public static void BuildGeneratedCode()
+        {
+            String[] arrayOfFiles;
+            arrayOfFiles = new String[3];
+            arrayOfFiles[0] = generatedCodeDir + "\\generated\\litleCommon.cs";
+            arrayOfFiles[1] = generatedCodeDir + "\\generated\\litleCommon.cs";
+            arrayOfFiles[2] = generatedCodeDir + "\\generated\\litleCommon.cs";
+            CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
+            CompilerParameters cp = new CompilerParameters();
+            //cp.GenerateInMemory = false;
+            cp.OutputAssembly = "litleXSDGenerated.dll";
+
+            CompilerResults result = provider.CompileAssemblyFromFile(cp, arrayOfFiles);
+            int something = 0;
+            something = 5;
+        }
     }
 }
