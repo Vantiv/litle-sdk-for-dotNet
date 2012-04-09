@@ -38,9 +38,9 @@ namespace GenerateCode
                 {
                     GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams(pathToPass));
                     Result<string> result = xsdGen.Generate();
-                    // delete the modified xsd file.
-                    File.Delete(fileName);
                 }
+               // delete the modified xsd file.
+               File.Delete(fileName);
             }
 
             BuildGeneratedCode();
