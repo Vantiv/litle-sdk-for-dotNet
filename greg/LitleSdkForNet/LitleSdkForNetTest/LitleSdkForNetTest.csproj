@@ -49,6 +49,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="litleXSDGenerated">
+      <HintPath>..\..\..\Project\GenerateCode\GenerateCode\bin\Debug\generated\litleXSDGenerated.dll</HintPath>
+    </Reference>
     <Reference Include="nunit-console-runner">
       <HintPath>NUnit\nunit-console-runner.dll</HintPath>
     </Reference>
@@ -115,6 +118,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LitleSdkForNet\LitleSdkForNet.csproj">
+      <Project>{4A6E3397-DE37-4F91-A90F-E74C1D91E098}</Project>
+      <Name>LitleSdkForNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
