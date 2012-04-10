@@ -4,3 +4,6 @@ Project.suo
 Project/TestTransaction2.csproj 	
 Project/TestTransaction2.csproj.user
 Project/TestTransaction2.suo
+Project/GenerateCode/GenerateCode.suo
+Project/GenerateCode/Xsd2Code.Library/obj/Debug
+Project/GenerateCode/obj/Debug

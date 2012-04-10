@@ -44,18 +44,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GenerateCode.cs" />
+    <Compile Include="ModifyXSDs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\xsd\litleCommon_v8.10.xsd" />
+    <None Include="bin\Debug\xsd\litleOnline_v8.10.xsd" />
     <None Include="xsd\litleCommon_v8.10.xsd" />
     <None Include="xsd\litleOnline_v8.10.xsd" />
-    <None Include="xsd\litleTransaction_v8.10.xsd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Xsd2Code.Library\Xsd2Code.Library.csproj">
       <Project>{1B59FB12-699C-4927-ACA3-D7F0E0F79100}</Project>
       <Name>Xsd2Code.Library</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\modifyXSD.vbs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\generated\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
