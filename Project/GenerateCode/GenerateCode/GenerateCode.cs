@@ -33,17 +33,27 @@ namespace GenerateCode
             // calls to generate the code
             foreach (string fileName in fileArrayToGenerateFrom)
             {
-                pathToPass = System.IO.Path.GetFullPath(fileName);
+               pathToPass = System.IO.Path.GetFullPath(fileName);
                if (pathToPass.IndexOf("litleOnline") != -1)
                 {
                     GeneratorFacade xsdGen = new GeneratorFacade(GetGeneratorParams(pathToPass));
                     Result<string> result = xsdGen.Generate();
                 }
-               // delete the modified xsd file.
-               File.Delete(fileName);
+               
             }
 
             BuildGeneratedCode();
+          
+            //delete files after BuildGeneratedCode
+            foreach (string fileName in fileArrayToGenerateFrom)
+            {
+                pathToPass = System.IO.Path.GetFullPath(fileName);
+                if (pathToPass.IndexOf("litle") != -1)
+                {
+                    // delete the modified xsd file.
+                    File.Delete(fileName);
+                }
+            }
         }
 
         private static GeneratorParams GetGeneratorParams(string inputFilePath)
