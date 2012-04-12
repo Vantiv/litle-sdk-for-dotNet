@@ -14,7 +14,7 @@ namespace GenerateCode
 {
     public class GenerateCode
     {
-        private const string CodeGenerationNamespace = "LitleXSDGenerated";
+        private const string CodeGenerationNamespace = "Litle.Sdk.Generated";
 
         private static string generatedCodeDir = "";
 
@@ -101,7 +101,7 @@ namespace GenerateCode
         {
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             CompilerParameters cp = new CompilerParameters();
-            cp.OutputAssembly = generatedCodeDir + "\\generated\\litleXSDGenerated.dll";
+            cp.OutputAssembly = generatedCodeDir + "\\generated\\Litle.Sdk.Generated.dll";
             cp.ReferencedAssemblies.Add("System.dll");
             cp.ReferencedAssemblies.Add("System.Xml.dll");
 
