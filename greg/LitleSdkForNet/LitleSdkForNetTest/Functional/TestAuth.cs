@@ -24,7 +24,7 @@ namespace LitleSdkForNetTest.Functional
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
             authorization.orderId ="12344";
-            authorization.amount = 106;
+            authorization.amount = "106";
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;

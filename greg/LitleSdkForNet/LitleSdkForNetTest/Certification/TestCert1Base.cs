@@ -24,7 +24,7 @@ namespace LitleSdkForNetTest.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "1";
-            authorization.amount = 10010;
+            authorization.amount = "10010";
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "John Smith";
@@ -49,6 +49,7 @@ namespace LitleSdkForNetTest.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
             capture capture = new capture();
+            Console.WriteLine("Going to write litleTxnId of " + response.litleTxnId);
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureResponse = litle.Capture(capture);
             Assert.AreEqual("000", captureResponse.response);
@@ -60,11 +61,12 @@ namespace LitleSdkForNetTest.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            //baseRequestTransactionVoid newvoid = new baseRequestTransactionVoid(); //TODO - Can we change this class name?
-            //newvoid.litleTxnId = creditResponse.litleTxnId;
-            //litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid); //TODO - Can we change this class name too?
-            //Assert.AreEqual("000", voidResponse.response);
-            //Assert.AreEqual("Approved", voidResponse.message);
+
+            @void newvoid = new @void(); //TODO - Can we change this class name?
+            newvoid.litleTxnId = creditResponse.litleTxnId;
+            litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid); //TODO - Can we change this class name too?
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         //[Test]

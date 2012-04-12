@@ -61,6 +61,30 @@ public partial class baseRequest {
     
     private authorization authorizationField;
     
+    private authReversal authReversalField;
+    
+    private capture captureField;
+    
+    private captureGivenAuth captureGivenAuthField;
+    
+    private credit creditField;
+    
+    private echeckCredit echeckCreditField;
+    
+    private echeckRedeposit echeckRedepositField;
+    
+    private echeckSale echeckSaleField;
+    
+    private echeckVerification echeckVerificationField;
+    
+    private forceCapture forceCaptureField;
+    
+    private sale saleField;
+    
+    private registerTokenRequestType registerTokenRequestField;
+    
+    private @void voidField;
+    
     private string versionField;
     
     /// <remarks/>
@@ -80,6 +104,126 @@ public partial class baseRequest {
         }
         set {
             this.authorizationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public authReversal authReversal {
+        get {
+            return this.authReversalField;
+        }
+        set {
+            this.authReversalField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public capture capture {
+        get {
+            return this.captureField;
+        }
+        set {
+            this.captureField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public captureGivenAuth captureGivenAuth {
+        get {
+            return this.captureGivenAuthField;
+        }
+        set {
+            this.captureGivenAuthField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public credit credit {
+        get {
+            return this.creditField;
+        }
+        set {
+            this.creditField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public echeckCredit echeckCredit {
+        get {
+            return this.echeckCreditField;
+        }
+        set {
+            this.echeckCreditField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public echeckRedeposit echeckRedeposit {
+        get {
+            return this.echeckRedepositField;
+        }
+        set {
+            this.echeckRedepositField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public echeckSale echeckSale {
+        get {
+            return this.echeckSaleField;
+        }
+        set {
+            this.echeckSaleField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public echeckVerification echeckVerification {
+        get {
+            return this.echeckVerificationField;
+        }
+        set {
+            this.echeckVerificationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public forceCapture forceCapture {
+        get {
+            return this.forceCaptureField;
+        }
+        set {
+            this.forceCaptureField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public sale sale {
+        get {
+            return this.saleField;
+        }
+        set {
+            this.saleField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public registerTokenRequestType registerTokenRequest {
+        get {
+            return this.registerTokenRequestField;
+        }
+        set {
+            this.registerTokenRequestField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public @void @void {
+        get {
+            return this.voidField;
+        }
+        set {
+            this.voidField = value;
         }
     }
     
@@ -110,7 +254,7 @@ public partial class authorization : transactionTypeWithReportGroup {
     
     private string orderIdField;
     
-    private long amountField;
+    private string amountField;
     
     private orderSourceType orderSourceField;
     
@@ -190,7 +334,8 @@ public partial class authorization : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    public long amount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
         get {
             return this.amountField;
         }
@@ -2661,9 +2806,7 @@ public partial class enhancedData {
     
     private string customerReferenceField;
     
-    private long salesTaxField;
-    
-    private bool salesTaxFieldSpecified;
+    private string salesTaxField;
     
     private enhancedDataDeliveryType deliveryTypeField;
     
@@ -2671,17 +2814,11 @@ public partial class enhancedData {
     
     private bool taxExemptFieldSpecified;
     
-    private long discountAmountField;
+    private string discountAmountField;
     
-    private bool discountAmountFieldSpecified;
+    private string shippingAmountField;
     
-    private long shippingAmountField;
-    
-    private bool shippingAmountFieldSpecified;
-    
-    private long dutyAmountField;
-    
-    private bool dutyAmountFieldSpecified;
+    private string dutyAmountField;
     
     private string shipFromPostalCodeField;
     
@@ -2716,23 +2853,13 @@ public partial class enhancedData {
     }
     
     /// <remarks/>
-    public long salesTax {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string salesTax {
         get {
             return this.salesTaxField;
         }
         set {
             this.salesTaxField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool salesTaxSpecified {
-        get {
-            return this.salesTaxFieldSpecified;
-        }
-        set {
-            this.salesTaxFieldSpecified = value;
         }
     }
     
@@ -2769,7 +2896,8 @@ public partial class enhancedData {
     }
     
     /// <remarks/>
-    public long discountAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string discountAmount {
         get {
             return this.discountAmountField;
         }
@@ -2779,18 +2907,8 @@ public partial class enhancedData {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool discountAmountSpecified {
-        get {
-            return this.discountAmountFieldSpecified;
-        }
-        set {
-            this.discountAmountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long shippingAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string shippingAmount {
         get {
             return this.shippingAmountField;
         }
@@ -2800,34 +2918,13 @@ public partial class enhancedData {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool shippingAmountSpecified {
-        get {
-            return this.shippingAmountFieldSpecified;
-        }
-        set {
-            this.shippingAmountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long dutyAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string dutyAmount {
         get {
             return this.dutyAmountField;
         }
         set {
             this.dutyAmountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool dutyAmountSpecified {
-        get {
-            return this.dutyAmountFieldSpecified;
-        }
-        set {
-            this.dutyAmountFieldSpecified = value;
         }
     }
     
@@ -2962,7 +3059,7 @@ public partial class detailTax {
     
     private bool taxIncludedInTotalFieldSpecified;
     
-    private long taxAmountField;
+    private string taxAmountField;
     
     private decimal taxRateField;
     
@@ -2996,7 +3093,8 @@ public partial class detailTax {
     }
     
     /// <remarks/>
-    public long taxAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string taxAmount {
         get {
             return this.taxAmountField;
         }
@@ -3146,21 +3244,13 @@ public partial class lineItemData {
     
     private string unitOfMeasureField;
     
-    private long taxAmountField;
+    private string taxAmountField;
     
-    private bool taxAmountFieldSpecified;
+    private string lineItemTotalField;
     
-    private long lineItemTotalField;
+    private string lineItemTotalWithTaxField;
     
-    private bool lineItemTotalFieldSpecified;
-    
-    private long lineItemTotalWithTaxField;
-    
-    private bool lineItemTotalWithTaxFieldSpecified;
-    
-    private long itemDiscountAmountField;
-    
-    private bool itemDiscountAmountFieldSpecified;
+    private string itemDiscountAmountField;
     
     private string commodityCodeField;
     
@@ -3233,7 +3323,8 @@ public partial class lineItemData {
     }
     
     /// <remarks/>
-    public long taxAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string taxAmount {
         get {
             return this.taxAmountField;
         }
@@ -3243,18 +3334,8 @@ public partial class lineItemData {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool taxAmountSpecified {
-        get {
-            return this.taxAmountFieldSpecified;
-        }
-        set {
-            this.taxAmountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long lineItemTotal {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string lineItemTotal {
         get {
             return this.lineItemTotalField;
         }
@@ -3264,18 +3345,8 @@ public partial class lineItemData {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool lineItemTotalSpecified {
-        get {
-            return this.lineItemTotalFieldSpecified;
-        }
-        set {
-            this.lineItemTotalFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long lineItemTotalWithTax {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string lineItemTotalWithTax {
         get {
             return this.lineItemTotalWithTaxField;
         }
@@ -3285,34 +3356,13 @@ public partial class lineItemData {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool lineItemTotalWithTaxSpecified {
-        get {
-            return this.lineItemTotalWithTaxFieldSpecified;
-        }
-        set {
-            this.lineItemTotalWithTaxFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long itemDiscountAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string itemDiscountAmount {
         get {
             return this.itemDiscountAmountField;
         }
         set {
             this.itemDiscountAmountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool itemDiscountAmountSpecified {
-        get {
-            return this.itemDiscountAmountFieldSpecified;
-        }
-        set {
-            this.itemDiscountAmountFieldSpecified = value;
         }
     }
     
@@ -3436,26 +3486,19 @@ public partial class healthcareIIAS {
 [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
 public partial class healthcareAmounts {
     
-    private long totalHealthcareAmountField;
+    private string totalHealthcareAmountField;
     
-    private long rxAmountField;
+    private string rxAmountField;
     
-    private bool rxAmountFieldSpecified;
+    private string visionAmountField;
     
-    private long visionAmountField;
+    private string clinicOtherAmountField;
     
-    private bool visionAmountFieldSpecified;
-    
-    private long clinicOtherAmountField;
-    
-    private bool clinicOtherAmountFieldSpecified;
-    
-    private long dentalAmountField;
-    
-    private bool dentalAmountFieldSpecified;
+    private string dentalAmountField;
     
     /// <remarks/>
-    public long totalHealthcareAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string totalHealthcareAmount {
         get {
             return this.totalHealthcareAmountField;
         }
@@ -3465,7 +3508,8 @@ public partial class healthcareAmounts {
     }
     
     /// <remarks/>
-    public long RxAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string RxAmount {
         get {
             return this.rxAmountField;
         }
@@ -3475,18 +3519,8 @@ public partial class healthcareAmounts {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool RxAmountSpecified {
-        get {
-            return this.rxAmountFieldSpecified;
-        }
-        set {
-            this.rxAmountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long visionAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string visionAmount {
         get {
             return this.visionAmountField;
         }
@@ -3496,18 +3530,8 @@ public partial class healthcareAmounts {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool visionAmountSpecified {
-        get {
-            return this.visionAmountFieldSpecified;
-        }
-        set {
-            this.visionAmountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long clinicOtherAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string clinicOtherAmount {
         get {
             return this.clinicOtherAmountField;
         }
@@ -3517,34 +3541,13 @@ public partial class healthcareAmounts {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool clinicOtherAmountSpecified {
-        get {
-            return this.clinicOtherAmountFieldSpecified;
-        }
-        set {
-            this.clinicOtherAmountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long dentalAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string dentalAmount {
         get {
             return this.dentalAmountField;
         }
         set {
             this.dentalAmountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool dentalAmountSpecified {
-        get {
-            return this.dentalAmountFieldSpecified;
-        }
-        set {
-            this.dentalAmountFieldSpecified = value;
         }
     }
 }
@@ -3887,42 +3890,2078 @@ public partial class transactionTypeWithReportGroupAndPartial : transactionType 
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class authReversal : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private bool litleTxnIdFieldSpecified;
+    
+    private string amountField;
+    
+    private string payPalNotesField;
+    
+    private string actionReasonField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool litleTxnIdSpecified {
+        get {
+            return this.litleTxnIdFieldSpecified;
+        }
+        set {
+            this.litleTxnIdFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string payPalNotes {
+        get {
+            return this.payPalNotesField;
+        }
+        set {
+            this.payPalNotesField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string actionReason {
+        get {
+            return this.actionReasonField;
+        }
+        set {
+            this.actionReasonField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class capture : transactionTypeWithReportGroupAndPartial {
+    
+    private long litleTxnIdField;
+    
+    private string amountField;
+    
+    private enhancedData enhancedDataField;
+    
+    private processingInstructions processingInstructionsField;
+    
+    private bool payPalOrderCompleteField;
+    
+    private bool payPalOrderCompleteFieldSpecified;
+    
+    private string payPalNotesField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public enhancedData enhancedData {
+        get {
+            return this.enhancedDataField;
+        }
+        set {
+            this.enhancedDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public processingInstructions processingInstructions {
+        get {
+            return this.processingInstructionsField;
+        }
+        set {
+            this.processingInstructionsField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public bool payPalOrderComplete {
+        get {
+            return this.payPalOrderCompleteField;
+        }
+        set {
+            this.payPalOrderCompleteField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool payPalOrderCompleteSpecified {
+        get {
+            return this.payPalOrderCompleteFieldSpecified;
+        }
+        set {
+            this.payPalOrderCompleteFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string payPalNotes {
+        get {
+            return this.payPalNotesField;
+        }
+        set {
+            this.payPalNotesField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class captureGivenAuth : transactionTypeWithReportGroup {
+    
+    private string orderIdField;
+    
+    private authInformation authInformationField;
+    
+    private string amountField;
+    
+    private orderSourceType orderSourceField;
+    
+    private contact billToAddressField;
+    
+    private contact shipToAddressField;
+    
+    private cardType cardField;
+    
+    private cardTokenType tokenField;
+    
+    private cardPaypageType paypageField;
+    
+    private customBilling customBillingField;
+    
+    private govtTaxTypeEnum taxTypeField;
+    
+    private bool taxTypeFieldSpecified;
+    
+    private billMeLaterRequest billMeLaterRequestField;
+    
+    private enhancedData enhancedDataField;
+    
+    private processingInstructions processingInstructionsField;
+    
+    private pos posField;
+    
+    private amexAggregatorData amexAggregatorDataField;
+    
+    private merchantDataType merchantDataField;
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public authInformation authInformation {
+        get {
+            return this.authInformationField;
+        }
+        set {
+            this.authInformationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public orderSourceType orderSource {
+        get {
+            return this.orderSourceField;
+        }
+        set {
+            this.orderSourceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact billToAddress {
+        get {
+            return this.billToAddressField;
+        }
+        set {
+            this.billToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact shipToAddress {
+        get {
+            return this.shipToAddressField;
+        }
+        set {
+            this.shipToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardType card {
+        get {
+            return this.cardField;
+        }
+        set {
+            this.cardField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardTokenType token {
+        get {
+            return this.tokenField;
+        }
+        set {
+            this.tokenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardPaypageType paypage {
+        get {
+            return this.paypageField;
+        }
+        set {
+            this.paypageField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public customBilling customBilling {
+        get {
+            return this.customBillingField;
+        }
+        set {
+            this.customBillingField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public govtTaxTypeEnum taxType {
+        get {
+            return this.taxTypeField;
+        }
+        set {
+            this.taxTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool taxTypeSpecified {
+        get {
+            return this.taxTypeFieldSpecified;
+        }
+        set {
+            this.taxTypeFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public billMeLaterRequest billMeLaterRequest {
+        get {
+            return this.billMeLaterRequestField;
+        }
+        set {
+            this.billMeLaterRequestField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public enhancedData enhancedData {
+        get {
+            return this.enhancedDataField;
+        }
+        set {
+            this.enhancedDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public processingInstructions processingInstructions {
+        get {
+            return this.processingInstructionsField;
+        }
+        set {
+            this.processingInstructionsField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public pos pos {
+        get {
+            return this.posField;
+        }
+        set {
+            this.posField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public amexAggregatorData amexAggregatorData {
+        get {
+            return this.amexAggregatorDataField;
+        }
+        set {
+            this.amexAggregatorDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public merchantDataType merchantData {
+        get {
+            return this.merchantDataField;
+        }
+        set {
+            this.merchantDataField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class authInformation {
+    
+    private System.DateTime authDateField;
+    
+    private string authCodeField;
+    
+    private fraudResult fraudResultField;
+    
+    private string authAmountField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+    public System.DateTime authDate {
+        get {
+            return this.authDateField;
+        }
+        set {
+            this.authDateField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string authCode {
+        get {
+            return this.authCodeField;
+        }
+        set {
+            this.authCodeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public fraudResult fraudResult {
+        get {
+            return this.fraudResultField;
+        }
+        set {
+            this.fraudResultField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string authAmount {
+        get {
+            return this.authAmountField;
+        }
+        set {
+            this.authAmountField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class fraudResult {
+    
+    private string avsResultField;
+    
+    private string cardValidationResultField;
+    
+    private string authenticationResultField;
+    
+    private string advancedAVSResultField;
+    
+    /// <remarks/>
+    public string avsResult {
+        get {
+            return this.avsResultField;
+        }
+        set {
+            this.avsResultField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string cardValidationResult {
+        get {
+            return this.cardValidationResultField;
+        }
+        set {
+            this.cardValidationResultField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string authenticationResult {
+        get {
+            return this.authenticationResultField;
+        }
+        set {
+            this.authenticationResultField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string advancedAVSResult {
+        get {
+            return this.advancedAVSResultField;
+        }
+        set {
+            this.advancedAVSResultField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class credit : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private bool litleTxnIdFieldSpecified;
+    
+    private enhancedData enhancedDataField;
+    
+    private processingInstructions processingInstructionsField;
+    
+    private string orderIdField;
+    
+    private string amountField;
+    
+    private orderSourceType orderSourceField;
+    
+    private contact billToAddressField;
+    
+    private cardType cardField;
+    
+    private cardTokenType tokenField;
+    
+    private cardPaypageType paypageField;
+    
+    private creditPaypal paypalField;
+    
+    private customBilling customBillingField;
+    
+    private govtTaxTypeEnum taxTypeField;
+    
+    private bool taxTypeFieldSpecified;
+    
+    private billMeLaterRequest billMeLaterRequestField;
+    
+    private pos posField;
+    
+    private amexAggregatorData amexAggregatorDataField;
+    
+    private merchantDataType merchantDataField;
+    
+    private string payPalNotesField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool litleTxnIdSpecified {
+        get {
+            return this.litleTxnIdFieldSpecified;
+        }
+        set {
+            this.litleTxnIdFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public enhancedData enhancedData {
+        get {
+            return this.enhancedDataField;
+        }
+        set {
+            this.enhancedDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public processingInstructions processingInstructions {
+        get {
+            return this.processingInstructionsField;
+        }
+        set {
+            this.processingInstructionsField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public orderSourceType orderSource {
+        get {
+            return this.orderSourceField;
+        }
+        set {
+            this.orderSourceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact billToAddress {
+        get {
+            return this.billToAddressField;
+        }
+        set {
+            this.billToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardType card {
+        get {
+            return this.cardField;
+        }
+        set {
+            this.cardField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardTokenType token {
+        get {
+            return this.tokenField;
+        }
+        set {
+            this.tokenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardPaypageType paypage {
+        get {
+            return this.paypageField;
+        }
+        set {
+            this.paypageField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public creditPaypal paypal {
+        get {
+            return this.paypalField;
+        }
+        set {
+            this.paypalField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public customBilling customBilling {
+        get {
+            return this.customBillingField;
+        }
+        set {
+            this.customBillingField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public govtTaxTypeEnum taxType {
+        get {
+            return this.taxTypeField;
+        }
+        set {
+            this.taxTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool taxTypeSpecified {
+        get {
+            return this.taxTypeFieldSpecified;
+        }
+        set {
+            this.taxTypeFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public billMeLaterRequest billMeLaterRequest {
+        get {
+            return this.billMeLaterRequestField;
+        }
+        set {
+            this.billMeLaterRequestField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public pos pos {
+        get {
+            return this.posField;
+        }
+        set {
+            this.posField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public amexAggregatorData amexAggregatorData {
+        get {
+            return this.amexAggregatorDataField;
+        }
+        set {
+            this.amexAggregatorDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public merchantDataType merchantData {
+        get {
+            return this.merchantDataField;
+        }
+        set {
+            this.merchantDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string payPalNotes {
+        get {
+            return this.payPalNotesField;
+        }
+        set {
+            this.payPalNotesField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+public partial class creditPaypal {
+    
+    private string payerIdField;
+    
+    private string payerEmailField;
+    
+    /// <remarks/>
+    public string payerId {
+        get {
+            return this.payerIdField;
+        }
+        set {
+            this.payerIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string payerEmail {
+        get {
+            return this.payerEmailField;
+        }
+        set {
+            this.payerEmailField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class echeckCredit : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private bool litleTxnIdFieldSpecified;
+    
+    private string amountField;
+    
+    private customBilling customBillingField;
+    
+    private string orderIdField;
+    
+    private orderSourceType orderSourceField;
+    
+    private bool orderSourceFieldSpecified;
+    
+    private contact billToAddressField;
+    
+    private object itemField;
+    
+    private merchantDataType merchantDataField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool litleTxnIdSpecified {
+        get {
+            return this.litleTxnIdFieldSpecified;
+        }
+        set {
+            this.litleTxnIdFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public customBilling customBilling {
+        get {
+            return this.customBillingField;
+        }
+        set {
+            this.customBillingField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public orderSourceType orderSource {
+        get {
+            return this.orderSourceField;
+        }
+        set {
+            this.orderSourceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool orderSourceSpecified {
+        get {
+            return this.orderSourceFieldSpecified;
+        }
+        set {
+            this.orderSourceFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact billToAddress {
+        get {
+            return this.billToAddressField;
+        }
+        set {
+            this.billToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType))]
+    [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType))]
+    public object Item {
+        get {
+            return this.itemField;
+        }
+        set {
+            this.itemField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public merchantDataType merchantData {
+        get {
+            return this.merchantDataField;
+        }
+        set {
+            this.merchantDataField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
-public partial class driversLicenseInfo {
+[System.Xml.Serialization.XmlRootAttribute("echeck", Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class echeckType {
     
-    private string licenseNumberField;
+    private echeckAccountTypeEnum accTypeField;
     
-    private string stateField;
+    private string accNumField;
     
-    private string dateOfBirthField;
+    private string routingNumField;
+    
+    private string checkNumField;
     
     /// <remarks/>
-    public string licenseNumber {
+    public echeckAccountTypeEnum accType {
         get {
-            return this.licenseNumberField;
+            return this.accTypeField;
         }
         set {
-            this.licenseNumberField = value;
+            this.accTypeField = value;
         }
     }
     
     /// <remarks/>
-    public string state {
+    public string accNum {
         get {
-            return this.stateField;
+            return this.accNumField;
         }
         set {
-            this.stateField = value;
+            this.accNumField = value;
         }
     }
     
     /// <remarks/>
-    public string dateOfBirth {
+    public string routingNum {
         get {
-            return this.dateOfBirthField;
+            return this.routingNumField;
         }
         set {
-            this.dateOfBirthField = value;
+            this.routingNumField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string checkNum {
+        get {
+            return this.checkNumField;
+        }
+        set {
+            this.checkNumField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
+public enum echeckAccountTypeEnum {
+    
+    /// <remarks/>
+    Checking,
+    
+    /// <remarks/>
+    Savings,
+    
+    /// <remarks/>
+    Corporate,
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlEnumAttribute("Corp Savings")]
+    CorpSavings,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute("echeckToken", Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class echeckTokenType {
+    
+    private string litleTokenField;
+    
+    private string routingNumField;
+    
+    private echeckAccountTypeEnum accTypeField;
+    
+    private string checkNumField;
+    
+    /// <remarks/>
+    public string litleToken {
+        get {
+            return this.litleTokenField;
+        }
+        set {
+            this.litleTokenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string routingNum {
+        get {
+            return this.routingNumField;
+        }
+        set {
+            this.routingNumField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public echeckAccountTypeEnum accType {
+        get {
+            return this.accTypeField;
+        }
+        set {
+            this.accTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string checkNum {
+        get {
+            return this.checkNumField;
+        }
+        set {
+            this.checkNumField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class echeckRedeposit : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private object itemField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType))]
+    [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType))]
+    public object Item {
+        get {
+            return this.itemField;
+        }
+        set {
+            this.itemField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class echeckSale : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private bool litleTxnIdFieldSpecified;
+    
+    private string amountField;
+    
+    private customBilling customBillingField;
+    
+    private string orderIdField;
+    
+    private bool verifyField;
+    
+    private bool verifyFieldSpecified;
+    
+    private orderSourceType orderSourceField;
+    
+    private bool orderSourceFieldSpecified;
+    
+    private contact billToAddressField;
+    
+    private contact shipToAddressField;
+    
+    private object itemField;
+    
+    private merchantDataType merchantDataField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool litleTxnIdSpecified {
+        get {
+            return this.litleTxnIdFieldSpecified;
+        }
+        set {
+            this.litleTxnIdFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public customBilling customBilling {
+        get {
+            return this.customBillingField;
+        }
+        set {
+            this.customBillingField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public bool verify {
+        get {
+            return this.verifyField;
+        }
+        set {
+            this.verifyField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool verifySpecified {
+        get {
+            return this.verifyFieldSpecified;
+        }
+        set {
+            this.verifyFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public orderSourceType orderSource {
+        get {
+            return this.orderSourceField;
+        }
+        set {
+            this.orderSourceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool orderSourceSpecified {
+        get {
+            return this.orderSourceFieldSpecified;
+        }
+        set {
+            this.orderSourceFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact billToAddress {
+        get {
+            return this.billToAddressField;
+        }
+        set {
+            this.billToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact shipToAddress {
+        get {
+            return this.shipToAddressField;
+        }
+        set {
+            this.shipToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType))]
+    [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType))]
+    public object Item {
+        get {
+            return this.itemField;
+        }
+        set {
+            this.itemField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public merchantDataType merchantData {
+        get {
+            return this.merchantDataField;
+        }
+        set {
+            this.merchantDataField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class echeckVerification : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private bool litleTxnIdFieldSpecified;
+    
+    private string orderIdField;
+    
+    private string amountField;
+    
+    private orderSourceType orderSourceField;
+    
+    private contact billToAddressField;
+    
+    private object itemField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool litleTxnIdSpecified {
+        get {
+            return this.litleTxnIdFieldSpecified;
+        }
+        set {
+            this.litleTxnIdFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public orderSourceType orderSource {
+        get {
+            return this.orderSourceField;
+        }
+        set {
+            this.orderSourceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact billToAddress {
+        get {
+            return this.billToAddressField;
+        }
+        set {
+            this.billToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType))]
+    [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType))]
+    public object Item {
+        get {
+            return this.itemField;
+        }
+        set {
+            this.itemField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class forceCapture : transactionTypeWithReportGroup {
+    
+    private string orderIdField;
+    
+    private string amountField;
+    
+    private orderSourceType orderSourceField;
+    
+    private contact billToAddressField;
+    
+    private cardType cardField;
+    
+    private cardTokenType tokenField;
+    
+    private cardPaypageType paypageField;
+    
+    private customBilling customBillingField;
+    
+    private govtTaxTypeEnum taxTypeField;
+    
+    private bool taxTypeFieldSpecified;
+    
+    private enhancedData enhancedDataField;
+    
+    private processingInstructions processingInstructionsField;
+    
+    private pos posField;
+    
+    private amexAggregatorData amexAggregatorDataField;
+    
+    private merchantDataType merchantDataField;
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public orderSourceType orderSource {
+        get {
+            return this.orderSourceField;
+        }
+        set {
+            this.orderSourceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact billToAddress {
+        get {
+            return this.billToAddressField;
+        }
+        set {
+            this.billToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardType card {
+        get {
+            return this.cardField;
+        }
+        set {
+            this.cardField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardTokenType token {
+        get {
+            return this.tokenField;
+        }
+        set {
+            this.tokenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardPaypageType paypage {
+        get {
+            return this.paypageField;
+        }
+        set {
+            this.paypageField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public customBilling customBilling {
+        get {
+            return this.customBillingField;
+        }
+        set {
+            this.customBillingField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public govtTaxTypeEnum taxType {
+        get {
+            return this.taxTypeField;
+        }
+        set {
+            this.taxTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool taxTypeSpecified {
+        get {
+            return this.taxTypeFieldSpecified;
+        }
+        set {
+            this.taxTypeFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public enhancedData enhancedData {
+        get {
+            return this.enhancedDataField;
+        }
+        set {
+            this.enhancedDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public processingInstructions processingInstructions {
+        get {
+            return this.processingInstructionsField;
+        }
+        set {
+            this.processingInstructionsField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public pos pos {
+        get {
+            return this.posField;
+        }
+        set {
+            this.posField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public amexAggregatorData amexAggregatorData {
+        get {
+            return this.amexAggregatorDataField;
+        }
+        set {
+            this.amexAggregatorDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public merchantDataType merchantData {
+        get {
+            return this.merchantDataField;
+        }
+        set {
+            this.merchantDataField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class sale : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private bool litleTxnIdFieldSpecified;
+    
+    private string orderIdField;
+    
+    private string amountField;
+    
+    private orderSourceType orderSourceField;
+    
+    private customerInfo customerInfoField;
+    
+    private contact billToAddressField;
+    
+    private contact shipToAddressField;
+    
+    private cardType cardField;
+    
+    private payPal paypalField;
+    
+    private cardTokenType tokenField;
+    
+    private cardPaypageType paypageField;
+    
+    private billMeLaterRequest billMeLaterRequestField;
+    
+    private fraudCheckType fraudCheckField;
+    
+    private fraudCheckType cardholderAuthenticationField;
+    
+    private customBilling customBillingField;
+    
+    private govtTaxTypeEnum taxTypeField;
+    
+    private bool taxTypeFieldSpecified;
+    
+    private enhancedData enhancedDataField;
+    
+    private processingInstructions processingInstructionsField;
+    
+    private pos posField;
+    
+    private bool payPalOrderCompleteField;
+    
+    private bool payPalOrderCompleteFieldSpecified;
+    
+    private string payPalNotesField;
+    
+    private amexAggregatorData amexAggregatorDataField;
+    
+    private bool allowPartialAuthField;
+    
+    private bool allowPartialAuthFieldSpecified;
+    
+    private healthcareIIAS healthcareIIASField;
+    
+    private filteringType filteringField;
+    
+    private merchantDataType merchantDataField;
+    
+    private recyclingRequestType recyclingRequestField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool litleTxnIdSpecified {
+        get {
+            return this.litleTxnIdFieldSpecified;
+        }
+        set {
+            this.litleTxnIdFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string amount {
+        get {
+            return this.amountField;
+        }
+        set {
+            this.amountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public orderSourceType orderSource {
+        get {
+            return this.orderSourceField;
+        }
+        set {
+            this.orderSourceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public customerInfo customerInfo {
+        get {
+            return this.customerInfoField;
+        }
+        set {
+            this.customerInfoField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact billToAddress {
+        get {
+            return this.billToAddressField;
+        }
+        set {
+            this.billToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public contact shipToAddress {
+        get {
+            return this.shipToAddressField;
+        }
+        set {
+            this.shipToAddressField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardType card {
+        get {
+            return this.cardField;
+        }
+        set {
+            this.cardField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public payPal paypal {
+        get {
+            return this.paypalField;
+        }
+        set {
+            this.paypalField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardTokenType token {
+        get {
+            return this.tokenField;
+        }
+        set {
+            this.tokenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public cardPaypageType paypage {
+        get {
+            return this.paypageField;
+        }
+        set {
+            this.paypageField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public billMeLaterRequest billMeLaterRequest {
+        get {
+            return this.billMeLaterRequestField;
+        }
+        set {
+            this.billMeLaterRequestField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public fraudCheckType fraudCheck {
+        get {
+            return this.fraudCheckField;
+        }
+        set {
+            this.fraudCheckField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public fraudCheckType cardholderAuthentication {
+        get {
+            return this.cardholderAuthenticationField;
+        }
+        set {
+            this.cardholderAuthenticationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public customBilling customBilling {
+        get {
+            return this.customBillingField;
+        }
+        set {
+            this.customBillingField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public govtTaxTypeEnum taxType {
+        get {
+            return this.taxTypeField;
+        }
+        set {
+            this.taxTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool taxTypeSpecified {
+        get {
+            return this.taxTypeFieldSpecified;
+        }
+        set {
+            this.taxTypeFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public enhancedData enhancedData {
+        get {
+            return this.enhancedDataField;
+        }
+        set {
+            this.enhancedDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public processingInstructions processingInstructions {
+        get {
+            return this.processingInstructionsField;
+        }
+        set {
+            this.processingInstructionsField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public pos pos {
+        get {
+            return this.posField;
+        }
+        set {
+            this.posField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public bool payPalOrderComplete {
+        get {
+            return this.payPalOrderCompleteField;
+        }
+        set {
+            this.payPalOrderCompleteField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool payPalOrderCompleteSpecified {
+        get {
+            return this.payPalOrderCompleteFieldSpecified;
+        }
+        set {
+            this.payPalOrderCompleteFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string payPalNotes {
+        get {
+            return this.payPalNotesField;
+        }
+        set {
+            this.payPalNotesField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public amexAggregatorData amexAggregatorData {
+        get {
+            return this.amexAggregatorDataField;
+        }
+        set {
+            this.amexAggregatorDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public bool allowPartialAuth {
+        get {
+            return this.allowPartialAuthField;
+        }
+        set {
+            this.allowPartialAuthField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool allowPartialAuthSpecified {
+        get {
+            return this.allowPartialAuthFieldSpecified;
+        }
+        set {
+            this.allowPartialAuthFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public healthcareIIAS healthcareIIAS {
+        get {
+            return this.healthcareIIASField;
+        }
+        set {
+            this.healthcareIIASField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public filteringType filtering {
+        get {
+            return this.filteringField;
+        }
+        set {
+            this.filteringField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public merchantDataType merchantData {
+        get {
+            return this.merchantDataField;
+        }
+        set {
+            this.merchantDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public recyclingRequestType recyclingRequest {
+        get {
+            return this.recyclingRequestField;
+        }
+        set {
+            this.recyclingRequestField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute("registerTokenRequest", Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class registerTokenRequestType : transactionTypeWithReportGroup {
+    
+    private string orderIdField;
+    
+    private string accountNumberField;
+    
+    private echeckForTokenType echeckForTokenField;
+    
+    private string paypageRegistrationIdField;
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string accountNumber {
+        get {
+            return this.accountNumberField;
+        }
+        set {
+            this.accountNumberField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public echeckForTokenType echeckForToken {
+        get {
+            return this.echeckForTokenField;
+        }
+        set {
+            this.echeckForTokenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string paypageRegistrationId {
+        get {
+            return this.paypageRegistrationIdField;
+        }
+        set {
+            this.paypageRegistrationIdField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
+public partial class echeckForTokenType {
+    
+    private string accNumField;
+    
+    private string routingNumField;
+    
+    /// <remarks/>
+    public string accNum {
+        get {
+            return this.accNumField;
+        }
+        set {
+            this.accNumField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string routingNum {
+        get {
+            return this.routingNumField;
+        }
+        set {
+            this.routingNumField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class @void : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private processingInstructions processingInstructionsField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public processingInstructions processingInstructions {
+        get {
+            return this.processingInstructionsField;
+        }
+        set {
+            this.processingInstructionsField = value;
         }
     }
 }
@@ -3935,17 +5974,40 @@ public partial class driversLicenseInfo {
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
 public partial class recycleAdviceType {
     
-    private object itemField;
+    private System.DateTime nextRecycleTimeField;
+    
+    private bool nextRecycleTimeFieldSpecified;
+    
+    private string recycleAdviceEndField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("nextRecycleTime", typeof(System.DateTime))]
-    [System.Xml.Serialization.XmlElementAttribute("recycleAdviceEnd", typeof(string))]
-    public object Item {
+    public System.DateTime nextRecycleTime {
         get {
-            return this.itemField;
+            return this.nextRecycleTimeField;
         }
         set {
-            this.itemField = value;
+            this.nextRecycleTimeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool nextRecycleTimeSpecified {
+        get {
+            return this.nextRecycleTimeFieldSpecified;
+        }
+        set {
+            this.nextRecycleTimeFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string recycleAdviceEnd {
+        get {
+            return this.recycleAdviceEndField;
+        }
+        set {
+            this.recycleAdviceEndField = value;
         }
     }
 }
@@ -4248,26 +6310,6 @@ public partial class echeckTokenInfoType {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
 [System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
-public enum echeckAccountTypeEnum {
-    
-    /// <remarks/>
-    Checking,
-    
-    /// <remarks/>
-    Savings,
-    
-    /// <remarks/>
-    Corporate,
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlEnumAttribute("Corp Savings")]
-    CorpSavings,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
@@ -4348,44 +6390,13 @@ public partial class accountInfoType {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
-public partial class echeckForTokenType {
-    
-    private string accNumField;
-    
-    private string routingNumField;
-    
-    /// <remarks/>
-    public string accNum {
-        get {
-            return this.accNumField;
-        }
-        set {
-            this.accNumField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string routingNum {
-        get {
-            return this.routingNumField;
-        }
-        set {
-            this.routingNumField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
 public partial class billMeLaterResponseData {
     
     private long bmlMerchantIdField;
+    
+    private bool bmlMerchantIdFieldSpecified;
     
     private string promotionalOfferCodeField;
     
@@ -4393,9 +6404,7 @@ public partial class billMeLaterResponseData {
     
     private bool approvedTermsCodeFieldSpecified;
     
-    private long creditLineField;
-    
-    private bool creditLineFieldSpecified;
+    private string creditLineField;
     
     private string addressIndicatorField;
     
@@ -4412,6 +6421,17 @@ public partial class billMeLaterResponseData {
         }
         set {
             this.bmlMerchantIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool bmlMerchantIdSpecified {
+        get {
+            return this.bmlMerchantIdFieldSpecified;
+        }
+        set {
+            this.bmlMerchantIdFieldSpecified = value;
         }
     }
     
@@ -4447,23 +6467,13 @@ public partial class billMeLaterResponseData {
     }
     
     /// <remarks/>
-    public long creditLine {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string creditLine {
         get {
             return this.creditLineField;
         }
         set {
             this.creditLineField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool creditLineSpecified {
-        get {
-            return this.creditLineFieldSpecified;
-        }
-        set {
-            this.creditLineFieldSpecified = value;
         }
     }
     
@@ -4515,1485 +6525,6 @@ public partial class billMeLaterResponseData {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class authReversal : transactionTypeWithReportGroup {
-    
-    private long litleTxnIdField;
-    
-    private long amountField;
-    
-    private bool amountFieldSpecified;
-    
-    private string payPalNotesField;
-    
-    private string actionReasonField;
-    
-    /// <remarks/>
-    public long litleTxnId {
-        get {
-            return this.litleTxnIdField;
-        }
-        set {
-            this.litleTxnIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long amount {
-        get {
-            return this.amountField;
-        }
-        set {
-            this.amountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool amountSpecified {
-        get {
-            return this.amountFieldSpecified;
-        }
-        set {
-            this.amountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string payPalNotes {
-        get {
-            return this.payPalNotesField;
-        }
-        set {
-            this.payPalNotesField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string actionReason {
-        get {
-            return this.actionReasonField;
-        }
-        set {
-            this.actionReasonField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class capture : transactionTypeWithReportGroupAndPartial {
-    
-    private long litleTxnIdField;
-    
-    private long amountField;
-    
-    private bool amountFieldSpecified;
-    
-    private enhancedData enhancedDataField;
-    
-    private processingInstructions processingInstructionsField;
-    
-    private bool payPalOrderCompleteField;
-    
-    private bool payPalOrderCompleteFieldSpecified;
-    
-    private string payPalNotesField;
-    
-    /// <remarks/>
-    public long litleTxnId {
-        get {
-            return this.litleTxnIdField;
-        }
-        set {
-            this.litleTxnIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long amount {
-        get {
-            return this.amountField;
-        }
-        set {
-            this.amountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool amountSpecified {
-        get {
-            return this.amountFieldSpecified;
-        }
-        set {
-            this.amountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public enhancedData enhancedData {
-        get {
-            return this.enhancedDataField;
-        }
-        set {
-            this.enhancedDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public processingInstructions processingInstructions {
-        get {
-            return this.processingInstructionsField;
-        }
-        set {
-            this.processingInstructionsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public bool payPalOrderComplete {
-        get {
-            return this.payPalOrderCompleteField;
-        }
-        set {
-            this.payPalOrderCompleteField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool payPalOrderCompleteSpecified {
-        get {
-            return this.payPalOrderCompleteFieldSpecified;
-        }
-        set {
-            this.payPalOrderCompleteFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string payPalNotes {
-        get {
-            return this.payPalNotesField;
-        }
-        set {
-            this.payPalNotesField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class forceCapture : transactionTypeWithReportGroup {
-    
-    private string orderIdField;
-    
-    private long amountField;
-    
-    private orderSourceType orderSourceField;
-    
-    private contact billToAddressField;
-    
-    private object itemField;
-    
-    private customBilling customBillingField;
-    
-    private govtTaxTypeEnum taxTypeField;
-    
-    private bool taxTypeFieldSpecified;
-    
-    private enhancedData enhancedDataField;
-    
-    private processingInstructions processingInstructionsField;
-    
-    private pos posField;
-    
-    private amexAggregatorData amexAggregatorDataField;
-    
-    private merchantDataType merchantDataField;
-    
-    /// <remarks/>
-    public string orderId {
-        get {
-            return this.orderIdField;
-        }
-        set {
-            this.orderIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long amount {
-        get {
-            return this.amountField;
-        }
-        set {
-            this.amountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public orderSourceType orderSource {
-        get {
-            return this.orderSourceField;
-        }
-        set {
-            this.orderSourceField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public contact billToAddress {
-        get {
-            return this.billToAddressField;
-        }
-        set {
-            this.billToAddressField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("card", typeof(cardType))]
-    [System.Xml.Serialization.XmlElementAttribute("paypage", typeof(cardPaypageType))]
-    [System.Xml.Serialization.XmlElementAttribute("token", typeof(cardTokenType))]
-    public object Item {
-        get {
-            return this.itemField;
-        }
-        set {
-            this.itemField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public customBilling customBilling {
-        get {
-            return this.customBillingField;
-        }
-        set {
-            this.customBillingField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public govtTaxTypeEnum taxType {
-        get {
-            return this.taxTypeField;
-        }
-        set {
-            this.taxTypeField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool taxTypeSpecified {
-        get {
-            return this.taxTypeFieldSpecified;
-        }
-        set {
-            this.taxTypeFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public enhancedData enhancedData {
-        get {
-            return this.enhancedDataField;
-        }
-        set {
-            this.enhancedDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public processingInstructions processingInstructions {
-        get {
-            return this.processingInstructionsField;
-        }
-        set {
-            this.processingInstructionsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public pos pos {
-        get {
-            return this.posField;
-        }
-        set {
-            this.posField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public amexAggregatorData amexAggregatorData {
-        get {
-            return this.amexAggregatorDataField;
-        }
-        set {
-            this.amexAggregatorDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public merchantDataType merchantData {
-        get {
-            return this.merchantDataField;
-        }
-        set {
-            this.merchantDataField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class captureGivenAuth : transactionTypeWithReportGroup {
-    
-    private string orderIdField;
-    
-    private authInformation authInformationField;
-    
-    private long amountField;
-    
-    private orderSourceType orderSourceField;
-    
-    private contact billToAddressField;
-    
-    private contact shipToAddressField;
-    
-    private object itemField;
-    
-    private customBilling customBillingField;
-    
-    private govtTaxTypeEnum taxTypeField;
-    
-    private bool taxTypeFieldSpecified;
-    
-    private billMeLaterRequest billMeLaterRequestField;
-    
-    private enhancedData enhancedDataField;
-    
-    private processingInstructions processingInstructionsField;
-    
-    private pos posField;
-    
-    private amexAggregatorData amexAggregatorDataField;
-    
-    private merchantDataType merchantDataField;
-    
-    /// <remarks/>
-    public string orderId {
-        get {
-            return this.orderIdField;
-        }
-        set {
-            this.orderIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public authInformation authInformation {
-        get {
-            return this.authInformationField;
-        }
-        set {
-            this.authInformationField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long amount {
-        get {
-            return this.amountField;
-        }
-        set {
-            this.amountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public orderSourceType orderSource {
-        get {
-            return this.orderSourceField;
-        }
-        set {
-            this.orderSourceField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public contact billToAddress {
-        get {
-            return this.billToAddressField;
-        }
-        set {
-            this.billToAddressField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public contact shipToAddress {
-        get {
-            return this.shipToAddressField;
-        }
-        set {
-            this.shipToAddressField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("card", typeof(cardType))]
-    [System.Xml.Serialization.XmlElementAttribute("paypage", typeof(cardPaypageType))]
-    [System.Xml.Serialization.XmlElementAttribute("token", typeof(cardTokenType))]
-    public object Item {
-        get {
-            return this.itemField;
-        }
-        set {
-            this.itemField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public customBilling customBilling {
-        get {
-            return this.customBillingField;
-        }
-        set {
-            this.customBillingField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public govtTaxTypeEnum taxType {
-        get {
-            return this.taxTypeField;
-        }
-        set {
-            this.taxTypeField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool taxTypeSpecified {
-        get {
-            return this.taxTypeFieldSpecified;
-        }
-        set {
-            this.taxTypeFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public billMeLaterRequest billMeLaterRequest {
-        get {
-            return this.billMeLaterRequestField;
-        }
-        set {
-            this.billMeLaterRequestField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public enhancedData enhancedData {
-        get {
-            return this.enhancedDataField;
-        }
-        set {
-            this.enhancedDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public processingInstructions processingInstructions {
-        get {
-            return this.processingInstructionsField;
-        }
-        set {
-            this.processingInstructionsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public pos pos {
-        get {
-            return this.posField;
-        }
-        set {
-            this.posField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public amexAggregatorData amexAggregatorData {
-        get {
-            return this.amexAggregatorDataField;
-        }
-        set {
-            this.amexAggregatorDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public merchantDataType merchantData {
-        get {
-            return this.merchantDataField;
-        }
-        set {
-            this.merchantDataField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class authInformation {
-    
-    private System.DateTime authDateField;
-    
-    private string authCodeField;
-    
-    private fraudResult fraudResultField;
-    
-    private long authAmountField;
-    
-    private bool authAmountFieldSpecified;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-    public System.DateTime authDate {
-        get {
-            return this.authDateField;
-        }
-        set {
-            this.authDateField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string authCode {
-        get {
-            return this.authCodeField;
-        }
-        set {
-            this.authCodeField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public fraudResult fraudResult {
-        get {
-            return this.fraudResultField;
-        }
-        set {
-            this.fraudResultField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long authAmount {
-        get {
-            return this.authAmountField;
-        }
-        set {
-            this.authAmountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool authAmountSpecified {
-        get {
-            return this.authAmountFieldSpecified;
-        }
-        set {
-            this.authAmountFieldSpecified = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class fraudResult {
-    
-    private string avsResultField;
-    
-    private string cardValidationResultField;
-    
-    private string authenticationResultField;
-    
-    private string advancedAVSResultField;
-    
-    /// <remarks/>
-    public string avsResult {
-        get {
-            return this.avsResultField;
-        }
-        set {
-            this.avsResultField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string cardValidationResult {
-        get {
-            return this.cardValidationResultField;
-        }
-        set {
-            this.cardValidationResultField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string authenticationResult {
-        get {
-            return this.authenticationResultField;
-        }
-        set {
-            this.authenticationResultField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string advancedAVSResult {
-        get {
-            return this.advancedAVSResultField;
-        }
-        set {
-            this.advancedAVSResultField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class sale : transactionTypeWithReportGroup {
-    
-    private long litleTxnIdField;
-    
-    private bool litleTxnIdFieldSpecified;
-    
-    private string orderIdField;
-    
-    private long amountField;
-    
-    private orderSourceType orderSourceField;
-    
-    private customerInfo customerInfoField;
-    
-    private contact billToAddressField;
-    
-    private contact shipToAddressField;
-    
-    private object itemField;
-    
-    private billMeLaterRequest billMeLaterRequestField;
-    
-    private fraudCheckType item1Field;
-    
-    private Item1ChoiceType item1ElementNameField;
-    
-    private customBilling customBillingField;
-    
-    private govtTaxTypeEnum taxTypeField;
-    
-    private bool taxTypeFieldSpecified;
-    
-    private enhancedData enhancedDataField;
-    
-    private processingInstructions processingInstructionsField;
-    
-    private pos posField;
-    
-    private bool payPalOrderCompleteField;
-    
-    private bool payPalOrderCompleteFieldSpecified;
-    
-    private string payPalNotesField;
-    
-    private amexAggregatorData amexAggregatorDataField;
-    
-    private bool allowPartialAuthField;
-    
-    private bool allowPartialAuthFieldSpecified;
-    
-    private healthcareIIAS healthcareIIASField;
-    
-    private filteringType filteringField;
-    
-    private merchantDataType merchantDataField;
-    
-    private recyclingRequestType recyclingRequestField;
-    
-    /// <remarks/>
-    public long litleTxnId {
-        get {
-            return this.litleTxnIdField;
-        }
-        set {
-            this.litleTxnIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool litleTxnIdSpecified {
-        get {
-            return this.litleTxnIdFieldSpecified;
-        }
-        set {
-            this.litleTxnIdFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string orderId {
-        get {
-            return this.orderIdField;
-        }
-        set {
-            this.orderIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long amount {
-        get {
-            return this.amountField;
-        }
-        set {
-            this.amountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public orderSourceType orderSource {
-        get {
-            return this.orderSourceField;
-        }
-        set {
-            this.orderSourceField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public customerInfo customerInfo {
-        get {
-            return this.customerInfoField;
-        }
-        set {
-            this.customerInfoField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public contact billToAddress {
-        get {
-            return this.billToAddressField;
-        }
-        set {
-            this.billToAddressField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public contact shipToAddress {
-        get {
-            return this.shipToAddressField;
-        }
-        set {
-            this.shipToAddressField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("card", typeof(cardType))]
-    [System.Xml.Serialization.XmlElementAttribute("paypage", typeof(cardPaypageType))]
-    [System.Xml.Serialization.XmlElementAttribute("paypal", typeof(payPal))]
-    [System.Xml.Serialization.XmlElementAttribute("token", typeof(cardTokenType))]
-    public object Item {
-        get {
-            return this.itemField;
-        }
-        set {
-            this.itemField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public billMeLaterRequest billMeLaterRequest {
-        get {
-            return this.billMeLaterRequestField;
-        }
-        set {
-            this.billMeLaterRequestField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("cardholderAuthentication", typeof(fraudCheckType))]
-    [System.Xml.Serialization.XmlElementAttribute("fraudCheck", typeof(fraudCheckType))]
-    [System.Xml.Serialization.XmlChoiceIdentifierAttribute("Item1ElementName")]
-    public fraudCheckType Item1 {
-        get {
-            return this.item1Field;
-        }
-        set {
-            this.item1Field = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public Item1ChoiceType Item1ElementName {
-        get {
-            return this.item1ElementNameField;
-        }
-        set {
-            this.item1ElementNameField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public customBilling customBilling {
-        get {
-            return this.customBillingField;
-        }
-        set {
-            this.customBillingField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public govtTaxTypeEnum taxType {
-        get {
-            return this.taxTypeField;
-        }
-        set {
-            this.taxTypeField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool taxTypeSpecified {
-        get {
-            return this.taxTypeFieldSpecified;
-        }
-        set {
-            this.taxTypeFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public enhancedData enhancedData {
-        get {
-            return this.enhancedDataField;
-        }
-        set {
-            this.enhancedDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public processingInstructions processingInstructions {
-        get {
-            return this.processingInstructionsField;
-        }
-        set {
-            this.processingInstructionsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public pos pos {
-        get {
-            return this.posField;
-        }
-        set {
-            this.posField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public bool payPalOrderComplete {
-        get {
-            return this.payPalOrderCompleteField;
-        }
-        set {
-            this.payPalOrderCompleteField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool payPalOrderCompleteSpecified {
-        get {
-            return this.payPalOrderCompleteFieldSpecified;
-        }
-        set {
-            this.payPalOrderCompleteFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string payPalNotes {
-        get {
-            return this.payPalNotesField;
-        }
-        set {
-            this.payPalNotesField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public amexAggregatorData amexAggregatorData {
-        get {
-            return this.amexAggregatorDataField;
-        }
-        set {
-            this.amexAggregatorDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public bool allowPartialAuth {
-        get {
-            return this.allowPartialAuthField;
-        }
-        set {
-            this.allowPartialAuthField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool allowPartialAuthSpecified {
-        get {
-            return this.allowPartialAuthFieldSpecified;
-        }
-        set {
-            this.allowPartialAuthFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public healthcareIIAS healthcareIIAS {
-        get {
-            return this.healthcareIIASField;
-        }
-        set {
-            this.healthcareIIASField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public filteringType filtering {
-        get {
-            return this.filteringField;
-        }
-        set {
-            this.filteringField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public merchantDataType merchantData {
-        get {
-            return this.merchantDataField;
-        }
-        set {
-            this.merchantDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public recyclingRequestType recyclingRequest {
-        get {
-            return this.recyclingRequestField;
-        }
-        set {
-            this.recyclingRequestField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema", IncludeInSchema=false)]
-public enum Item1ChoiceType {
-    
-    /// <remarks/>
-    cardholderAuthentication,
-    
-    /// <remarks/>
-    fraudCheck,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class credit : transactionTypeWithReportGroup {
-    
-    private long litleTxnIdField;
-    
-    private long amountField;
-    
-    private bool amountFieldSpecified;
-    
-    private customBilling customBillingField;
-    
-    private enhancedData enhancedDataField;
-    
-    private processingInstructions processingInstructionsField;
-    
-    private string orderIdField;
-    
-    private long amount1Field;
-    
-    private orderSourceType orderSourceField;
-    
-    private contact billToAddressField;
-    
-    private cardType cardField;
-    
-    private cardTokenType tokenField;
-    
-    private cardPaypageType paypageField;
-    
-    private creditPaypal paypalField;
-    
-    private customBilling customBilling1Field;
-    
-    private govtTaxTypeEnum taxTypeField;
-    
-    private bool taxTypeFieldSpecified;
-    
-    private billMeLaterRequest billMeLaterRequestField;
-    
-    private enhancedData enhancedData1Field;
-    
-    private processingInstructions processingInstructions1Field;
-    
-    private pos posField;
-    
-    private amexAggregatorData amexAggregatorDataField;
-    
-    private merchantDataType merchantDataField;
-    
-    private string payPalNotesField;
-    
-    /// <remarks/>
-    public long litleTxnId {
-        get {
-            return this.litleTxnIdField;
-        }
-        set {
-            this.litleTxnIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public long amount {
-        get {
-            return this.amountField;
-        }
-        set {
-            this.amountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool amountSpecified {
-        get {
-            return this.amountFieldSpecified;
-        }
-        set {
-            this.amountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public customBilling customBilling {
-        get {
-            return this.customBillingField;
-        }
-        set {
-            this.customBillingField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public enhancedData enhancedData {
-        get {
-            return this.enhancedDataField;
-        }
-        set {
-            this.enhancedDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public processingInstructions processingInstructions {
-        get {
-            return this.processingInstructionsField;
-        }
-        set {
-            this.processingInstructionsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string orderId {
-        get {
-            return this.orderIdField;
-        }
-        set {
-            this.orderIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("amount")]
-    public long amount1 {
-        get {
-            return this.amount1Field;
-        }
-        set {
-            this.amount1Field = value;
-        }
-    }
-    
-    /// <remarks/>
-    public orderSourceType orderSource {
-        get {
-            return this.orderSourceField;
-        }
-        set {
-            this.orderSourceField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public contact billToAddress {
-        get {
-            return this.billToAddressField;
-        }
-        set {
-            this.billToAddressField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public cardType card {
-        get {
-            return this.cardField;
-        }
-        set {
-            this.cardField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public cardTokenType token {
-        get {
-            return this.tokenField;
-        }
-        set {
-            this.tokenField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public cardPaypageType paypage {
-        get {
-            return this.paypageField;
-        }
-        set {
-            this.paypageField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public creditPaypal paypal {
-        get {
-            return this.paypalField;
-        }
-        set {
-            this.paypalField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("customBilling")]
-    public customBilling customBilling1 {
-        get {
-            return this.customBilling1Field;
-        }
-        set {
-            this.customBilling1Field = value;
-        }
-    }
-    
-    /// <remarks/>
-    public govtTaxTypeEnum taxType {
-        get {
-            return this.taxTypeField;
-        }
-        set {
-            this.taxTypeField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool taxTypeSpecified {
-        get {
-            return this.taxTypeFieldSpecified;
-        }
-        set {
-            this.taxTypeFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    public billMeLaterRequest billMeLaterRequest {
-        get {
-            return this.billMeLaterRequestField;
-        }
-        set {
-            this.billMeLaterRequestField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("enhancedData")]
-    public enhancedData enhancedData1 {
-        get {
-            return this.enhancedData1Field;
-        }
-        set {
-            this.enhancedData1Field = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("processingInstructions")]
-    public processingInstructions processingInstructions1 {
-        get {
-            return this.processingInstructions1Field;
-        }
-        set {
-            this.processingInstructions1Field = value;
-        }
-    }
-    
-    /// <remarks/>
-    public pos pos {
-        get {
-            return this.posField;
-        }
-        set {
-            this.posField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public amexAggregatorData amexAggregatorData {
-        get {
-            return this.amexAggregatorDataField;
-        }
-        set {
-            this.amexAggregatorDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public merchantDataType merchantData {
-        get {
-            return this.merchantDataField;
-        }
-        set {
-            this.merchantDataField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string payPalNotes {
-        get {
-            return this.payPalNotesField;
-        }
-        set {
-            this.payPalNotesField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-public partial class creditPaypal {
-    
-    private string itemField;
-    
-    private ItemChoiceType1 itemElementNameField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("payerEmail", typeof(string))]
-    [System.Xml.Serialization.XmlElementAttribute("payerId", typeof(string))]
-    [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-    public string Item {
-        get {
-            return this.itemField;
-        }
-        set {
-            this.itemField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public ItemChoiceType1 ItemElementName {
-        get {
-            return this.itemElementNameField;
-        }
-        set {
-            this.itemElementNameField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema", IncludeInSchema=false)]
-public enum ItemChoiceType1 {
-    
-    /// <remarks/>
-    payerEmail,
-    
-    /// <remarks/>
-    payerId,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute("registerTokenRequest", Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class registerTokenRequestType : transactionTypeWithReportGroup {
-    
-    private string orderIdField;
-    
-    private object itemField;
-    
-    private ItemChoiceType itemElementNameField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public string orderId {
-        get {
-            return this.orderIdField;
-        }
-        set {
-            this.orderIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("accountNumber", typeof(string), Order=1)]
-    [System.Xml.Serialization.XmlElementAttribute("echeckForToken", typeof(echeckForTokenType), Order=1)]
-    [System.Xml.Serialization.XmlElementAttribute("paypageRegistrationId", typeof(string), Order=1)]
-    [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-    public object Item {
-        get {
-            return this.itemField;
-        }
-        set {
-            this.itemField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public ItemChoiceType ItemElementName {
-        get {
-            return this.itemElementNameField;
-        }
-        set {
-            this.itemElementNameField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema", IncludeInSchema=false)]
-public enum ItemChoiceType {
-    
-    /// <remarks/>
-    accountNumber,
-    
-    /// <remarks/>
-    echeckForToken,
-    
-    /// <remarks/>
-    paypageRegistrationId,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
 public partial class registerTokenResponse : transactionTypeWithReportGroup {
     
     private long litleTxnIdField;
@@ -6017,7 +6548,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     private System.DateTime responseTimeField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -6028,7 +6558,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -6039,7 +6568,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string litleToken {
         get {
             return this.litleTokenField;
@@ -6050,7 +6578,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public string bin {
         get {
             return this.binField;
@@ -6061,7 +6588,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public methodOfPaymentTypeEnum type {
         get {
             return this.typeField;
@@ -6083,7 +6609,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public string eCheckAccountSuffix {
         get {
             return this.eCheckAccountSuffixField;
@@ -6094,7 +6619,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public string response {
         get {
             return this.responseField;
@@ -6105,7 +6629,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=7)]
     public string message {
         get {
             return this.messageField;
@@ -6116,7 +6639,6 @@ public partial class registerTokenResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=8)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -6156,9 +6678,7 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     
     private string authorizationResponseSubCodeField;
     
-    private long approvedAmountField;
-    
-    private bool approvedAmountFieldSpecified;
+    private string approvedAmountField;
     
     private accountInfoType accountInformationField;
     
@@ -6175,7 +6695,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     private recyclingType recyclingField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -6186,7 +6705,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -6197,7 +6715,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -6208,7 +6725,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -6219,7 +6735,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string cardProductId {
         get {
             return this.cardProductIdField;
@@ -6230,7 +6745,7 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=5)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -6252,7 +6767,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public string message {
         get {
             return this.messageField;
@@ -6263,7 +6777,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=7)]
     public string authCode {
         get {
             return this.authCodeField;
@@ -6274,7 +6787,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=8)]
     public string authorizationResponseSubCode {
         get {
             return this.authorizationResponseSubCodeField;
@@ -6285,8 +6797,8 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-    public long approvedAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string approvedAmount {
         get {
             return this.approvedAmountField;
         }
@@ -6296,18 +6808,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool approvedAmountSpecified {
-        get {
-            return this.approvedAmountFieldSpecified;
-        }
-        set {
-            this.approvedAmountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=10)]
     public accountInfoType accountInformation {
         get {
             return this.accountInformationField;
@@ -6318,7 +6818,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=11)]
     public accountUpdater accountUpdater {
         get {
             return this.accountUpdaterField;
@@ -6329,7 +6828,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=12)]
     public fraudResult fraudResult {
         get {
             return this.fraudResultField;
@@ -6340,7 +6838,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=13)]
     public billMeLaterResponseData billMeLaterResponseData {
         get {
             return this.billMeLaterResponseDataField;
@@ -6351,7 +6848,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=14)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
@@ -6362,7 +6858,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=15)]
     public enhancedAuthResponse enhancedAuthResponse {
         get {
             return this.enhancedAuthResponseField;
@@ -6373,7 +6868,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=16)]
     public recyclingType recycling {
         get {
             return this.recyclingField;
@@ -6681,7 +7175,6 @@ public partial class authReversalResponse : transactionTypeWithReportGroup {
     private string messageField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -6692,7 +7185,6 @@ public partial class authReversalResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -6703,7 +7195,6 @@ public partial class authReversalResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -6714,7 +7205,6 @@ public partial class authReversalResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -6725,7 +7215,7 @@ public partial class authReversalResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=4)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -6747,7 +7237,6 @@ public partial class authReversalResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public string message {
         get {
             return this.messageField;
@@ -6788,7 +7277,6 @@ public partial class captureResponse : transactionTypeWithReportGroup {
     private bool duplicateFieldSpecified;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -6799,7 +7287,6 @@ public partial class captureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -6810,7 +7297,6 @@ public partial class captureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -6821,7 +7307,6 @@ public partial class captureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -6832,7 +7317,7 @@ public partial class captureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=4)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -6854,7 +7339,6 @@ public partial class captureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public string message {
         get {
             return this.messageField;
@@ -6865,7 +7349,6 @@ public partial class captureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public accountUpdater accountUpdater {
         get {
             return this.accountUpdaterField;
@@ -6926,7 +7409,6 @@ public partial class forceCaptureResponse : transactionTypeWithReportGroup {
     private accountUpdater accountUpdaterField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -6937,7 +7419,6 @@ public partial class forceCaptureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -6948,7 +7429,6 @@ public partial class forceCaptureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -6959,7 +7439,6 @@ public partial class forceCaptureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -6970,7 +7449,7 @@ public partial class forceCaptureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=4)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -6992,7 +7471,6 @@ public partial class forceCaptureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public string message {
         get {
             return this.messageField;
@@ -7003,7 +7481,6 @@ public partial class forceCaptureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
@@ -7014,7 +7491,6 @@ public partial class forceCaptureResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=7)]
     public accountUpdater accountUpdater {
         get {
             return this.accountUpdaterField;
@@ -7051,7 +7527,6 @@ public partial class captureGivenAuthResponse : transactionTypeWithReportGroup {
     private tokenResponseType tokenResponseField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -7062,7 +7537,6 @@ public partial class captureGivenAuthResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -7073,7 +7547,6 @@ public partial class captureGivenAuthResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -7084,7 +7557,6 @@ public partial class captureGivenAuthResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -7095,7 +7567,7 @@ public partial class captureGivenAuthResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=4)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -7117,7 +7589,6 @@ public partial class captureGivenAuthResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public string message {
         get {
             return this.messageField;
@@ -7128,7 +7599,6 @@ public partial class captureGivenAuthResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
@@ -7168,9 +7638,7 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     
     private string authorizationResponseSubCodeField;
     
-    private long approvedAmountField;
-    
-    private bool approvedAmountFieldSpecified;
+    private string approvedAmountField;
     
     private accountInfoType accountInformationField;
     
@@ -7191,7 +7659,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     private bool duplicateFieldSpecified;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -7202,7 +7669,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -7213,7 +7679,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -7224,7 +7689,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -7235,7 +7699,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string cardProductId {
         get {
             return this.cardProductIdField;
@@ -7246,7 +7709,7 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=5)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -7268,7 +7731,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public string message {
         get {
             return this.messageField;
@@ -7279,7 +7741,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=7)]
     public string authCode {
         get {
             return this.authCodeField;
@@ -7290,7 +7751,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=8)]
     public string authorizationResponseSubCode {
         get {
             return this.authorizationResponseSubCodeField;
@@ -7301,8 +7761,8 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-    public long approvedAmount {
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string approvedAmount {
         get {
             return this.approvedAmountField;
         }
@@ -7312,18 +7772,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool approvedAmountSpecified {
-        get {
-            return this.approvedAmountFieldSpecified;
-        }
-        set {
-            this.approvedAmountFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=10)]
     public accountInfoType accountInformation {
         get {
             return this.accountInformationField;
@@ -7334,7 +7782,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=11)]
     public fraudResult fraudResult {
         get {
             return this.fraudResultField;
@@ -7345,7 +7792,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=12)]
     public billMeLaterResponseData billMeLaterResponseData {
         get {
             return this.billMeLaterResponseDataField;
@@ -7356,7 +7802,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=13)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
@@ -7367,7 +7812,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=14)]
     public enhancedAuthResponse enhancedAuthResponse {
         get {
             return this.enhancedAuthResponseField;
@@ -7378,7 +7822,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=15)]
     public accountUpdater accountUpdater {
         get {
             return this.accountUpdaterField;
@@ -7389,7 +7832,6 @@ public partial class saleResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=16)]
     public recyclingType recycling {
         get {
             return this.recyclingField;
@@ -7452,7 +7894,6 @@ public partial class creditResponse : transactionTypeWithReportGroup {
     private bool duplicateFieldSpecified;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -7463,7 +7904,6 @@ public partial class creditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -7474,7 +7914,6 @@ public partial class creditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -7485,7 +7924,6 @@ public partial class creditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -7496,7 +7934,7 @@ public partial class creditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=4)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -7518,7 +7956,6 @@ public partial class creditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public string message {
         get {
             return this.messageField;
@@ -7529,7 +7966,6 @@ public partial class creditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
@@ -7558,400 +7994,6 @@ public partial class creditResponse : transactionTypeWithReportGroup {
         }
         set {
             this.duplicateFieldSpecified = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute("echeck", Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class echeckType {
-    
-    private echeckAccountTypeEnum accTypeField;
-    
-    private string accNumField;
-    
-    private string routingNumField;
-    
-    private string checkNumField;
-    
-    /// <remarks/>
-    public echeckAccountTypeEnum accType {
-        get {
-            return this.accTypeField;
-        }
-        set {
-            this.accTypeField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string accNum {
-        get {
-            return this.accNumField;
-        }
-        set {
-            this.accNumField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string routingNum {
-        get {
-            return this.routingNumField;
-        }
-        set {
-            this.routingNumField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string checkNum {
-        get {
-            return this.checkNumField;
-        }
-        set {
-            this.checkNumField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute("echeckToken", Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class echeckTokenType {
-    
-    private string litleTokenField;
-    
-    private string routingNumField;
-    
-    private echeckAccountTypeEnum accTypeField;
-    
-    private string checkNumField;
-    
-    /// <remarks/>
-    public string litleToken {
-        get {
-            return this.litleTokenField;
-        }
-        set {
-            this.litleTokenField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string routingNum {
-        get {
-            return this.routingNumField;
-        }
-        set {
-            this.routingNumField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public echeckAccountTypeEnum accType {
-        get {
-            return this.accTypeField;
-        }
-        set {
-            this.accTypeField = value;
-        }
-    }
-    
-    /// <remarks/>
-    public string checkNum {
-        get {
-            return this.checkNumField;
-        }
-        set {
-            this.checkNumField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class echeckSale : transactionTypeWithReportGroup {
-    
-    private object[] itemsField;
-    
-    private ItemsChoiceType1[] itemsElementNameField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("amount", typeof(long), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("billToAddress", typeof(contact), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("customBilling", typeof(customBilling), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("echeckOrEcheckToken", typeof(object), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("litleTxnId", typeof(long), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("merchantData", typeof(merchantDataType), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("orderId", typeof(string), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("orderSource", typeof(orderSourceType), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("shipToAddress", typeof(contact), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("verify", typeof(bool), Order=0)]
-    [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-    public object[] Items {
-        get {
-            return this.itemsField;
-        }
-        set {
-            this.itemsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("ItemsElementName", Order=1)]
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public ItemsChoiceType1[] ItemsElementName {
-        get {
-            return this.itemsElementNameField;
-        }
-        set {
-            this.itemsElementNameField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema", IncludeInSchema=false)]
-public enum ItemsChoiceType1 {
-    
-    /// <remarks/>
-    amount,
-    
-    /// <remarks/>
-    billToAddress,
-    
-    /// <remarks/>
-    customBilling,
-    
-    /// <remarks/>
-    echeck,
-    
-    /// <remarks/>
-    echeckOrEcheckToken,
-    
-    /// <remarks/>
-    echeckToken,
-    
-    /// <remarks/>
-    litleTxnId,
-    
-    /// <remarks/>
-    merchantData,
-    
-    /// <remarks/>
-    orderId,
-    
-    /// <remarks/>
-    orderSource,
-    
-    /// <remarks/>
-    shipToAddress,
-    
-    /// <remarks/>
-    verify,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class echeckCredit : transactionTypeWithReportGroup {
-    
-    private object[] itemsField;
-    
-    private ItemsChoiceType2[] itemsElementNameField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("amount", typeof(long), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("billToAddress", typeof(contact), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("customBilling", typeof(customBilling), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("echeckOrEcheckToken", typeof(object), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("litleTxnId", typeof(long), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("merchantData", typeof(merchantDataType), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("orderId", typeof(string), Order=0)]
-    [System.Xml.Serialization.XmlElementAttribute("orderSource", typeof(orderSourceType), Order=0)]
-    [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-    public object[] Items {
-        get {
-            return this.itemsField;
-        }
-        set {
-            this.itemsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("ItemsElementName", Order=1)]
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public ItemsChoiceType2[] ItemsElementName {
-        get {
-            return this.itemsElementNameField;
-        }
-        set {
-            this.itemsElementNameField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema", IncludeInSchema=false)]
-public enum ItemsChoiceType2 {
-    
-    /// <remarks/>
-    amount,
-    
-    /// <remarks/>
-    billToAddress,
-    
-    /// <remarks/>
-    customBilling,
-    
-    /// <remarks/>
-    echeck,
-    
-    /// <remarks/>
-    echeckOrEcheckToken,
-    
-    /// <remarks/>
-    echeckToken,
-    
-    /// <remarks/>
-    litleTxnId,
-    
-    /// <remarks/>
-    merchantData,
-    
-    /// <remarks/>
-    orderId,
-    
-    /// <remarks/>
-    orderSource,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class echeckVerification : transactionTypeWithReportGroup {
-    
-    private long litleTxnIdField;
-    
-    private bool litleTxnIdFieldSpecified;
-    
-    private string orderIdField;
-    
-    private long amountField;
-    
-    private orderSourceType orderSourceField;
-    
-    private contact billToAddressField;
-    
-    private object itemField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public long litleTxnId {
-        get {
-            return this.litleTxnIdField;
-        }
-        set {
-            this.litleTxnIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool litleTxnIdSpecified {
-        get {
-            return this.litleTxnIdFieldSpecified;
-        }
-        set {
-            this.litleTxnIdFieldSpecified = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    public string orderId {
-        get {
-            return this.orderIdField;
-        }
-        set {
-            this.orderIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-    public long amount {
-        get {
-            return this.amountField;
-        }
-        set {
-            this.amountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-    public orderSourceType orderSource {
-        get {
-            return this.orderSourceField;
-        }
-        set {
-            this.orderSourceField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-    public contact billToAddress {
-        get {
-            return this.billToAddressField;
-        }
-        set {
-            this.billToAddressField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType), Order=5)]
-    [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType), Order=5)]
-    public object Item {
-        get {
-            return this.itemField;
-        }
-        set {
-            this.itemField = value;
         }
     }
 }
@@ -7990,7 +8032,6 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     private bool duplicateFieldSpecified;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -8001,7 +8042,6 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -8012,7 +8052,6 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -8023,7 +8062,6 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -8034,7 +8072,6 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string message {
         get {
             return this.messageField;
@@ -8045,7 +8082,6 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public string verificationCode {
         get {
             return this.verificationCodeField;
@@ -8056,7 +8092,7 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=6)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -8078,7 +8114,6 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=7)]
     public accountUpdater accountUpdater {
         get {
             return this.accountUpdaterField;
@@ -8089,7 +8124,6 @@ public partial class echeckSalesResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=8)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
@@ -8154,7 +8188,6 @@ public partial class echeckCreditResponse : transactionTypeWithReportGroup {
     private bool duplicateFieldSpecified;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -8165,7 +8198,6 @@ public partial class echeckCreditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -8176,7 +8208,6 @@ public partial class echeckCreditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -8187,7 +8218,6 @@ public partial class echeckCreditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -8198,7 +8228,6 @@ public partial class echeckCreditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string message {
         get {
             return this.messageField;
@@ -8209,7 +8238,7 @@ public partial class echeckCreditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=5)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -8231,7 +8260,6 @@ public partial class echeckCreditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public accountUpdater accountUpdater {
         get {
             return this.accountUpdaterField;
@@ -8242,7 +8270,6 @@ public partial class echeckCreditResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=7)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
@@ -8301,7 +8328,6 @@ public partial class echeckVerificationResponse : transactionTypeWithReportGroup
     private tokenResponseType tokenResponseField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -8312,7 +8338,6 @@ public partial class echeckVerificationResponse : transactionTypeWithReportGroup
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string orderId {
         get {
             return this.orderIdField;
@@ -8323,7 +8348,6 @@ public partial class echeckVerificationResponse : transactionTypeWithReportGroup
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string response {
         get {
             return this.responseField;
@@ -8334,7 +8358,6 @@ public partial class echeckVerificationResponse : transactionTypeWithReportGroup
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -8345,7 +8368,6 @@ public partial class echeckVerificationResponse : transactionTypeWithReportGroup
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string message {
         get {
             return this.messageField;
@@ -8356,7 +8378,7 @@ public partial class echeckVerificationResponse : transactionTypeWithReportGroup
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=5)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -8378,50 +8400,12 @@ public partial class echeckVerificationResponse : transactionTypeWithReportGroup
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
         }
         set {
             this.tokenResponseField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class echeckRedeposit : transactionTypeWithReportGroup {
-    
-    private long litleTxnIdField;
-    
-    private object itemField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public long litleTxnId {
-        get {
-            return this.litleTxnIdField;
-        }
-        set {
-            this.litleTxnIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType), Order=1)]
-    [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType), Order=1)]
-    public object Item {
-        get {
-            return this.itemField;
-        }
-        set {
-            this.itemField = value;
         }
     }
 }
@@ -8452,7 +8436,6 @@ public partial class echeckRedepositResponse : transactionTypeWithReportGroup {
     private tokenResponseType tokenResponseField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -8463,7 +8446,6 @@ public partial class echeckRedepositResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string response {
         get {
             return this.responseField;
@@ -8474,7 +8456,6 @@ public partial class echeckRedepositResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -8485,7 +8466,6 @@ public partial class echeckRedepositResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public string message {
         get {
             return this.messageField;
@@ -8496,7 +8476,7 @@ public partial class echeckRedepositResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=4)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -8518,7 +8498,6 @@ public partial class echeckRedepositResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=5)]
     public accountUpdater accountUpdater {
         get {
             return this.accountUpdaterField;
@@ -8529,7 +8508,6 @@ public partial class echeckRedepositResponse : transactionTypeWithReportGroup {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=6)]
     public tokenResponseType tokenResponse {
         get {
             return this.tokenResponseField;
@@ -8662,7 +8640,6 @@ public partial class litleOnlineResponseTransactionResponseEcheckVoidResponse : 
     private bool duplicateFieldSpecified;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -8673,7 +8650,6 @@ public partial class litleOnlineResponseTransactionResponseEcheckVoidResponse : 
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string response {
         get {
             return this.responseField;
@@ -8684,7 +8660,6 @@ public partial class litleOnlineResponseTransactionResponseEcheckVoidResponse : 
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -8695,7 +8670,7 @@ public partial class litleOnlineResponseTransactionResponseEcheckVoidResponse : 
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=3)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -8706,7 +8681,6 @@ public partial class litleOnlineResponseTransactionResponseEcheckVoidResponse : 
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string message {
         get {
             return this.messageField;
@@ -8763,7 +8737,6 @@ public partial class litleOnlineResponseTransactionResponseVoidResponse : transa
     private bool duplicateFieldSpecified;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;
@@ -8774,7 +8747,6 @@ public partial class litleOnlineResponseTransactionResponseVoidResponse : transa
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string response {
         get {
             return this.responseField;
@@ -8785,7 +8757,6 @@ public partial class litleOnlineResponseTransactionResponseVoidResponse : transa
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public System.DateTime responseTime {
         get {
             return this.responseTimeField;
@@ -8796,7 +8767,7 @@ public partial class litleOnlineResponseTransactionResponseVoidResponse : transa
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(DataType="date", Order=3)]
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
     public System.DateTime postDate {
         get {
             return this.postDateField;
@@ -8807,7 +8778,6 @@ public partial class litleOnlineResponseTransactionResponseVoidResponse : transa
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=4)]
     public string message {
         get {
             return this.messageField;
@@ -8847,48 +8817,11 @@ public partial class litleOnlineResponseTransactionResponseVoidResponse : transa
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
-public partial class @void : transactionTypeWithReportGroup {
-    
-    private long litleTxnIdField;
-    
-    private processingInstructions processingInstructionsField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-    public long litleTxnId {
-        get {
-            return this.litleTxnIdField;
-        }
-        set {
-            this.litleTxnIdField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-    public processingInstructions processingInstructions {
-        get {
-            return this.processingInstructionsField;
-        }
-        set {
-            this.processingInstructionsField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
-[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
 public partial class echeckVoid : transactionTypeWithReportGroup {
     
     private long litleTxnIdField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public long litleTxnId {
         get {
             return this.litleTxnIdField;

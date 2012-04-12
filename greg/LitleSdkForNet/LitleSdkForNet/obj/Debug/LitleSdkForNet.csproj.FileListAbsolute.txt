@@ -11,3 +11,6 @@ C:\jenkins\workspace\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\obj
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\obj\Debug\LitleSdkForNet.dll
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\obj\Debug\LitleSdkForNet.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForNet.dll.config
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForNet.dll
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForNet.pdb

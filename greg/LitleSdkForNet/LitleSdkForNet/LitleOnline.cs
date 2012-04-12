@@ -61,18 +61,6 @@ namespace LitleSdkForNet
             litleOnlineRequest request = createLitleOnlineRequest();          
             fillInReportGroup(auth);
             request.authorization = auth;
-            //request.
-            //request.Item = auth;
-            //Console.WriteLine(request.Item.reportGroup);
-
-            //baseRequest baseRequest = (baseRequest)request;
-            //Console.WriteLine(baseRequest.authentication.user);
-            //transactionTypeWithReportGroup ttwrg = baseRequest.Item;
-            //Console.WriteLine(ttwrg.reportGroup);
-            //authorization auth2 = (authorization)ttwrg;
-            //Console.WriteLine(auth2.amount);
-            //request.Item = 
-
 
             litleOnlineResponse response = sendToLitle(request);
             authorizationResponse authResponse = (authorizationResponse)response.Item;
@@ -83,6 +71,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(reversal);
+            request.authReversal = reversal;
 
             litleOnlineResponse response = sendToLitle(request);
             authReversalResponse reversalResponse = (authReversalResponse)response.Item;
@@ -93,6 +82,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(capture);
+            request.capture = capture;
 
             litleOnlineResponse response = sendToLitle(request);
             captureResponse captureResponse = (captureResponse)response.Item;
@@ -103,6 +93,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(captureGivenAuth);
+            request.captureGivenAuth = captureGivenAuth;
 
             litleOnlineResponse response = sendToLitle(request);
             captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)response.Item;
@@ -113,6 +104,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(credit);
+            request.credit = credit;
 
             litleOnlineResponse response = sendToLitle(request);
             creditResponse creditResponse = (creditResponse)response.Item;
@@ -123,6 +115,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(echeckCredit);
+            request.echeckCredit = echeckCredit;
 
             litleOnlineResponse response = sendToLitle(request);
             echeckCreditResponse echeckCreditResponse = (echeckCreditResponse)response.Item;
@@ -133,6 +126,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(echeckRedeposit);
+            request.echeckRedeposit = echeckRedeposit;
 
             litleOnlineResponse response = sendToLitle(request);
             echeckRedepositResponse echeckRedepositResponse = (echeckRedepositResponse)response.Item;
@@ -143,6 +137,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(echeckSale);
+            request.echeckSale = echeckSale;
 
             litleOnlineResponse response = sendToLitle(request);
             echeckSalesResponse echeckSalesResponse = (echeckSalesResponse)response.Item;
@@ -153,6 +148,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(echeckVerification);
+            request.echeckVerification = echeckVerification;
 
             litleOnlineResponse response = sendToLitle(request);
             echeckVerificationResponse echeckVerificationResponse = (echeckVerificationResponse)response.Item;
@@ -163,6 +159,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(forceCapture);
+            request.forceCapture = forceCapture;
 
             litleOnlineResponse response = sendToLitle(request);
             forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)response.Item;
@@ -173,6 +170,7 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(sale);
+            request.sale = sale;
 
             litleOnlineResponse response = sendToLitle(request);
             saleResponse saleResponse = (saleResponse)response.Item;
@@ -183,21 +181,23 @@ namespace LitleSdkForNet
         {
             litleOnlineRequest request = createLitleOnlineRequest();
             fillInReportGroup(tokenRequest);
+            request.registerTokenRequest = tokenRequest;
 
             litleOnlineResponse response = sendToLitle(request);
             registerTokenResponse registerTokenResponse = (registerTokenResponse)response.Item;
             return registerTokenResponse;
         }
 
-        //public litleOnlineResponseTransactionResponseVoidResponse DoVoid(baseRequestTransactionVoid v)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(v);
+        public litleOnlineResponseTransactionResponseVoidResponse DoVoid(@void v)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(v);
+            request.@void = v;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = (litleOnlineResponseTransactionResponseVoidResponse)response.Item;
-        //    return voidResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            litleOnlineResponseTransactionResponseVoidResponse voidResponse = (litleOnlineResponseTransactionResponseVoidResponse)response.Item;
+            return voidResponse;
+        }
 
         private litleOnlineRequest createLitleOnlineRequest()
         {
