@@ -49,9 +49,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="litleXSDGenerated">
-      <HintPath>..\..\..\Project\GenerateCode\GenerateCode\bin\Debug\generated\litleXSDGenerated.dll</HintPath>
-    </Reference>
     <Reference Include="nunit-console-runner">
       <HintPath>NUnit\nunit-console-runner.dll</HintPath>
     </Reference>

@@ -17,7 +17,10 @@ namespace LitleSdkForNet
             string uri = config["url"];
             byte[] bytes = System.Text.Encoding.ASCII.GetBytes(xmlRequest); // get raw bytes to be sent
             System.Net.WebRequest req = System.Net.WebRequest.Create(uri);
-
+            if("true".Equals(config["printxml"])) 
+            {
+                Console.WriteLine(xmlRequest);
+            }
             req.ContentType = "text/xml";
             req.Method = "POST";
             WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
@@ -38,7 +41,12 @@ namespace LitleSdkForNet
                     return null;
                 }
                 System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                return sr.ReadToEnd().Trim();
+                string xmlResponse = sr.ReadToEnd().Trim();
+                if ("true".Equals(config["printxml"]))
+                {
+                    Console.WriteLine(xmlResponse);
+                }
+                return xmlResponse;
             }
             finally
             {

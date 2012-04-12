@@ -1,113 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\jenkins\workspace\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" total="18" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-10" time="14:47:21">
-  <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.3625" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\jenkins\workspace\litle-sdk-for-dotNet\greg\LitleSdkForNet" machine-name="VM-GDAKE" user="gdake" user-domain="LITLE" />
+<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" total="1" errors="1" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-12" time="18:14:04">
+  <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.3625" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet" machine-name="VM-GDAKE" user="gdake" user-domain="LITLE" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Project" name="C:\jenkins\workspace\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" executed="True" result="Success" success="True" time="0.141" asserts="0">
+  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" executed="True" result="Failure" success="False" time="5.000" asserts="0">
     <results>
-      <test-suite type="Assembly" name="C:\jenkins\workspace\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForNet.dll" executed="True" result="Inconclusive" success="False" time="0.000" asserts="0" />
-      <test-suite type="Assembly" name="C:\jenkins\workspace\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForNetTest.exe" executed="True" result="Success" success="True" time="0.125" asserts="0">
+      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.exe" executed="True" result="Failure" success="False" time="4.984" asserts="0">
         <results>
-          <test-suite type="Namespace" name="LitleSdkForNetTest" executed="True" result="Success" success="True" time="0.109" asserts="0">
+          <test-suite type="Namespace" name="LitleSdkForNetTest" executed="True" result="Failure" success="False" time="4.984" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Certification" executed="True" result="Success" success="True" time="0.047" asserts="0">
+              <test-suite type="Namespace" name="Certification" executed="True" result="Failure" success="False" time="4.969" asserts="0">
                 <results>
-                  <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Success" success="True" time="0.031" asserts="0">
+                  <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Failure" success="False" time="4.875" asserts="0">
                     <results>
-                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.Test1Auth" executed="True" result="Success" success="True" time="0.016" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestCert2AuthEnhanced" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Certification.TestCert2AuthEnhanced.Test14" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestCert3AuthReversal" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Certification.TestCert3AuthReversal.Test32" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestCert4Echeck" executed="True" result="Success" success="True" time="0.016" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Certification.TestCert4Echeck.Test37" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestCert5Token" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Certification.TestCert5Token.Test50" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                </results>
-              </test-suite>
-              <test-suite type="Namespace" name="Functional" executed="True" result="Success" success="True" time="0.047" asserts="0">
-                <results>
-                  <test-suite type="TestFixture" name="TestAuth" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestAuth.SimpleAuthWithCard" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestAuthReversal" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestAuthReversal.SimpleAuthReversal" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestCapture" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestCapture.SimpleCapture" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestCaptureGivenAuth" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestCaptureGivenAuth.SimpleCaptureGivenAuthWithCard" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestCredit" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestCredit.SimpleCreditWithCard" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestEcheckCredit" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestEcheckCredit.SimpleEcheckCredit" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestEcheckSale" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestEcheckSale.SimpleEcheckSaleWithEcheck" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestEcheckVerification" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestEcheckVerification.SimpleEcheckVerification" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestForceCapture" executed="True" result="Success" success="True" time="0.016" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestForceCapture.SimpleForceCaptureWithCard" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestSale" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestSale.SimpleWithCard" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestSimpleEcheckRedeposit" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestSimpleEcheckRedeposit.SimpleEcheckRedeposit" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                  <test-suite type="TestFixture" name="TestToken" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Functional.TestToken.SimpleToken" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                    </results>
-                  </test-suite>
-                </results>
-              </test-suite>
-              <test-suite type="Namespace" name="Unit" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                <results>
-                  <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Success" success="True" time="0.000" asserts="0">
-                    <results>
-                      <test-case name="LitleSdkForNetTest.Unit.TestCert1Base.Test1Auth" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.Test1Auth" executed="True" result="Error" success="False" time="4.672" asserts="5">
+                        <failure>
+                          <message><![CDATA[System.InvalidOperationException : There is an error in XML document (1, 2).
+  ----> System.InvalidOperationException : <litleOnlineResponse xmlns=''> was not expected.]]></message>
+                          <stack-trace><![CDATA[at System.Xml.Serialization.XmlSerializer.Deserialize(XmlReader xmlReader, String encodingStyle, XmlDeserializationEvents events)
+at System.Xml.Serialization.XmlSerializer.Deserialize(TextReader textReader)
+at LitleSdkForNet.LitleOnline.DeserializeObject(String response) in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\LitleOnline.cs:line 240
+at LitleSdkForNet.LitleOnline.sendToLitle(litleOnlineRequest request) in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\LitleOnline.cs:line 218
+at LitleSdkForNet.LitleOnline.Capture(capture capture) in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\LitleOnline.cs:line 95
+at LitleSdkForNetTest.Certification.TestCert1Base.Test1Auth() in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\Certification\TestCert1Base.cs:line 51
+--InvalidOperationException
+at Microsoft.Xml.Serialization.GeneratedAssembly.XmlSerializationReaderlitleOnlineResponse.Read44_litleOnlineResponse()
+]]></stack-trace>
+                        </failure>
+                      </test-case>
                     </results>
                   </test-suite>
                 </results>

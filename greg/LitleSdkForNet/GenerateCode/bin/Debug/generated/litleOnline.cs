@@ -23752,7 +23752,7 @@ namespace Litle.Sdk.Generated {
         private authentication authenticationField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private transactionTypeWithReportGroup itemField;
+        private authorization authorizationField;
         
         [EditorBrowsable(EditorBrowsableState.Never)]
         private string versionField;
@@ -23760,7 +23760,7 @@ namespace Litle.Sdk.Generated {
         private static System.Xml.Serialization.XmlSerializer serializer;
         
         public baseRequest() {
-            this.itemField = new transactionTypeWithReportGroup();
+            this.authorizationField = new authorization();
             this.authenticationField = new authentication();
         }
         
@@ -23782,20 +23782,20 @@ namespace Litle.Sdk.Generated {
             }
         }
         
-        public transactionTypeWithReportGroup Item {
+        public authorization authorization {
             get {
-                return this.itemField;
+                return this.authorizationField;
             }
             set {
-                if ((this.itemField != null)) {
-                    if ((itemField.Equals(value) != true)) {
-                        this.itemField = value;
-                        this.OnPropertyChanged("Item");
+                if ((this.authorizationField != null)) {
+                    if ((authorizationField.Equals(value) != true)) {
+                        this.authorizationField = value;
+                        this.OnPropertyChanged("authorization");
                     }
                 }
                 else {
-                    this.itemField = value;
-                    this.OnPropertyChanged("Item");
+                    this.authorizationField = value;
+                    this.OnPropertyChanged("authorization");
                 }
             }
         }
@@ -23986,415 +23986,6 @@ namespace Litle.Sdk.Generated {
         /// </summary>
         public virtual baseRequest Clone() {
             return ((baseRequest)(this.MemberwiseClone()));
-        }
-        #endregion
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class baseRequestTransactionEcheckVoid : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private long litleTxnIdField;
-        
-        private static System.Xml.Serialization.XmlSerializer serializer;
-        
-        public long litleTxnId {
-            get {
-                return this.litleTxnIdField;
-            }
-            set {
-                if ((litleTxnIdField.Equals(value) != true)) {
-                    this.litleTxnIdField = value;
-                    this.OnPropertyChanged("litleTxnId");
-                }
-            }
-        }
-        
-        private static System.Xml.Serialization.XmlSerializer Serializer {
-            get {
-                if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(baseRequestTransactionEcheckVoid));
-                }
-                return serializer;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        #region Serialize/Deserialize
-        /// <summary>
-        /// Serializes current baseRequestTransactionEcheckVoid object into an XML document
-        /// </summary>
-        /// <returns>string XML value</returns>
-        public virtual string Serialize() {
-            System.IO.StreamReader streamReader = null;
-            System.IO.MemoryStream memoryStream = null;
-            try {
-                memoryStream = new System.IO.MemoryStream();
-                Serializer.Serialize(memoryStream, this);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                streamReader = new System.IO.StreamReader(memoryStream);
-                return streamReader.ReadToEnd();
-            }
-            finally {
-                if ((streamReader != null)) {
-                    streamReader.Dispose();
-                }
-                if ((memoryStream != null)) {
-                    memoryStream.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes workflow markup into an baseRequestTransactionEcheckVoid object
-        /// </summary>
-        /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output baseRequestTransactionEcheckVoid object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out baseRequestTransactionEcheckVoid obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequestTransactionEcheckVoid);
-            try {
-                obj = Deserialize(xml);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool Deserialize(string xml, out baseRequestTransactionEcheckVoid obj) {
-            System.Exception exception = null;
-            return Deserialize(xml, out obj, out exception);
-        }
-        
-        public static baseRequestTransactionEcheckVoid Deserialize(string xml) {
-            System.IO.StringReader stringReader = null;
-            try {
-                stringReader = new System.IO.StringReader(xml);
-                return ((baseRequestTransactionEcheckVoid)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
-            }
-            finally {
-                if ((stringReader != null)) {
-                    stringReader.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Serializes current baseRequestTransactionEcheckVoid object into file
-        /// </summary>
-        /// <param name="fileName">full path of outupt xml file</param>
-        /// <param name="exception">output Exception value if failed</param>
-        /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
-            exception = null;
-            try {
-                SaveToFile(fileName);
-                return true;
-            }
-            catch (System.Exception e) {
-                exception = e;
-                return false;
-            }
-        }
-        
-        public virtual void SaveToFile(string fileName) {
-            System.IO.StreamWriter streamWriter = null;
-            try {
-                string xmlString = Serialize();
-                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
-                streamWriter = xmlFile.CreateText();
-                streamWriter.WriteLine(xmlString);
-                streamWriter.Close();
-            }
-            finally {
-                if ((streamWriter != null)) {
-                    streamWriter.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes xml markup from file into an baseRequestTransactionEcheckVoid object
-        /// </summary>
-        /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output baseRequestTransactionEcheckVoid object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out baseRequestTransactionEcheckVoid obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequestTransactionEcheckVoid);
-            try {
-                obj = LoadFromFile(fileName);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool LoadFromFile(string fileName, out baseRequestTransactionEcheckVoid obj) {
-            System.Exception exception = null;
-            return LoadFromFile(fileName, out obj, out exception);
-        }
-        
-        public static baseRequestTransactionEcheckVoid LoadFromFile(string fileName) {
-            System.IO.FileStream file = null;
-            System.IO.StreamReader sr = null;
-            try {
-                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
-                sr = new System.IO.StreamReader(file);
-                string xmlString = sr.ReadToEnd();
-                sr.Close();
-                file.Close();
-                return Deserialize(xmlString);
-            }
-            finally {
-                if ((file != null)) {
-                    file.Dispose();
-                }
-                if ((sr != null)) {
-                    sr.Dispose();
-                }
-            }
-        }
-        #endregion
-        
-        #region Clone method
-        /// <summary>
-        /// Create a clone of this baseRequestTransactionEcheckVoid object
-        /// </summary>
-        public virtual baseRequestTransactionEcheckVoid Clone() {
-            return ((baseRequestTransactionEcheckVoid)(this.MemberwiseClone()));
-        }
-        #endregion
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    public partial class baseRequestTransactionVoidTransaction : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private long litleTxnIdField;
-        
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        private processingInstructions processingInstructionsField;
-        
-        private static System.Xml.Serialization.XmlSerializer serializer;
-        
-        public baseRequestTransactionVoidTransaction() {
-            this.processingInstructionsField = new processingInstructions();
-        }
-        
-        public long litleTxnId {
-            get {
-                return this.litleTxnIdField;
-            }
-            set {
-                if ((litleTxnIdField.Equals(value) != true)) {
-                    this.litleTxnIdField = value;
-                    this.OnPropertyChanged("litleTxnId");
-                }
-            }
-        }
-        
-        public processingInstructions processingInstructions {
-            get {
-                return this.processingInstructionsField;
-            }
-            set {
-                if ((this.processingInstructionsField != null)) {
-                    if ((processingInstructionsField.Equals(value) != true)) {
-                        this.processingInstructionsField = value;
-                        this.OnPropertyChanged("processingInstructions");
-                    }
-                }
-                else {
-                    this.processingInstructionsField = value;
-                    this.OnPropertyChanged("processingInstructions");
-                }
-            }
-        }
-        
-        private static System.Xml.Serialization.XmlSerializer Serializer {
-            get {
-                if ((serializer == null)) {
-                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(baseRequestTransactionVoidTransaction));
-                }
-                return serializer;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        #region Serialize/Deserialize
-        /// <summary>
-        /// Serializes current baseRequestTransactionVoidTransaction object into an XML document
-        /// </summary>
-        /// <returns>string XML value</returns>
-        public virtual string Serialize() {
-            System.IO.StreamReader streamReader = null;
-            System.IO.MemoryStream memoryStream = null;
-            try {
-                memoryStream = new System.IO.MemoryStream();
-                Serializer.Serialize(memoryStream, this);
-                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
-                streamReader = new System.IO.StreamReader(memoryStream);
-                return streamReader.ReadToEnd();
-            }
-            finally {
-                if ((streamReader != null)) {
-                    streamReader.Dispose();
-                }
-                if ((memoryStream != null)) {
-                    memoryStream.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes workflow markup into an baseRequestTransactionVoidTransaction object
-        /// </summary>
-        /// <param name="xml">string workflow markup to deserialize</param>
-        /// <param name="obj">Output baseRequestTransactionVoidTransaction object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool Deserialize(string xml, out baseRequestTransactionVoidTransaction obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequestTransactionVoidTransaction);
-            try {
-                obj = Deserialize(xml);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool Deserialize(string xml, out baseRequestTransactionVoidTransaction obj) {
-            System.Exception exception = null;
-            return Deserialize(xml, out obj, out exception);
-        }
-        
-        public static baseRequestTransactionVoidTransaction Deserialize(string xml) {
-            System.IO.StringReader stringReader = null;
-            try {
-                stringReader = new System.IO.StringReader(xml);
-                return ((baseRequestTransactionVoidTransaction)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
-            }
-            finally {
-                if ((stringReader != null)) {
-                    stringReader.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Serializes current baseRequestTransactionVoidTransaction object into file
-        /// </summary>
-        /// <param name="fileName">full path of outupt xml file</param>
-        /// <param name="exception">output Exception value if failed</param>
-        /// <returns>true if can serialize and save into file; otherwise, false</returns>
-        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
-            exception = null;
-            try {
-                SaveToFile(fileName);
-                return true;
-            }
-            catch (System.Exception e) {
-                exception = e;
-                return false;
-            }
-        }
-        
-        public virtual void SaveToFile(string fileName) {
-            System.IO.StreamWriter streamWriter = null;
-            try {
-                string xmlString = Serialize();
-                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
-                streamWriter = xmlFile.CreateText();
-                streamWriter.WriteLine(xmlString);
-                streamWriter.Close();
-            }
-            finally {
-                if ((streamWriter != null)) {
-                    streamWriter.Dispose();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Deserializes xml markup from file into an baseRequestTransactionVoidTransaction object
-        /// </summary>
-        /// <param name="fileName">string xml file to load and deserialize</param>
-        /// <param name="obj">Output baseRequestTransactionVoidTransaction object</param>
-        /// <param name="exception">output Exception value if deserialize failed</param>
-        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
-        public static bool LoadFromFile(string fileName, out baseRequestTransactionVoidTransaction obj, out System.Exception exception) {
-            exception = null;
-            obj = default(baseRequestTransactionVoidTransaction);
-            try {
-                obj = LoadFromFile(fileName);
-                return true;
-            }
-            catch (System.Exception ex) {
-                exception = ex;
-                return false;
-            }
-        }
-        
-        public static bool LoadFromFile(string fileName, out baseRequestTransactionVoidTransaction obj) {
-            System.Exception exception = null;
-            return LoadFromFile(fileName, out obj, out exception);
-        }
-        
-        public static baseRequestTransactionVoidTransaction LoadFromFile(string fileName) {
-            System.IO.FileStream file = null;
-            System.IO.StreamReader sr = null;
-            try {
-                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
-                sr = new System.IO.StreamReader(file);
-                string xmlString = sr.ReadToEnd();
-                sr.Close();
-                file.Close();
-                return Deserialize(xmlString);
-            }
-            finally {
-                if ((file != null)) {
-                    file.Dispose();
-                }
-                if ((sr != null)) {
-                    sr.Dispose();
-                }
-            }
-        }
-        #endregion
-        
-        #region Clone method
-        /// <summary>
-        /// Create a clone of this baseRequestTransactionVoidTransaction object
-        /// </summary>
-        public virtual baseRequestTransactionVoidTransaction Clone() {
-            return ((baseRequestTransactionVoidTransaction)(this.MemberwiseClone()));
         }
         #endregion
     }
@@ -25250,6 +24841,415 @@ namespace Litle.Sdk.Generated {
         /// </summary>
         public virtual litleOnlineResponseTransactionResponseVoidTransactionResponse Clone() {
             return ((litleOnlineResponseTransactionResponseVoidTransactionResponse)(this.MemberwiseClone()));
+        }
+        #endregion
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    public partial class voidTransaction : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private long litleTxnIdField;
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private processingInstructions processingInstructionsField;
+        
+        private static System.Xml.Serialization.XmlSerializer serializer;
+        
+        public voidTransaction() {
+            this.processingInstructionsField = new processingInstructions();
+        }
+        
+        public long litleTxnId {
+            get {
+                return this.litleTxnIdField;
+            }
+            set {
+                if ((litleTxnIdField.Equals(value) != true)) {
+                    this.litleTxnIdField = value;
+                    this.OnPropertyChanged("litleTxnId");
+                }
+            }
+        }
+        
+        public processingInstructions processingInstructions {
+            get {
+                return this.processingInstructionsField;
+            }
+            set {
+                if ((this.processingInstructionsField != null)) {
+                    if ((processingInstructionsField.Equals(value) != true)) {
+                        this.processingInstructionsField = value;
+                        this.OnPropertyChanged("processingInstructions");
+                    }
+                }
+                else {
+                    this.processingInstructionsField = value;
+                    this.OnPropertyChanged("processingInstructions");
+                }
+            }
+        }
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
+                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(voidTransaction));
+                }
+                return serializer;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        public virtual void OnPropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
+            if ((handler != null)) {
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
+        #region Serialize/Deserialize
+        /// <summary>
+        /// Serializes current voidTransaction object into an XML document
+        /// </summary>
+        /// <returns>string XML value</returns>
+        public virtual string Serialize() {
+            System.IO.StreamReader streamReader = null;
+            System.IO.MemoryStream memoryStream = null;
+            try {
+                memoryStream = new System.IO.MemoryStream();
+                Serializer.Serialize(memoryStream, this);
+                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
+                streamReader = new System.IO.StreamReader(memoryStream);
+                return streamReader.ReadToEnd();
+            }
+            finally {
+                if ((streamReader != null)) {
+                    streamReader.Dispose();
+                }
+                if ((memoryStream != null)) {
+                    memoryStream.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Deserializes workflow markup into an voidTransaction object
+        /// </summary>
+        /// <param name="xml">string workflow markup to deserialize</param>
+        /// <param name="obj">Output voidTransaction object</param>
+        /// <param name="exception">output Exception value if deserialize failed</param>
+        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
+        public static bool Deserialize(string xml, out voidTransaction obj, out System.Exception exception) {
+            exception = null;
+            obj = default(voidTransaction);
+            try {
+                obj = Deserialize(xml);
+                return true;
+            }
+            catch (System.Exception ex) {
+                exception = ex;
+                return false;
+            }
+        }
+        
+        public static bool Deserialize(string xml, out voidTransaction obj) {
+            System.Exception exception = null;
+            return Deserialize(xml, out obj, out exception);
+        }
+        
+        public static voidTransaction Deserialize(string xml) {
+            System.IO.StringReader stringReader = null;
+            try {
+                stringReader = new System.IO.StringReader(xml);
+                return ((voidTransaction)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
+            }
+            finally {
+                if ((stringReader != null)) {
+                    stringReader.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Serializes current voidTransaction object into file
+        /// </summary>
+        /// <param name="fileName">full path of outupt xml file</param>
+        /// <param name="exception">output Exception value if failed</param>
+        /// <returns>true if can serialize and save into file; otherwise, false</returns>
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
+            exception = null;
+            try {
+                SaveToFile(fileName);
+                return true;
+            }
+            catch (System.Exception e) {
+                exception = e;
+                return false;
+            }
+        }
+        
+        public virtual void SaveToFile(string fileName) {
+            System.IO.StreamWriter streamWriter = null;
+            try {
+                string xmlString = Serialize();
+                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
+                streamWriter = xmlFile.CreateText();
+                streamWriter.WriteLine(xmlString);
+                streamWriter.Close();
+            }
+            finally {
+                if ((streamWriter != null)) {
+                    streamWriter.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Deserializes xml markup from file into an voidTransaction object
+        /// </summary>
+        /// <param name="fileName">string xml file to load and deserialize</param>
+        /// <param name="obj">Output voidTransaction object</param>
+        /// <param name="exception">output Exception value if deserialize failed</param>
+        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
+        public static bool LoadFromFile(string fileName, out voidTransaction obj, out System.Exception exception) {
+            exception = null;
+            obj = default(voidTransaction);
+            try {
+                obj = LoadFromFile(fileName);
+                return true;
+            }
+            catch (System.Exception ex) {
+                exception = ex;
+                return false;
+            }
+        }
+        
+        public static bool LoadFromFile(string fileName, out voidTransaction obj) {
+            System.Exception exception = null;
+            return LoadFromFile(fileName, out obj, out exception);
+        }
+        
+        public static voidTransaction LoadFromFile(string fileName) {
+            System.IO.FileStream file = null;
+            System.IO.StreamReader sr = null;
+            try {
+                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
+                sr = new System.IO.StreamReader(file);
+                string xmlString = sr.ReadToEnd();
+                sr.Close();
+                file.Close();
+                return Deserialize(xmlString);
+            }
+            finally {
+                if ((file != null)) {
+                    file.Dispose();
+                }
+                if ((sr != null)) {
+                    sr.Dispose();
+                }
+            }
+        }
+        #endregion
+        
+        #region Clone method
+        /// <summary>
+        /// Create a clone of this voidTransaction object
+        /// </summary>
+        public virtual voidTransaction Clone() {
+            return ((voidTransaction)(this.MemberwiseClone()));
+        }
+        #endregion
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    public partial class echeckVoid : transactionTypeWithReportGroup, System.ComponentModel.INotifyPropertyChanged {
+        
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        private long litleTxnIdField;
+        
+        private static System.Xml.Serialization.XmlSerializer serializer;
+        
+        public long litleTxnId {
+            get {
+                return this.litleTxnIdField;
+            }
+            set {
+                if ((litleTxnIdField.Equals(value) != true)) {
+                    this.litleTxnIdField = value;
+                    this.OnPropertyChanged("litleTxnId");
+                }
+            }
+        }
+        
+        private static System.Xml.Serialization.XmlSerializer Serializer {
+            get {
+                if ((serializer == null)) {
+                    serializer = new System.Xml.Serialization.XmlSerializer(typeof(echeckVoid));
+                }
+                return serializer;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        public virtual void OnPropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
+            if ((handler != null)) {
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
+        #region Serialize/Deserialize
+        /// <summary>
+        /// Serializes current echeckVoid object into an XML document
+        /// </summary>
+        /// <returns>string XML value</returns>
+        public virtual string Serialize() {
+            System.IO.StreamReader streamReader = null;
+            System.IO.MemoryStream memoryStream = null;
+            try {
+                memoryStream = new System.IO.MemoryStream();
+                Serializer.Serialize(memoryStream, this);
+                memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
+                streamReader = new System.IO.StreamReader(memoryStream);
+                return streamReader.ReadToEnd();
+            }
+            finally {
+                if ((streamReader != null)) {
+                    streamReader.Dispose();
+                }
+                if ((memoryStream != null)) {
+                    memoryStream.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Deserializes workflow markup into an echeckVoid object
+        /// </summary>
+        /// <param name="xml">string workflow markup to deserialize</param>
+        /// <param name="obj">Output echeckVoid object</param>
+        /// <param name="exception">output Exception value if deserialize failed</param>
+        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
+        public static bool Deserialize(string xml, out echeckVoid obj, out System.Exception exception) {
+            exception = null;
+            obj = default(echeckVoid);
+            try {
+                obj = Deserialize(xml);
+                return true;
+            }
+            catch (System.Exception ex) {
+                exception = ex;
+                return false;
+            }
+        }
+        
+        public static bool Deserialize(string xml, out echeckVoid obj) {
+            System.Exception exception = null;
+            return Deserialize(xml, out obj, out exception);
+        }
+        
+        public static echeckVoid Deserialize(string xml) {
+            System.IO.StringReader stringReader = null;
+            try {
+                stringReader = new System.IO.StringReader(xml);
+                return ((echeckVoid)(Serializer.Deserialize(System.Xml.XmlReader.Create(stringReader))));
+            }
+            finally {
+                if ((stringReader != null)) {
+                    stringReader.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Serializes current echeckVoid object into file
+        /// </summary>
+        /// <param name="fileName">full path of outupt xml file</param>
+        /// <param name="exception">output Exception value if failed</param>
+        /// <returns>true if can serialize and save into file; otherwise, false</returns>
+        public virtual bool SaveToFile(string fileName, out System.Exception exception) {
+            exception = null;
+            try {
+                SaveToFile(fileName);
+                return true;
+            }
+            catch (System.Exception e) {
+                exception = e;
+                return false;
+            }
+        }
+        
+        public virtual void SaveToFile(string fileName) {
+            System.IO.StreamWriter streamWriter = null;
+            try {
+                string xmlString = Serialize();
+                System.IO.FileInfo xmlFile = new System.IO.FileInfo(fileName);
+                streamWriter = xmlFile.CreateText();
+                streamWriter.WriteLine(xmlString);
+                streamWriter.Close();
+            }
+            finally {
+                if ((streamWriter != null)) {
+                    streamWriter.Dispose();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Deserializes xml markup from file into an echeckVoid object
+        /// </summary>
+        /// <param name="fileName">string xml file to load and deserialize</param>
+        /// <param name="obj">Output echeckVoid object</param>
+        /// <param name="exception">output Exception value if deserialize failed</param>
+        /// <returns>true if this XmlSerializer can deserialize the object; otherwise, false</returns>
+        public static bool LoadFromFile(string fileName, out echeckVoid obj, out System.Exception exception) {
+            exception = null;
+            obj = default(echeckVoid);
+            try {
+                obj = LoadFromFile(fileName);
+                return true;
+            }
+            catch (System.Exception ex) {
+                exception = ex;
+                return false;
+            }
+        }
+        
+        public static bool LoadFromFile(string fileName, out echeckVoid obj) {
+            System.Exception exception = null;
+            return LoadFromFile(fileName, out obj, out exception);
+        }
+        
+        public static echeckVoid LoadFromFile(string fileName) {
+            System.IO.FileStream file = null;
+            System.IO.StreamReader sr = null;
+            try {
+                file = new System.IO.FileStream(fileName, FileMode.Open, FileAccess.Read);
+                sr = new System.IO.StreamReader(file);
+                string xmlString = sr.ReadToEnd();
+                sr.Close();
+                file.Close();
+                return Deserialize(xmlString);
+            }
+            finally {
+                if ((file != null)) {
+                    file.Dispose();
+                }
+                if ((sr != null)) {
+                    sr.Dispose();
+                }
+            }
+        }
+        #endregion
+        
+        #region Clone method
+        /// <summary>
+        /// Create a clone of this echeckVoid object
+        /// </summary>
+        public virtual echeckVoid Clone() {
+            return ((echeckVoid)(this.MemberwiseClone()));
         }
         #endregion
     }

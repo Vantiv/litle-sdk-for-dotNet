@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using LitleXSDGenerated;
 using LitleSdkForNet;
 
 namespace LitleSdkForNetTest.Functional
@@ -25,7 +24,7 @@ namespace LitleSdkForNetTest.Functional
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
             authorization.orderId ="12344";
-            authorization.amount = "106";
+            authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;

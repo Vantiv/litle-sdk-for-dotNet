@@ -55,8 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="communications.cs" />
-    <Compile Include="createObject2.cs" />
-    <Compile Include="litleOnline_v8_8_combined.cs" />
+    <Compile Include="litleOnline_combined_v8_10.cs" />
     <Compile Include="SerializeAndDeserializeXML.cs" />
     <Compile Include="testPayment.cs" />
   </ItemGroup>
@@ -84,6 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="litleOnline_combined_v8.10.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

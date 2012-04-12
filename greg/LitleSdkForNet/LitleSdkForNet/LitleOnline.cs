@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LitleXSDGenerated;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace LitleSdkForNet
 {
@@ -12,11 +14,21 @@ namespace LitleSdkForNet
         private Communications communication;
 
         /**
-         * Construct a Litle online using the configuration specified in %HOME%/.litle_SDK_config.properties
+         * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
         public LitleOnline()
         {
             config = new Dictionary<String, String>();
+            config["url"] = Properties.Settings.Default.url;
+            config["reportGroup"] = Properties.Settings.Default.reportGroup;
+            config["username"] = Properties.Settings.Default.username;
+            config["printxml"] = Properties.Settings.Default.printxml;
+            config["version"] = Properties.Settings.Default.version;
+            config["timeout"] = Properties.Settings.Default.timeout;
+            config["proxyHost"] = Properties.Settings.Default.proxyHost;
+            config["merchantId"] = Properties.Settings.Default.merchantId;
+            config["password"] = Properties.Settings.Default.password;
+            config["proxyPort"] = Properties.Settings.Default.proxyPort;
              communication = new Communications();
             //TODO load config from file
         }
@@ -46,8 +58,21 @@ namespace LitleSdkForNet
 
         public authorizationResponse Authorize(authorization auth)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
+            litleOnlineRequest request = createLitleOnlineRequest();          
             fillInReportGroup(auth);
+            request.authorization = auth;
+            //request.
+            //request.Item = auth;
+            //Console.WriteLine(request.Item.reportGroup);
+
+            //baseRequest baseRequest = (baseRequest)request;
+            //Console.WriteLine(baseRequest.authentication.user);
+            //transactionTypeWithReportGroup ttwrg = baseRequest.Item;
+            //Console.WriteLine(ttwrg.reportGroup);
+            //authorization auth2 = (authorization)ttwrg;
+            //Console.WriteLine(auth2.amount);
+            //request.Item = 
+
 
             litleOnlineResponse response = sendToLitle(request);
             authorizationResponse authResponse = (authorizationResponse)response.Item;
@@ -164,15 +189,15 @@ namespace LitleSdkForNet
             return registerTokenResponse;
         }
 
-        public litleOnlineResponseTransactionResponseVoidResponse DoVoid(baseRequestTransactionVoid v)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(v);
+        //public litleOnlineResponseTransactionResponseVoidResponse DoVoid(baseRequestTransactionVoid v)
+        //{
+        //    litleOnlineRequest request = createLitleOnlineRequest();
+        //    fillInReportGroup(v);
 
-            litleOnlineResponse response = sendToLitle(request);
-            litleOnlineResponseTransactionResponseVoidResponse voidResponse = (litleOnlineResponseTransactionResponseVoidResponse)response.Item;
-            return voidResponse;
-        }
+        //    litleOnlineResponse response = sendToLitle(request);
+        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = (litleOnlineResponseTransactionResponseVoidResponse)response.Item;
+        //    return voidResponse;
+        //}
 
         private litleOnlineRequest createLitleOnlineRequest()
         {
@@ -181,21 +206,42 @@ namespace LitleSdkForNet
             request.version = config["version"];
             authentication authentication = new authentication();
             authentication.password = config["password"];
-            authentication.user = config["user"];
+            authentication.user = config["username"];
             request.authentication = authentication;
             return request;
         }
 
         private litleOnlineResponse sendToLitle(litleOnlineRequest request)
         {
-            string xmlRequest = request.Serialize();
+            //string xmlRequest = request.Serialize();
+            string xmlRequest = SerializeObject(request);
             string xmlResponse = communication.HttpPost(xmlRequest,config);
-            litleOnlineResponse response = litleOnlineResponse.Deserialize(xmlResponse);
-            if("1".Equals(response.response)) {
-                throw new LitleOnlineException(response.message);
-            }
-            return response;
+            //litleOnlineResponse response = litleOnlineResponse.Deserialize(xmlResponse);
+            //litleO
+            //if("1".Equals(response.response)) {
+            //    throw new LitleOnlineException(response.message);
+            //}
+            //return response;
+            litleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);
+            return litleOnlineResponse;
         }
+
+        public static String SerializeObject(litleOnlineRequest req)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineRequest));
+            MemoryStream ms = new MemoryStream();
+            serializer.Serialize(ms, req);
+            return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
+        }// serialize the xml
+
+        public static litleOnlineResponse DeserializeObject(string response)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineResponse));
+            StringReader reader = new StringReader(response);
+            litleOnlineResponse i = (litleOnlineResponse)serializer.Deserialize(reader);
+            return i;
+
+        }// deserialize the object
 
         private void fillInReportGroup(transactionTypeWithReportGroup txn)
         {

@@ -11,7 +11,7 @@ namespace GenerateCode
     class ModifyXSDs
     {
         private String xsdVersionNumber = "";
-        private String pathToXSDFolder = "xsd\\";
+        private String pathToXSDFolder = "C:\\Documents and Settings\\gdake\\git\\litle-sdk-for-dotNet\\Project\\GenerateCode\\GenerateCode\\bin\\Debug\\xsd";
 
         /*
          * Constructor

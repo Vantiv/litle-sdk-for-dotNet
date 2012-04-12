@@ -5,3 +5,9 @@ C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSd
 C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNet\obj\Release\LitleSdkForNet.pdb
 C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForNet.dll
 C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForNet.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Release\LitleSdkForNet.dll
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Release\LitleSdkForNet.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\obj\Release\LitleSdkForNet.dll
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\obj\Release\LitleSdkForNet.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Release\LitleSdkForNet.dll.config
