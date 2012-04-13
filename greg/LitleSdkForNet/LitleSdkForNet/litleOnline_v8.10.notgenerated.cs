@@ -1665,7 +1665,13 @@ namespace Litle.Sdk
         public DateTime authDate;
         public string authCode;
         public fraudResult fraudResult;
-        public string authAmount;
+        private long authAmountField;
+        private bool authAmountSet;
+        public long authAmount
+        {
+            get { return this.authAmountField; }
+            set { this.authAmountField = value; this.authAmountSet = true; }
+        }
 
         public string Serialize()
         {
@@ -1673,7 +1679,7 @@ namespace Litle.Sdk
             if (authDate != null) xml += "\r\n<authDate>" + XmlUtil.toXsdDate(authDate) + "</authDate>";
             if (authCode != null) xml += "\r\n<authCode>" + authCode + "</authCode>";
             if (fraudResult != null) xml += "\r\n<fraudResult>" + fraudResult.Serialize() + "</fraudResult>";
-            if (authAmount != null) xml += "\r\n<authAmount>" + authAmount + "</authAmount>";
+            if (authAmountSet) xml += "\r\n<authAmount>" + authAmountField + "</authAmount>";
             return xml;
         }
     }

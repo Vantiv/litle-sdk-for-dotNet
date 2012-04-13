@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Functional
             DateTime authDate = new DateTime(2002, 10, 9);
             authInfo.authDate = authDate;
             authInfo.authCode = "543216";
-            authInfo.authAmount = "12345";
+            authInfo.authAmount = 12345;
             capturegivenauth.authInformation = authInfo;
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
@@ -49,7 +49,7 @@ namespace Litle.Sdk.Test.Functional
             DateTime authDate = new DateTime(2002, 10, 9);
             authInfo.authDate = authDate;
             authInfo.authCode = "543216";
-            authInfo.authAmount = "12345";
+            authInfo.authAmount = 12345;
             capturegivenauth.authInformation = authInfo;
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardTokenType cardtoken = new cardTokenType();
@@ -71,7 +71,7 @@ namespace Litle.Sdk.Test.Functional
             DateTime authDate = new DateTime(2002, 10, 9);
             authInfo.authDate = authDate;
             authInfo.authCode = "543216";
-            authInfo.authAmount = "12345";
+            authInfo.authAmount = 12345;
             capturegivenauth.authInformation = authInfo;
             contact contact = new contact();
             contact.name = "Bob";
@@ -101,7 +101,7 @@ namespace Litle.Sdk.Test.Functional
             DateTime authDate = new DateTime(2002, 10, 9);
             authInfo.authDate = authDate;
             authInfo.authCode = "543216";
-            authInfo.authAmount = "12345";
+            authInfo.authAmount = 12345;
             fraudResult fraudresult = new fraudResult();
             fraudresult.avsResult = "12";
             fraudresult.cardValidationResult = "123";
