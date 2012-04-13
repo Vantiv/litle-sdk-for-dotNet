@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
-  <TopNode>[0-1000]C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNet.sln</TopNode>
-  <SelectedNode>[0-1000]C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNet.sln</SelectedNode>
+  <TopNode>[0-1000]C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln</TopNode>
+  <SelectedNode>[0-1000]C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
-    <Node UniqueName="[0-1000]C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNet.sln" Expanded="true" />
-    <Node UniqueName="[0-1005]C:\Documents and Settings\gdake\My Documents\Visual Studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForNetTest.exe" Expanded="true" />
-    <Node UniqueName="[0-1006]LitleSdkForNetTest" Expanded="true" />
-    <Node UniqueName="[0-1002]LitleSdkForNetTest.TestFixture1" Expanded="true" />
+    <Node UniqueName="[0-1000]C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" Expanded="true" />
+    <Node UniqueName="[0-1128]C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForDotNetTest.exe" Expanded="true" />
+    <Node UniqueName="[0-1129]Litle" Expanded="true" />
+    <Node UniqueName="[0-1130]Litle.Sdk" Expanded="true" />
+    <Node UniqueName="[0-1131]Litle.Sdk.Test" Expanded="true" />
+    <Node UniqueName="[0-1133]Litle.Sdk.Test.Certification" Expanded="true" />
+    <Node UniqueName="[0-1132]Litle.Sdk.Test.Functional" Expanded="true" />
+    <Node UniqueName="[0-1134]Litle.Sdk.Test.Unit" Expanded="true" />
   </Nodes>
 </VisualState>
