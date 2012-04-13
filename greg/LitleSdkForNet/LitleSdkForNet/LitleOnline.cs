@@ -166,16 +166,16 @@ namespace LitleSdkForNet
         //    return forceCaptureResponse;
         //}
 
-        //public saleResponse Sale(sale sale)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(sale);
-        //    request.sale = sale;
+        public saleResponse Sale(sale sale)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(sale);
+            request.sale = sale;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    saleResponse saleResponse = (saleResponse)response.Item;
-        //    return saleResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            saleResponse saleResponse = (saleResponse)response.Item;
+            return saleResponse;
+        }
 
         //public registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest)
         //{

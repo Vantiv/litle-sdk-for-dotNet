@@ -1,19 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-13" time="03:03:38">
+<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" total="30" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-13" time="03:47:24">
   <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.3625" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet" machine-name="VM-GDAKE" user="gdake" user-domain="LITLE" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" executed="True" result="Success" success="True" time="4.781" asserts="0">
+  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" executed="True" result="Success" success="True" time="29.469" asserts="0">
     <results>
-      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.exe" executed="True" result="Success" success="True" time="4.781" asserts="0">
+      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.exe" executed="True" result="Success" success="True" time="29.469" asserts="0">
         <results>
-          <test-suite type="Namespace" name="LitleSdkForNetTest" executed="True" result="Success" success="True" time="4.781" asserts="0">
+          <test-suite type="Namespace" name="LitleSdkForNetTest" executed="True" result="Success" success="True" time="29.454" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Certification" executed="True" result="Success" success="True" time="4.766" asserts="0">
+              <test-suite type="Namespace" name="Certification" executed="True" result="Success" success="True" time="29.438" asserts="0">
                 <results>
-                  <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Success" success="True" time="4.766" asserts="0">
+                  <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Success" success="True" time="29.438" asserts="0">
                     <results>
-                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.Test1Auth" executed="True" result="Success" success="True" time="4.547" asserts="11" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test10" executed="True" result="Success" success="True" time="5.109" asserts="3" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test11" executed="True" result="Success" success="True" time="0.500" asserts="3" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test12" executed="True" result="Success" success="True" time="0.500" asserts="3" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test13" executed="True" result="Success" success="True" time="0.563" asserts="3" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.Test1Auth" executed="True" result="Success" success="True" time="2.109" asserts="11" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.Test1AVS" executed="True" result="Success" success="True" time="0.531" asserts="5" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test1Sale" executed="True" result="Success" success="True" time="1.484" asserts="9" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test2Auth" executed="True" result="Success" success="True" time="2.109" asserts="11" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test2AVS" executed="True" result="Success" success="True" time="0.547" asserts="5" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test2Sale" executed="True" result="Success" success="True" time="1.094" asserts="7" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test3Auth" executed="True" result="Success" success="True" time="1.531" asserts="9" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test3AVS" executed="True" result="Success" success="True" time="0.594" asserts="5" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test3Sale" executed="True" result="Success" success="True" time="1.016" asserts="7" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test4Auth" executed="True" result="Success" success="True" time="1.594" asserts="8" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test4AVS" executed="True" result="Success" success="True" time="0.531" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test4Sale" executed="True" result="Success" success="True" time="1.031" asserts="6" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test5Auth" executed="True" result="Success" success="True" time="1.391" asserts="9" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test5AVS" executed="True" result="Success" success="True" time="0.484" asserts="5" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test5Sale" executed="True" result="Success" success="True" time="0.953" asserts="7" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test6Auth" executed="True" result="Success" success="True" time="0.531" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test6Sale" executed="True" result="Success" success="True" time="0.469" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test7Auth" executed="True" result="Success" success="True" time="0.484" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test7AVS" executed="True" result="Success" success="True" time="0.516" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test7Sale" executed="True" result="Success" success="True" time="0.469" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test8Auth" executed="True" result="Success" success="True" time="0.469" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test8AVS" executed="True" result="Success" success="True" time="0.469" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test8Sale" executed="True" result="Success" success="True" time="0.484" asserts="4" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test9Auth" executed="True" result="Success" success="True" time="0.469" asserts="3" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test9AVS" executed="True" result="Success" success="True" time="0.500" asserts="3" />
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.test9Sale" executed="True" result="Success" success="True" time="0.453" asserts="3" />
                     </results>
                   </test-suite>
                 </results>

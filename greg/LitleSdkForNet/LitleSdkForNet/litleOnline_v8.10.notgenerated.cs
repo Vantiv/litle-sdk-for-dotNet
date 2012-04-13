@@ -15,6 +15,7 @@ namespace LitleSdkForNet
         public capture capture;
         public credit credit;
         public voidTxn voidTxn;
+        public sale sale;
 
         public string Serialize()
         {
@@ -25,6 +26,7 @@ namespace LitleSdkForNet
             else if (capture != null) xml += capture.Serialize();
             else if (credit != null) xml += credit.Serialize();
             else if (voidTxn != null) xml += voidTxn.Serialize();
+            else if (sale != null) xml += sale.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -970,6 +972,300 @@ namespace LitleSdkForNet
             return xml;
         }
     }
+
+    public partial class sale : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+        private bool litleTxnIdSet;
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+                this.litleTxnIdSet = true;
+            }
+        }
+        public string orderId;
+        public string amount;
+        public orderSourceType orderSource;
+        public customerInfo customerInfo;
+        public contact billToAddress;
+        public contact shipToAddress;
+        public cardType card;
+        public payPal paypal;
+        public cardTokenType token;
+        public cardPaypageType paypage;
+        public billMeLaterRequest billMeLaterRequest;
+        public fraudCheckType cardholderAuthentication;
+        public customBilling customBilling;
+        public govtTaxTypeEnum taxType;
+        public enhancedData enhancedData;
+        public processingInstructions processingInstructions;
+        public pos pos;
+        private bool payPalOrderCompleteField;
+        private bool payPalOrderCompleteSet;
+        public bool payPalOrderComplete
+        {
+            get { return this.payPalOrderCompleteField; }
+            set { this.payPalOrderCompleteField = value; this.payPalOrderCompleteSet = true; }
+        }
+        public string payPalNotes;
+        public amexAggregatorData amexAggregatorData;
+        private bool allowPartialAuthField;
+        private bool allowPartialAuthSet;
+        public bool allowPartialAuth
+        {
+            get
+            {
+                return this.allowPartialAuthField;
+            }
+            set
+            {
+                this.allowPartialAuthField = value;
+                this.allowPartialAuthSet = true;
+            }
+        }
+        public healthcareIIAS healthcareIIAS;
+        public filteringType filtering;
+        public merchantDataType merchantData;
+        public recyclingRequestType recyclingRequest;
+
+        public String Serialize()
+        {
+            string xml = "\r\n<sale";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";                                   
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+            if (customerInfo != null)
+            {
+                xml += "\r\n<customerInfo>" + customerInfo.Serialize() + "\r\n</customerInfo>";
+            }
+            if (billToAddress != null)
+            {
+                xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
+            }
+            if (shipToAddress != null)
+            {
+                xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "\r\n</shipToAddress>";
+            }
+            if (card != null)
+            {
+                xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            }
+            else if (paypal != null)
+            {
+                xml += "\r\n<paypal>" + paypal.Serialize() + "\r\n</paypal>";
+            }
+            else if (token != null)
+            {
+                xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+            }
+            else if (paypage != null)
+            {
+                xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+            }
+            if (billMeLaterRequest != null)
+            {
+                xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
+            }
+            if (cardholderAuthentication != null)
+            {
+                xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() + "\r\n</cardholderAuthentication>";
+            }
+            if (customBilling != null)
+            {
+                xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+            }
+            if (taxType != null)
+            {
+                xml += "\r\n<taxType>" + taxType + "</taxType>";
+            }
+            if (enhancedData != null)
+            {
+                xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
+            }
+            if (processingInstructions != null)
+            {
+                xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+            }
+            if (pos != null)
+            {
+                xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
+            }
+            if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderCompleteSet>" + payPalOrderCompleteField + "</payPalOrderCompleteSet>";
+            if (payPalNotes != null) xml += "\r\n<payPalNotes>" + payPalNotes + "</payPalNotes>";
+            if (amexAggregatorData != null)
+            {
+                xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
+            }
+            if (allowPartialAuthSet)
+            {
+                xml += "\r\n<allowPartialAuth>" + allowPartialAuthField + "</allowPartialAuth>";
+            }
+            if (healthcareIIAS != null)
+            {
+                xml += "\r\n<healthcareIIAS>" + healthcareIIAS.Serialize() + "\r\n</healthcareIIAS>";
+            }
+            if (filtering != null)
+            {
+                xml += "\r\n<filtering>" + filtering.Serialize() + "\r\n</filtering>";
+            }
+            if (merchantData != null)
+            {
+                xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
+            }
+            if (recyclingRequest != null)
+            {
+                xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
+            }
+            
+            xml += "\r\n</sale>";
+            return xml;
+        }
+    }
+
+    public partial class recyclingRequestType
+    {
+        private recycleByTypeEnum recycleByField;
+        private bool recycleBySet;
+        public recycleByTypeEnum recycleBy {
+            get { return this.recycleByField; }
+            set { this.recycleByField = value; this.recycleBySet = true; }
+        }
+        public string recycleId;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (recycleBySet) xml += "\r\n<recycleBy>" + recycleByField + "</recycleBy>";
+            if (recycleId != null) xml += "\r\n<recycleId>" + recycleId + "</recycleId>";
+            return xml;
+        }
+    }
+
+    public partial class filteringType
+    {
+        private bool prepaidField;
+        private bool prepaidSet;
+        public bool prepaid
+        {
+            get { return this.prepaidField; }
+            set { this.prepaidField = value; this.prepaidSet = true; }
+        }
+
+        private bool internationalField;
+        private bool internationalSet;
+        public bool international
+        {
+            get { return this.internationalField; }
+            set { this.internationalField = value; this.internationalSet = true; }
+        }
+
+        private bool chargebackField;
+        private bool chargebackSet;
+        public bool chargeback
+        {
+            get { return this.chargebackField; }
+            set { this.chargebackField = value; this.chargebackSet = true; }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (prepaidSet) xml += "\r\n<prepaid>" + prepaidField + "</prepaid>";
+            if (internationalSet) xml += "\r\n<international>" + internationalField + "</international>";
+            if (chargebackSet) xml += "\r\n<chargeback>" + chargebackField + "</chargeback>";
+            return xml;
+        }
+
+    }
+
+    public partial class healthcareIIAS
+    {
+        public healthcareAmounts healthcareAmounts;
+        private IIASFlagType IIASFlagField;
+        private bool IIASFlagSet;
+        public IIASFlagType IIASFlag
+        {
+            get { return this.IIASFlagField; }
+            set { this.IIASFlagField = value; this.IIASFlagSet = true; }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (healthcareAmounts != null) xml += "\r\n<healthcareAmounts>" + healthcareAmounts.Serialize() + "</healthcareAmounts>";
+            if (IIASFlagSet) xml += "\r\n<IIASFlag>" + IIASFlagField + "</IIASFlag>";
+            return xml;
+        }
+    }
+
+    public partial class healthcareAmounts
+    {
+        private int totalHealthcareAmountField;
+        private bool totalHealthcareAmountSet;
+        public int totalHealthcareAmount
+        {
+            get { return this.totalHealthcareAmountField; }
+            set { this.totalHealthcareAmountField = value; this.totalHealthcareAmountSet = true; }
+        }
+
+        private int RxAmountField;
+        private bool RxAmountSet;
+        public int RxAmount
+        {
+            get { return this.RxAmountField; }
+            set { this.RxAmountField = value; this.RxAmountSet = true; }
+        }
+
+        private int visionAmountField;
+        private bool visionAmountSet;
+        public int visionAmount
+        {
+            get { return this.visionAmountField; }
+            set { this.visionAmountField = value; this.visionAmountSet = true; }
+        }
+
+        private int clinicOtherAmountField;
+        private bool clinicOtherAmountSet;
+        public int clinicOtherAmount
+        {
+            get { return this.clinicOtherAmountField; }
+            set { this.clinicOtherAmountField = value; this.clinicOtherAmountSet = true; }
+        }
+
+        private int dentalAmountField;
+        private bool dentalAmountSet;
+        public int dentalAmount
+        {
+            get { return this.dentalAmountField; }
+            set { this.dentalAmountField = value; this.dentalAmountSet = true; }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (totalHealthcareAmountSet) xml += "\r\n<totalHealthcareAmount>" + totalHealthcareAmountField + "</totalHealthcareAmount>";
+            if (RxAmountSet) xml += "\r\n<RxAmount>" + RxAmountField + "</RxAmount>";
+            if (visionAmountSet) xml += "\r\n<visionAmount>" + visionAmountField + "</visionAmount>";
+            if (clinicOtherAmountSet) xml += "\r\n<clinicOtherAmount>" + clinicOtherAmountField + "</clinicOtherAmount>";
+            if (dentalAmountSet) xml += "\r\n<dentalAmount>" + dentalAmountField + "</dentalAmount>";
+            return xml;
+        }
+    }
+
 
     public enum orderSourceType
     {

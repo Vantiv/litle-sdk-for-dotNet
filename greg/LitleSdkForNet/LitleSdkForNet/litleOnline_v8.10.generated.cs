@@ -4019,137 +4019,137 @@ namespace LitleSdkForNet
     //    }
     //}
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class healthcareIIAS
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    //[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    //public partial class healthcareIIAS
+    //{
 
-        private healthcareAmounts healthcareAmountsField;
+    //    private healthcareAmounts healthcareAmountsField;
 
-        private IIASFlagType iIASFlagField;
+    //    private IIASFlagType iIASFlagField;
 
-        /// <remarks/>
-        public healthcareAmounts healthcareAmounts
-        {
-            get
-            {
-                return this.healthcareAmountsField;
-            }
-            set
-            {
-                this.healthcareAmountsField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public healthcareAmounts healthcareAmounts
+    //    {
+    //        get
+    //        {
+    //            return this.healthcareAmountsField;
+    //        }
+    //        set
+    //        {
+    //            this.healthcareAmountsField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public IIASFlagType IIASFlag
-        {
-            get
-            {
-                return this.iIASFlagField;
-            }
-            set
-            {
-                this.iIASFlagField = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    public IIASFlagType IIASFlag
+    //    {
+    //        get
+    //        {
+    //            return this.iIASFlagField;
+    //        }
+    //        set
+    //        {
+    //            this.iIASFlagField = value;
+    //        }
+    //    }
+    //}
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class healthcareAmounts
-    {
+    // <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    //[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    //public partial class healthcareAmounts
+    //{
 
-        private string totalHealthcareAmountField;
+    //    private string totalHealthcareAmountField;
 
-        private string rxAmountField;
+    //    private string rxAmountField;
 
-        private string visionAmountField;
+    //    private string visionAmountField;
 
-        private string clinicOtherAmountField;
+    //    private string clinicOtherAmountField;
 
-        private string dentalAmountField;
+    //    private string dentalAmountField;
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-        public string totalHealthcareAmount
-        {
-            get
-            {
-                return this.totalHealthcareAmountField;
-            }
-            set
-            {
-                this.totalHealthcareAmountField = value;
-            }
-        }
+    //     <remarks/>
+    //    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+    //    public string totalHealthcareAmount
+    //    {
+    //        get
+    //        {
+    //            return this.totalHealthcareAmountField;
+    //        }
+    //        set
+    //        {
+    //            this.totalHealthcareAmountField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-        public string RxAmount
-        {
-            get
-            {
-                return this.rxAmountField;
-            }
-            set
-            {
-                this.rxAmountField = value;
-            }
-        }
+    //     <remarks/>
+    //    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+    //    public string RxAmount
+    //    {
+    //        get
+    //        {
+    //            return this.rxAmountField;
+    //        }
+    //        set
+    //        {
+    //            this.rxAmountField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-        public string visionAmount
-        {
-            get
-            {
-                return this.visionAmountField;
-            }
-            set
-            {
-                this.visionAmountField = value;
-            }
-        }
+    //     <remarks/>
+    //    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+    //    public string visionAmount
+    //    {
+    //        get
+    //        {
+    //            return this.visionAmountField;
+    //        }
+    //        set
+    //        {
+    //            this.visionAmountField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-        public string clinicOtherAmount
-        {
-            get
-            {
-                return this.clinicOtherAmountField;
-            }
-            set
-            {
-                this.clinicOtherAmountField = value;
-            }
-        }
+    //     <remarks/>
+    //    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+    //    public string clinicOtherAmount
+    //    {
+    //        get
+    //        {
+    //            return this.clinicOtherAmountField;
+    //        }
+    //        set
+    //        {
+    //            this.clinicOtherAmountField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-        public string dentalAmount
-        {
-            get
-            {
-                return this.dentalAmountField;
-            }
-            set
-            {
-                this.dentalAmountField = value;
-            }
-        }
-    }
+    //     <remarks/>
+    //    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+    //    public string dentalAmount
+    //    {
+    //        get
+    //        {
+    //            return this.dentalAmountField;
+    //        }
+    //        set
+    //        {
+    //            this.dentalAmountField = value;
+    //        }
+    //    }
+    //}
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
@@ -4162,108 +4162,108 @@ namespace LitleSdkForNet
         Y,
     }
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    public partial class filteringType
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    //public partial class filteringType
+    //{
 
-        private bool prepaidField;
+    //    private bool prepaidField;
 
-        private bool prepaidFieldSpecified;
+    //    private bool prepaidFieldSpecified;
 
-        private bool internationalField;
+    //    private bool internationalField;
 
-        private bool internationalFieldSpecified;
+    //    private bool internationalFieldSpecified;
 
-        private bool chargebackField;
+    //    private bool chargebackField;
 
-        private bool chargebackFieldSpecified;
+    //    private bool chargebackFieldSpecified;
 
-        /// <remarks/>
-        public bool prepaid
-        {
-            get
-            {
-                return this.prepaidField;
-            }
-            set
-            {
-                this.prepaidField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public bool prepaid
+    //    {
+    //        get
+    //        {
+    //            return this.prepaidField;
+    //        }
+    //        set
+    //        {
+    //            this.prepaidField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool prepaidSpecified
-        {
-            get
-            {
-                return this.prepaidFieldSpecified;
-            }
-            set
-            {
-                this.prepaidFieldSpecified = value;
-            }
-        }
+    //    /// <remarks/>
+    //    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    //    public bool prepaidSpecified
+    //    {
+    //        get
+    //        {
+    //            return this.prepaidFieldSpecified;
+    //        }
+    //        set
+    //        {
+    //            this.prepaidFieldSpecified = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public bool international
-        {
-            get
-            {
-                return this.internationalField;
-            }
-            set
-            {
-                this.internationalField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public bool international
+    //    {
+    //        get
+    //        {
+    //            return this.internationalField;
+    //        }
+    //        set
+    //        {
+    //            this.internationalField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool internationalSpecified
-        {
-            get
-            {
-                return this.internationalFieldSpecified;
-            }
-            set
-            {
-                this.internationalFieldSpecified = value;
-            }
-        }
+    //    /// <remarks/>
+    //    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    //    public bool internationalSpecified
+    //    {
+    //        get
+    //        {
+    //            return this.internationalFieldSpecified;
+    //        }
+    //        set
+    //        {
+    //            this.internationalFieldSpecified = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public bool chargeback
-        {
-            get
-            {
-                return this.chargebackField;
-            }
-            set
-            {
-                this.chargebackField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public bool chargeback
+    //    {
+    //        get
+    //        {
+    //            return this.chargebackField;
+    //        }
+    //        set
+    //        {
+    //            this.chargebackField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool chargebackSpecified
-        {
-            get
-            {
-                return this.chargebackFieldSpecified;
-            }
-            set
-            {
-                this.chargebackFieldSpecified = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    //    public bool chargebackSpecified
+    //    {
+    //        get
+    //        {
+    //            return this.chargebackFieldSpecified;
+    //        }
+    //        set
+    //        {
+    //            this.chargebackFieldSpecified = value;
+    //        }
+    //    }
+    //}
 
     ///// <remarks/>
     //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
@@ -4320,61 +4320,61 @@ namespace LitleSdkForNet
     //    }
     //}
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    public partial class recyclingRequestType
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    //public partial class recyclingRequestType
+    //{
 
-        private recycleByTypeEnum recycleByField;
+    //    private recycleByTypeEnum recycleByField;
 
-        private bool recycleByFieldSpecified;
+    //    private bool recycleByFieldSpecified;
 
-        private string recycleIdField;
+    //    private string recycleIdField;
 
-        /// <remarks/>
-        public recycleByTypeEnum recycleBy
-        {
-            get
-            {
-                return this.recycleByField;
-            }
-            set
-            {
-                this.recycleByField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public recycleByTypeEnum recycleBy
+    //    {
+    //        get
+    //        {
+    //            return this.recycleByField;
+    //        }
+    //        set
+    //        {
+    //            this.recycleByField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool recycleBySpecified
-        {
-            get
-            {
-                return this.recycleByFieldSpecified;
-            }
-            set
-            {
-                this.recycleByFieldSpecified = value;
-            }
-        }
+    //    /// <remarks/>
+    //    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    //    public bool recycleBySpecified
+    //    {
+    //        get
+    //        {
+    //            return this.recycleByFieldSpecified;
+    //        }
+    //        set
+    //        {
+    //            this.recycleByFieldSpecified = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public string recycleId
-        {
-            get
-            {
-                return this.recycleIdField;
-            }
-            set
-            {
-                this.recycleIdField = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    public string recycleId
+    //    {
+    //        get
+    //        {
+    //            return this.recycleIdField;
+    //        }
+    //        set
+    //        {
+    //            this.recycleIdField = value;
+    //        }
+    //    }
+    //}
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
