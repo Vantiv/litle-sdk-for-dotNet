@@ -646,13 +646,13 @@ namespace Litle.Sdk
             else
             {
                 xml += "\r\n<orderId>" + orderId + "</orderId>";
-                if (verifySet) xml += "\r\n<verify>" + verifyField + "</verify>";
+                if (verifySet) xml += "\r\n<verify>" + (verifyField ? "true":"false") + "</verify>";
                 xml += "\r\n<amount>" + amountField + "</amount>";
                 xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
                 if (shipToAddress != null) xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "</shipToAddress>";
                 if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
-                else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
+                else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
                 if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
                 if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
             }
@@ -826,6 +826,7 @@ namespace Litle.Sdk
                     xml += "\r\n<paypal>";
                     if (paypal.payerId != null) xml += "\r\n<payerId>" + paypal.payerId + "</payerId>";
                     else if (paypal.payerEmail != null) xml += "\r\n<payerEmail>" + paypal.payerEmail + "</payerEmail>";
+                    xml += "\r\n</paypal>";
                 }
                 if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
                 if (taxTypeSet) xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
@@ -836,7 +837,7 @@ namespace Litle.Sdk
                 if (amexAggregatorData != null) xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "</amexAggregatorData>";
                 if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
             }
-            if (payPalNotes != null) xml += "\r\n<payPalNotes>" + payPalNotes + "</merchantData>";
+            if (payPalNotes != null) xml += "\r\n<payPalNotes>" + payPalNotes + "</payPalNotes>";
             xml += "\r\n</credit>";
             return xml;
         }
