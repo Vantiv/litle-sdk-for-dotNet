@@ -8,7 +8,7 @@ using Litle.Sdk;
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    class TestSimpleEcheckRedeposit
+    class TestEcheckRedeposit
     {
         private LitleOnline litle;
 

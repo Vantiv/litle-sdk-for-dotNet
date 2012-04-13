@@ -1118,10 +1118,17 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "";
+            string xml = "\r\n<echeckRedeposit";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
             if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
             if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
-            else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
+            else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
+            xml += "\r\n</echeckRedeposit>";
             return xml;
         }
     }
