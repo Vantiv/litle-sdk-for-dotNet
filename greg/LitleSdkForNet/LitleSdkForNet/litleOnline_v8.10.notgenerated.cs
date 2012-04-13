@@ -162,11 +162,11 @@ namespace LitleSdkForNet
             }
             if (customerCheckingAccountSet)
             {
-                xml += "\r\n<customerCheckingAccount>" + customerCheckingAccountField + "</customerCheckingAccount>";
+                xml += "\r\n<customerCheckingAccount>" + customerCheckingAccountField.ToString().ToLower() + "</customerCheckingAccount>";
             }
             if (customerSavingAccountSet)
             {
-                xml += "\r\n<customerSavingAccount>" + customerSavingAccountField + "</customerSavingAccount>";
+                xml += "\r\n<customerSavingAccount>" + customerSavingAccountField.ToString().ToLower() + "</customerSavingAccount>";
             }
             if (employerName != null)
             {
@@ -301,7 +301,7 @@ namespace LitleSdkForNet
             if (customerReference != null) xml += "\r\n<customerReference>" + customerReference + "</customerReference>";
             if (salesTaxSet) xml += "\r\n<salesTax>" + salesTaxField + "</salesTax>";
             if (deliveryTypeSet) xml += "\r\n<deliveryType>" + deliveryTypeField + "</deliveryType>";
-            if (taxExemptSet) xml += "\r\n<taxExempt>" + taxExemptField + "</taxExempt>";
+            if (taxExemptSet) xml += "\r\n<taxExempt>" + taxExemptField.ToString().ToLower() + "</taxExempt>";
             if (discountAmountSet) xml += "\r\n<discountAmount>" + discountAmountField + "</discountAmount>";
             if (shippingAmountSet) xml += "\r\n<shippingAmount>" + shippingAmountField + "</shippingAmount>";
             if (dutyAmountSet) xml += "\r\n<dutyAmount>" + dutyAmountField + "</dutyAmount>";
@@ -434,7 +434,7 @@ namespace LitleSdkForNet
         public string Serialize()
         {
             string xml = "";
-            if (taxIncludedInTotalSet) xml += "\r\n<taxIncludedInTotal>" + taxIncludedInTotalField + "</taxIncludedInTotal>";
+            if (taxIncludedInTotalSet) xml += "\r\n<taxIncludedInTotal>" + taxIncludedInTotalField.ToString().ToLower() + "</taxIncludedInTotal>";
             if (taxAmountSet) xml += "\r\n<taxAmount>" + taxAmountField + "</taxAmount>";
             if (taxRate != null) xml += "\r\n<taxRate>" + taxRate + "</taxRate>";
             if (taxTypeIdentifierSet) xml += "\r\n<taxTypeIdentifier>" + taxTypeIdentifierField + "</taxTypeIdentifier>";
@@ -487,14 +487,14 @@ namespace LitleSdkForNet
             xml += " reportGroup=\"" + reportGroup + "\"";
             if (partialSet)
             {
-                xml += " partial=\"" + partial + "\"";
+                xml += " partial=\"" + partial.ToString().ToLower() + "\"";
             }
             xml += ">";
             xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
             if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
             if (enhancedData != null) xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
             if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
-            if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderComplete>" + payPalOrderCompleteField + "</payPalOrderComplete>";
+            if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderComplete>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderComplete>";
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + payPalNotes + "</payPalNotes>";
             xml += "\r\n</capture>";
             
@@ -753,13 +753,13 @@ namespace LitleSdkForNet
         {
             string xml = "";
             if (bmlMerchantIdSet) xml += "\r\n<bmlMerchantId>" + bmlMerchantIdField + "</bmlMerchantId>";
-            if (bmlProductType != null) xml += "\r\n<bmlProductType>" + bmlProductType + "</bmlProductType>";
+            if (bmlProductTypeSet) xml += "\r\n<bmlProductType>" + bmlProductTypeField + "</bmlProductType>";
             if (termsAndConditionsSet) xml += "\r\n<termsAndConditions>" + termsAndConditionsField + "</termsAndConditions>";
             if (preapprovalNumber != null) xml += "\r\n<preapprovalNumber>" + preapprovalNumber + "</preapprovalNumber>";
             if (merchantPromotionalCodeSet) xml += "\r\n<merchantPromotionalCode>" + merchantPromotionalCodeField + "</merchantPromotionalCode>";
             if (virtualAuthenticationKeyPresenceIndicator != null) xml += "\r\n<virtualAuthenticationKeyPresenceIndictor>" + virtualAuthenticationKeyPresenceIndicator + "</virtualAuthenticationKeyPresenceIndicator>";
             if(virtualAuthenticationKeyData != null) xml += "\r\n<virtualAuthenticationKeyData>" + virtualAuthenticationKeyData + "</virtualAuthenticationKeyData>";
-            if (itemCategoryCodeSet != null) xml += "\r\n<itemCategoryCode>" + itemCategoryCodeField + "</itemCategoryCode>";            
+            if (itemCategoryCodeSet) xml += "\r\n<itemCategoryCode>" + itemCategoryCodeField + "</itemCategoryCode>";            
             return xml;
         }
         
@@ -809,7 +809,7 @@ namespace LitleSdkForNet
         public string Serialize()
         {
             string xml = "";
-            if (bypassVelocityCheckSet) xml += "\r\n<bypassVelocityCheck>" + bypassVelocityCheckField + "</bypassVelocityCheck>";
+            if (bypassVelocityCheckSet) xml += "\r\n<bypassVelocityCheck>" + bypassVelocityCheckField.ToString().ToLower() + "</bypassVelocityCheck>";
             return xml;
         }
     }
@@ -846,7 +846,13 @@ namespace LitleSdkForNet
         public processingInstructions processingInstructions;
         public pos pos;
         public customBilling customBilling;
-        public govtTaxTypeEnum taxType;
+        private govtTaxTypeEnum taxTypeField;
+        private bool taxTypeSet;
+        public govtTaxTypeEnum taxType
+        {
+            get { return this.taxTypeField; }
+            set { this.taxTypeField = value; this.taxTypeSet = true; }
+        }
         public enhancedData enhancedData;
         public amexAggregatorData amexAggregatorData;
         private bool allowPartialAuthField;
@@ -902,71 +908,70 @@ namespace LitleSdkForNet
                 {
                     xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
                 }
-                //TODO come back
-                //else if (paypal != null)
-                //{
-                //    xml += "\r\n<paypal>" + paypal.Serialize() + "\r\n</paypal>";
-                //}
-                //else if (token != null)
-                //{
-                //    xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
-                //}
-                //else if (paypage != null)
-                //{
-                //    xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
-                //}
-                //if (billMeLaterRequest != null)
-                //{
-                //    xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
-                //}
-                //if (cardholderAuthentication != null)
-                //{
-                //    xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() + "\r\n</cardholderAuthentication>";
-                //}
-                //if (processingInstructions != null)
-                //{
-                //    xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
-                //}
-                //if (pos != null)
-                //{
-                //    xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
-                //}
-                //if (customBilling != null)
-                //{
-                //    xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
-                //}
-                //if (taxType != null)
-                //{
-                //    xml += "\r\n<taxType>" + taxType + "</taxType>";
-                //}
-                //if (enhancedData != null)
-                //{
-                //    xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
-                //}
-                //if (amexAggregatorData != null)
-                //{
-                //    xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
-                //}
-                //if (allowPartialAuthSet)
-                //{
-                //    xml += "\r\n<allowPartialAuth>" + allowPartialAuthField + "</allowPartialAuth>";
-                //}
-                //if (healthcareIIAS != null)
-                //{
-                //    xml += "\r\n<healthcareIIAS>" + healthcareIIAS.Serialize() + "\r\n</healthcareIIAS>";
-                //}
-                //if (filtering != null)
-                //{
-                //    xml += "\r\n<filtering>" + filtering.Serialize() + "\r\n</filtering>";
-                //}
-                //if (merchantData != null)
-                //{
-                //    xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
-                //}
-                //if (recyclingRequest != null)
-                //{
-                //    xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
-                //}
+                else if (paypal != null)
+                {
+                    xml += "\r\n<paypal>" + paypal.Serialize() + "\r\n</paypal>";
+                }
+                else if (token != null)
+                {
+                    xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+                }
+                else if (paypage != null)
+                {
+                    xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+                }
+                if (billMeLaterRequest != null)
+                {
+                    xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
+                }
+                if (cardholderAuthentication != null)
+                {
+                    xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() + "\r\n</cardholderAuthentication>";
+                }
+                if (processingInstructions != null)
+                {
+                    xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+                }
+                if (pos != null)
+                {
+                    xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
+                }
+                if (customBilling != null)
+                {
+                    xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+                }
+                if (taxTypeSet)
+                {
+                    xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
+                }
+                if (enhancedData != null)
+                {
+                    xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
+                }
+                if (amexAggregatorData != null)
+                {
+                    xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
+                }
+                if (allowPartialAuthSet)
+                {
+                    xml += "\r\n<allowPartialAuth>" + allowPartialAuthField.ToString().ToLower() + "</allowPartialAuth>";
+                }
+                if (healthcareIIAS != null)
+                {
+                    xml += "\r\n<healthcareIIAS>" + healthcareIIAS.Serialize() + "\r\n</healthcareIIAS>";
+                }
+                if (filtering != null)
+                {
+                    xml += "\r\n<filtering>" + filtering.Serialize() + "\r\n</filtering>";
+                }
+                if (merchantData != null)
+                {
+                    xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
+                }
+                if (recyclingRequest != null)
+                {
+                    xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
+                }
             }
             xml += "\r\n</authorization>";
             return xml;
@@ -1003,7 +1008,13 @@ namespace LitleSdkForNet
         public billMeLaterRequest billMeLaterRequest;
         public fraudCheckType cardholderAuthentication;
         public customBilling customBilling;
-        public govtTaxTypeEnum taxType;
+        private govtTaxTypeEnum taxTypeField;
+        private bool taxTypeSet;
+        public govtTaxTypeEnum taxType
+        {
+            get { return this.taxTypeField; }
+            set { this.taxTypeField = value; this.taxTypeSet = true; }
+        }
         public enhancedData enhancedData;
         public processingInstructions processingInstructions;
         public pos pos;
@@ -1088,9 +1099,9 @@ namespace LitleSdkForNet
             {
                 xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
             }
-            if (taxType != null)
+            if (taxTypeSet != null)
             {
-                xml += "\r\n<taxType>" + taxType + "</taxType>";
+                xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
             }
             if (enhancedData != null)
             {
@@ -1104,7 +1115,7 @@ namespace LitleSdkForNet
             {
                 xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
             }
-            if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderCompleteSet>" + payPalOrderCompleteField + "</payPalOrderCompleteSet>";
+            if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderCompleteSet>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderCompleteSet>";
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + payPalNotes + "</payPalNotes>";
             if (amexAggregatorData != null)
             {
@@ -1112,7 +1123,7 @@ namespace LitleSdkForNet
             }
             if (allowPartialAuthSet)
             {
-                xml += "\r\n<allowPartialAuth>" + allowPartialAuthField + "</allowPartialAuth>";
+                xml += "\r\n<allowPartialAuth>" + allowPartialAuthField.ToString().ToLower() + "</allowPartialAuth>";
             }
             if (healthcareIIAS != null)
             {
@@ -1184,9 +1195,9 @@ namespace LitleSdkForNet
         public string Serialize()
         {
             string xml = "";
-            if (prepaidSet) xml += "\r\n<prepaid>" + prepaidField + "</prepaid>";
-            if (internationalSet) xml += "\r\n<international>" + internationalField + "</international>";
-            if (chargebackSet) xml += "\r\n<chargeback>" + chargebackField + "</chargeback>";
+            if (prepaidSet) xml += "\r\n<prepaid>" + prepaidField.ToString().ToLower() + "</prepaid>";
+            if (internationalSet) xml += "\r\n<international>" + internationalField.ToString().ToLower() + "</international>";
+            if (chargebackSet) xml += "\r\n<chargeback>" + chargebackField.ToString().ToLower() + "</chargeback>";
             return xml;
         }
 
