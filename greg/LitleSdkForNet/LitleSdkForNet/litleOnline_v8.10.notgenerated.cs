@@ -17,6 +17,9 @@ namespace LitleSdkForNet
         public voidTxn voidTxn;
         public sale sale;
         public authReversal authReversal;
+        public echeckCredit echeckCredit;
+        public echeckVerification echeckVerification;
+        public echeckSale echeckSale;
 
         public string Serialize()
         {
@@ -29,6 +32,9 @@ namespace LitleSdkForNet
             else if (voidTxn != null) xml += voidTxn.Serialize();
             else if (sale != null) xml += sale.Serialize();
             else if (authReversal != null) xml += authReversal.Serialize();
+            else if (echeckCredit != null) xml += echeckCredit.Serialize();
+            else if (echeckVerification != null) xml += echeckVerification.Serialize();
+            else if (echeckSale != null) xml += echeckSale.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -408,7 +414,6 @@ namespace LitleSdkForNet
 
     public partial class detailTax
     {
-        //TODO Fill me in
         private bool taxIncludedInTotalField;
         private bool taxIncludedInTotalSet;
         public bool taxIncludedInTotal
@@ -504,6 +509,177 @@ namespace LitleSdkForNet
         }
     }
 
+    public partial class echeckCredit : transactionTypeWithReportGroup
+    {
+        private long litleTxnIdField;
+        private bool litleTxnIdSet;
+        public long litleTxnId
+        {
+            get { return this.litleTxnIdField; }
+            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+        }
+        private long amountField;
+        private bool amountSet;
+        public long amount
+        {
+            get { return this.amountField; }
+            set { this.amountField = value; amountSet = true; }
+        }
+        public customBilling customBilling;
+        public string orderId;
+        public orderSourceType orderSource;
+        public contact billToAddress;
+        public echeckType echeck;
+        public echeckTokenType token;
+        public merchantDataType merchantData;
+
+        public string Serialize()
+        {
+            string xml = "\r\n<echeckCredit";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\"";
+            xml += ">";
+
+            if (litleTxnIdSet)
+            {
+                xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
+                if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
+                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
+            }
+            else
+            {
+                xml += "\r\n<orderId>" + orderId + "</orderId>";
+                xml += "\r\n<amount>" + amountField + "</amount>";
+                xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+                if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
+                if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
+                else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
+                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
+                if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
+            }
+            xml += "\r\n</echeckCredit>";
+            return xml;
+        }
+    }
+
+    public partial class echeckSale : transactionTypeWithReportGroup
+    {
+        private long litleTxnIdField;
+        private bool litleTxnIdSet;
+        public long litleTxnId
+        {
+            get { return this.litleTxnIdField; }
+            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+        }
+        private long amountField;
+        private bool amountSet;
+        public long amount
+        {
+            get { return this.amountField; }
+            set { this.amountField = value; amountSet = true; }
+        }
+        public customBilling customBilling;
+        public string orderId;
+        private bool verifyField;
+        private bool verifySet;
+        public bool verify
+        {
+            get { return this.verifyField; }
+            set { this.verifyField = value; verifySet = true; }
+        }
+        public orderSourceType orderSource;
+        public contact billToAddress;
+        public contact shipToAddress;
+        public echeckType echeck;
+        public echeckTokenType token;
+        public merchantDataType merchantData;
+
+        public string Serialize()
+        {
+            string xml = "\r\n<echeckSale";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\"";
+            xml += ">";
+
+            if (litleTxnIdSet)
+            {
+                xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
+                if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
+                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
+            }
+            else
+            {
+                xml += "\r\n<orderId>" + orderId + "</orderId>";
+                if (verifySet) xml += "\r\n<verify>" + verifyField + "</verify>";
+                xml += "\r\n<amount>" + amountField + "</amount>";
+                xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+                if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
+                if (shipToAddress != null) xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "</shipToAddress>";
+                if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
+                else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
+                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
+                if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
+            }
+            xml += "\r\n</echeckSale>";
+            return xml;
+        }
+    }
+
+
+    public partial class echeckVerification : transactionTypeWithReportGroup
+    {
+        private long litleTxnIdField;
+        private bool litleTxnIdSet;
+        public long litleTxnId
+        {
+            get { return this.litleTxnIdField; }
+            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+        }
+        public string orderId;
+        private long amountField;
+        private bool amountSet;
+        public long amount
+        {
+            get { return this.amountField; }
+            set { this.amountField = value; amountSet = true; }
+        }
+        public orderSourceType orderSource;
+        public contact billToAddress;
+        public echeckType echeck;
+        public echeckTokenType token;
+
+        public string Serialize()
+        {
+            string xml = "\r\n<echeckVerification";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\"";
+            xml += ">";
+
+            if(litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
+            xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+            if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
+            if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
+            else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
+            xml += "\r\n</echeckVerification>";
+            return xml;
+        }
+    }
+
+
     public partial class credit : transactionTypeWithReportGroup
     {
         private long litleTxnIdField;
@@ -596,6 +772,57 @@ namespace LitleSdkForNet
             return xml;
         }
     }
+
+    public partial class echeckType 
+    {
+        private echeckAccountTypeEnum accTypeField;
+        private bool accTypeSet;
+        public echeckAccountTypeEnum accType
+        {
+            get { return this.accTypeField; }
+            set { this.accTypeField = value; accTypeSet = true; }
+        }
+
+        public string accNum;
+        public string routingNum;
+        public string checkNum;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (accTypeSet) xml += "\r\n<accType>" + accTypeField + "</accType>";
+            if (accNum != null) xml += "\r\n<accNum>" + accNum + "</accNum>";
+            if (routingNum != null) xml += "\r\n<routingNum>" + routingNum + "</routingNum>";
+            if (checkNum != null) xml += "\r\n<checkNum>" + checkNum + "</checkNum>";
+            return xml;
+        }
+    }
+
+    public partial class echeckTokenType
+    {
+        public string litleToken;
+        public string routingNum;
+        private echeckAccountTypeEnum accTypeField;
+        private bool accTypeSet;
+        public echeckAccountTypeEnum accType
+        {
+            get { return this.accTypeField; }
+            set { this.accTypeField = value; accTypeSet = true; }
+        }
+        public string checkNum;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (litleToken != null) xml += "\r\n<litleToken>" + litleToken + "</litleToken>";
+            if (routingNum != null) xml += "\r\n<routingNum>" + routingNum + "</routingNum>";
+            if (accTypeSet) xml += "\r\n<accType>" + accTypeField + "</accType>";            
+            if (checkNum != null) xml += "\r\n<checkNum>" + checkNum + "</checkNum>";
+            return xml;
+        }
+
+    }
+
 
     public partial class pos
     {

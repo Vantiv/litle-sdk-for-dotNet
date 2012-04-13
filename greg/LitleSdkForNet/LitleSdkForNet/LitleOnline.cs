@@ -111,16 +111,16 @@ namespace LitleSdkForNet
             return creditResponse;
         }
 
-        //public echeckCreditResponse EcheckCredit(echeckCredit echeckCredit)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(echeckCredit);
-        //    request.echeckCredit = echeckCredit;
+        public echeckCreditResponse EcheckCredit(echeckCredit echeckCredit)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(echeckCredit);
+            request.echeckCredit = echeckCredit;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    echeckCreditResponse echeckCreditResponse = (echeckCreditResponse)response.Item;
-        //    return echeckCreditResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            echeckCreditResponse echeckCreditResponse = (echeckCreditResponse)response.Item;
+            return echeckCreditResponse;
+        }
 
         //public echeckRedepositResponse EcheckRedeposit(echeckRedeposit echeckRedeposit)
         //{
@@ -133,27 +133,27 @@ namespace LitleSdkForNet
         //    return echeckRedepositResponse;
         //}
 
-        //public echeckSalesResponse EcheckSale(echeckSale echeckSale)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(echeckSale);
-        //    request.echeckSale = echeckSale;
+        public echeckSalesResponse EcheckSale(echeckSale echeckSale)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(echeckSale);
+            request.echeckSale = echeckSale;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    echeckSalesResponse echeckSalesResponse = (echeckSalesResponse)response.Item;
-        //    return echeckSalesResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            echeckSalesResponse echeckSalesResponse = (echeckSalesResponse)response.Item;
+            return echeckSalesResponse;
+        }
 
-        //public echeckVerificationResponse EcheckVerification(echeckVerification echeckVerification)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(echeckVerification);
-        //    request.echeckVerification = echeckVerification;
+        public echeckVerificationResponse EcheckVerification(echeckVerification echeckVerification)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(echeckVerification);
+            request.echeckVerification = echeckVerification;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    echeckVerificationResponse echeckVerificationResponse = (echeckVerificationResponse)response.Item;
-        //    return echeckVerificationResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            echeckVerificationResponse echeckVerificationResponse = (echeckVerificationResponse)response.Item;
+            return echeckVerificationResponse;
+        }
 
         //public forceCaptureResponse ForceCapture(forceCapture forceCapture)
         //{

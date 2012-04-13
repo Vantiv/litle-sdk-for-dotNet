@@ -5158,76 +5158,76 @@ namespace LitleSdkForNet
     //    }
     //}
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute("echeck", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class echeckType
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    //[System.Xml.Serialization.XmlRootAttribute("echeck", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    //public partial class echeckType
+    //{
 
-        private echeckAccountTypeEnum accTypeField;
+    //    private echeckAccountTypeEnum accTypeField;
 
-        private string accNumField;
+    //    private string accNumField;
 
-        private string routingNumField;
+    //    private string routingNumField;
 
-        private string checkNumField;
+    //    private string checkNumField;
 
-        /// <remarks/>
-        public echeckAccountTypeEnum accType
-        {
-            get
-            {
-                return this.accTypeField;
-            }
-            set
-            {
-                this.accTypeField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public echeckAccountTypeEnum accType
+    //    {
+    //        get
+    //        {
+    //            return this.accTypeField;
+    //        }
+    //        set
+    //        {
+    //            this.accTypeField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public string accNum
-        {
-            get
-            {
-                return this.accNumField;
-            }
-            set
-            {
-                this.accNumField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public string accNum
+    //    {
+    //        get
+    //        {
+    //            return this.accNumField;
+    //        }
+    //        set
+    //        {
+    //            this.accNumField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public string routingNum
-        {
-            get
-            {
-                return this.routingNumField;
-            }
-            set
-            {
-                this.routingNumField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public string routingNum
+    //    {
+    //        get
+    //        {
+    //            return this.routingNumField;
+    //        }
+    //        set
+    //        {
+    //            this.routingNumField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public string checkNum
-        {
-            get
-            {
-                return this.checkNumField;
-            }
-            set
-            {
-                this.checkNumField = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    public string checkNum
+    //    {
+    //        get
+    //        {
+    //            return this.checkNumField;
+    //        }
+    //        set
+    //        {
+    //            this.checkNumField = value;
+    //        }
+    //    }
+    //}
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
@@ -5250,76 +5250,76 @@ namespace LitleSdkForNet
         CorpSavings,
     }
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute("echeckToken", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class echeckTokenType
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    //[System.Xml.Serialization.XmlRootAttribute("echeckToken", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    //public partial class echeckTokenType
+    //{
 
-        private string litleTokenField;
+    //    private string litleTokenField;
 
-        private string routingNumField;
+    //    private string routingNumField;
 
-        private echeckAccountTypeEnum accTypeField;
+    //    private echeckAccountTypeEnum accTypeField;
 
-        private string checkNumField;
+    //    private string checkNumField;
 
-        /// <remarks/>
-        public string litleToken
-        {
-            get
-            {
-                return this.litleTokenField;
-            }
-            set
-            {
-                this.litleTokenField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public string litleToken
+    //    {
+    //        get
+    //        {
+    //            return this.litleTokenField;
+    //        }
+    //        set
+    //        {
+    //            this.litleTokenField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public string routingNum
-        {
-            get
-            {
-                return this.routingNumField;
-            }
-            set
-            {
-                this.routingNumField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public string routingNum
+    //    {
+    //        get
+    //        {
+    //            return this.routingNumField;
+    //        }
+    //        set
+    //        {
+    //            this.routingNumField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public echeckAccountTypeEnum accType
-        {
-            get
-            {
-                return this.accTypeField;
-            }
-            set
-            {
-                this.accTypeField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public echeckAccountTypeEnum accType
+    //    {
+    //        get
+    //        {
+    //            return this.accTypeField;
+    //        }
+    //        set
+    //        {
+    //            this.accTypeField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public string checkNum
-        {
-            get
-            {
-                return this.checkNumField;
-            }
-            set
-            {
-                this.checkNumField = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    public string checkNum
+    //    {
+    //        get
+    //        {
+    //            return this.checkNumField;
+    //        }
+    //        set
+    //        {
+    //            this.checkNumField = value;
+    //        }
+    //    }
+    //}
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]

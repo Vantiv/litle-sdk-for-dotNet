@@ -203,8 +203,6 @@ namespace LitleSdkForNetTest.Certification
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
             Assert.AreEqual("336", reversalResponse.response);
             Assert.AreEqual("Reversal Amount does not match Authorization amount", reversalResponse.message);
-        }
-
-            
+        }            
     }
 }
