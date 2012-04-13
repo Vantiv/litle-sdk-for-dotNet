@@ -16,6 +16,7 @@ namespace LitleSdkForNet
         public credit credit;
         public voidTxn voidTxn;
         public sale sale;
+        public authReversal authReversal;
 
         public string Serialize()
         {
@@ -27,6 +28,7 @@ namespace LitleSdkForNet
             else if (credit != null) xml += credit.Serialize();
             else if (voidTxn != null) xml += voidTxn.Serialize();
             else if (sale != null) xml += sale.Serialize();
+            else if (authReversal != null) xml += authReversal.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -1655,34 +1657,39 @@ namespace LitleSdkForNet
         }
     }
 
-    //public partial class authReversal : transactionTypeWithReportGroup
-    //{
+    public partial class authReversal : transactionTypeWithReportGroup
+    {
+        public long litleTxnId;
+        public string amount;
+        public string payPalNotes;
+        public string actionReason;
 
-    //    public long litleTxnId;
-    //    public string amount;
-    //    public string payPalNotes;
-    //    public string actionReason;
+        public string Serialize()
+        {
+            string xml = "\r\n<authReversal";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            if (amount != null)
+            {
+                xml += "\r\n<amount>" + amount + "</amount>";
+            }
+            if (payPalNotes != null)
+            {
+                xml += "\r\n<payPalNotes>" + payPalNotes + "</payPalNotes>";
+            }
+            if (actionReason != null)
+            {
+                xml += "\r\n<actionReason>" + actionReason + "</actionReason>";
+            }
+            xml += "\r\n</authReversal>";
+            return xml;
+        }
 
-    //    public string Serialize()
-    //    {
-    //        string xml = "\r\n<authReversal>";
-    //        xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
-    //        if (amount != null)
-    //        {
-    //            xml += "\r\n<amount>" + amount + "</amount>";
-    //        }
-    //        if (payPalNotes != null)
-    //        {
-    //            xml += "\r\n<payPalNotes>" + payPalNotes + "</payPalNotes>";
-    //        }
-    //        if (actionReason != null)
-    //        {
-    //            xml += "\r\n<actionReason>" + actionReason + "</actionReason>";
-    //        }
-    //        xml += "\r\n</authReversal";
-    //        return xml;
-    //    }
-
-    //}
+    }
 
 }

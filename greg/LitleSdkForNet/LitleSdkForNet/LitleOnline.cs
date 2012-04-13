@@ -67,16 +67,16 @@ namespace LitleSdkForNet
             return authResponse;
         }
 
-        //public authReversalResponse AuthReversal(authReversal reversal)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(reversal);
-        //    request.authReversal = reversal;
+        public authReversalResponse AuthReversal(authReversal reversal)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(reversal);
+            request.authReversal = reversal;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    authReversalResponse reversalResponse = (authReversalResponse)response.Item;
-        //    return reversalResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            authReversalResponse reversalResponse = (authReversalResponse)response.Item;
+            return reversalResponse;
+        }
 
         public captureResponse Capture(capture capture)
         {
