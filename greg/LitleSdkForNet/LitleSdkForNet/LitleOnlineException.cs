@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LitleSdkForNet
+namespace Litle.Sdk
 {
     public class LitleOnlineException : Exception
     {

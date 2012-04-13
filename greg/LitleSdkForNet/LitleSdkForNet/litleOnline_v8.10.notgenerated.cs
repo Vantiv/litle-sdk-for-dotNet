@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LitleSdkForNet
+namespace Litle.Sdk
 {
     public partial class litleOnlineRequest
     {
@@ -409,7 +409,21 @@ namespace LitleSdkForNet
         public string Serialize()
         {
             string xml = "";
-            //TODO Fill me in
+            if (itemSequenceNumberSet) xml += "\r\n<itemSequenceNumber>" + itemSeqenceNumberField + "</itemSequenceNumber>";
+            if (itemDescription != null) xml += "\r\n<itemDescription>" + itemDescription + "</itemDescription>";
+            if (productCode != null) xml += "\r\n<productCode>" + productCode + "</productCode>";
+            if (quantity != null) xml += "\r\n<quantity>" + quantity + "</quantity>";
+            if (unitOfMeasure != null) xml += "\r\n<unitOfMeasure>" + unitOfMeasure + "</unitOfMeasure>";
+            if (taxAmountSet) xml += "\r\n<taxAmount>" + taxAmountField + "</taxAmount>";
+            if (lineItemTotalSet) xml += "\r\n<lineItemTotal>" + lineItemTotalField + "</lineItemTotal>";
+            if (lineItemTotalWithTaxSet) xml += "\r\n<lineItemTotalWithTax>" + lineItemTotalWithTaxField + "</lineItemTotalWithTax>";
+            if (itemDiscountAmountSet) xml += "\r\n<itemDiscountAmount>" + itemDiscountAmountField + "</itemDiscountAmount>";
+            if (commodityCode != null) xml += "\r\n<commodityCode>" + commodityCode + "</commodityCode>";
+            if (unitCost != null) xml += "\r\n<unitCost>" + unitCost + "</unitCost>";
+            foreach (detailTax detailTax in detailTaxes)
+            {
+                if (detailTax != null) xml += "\r\n<detailTax>" + detailTax.Serialize() + "</detailTax>";
+            }
             return xml;
         }
 

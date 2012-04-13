@@ -8,7 +8,7 @@ using System.Text;
 using System.Xml.XPath;
 using System.Net;
 
-namespace LitleSdkForNet
+namespace Litle.Sdk
 {
     public class Communications
     {

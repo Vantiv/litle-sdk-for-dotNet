@@ -9,14 +9,14 @@ C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSd
 C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\LitleSdkForNetTest.exe
 C:\Documents and Settings\gdake\my documents\visual studio 2010\Projects\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\LitleSdkForNetTest.pdb
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\LitleSdkForNetTest.exe
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.exe
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.pdb
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNet.dll
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit-console-runner.dll
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit.framework.dll
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit.util.dll
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit.core.interfaces.dll
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\nunit.core.dll
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNet.pdb
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\LitleSdkForNetTest.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForDotNetTest.exe
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForDotNetTest.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForDotNet.dll
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForDotNet.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\LitleSdkForDotNetTest.exe
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\obj\x86\Release\LitleSdkForDotNetTest.pdb

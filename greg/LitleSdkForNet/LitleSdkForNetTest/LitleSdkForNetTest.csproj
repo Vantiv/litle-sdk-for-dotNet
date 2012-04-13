@@ -8,8 +8,8 @@
     <ProjectGuid>{D0A0B9E4-E555-498D-910D-28C61BD094EF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LitleSdkForNetTest</RootNamespace>
-    <AssemblyName>LitleSdkForNetTest</AssemblyName>
+    <RootNamespace>Litle.Sdk.Test</RootNamespace>
+    <AssemblyName>LitleSdkForDotNetTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

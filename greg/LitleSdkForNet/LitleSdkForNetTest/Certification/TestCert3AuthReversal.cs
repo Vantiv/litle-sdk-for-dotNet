@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using Litle.Sdk;
 
-using LitleSdkForNet;
-
-namespace LitleSdkForNetTest.Certification
+namespace Litle.Sdk.Test.Certification
 {
     [TestFixture]
     class TestCert3AuthReversal

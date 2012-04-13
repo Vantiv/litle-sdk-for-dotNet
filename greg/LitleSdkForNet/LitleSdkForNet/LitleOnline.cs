@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace LitleSdkForNet
+namespace Litle.Sdk
 {
     public class LitleOnline
     {
@@ -30,7 +30,6 @@ namespace LitleSdkForNet
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
              communication = new Communications();
-            //TODO load config from file
         }
 
         /**

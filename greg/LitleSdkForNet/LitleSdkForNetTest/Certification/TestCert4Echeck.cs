@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using LitleSdkForNet;
+using Litle.Sdk;
 
-namespace LitleSdkForNetTest.Certification
+namespace Litle.Sdk.Test.Certification
 {
     [TestFixture]
     class TestCert4Echeck
@@ -274,7 +274,7 @@ namespace LitleSdkForNetTest.Certification
         public void test48()
         {
             echeckCredit credit = new echeckCredit();
-            credit.litleTxnId = 430000000000000001L; //TODO - why is this litleTxnId a long and the other litleTxnIds (void, credit, capture) are strings - I prefer long
+            credit.litleTxnId = 430000000000000001L;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
             Assert.AreEqual("000", response.response);
