@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
 
-namespace LitleSdkForNetTest.Functional
+namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
     class TestEcheckVerification
@@ -84,11 +84,16 @@ namespace LitleSdkForNetTest.Functional
             echeckTypeObj.accNum = "12345657890";
             echeckTypeObj.routingNum = "123456789";
             echeckTypeObj.checkNum = "123455";
-
             echeckVerificationObject.echeck = echeckTypeObj;
-
-            echeckVerificationResponse response = lOnlineObj.EcheckVerification(echeckVerificationObject);
-            StringAssert.Contains("Error validating xml data against the schema", response.message);
+            try
+            {
+                //expected exception;
+                echeckVerificationResponse response = lOnlineObj.EcheckVerification(echeckVerificationObject);
+            }
+            catch (LitleOnlineException e)
+            {
+                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+            }
         }
     }
 }
