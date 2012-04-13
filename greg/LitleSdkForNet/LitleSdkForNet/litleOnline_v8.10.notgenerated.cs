@@ -22,6 +22,7 @@ namespace Litle.Sdk
         public echeckSale echeckSale;
         public registerTokenRequestType registerTokenRequest;
         public forceCapture forceCapture;
+        public captureGivenAuth captureGivenAuth;
 
         public string Serialize()
         {
@@ -39,6 +40,7 @@ namespace Litle.Sdk
             else if (echeckSale != null) xml += echeckSale.Serialize();
             else if (registerTokenRequest != null) xml += registerTokenRequest.Serialize();
             else if (forceCapture != null) xml += forceCapture.Serialize();
+            else if (captureGivenAuth != null) xml += captureGivenAuth.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -1518,6 +1520,122 @@ namespace Litle.Sdk
             return xml;
         }
     }
+
+    public partial class captureGivenAuth : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public authInformation authInformation;
+        public string amount;
+        public orderSourceType orderSource;
+        public contact billToAddress;
+        public contact shipToAddress;
+        public cardType card;
+        public cardTokenType token;
+        public cardPaypageType paypage;
+        public customBilling customBilling;
+        private govtTaxTypeEnum taxTypeField;
+        private bool taxTypeSet;
+        public govtTaxTypeEnum taxType
+        {
+            get { return this.taxTypeField; }
+            set { this.taxTypeField = value; this.taxTypeSet = true; }
+        }
+        public billMeLaterRequest billMeLaterRequest;
+        public enhancedData enhancedData;
+        public processingInstructions processingInstructions;
+        public pos pos;
+        public amexAggregatorData amexAggregatorData;
+        public merchantDataType merchantData;
+
+        public String Serialize()
+        {
+            string xml = "\r\n<captureGivenAuth";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            if (authInformation != null) xml += "\r\n<authInformation>" + authInformation.Serialize() + "\r\n</authInformation>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+            if (billToAddress != null)
+            {
+                xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
+            }
+            if (shipToAddress != null)
+            {
+                xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "\r\n</shipToAddress>";
+            }
+            if (card != null)
+            {
+                xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            }
+            else if (token != null)
+            {
+                xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+            }
+            else if (paypage != null)
+            {
+                xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+            }
+            if (customBilling != null)
+            {
+                xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+            }
+            if (taxTypeSet)
+            {
+                xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
+            }
+            if (billMeLaterRequest != null)
+            {
+                xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
+            }
+            if (enhancedData != null)
+            {
+                xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
+            }
+            if (processingInstructions != null)
+            {
+                xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+            }
+            if (pos != null)
+            {
+                xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
+            }
+            if (amexAggregatorData != null)
+            {
+                xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
+            }
+            if (merchantData != null)
+            {
+                xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
+            }
+            
+            xml += "\r\n</captureGivenAuth>";
+            return xml;
+        }
+    }
+
+    public partial class authInformation
+    {
+        public DateTime authDate;
+        public string authCode;
+        public fraudResult fraudResult;
+        public string authAmount;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (authDate != null) xml += "\r\n<authDate>" + authDate + "</authDate>";
+            if (authCode != null) xml += "\r\n<authCode>" + authCode + "</authCode>";
+            if (fraudResult != null) xml += "\r\n<fraudResult>" + fraudResult + "</fraudResult>";
+            if (authAmount != null) xml += "\r\n<authAmount>" + authAmount + "</authAmount>";
+            return xml;
+        }
+    }
+
     public partial class recyclingRequestType
     {
         private recycleByTypeEnum recycleByField;

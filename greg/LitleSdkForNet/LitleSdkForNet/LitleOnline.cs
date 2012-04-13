@@ -29,7 +29,7 @@ namespace Litle.Sdk
             config["merchantId"] = Properties.Settings.Default.merchantId;
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
-             communication = new Communications();
+            communication = new Communications();
         }
 
         /**
@@ -88,16 +88,16 @@ namespace Litle.Sdk
             return captureResponse;
         }
 
-        //public captureGivenAuthResponse CaptureGivenAuth(captureGivenAuth captureGivenAuth)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(captureGivenAuth);
-        //    request.captureGivenAuth = captureGivenAuth;
+        public captureGivenAuthResponse CaptureGivenAuth(captureGivenAuth captureGivenAuth)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(captureGivenAuth);
+            request.captureGivenAuth = captureGivenAuth;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)response.Item;
-        //    return captureGivenAuthResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)response.Item;
+            return captureGivenAuthResponse;
+        }
 
         public creditResponse Credit(credit credit)
         {
