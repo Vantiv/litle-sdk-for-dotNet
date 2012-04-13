@@ -301,7 +301,13 @@ namespace Litle.Sdk
             set { this.destinationCountryCodeField = value; this.destinationCountryCodeSet = true; }
         }        
         public string invoiceReferenceNumber;
-        public DateTime orderDate;
+        private DateTime orderDateField;
+        private bool orderDateSet;
+        public DateTime orderDate
+        {
+            get { return this.orderDateField; }
+            set { this.orderDateField = value; this.orderDateSet = true; }
+        }
         public List<detailTax> detailTaxes;
         public List<lineItemData> lineItems;
 
@@ -325,7 +331,7 @@ namespace Litle.Sdk
             if (destinationPostalCode != null) xml += "\r\n<destinationPostalCode>" + destinationPostalCode + "</destinationPostalCode>";
             if (destinationCountryCodeSet) xml += "\r\n<destinationCountryCode>" + destinationCountryCodeField + "</destinationCountryCode>";
             if (invoiceReferenceNumber != null) xml += "\r\n<invoiceReferenceNumber>" + invoiceReferenceNumber + "</invoiceReferenceNumber>";
-            if (orderDate != null) xml += "\r\n<orderDate>" + XmlUtil.toXsdDate(orderDate) + "</orderDate>";
+            if (orderDateSet) xml += "\r\n<orderDate>" + XmlUtil.toXsdDate(orderDateField) + "</orderDate>";
             foreach (detailTax detailTax in detailTaxes) {
                 xml += "\r\n<detailTax>" + detailTax.Serialize() + "\r\n</detailTax>";
             }
