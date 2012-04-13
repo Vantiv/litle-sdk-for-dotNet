@@ -926,12 +926,16 @@ namespace Litle.Sdk
     {
         public string payerId;
         public string payerEmail;
+        public string token;
+        public string transactionId;
 
         public string Serialize()
         {
             string xml = "";
             if (payerId != null) xml += "\r\n<payerId>" + payerId + "</payerId>";
             if (payerEmail != null) xml += "\r\n<payerEmail>" + payerEmail + "</payerEmail>";
+            if (token != null) xml += "\r\n<token>" + token + "</token>";
+            if (transactionId != null) xml += "\r\n<transactionId>" + transactionId + "</transactionId>";
             return xml;
         }
     }
