@@ -19,7 +19,7 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.accountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Valid Format", rtokenResponse.message);
+            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.paypageRegistrationId = "1233456789101112";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Valid Format", rtokenResponse.message);
+            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
         }
 
         [Test]
@@ -40,11 +40,13 @@ namespace Litle.Sdk.Test.Functional
             LitleOnline lOnlineObj = new LitleOnline();
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
             registerTokenRequest.orderId = "12344";
-            registerTokenRequest.echeckForToken.accNum = "12344565";
-            registerTokenRequest.echeckForToken.routingNum = "123476545";
+            echeckForTokenType echeckObj = new echeckForTokenType();
+            echeckObj.accNum = "12344565";
+            echeckObj.routingNum = "123476545";
+            registerTokenRequest.echeckForToken = echeckObj;
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Valid Format", rtokenResponse.message);
+            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
         }
 
         [Test]
@@ -53,7 +55,9 @@ namespace Litle.Sdk.Test.Functional
             LitleOnline lOnlineObj = new LitleOnline();
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
             registerTokenRequest.orderId = "12344";
-            registerTokenRequest.echeckForToken.routingNum = "123476545";
+            echeckForTokenType echeckObj = new echeckForTokenType();
+            echeckObj.routingNum = "123476545";
+            registerTokenRequest.echeckForToken = echeckObj;
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
             StringAssert.Contains("Error validating xml data against the schema", rtokenResponse.message);

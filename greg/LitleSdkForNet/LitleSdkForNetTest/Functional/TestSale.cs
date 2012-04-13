@@ -54,6 +54,24 @@ namespace Litle.Sdk.Test.Functional
             saleResponse responseObj = lOnlineObj.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
         }
+
+        [Test]
+        public void SimpleSaleWithPayPal()
+        {
+            LitleOnline lOnlineObj = new LitleOnline();
+            sale saleObj = new sale();
+            saleObj.amount = "106";
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            payPal payPalObj = new payPal();
+            payPalObj.payerId = "1234";
+            payPalObj.token = "1234";
+            payPalObj.transactionId = "123456";
+            saleObj.paypal = payPalObj;
+            saleResponse responseObj = lOnlineObj.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
             
     }
 }
