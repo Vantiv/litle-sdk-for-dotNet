@@ -1,26 +1,110 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" total="4" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-13" time="11:05:38">
+<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" total="17" errors="2" failures="2" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-13" time="11:09:04">
   <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.3625" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet" machine-name="VM-GDAKE" user="gdake" user-domain="LITLE" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" executed="True" result="Success" success="True" time="4.609" asserts="0">
+  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" executed="True" result="Failure" success="False" time="7.266" asserts="0">
     <results>
-      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForDotNetTest.exe" executed="True" result="Success" success="True" time="4.578" asserts="0">
+      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForDotNetTest.exe" executed="True" result="Failure" success="False" time="7.250" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Litle" executed="True" result="Success" success="True" time="4.578" asserts="0">
+          <test-suite type="Namespace" name="Litle" executed="True" result="Failure" success="False" time="7.250" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Sdk" executed="True" result="Success" success="True" time="4.578" asserts="0">
+              <test-suite type="Namespace" name="Sdk" executed="True" result="Failure" success="False" time="7.234" asserts="0">
                 <results>
-                  <test-suite type="Namespace" name="Test" executed="True" result="Success" success="True" time="4.578" asserts="0">
+                  <test-suite type="Namespace" name="Test" executed="True" result="Failure" success="False" time="7.219" asserts="0">
                     <results>
-                      <test-suite type="Namespace" name="Functional" executed="True" result="Success" success="True" time="4.578" asserts="0">
+                      <test-suite type="Namespace" name="Functional" executed="True" result="Failure" success="False" time="7.219" asserts="0">
                         <results>
-                          <test-suite type="TestFixture" name="TestCaptureGivenAuth" executed="True" result="Success" success="True" time="4.578" asserts="0">
+                          <test-suite type="TestFixture" name="TestAuth" executed="True" result="Inconclusive" success="False" time="0.016" asserts="0" />
+                          <test-suite type="TestFixture" name="TestAuthReversal" executed="True" result="Success" success="True" time="0.000" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.authInfo" executed="True" result="Success" success="True" time="2.906" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestAuthReversal.SimpleAuthReversal" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestCapture" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestCapture.SimpleCapture" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestCaptureGivenAuth" executed="True" result="Success" success="True" time="4.594" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.authInfo" executed="True" result="Success" success="True" time="2.953" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.complexCaptureGivenAuth" executed="True" result="Success" success="True" time="0.484" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.simpleCaptureGivenAuthWithCard" executed="True" result="Success" success="True" time="0.469" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.simpleCaptureGivenAuthWithToken" executed="True" result="Success" success="True" time="0.500" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestCredit" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.SimpleCreditWithCard" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestEcheckCredit" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckCredit.SimpleEcheckCredit" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestEcheckSale" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.SimpleEcheckSaleWithEcheck" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestForceCapture" executed="True" result="Success" success="True" time="0.938" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestForceCapture.simpleForceCaptureWithCard" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestForceCapture.simpleForceCaptureWithToken" executed="True" result="Success" success="True" time="0.453" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestSale" executed="True" result="Success" success="True" time="0.484" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestSale.SimpleSaleWithCard" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestSimpleEcheckRedeposit" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestSimpleEcheckRedeposit.SimpleEcheckRedeposit" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="TestToken" executed="True" result="Failure" success="False" time="1.156" asserts="0">
+                            <results>
+                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleToken" executed="True" result="Failure" success="False" time="0.594" asserts="1">
+                                <failure>
+                                  <message><![CDATA[  Expected string length 12 but was 42. Strings differ at index 0.
+  Expected: "Valid Format", ignoring case
+  But was:  "Account number was successfully registered"
+  -----------^
+]]></message>
+                                  <stack-trace><![CDATA[at NUnit.Framework.StringAssert.AreEqualIgnoringCase(String expected, String actual, String message, Object[] args)
+at Litle.Sdk.Test.Functional.TestToken.SimpleToken() in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\Functional\TestToken.cs:line 20
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleTokenWithEcheck" executed="True" result="Error" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
+                                  <stack-trace><![CDATA[at Litle.Sdk.Test.Functional.TestToken.SimpleTokenWithEcheck() in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\Functional\TestToken.cs:line 43
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleTokenWithPayPage" executed="True" result="Failure" success="False" time="0.531" asserts="1">
+                                <failure>
+                                  <message><![CDATA[  Expected string length 12 but was 42. Strings differ at index 0.
+  Expected: "Valid Format", ignoring case
+  But was:  "Account number was successfully registered"
+  -----------^
+]]></message>
+                                  <stack-trace><![CDATA[at NUnit.Framework.StringAssert.AreEqualIgnoringCase(String expected, String actual, String message, Object[] args)
+at Litle.Sdk.Test.Functional.TestToken.SimpleTokenWithPayPage() in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\Functional\TestToken.cs:line 32
+]]></stack-trace>
+                                </failure>
+                              </test-case>
+                              <test-case name="Litle.Sdk.Test.Functional.TestToken.TokenEcheckMissingRequiredField" executed="True" result="Error" success="False" time="0.000" asserts="0">
+                                <failure>
+                                  <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
+                                  <stack-trace><![CDATA[at Litle.Sdk.Test.Functional.TestToken.TokenEcheckMissingRequiredField() in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\Functional\TestToken.cs:line 56
+]]></stack-trace>
+                                </failure>
+                              </test-case>
                             </results>
                           </test-suite>
                         </results>
