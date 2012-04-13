@@ -177,16 +177,16 @@ namespace LitleSdkForNet
             return saleResponse;
         }
 
-        //public registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(tokenRequest);
-        //    request.registerTokenRequest = tokenRequest;
+        public registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(tokenRequest);
+            request.registerTokenRequest = tokenRequest;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    registerTokenResponse registerTokenResponse = (registerTokenResponse)response.Item;
-        //    return registerTokenResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            registerTokenResponse registerTokenResponse = (registerTokenResponse)response.Item;
+            return registerTokenResponse;
+        }
 
         public litleOnlineResponseTransactionResponseVoidResponse DoVoid(voidTxn v)
         {

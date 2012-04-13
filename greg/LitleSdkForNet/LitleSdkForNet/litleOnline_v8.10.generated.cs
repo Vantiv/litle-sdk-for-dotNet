@@ -5859,123 +5859,123 @@ namespace LitleSdkForNet
     //    }
     //}
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute("registerTokenRequest", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class registerTokenRequestType : transactionTypeWithReportGroup
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    //[System.Xml.Serialization.XmlRootAttribute("registerTokenRequest", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    //public partial class registerTokenRequestType : transactionTypeWithReportGroup
+    //{
 
-        private string orderIdField;
+    //    private string orderIdField;
 
-        private object itemField;
+    //    private object itemField;
 
-        private ItemChoiceType itemElementNameField;
+    //    private ItemChoiceType itemElementNameField;
 
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public string orderId
+    //    {
+    //        get
+    //        {
+    //            return this.orderIdField;
+    //        }
+    //        set
+    //        {
+    //            this.orderIdField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("accountNumber", typeof(string))]
-        [System.Xml.Serialization.XmlElementAttribute("echeckForToken", typeof(echeckForTokenType))]
-        [System.Xml.Serialization.XmlElementAttribute("paypageRegistrationId", typeof(string))]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
-        public object Item
-        {
-            get
-            {
-                return this.itemField;
-            }
-            set
-            {
-                this.itemField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    [System.Xml.Serialization.XmlElementAttribute("accountNumber", typeof(string))]
+    //    [System.Xml.Serialization.XmlElementAttribute("echeckForToken", typeof(echeckForTokenType))]
+    //    [System.Xml.Serialization.XmlElementAttribute("paypageRegistrationId", typeof(string))]
+    //    [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemElementName")]
+    //    public object Item
+    //    {
+    //        get
+    //        {
+    //            return this.itemField;
+    //        }
+    //        set
+    //        {
+    //            this.itemField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemChoiceType ItemElementName
-        {
-            get
-            {
-                return this.itemElementNameField;
-            }
-            set
-            {
-                this.itemElementNameField = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    //    public ItemChoiceType ItemElementName
+    //    {
+    //        get
+    //        {
+    //            return this.itemElementNameField;
+    //        }
+    //        set
+    //        {
+    //            this.itemElementNameField = value;
+    //        }
+    //    }
+    //}
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    public partial class echeckForTokenType
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    //public partial class echeckForTokenType
+    //{
 
-        private string accNumField;
+    //    private string accNumField;
 
-        private string routingNumField;
+    //    private string routingNumField;
 
-        /// <remarks/>
-        public string accNum
-        {
-            get
-            {
-                return this.accNumField;
-            }
-            set
-            {
-                this.accNumField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public string accNum
+    //    {
+    //        get
+    //        {
+    //            return this.accNumField;
+    //        }
+    //        set
+    //        {
+    //            this.accNumField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public string routingNum
-        {
-            get
-            {
-                return this.routingNumField;
-            }
-            set
-            {
-                this.routingNumField = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    public string routingNum
+    //    {
+    //        get
+    //        {
+    //            return this.routingNumField;
+    //        }
+    //        set
+    //        {
+    //            this.routingNumField = value;
+    //        }
+    //    }
+    //}
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
-    public enum ItemChoiceType
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
+    //public enum ItemChoiceType
+    //{
 
-        /// <remarks/>
-        accountNumber,
+    //    /// <remarks/>
+    //    accountNumber,
 
-        /// <remarks/>
-        echeckForToken,
+    //    /// <remarks/>
+    //    echeckForToken,
 
-        /// <remarks/>
-        paypageRegistrationId,
-    }
+    //    /// <remarks/>
+    //    paypageRegistrationId,
+    //}
 
     ///// <remarks/>
     //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]

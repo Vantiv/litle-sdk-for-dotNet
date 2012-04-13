@@ -20,6 +20,7 @@ namespace LitleSdkForNet
         public echeckCredit echeckCredit;
         public echeckVerification echeckVerification;
         public echeckSale echeckSale;
+        public registerTokenRequestType registerTokenRequest;
 
         public string Serialize()
         {
@@ -35,6 +36,7 @@ namespace LitleSdkForNet
             else if (echeckCredit != null) xml += echeckCredit.Serialize();
             else if (echeckVerification != null) xml += echeckVerification.Serialize();
             else if (echeckSale != null) xml += echeckSale.Serialize();
+            else if (registerTokenRequest != null) xml += registerTokenRequest.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -675,6 +677,47 @@ namespace LitleSdkForNet
             if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
             else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
             xml += "\r\n</echeckVerification>";
+            return xml;
+        }
+    }
+
+    public partial class registerTokenRequestType : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public string accountNumber;
+        public echeckForTokenType echeckForToken;
+        public string paypageRegistrationId;
+
+        public string Serialize()
+        {
+            string xml = "\r\n<registerTokenRequest";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\"";
+            xml += ">";
+
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            if(accountNumber != null)  xml += "\r\n<accountNumber>" + accountNumber + "</accountNumber>";
+            else if (echeckForToken != null) xml += "\r\n<echeckForToken>" + echeckForToken.Serialize() + "</echeckForToken>";
+            else if (paypageRegistrationId != null) xml += "\r\n<paypageRegistrationId>" + paypageRegistrationId + "</paypageRegistrationId>";
+            xml += "\r\n</registerTokenRequest>";
+            return xml;
+        }
+    }
+
+    public partial class echeckForTokenType
+    {
+        public string accNum;
+        public string routingNum;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (accNum != null) xml += "\r\n<accNum>" + accNum + "</accNum>";
+            if (routingNum != null) xml += "\r\n<routingNum>" + routingNum + "</routingNum>";
             return xml;
         }
     }
