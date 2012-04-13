@@ -19,7 +19,7 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.accountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            StringAssert.AreEqualIgnoringCase("Valid Format", rtokenResponse.message);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.paypageRegistrationId = "1233456789101112";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            StringAssert.AreEqualIgnoringCase("Valid Format", rtokenResponse.message);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.echeckForToken.routingNum = "123476545";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            StringAssert.AreEqualIgnoringCase("Valid Format", rtokenResponse.message);
         }
 
         [Test]
