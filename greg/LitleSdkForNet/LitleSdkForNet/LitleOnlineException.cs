@@ -11,5 +11,10 @@ namespace Litle.Sdk
         {
             
         }
+
+        public LitleOnlineException(string message, Exception e) : base(message, e)
+        {
+
+        }
     }
 }
