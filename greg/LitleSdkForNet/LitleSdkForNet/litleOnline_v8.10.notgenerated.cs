@@ -1151,7 +1151,7 @@ namespace Litle.Sdk
             }
         }
         public string orderId;
-        public string amount;
+        public long amount;
         public orderSourceType orderSource;
         public customerInfo customerInfo;
         public contact billToAddress;
@@ -1315,7 +1315,7 @@ namespace Litle.Sdk
             }
         }
         public string orderId;
-        public string amount;
+        public long amount;
         public orderSourceType orderSource;
         public customerInfo customerInfo;
         public contact billToAddress;
@@ -1469,7 +1469,7 @@ namespace Litle.Sdk
     public partial class forceCapture : transactionTypeWithReportGroup
     {
         public string orderId;
-        public string amount;
+        public long amount;
         public orderSourceType orderSource;
         public contact billToAddress;
         public cardType card;
@@ -1554,7 +1554,7 @@ namespace Litle.Sdk
     {
         public string orderId;
         public authInformation authInformation;
-        public string amount;
+        public long amount;
         public orderSourceType orderSource;
         public contact billToAddress;
         public contact shipToAddress;
@@ -2208,7 +2208,13 @@ namespace Litle.Sdk
     public partial class authReversal : transactionTypeWithReportGroup
     {
         public long litleTxnId;
-        public string amount;
+        private long amountField;
+        private bool amountSet;
+        public long amount
+        {
+            get { return this.amountField; }
+            set { this.amountField = value; amountSet = true; }
+        }
         public string payPalNotes;
         public string actionReason;
 
@@ -2222,9 +2228,9 @@ namespace Litle.Sdk
             }
             xml += " reportGroup=\"" + reportGroup + "\">";
             xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
-            if (amount != null)
+            if (amountSet)
             {
-                xml += "\r\n<amount>" + amount + "</amount>";
+                xml += "\r\n<amount>" + amountField + "</amount>";
             }
             if (payPalNotes != null)
             {
