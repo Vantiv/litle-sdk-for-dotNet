@@ -1,1 +1,82 @@
-This sdk is just being started.  Please do not attempt to use it yet.  If you are interested in hearing about our .Net SDK when it is complete, please email sdksupport@litle.com
+Litle Online .NET SDK
+=====================
+
+About Litle
+------------
+[Litle &amp; Co.](http://www.litle.com) powers the payment processing engines for leading companies that sell directly to consumers through  internet retail, direct response marketing (TV, radio and telephone), and online services. Litle & Co. is the leading, independent authority in card-not-present (CNP) commerce, transaction processing and merchant services.
+
+
+About this SDK
+--------------
+The Litle .NET SDK is a C# implementation of the [Litle &amp; Co.](http://www.litle.com) XML API. This SDK was created to make it as easy as possible to connect and process your payments with Litle.  This SDK utilizes  the HTTPS protocol to securely connect to Litle.  Using the SDK requires coordination with the Litle team in order to be provided with credentials for accessing our systems.
+
+Our .NET SDK supports all of the functionality present in Litle XML v8. Please see the online copy of our XSD for Litle XML to get more details on what is supported by the Litle payments engine.
+
+This SDK is implemented to support the .NET plaform, including C#, VB.NET and Managed C++ and was created by Litle & Co. It is intended use is for online transactions processing utilizing your account on the Litle payments engine.
+
+See LICENSE file for details on using this software.
+
+Source Code available from : https://github.com/LitleCo/litle-sdk-for-dotNet
+
+Please contact [Litle &amp; Co.](http://www.litle.com) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at sdksupport@litle.com
+
+Setup
+-----
+
+1.) To install it, just copy LitleSdkForDotNet.dll into your Visual Studio referernces. 
+
+2.) You can configure it statically by modifying LitleSdkForDotNet.dll.config or at runtime using the LitleOnline(Dictionary) constructor. If you are just trying it out, the username, password and merchant id don't matter, and you should choose the sandbox url at https://www.testlitle.com/sandbox/communicator/online.
+
+3.) Create a c# class similar to:  
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Litle.Sdk;
+
+    class Example
+    {
+[STAThread]
+        public static void Main(String[] args)
+        {
+            LitleOnline litle = new LitleOnline();
+            sale sale = new sale();
+            sale.orderId = "1";
+            sale.amount = 10010;
+            sale.orderSource = orderSourceType.ecommerce;
+            contact contact = new contact();
+            contact.name = "John Smith";
+            contact.addressLine1 = "1 Main St.";
+            contact.city = "Burlington";
+            contact.state = "MA";
+            contact.zip = "01803-3747";
+            contact.country = countryTypeEnum.US;
+            sale.billToAddress = contact;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4457010000000009";
+            card.expDate = "0112";
+            card.cardValidationNum = "349";
+            sale.card = card;
+
+            saleResponse response = litle.Sale(sale);
+            //Display Results
+            Console.WriteLine("Response: " + response.response);
+            Console.WriteLine("Message: " + response.message);
+            Console.WriteLine("Litle Transaction Id: " + response.litleTxnId);
+            Console.ReadLine();
+        }
+    }
+
+```
+
+4) Compile and run this file.  You should see the following result:
+
+    Response: 000
+    Message: Approved
+    Litle Transaction ID: <your-numeric-litle-txn-id>
+
+
+Please contact Litle & Co. with any further questions.   You can reach us at sdksupport@litle.com.
