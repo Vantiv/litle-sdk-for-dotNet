@@ -49,7 +49,7 @@ namespace Litle.Sdk.Test.Functional
             DateTime authDate = new DateTime(2002, 10, 9);
             authInfo.authDate = authDate;
             authInfo.authCode = "543216";
-            authInfo.authAmount = "12345L";
+            authInfo.authAmount = "12345";
             capturegivenauth.authInformation = authInfo;
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardTokenType cardtoken = new cardTokenType();

@@ -1,49 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" total="14" errors="1" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-13" time="10:39:00">
+<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" total="4" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-13" time="11:05:38">
   <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.3625" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet" machine-name="VM-GDAKE" user="gdake" user-domain="LITLE" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" executed="False" result="Cancelled">
+  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.sln" executed="True" result="Success" success="True" time="4.609" asserts="0">
     <results>
-      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForDotNet.dll" executed="True" result="Inconclusive" success="False" time="0.000" asserts="0" />
-      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForDotNetTest.exe" executed="False" result="Cancelled">
+      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForDotNetTest.exe" executed="True" result="Success" success="True" time="4.578" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Litle" executed="False" result="Cancelled">
+          <test-suite type="Namespace" name="Litle" executed="True" result="Success" success="True" time="4.578" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Sdk" executed="False" result="Cancelled">
+              <test-suite type="Namespace" name="Sdk" executed="True" result="Success" success="True" time="4.578" asserts="0">
                 <results>
-                  <test-suite type="Namespace" name="Test" executed="False" result="Cancelled">
+                  <test-suite type="Namespace" name="Test" executed="True" result="Success" success="True" time="4.578" asserts="0">
                     <results>
-                      <test-suite type="Namespace" name="Certification" executed="False" result="Cancelled">
+                      <test-suite type="Namespace" name="Functional" executed="True" result="Success" success="True" time="4.578" asserts="0">
                         <results>
-                          <test-suite type="TestFixture" name="TestCert1Base" executed="False" result="Cancelled">
+                          <test-suite type="TestFixture" name="TestCaptureGivenAuth" executed="True" result="Success" success="True" time="4.578" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test10" executed="True" result="Success" success="True" time="2.969" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test11" executed="True" result="Success" success="True" time="0.516" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test12" executed="True" result="Success" success="True" time="0.469" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test13" executed="True" result="Success" success="True" time="0.500" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.Test1Auth" executed="True" result="Success" success="True" time="1.938" asserts="11" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.Test1AVS" executed="True" result="Success" success="True" time="0.469" asserts="5" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test1Sale" executed="True" result="Success" success="True" time="1.375" asserts="9" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test2Auth" executed="True" result="Success" success="True" time="1.922" asserts="11" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test2AVS" executed="True" result="Success" success="True" time="0.500" asserts="5" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test2Sale" executed="True" result="Success" success="True" time="1.375" asserts="9" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3Auth" executed="True" result="Success" success="True" time="1.859" asserts="11" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3AVS" executed="True" result="Success" success="True" time="0.500" asserts="5" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3Sale" executed="True" result="Success" success="True" time="1.391" asserts="9" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test4Auth" executed="False" result="Cancelled">
-                                <failure>
-                                  <message><![CDATA[Test cancelled by user]]></message>
-                                  <stack-trace><![CDATA[at System.RuntimeMethodHandle._InvokeMethodFast(IRuntimeMethodInfo method, Object target, Object[] arguments, SignatureStruct& sig, MethodAttributes methodAttributes, RuntimeType typeOwner)
-at System.RuntimeMethodHandle.InvokeMethodFast(IRuntimeMethodInfo method, Object target, Object[] arguments, Signature sig, MethodAttributes methodAttributes, RuntimeType typeOwner)
-at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture, Boolean skipVisibilityChecks)
-at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
-at NUnit.Core.Reflect.InvokeMethod(MethodInfo method, Object fixture, Object[] args)
-at NUnit.Core.TestMethod.RunTestMethod(TestResult testResult)
-at NUnit.Core.TestMethod.RunTestCase(TestResult testResult)
-]]></stack-trace>
-                                </failure>
-                              </test-case>
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.authInfo" executed="True" result="Success" success="True" time="2.906" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.complexCaptureGivenAuth" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.simpleCaptureGivenAuthWithCard" executed="True" result="Success" success="True" time="0.469" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.simpleCaptureGivenAuthWithToken" executed="True" result="Success" success="True" time="0.500" asserts="1" />
                             </results>
                           </test-suite>
                         </results>

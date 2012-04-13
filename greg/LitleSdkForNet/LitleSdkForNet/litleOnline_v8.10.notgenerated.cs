@@ -156,11 +156,11 @@ namespace Litle.Sdk
             }
             if (dob != null)
             {
-                xml += "\r\n<dob>" + dob + "</dob>";
+                xml += "\r\n<dob>" + XmlUtil.toXsdDate(dob) + "</dob>";
             }
             if (customerRegistrationDate != null)
             {
-                xml += "\r\n<customerRegistrationDate>" + customerRegistrationDate + "</customerRegistrationDate>";
+                xml += "\r\n<customerRegistrationDate>" + XmlUtil.toXsdDate(customerRegistrationDate) + "</customerRegistrationDate>";
             }
             if (customerTypeSet)
             {
@@ -323,7 +323,7 @@ namespace Litle.Sdk
             if (destinationPostalCode != null) xml += "\r\n<destinationPostalCode>" + destinationPostalCode + "</destinationPostalCode>";
             if (destinationCountryCodeSet) xml += "\r\n<destinationCountryCode>" + destinationCountryCodeField + "</destinationCountryCode>";
             if (invoiceReferenceNumber != null) xml += "\r\n<invoiceReferenceNumber>" + invoiceReferenceNumber + "</invoiceReferenceNumber>";
-            if (orderDate != null) xml += "\r\n<orderDate>" + orderDate + "</orderDate>";
+            if (orderDate != null) xml += "\r\n<orderDate>" + XmlUtil.toXsdDate(orderDate) + "</orderDate>";
             foreach (detailTax detailTax in detailTaxes) {
                 xml += "\r\n<detailTax>" + detailTax.Serialize() + "\r\n</detailTax>";
             }
@@ -1618,6 +1618,19 @@ namespace Litle.Sdk
         }
     }
 
+    public partial class fraudResult
+    {
+        public string Serialize()
+        {
+            string xml = "";
+            if (avsResult != null) xml += "\r\n<avsResult>" + avsResult + "</avsResult>";
+            if (cardValidationResult != null) xml += "\r\n<cardValidationResult>" + cardValidationResult + "</cardValidationResult>";
+            if (authenticationResult != null) xml += "\r\n<authenticationResult>" + authenticationResult + "</authenticationResult>";
+            if (advancedAVSResult != null) xml += "\r\n<advancedAVSResult>" + advancedAVSResult + "</advancedAVSResult>";
+            return xml;
+        }
+    }
+
     public partial class authInformation
     {
         public DateTime authDate;
@@ -1628,11 +1641,30 @@ namespace Litle.Sdk
         public string Serialize()
         {
             string xml = "";
-            if (authDate != null) xml += "\r\n<authDate>" + authDate + "</authDate>";
+            if (authDate != null) xml += "\r\n<authDate>" + XmlUtil.toXsdDate(authDate) + "</authDate>";
             if (authCode != null) xml += "\r\n<authCode>" + authCode + "</authCode>";
-            if (fraudResult != null) xml += "\r\n<fraudResult>" + fraudResult + "</fraudResult>";
+            if (fraudResult != null) xml += "\r\n<fraudResult>" + fraudResult.Serialize() + "</fraudResult>";
             if (authAmount != null) xml += "\r\n<authAmount>" + authAmount + "</authAmount>";
             return xml;
+        }
+    }
+
+    public class XmlUtil
+    {
+        public static string toXsdDate(DateTime dateTime)
+        {
+            string year = dateTime.Year.ToString();
+            string month = dateTime.Month.ToString();
+            if (dateTime.Month < 10)
+            {
+                month = "0" + month;
+            }
+            string day = dateTime.Day.ToString();
+            if (dateTime.Day < 10)
+            {
+                day = "0" + day;
+            }
+            return year + "-" + month + "-" + day;
         }
     }
 
