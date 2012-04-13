@@ -1,33 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" total="1" errors="1" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-12" time="19:31:57">
+<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-13" time="03:03:38">
   <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.3625" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet" machine-name="VM-GDAKE" user="gdake" user-domain="LITLE" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" executed="True" result="Failure" success="False" time="5.438" asserts="0">
+  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" executed="True" result="Success" success="True" time="4.781" asserts="0">
     <results>
-      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.exe" executed="True" result="Failure" success="False" time="5.438" asserts="0">
+      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Release\LitleSdkForNetTest.exe" executed="True" result="Success" success="True" time="4.781" asserts="0">
         <results>
-          <test-suite type="Namespace" name="LitleSdkForNetTest" executed="True" result="Failure" success="False" time="5.438" asserts="0">
+          <test-suite type="Namespace" name="LitleSdkForNetTest" executed="True" result="Success" success="True" time="4.781" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Certification" executed="True" result="Failure" success="False" time="5.438" asserts="0">
+              <test-suite type="Namespace" name="Certification" executed="True" result="Success" success="True" time="4.766" asserts="0">
                 <results>
-                  <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Failure" success="False" time="5.375" asserts="0">
+                  <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Success" success="True" time="4.766" asserts="0">
                     <results>
-                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.Test1Auth" executed="True" result="Error" success="False" time="5.109" asserts="7">
-                        <failure>
-                          <message><![CDATA[System.InvalidOperationException : There is an error in XML document (1, 2).
-  ----> System.InvalidOperationException : <litleOnlineResponse xmlns=''> was not expected.]]></message>
-                          <stack-trace><![CDATA[at System.Xml.Serialization.XmlSerializer.Deserialize(XmlReader xmlReader, String encodingStyle, XmlDeserializationEvents events)
-at System.Xml.Serialization.XmlSerializer.Deserialize(TextReader textReader)
-at LitleSdkForNet.LitleOnline.DeserializeObject(String response) in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\LitleOnline.cs:line 240
-at LitleSdkForNet.LitleOnline.sendToLitle(litleOnlineRequest request) in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\LitleOnline.cs:line 218
-at LitleSdkForNet.LitleOnline.Credit(credit credit) in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\LitleOnline.cs:line 107
-at LitleSdkForNetTest.Certification.TestCert1Base.Test1Auth() in C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\Certification\TestCert1Base.cs:line 58
---InvalidOperationException
-at Microsoft.Xml.Serialization.GeneratedAssembly.XmlSerializationReaderlitleOnlineResponse.Read43_litleOnlineResponse()
-]]></stack-trace>
-                        </failure>
-                      </test-case>
+                      <test-case name="LitleSdkForNetTest.Certification.TestCert1Base.Test1Auth" executed="True" result="Success" success="True" time="4.547" asserts="11" />
                     </results>
                   </test-suite>
                 </results>

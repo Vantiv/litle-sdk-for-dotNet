@@ -34,7 +34,7 @@ namespace LitleSdkForNetTest.Certification
             contact.zip = "01803-3747";
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
-            cardType card = new cardType();
+            cardType card = new cardType();            
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4457010000000009";
             card.expDate = "0112";
@@ -61,10 +61,9 @@ namespace LitleSdkForNetTest.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-
-            @void newvoid = new @void(); //TODO - Can we change this class name?
+            voidTxn newvoid = new voidTxn(); 
             newvoid.litleTxnId = creditResponse.litleTxnId;
-            litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid); //TODO - Can we change this class name too?
+            litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
