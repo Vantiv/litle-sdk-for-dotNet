@@ -24,7 +24,7 @@ namespace Litle.Sdk.Test.Functional
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
-            authorization.amount = "106";
+            authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -45,7 +45,7 @@ namespace Litle.Sdk.Test.Functional
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
             authorization.orderId = "123456";
-            authorization.amount = "106";
+            authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             payPal paypal = new payPal();
             paypal.payerId = "1234";
@@ -66,7 +66,7 @@ namespace Litle.Sdk.Test.Functional
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
-            authorization.amount = "106";
+            authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             pos pos = new pos();
             pos.cardholderId = posCardholderIdTypeEnum.pin;

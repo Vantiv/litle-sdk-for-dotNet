@@ -23,7 +23,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "32";
-            auth.amount = "10010";
+            auth.amount = 10010;
             auth.orderSource = orderSourceType.ecommerce;
             contact billToAddress = new contact();
             billToAddress.name = "John Smith";
@@ -66,7 +66,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "33";
-            auth.amount = "20020";
+            auth.amount = 20020;
             auth.orderSource = orderSourceType.ecommerce;
             contact billToAddress = new contact();
             billToAddress.name = "Mike J. Hammer";
@@ -106,7 +106,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "34";
-            auth.amount = "30030";
+            auth.amount = 30030;
             auth.orderSource = orderSourceType.ecommerce;
             contact billToAddress = new contact();
             billToAddress.name = "Eileen Jones";
@@ -142,7 +142,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "35";
-            auth.amount = "40040";
+            auth.amount = 40040;
             auth.orderSource = orderSourceType.ecommerce;
             contact billToAddress = new contact();
             billToAddress.name = "Bob Black";
@@ -173,7 +173,7 @@ namespace Litle.Sdk.Test.Certification
 
             authReversal reversal = new authReversal();
             reversal.litleTxnId = authorizeResponse.litleTxnId;
-            reversal.amount = "20020";
+            reversal.amount = 20020;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
             Assert.AreEqual("000", reversalResponse.response);
             Assert.AreEqual("Approved", reversalResponse.message);
@@ -184,7 +184,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "36";
-            auth.amount = "20500";
+            auth.amount = 20500;
             auth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.number = "375000026600004";
@@ -198,7 +198,7 @@ namespace Litle.Sdk.Test.Certification
 
             authReversal reversal = new authReversal();
             reversal.litleTxnId = authorizeResponse.litleTxnId;
-            reversal.amount = "10000";
+            reversal.amount = 10000;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
             Assert.AreEqual("336", reversalResponse.response);
             Assert.AreEqual("Reversal Amount does not match Authorization amount", reversalResponse.message);

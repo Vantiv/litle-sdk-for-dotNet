@@ -24,7 +24,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "14";
-            authorization.amount = "3000";
+            authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -46,7 +46,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "15";
-            authorization.amount = "3000";
+            authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -68,7 +68,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "16";
-            authorization.amount = "3000";
+            authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -90,7 +90,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "17";
-            authorization.amount = "3000";
+            authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -112,7 +112,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "18";
-            authorization.amount = "3000";
+            authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -134,7 +134,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "19";
-            authorization.amount = "3000";
+            authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -156,7 +156,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "20";
-            authorization.amount = "3000";
+            authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -178,7 +178,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "21";
-            authorization.amount = "5000";
+            authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -197,7 +197,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "22";
-            authorization.amount = "5000";
+            authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -216,7 +216,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "23";
-            authorization.amount = "5000";
+            authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -236,7 +236,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "24";
-            authorization.amount = "5000";
+            authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -256,7 +256,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "25";
-            authorization.amount = "5000";
+            authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -276,7 +276,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "26";
-            authorization.amount = "18698";
+            authorization.amount = 18698;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -301,7 +301,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "27";
-            authorization.amount = "18698";
+            authorization.amount = 18698;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -327,7 +327,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "28";
-            authorization.amount = "15000";
+            authorization.amount = 15000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -353,7 +353,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "29";
-            authorization.amount = "18699";
+            authorization.amount = 18699;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -382,7 +382,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "30";
-            authorization.amount = "20000";
+            authorization.amount = 20000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -411,7 +411,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "31";
-            authorization.amount = "25000";
+            authorization.amount = 25000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;

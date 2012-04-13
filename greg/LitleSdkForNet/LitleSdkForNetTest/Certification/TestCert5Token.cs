@@ -98,7 +98,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "55";
-            auth.amount = "15000";
+            auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.number = "5435101234510196";
@@ -121,7 +121,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "56";
-            auth.amount = "15000";
+            auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.number = "5435109999999999";
@@ -140,7 +140,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "57";
-            auth.amount = "15000";
+            auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.number = "5435101234510196";
@@ -163,7 +163,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "59";
-            auth.amount = "15000";
+            auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
             cardTokenType token = new cardTokenType();
             token.litleToken = "1712990000040196";
@@ -180,7 +180,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization auth = new authorization();
             auth.orderId = "60";
-            auth.amount = "15000";
+            auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
             cardTokenType token = new cardTokenType();
             token.litleToken = "1712999999999999";

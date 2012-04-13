@@ -23,7 +23,7 @@ namespace Litle.Sdk.Test.Functional
         {
             authReversal reversal = new authReversal();
             reversal.litleTxnId = 12345678000L;
-            reversal.amount = "106";
+            reversal.amount = 106;
             reversal.payPalNotes = "Notes";
 
             authReversalResponse response = litle.AuthReversal(reversal);

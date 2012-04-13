@@ -22,7 +22,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleCaptureGivenAuthWithCard() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = "106";
+            capturegivenauth.amount = 106;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
             DateTime authDate = new DateTime(2002, 10, 9);
@@ -43,7 +43,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleCaptureGivenAuthWithToken() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = "106";
+            capturegivenauth.amount = 106;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
             DateTime authDate = new DateTime(2002, 10, 9);
@@ -65,7 +65,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void complexCaptureGivenAuth() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = "106";
+            capturegivenauth.amount = 106;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
             DateTime authDate = new DateTime(2002, 10, 9);
@@ -95,7 +95,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void authInfo() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = "106";
+            capturegivenauth.amount = 106;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
             DateTime authDate = new DateTime(2002, 10, 9);

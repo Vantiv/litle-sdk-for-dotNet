@@ -24,7 +24,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "1";
-            authorization.amount = "10010";
+            authorization.amount = 10010;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "John Smith";
@@ -73,7 +73,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "1";
-            authorization.amount = "0";
+            authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "John Smith";
@@ -103,7 +103,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "1";
-            sale.amount = "10010";
+            sale.amount = 10010;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "John Smith";
@@ -146,7 +146,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "2";
-            authorization.amount = "20020";
+            authorization.amount = 20020;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Mike J. Hammer";
@@ -198,7 +198,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "2";
-            authorization.amount = "0";
+            authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Mike J. Hammer";
@@ -233,7 +233,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "2";
-            sale.amount = "20020";
+            sale.amount = 20020;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Mike J. Hammer";
@@ -279,7 +279,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "3";
-            authorization.amount = "30030";
+            authorization.amount = 30030;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Eileen Jones";
@@ -327,7 +327,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "3";
-            authorization.amount = "0";
+            authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Eileen Jones";
@@ -358,7 +358,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "3";
-            sale.amount = "30030";
+            sale.amount = 30030;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Eileen Jones";
@@ -400,7 +400,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "4";
-            authorization.amount = "40040";
+            authorization.amount = 40040;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Bob Black";
@@ -447,7 +447,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "4";
-            authorization.amount = "0";
+            authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Bob Black";
@@ -476,7 +476,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "4";
-            sale.amount = "40040";
+            sale.amount = 40040;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Bob Black";
@@ -517,7 +517,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "5";
-            authorization.amount = "50050";
+            authorization.amount = 50050;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -560,7 +560,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "5";
-            authorization.amount = "0";
+            authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -585,7 +585,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "5";
-            sale.amount = "50050";
+            sale.amount = 50050;
             sale.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -622,7 +622,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "6";
-            authorization.amount = "60060";
+            authorization.amount = 60060;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Joe Green";
@@ -651,7 +651,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "6";
-            sale.amount = "60060";
+            sale.amount = 60060;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Joe Green";
@@ -686,7 +686,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "7";
-            authorization.amount = "70070";
+            authorization.amount = 70070;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Jane Murray";
@@ -715,7 +715,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "7";
-            authorization.amount = "0";
+            authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Jane Murray";
@@ -744,7 +744,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "7";
-            sale.amount = "70070";
+            sale.amount = 70070;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Jane Murray";
@@ -773,7 +773,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "8";
-            authorization.amount = "80080";
+            authorization.amount = 80080;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Mark Johnson";
@@ -802,7 +802,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "8";
-            authorization.amount = "0";
+            authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Mark Johnson";
@@ -831,7 +831,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "8";
-            sale.amount = "80080";
+            sale.amount = 80080;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "Mark Johnson";
@@ -860,7 +860,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "9";
-            authorization.amount = "90090";
+            authorization.amount = 90090;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "James Miller";
@@ -888,7 +888,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "9";
-            authorization.amount = "0";
+            authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "James Miller";
@@ -916,7 +916,7 @@ namespace Litle.Sdk.Test.Certification
         {
             sale sale = new sale();
             sale.orderId = "9";
-            sale.amount = "90090";
+            sale.amount = 90090;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "James Miller";
@@ -944,7 +944,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "10";
-            authorization.amount = "40000";
+            authorization.amount = 40000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
@@ -964,7 +964,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "11";
-            authorization.amount = "60000";
+            authorization.amount = 60000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.MC;
@@ -984,7 +984,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "12";
-            authorization.amount = "50000";
+            authorization.amount = 50000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.AX;
@@ -1004,7 +1004,7 @@ namespace Litle.Sdk.Test.Certification
         {
             authorization authorization = new authorization();
             authorization.orderId = "13";
-            authorization.amount = "15000";
+            authorization.amount = 15000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.DI;

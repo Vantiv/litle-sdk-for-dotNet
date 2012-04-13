@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Functional
         {
             LitleOnline lOnlineObj = new LitleOnline();
             sale saleObj = new sale();
-            saleObj.amount = "106";
+            saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
             saleObj.orderSource = orderSourceType.ecommerce;
@@ -60,7 +60,7 @@ namespace Litle.Sdk.Test.Functional
         {
             LitleOnline lOnlineObj = new LitleOnline();
             sale saleObj = new sale();
-            saleObj.amount = "106";
+            saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
             saleObj.orderSource = orderSourceType.ecommerce;

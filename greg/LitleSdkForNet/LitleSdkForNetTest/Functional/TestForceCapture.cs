@@ -22,7 +22,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleForceCaptureWithCard() {
             forceCapture forcecapture = new forceCapture();
-            forcecapture.amount = "106";
+            forcecapture.amount = 106;
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
@@ -37,7 +37,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleForceCaptureWithToken() {
             forceCapture forcecapture = new forceCapture();
-            forcecapture.amount = "106";
+            forcecapture.amount = 106;
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
             cardTokenType token = new cardTokenType();
