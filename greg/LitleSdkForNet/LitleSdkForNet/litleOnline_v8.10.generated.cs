@@ -4585,78 +4585,78 @@ namespace Litle.Sdk
     //    }
     //}
 
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class authInformation
-    {
+    ///// <remarks/>
+    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    //[System.SerializableAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.ComponentModel.DesignerCategoryAttribute("code")]
+    //[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    //[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    //public partial class authInformation
+    //{
 
-        private System.DateTime authDateField;
+    //    private System.DateTime authDateField;
 
-        private string authCodeField;
+    //    private string authCodeField;
 
-        private fraudResult fraudResultField;
+    //    private fraudResult fraudResultField;
 
-        private string authAmountField;
+    //    private string authAmountField;
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-        public System.DateTime authDate
-        {
-            get
-            {
-                return this.authDateField;
-            }
-            set
-            {
-                this.authDateField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
+    //    public System.DateTime authDate
+    //    {
+    //        get
+    //        {
+    //            return this.authDateField;
+    //        }
+    //        set
+    //        {
+    //            this.authDateField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public string authCode
-        {
-            get
-            {
-                return this.authCodeField;
-            }
-            set
-            {
-                this.authCodeField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public string authCode
+    //    {
+    //        get
+    //        {
+    //            return this.authCodeField;
+    //        }
+    //        set
+    //        {
+    //            this.authCodeField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        public fraudResult fraudResult
-        {
-            get
-            {
-                return this.fraudResultField;
-            }
-            set
-            {
-                this.fraudResultField = value;
-            }
-        }
+    //    /// <remarks/>
+    //    public fraudResult fraudResult
+    //    {
+    //        get
+    //        {
+    //            return this.fraudResultField;
+    //        }
+    //        set
+    //        {
+    //            this.fraudResultField = value;
+    //        }
+    //    }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-        public string authAmount
-        {
-            get
-            {
-                return this.authAmountField;
-            }
-            set
-            {
-                this.authAmountField = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+    //    public string authAmount
+    //    {
+    //        get
+    //        {
+    //            return this.authAmountField;
+    //        }
+    //        set
+    //        {
+    //            this.authAmountField = value;
+    //        }
+    //    }
+    //}
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
