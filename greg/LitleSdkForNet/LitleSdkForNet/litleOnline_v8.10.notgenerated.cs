@@ -695,7 +695,7 @@ namespace Litle.Sdk
             xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
             if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
             if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
-            else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
+            else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
             xml += "\r\n</echeckVerification>";
             return xml;
         }

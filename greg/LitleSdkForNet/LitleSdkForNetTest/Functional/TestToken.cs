@@ -59,8 +59,15 @@ namespace Litle.Sdk.Test.Functional
             echeckObj.routingNum = "123476545";
             registerTokenRequest.echeckForToken = echeckObj;
             registerTokenRequest.reportGroup = "Planets";
-            registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-            StringAssert.Contains("Error validating xml data against the schema", rtokenResponse.message);
+            try
+            {
+                //expected exception;
+                registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
+            }
+            catch (LitleOnlineException e)
+            {
+                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+            }
         }
             
     }
