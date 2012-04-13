@@ -23,6 +23,7 @@ namespace Litle.Sdk
         public registerTokenRequestType registerTokenRequest;
         public forceCapture forceCapture;
         public captureGivenAuth captureGivenAuth;
+        public echeckRedeposit echeckRedeposit;
 
         public string Serialize()
         {
@@ -41,6 +42,7 @@ namespace Litle.Sdk
             else if (registerTokenRequest != null) xml += registerTokenRequest.Serialize();
             else if (forceCapture != null) xml += forceCapture.Serialize();
             else if (captureGivenAuth != null) xml += captureGivenAuth.Serialize();
+            else if (echeckRedeposit != null) xml += echeckRedeposit.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -1104,6 +1106,29 @@ namespace Litle.Sdk
         {
             string xml = "";
             if (bypassVelocityCheckSet) xml += "\r\n<bypassVelocityCheck>" + bypassVelocityCheckField.ToString().ToLower() + "</bypassVelocityCheck>";
+            return xml;
+        }
+    }
+
+    public partial class echeckRedeposit : baseRequestTransactionEcheckRedeposit
+    {
+        //litleTxnIdField and set are in super
+        public echeckType echeck;
+        public echeckTokenType token;
+
+        public string Serialize()
+        {
+            string xml = "\r\n<echeckRedeposit";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
+            if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
+            else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
+            xml += "\r\n</echeckRedeposit>";
             return xml;
         }
     }

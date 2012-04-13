@@ -121,16 +121,16 @@ namespace Litle.Sdk
             return echeckCreditResponse;
         }
 
-        //public echeckRedepositResponse EcheckRedeposit(echeckRedeposit echeckRedeposit)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(echeckRedeposit);
-        //    request.echeckRedeposit = echeckRedeposit;
+        public echeckRedepositResponse EcheckRedeposit(echeckRedeposit echeckRedeposit)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(echeckRedeposit);
+            request.echeckRedeposit = echeckRedeposit;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    echeckRedepositResponse echeckRedepositResponse = (echeckRedepositResponse)response.Item;
-        //    return echeckRedepositResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            echeckRedepositResponse echeckRedepositResponse = (echeckRedepositResponse)response.Item;
+            return echeckRedepositResponse;
+        }
 
         public echeckSalesResponse EcheckSale(echeckSale echeckSale)
         {
@@ -214,12 +214,19 @@ namespace Litle.Sdk
         {
             string xmlRequest = request.Serialize();
             string xmlResponse = communication.HttpPost(xmlRequest,config);
-            litleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);
-            if ("1".Equals(litleOnlineResponse.response))
+            try
             {
-                throw new LitleOnlineException(litleOnlineResponse.message);
+                litleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);
+                if ("1".Equals(litleOnlineResponse.response))
+                {
+                    throw new LitleOnlineException(litleOnlineResponse.message);
+                }
+                return litleOnlineResponse;
             }
-            return litleOnlineResponse;
+            catch (InvalidOperationException ioe)
+            {
+                throw new LitleOnlineException("Error validating xml data against the schema", ioe);
+            }
         }
 
         public static String SerializeObject(litleOnlineRequest req)

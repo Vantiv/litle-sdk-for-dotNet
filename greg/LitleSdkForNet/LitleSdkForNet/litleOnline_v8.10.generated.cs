@@ -5187,7 +5187,8 @@ namespace Litle.Sdk
     public partial class baseRequestTransactionEcheckRedeposit : transactionTypeWithReportGroup
     {
 
-        private long litleTxnIdField;
+        protected long litleTxnIdField;
+        protected bool litleTxnIdSet;
 
         private object itemField;
 
@@ -5201,6 +5202,7 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
+                this.litleTxnIdSet = true;
             }
         }
 
