@@ -155,16 +155,16 @@ namespace LitleSdkForNet
             return echeckVerificationResponse;
         }
 
-        //public forceCaptureResponse ForceCapture(forceCapture forceCapture)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(forceCapture);
-        //    request.forceCapture = forceCapture;
+        public forceCaptureResponse ForceCapture(forceCapture forceCapture)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(forceCapture);
+            request.forceCapture = forceCapture;
 
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)response.Item;
-        //    return forceCaptureResponse;
-        //}
+            litleOnlineResponse response = sendToLitle(request);
+            forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)response.Item;
+            return forceCaptureResponse;
+        }
 
         public saleResponse Sale(sale sale)
         {

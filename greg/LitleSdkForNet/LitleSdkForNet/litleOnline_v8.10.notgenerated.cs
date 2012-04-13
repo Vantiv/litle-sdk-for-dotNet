@@ -21,6 +21,7 @@ namespace LitleSdkForNet
         public echeckVerification echeckVerification;
         public echeckSale echeckSale;
         public registerTokenRequestType registerTokenRequest;
+        public forceCapture forceCapture;
 
         public string Serialize()
         {
@@ -37,6 +38,7 @@ namespace LitleSdkForNet
             else if (echeckVerification != null) xml += echeckVerification.Serialize();
             else if (echeckSale != null) xml += echeckSale.Serialize();
             else if (registerTokenRequest != null) xml += registerTokenRequest.Serialize();
+            else if (forceCapture != null) xml += forceCapture.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -1371,7 +1373,7 @@ namespace LitleSdkForNet
             {
                 xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
             }
-            if (taxTypeSet != null)
+            if (taxTypeSet)
             {
                 xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
             }
@@ -1419,6 +1421,89 @@ namespace LitleSdkForNet
         }
     }
 
+    public partial class forceCapture : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public string amount;
+        public orderSourceType orderSource;
+        public contact billToAddress;
+        public cardType card;
+        public cardTokenType token;
+        public cardPaypageType paypage;
+        public customBilling customBilling;
+        private govtTaxTypeEnum taxTypeField;
+        private bool taxTypeSet;
+        public govtTaxTypeEnum taxType
+        {
+            get { return this.taxTypeField; }
+            set { this.taxTypeField = value; this.taxTypeSet = true; }
+        }
+        public enhancedData enhancedData;
+        public processingInstructions processingInstructions;
+        public pos pos;
+        public amexAggregatorData amexAggregatorData;
+        public merchantDataType merchantData;
+
+        public String Serialize()
+        {
+            string xml = "\r\n<forceCapture";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+            if (billToAddress != null)
+            {
+                xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
+            }
+            if (card != null)
+            {
+                xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            }
+            else if (token != null)
+            {
+                xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+            }
+            else if (paypage != null)
+            {
+                xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+            }
+            if (customBilling != null)
+            {
+                xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+            }
+            if (taxTypeSet)
+            {
+                xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
+            }
+            if (enhancedData != null)
+            {
+                xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
+            }
+            if (processingInstructions != null)
+            {
+                xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+            }
+            if (pos != null)
+            {
+                xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
+            }
+            if (amexAggregatorData != null)
+            {
+                xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
+            }
+            if (merchantData != null)
+            {
+                xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
+            }
+            xml += "\r\n</forceCapture>";
+            return xml;
+        }
+    }
     public partial class recyclingRequestType
     {
         private recycleByTypeEnum recycleByField;
