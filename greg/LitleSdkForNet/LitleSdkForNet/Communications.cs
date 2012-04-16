@@ -23,9 +23,12 @@ namespace Litle.Sdk
             }
             req.ContentType = "text/xml";
             req.Method = "POST";
-            WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
-            myproxy.BypassProxyOnLocal = true;
-            req.Proxy = myproxy;
+            if (config.ContainsKey("proxyHost") && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"].Length > 0)
+            {
+                WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
+                myproxy.BypassProxyOnLocal = true;
+                req.Proxy = myproxy;
+            }
             req.ContentLength = bytes.Length;            
 
             System.IO.Stream os = req.GetRequestStream();
