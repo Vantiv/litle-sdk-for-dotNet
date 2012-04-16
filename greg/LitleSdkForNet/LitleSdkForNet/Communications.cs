@@ -12,7 +12,7 @@ namespace Litle.Sdk
 {
     public class Communications
     {
-        public string HttpPost(string xmlRequest, Dictionary<String,String> config)
+        virtual public string HttpPost(string xmlRequest, Dictionary<String,String> config)
         {
             string uri = config["url"];
             byte[] bytes = System.Text.Encoding.ASCII.GetBytes(xmlRequest); // get raw bytes to be sent

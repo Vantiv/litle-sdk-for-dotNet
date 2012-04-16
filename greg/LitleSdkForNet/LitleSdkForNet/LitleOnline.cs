@@ -55,6 +55,11 @@ namespace Litle.Sdk
             communication = new Communications();
         }
 
+        public void setCommunication(Communications communication)
+        {
+            this.communication = communication;
+        }
+
         public authorizationResponse Authorize(authorization auth)
         {
             litleOnlineRequest request = createLitleOnlineRequest();          
@@ -213,6 +218,7 @@ namespace Litle.Sdk
         private litleOnlineResponse sendToLitle(litleOnlineRequest request)
         {
             string xmlRequest = request.Serialize();
+            Console.WriteLine(xmlRequest);
             string xmlResponse = communication.HttpPost(xmlRequest,config);
             try
             {
