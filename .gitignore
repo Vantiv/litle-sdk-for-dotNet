@@ -11,5 +11,9 @@ Project/GenerateCode/obj/Debug
 greg/LitleSdkForNet/LitleSdkForNet/bin
 greg/LitleSdkForNet/LitleSdkForNet/obj
 greg/LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNetTest.exe
+greg/LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNetTest.pdb
 greg/LitleSdkForNet/LitleSdkForNetTest/bin/Release/LitleSdkForDotNet.pdb
+greg/LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNet.pdb
+greg/LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNet.dll
 greg/LitleSdkForNet/LitleSdkForNetTest/obj
+greg/LitleSdkForNet/LitleSdkForNet/obj/Release/LitleSdkForNet.csproj.FileListAbsolute.txt
