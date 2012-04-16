@@ -1,5 +1,5 @@
 # git ignore file
-Project.sln
+Project
 Project.suo
 Project/TestTransaction2.csproj 	
 Project/TestTransaction2.csproj.user
