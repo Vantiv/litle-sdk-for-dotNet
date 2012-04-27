@@ -18,7 +18,7 @@
       <Value Profile="(Default)">false</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">8.10</Value>
+      <Value Profile="(Default)">8.12</Value>
     </Setting>
     <Setting Name="timeout" Type="System.String" Scope="User">
       <Value Profile="(Default)">65</Value>

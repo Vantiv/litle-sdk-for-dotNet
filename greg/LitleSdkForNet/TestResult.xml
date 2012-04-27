@@ -1,157 +1,157 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" total="131" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-27" time="18:14:58">
+<test-results name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" total="132" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-04-27" time="18:28:22">
   <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.3625" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet" machine-name="VM-GDAKE" user="gdake" user-domain="LITLE" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" executed="True" result="Success" success="True" time="69.157" asserts="0">
+  <test-suite type="Project" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet.nunit" executed="True" result="Success" success="True" time="72.829" asserts="0">
     <results>
       <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForDotNet.dll" executed="True" result="Inconclusive" success="False" time="0.000" asserts="0" />
-      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForDotNetTest.exe" executed="True" result="Success" success="True" time="69.157" asserts="0">
+      <test-suite type="Assembly" name="C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForDotNetTest.exe" executed="True" result="Success" success="True" time="72.782" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Litle" executed="True" result="Success" success="True" time="69.126" asserts="0">
+          <test-suite type="Namespace" name="Litle" executed="True" result="Success" success="True" time="72.767" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Sdk" executed="True" result="Success" success="True" time="69.110" asserts="0">
+              <test-suite type="Namespace" name="Sdk" executed="True" result="Success" success="True" time="72.751" asserts="0">
                 <results>
-                  <test-suite type="Namespace" name="Test" executed="True" result="Success" success="True" time="69.095" asserts="0">
+                  <test-suite type="Namespace" name="Test" executed="True" result="Success" success="True" time="72.735" asserts="0">
                     <results>
-                      <test-suite type="Namespace" name="Certification" executed="True" result="Success" success="True" time="52.719" asserts="0">
+                      <test-suite type="Namespace" name="Certification" executed="True" result="Success" success="True" time="55.188" asserts="0">
                         <results>
-                          <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Success" success="True" time="26.672" asserts="0">
+                          <test-suite type="TestFixture" name="TestCert1Base" executed="True" result="Success" success="True" time="28.672" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test10" executed="True" result="Success" success="True" time="1.156" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test11" executed="True" result="Success" success="True" time="0.516" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test12" executed="True" result="Success" success="True" time="0.469" asserts="3" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test10" executed="True" result="Success" success="True" time="3.328" asserts="3" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test11" executed="True" result="Success" success="True" time="0.469" asserts="3" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test12" executed="True" result="Success" success="True" time="0.484" asserts="3" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test13" executed="True" result="Success" success="True" time="0.469" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.Test1Auth" executed="True" result="Success" success="True" time="1.844" asserts="11" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.Test1Auth" executed="True" result="Success" success="True" time="1.781" asserts="11" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.Test1AVS" executed="True" result="Success" success="True" time="0.469" asserts="5" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test1Sale" executed="True" result="Success" success="True" time="1.313" asserts="9" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test2Auth" executed="True" result="Success" success="True" time="1.875" asserts="11" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test2AVS" executed="True" result="Success" success="True" time="0.469" asserts="5" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test1Sale" executed="True" result="Success" success="True" time="1.328" asserts="9" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test2Auth" executed="True" result="Success" success="True" time="1.797" asserts="11" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test2AVS" executed="True" result="Success" success="True" time="0.484" asserts="5" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test2Sale" executed="True" result="Success" success="True" time="1.359" asserts="9" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3Auth" executed="True" result="Success" success="True" time="1.891" asserts="11" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3AVS" executed="True" result="Success" success="True" time="0.516" asserts="5" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3Sale" executed="True" result="Success" success="True" time="1.375" asserts="9" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test4Auth" executed="True" result="Success" success="True" time="1.828" asserts="10" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test4AVS" executed="True" result="Success" success="True" time="0.563" asserts="4" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test4Sale" executed="True" result="Success" success="True" time="1.313" asserts="8" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test5Auth" executed="True" result="Success" success="True" time="1.766" asserts="11" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3Auth" executed="True" result="Success" success="True" time="1.813" asserts="11" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3AVS" executed="True" result="Success" success="True" time="0.469" asserts="5" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test3Sale" executed="True" result="Success" success="True" time="1.359" asserts="9" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test4Auth" executed="True" result="Success" success="True" time="1.813" asserts="10" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test4AVS" executed="True" result="Success" success="True" time="0.453" asserts="4" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test4Sale" executed="True" result="Success" success="True" time="1.438" asserts="8" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test5Auth" executed="True" result="Success" success="True" time="1.813" asserts="11" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test5AVS" executed="True" result="Success" success="True" time="0.453" asserts="5" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test5Sale" executed="True" result="Success" success="True" time="1.328" asserts="9" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test6Auth" executed="True" result="Success" success="True" time="0.453" asserts="4" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test6Sale" executed="True" result="Success" success="True" time="0.859" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test7Auth" executed="True" result="Success" success="True" time="0.516" asserts="4" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test7AVS" executed="True" result="Success" success="True" time="0.453" asserts="4" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test7Sale" executed="True" result="Success" success="True" time="0.453" asserts="4" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test6Sale" executed="True" result="Success" success="True" time="0.875" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test7Auth" executed="True" result="Success" success="True" time="0.453" asserts="4" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test7AVS" executed="True" result="Success" success="True" time="0.469" asserts="4" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test7Sale" executed="True" result="Success" success="True" time="0.438" asserts="4" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test8Auth" executed="True" result="Success" success="True" time="0.469" asserts="4" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test8AVS" executed="True" result="Success" success="True" time="0.531" asserts="4" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test8AVS" executed="True" result="Success" success="True" time="0.469" asserts="4" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test8Sale" executed="True" result="Success" success="True" time="0.453" asserts="4" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test9Auth" executed="True" result="Success" success="True" time="0.484" asserts="3" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test9Auth" executed="True" result="Success" success="True" time="0.453" asserts="3" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test9AVS" executed="True" result="Success" success="True" time="0.469" asserts="3" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert1Base.test9Sale" executed="True" result="Success" success="True" time="0.438" asserts="3" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestCert2AuthEnhanced" executed="True" result="Success" success="True" time="8.578" asserts="0">
+                          <test-suite type="TestFixture" name="TestCert2AuthEnhanced" executed="True" result="Success" success="True" time="8.672" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test14" executed="True" result="Success" success="True" time="0.516" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test15" executed="True" result="Success" success="True" time="0.469" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test14" executed="True" result="Success" success="True" time="0.469" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test15" executed="True" result="Success" success="True" time="0.516" asserts="6" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test16" executed="True" result="Success" success="True" time="0.469" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test17" executed="True" result="Success" success="True" time="0.469" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test18" executed="True" result="Success" success="True" time="0.531" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test19" executed="True" result="Success" success="True" time="0.469" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test20" executed="True" result="Success" success="True" time="0.469" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test21" executed="True" result="Success" success="True" time="0.453" asserts="3" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test17" executed="True" result="Success" success="True" time="0.500" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test18" executed="True" result="Success" success="True" time="0.469" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test19" executed="True" result="Success" success="True" time="0.484" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test20" executed="True" result="Success" success="True" time="0.453" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test21" executed="True" result="Success" success="True" time="0.516" asserts="3" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test22" executed="True" result="Success" success="True" time="0.469" asserts="3" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test23" executed="True" result="Success" success="True" time="0.469" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test24" executed="True" result="Success" success="True" time="0.453" asserts="3" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test25" executed="True" result="Success" success="True" time="0.484" asserts="3" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test24" executed="True" result="Success" success="True" time="0.469" asserts="3" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test25" executed="True" result="Success" success="True" time="0.469" asserts="3" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test26" executed="True" result="Success" success="True" time="0.469" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test27" executed="True" result="Success" success="True" time="0.453" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test28" executed="True" result="Success" success="True" time="0.469" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test29" executed="True" result="Success" success="True" time="0.453" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test30" executed="True" result="Success" success="True" time="0.516" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test27" executed="True" result="Success" success="True" time="0.469" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test28" executed="True" result="Success" success="True" time="0.516" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test29" executed="True" result="Success" success="True" time="0.469" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test30" executed="True" result="Success" success="True" time="0.484" asserts="2" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert2AuthEnhanced.test31" executed="True" result="Success" success="True" time="0.453" asserts="3" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestCert3AuthReversal" executed="True" result="Success" success="True" time="5.453" asserts="0">
+                          <test-suite type="TestFixture" name="TestCert3AuthReversal" executed="True" result="Success" success="True" time="5.484" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test32" executed="True" result="Success" success="True" time="1.406" asserts="9" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test32" executed="True" result="Success" success="True" time="1.328" asserts="9" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test33" executed="True" result="Success" success="True" time="0.922" asserts="7" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test34" executed="True" result="Success" success="True" time="0.906" asserts="7" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test35" executed="True" result="Success" success="True" time="1.328" asserts="8" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test36" executed="True" result="Success" success="True" time="0.891" asserts="4" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test34" executed="True" result="Success" success="True" time="0.953" asserts="7" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test35" executed="True" result="Success" success="True" time="1.359" asserts="8" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert3AuthReversal.test36" executed="True" result="Success" success="True" time="0.906" asserts="4" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestCert4Echeck" executed="True" result="Success" success="True" time="5.969" asserts="0">
+                          <test-suite type="TestFixture" name="TestCert4Echeck" executed="True" result="Success" success="True" time="6.203" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test37" executed="True" result="Success" success="True" time="0.453" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test38" executed="True" result="Success" success="True" time="0.500" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test39" executed="True" result="Success" success="True" time="0.453" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test37" executed="True" result="Success" success="True" time="0.484" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test38" executed="True" result="Success" success="True" time="0.453" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test39" executed="True" result="Success" success="True" time="0.531" asserts="2" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test40" executed="True" result="Success" success="True" time="0.438" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test41" executed="True" result="Success" success="True" time="0.469" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test42" executed="True" result="Success" success="True" time="0.422" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test43" executed="True" result="Success" success="True" time="0.469" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test44" executed="True" result="Success" success="True" time="0.438" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test45" executed="True" result="Success" success="True" time="0.453" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test41" executed="True" result="Success" success="True" time="0.500" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test42" executed="True" result="Success" success="True" time="0.453" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test43" executed="True" result="Success" success="True" time="0.453" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test44" executed="True" result="Success" success="True" time="0.453" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test45" executed="True" result="Success" success="True" time="0.469" asserts="2" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test46" executed="True" result="Success" success="True" time="0.500" asserts="2" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test47" executed="True" result="Success" success="True" time="0.438" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test48" executed="True" result="Success" success="True" time="0.469" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test49" executed="True" result="Success" success="True" time="0.438" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test48" executed="True" result="Success" success="True" time="0.563" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert4Echeck.test49" executed="True" result="Success" success="True" time="0.453" asserts="2" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestCert5Token" executed="True" result="Success" success="True" time="6.031" asserts="0">
+                          <test-suite type="TestFixture" name="TestCert5Token" executed="True" result="Success" success="True" time="6.141" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test50" executed="True" result="Success" success="True" time="0.484" asserts="5" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test50" executed="True" result="Success" success="True" time="0.469" asserts="5" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test51" executed="True" result="Success" success="True" time="0.422" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test52" executed="True" result="Success" success="True" time="0.438" asserts="5" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test53" executed="True" result="Success" success="True" time="0.438" asserts="5" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test52" executed="True" result="Success" success="True" time="0.453" asserts="5" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test53" executed="True" result="Success" success="True" time="0.484" asserts="5" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test54" executed="True" result="Success" success="True" time="0.438" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test55" executed="True" result="Success" success="True" time="0.516" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test56" executed="True" result="Success" success="True" time="0.453" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test57" executed="True" result="Success" success="True" time="0.453" asserts="6" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test59" executed="True" result="Success" success="True" time="0.453" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test60" executed="True" result="Success" success="True" time="0.484" asserts="2" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test61" executed="True" result="Success" success="True" time="0.469" asserts="4" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test55" executed="True" result="Success" success="True" time="0.578" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test56" executed="True" result="Success" success="True" time="0.469" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test57" executed="True" result="Success" success="True" time="0.500" asserts="6" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test59" executed="True" result="Success" success="True" time="0.469" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test60" executed="True" result="Success" success="True" time="0.469" asserts="2" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test61" executed="True" result="Success" success="True" time="0.453" asserts="4" />
                               <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test62" executed="True" result="Success" success="True" time="0.453" asserts="5" />
-                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test63" executed="True" result="Success" success="True" time="0.484" asserts="5" />
+                              <test-case name="Litle.Sdk.Test.Certification.TestCert5Token.test63" executed="True" result="Success" success="True" time="0.453" asserts="5" />
                             </results>
                           </test-suite>
                         </results>
                       </test-suite>
-                      <test-suite type="Namespace" name="Functional" executed="True" result="Success" success="True" time="16.235" asserts="0">
+                      <test-suite type="Namespace" name="Functional" executed="True" result="Success" success="True" time="16.281" asserts="0">
                         <results>
                           <test-suite type="TestFixture" name="TestAuth" executed="True" result="Success" success="True" time="1.438" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestAuth.posWithoutCapabilityAndEntryMode" executed="True" result="Success" success="True" time="0.453" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestAuth.SimpleAuthWithCard" executed="True" result="Success" success="True" time="0.500" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestAuth.simpleAuthWithPaypal" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestAuth.posWithoutCapabilityAndEntryMode" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestAuth.SimpleAuthWithCard" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestAuth.simpleAuthWithPaypal" executed="True" result="Success" success="True" time="0.469" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestAuthReversal" executed="True" result="Success" success="True" time="0.438" asserts="0">
+                          <test-suite type="TestFixture" name="TestAuthReversal" executed="True" result="Success" success="True" time="0.469" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestAuthReversal.SimpleAuthReversal" executed="True" result="Success" success="True" time="0.438" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestAuthReversal.SimpleAuthReversal" executed="True" result="Success" success="True" time="0.469" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestCapture" executed="True" result="Success" success="True" time="1.359" asserts="0">
+                          <test-suite type="TestFixture" name="TestCapture" executed="True" result="Success" success="True" time="1.391" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestCapture.complexCapture" executed="True" result="Success" success="True" time="0.469" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestCapture.SimpleCapture" executed="True" result="Success" success="True" time="0.438" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestCapture.simpleCaptureWithPartial" executed="True" result="Success" success="True" time="0.438" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCapture.complexCapture" executed="True" result="Success" success="True" time="0.438" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCapture.SimpleCapture" executed="True" result="Success" success="True" time="0.453" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCapture.simpleCaptureWithPartial" executed="True" result="Success" success="True" time="0.500" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestCaptureGivenAuth" executed="True" result="Success" success="True" time="1.875" asserts="0">
+                          <test-suite type="TestFixture" name="TestCaptureGivenAuth" executed="True" result="Success" success="True" time="1.969" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.authInfo" executed="True" result="Success" success="True" time="0.484" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.complexCaptureGivenAuth" executed="True" result="Success" success="True" time="0.469" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.simpleCaptureGivenAuthWithCard" executed="True" result="Success" success="True" time="0.453" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.simpleCaptureGivenAuthWithToken" executed="True" result="Success" success="True" time="0.453" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.authInfo" executed="True" result="Success" success="True" time="0.469" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.complexCaptureGivenAuth" executed="True" result="Success" success="True" time="0.500" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.simpleCaptureGivenAuthWithCard" executed="True" result="Success" success="True" time="0.469" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCaptureGivenAuth.simpleCaptureGivenAuthWithToken" executed="True" result="Success" success="True" time="0.500" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestCredit" executed="True" result="Success" success="True" time="1.781" asserts="0">
+                          <test-suite type="TestFixture" name="TestCredit" executed="True" result="Success" success="True" time="1.875" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.PaypalNotes" executed="True" result="Success" success="True" time="0.422" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.ProcessingInstructionAndAmexData" executed="True" result="Success" success="True" time="0.422" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.SimpleCreditWithCard" executed="True" result="Success" success="True" time="0.469" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.SimpleCreditWithPaypal" executed="True" result="Success" success="True" time="0.422" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.PaypalNotes" executed="True" result="Success" success="True" time="0.438" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.ProcessingInstructionAndAmexData" executed="True" result="Success" success="True" time="0.500" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.SimpleCreditWithCard" executed="True" result="Success" success="True" time="0.453" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestCredit.SimpleCreditWithPaypal" executed="True" result="Success" success="True" time="0.469" asserts="1" />
                             </results>
                           </test-suite>
                           <test-suite type="TestFixture" name="TestEcheckCredit" executed="True" result="Success" success="True" time="0.000" asserts="0">
@@ -159,57 +159,57 @@
                               <test-case name="Litle.Sdk.Test.Functional.TestEcheckCredit.SimpleEcheckCredit" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestEcheckRedeposit" executed="True" result="Success" success="True" time="1.406" asserts="0">
+                          <test-suite type="TestFixture" name="TestEcheckRedeposit" executed="True" result="Success" success="True" time="1.375" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckRedeposit.echeckRedepositWithEcheck" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckRedeposit.echeckRedepositWithEcheck" executed="True" result="Success" success="True" time="0.453" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Functional.TestEcheckRedeposit.echeckRedepositWithEcheckToken" executed="True" result="Success" success="True" time="0.438" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckRedeposit.simpleEcheckRedeposit" executed="True" result="Success" success="True" time="0.469" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckRedeposit.simpleEcheckRedeposit" executed="True" result="Success" success="True" time="0.484" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestEcheckSale" executed="True" result="Success" success="True" time="2.703" asserts="0">
+                          <test-suite type="TestFixture" name="TestEcheckSale" executed="True" result="Success" success="True" time="2.719" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.EcheckSaleMissingBilling" executed="True" result="Success" success="True" time="0.438" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.EcheckSaleMissingBilling" executed="True" result="Success" success="True" time="0.422" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.EcheckSaleWithEcheckToken" executed="True" result="Success" success="True" time="0.453" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.EcheckSaleWithShipTo" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.EcheckSaleWithShipTo" executed="True" result="Success" success="True" time="0.469" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.NoAmount" executed="True" result="Success" success="True" time="0.438" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.SimpleEcheckSale" executed="True" result="Success" success="True" time="0.453" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.SimpleEcheckSaleWithEcheck" executed="True" result="Success" success="True" time="0.438" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.SimpleEcheckSale" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckSale.SimpleEcheckSaleWithEcheck" executed="True" result="Success" success="True" time="0.453" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestEcheckVerification" executed="True" result="Success" success="True" time="1.375" asserts="0">
+                          <test-suite type="TestFixture" name="TestEcheckVerification" executed="True" result="Success" success="True" time="1.359" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckVerification.EcheckVerificationWithEcheckToken" executed="True" result="Success" success="True" time="0.438" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckVerification.SimpleEcheckVerification" executed="True" result="Success" success="True" time="0.500" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckVerification.EcheckVerificationWithEcheckToken" executed="True" result="Success" success="True" time="0.469" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestEcheckVerification.SimpleEcheckVerification" executed="True" result="Success" success="True" time="0.453" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Functional.TestEcheckVerification.TestMissingBillingField" executed="True" result="Success" success="True" time="0.438" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestForceCapture" executed="True" result="Success" success="True" time="0.953" asserts="0">
+                          <test-suite type="TestFixture" name="TestForceCapture" executed="True" result="Success" success="True" time="0.906" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestForceCapture.simpleForceCaptureWithCard" executed="True" result="Success" success="True" time="0.516" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestForceCapture.simpleForceCaptureWithToken" executed="True" result="Success" success="True" time="0.422" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestForceCapture.simpleForceCaptureWithCard" executed="True" result="Success" success="True" time="0.438" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestForceCapture.simpleForceCaptureWithToken" executed="True" result="Success" success="True" time="0.469" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestSale" executed="True" result="Success" success="True" time="0.938" asserts="0">
+                          <test-suite type="TestFixture" name="TestSale" executed="True" result="Success" success="True" time="0.906" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestSale.SimpleSaleWithCard" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestSale.SimpleSaleWithCard" executed="True" result="Success" success="True" time="0.438" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Functional.TestSale.SimpleSaleWithPayPal" executed="True" result="Success" success="True" time="0.453" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="TestToken" executed="True" result="Success" success="True" time="1.922" asserts="0">
+                          <test-suite type="TestFixture" name="TestToken" executed="True" result="Success" success="True" time="1.828" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleToken" executed="True" result="Success" success="True" time="0.547" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleTokenWithEcheck" executed="True" result="Success" success="True" time="0.422" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleTokenWithPayPage" executed="True" result="Success" success="True" time="0.484" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Functional.TestToken.TokenEcheckMissingRequiredField" executed="True" result="Success" success="True" time="0.422" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleToken" executed="True" result="Success" success="True" time="0.484" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleTokenWithEcheck" executed="True" result="Success" success="True" time="0.453" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestToken.SimpleTokenWithPayPage" executed="True" result="Success" success="True" time="0.453" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Functional.TestToken.TokenEcheckMissingRequiredField" executed="True" result="Success" success="True" time="0.438" asserts="1" />
                             </results>
                           </test-suite>
                         </results>
                       </test-suite>
-                      <test-suite type="Namespace" name="Unit" executed="True" result="Success" success="True" time="0.125" asserts="0">
+                      <test-suite type="Namespace" name="Unit" executed="True" result="Success" success="True" time="1.250" asserts="0">
                         <results>
-                          <test-suite type="TestFixture" name="TestCredit" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                          <test-suite type="TestFixture" name="TestCredit" executed="True" result="Success" success="True" time="1.141" asserts="0">
                             <results>
-                              <test-case name="Litle.Sdk.Test.Unit.TestCredit.TestActionReasonOnOrphanedRefund" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                              <test-case name="Litle.Sdk.Test.Unit.TestCredit.TestActionReasonOnOrphanedRefund" executed="True" result="Success" success="True" time="1.141" asserts="0" />
                             </results>
                           </test-suite>
                           <test-suite type="TestFixture" name="TestLitleOnline" executed="True" result="Success" success="True" time="0.109" asserts="0">
@@ -222,12 +222,13 @@
                               <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testDefaultReportGroup" executed="True" result="Success" success="True" time="0.016" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testEcheckCredit" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testEcheckRedeposit" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testEcheckSale" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testEcheckSale" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testEcheckVerification" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testForceCapture" executed="True" result="Success" success="True" time="0.016" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testInvalidOperationException" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                              <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testLitleOnlineException" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testInvalidOperationException" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testLitleOnlineException" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                               <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testSale" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                              <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testSetMerchantSdk" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                               <test-case name="Litle.Sdk.Test.Unit.TestLitleOnline.testToken" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                             </results>
                           </test-suite>

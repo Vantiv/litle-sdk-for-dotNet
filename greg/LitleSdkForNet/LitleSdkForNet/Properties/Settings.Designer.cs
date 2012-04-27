@@ -85,7 +85,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8.10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8.12")]
         public string version {
             get {
                 return ((string)(this["version"]));
