@@ -89,6 +89,7 @@
     <Compile Include="Functional\TestAuth.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\TestCredit.cs" />
     <Compile Include="Unit\TestLitleOnline.cs" />
   </ItemGroup>
   <ItemGroup>

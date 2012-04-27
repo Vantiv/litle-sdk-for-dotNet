@@ -391,6 +391,12 @@ namespace Litle.Sdk.Test.Unit
             authorizationResponse authorize = litle.Authorize(authorization);
             Assert.AreEqual("Default Report Group", authorize.reportGroup);
         }
+
+        [Test]
+        public void testSetMerchantSdk()
+        {
+
+        }
             
     }
 }

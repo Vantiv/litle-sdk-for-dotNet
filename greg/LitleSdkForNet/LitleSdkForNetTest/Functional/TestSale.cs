@@ -47,7 +47,7 @@ namespace Litle.Sdk.Test.Functional
             saleObj.orderSource = orderSourceType.ecommerce;
             cardType cardObj = new cardType();
             cardObj.type = methodOfPaymentTypeEnum.VI;
-            cardObj.number = "4100000000000002";
+            cardObj.number = "4100000000000000";
             cardObj.expDate = "1210";
             saleObj.card = cardObj;
 

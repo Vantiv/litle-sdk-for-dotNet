@@ -10,6 +10,7 @@ namespace Litle.Sdk
 
         public string merchantId;
         public string version;
+        public string merchantSdk;
         public authentication authentication;
         public authorization authorization;
         public capture capture;
@@ -27,7 +28,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"" + version + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"" + version + "\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -793,6 +794,7 @@ namespace Litle.Sdk
         public amexAggregatorData amexAggregatorData;
         public merchantDataType merchantData;
         public String payPalNotes;
+        public String actionReason;
 
         public string Serialize()
         {
@@ -838,6 +840,7 @@ namespace Litle.Sdk
                 if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
             }
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + payPalNotes + "</payPalNotes>";
+            if (actionReason != null) xml += "\r\n<actionReason>" + actionReason + "</actionReason>";
             xml += "\r\n</credit>";
             return xml;
         }

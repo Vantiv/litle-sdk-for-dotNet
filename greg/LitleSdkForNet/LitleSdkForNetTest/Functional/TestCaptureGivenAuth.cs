@@ -33,7 +33,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
+            card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
@@ -85,7 +85,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
+            card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
@@ -112,7 +112,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
+            card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card=card;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);

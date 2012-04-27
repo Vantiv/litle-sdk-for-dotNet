@@ -30,3 +30,6 @@ C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\Lit
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\nunit.core.interfaces.dll
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\nunit.core.dll
 C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\LitleSdkForDotNet.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\Moq.dll
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\Moq.pdb
+C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\greg\LitleSdkForNet\LitleSdkForNetTest\bin\Debug\Moq.xml
