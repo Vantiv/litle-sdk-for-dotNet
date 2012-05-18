@@ -68,9 +68,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)\..\README.md $(OutDir)
-copy $(SolutionDir)\..\LICENSE $(OutDir)
-copy $(SolutionDir)\..\CHANGELOG $(OutDir)
+    <PostBuildEvent>copy "$(SolutionDir)..\README.md" "$(TargetDir)README.md" /Y
+copy "$(SolutionDir)..\LICENSE" "$(TargetDir)LICENSE" /Y
+copy "$(SolutionDir)..\CHANGELOG" "$(TargetDir)CHANGELOG" /Y
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
