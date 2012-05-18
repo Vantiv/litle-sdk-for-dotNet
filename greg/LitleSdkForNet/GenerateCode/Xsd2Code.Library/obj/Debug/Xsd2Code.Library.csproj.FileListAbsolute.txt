@@ -1,8 +1,0 @@
-C:\msysgit\dotNetGenerateCode\GenerateCode\GenerateCode\Xsd2Code.Library\bin\Debug\Xsd2Code.Library.dll
-C:\msysgit\dotNetGenerateCode\GenerateCode\GenerateCode\Xsd2Code.Library\bin\Debug\Xsd2Code.Library.pdb
-C:\msysgit\dotNetGenerateCode\GenerateCode\GenerateCode\Xsd2Code.Library\obj\Debug\ResolveAssemblyReference.cache
-C:\msysgit\dotNetGenerateCode\GenerateCode\GenerateCode\Xsd2Code.Library\obj\Debug\Xsd2Code.Library.Properties.Resources.resources
-C:\msysgit\dotNetGenerateCode\GenerateCode\GenerateCode\Xsd2Code.Library\obj\Debug\GenerateResource-ResGen.read.1.tlog
-C:\msysgit\dotNetGenerateCode\GenerateCode\GenerateCode\Xsd2Code.Library\obj\Debug\GenerateResource-ResGen.write.1.tlog
-C:\msysgit\dotNetGenerateCode\GenerateCode\GenerateCode\Xsd2Code.Library\obj\Debug\Xsd2Code.Library.dll
-C:\msysgit\dotNetGenerateCode\GenerateCode\GenerateCode\Xsd2Code.Library\obj\Debug\Xsd2Code.Library.pdb

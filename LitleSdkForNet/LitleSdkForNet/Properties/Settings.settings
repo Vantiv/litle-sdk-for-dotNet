@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Litle.Sdk.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://l-gdake-t5500:8081/sandbox/communicator/online</Value>
+    </Setting>
+    <Setting Name="reportGroup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default Report Group</Value>
+    </Setting>
+    <Setting Name="username" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="printxml" Type="System.String" Scope="User">
+      <Value Profile="(Default)">false</Value>
+    </Setting>
+    <Setting Name="timeout" Type="System.String" Scope="User">
+      <Value Profile="(Default)">65</Value>
+    </Setting>
+    <Setting Name="proxyHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="proxyPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="merchantId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">101</Value>
+    </Setting>
+    <Setting Name="version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">8.13</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

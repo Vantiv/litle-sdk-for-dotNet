@@ -1,7 +1,0 @@
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\Project\GenerateCode\GenerateCode\bin\Release\GenerateCode.exe
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\Project\GenerateCode\GenerateCode\bin\Release\GenerateCode.pdb
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\Project\GenerateCode\GenerateCode\bin\Release\Xsd2Code.Library.dll
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\Project\GenerateCode\GenerateCode\bin\Release\Xsd2Code.Library.pdb
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\Project\GenerateCode\GenerateCode\obj\Release\ResolveAssemblyReference.cache
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\Project\GenerateCode\GenerateCode\obj\Release\GenerateCode.exe
-C:\Documents and Settings\gdake\git\litle-sdk-for-dotNet\Project\GenerateCode\GenerateCode\obj\Release\GenerateCode.pdb
