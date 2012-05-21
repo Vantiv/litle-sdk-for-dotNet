@@ -10,4 +10,5 @@ LitleSdkForNet/LitleSdkForNetTest/obj
 LitleSdkForNet/LitleSdkForNet/obj/Release/LitleSdkForNet.csproj.FileListAbsolute.txt
 LitleSdkForNet/LitleSdkForNet.VisualState.xml
 *.zip
+*.suo
 
