@@ -1,14 +1,10 @@
 # git ignore file
 LitleSdkForNet/LitleSdkForNet/bin
 LitleSdkForNet/LitleSdkForNet/obj
-LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNetTest.exe
-LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNetTest.pdb
-LitleSdkForNet/LitleSdkForNetTest/bin/Release/LitleSdkForDotNet.pdb
-LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNet.pdb
-LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNet.dll
+LitleSdkForNet/LitleSdkForNetTest/bin
 LitleSdkForNet/LitleSdkForNetTest/obj
 LitleSdkForNet/LitleSdkForNet/obj/Release/LitleSdkForNet.csproj.FileListAbsolute.txt
 LitleSdkForNet/LitleSdkForNet.VisualState.xml
+LitleSdkForNet/TestResult.xml
 *.zip
 *.suo
-

@@ -131,6 +131,12 @@
       <Name>LitleSdkForNet</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Moq\Moq.dll" />
+    <Content Include="Moq\Moq.pdb" />
+    <Content Include="Moq\Moq.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
