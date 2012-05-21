@@ -1,19 +1,13 @@
 # git ignore file
-Project
-Project.suo
-Project/TestTransaction2.csproj 	
-Project/TestTransaction2.csproj.user
-Project/TestTransaction2.suo
-Project/GenerateCode/GenerateCode.suo
-Project/GenerateCode/Xsd2Code.Library/obj/Debug
-Project/GenerateCode/obj/Debug
+LitleSdkForNet/LitleSdkForNet/bin
+LitleSdkForNet/LitleSdkForNet/obj
+LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNetTest.exe
+LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNetTest.pdb
+LitleSdkForNet/LitleSdkForNetTest/bin/Release/LitleSdkForDotNet.pdb
+LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNet.pdb
+LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNet.dll
+LitleSdkForNet/LitleSdkForNetTest/obj
+LitleSdkForNet/LitleSdkForNet/obj/Release/LitleSdkForNet.csproj.FileListAbsolute.txt
+LitleSdkForNet/LitleSdkForNet.VisualState.xml
+*.zip
 
-greg/LitleSdkForNet/LitleSdkForNet/bin
-greg/LitleSdkForNet/LitleSdkForNet/obj
-greg/LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNetTest.exe
-greg/LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNetTest.pdb
-greg/LitleSdkForNet/LitleSdkForNetTest/bin/Release/LitleSdkForDotNet.pdb
-greg/LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNet.pdb
-greg/LitleSdkForNet/LitleSdkForNetTest/bin/Debug/LitleSdkForDotNet.dll
-greg/LitleSdkForNet/LitleSdkForNetTest/obj
-greg/LitleSdkForNet/LitleSdkForNet/obj/Release/LitleSdkForNet.csproj.FileListAbsolute.txt
