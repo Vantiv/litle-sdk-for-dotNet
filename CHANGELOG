@@ -1,5 +1,10 @@
 = LitleOnline CHANGELOG
 
+== Version 8.13.1 (May 23, 2012)
+
+* Feature: Echeck Void now supported
+* Bugfix: Make sure streams are closed and flushed
+
 == Version 8.13.0 (May 18, 2012)
 
 * Feature: Authorizations and Sales can accept an optional fraudFilterOverride parameter

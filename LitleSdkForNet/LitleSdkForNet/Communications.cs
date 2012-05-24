@@ -15,7 +15,6 @@ namespace Litle.Sdk
         virtual public string HttpPost(string xmlRequest, Dictionary<String,String> config)
         {
             string uri = config["url"];
-            byte[] bytes = System.Text.Encoding.ASCII.GetBytes(xmlRequest); // get raw bytes to be sent
             System.Net.WebRequest req = System.Net.WebRequest.Create(uri);
             if("true".Equals(config["printxml"])) 
             {
@@ -29,32 +28,29 @@ namespace Litle.Sdk
                 myproxy.BypassProxyOnLocal = true;
                 req.Proxy = myproxy;
             }
-            req.ContentLength = bytes.Length;            
 
-            System.IO.Stream os = req.GetRequestStream();
-            try
+            // submit http request
+            using (var writer = new StreamWriter(req.GetRequestStream()))
             {
-                // submit http request
-                os.Write(bytes, 0, bytes.Length);
+                writer.Write(xmlRequest);
+            }
 
-                // read response
-                System.Net.WebResponse resp = req.GetResponse();
-                if (resp == null)
-                {
-                    return null;
-                }
-                System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                string xmlResponse = sr.ReadToEnd().Trim();
-                if ("true".Equals(config["printxml"]))
-                {
-                    Console.WriteLine(xmlResponse);
-                }
-                return xmlResponse;
-            }
-            finally
+            // read response
+            System.Net.WebResponse resp = req.GetResponse();
+            if (resp == null)
             {
-                os.Close();
+               return null;
             }
+            string xmlResponse;
+            using (var reader = new System.IO.StreamReader(resp.GetResponseStream()))
+            {
+                xmlResponse = reader.ReadToEnd().Trim();
+            }
+            if ("true".Equals(config["printxml"]))
+            {
+                Console.WriteLine(xmlResponse);
+            }
+            return xmlResponse;
         }
     }
 }
