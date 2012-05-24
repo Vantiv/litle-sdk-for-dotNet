@@ -25,6 +25,7 @@ namespace Litle.Sdk
         public forceCapture forceCapture;
         public captureGivenAuth captureGivenAuth;
         public echeckRedeposit echeckRedeposit;
+        public echeckVoid echeckVoid;
 
         public string Serialize()
         {
@@ -44,6 +45,7 @@ namespace Litle.Sdk
             else if (forceCapture != null) xml += forceCapture.Serialize();
             else if (captureGivenAuth != null) xml += captureGivenAuth.Serialize();
             else if (echeckRedeposit != null) xml += echeckRedeposit.Serialize();
+            else if (echeckVoid != null) xml += echeckVoid.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -2287,6 +2289,26 @@ namespace Litle.Sdk
                 xml += "\r\n<actionReason>" + actionReason + "</actionReason>";
             }
             xml += "\r\n</authReversal>";
+            return xml;
+        }
+
+    }
+
+    public partial class echeckVoid : transactionTypeWithReportGroup
+    {
+        public long litleTxnId;
+
+        public string Serialize()
+        {
+            string xml = "\r\n<echeckVoid";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n</echeckVoid>";
             return xml;
         }
 

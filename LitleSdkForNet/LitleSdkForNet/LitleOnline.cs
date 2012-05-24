@@ -203,6 +203,17 @@ namespace Litle.Sdk
             return voidResponse;
         }
 
+        public litleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoid(echeckVoid v)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(v);
+            request.echeckVoid = v;
+
+            litleOnlineResponse response = sendToLitle(request);
+            litleOnlineResponseTransactionResponseEcheckVoidResponse voidResponse = (litleOnlineResponseTransactionResponseEcheckVoidResponse)response.Item;
+            return voidResponse;
+        }
+
         private litleOnlineRequest createLitleOnlineRequest()
         {
             litleOnlineRequest request = new litleOnlineRequest();
