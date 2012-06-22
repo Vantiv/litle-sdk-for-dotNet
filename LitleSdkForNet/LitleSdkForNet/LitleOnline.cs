@@ -219,7 +219,7 @@ namespace Litle.Sdk
             litleOnlineRequest request = new litleOnlineRequest();
             request.merchantId = config["merchantId"];
             request.version = config["version"];
-            request.merchantSdk = "DotNet;8.13.0";
+            request.merchantSdk = "DotNet;8.13.2";
             authentication authentication = new authentication();
             authentication.password = config["password"];
             authentication.user = config["username"];
@@ -230,7 +230,6 @@ namespace Litle.Sdk
         private litleOnlineResponse sendToLitle(litleOnlineRequest request)
         {
             string xmlRequest = request.Serialize();
-            Console.WriteLine(xmlRequest);
             string xmlResponse = communication.HttpPost(xmlRequest,config);
             try
             {

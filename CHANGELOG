@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== Version 8.13.2 (June 22, 2012)
+
+* Bugfix: Remove extra Console.WriteLine that always printed the xml request
+
 == Version 8.13.1 (May 23, 2012)
 
 * Feature: Echeck Void now supported
