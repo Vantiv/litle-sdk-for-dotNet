@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Litle.Sdk
 {
-    public class LitleOnline
+    public class LitleOnline : ILitleOnline
     {
         private Dictionary<String, String> config;
         private Communications communication;
@@ -278,5 +278,23 @@ namespace Litle.Sdk
                 txn.reportGroup = config["reportGroup"];
             }
         }
+    }
+
+    public interface ILitleOnline
+    {
+        authorizationResponse Authorize(authorization auth);
+        authReversalResponse AuthReversal(authReversal reversal);
+        captureResponse Capture(capture capture);
+        captureGivenAuthResponse CaptureGivenAuth(captureGivenAuth captureGivenAuth);
+        creditResponse Credit(credit credit);
+        echeckCreditResponse EcheckCredit(echeckCredit echeckCredit);
+        echeckRedepositResponse EcheckRedeposit(echeckRedeposit echeckRedeposit);
+        echeckSalesResponse EcheckSale(echeckSale echeckSale);
+        echeckVerificationResponse EcheckVerification(echeckVerification echeckVerification);
+        forceCaptureResponse ForceCapture(forceCapture forceCapture);
+        saleResponse Sale(sale sale);
+        registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest);
+        litleOnlineResponseTransactionResponseVoidResponse DoVoid(voidTxn v);
+        litleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoid(echeckVoid v);
     }
 }
