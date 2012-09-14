@@ -2243,7 +2243,7 @@ namespace Litle.Sdk
             }
             else
             {
-                xml += "\r\n<track>" + track + "</track";
+                xml += "\r\n<track>" + track + "</track>";
             }
             if (cardValidationNum != null)
             {

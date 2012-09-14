@@ -90,6 +90,31 @@ namespace Litle.Sdk.Test.Functional
                 Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
+
+        [Test]
+        public void trackData()
+        {
+            authorization authorization = new authorization();
+            authorization.id = "AX54321678";
+            authorization.reportGroup = "RG27";
+            authorization.orderId = "12z58743y1";
+            authorization.amount = 12522L;
+            authorization.orderSource = orderSourceType.retail;
+            contact billToAddress = new contact();
+            billToAddress.zip = "95032";
+            authorization.billToAddress = billToAddress;
+            cardType card = new cardType();
+            card.track = "%B40000001^Doe/JohnP^06041...?;40001=0604101064200?";
+            authorization.card = card;
+            pos pos = new pos();
+            pos.capability = posCapabilityTypeEnum.magstripe;
+            pos.entryMode = posEntryModeTypeEnum.completeread;
+            pos.cardholderId = posCardholderIdTypeEnum.signature;
+            authorization.pos = pos;
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Approved", response.message);
+        }
             
     }
 }

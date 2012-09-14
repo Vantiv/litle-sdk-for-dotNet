@@ -1,5 +1,10 @@
 = LitleOnline CHANGELOG
 
+== Version 8.13.3 (September 14, 2012)
+
+* Bugfix: Fix typo that kept track data from being sent up correctly
+* Feature: Merged pull request #1 from wessiyad to allow easier mocking of calls to the SDK
+
 == Version 8.13.2 (June 22, 2012)
 
 * Bugfix: Remove extra Console.WriteLine that always printed the xml request
