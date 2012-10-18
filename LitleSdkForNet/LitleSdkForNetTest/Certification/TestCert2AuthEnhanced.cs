@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -16,7 +15,16 @@ namespace Litle.Sdk.Test.Certification
         [TestFixtureSetUp]
         public void setUp()
         {
-            litle = new LitleOnline();
+            Dictionary<string, string> config = new Dictionary<string, string>();
+            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("reportGroup", "Default Report Group");
+            config.Add("username", "DOTNET");
+            config.Add("version", "8.13");
+            config.Add("timeout", "65");
+            config.Add("merchantId", "101");
+            config.Add("password", "TESTCASE");
+            config.Add("printxml", "true");
+            litle = new LitleOnline(config);
         }
 
         [Test]

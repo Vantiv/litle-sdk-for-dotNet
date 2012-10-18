@@ -1,45 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
-
-        //[Test]
-        //public void SimpleTokenWithEcheck()
-        //{
-        //    LitleOnline lOnlineObj = new LitleOnline();
-        //    registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
-        //    registerTokenRequest.orderId = "12344";
-        //    registerTokenRequest.echeckForToken.accNum = "12344565";
-        //    registerTokenRequest.echeckForToken.routingNum = "123476545";
-        //    registerTokenRequest.reportGroup = "Planets";
-        //    registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-        //    StringAssert.AreEqualIgnoringCase("Valid Format", rtokenResponse.message);
-        //}
-
-        //[Test]
-        //public void TokenEcheckMissingRequiredField()
-        //{
-        //    LitleOnline lOnlineObj = new LitleOnline();
-        //    registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
-        //    registerTokenRequest.orderId = "12344";
-        //    registerTokenRequest.echeckForToken.routingNum = "123476545";
-        //    registerTokenRequest.reportGroup = "Planets";
-        //    registerTokenResponse rtokenResponse = lOnlineObj.RegisterToken(registerTokenRequest);
-        //    StringAssert.Contains("Error validating xml data against the schema", rtokenResponse.message);
-        //}
-            
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
     class TestSale
     {
+        private LitleOnline litle;
+
+        [TestFixtureSetUp]
+        public void setUp()
+        {
+            Dictionary<string, string> config = new Dictionary<string, string>();
+            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("reportGroup", "Default Report Group");
+            config.Add("username", "DOTNET");
+            config.Add("version", "8.13");
+            config.Add("timeout", "65");
+            config.Add("merchantId", "101");
+            config.Add("password", "TESTCASE");
+            config.Add("printxml", "true");
+            litle = new LitleOnline(config);
+        }
+
         [Test]
         public void SimpleSaleWithCard()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
             sale saleObj = new sale();
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
@@ -51,14 +40,13 @@ namespace Litle.Sdk.Test.Functional
             cardObj.expDate = "1210";
             saleObj.card = cardObj;
 
-            saleResponse responseObj = lOnlineObj.Sale(saleObj);
+            saleResponse responseObj = litle.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
         }
 
         [Test]
         public void SimpleSaleWithPayPal()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
             sale saleObj = new sale();
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
@@ -69,7 +57,7 @@ namespace Litle.Sdk.Test.Functional
             payPalObj.token = "1234";
             payPalObj.transactionId = "123456";
             saleObj.paypal = payPalObj;
-            saleResponse responseObj = lOnlineObj.Sale(saleObj);
+            saleResponse responseObj = litle.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
         }
             

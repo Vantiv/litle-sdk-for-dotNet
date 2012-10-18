@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -10,11 +9,26 @@ namespace Litle.Sdk.Test.Functional
     [TestFixture]
     class TestEcheckSale
     {
+        private LitleOnline litle;
+
+        [TestFixtureSetUp]
+        public void setUp()
+        {
+            Dictionary<string, string> config = new Dictionary<string, string>();
+            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("reportGroup", "Default Report Group");
+            config.Add("username", "DOTNET");
+            config.Add("version", "8.13");
+            config.Add("timeout", "65");
+            config.Add("merchantId", "101");
+            config.Add("password", "TESTCASE");
+            config.Add("printxml", "true");
+            litle = new LitleOnline(config);
+        }
+
         [Test]
         public void SimpleEcheckSaleWithEcheck()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
-
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.amount = 123456;
             echeckSaleObj.orderId = "12345";
@@ -35,21 +49,20 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.echeck = echeckTypeObj;
             echeckSaleObj.billToAddress = contactObj;
 
-            echeckSalesResponse response = lOnlineObj.EcheckSale(echeckSaleObj);
+            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void NoAmount()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.reportGroup = "Planets";
             
             try
             {
                 //expected exception;
-                echeckSalesResponse response = lOnlineObj.EcheckSale(echeckSaleObj);
+                echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
             }
             catch (LitleOnlineException e)
             {
@@ -60,8 +73,6 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void EcheckSaleWithShipTo()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
-
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.reportGroup = "Planets";
             echeckSaleObj.amount = 123456;
@@ -85,15 +96,13 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.billToAddress = contactObj;
             echeckSaleObj.shipToAddress = contactObj;
 
-            echeckSalesResponse response = lOnlineObj.EcheckSale(echeckSaleObj);
+            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void EcheckSaleWithEcheckToken()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
-
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.reportGroup = "Planets";
             echeckSaleObj.amount = 123456;
@@ -121,15 +130,13 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.customBilling = customBillingObj;
             echeckSaleObj.billToAddress = contactObj;
 
-            echeckSalesResponse response = lOnlineObj.EcheckSale(echeckSaleObj);
+            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void EcheckSaleMissingBilling()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
-
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.amount = 123456;
             echeckSaleObj.orderId = "12345";
@@ -146,7 +153,7 @@ namespace Litle.Sdk.Test.Functional
             try
             {
                 //expected exception;
-                echeckSalesResponse response = lOnlineObj.EcheckSale(echeckSaleObj);
+                echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
             }
             catch (LitleOnlineException e)
             {
@@ -157,14 +164,12 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleEcheckSale()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
-
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.reportGroup = "Planets";
             echeckSaleObj.litleTxnId = 123456789101112;
             echeckSaleObj.amount = 12;
 
-            echeckSalesResponse response = lOnlineObj.EcheckSale(echeckSaleObj);
+            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
             

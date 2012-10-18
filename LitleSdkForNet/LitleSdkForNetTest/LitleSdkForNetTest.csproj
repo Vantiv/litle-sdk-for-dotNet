@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Litle.Sdk.Test</RootNamespace>
     <AssemblyName>LitleSdkForDotNetTest</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -62,10 +62,6 @@
       <HintPath>NUnit\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -89,6 +85,8 @@
     <Compile Include="Functional\TestAuth.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\TestUpdateCardValidationNumOnToken.cs" />
+    <Compile Include="Unit\TestRegisterTokenRequest.cs" />
     <Compile Include="Unit\TestEcheckVoid.cs" />
     <Compile Include="Unit\TestSale.cs" />
     <Compile Include="Unit\TestAuthorization.cs" />
@@ -96,7 +94,9 @@
     <Compile Include="Unit\TestLitleOnline.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="NUnit\nunit-console-runner.dll" />
     <None Include="NUnit\nunit.framework.dll" />
     <None Include="NUnit\nunit.mocks.dll" />

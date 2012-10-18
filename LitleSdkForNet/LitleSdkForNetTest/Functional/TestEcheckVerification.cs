@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -10,11 +9,26 @@ namespace Litle.Sdk.Test.Functional
     [TestFixture]
     class TestEcheckVerification
     {
+        private LitleOnline litle;
+
+        [TestFixtureSetUp]
+        public void setUp()
+        {
+            Dictionary<string, string> config = new Dictionary<string, string>();
+            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("reportGroup", "Default Report Group");
+            config.Add("username", "DOTNET");
+            config.Add("version", "8.13");
+            config.Add("timeout", "65");
+            config.Add("merchantId", "101");
+            config.Add("password", "TESTCASE");
+            config.Add("printxml", "true");
+            litle = new LitleOnline(config);
+        }
+
         [Test]
         public void SimpleEcheckVerification()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
-
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
@@ -35,15 +49,13 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject.echeck = echeckTypeObj;
             echeckVerificationObject.billToAddress = contactObj;
 
-            echeckVerificationResponse response = lOnlineObj.EcheckVerification(echeckVerificationObject);
+            echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void EcheckVerificationWithEcheckToken()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
-
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
@@ -64,15 +76,13 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject.token = echeckTokenObj;
             echeckVerificationObject.billToAddress = contactObj;
 
-            echeckVerificationResponse response = lOnlineObj.EcheckVerification(echeckVerificationObject);
+            echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void TestMissingBillingField()
         {
-            LitleOnline lOnlineObj = new LitleOnline();
-
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.reportGroup = "Planets";
             echeckVerificationObject.amount = 123;
@@ -88,7 +98,7 @@ namespace Litle.Sdk.Test.Functional
             try
             {
                 //expected exception;
-                echeckVerificationResponse response = lOnlineObj.EcheckVerification(echeckVerificationObject);
+                echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
             }
             catch (LitleOnlineException e)
             {
