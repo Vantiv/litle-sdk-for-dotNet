@@ -1,5 +1,12 @@
 = LitleOnline CHANGELOG
 
+== Version 8.14.0 (October 18, 2012)
+
+* Feature: Add support for .NET versions 2.0 and 3.5 to existing support for 4.0 - you still need at least 3.5 in order to run the test suite as Moq requires it
+* Feature: Temporary storage of card validation num on tokens
+* Feature: Updating card validation numbers on tokens
+* Bugfix: Make all of the functional and certification tests run against the external sandbox.
+
 == Version 8.13.3 (September 14, 2012)
 
 * Bugfix: Fix typo that kept track data from being sent up correctly
