@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -214,12 +213,23 @@ namespace Litle.Sdk
             return voidResponse;
         }
 
+        public updateCardValidationNumOnTokenResponse UpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(updateCardValidationNumOnToken);
+            request.updateCardValidationNumOnToken = updateCardValidationNumOnToken;
+
+            litleOnlineResponse response = sendToLitle(request);
+            updateCardValidationNumOnTokenResponse updateResponse = (updateCardValidationNumOnTokenResponse)response.Item;
+            return updateResponse;
+        }
+
         private litleOnlineRequest createLitleOnlineRequest()
         {
             litleOnlineRequest request = new litleOnlineRequest();
             request.merchantId = config["merchantId"];
             request.version = config["version"];
-            request.merchantSdk = "DotNet;8.13.3";
+            request.merchantSdk = "DotNet;8.14.0";
             authentication authentication = new authentication();
             authentication.password = config["password"];
             authentication.user = config["username"];
@@ -296,5 +306,6 @@ namespace Litle.Sdk
         registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest);
         litleOnlineResponseTransactionResponseVoidResponse DoVoid(voidTxn v);
         litleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoid(echeckVoid v);
+        updateCardValidationNumOnTokenResponse UpdateCardValidationNumOnToken(updateCardValidationNumOnToken update);
     }
 }

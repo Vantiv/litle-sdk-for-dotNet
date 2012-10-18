@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Litle.Sdk
@@ -26,6 +25,7 @@ namespace Litle.Sdk
         public captureGivenAuth captureGivenAuth;
         public echeckRedeposit echeckRedeposit;
         public echeckVoid echeckVoid;
+        public updateCardValidationNumOnToken updateCardValidationNumOnToken;
 
         public string Serialize()
         {
@@ -46,6 +46,7 @@ namespace Litle.Sdk
             else if (captureGivenAuth != null) xml += captureGivenAuth.Serialize();
             else if (echeckRedeposit != null) xml += echeckRedeposit.Serialize();
             else if (echeckVoid != null) xml += echeckVoid.Serialize();
+            else if (updateCardValidationNumOnToken != null) xml += updateCardValidationNumOnToken.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -716,6 +717,7 @@ namespace Litle.Sdk
         public string accountNumber;
         public echeckForTokenType echeckForToken;
         public string paypageRegistrationId;
+        public string cardValidationNum;
 
         public string Serialize()
         {
@@ -732,7 +734,33 @@ namespace Litle.Sdk
             if(accountNumber != null)  xml += "\r\n<accountNumber>" + accountNumber + "</accountNumber>";
             else if (echeckForToken != null) xml += "\r\n<echeckForToken>" + echeckForToken.Serialize() + "</echeckForToken>";
             else if (paypageRegistrationId != null) xml += "\r\n<paypageRegistrationId>" + paypageRegistrationId + "</paypageRegistrationId>";
+            if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + cardValidationNum + "</cardValidationNum>";
             xml += "\r\n</registerTokenRequest>";
+            return xml;
+        }
+    }
+
+    public partial class updateCardValidationNumOnToken : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public string litleToken;
+        public string cardValidationNum;
+
+        public string Serialize()
+        {
+            string xml = "\r\n<updateCardValidationNumOnToken";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\"";
+            xml += ">";
+
+            if (orderId != null) xml += "\r\n<orderId>" + orderId + "</orderId>";
+            if (litleToken != null) xml += "\r\n<litleToken>" + litleToken + "</litleToken>";
+            if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + cardValidationNum + "</cardValidationNum>";
+            xml += "\r\n</updateCardValidationNumOnToken>";
             return xml;
         }
     }
@@ -772,13 +800,7 @@ namespace Litle.Sdk
         public enhancedData enhancedData;
         public processingInstructions processingInstructions;
         public string orderId;
-        private orderSourceType orderSourceField;
-        private bool orderSourceSet;
-        public orderSourceType orderSource
-        {
-            get { return this.orderSourceField; }
-            set { this.orderSourceField = value; orderSourceSet = true; }
-        }
+        public orderSourceType orderSource;
         public contact billToAddress;
         public cardType card;
         public cardTokenType token;

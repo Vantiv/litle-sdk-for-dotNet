@@ -1552,6 +1552,92 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class updateCardValidationNumOnTokenResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string orderIdField;
+
+        private string responseField;
+
+        private string messageField;
+
+        private System.DateTime responseTimeField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string orderId
+        {
+            get
+            {
+                return this.orderIdField;
+            }
+            set
+            {
+                this.orderIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class authorizationResponse : transactionTypeWithReportGroup
     {
 
@@ -3864,6 +3950,7 @@ namespace Litle.Sdk
         [System.Xml.Serialization.XmlElementAttribute("registerTokenResponse", typeof(registerTokenResponse))]
         [System.Xml.Serialization.XmlElementAttribute("saleResponse", typeof(saleResponse))]
         [System.Xml.Serialization.XmlElementAttribute("voidResponse", typeof(litleOnlineResponseTransactionResponseVoidResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("updateCardValidationNumOnTokenResponse", typeof(updateCardValidationNumOnTokenResponse))]
         public transactionTypeWithReportGroup Item
         {
             get
