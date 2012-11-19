@@ -1,11 +1,12 @@
 = LitleOnline CHANGELOG
 
-== Version 8.14.0 (October 18, 2012)
+== Version 8.14.0 (November 19, 2012)
 
 * Feature: Add support for .NET versions 2.0 and 3.5 to existing support for 4.0 - you still need at least 3.5 in order to run the test suite as Moq requires it
 * Feature: Temporary storage of card validation num on tokens
 * Feature: Updating card validation numbers on tokens
 * Bugfix: Make all of the functional and certification tests run against the external sandbox.
+* Bugfix: Make the contact email be sent up instead of the zip in the <email> element.  Thanks to https://github.com/LitleCo/litle-sdk-for-dotNet/pull/3
 
 == Version 8.13.3 (September 14, 2012)
 
