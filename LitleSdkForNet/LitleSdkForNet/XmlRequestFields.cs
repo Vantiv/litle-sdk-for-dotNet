@@ -1954,7 +1954,7 @@ namespace Litle.Sdk
             if (state != null) xml += "\r\n<state>" + state + "</state>";
             if (zip != null) xml += "\r\n<zip>" + zip + "</zip>";
             if (countrySpecified) xml += "\r\n<country>" + countryField + "</country>";
-            if (email != null) xml += "\r\n<email>" + zip + "</email>";
+            if (email != null) xml += "\r\n<email>" + email + "</email>";
             if (phone != null) xml += "\r\n<phone>" + phone + "</phone>";
             return xml;
         }
