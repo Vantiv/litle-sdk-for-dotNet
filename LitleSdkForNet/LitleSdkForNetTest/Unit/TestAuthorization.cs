@@ -40,5 +40,28 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             litle.Authorize(auth);
         }
+
+        [Test]
+        public void TestContactShouldSendEmailForEmail_NotZip()
+        {
+            authorization auth = new authorization();
+            auth.orderId = "12344";
+            auth.amount = 2;
+            auth.orderSource = orderSourceType.ecommerce;
+            auth.reportGroup = "Planets";
+            contact billToAddress = new contact();
+            billToAddress.email = "gdake@litle.com";
+            billToAddress.zip = "12345";
+            auth.billToAddress = billToAddress;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<zip>12345</zip>.*<email>gdake@litle.com</email>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Authorize(auth);
+        }
     }
 }
