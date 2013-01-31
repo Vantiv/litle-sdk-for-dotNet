@@ -85,6 +85,8 @@
     <Compile Include="Functional\TestAuth.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\TestEcheckRedeposit.cs" />
+    <Compile Include="Unit\TestEcheckVerification.cs" />
     <Compile Include="Unit\TestUpdateCardValidationNumOnToken.cs" />
     <Compile Include="Unit\TestRegisterTokenRequest.cs" />
     <Compile Include="Unit\TestEcheckVoid.cs" />

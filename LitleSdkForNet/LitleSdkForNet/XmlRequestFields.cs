@@ -687,6 +687,7 @@ namespace Litle.Sdk
         public contact billToAddress;
         public echeckType echeck;
         public echeckTokenType token;
+        public merchantDataType merchantData;
 
         public string Serialize()
         {
@@ -706,6 +707,7 @@ namespace Litle.Sdk
             if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
             if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
             else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
+            if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
             xml += "\r\n</echeckVerification>";
             return xml;
         }
@@ -1149,6 +1151,7 @@ namespace Litle.Sdk
         //litleTxnIdField and set are in super
         public echeckType echeck;
         public echeckTokenType token;
+        public merchantDataType merchantData;
 
         public string Serialize()
         {
@@ -1162,6 +1165,7 @@ namespace Litle.Sdk
             if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
             if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
             else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
+            if (merchantData != null) { xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>"; }
             xml += "\r\n</echeckRedeposit>";
             return xml;
         }

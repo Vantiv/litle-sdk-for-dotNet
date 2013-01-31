@@ -1,4 +1,4 @@
-IF "%1"=="" (
+IF "%1"==[] (
 	echo "Requires command line argument to be version to zip"
 	exit /b
 )
