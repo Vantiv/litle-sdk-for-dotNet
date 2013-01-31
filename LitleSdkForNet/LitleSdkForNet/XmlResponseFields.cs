@@ -810,6 +810,30 @@ namespace Litle.Sdk
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    public partial class voidRecyclingResponseType
+    {
+        private long creditLitleTxnIdField;
+
+        public long creditLitleTxnId
+        {
+            get
+            {
+                return this.creditLitleTxnIdField;
+            }
+            set
+            {
+                this.creditLitleTxnIdField = value;
+            }
+        }
+
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
     public partial class tokenResponseType
     {
 
@@ -4149,6 +4173,8 @@ namespace Litle.Sdk
 
         private bool duplicateFieldSpecified;
 
+        private voidRecyclingResponseType recyclingField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -4240,6 +4266,19 @@ namespace Litle.Sdk
             set
             {
                 this.duplicateFieldSpecified = value;
+            }
+        }
+
+        //private voidRecyclingResponseType recycling;
+        public voidRecyclingResponseType recycling
+        {
+            get
+            {
+                return this.recyclingField;
+            }
+            set
+            {
+                this.recyclingField = value;
             }
         }
     }

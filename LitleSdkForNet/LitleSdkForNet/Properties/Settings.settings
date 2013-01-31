@@ -30,7 +30,7 @@
       <Value Profile="(Default)">101</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">8.14</Value>
+      <Value Profile="(Default)">8.16</Value>
     </Setting>
   </Settings>
 </SettingsFile>
