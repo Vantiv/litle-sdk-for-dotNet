@@ -15,6 +15,7 @@ namespace Litle.Sdk
         virtual public string HttpPost(string xmlRequest, Dictionary<String,String> config)
         {
             string uri = config["url"];
+            System.Net.ServicePointManager.Expect100Continue = false;
             System.Net.WebRequest req = System.Net.WebRequest.Create(uri);
             if("true".Equals(config["printxml"])) 
             {
