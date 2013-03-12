@@ -229,7 +229,7 @@ namespace Litle.Sdk
             litleOnlineRequest request = new litleOnlineRequest();
             request.merchantId = config["merchantId"];
             request.version = config["version"];
-            request.merchantSdk = "DotNet;8.16.0";
+            request.merchantSdk = "DotNet;8.16.1";
             authentication authentication = new authentication();
             authentication.password = config["password"];
             authentication.user = config["username"];

@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== Version 8.16.1 (March 12, 2013)
+
+* Bugfix: The existence of Expect:100 Continue will cause a 417 when using transact.litle.com.  In order to keep this from happening (and gain a performance benefit as well, I am telling WebRequest to *NOT* set this header for me.  Now the only headers that will be sent from the sdk are content-type, host, content-length and connection
+
 == Version 8.16.0 (Febuary 1, 2013)
 
 * Feature: Add recycling to voidResponse
