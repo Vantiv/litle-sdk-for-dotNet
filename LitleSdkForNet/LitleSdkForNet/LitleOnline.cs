@@ -22,7 +22,6 @@ namespace Litle.Sdk
             config["reportGroup"] = Properties.Settings.Default.reportGroup;
             config["username"] = Properties.Settings.Default.username;
             config["printxml"] = Properties.Settings.Default.printxml;
-            config["version"] = Properties.Settings.Default.version;
             config["timeout"] = Properties.Settings.Default.timeout;
             config["proxyHost"] = Properties.Settings.Default.proxyHost;
             config["merchantId"] = Properties.Settings.Default.merchantId;
@@ -41,7 +40,6 @@ namespace Litle.Sdk
          * username
          * merchantId
          * password
-         * version (eg 8.10)
          * timeout (in seconds)
          * Optional properties are:
          * proxyHost
@@ -228,7 +226,6 @@ namespace Litle.Sdk
         {
             litleOnlineRequest request = new litleOnlineRequest();
             request.merchantId = config["merchantId"];
-            request.version = config["version"];
             request.merchantSdk = "DotNet;8.16.1";
             authentication authentication = new authentication();
             authentication.password = config["password"];
