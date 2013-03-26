@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== Version 8.16.2 (March 26, 2013)
+
+* Bugfix: When sending order sources of 3dsAuthenticated or 3dsAttempted, because these strings are not valid names (they start with a number), the xml generated was using item as a prefix.  This fix changes orderSourceType from an enum to a class and adds a Serialize() method that correctly converts the member name 3dsAttempted to the xml element named 3dsAuthenticated
+
 == Version 8.16.1 (March 12, 2013)
 
 * Bugfix: The existence of Expect:100 Continue will cause a 417 when using transact.litle.com.  In order to keep this from happening (and gain a performance benefit as well, I am telling WebRequest to *NOT* set this header for me.  Now the only headers that will be sent from the sdk are content-type, host, content-length and connection

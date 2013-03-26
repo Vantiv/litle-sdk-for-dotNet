@@ -585,7 +585,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<orderId>" + orderId + "</orderId>";
                 xml += "\r\n<amount>" + amountField + "</amount>";
-                xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+                if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
                 if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
                 else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
@@ -651,7 +651,7 @@ namespace Litle.Sdk
                 xml += "\r\n<orderId>" + orderId + "</orderId>";
                 if (verifySet) xml += "\r\n<verify>" + (verifyField ? "true":"false") + "</verify>";
                 xml += "\r\n<amount>" + amountField + "</amount>";
-                xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+                if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
                 if (shipToAddress != null) xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "</shipToAddress>";
                 if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
@@ -702,7 +702,7 @@ namespace Litle.Sdk
             if(litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
             xml += "\r\n<orderId>" + orderId + "</orderId>";
             if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
-            xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+            if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
             if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
             if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
             else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
@@ -844,7 +844,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<orderId>" + orderId + "</orderId>";
                 xml += "\r\n<amount>" + amountField + "</amount>";
-                xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+                if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
                 if (card != null) xml += "\r\n<card>" + card.Serialize() + "</card>";
                 else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
@@ -1261,7 +1261,8 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<orderId>" + orderId + "</orderId>";
                 xml += "\r\n<amount>" + amount + "</amount>";
-                xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+                if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
+
                 if (customerInfo != null)
                 {
                     xml += "\r\n<customerInfo>" + customerInfo.Serialize() + "\r\n</customerInfo>";
@@ -1443,7 +1444,7 @@ namespace Litle.Sdk
             if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";                                   
             xml += "\r\n<orderId>" + orderId + "</orderId>";
             xml += "\r\n<amount>" + amount + "</amount>";
-            xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+            if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
             if (customerInfo != null)
             {
                 xml += "\r\n<customerInfo>" + customerInfo.Serialize() + "\r\n</customerInfo>";
@@ -1567,7 +1568,7 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + reportGroup + "\">";
             xml += "\r\n<orderId>" + orderId + "</orderId>";
             xml += "\r\n<amount>" + amount + "</amount>";
-            xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+            if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
             if (billToAddress != null)
             {
                 xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
@@ -1655,7 +1656,7 @@ namespace Litle.Sdk
             xml += "\r\n<orderId>" + orderId + "</orderId>";
             if (authInformation != null) xml += "\r\n<authInformation>" + authInformation.Serialize() + "\r\n</authInformation>";
             xml += "\r\n<amount>" + amount + "</amount>";
-            xml += "\r\n<orderSource>" + orderSource + "</orderSource>";
+            if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
             if (billToAddress != null)
             {
                 xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
@@ -1900,22 +1901,21 @@ namespace Litle.Sdk
         }
     }
 
-
-    public enum orderSourceType
+    public sealed class orderSourceType
     {
+        public static readonly orderSourceType ecommerce = new orderSourceType("ecommerce");
+        public static readonly orderSourceType installment = new orderSourceType("installment");
+        public static readonly orderSourceType mailorder = new orderSourceType("mailorder");
+        public static readonly orderSourceType recurring = new orderSourceType("recurring");
+        public static readonly orderSourceType retail = new orderSourceType("retail");
+        public static readonly orderSourceType telephone = new orderSourceType("telephone");
+        public static readonly orderSourceType item3dsAuthenticated = new orderSourceType("3dsAuthenticated");
+        public static readonly orderSourceType item3dsAttempted = new orderSourceType("3dsAttempted");
+        public static readonly orderSourceType recurringtel = new orderSourceType("recurringtel");
 
-        /// <remarks/>
-        ecommerce,
-        installment,
-        mailorder,
-        recurring,
-        retail,
-        telephone,
-        [System.Xml.Serialization.XmlEnumAttribute("3dsAuthenticated")]
-        Item3dsAuthenticated,
-        [System.Xml.Serialization.XmlEnumAttribute("3dsAttempted")]
-        Item3dsAttempted,
-        recurringtel,
+        private orderSourceType(String value) { this.value = value; }
+        public string Serialize() { return value; }
+        private string value;
     }
 
     public partial class contact
