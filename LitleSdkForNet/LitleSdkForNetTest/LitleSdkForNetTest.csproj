@@ -85,6 +85,10 @@
     <Compile Include="Functional\TestAuth.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\TestCaptureGivenAuth.cs" />
+    <Compile Include="Unit\TestForceCapture.cs" />
+    <Compile Include="Unit\TestCapture.cs" />
+    <Compile Include="Unit\TestAuthReversal.cs" />
     <Compile Include="Unit\TestVoid.cs" />
     <Compile Include="Unit\TestEcheckRedeposit.cs" />
     <Compile Include="Unit\TestEcheckVerification.cs" />

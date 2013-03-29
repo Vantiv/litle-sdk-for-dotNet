@@ -110,5 +110,44 @@ namespace Litle.Sdk.Test.Unit
             litle.Authorize(auth);
         }
 
+        [Test]
+        public void TestSurchargeAmount()
+        {
+            authorization auth = new authorization();
+            auth.orderId = "12344";
+            auth.amount = 2;
+            auth.surchargeAmount = 1;
+            auth.orderSource = orderSourceType.ecommerce;
+            auth.reportGroup = "Planets";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Authorize(auth);
+        }
+
+        [Test]
+        public void TestSurchargeAmount_Optional()
+        {
+            authorization auth = new authorization();
+            auth.orderId = "12344";
+            auth.amount = 2;
+            auth.orderSource = orderSourceType.ecommerce;
+            auth.reportGroup = "Planets";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Authorize(auth);
+        }
+
     }
 }
