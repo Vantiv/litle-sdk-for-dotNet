@@ -57,7 +57,6 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
             capture capture = new capture();
-            Console.WriteLine("Going to write litleTxnId of " + response.litleTxnId);
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureResponse = litle.Capture(capture);
             Assert.AreEqual("000", captureResponse.response);
