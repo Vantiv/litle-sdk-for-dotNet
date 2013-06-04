@@ -4,31 +4,6 @@ using System.Text;
 
 namespace Litle.Sdk
 {
-    //public partial class litleBatchRequest
-    //{
-
-
-    //    public List<batchRequest> listOfBatchRequest;
-
-
-
-    //    public string Serialize()
-    //    {
-    //        string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest merchantId=\"" + merchantId
-    //            + "\" version=\"8.17\" merchantSdk=\"" + merchantSdk + 
-    //            "\" xmlns=\"http://www.litle.com/schema\" " + 
-    //            "numBatchRequests=" + listOfBatchRequest.Count + ">";
-
-    //        foreach (batchRequest b in listOfBatchRequest)
-    //        {
-    //            xml += b.Serialize();
-    //        }
-
-    //        xml += "\r\n</litleRequest>";
-    //        return xml;
-    //    }
-    //}
-
     public partial class litleBatchRequest{
 
         public string id;
@@ -38,6 +13,9 @@ namespace Litle.Sdk
 
         public int numAccountUpdates;
         public string reportGroup;
+
+
+        public Dictionary<String, String> config;
 
         private authentication authentication;
 
@@ -54,6 +32,11 @@ namespace Litle.Sdk
         private List<captureGivenAuth> listOfCaptureGivenAuth;
         private List<echeckRedeposit> listOfEcheckRedeposit;
         private List<updateCardValidationNumOnToken> listOfUpdateCardValidationNumOnToken;
+
+        public litleBatchRequest()
+        {
+            config = new Dictionary<String, String>();
+        }
 
         public void addAuthorization(authorization authorization)
         {
@@ -273,8 +256,13 @@ namespace Litle.Sdk
                 xml += "numUpdateCardValidationNumOnTokens=" + listOfUpdateCardValidationNumOnToken.Count + "\r\n";
             }
 
-            xml += "merchantId=\"" + merchantId + "\"\r\n";
-            xml += "merchantSdk=\"" + merchantSdk + "\">";
+            xml += "merchantId=\"" + config["merchantId"] + "\"\r\n";
+            xml += "merchantSdk=\"" + merchantSdk + "\">\r\n";
+
+            authentication.user = config["username"];
+            authentication.password = config["password"];
+
+            xml += authentication.Serialize();
 
             if (listOfAuthorization != null)
             {

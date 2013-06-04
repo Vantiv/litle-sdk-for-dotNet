@@ -19,7 +19,6 @@ namespace Litle.Sdk
          */
         public LitleOnlineBatch()
         {
-            config = new Dictionary<String, String>();
             config["url"] = Properties.Settings.Default.url;
             config["reportGroup"] = Properties.Settings.Default.reportGroup;
             config["username"] = Properties.Settings.Default.username;
@@ -29,7 +28,6 @@ namespace Litle.Sdk
             config["merchantId"] = Properties.Settings.Default.merchantId;
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
-            communication = new Communications();
 
             listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
@@ -66,12 +64,18 @@ namespace Litle.Sdk
         public void addBatch(litleBatchRequest litleBatchRequest)
         {
             fillInReportGroup(litleBatchRequest);
+
+            if (!litleBatchRequest.config.ContainsKey("username")) litleBatchRequest.config["username"] = config["username"];
+            if (!litleBatchRequest.config.ContainsKey("password")) litleBatchRequest.config["password"] = config["password"];
+            if (!litleBatchRequest.config.ContainsKey("merchantId")) litleBatchRequest.config["merchantId"] = config["merchantId"];
+            if (!litleBatchRequest.config.ContainsKey("reportGroup")) litleBatchRequest.config["reportGroup"] = config["reportGroup"];
+
             listOfLitleBatchRequest.Add(litleBatchRequest);
         }
 
-        public litleBatchResponse sendToLitle(litleBatchRequest request)
+        public litleBatchResponse sendToLitle()
         {
-            string xmlRequest = request.Serialize();
+            string xmlRequest = this.Serialize();
             string xmlResponse = communication.HttpPost(xmlRequest, config);
             try
             {
