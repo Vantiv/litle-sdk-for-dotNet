@@ -46,9 +46,9 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addAuthorization(authorization);
             litle.addBatch(litleBatchRequest);
 
-            litleBatchResponse litleBatchResponse = litle.sendToLitle();
+            litleResponse litleResponse = litle.sendToLitle();
 
-            Assert.AreEqual(123, litleBatchResponse.listOfAuthorizationResponse[0].litleTxnId);
+            Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId);
         }
 
         //[Test]

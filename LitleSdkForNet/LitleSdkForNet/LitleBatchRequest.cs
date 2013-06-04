@@ -36,6 +36,22 @@ namespace Litle.Sdk
         public litleBatchRequest()
         {
             config = new Dictionary<String, String>();
+
+            authentication = new authentication();
+
+            listOfAuthorization = new List<authorization>();
+            listOfCapture = new List<capture>();
+            listOfCredit = new List<credit>();
+            listOfSale = new List<sale>();
+            listOfAuthReversal = new List<authReversal>();
+            listOfEcheckCredit = new List<echeckCredit>();
+            listOfEcheckVerification = new List<echeckVerification>();
+            listOfEcheckSale = new List<echeckSale>();
+            listOfRegisterTokenRequest = new List<registerTokenRequestType>();
+            listOfForceCapture = new List<forceCapture>();
+            listOfCaptureGivenAuth = new List<captureGivenAuth>();
+            listOfEcheckRedeposit = new List<echeckRedeposit>();
+            listOfUpdateCardValidationNumOnToken = new List<updateCardValidationNumOnToken>();
         }
 
         public void addAuthorization(authorization authorization)
@@ -118,8 +134,8 @@ namespace Litle.Sdk
 
                 }
 
-                xml += "numAuths=" + listOfAuthorization.Count + "\r\n";
-                xml += "authAmount=" + sum + "\r\n";
+                xml += "numAuths=\"" + listOfAuthorization.Count + "\"\r\n";
+                xml += "authAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfAuthReversal != null)
@@ -131,8 +147,8 @@ namespace Litle.Sdk
                     sum += ar.amount;
                 }
 
-                xml += "numAuthReversals=" + listOfAuthReversal.Count + "\r\n";
-                xml += "authReversalAmount=" + sum + "\r\n";
+                xml += "numAuthReversals=\"" + listOfAuthReversal.Count + "\"\r\n";
+                xml += "authReversalAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfCapture != null)
@@ -144,8 +160,8 @@ namespace Litle.Sdk
                     sum += c.amount;
                 }
 
-                xml += "numCaptures=" + listOfCapture.Count + "\r\n";
-                xml += "captureAmount=" + sum + "\r\n";
+                xml += "numCaptures=\"" + listOfCapture.Count + "\"\r\n";
+                xml += "captureAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfCredit != null)
@@ -157,8 +173,8 @@ namespace Litle.Sdk
                     sum += c.amount;
                 }
 
-                xml += "numCredits=" + listOfCredit.Count + "\r\n";
-                xml += "creditAmount=" + sum + "\r\n";
+                xml += "numCredits=\"" + listOfCredit.Count + "\"\r\n";
+                xml += "creditAmount=\"" + sum + "\"\r\n";
             }
             if (listOfForceCapture != null)
             {
@@ -169,8 +185,8 @@ namespace Litle.Sdk
                     sum += fc.amount;
                 }
 
-                xml += "numForceCaptures=" + listOfForceCapture.Count + "\r\n";
-                xml += "forceCaptureAmount=" + sum + "\r\n";
+                xml += "numForceCaptures=\"" + listOfForceCapture.Count + "\"\r\n";
+                xml += "forceCaptureAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfSale != null)
@@ -182,8 +198,8 @@ namespace Litle.Sdk
                     sum += s.amount;
                 }
 
-                xml += "numSales=" + listOfSale.Count + "\r\n";
-                xml += "saleAmount=" + sum + "\r\n";
+                xml += "numSales=\"" + listOfSale.Count + "\"\r\n";
+                xml += "saleAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfCaptureGivenAuth != null)
@@ -195,8 +211,8 @@ namespace Litle.Sdk
                     sum += cga.amount;
                 }
 
-                xml += "numCaptureGivenAuths=" + listOfCapture.Count + "\r\n";
-                xml += "captureGivenAuthAmount=" + sum + "\r\n";
+                xml += "numCaptureGivenAuths=\"" + listOfCapture.Count + "\"\r\n";
+                xml += "captureGivenAuthAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfEcheckSale != null)
@@ -208,8 +224,8 @@ namespace Litle.Sdk
                     sum += es.amount;
                 }
 
-                xml += "numEcheckSales=" + listOfEcheckSale.Count + "\r\n";
-                xml += "echeckSaleAmount=" + sum + "\r\n";
+                xml += "numEcheckSales=\"" + listOfEcheckSale.Count + "\"\r\n";
+                xml += "echeckSaleAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfEcheckCredit != null)
@@ -221,8 +237,8 @@ namespace Litle.Sdk
                     sum += ec.amount;
                 }
 
-                xml += "numEcheckCredit=" + listOfEcheckCredit.Count + "\r\n";
-                xml += "echeckCreditAmount=" + sum + "\r\n";
+                xml += "numEcheckCredit=\"" + listOfEcheckCredit.Count + "\"\r\n";
+                xml += "echeckCreditAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfEcheckVerification != null)
@@ -234,26 +250,26 @@ namespace Litle.Sdk
                     sum += ev.amount;
                 }
 
-                xml += "numEcheckVerification=" + listOfEcheckVerification.Count + "\r\n";
-                xml += "echeckVerificationAmount=" + sum + "\r\n";
+                xml += "numEcheckVerification=\"" + listOfEcheckVerification.Count + "\"\r\n";
+                xml += "echeckVerificationAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfEcheckRedeposit != null)
             {
-                xml += "numEcheckRedeposit=" + listOfEcheckRedeposit.Count + "\r\n";
+                xml += "numEcheckRedeposit=\"" + listOfEcheckRedeposit.Count + "\"\r\n";
             }
 
             // to ask about accountUpdate
-            xml += "numAccountUpdate=" + numAccountUpdates + "\r\n";
+            xml += "numAccountUpdate=\"" + numAccountUpdates + "\"\r\n";
 
             if (listOfRegisterTokenRequest != null)
             {
-                xml += "numTokenRegistrations=" + listOfRegisterTokenRequest.Count + "\r\n";
+                xml += "numTokenRegistrations=\"" + listOfRegisterTokenRequest.Count + "\"\r\n";
             }
 
             if (listOfUpdateCardValidationNumOnToken != null)
             {
-                xml += "numUpdateCardValidationNumOnTokens=" + listOfUpdateCardValidationNumOnToken.Count + "\r\n";
+                xml += "numUpdateCardValidationNumOnTokens=\"" + listOfUpdateCardValidationNumOnToken.Count + "\"\r\n";
             }
 
             xml += "merchantId=\"" + config["merchantId"] + "\"\r\n";

@@ -19,6 +19,8 @@ namespace Litle.Sdk
          */
         public LitleOnlineBatch()
         {
+            config = new Dictionary<string, string>();
+
             config["url"] = Properties.Settings.Default.url;
             config["reportGroup"] = Properties.Settings.Default.reportGroup;
             config["username"] = Properties.Settings.Default.username;
@@ -73,18 +75,18 @@ namespace Litle.Sdk
             listOfLitleBatchRequest.Add(litleBatchRequest);
         }
 
-        public litleBatchResponse sendToLitle()
+        public litleResponse sendToLitle()
         {
             string xmlRequest = this.Serialize();
             string xmlResponse = communication.HttpPost(xmlRequest, config);
             try
             {
-                litleBatchResponse litleBatchResponse = DeserializeObject(xmlResponse);
-                if ("1".Equals(litleBatchResponse.response))
+                litleResponse litleResponse = DeserializeObject(xmlResponse);
+                if ("1".Equals(litleResponse))
                 {
-                    throw new LitleOnlineException(litleBatchResponse.message);
+                    throw new LitleOnlineException(litleResponse.message);
                 }
-                return litleBatchResponse;
+                return litleResponse;
             }
             catch (InvalidOperationException ioe)
             {
@@ -95,8 +97,8 @@ namespace Litle.Sdk
         public string Serialize()
         {
             string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"8.17\"" +
-                "\" xmlns=\"http://www.litle.com/schema\" " +
-                "numBatchRequests=" + listOfLitleBatchRequest.Count + ">";
+                " xmlns=\"http://www.litle.com/schema\" " +
+                "numBatchRequests=\"" + listOfLitleBatchRequest.Count + "\">";
 
             foreach (litleBatchRequest b in listOfLitleBatchRequest)
             {
@@ -115,11 +117,11 @@ namespace Litle.Sdk
             return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
         }// serialize the xml
 
-        public static litleBatchResponse DeserializeObject(string response)
+        public static litleResponse DeserializeObject(string response)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(litleBatchResponse));
+            XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));
             StringReader reader = new StringReader(response);
-            litleBatchResponse i = (litleBatchResponse)serializer.Deserialize(reader);
+            litleResponse i = (litleResponse)serializer.Deserialize(reader);
             return i;
 
         }// deserialize the object

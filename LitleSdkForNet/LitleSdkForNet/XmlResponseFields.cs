@@ -4031,7 +4031,7 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class litleReponse
+    public partial class litleResponse
     {
         private string responseField;
 
@@ -4096,43 +4096,43 @@ namespace Litle.Sdk
 
     public class litleBatchResponse
     {  
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(authorizationResponse), ElementName = "authorizationResponse")]
+        [XmlArrayItem(typeof(authorizationResponse), ElementName = "authorizationResponse")]
         public List<authorizationResponse> listOfAuthorizationResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(captureResponse), ElementName = "captureResponse")]
+        [XmlArrayItem(typeof(captureResponse), ElementName = "captureResponse")]
         public List<captureResponse> listOfCaptureResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(forceCaptureResponse), ElementName = "forceCaptureResponse")]
+        [XmlArrayItem(typeof(forceCaptureResponse), ElementName = "forceCaptureResponse")]
         public List<forceCaptureResponse> listOfForceCaptureResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(captureGivenAuthResponse), ElementName = "captureGivenAuthResponse")]
+        [XmlArrayItem(typeof(captureGivenAuthResponse), ElementName = "captureGivenAuthResponse")]
         public List<captureGivenAuthResponse> listOfCaptureGivenAuthResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(saleResponse), ElementName = "saleResponse")]
+        [XmlArrayItem(typeof(saleResponse), ElementName = "saleResponse")]
         public List<saleResponse> listOfSaleResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(creditResponse), ElementName = "creditResponse")]
+        [XmlArrayItem(typeof(creditResponse), ElementName = "creditResponse")]
         public List<creditResponse> listOfCreditResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(echeckSalesResponse), ElementName = "echeckSalesResponse")]
+        [XmlArrayItem(typeof(echeckSalesResponse), ElementName = "echeckSalesResponse")]
         public List<echeckSalesResponse> listOfEcheckSalesResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(echeckCreditResponse), ElementName = "echeckCreditResponse")]
+        [XmlArrayItem(typeof(echeckCreditResponse), ElementName = "echeckCreditResponse")]
         public List<echeckCreditResponse> listOfEcheckCreditResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(echeckVerificationResponse), ElementName = "echeckVerificationResponse")]
+        [XmlArrayItem(typeof(echeckVerificationResponse), ElementName = "echeckVerificationResponse")]
         public List<echeckVerificationResponse> listOfEcheckVerificationResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(echeckRedepositResponse), ElementName = "echeckRedepositResponse")]
+        [XmlArrayItem(typeof(echeckRedepositResponse), ElementName = "echeckRedepositResponse")]
         public List<echeckRedepositResponse> listOfEcheckRedepositResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(authReversalResponse), ElementName = "authReversalResponse")]
+        [XmlArrayItem(typeof(authReversalResponse), ElementName = "authReversalResponse")]
         public List<authReversalResponse> listOfAuthReversalResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(registerTokenResponse), ElementName = "registerTokenResponse")]
+        [XmlArrayItem(typeof(registerTokenResponse), ElementName = "registerTokenResponse")]
         public List<registerTokenResponse> listOfRegisterTokenResponse;
 
-        [XmlArray("batchResponse"), XmlArrayItem(typeof(updateCardValidationNumOnTokenResponse), ElementName = "updateCardValidationNumOnTokenResponse")]
+        [XmlArrayItem(typeof(updateCardValidationNumOnTokenResponse), ElementName = "updateCardValidationNumOnTokenResponse")]
         public List<updateCardValidationNumOnTokenResponse> listOfUpdateCardValidationNumOnTokenResponse;
     }
 

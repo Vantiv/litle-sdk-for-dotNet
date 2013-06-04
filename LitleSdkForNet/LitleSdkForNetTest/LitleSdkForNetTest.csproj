@@ -89,7 +89,7 @@
     <Compile Include="Unit\TestForceCapture.cs" />
     <Compile Include="Unit\TestCapture.cs" />
     <Compile Include="Unit\TestAuthReversal.cs" />
-    <Compile Include="Unit\TestLitleBatch.cs" />
+    <Compile Include="Unit\TestLitleOnlineBatch.cs" />
     <Compile Include="Unit\TestVoid.cs" />
     <Compile Include="Unit\TestEcheckRedeposit.cs" />
     <Compile Include="Unit\TestEcheckVerification.cs" />
