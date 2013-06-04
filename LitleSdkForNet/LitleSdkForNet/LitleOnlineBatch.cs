@@ -9,8 +9,10 @@ namespace Litle.Sdk
 {
     public class LitleOnlineBatch
     {
+
         private Dictionary<String, String> config;
         private Communications communication;
+        private List<litleBatchRequest> listOfLitleBatchRequest;
 
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
@@ -28,6 +30,8 @@ namespace Litle.Sdk
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
             communication = new Communications();
+
+            listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
 
         /**
@@ -50,6 +54,8 @@ namespace Litle.Sdk
         {
             this.config = config;
             communication = new Communications();
+
+            listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
 
         public void setCommunication(Communications communication)
@@ -57,200 +63,44 @@ namespace Litle.Sdk
             this.communication = communication;
         }
 
-        //public authorizationResponse Authorize(List<authorization> listofauth)
-        //{
-        //    litleOnlineRequest request = createLitleOnlineRequest();
-        //    fillInReportGroup(listofauth);
-        //    request.authorization = listofauth;
-
-        //    litleOnlineResponse response = sendToLitle(request);
-        //    authorizationResponse authResponse = (authorizationResponse)response.Item;
-        //    return authResponse;
-        //}
-
-        public authReversalResponse AuthReversal(authReversal reversal)
+        public void addBatch(litleBatchRequest litleBatchRequest)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(reversal);
-            request.authReversal = reversal;
-
-            litleOnlineResponse response = sendToLitle(request);
-            authReversalResponse reversalResponse = (authReversalResponse)response.Item;
-            return reversalResponse;
+            fillInReportGroup(litleBatchRequest);
+            listOfLitleBatchRequest.Add(litleBatchRequest);
         }
 
-        public captureResponse Capture(capture capture)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(capture);
-            request.capture = capture;
-
-            litleOnlineResponse response = sendToLitle(request);
-            captureResponse captureResponse = (captureResponse)response.Item;
-            return captureResponse;
-        }
-
-        public captureGivenAuthResponse CaptureGivenAuth(captureGivenAuth captureGivenAuth)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(captureGivenAuth);
-            request.captureGivenAuth = captureGivenAuth;
-
-            litleOnlineResponse response = sendToLitle(request);
-            captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)response.Item;
-            return captureGivenAuthResponse;
-        }
-
-        public creditResponse Credit(credit credit)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(credit);
-            request.credit = credit;
-
-            litleOnlineResponse response = sendToLitle(request);
-            creditResponse creditResponse = (creditResponse)response.Item;
-            return creditResponse;
-        }
-
-        public echeckCreditResponse EcheckCredit(echeckCredit echeckCredit)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(echeckCredit);
-            request.echeckCredit = echeckCredit;
-
-            litleOnlineResponse response = sendToLitle(request);
-            echeckCreditResponse echeckCreditResponse = (echeckCreditResponse)response.Item;
-            return echeckCreditResponse;
-        }
-
-        public echeckRedepositResponse EcheckRedeposit(echeckRedeposit echeckRedeposit)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(echeckRedeposit);
-            request.echeckRedeposit = echeckRedeposit;
-
-            litleOnlineResponse response = sendToLitle(request);
-            echeckRedepositResponse echeckRedepositResponse = (echeckRedepositResponse)response.Item;
-            return echeckRedepositResponse;
-        }
-
-        public echeckSalesResponse EcheckSale(echeckSale echeckSale)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(echeckSale);
-            request.echeckSale = echeckSale;
-
-            litleOnlineResponse response = sendToLitle(request);
-            echeckSalesResponse echeckSalesResponse = (echeckSalesResponse)response.Item;
-            return echeckSalesResponse;
-        }
-
-        public echeckVerificationResponse EcheckVerification(echeckVerification echeckVerification)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(echeckVerification);
-            request.echeckVerification = echeckVerification;
-
-            litleOnlineResponse response = sendToLitle(request);
-            echeckVerificationResponse echeckVerificationResponse = (echeckVerificationResponse)response.Item;
-            return echeckVerificationResponse;
-        }
-
-        public forceCaptureResponse ForceCapture(forceCapture forceCapture)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(forceCapture);
-            request.forceCapture = forceCapture;
-
-            litleOnlineResponse response = sendToLitle(request);
-            forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)response.Item;
-            return forceCaptureResponse;
-        }
-
-        public saleResponse Sale(sale sale)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(sale);
-            request.sale = sale;
-
-            litleOnlineResponse response = sendToLitle(request);
-            saleResponse saleResponse = (saleResponse)response.Item;
-            return saleResponse;
-        }
-
-        public registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(tokenRequest);
-            request.registerTokenRequest = tokenRequest;
-
-            litleOnlineResponse response = sendToLitle(request);
-            registerTokenResponse registerTokenResponse = (registerTokenResponse)response.Item;
-            return registerTokenResponse;
-        }
-
-        public litleOnlineResponseTransactionResponseVoidResponse DoVoid(voidTxn v)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(v);
-            request.voidTxn = v;
-
-            litleOnlineResponse response = sendToLitle(request);
-            litleOnlineResponseTransactionResponseVoidResponse voidResponse = (litleOnlineResponseTransactionResponseVoidResponse)response.Item;
-            return voidResponse;
-        }
-
-        public litleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoid(echeckVoid v)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(v);
-            request.echeckVoid = v;
-
-            litleOnlineResponse response = sendToLitle(request);
-            litleOnlineResponseTransactionResponseEcheckVoidResponse voidResponse = (litleOnlineResponseTransactionResponseEcheckVoidResponse)response.Item;
-            return voidResponse;
-        }
-
-        public updateCardValidationNumOnTokenResponse UpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
-        {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(updateCardValidationNumOnToken);
-            request.updateCardValidationNumOnToken = updateCardValidationNumOnToken;
-
-            litleOnlineResponse response = sendToLitle(request);
-            updateCardValidationNumOnTokenResponse updateResponse = (updateCardValidationNumOnTokenResponse)response.Item;
-            return updateResponse;
-        }
-
-        private litleOnlineRequest createLitleOnlineRequest()
-        {
-            litleOnlineRequest request = new litleOnlineRequest();
-            request.merchantId = config["merchantId"];
-            request.merchantSdk = "DotNet;8.17.1";
-            authentication authentication = new authentication();
-            authentication.password = config["password"];
-            authentication.user = config["username"];
-            request.authentication = authentication;
-            return request;
-        }
-
-        private litleBatchResponse sendToLitle(litleBatchRequest request)
+        public litleBatchResponse sendToLitle(litleBatchRequest request)
         {
             string xmlRequest = request.Serialize();
             string xmlResponse = communication.HttpPost(xmlRequest, config);
             try
             {
-                litleBatchResponse litleOnlineResponse = DeserializeObject(xmlResponse);
-                if ("1".Equals(litleOnlineResponse.response))
+                litleBatchResponse litleBatchResponse = DeserializeObject(xmlResponse);
+                if ("1".Equals(litleBatchResponse.response))
                 {
-                    throw new LitleOnlineException(litleOnlineResponse.message);
+                    throw new LitleOnlineException(litleBatchResponse.message);
                 }
-                return litleOnlineResponse;
+                return litleBatchResponse;
             }
             catch (InvalidOperationException ioe)
             {
                 throw new LitleOnlineException("Error validating xml data against the schema", ioe);
             }
+        }
+
+        public string Serialize()
+        {
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"8.17\"" +
+                "\" xmlns=\"http://www.litle.com/schema\" " +
+                "numBatchRequests=" + listOfLitleBatchRequest.Count + ">";
+
+            foreach (litleBatchRequest b in listOfLitleBatchRequest)
+            {
+                xml += b.Serialize();
+            }
+
+            xml += "\r\n</litleRequest>";
+            return xml;
         }
 
         public static String SerializeObject(litleOnlineRequest req)
@@ -261,28 +111,20 @@ namespace Litle.Sdk
             return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
         }// serialize the xml
 
-        public static litleOnlineResponse DeserializeObject(string response)
+        public static litleBatchResponse DeserializeObject(string response)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineResponse));
+            XmlSerializer serializer = new XmlSerializer(typeof(litleBatchResponse));
             StringReader reader = new StringReader(response);
-            litleOnlineResponse i = (litleOnlineResponse)serializer.Deserialize(reader);
+            litleBatchResponse i = (litleBatchResponse)serializer.Deserialize(reader);
             return i;
 
         }// deserialize the object
 
-        private void fillInReportGroup(transactionTypeWithReportGroup txn)
+        private void fillInReportGroup(litleBatchRequest litleBatchRequest)
         {
-            if (txn.reportGroup == null)
+            if (litleBatchRequest.reportGroup == null)
             {
-                txn.reportGroup = config["reportGroup"];
-            }
-        }
-
-        private void fillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
-        {
-            if (txn.reportGroup == null)
-            {
-                txn.reportGroup = config["reportGroup"];
+                litleBatchRequest.reportGroup = config["reportGroup"];
             }
         }
     }

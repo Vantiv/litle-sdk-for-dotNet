@@ -4,74 +4,121 @@ using System.Text;
 
 namespace Litle.Sdk
 {
-    public partial class litleBatchRequest
-    {
+    //public partial class litleBatchRequest
+    //{
+
+
+    //    public List<batchRequest> listOfBatchRequest;
+
+
+
+    //    public string Serialize()
+    //    {
+    //        string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest merchantId=\"" + merchantId
+    //            + "\" version=\"8.17\" merchantSdk=\"" + merchantSdk + 
+    //            "\" xmlns=\"http://www.litle.com/schema\" " + 
+    //            "numBatchRequests=" + listOfBatchRequest.Count + ">";
+
+    //        foreach (batchRequest b in listOfBatchRequest)
+    //        {
+    //            xml += b.Serialize();
+    //        }
+
+    //        xml += "\r\n</litleRequest>";
+    //        return xml;
+    //    }
+    //}
+
+    public partial class litleBatchRequest{
+
+        public string id;
 
         public string merchantId;
         public string merchantSdk;
-        public List<batchRequest> listOfBatchRequest;
 
-
-
-        public string Serialize()
-        {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest merchantId=\"" + merchantId
-                + "\" version=\"8.17\" merchantSdk=\"" + merchantSdk + 
-                "\" xmlns=\"http://www.litle.com/schema\" " + 
-                "numBatchRequests=" + listOfBatchRequest.Count + ">";
-
-            foreach (batchRequest b in listOfBatchRequest)
-            {
-                xml += b.Serialize();
-            }
-
-            xml += "\r\n</litleRequest>";
-            return xml;
-        }
-    }
-
-    public partial class batchRequest
-    {
-        public string id;
-        //public int numAuths;
-        //public int authAmount;
-        //public int numAuthReversals;
-        //public int authReversalAmount;
-        //public int numCaptures;
-        //public int captureAmount;
-        //public int numCredits;
-        //public int creditAmount;
-        //public int numForceCaptures;
-        //public int forceCaptureAmount;
-        //public int numSales;
-        //public int saleAmount;
-        //public int numCaptureGivenAuths;
-        //public int captureGivenAuthAmount;
-        //public int numEcheckSales;
-        //public int echeckSaleAmount;
-        //public int numEcheckCredit;
-        //public int echeckCreditAmount;
-        //public int numEcheckVerification;
-        //public int echeckVerificationAmount;
-        //public int numEcheckRedeposit;
         public int numAccountUpdates;
-        //public int numTokenRegistrations;
-        //public int numUpdateCardValidationNumOnTokens;
-        public string merchantId;
+        public string reportGroup;
 
-        public List<authorization> listOfAuthorization;
-        public List<capture> listOfCapture;
-        public List<credit> listOfCredit;
-        public List<sale> listOfSale;
-        public List<authReversal> listOfAuthReversal;
-        public List<echeckCredit> listOfEcheckCredit;
-        public List<echeckVerification> listOfEcheckVerification;
-        public List<echeckSale> listOfEcheckSale;
-        public List<registerTokenRequestType> listOfRegisterTokenRequest;
-        public List<forceCapture> listOfForceCapture;
-        public List<captureGivenAuth> listOfCaptureGivenAuth;
-        public List<echeckRedeposit> listOfEcheckRedeposit;
-        public List<updateCardValidationNumOnToken> listOfUpdateCardValidationNumOnToken;
+        private authentication authentication;
+
+        private List<authorization> listOfAuthorization;
+        private List<capture> listOfCapture;
+        private List<credit> listOfCredit;
+        private List<sale> listOfSale;
+        private List<authReversal> listOfAuthReversal;
+        private List<echeckCredit> listOfEcheckCredit;
+        private List<echeckVerification> listOfEcheckVerification;
+        private List<echeckSale> listOfEcheckSale;
+        private List<registerTokenRequestType> listOfRegisterTokenRequest;
+        private List<forceCapture> listOfForceCapture;
+        private List<captureGivenAuth> listOfCaptureGivenAuth;
+        private List<echeckRedeposit> listOfEcheckRedeposit;
+        private List<updateCardValidationNumOnToken> listOfUpdateCardValidationNumOnToken;
+
+        public void addAuthorization(authorization authorization)
+        {
+            listOfAuthorization.Add(authorization);
+        }
+
+        public void addCapture(capture capture)
+        {
+            listOfCapture.Add(capture);
+        }
+
+        public void addCredit(credit credit)
+        {
+            listOfCredit.Add(credit);
+        }
+
+        public void addSale(sale sale)
+        {
+            listOfSale.Add(sale);
+        }
+
+        public void addAuthReversal(authReversal authReversal)
+        {
+            listOfAuthReversal.Add(authReversal);
+        }
+
+        public void addEcheckCredit(echeckCredit echeckCredit)
+        {
+            listOfEcheckCredit.Add(echeckCredit);
+        }
+
+        public void addEcheckVerification(echeckVerification echeckVerification)
+        {
+            listOfEcheckVerification.Add(echeckVerification);
+        }
+
+        public void addEcheckSale(echeckSale echeckSale)
+        {
+            listOfEcheckSale.Add(echeckSale);
+        }
+
+        public void addRegisterTokenRequest(registerTokenRequestType registerTokenRequestType)
+        {
+            listOfRegisterTokenRequest.Add(registerTokenRequestType);
+        }
+
+        public void addForceCapture(forceCapture forceCapture)
+        {
+            listOfForceCapture.Add(forceCapture);
+        }
+
+        public void addCaptureGivenAuth(captureGivenAuth captureGivenAuth)
+        {
+            listOfCaptureGivenAuth.Add(captureGivenAuth);
+        }
+
+        public void addEcheckRedeposit(echeckRedeposit echeckRedeposit)
+        {
+            listOfEcheckRedeposit.Add(echeckRedeposit);
+        }
+
+        public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
+        {
+            listOfUpdateCardValidationNumOnToken.Add(updateCardValidationNumOnToken);
+        }
 
         public String Serialize()
         {
@@ -226,7 +273,8 @@ namespace Litle.Sdk
                 xml += "numUpdateCardValidationNumOnTokens=" + listOfUpdateCardValidationNumOnToken.Count + "\r\n";
             }
 
-            xml += "merchantId=\"" + merchantId + "\">";
+            xml += "merchantId=\"" + merchantId + "\"\r\n";
+            xml += "merchantSdk=\"" + merchantSdk + "\">";
 
             if (listOfAuthorization != null)
             {
@@ -337,6 +385,20 @@ namespace Litle.Sdk
             return xml;
         }
 
+        private void fillInReportGroup(transactionTypeWithReportGroup txn)
+        {
+            if (txn.reportGroup == null)
+            {
+                txn.reportGroup = config["reportGroup"];
+            }
+        }
 
+        private void fillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
+        {
+            if (txn.reportGroup == null)
+            {
+                txn.reportGroup = config["reportGroup"];
+            }
+        }
     }
 }
