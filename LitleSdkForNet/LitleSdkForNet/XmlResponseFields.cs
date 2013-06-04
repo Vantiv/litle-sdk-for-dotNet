@@ -4030,6 +4030,98 @@ namespace Litle.Sdk
         }
     }
 
+    public partial class litleBatchResponse
+    {
+
+        private transactionTypeWithReportGroup itemField;
+
+        private string responseField;
+
+        private string messageField;
+
+        private string versionField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("authReversalResponse", typeof(authReversalResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("authorizationResponse", typeof(authorizationResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("captureGivenAuthResponse", typeof(captureGivenAuthResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("captureResponse", typeof(captureResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("creditResponse", typeof(creditResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("echeckCreditResponse", typeof(echeckCreditResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("echeckRedepositResponse", typeof(echeckRedepositResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("echeckSalesResponse", typeof(echeckSalesResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("echeckVerificationResponse", typeof(echeckVerificationResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("echeckVoidResponse", typeof(litleOnlineResponseTransactionResponseEcheckVoidResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("forceCaptureResponse", typeof(forceCaptureResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("registerTokenResponse", typeof(registerTokenResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("saleResponse", typeof(saleResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("voidResponse", typeof(litleOnlineResponseTransactionResponseVoidResponse))]
+        [System.Xml.Serialization.XmlElementAttribute("updateCardValidationNumOnTokenResponse", typeof(updateCardValidationNumOnTokenResponse))]
+
+        [System.Xml.Serialization.XmlElementAttribute("id")]
+        public string batchId;
+
+        [System.Xml.Serialization.XmlElementAttribute("litleBatchId")]
+        public long litleBatchId;
+
+        [System.Xml.Serialization.XmlElementAttribute("merchantId")]
+        public string merchantId;
+
+        public transactionTypeWithReportGroup Item
+        {
+            get
+            {
+                return this.itemField;
+            }
+            set
+            {
+                this.itemField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string version
+        {
+            get
+            {
+                return this.versionField;
+            }
+            set
+            {
+                this.versionField = value;
+            }
+        }
+    }
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.SerializableAttribute()]
