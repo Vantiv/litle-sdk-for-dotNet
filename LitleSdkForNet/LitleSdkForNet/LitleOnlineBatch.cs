@@ -70,7 +70,11 @@ namespace Litle.Sdk
             if (!litleBatchRequest.config.ContainsKey("username")) litleBatchRequest.config["username"] = config["username"];
             if (!litleBatchRequest.config.ContainsKey("password")) litleBatchRequest.config["password"] = config["password"];
             if (!litleBatchRequest.config.ContainsKey("merchantId")) litleBatchRequest.config["merchantId"] = config["merchantId"];
-            if (!litleBatchRequest.config.ContainsKey("reportGroup")) litleBatchRequest.config["reportGroup"] = config["reportGroup"];
+            if (!litleBatchRequest.config.ContainsKey("reportGroup"))
+            {
+                litleBatchRequest.config["reportGroup"] = config["reportGroup"];
+                litleBatchRequest.updateReportGroup();
+            }
 
             listOfLitleBatchRequest.Add(litleBatchRequest);
         }

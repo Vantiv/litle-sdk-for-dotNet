@@ -4031,14 +4031,14 @@ namespace Litle.Sdk
         }
     }
 
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class litleResponse
     {
-        private string responseField;
-
-        private string messageField;
-
-        private string versionField;
-
         [XmlElementAttribute("id")]
         public string batchId;
 
@@ -4052,88 +4052,66 @@ namespace Litle.Sdk
         public string merchantId;
 
         [XmlAttributeAttribute()]
-        public string response
-        {
-            get
-            {
-                return this.responseField;
-            }
-            set
-            {
-                this.responseField = value;
-            }
-        }
+        public string response;
 
         [XmlAttributeAttribute()]
-        public string message
-        {
-            get
-            {
-                return this.messageField;
-            }
-            set
-            {
-                this.messageField = value;
-            }
-        }
+        public string message;
 
         [XmlAttributeAttribute()]
-        public string version
-        {
-            get
-            {
-                return this.versionField;
-            }
-            set
-            {
-                this.versionField = value;
-            }
-        }
+        public string version;
 
-        [XmlArray("litleResponse"), XmlArrayItem(typeof(litleBatchResponse), ElementName = "batchResponse")]
-        public List<litleBatchResponse> listOfLitleBatchResponse;
+        [XmlElement(typeof(batchResponse), ElementName = "batchResponse", IsNullable = false)]
+        public List<batchResponse> listOfLitleBatchResponse;
     }
 
-    public class litleBatchResponse
-    {  
-        [XmlArrayItem(typeof(authorizationResponse), ElementName = "authorizationResponse")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.Serializable()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public class batchResponse
+    {
+        [XmlElement(typeof(authorizationResponse), ElementName = "authorizationResponse", IsNullable = true)]
         public List<authorizationResponse> listOfAuthorizationResponse;
 
-        [XmlArrayItem(typeof(captureResponse), ElementName = "captureResponse")]
+        [XmlElement(typeof(captureResponse), ElementName = "captureResponse", IsNullable = true)]
         public List<captureResponse> listOfCaptureResponse;
 
-        [XmlArrayItem(typeof(forceCaptureResponse), ElementName = "forceCaptureResponse")]
+        [XmlElement(typeof(forceCaptureResponse), ElementName = "forceCaptureResponse", IsNullable = true)]
         public List<forceCaptureResponse> listOfForceCaptureResponse;
 
-        [XmlArrayItem(typeof(captureGivenAuthResponse), ElementName = "captureGivenAuthResponse")]
+        [XmlElement(typeof(captureGivenAuthResponse), ElementName = "captureGivenAuthResponse", IsNullable = true)]
         public List<captureGivenAuthResponse> listOfCaptureGivenAuthResponse;
 
-        [XmlArrayItem(typeof(saleResponse), ElementName = "saleResponse")]
+        [XmlElement(typeof(saleResponse), ElementName = "saleResponse", IsNullable = true)]
         public List<saleResponse> listOfSaleResponse;
 
-        [XmlArrayItem(typeof(creditResponse), ElementName = "creditResponse")]
+        [XmlElement(typeof(creditResponse), ElementName = "creditResponse", IsNullable = true)]
         public List<creditResponse> listOfCreditResponse;
 
-        [XmlArrayItem(typeof(echeckSalesResponse), ElementName = "echeckSalesResponse")]
+        [XmlElement(typeof(echeckSalesResponse), ElementName = "echeckSalesResponse", IsNullable = true)]
         public List<echeckSalesResponse> listOfEcheckSalesResponse;
 
-        [XmlArrayItem(typeof(echeckCreditResponse), ElementName = "echeckCreditResponse")]
+        [XmlElement(typeof(echeckCreditResponse), ElementName = "echeckCreditResponse", IsNullable = true)]
         public List<echeckCreditResponse> listOfEcheckCreditResponse;
 
-        [XmlArrayItem(typeof(echeckVerificationResponse), ElementName = "echeckVerificationResponse")]
+        [XmlElement(typeof(echeckVerificationResponse), ElementName = "echeckVerificationResponse", IsNullable = true)]
         public List<echeckVerificationResponse> listOfEcheckVerificationResponse;
 
-        [XmlArrayItem(typeof(echeckRedepositResponse), ElementName = "echeckRedepositResponse")]
+        [XmlElement(typeof(echeckRedepositResponse), ElementName = "echeckRedepositResponse", IsNullable = true)]
         public List<echeckRedepositResponse> listOfEcheckRedepositResponse;
 
-        [XmlArrayItem(typeof(authReversalResponse), ElementName = "authReversalResponse")]
+        [XmlElement(typeof(authReversalResponse), ElementName = "authReversalResponse", IsNullable = true)]
         public List<authReversalResponse> listOfAuthReversalResponse;
 
-        [XmlArrayItem(typeof(registerTokenResponse), ElementName = "registerTokenResponse")]
+        [XmlElement(typeof(registerTokenResponse), ElementName = "registerTokenResponse", IsNullable = true)]
         public List<registerTokenResponse> listOfRegisterTokenResponse;
 
-        [XmlArrayItem(typeof(updateCardValidationNumOnTokenResponse), ElementName = "updateCardValidationNumOnTokenResponse")]
+        [XmlElement(typeof(updateCardValidationNumOnTokenResponse), ElementName = "updateCardValidationNumOnTokenResponse", IsNullable = true)]
         public List<updateCardValidationNumOnTokenResponse> listOfUpdateCardValidationNumOnTokenResponse;
+
+
     }
 
     /// <remarks/>

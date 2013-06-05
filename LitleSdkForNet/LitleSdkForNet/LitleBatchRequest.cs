@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Litle.Sdk
 {
-    public partial class litleBatchRequest{
+    public partial class litleBatchRequest
+    {
 
         public string id;
 
@@ -387,6 +388,69 @@ namespace Litle.Sdk
             xml += "</batchRequest>";
 
             return xml;
+        }
+
+        public void updateReportGroup()
+        {
+            foreach (authorization a in listOfAuthorization)
+            {
+                fillInReportGroup(a);
+            }
+
+            foreach (capture c in listOfCapture)
+            {
+                fillInReportGroup(c);
+            }
+
+            foreach (sale s in listOfSale)
+            {
+                fillInReportGroup(s);
+            }
+
+            foreach (authReversal ar in listOfAuthReversal)
+            {
+                fillInReportGroup(ar);
+            }
+
+            foreach (echeckCredit e in listOfEcheckCredit)
+            {
+                fillInReportGroup(e);
+            }
+
+            foreach (echeckVerification e in listOfEcheckVerification)
+            {
+                fillInReportGroup(e);
+            }
+
+            foreach (echeckSale e in listOfEcheckSale)
+            {
+                fillInReportGroup(e);
+            }
+
+            foreach (registerTokenRequestType r in listOfRegisterTokenRequest)
+            {
+                fillInReportGroup(r);
+            }
+
+            foreach (forceCapture f in listOfForceCapture)
+            {
+                fillInReportGroup(f);
+            }
+
+            foreach (captureGivenAuth c in listOfCaptureGivenAuth)
+            {
+                fillInReportGroup(c);
+            }
+
+            foreach (echeckRedeposit e in listOfEcheckRedeposit)
+            {
+                fillInReportGroup(e);
+            }
+
+            foreach (updateCardValidationNumOnToken u in listOfUpdateCardValidationNumOnToken)
+            {
+                fillInReportGroup(u);
+            }
         }
 
         private void fillInReportGroup(transactionTypeWithReportGroup txn)
