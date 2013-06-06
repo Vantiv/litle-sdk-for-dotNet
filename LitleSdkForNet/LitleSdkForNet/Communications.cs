@@ -7,17 +7,18 @@ using System.Diagnostics;
 using System.Text;
 using System.Xml.XPath;
 using System.Net;
+using Tamir.SharpSsh.jsch;
 
 namespace Litle.Sdk
 {
     public class Communications
     {
-        virtual public string HttpPost(string xmlRequest, Dictionary<String,String> config)
+        virtual public string HttpPost(string xmlRequest, Dictionary<String, String> config)
         {
             string uri = config["url"];
             System.Net.ServicePointManager.Expect100Continue = false;
             System.Net.WebRequest req = System.Net.WebRequest.Create(uri);
-            if("true".Equals(config["printxml"])) 
+            if ("true".Equals(config["printxml"]))
             {
                 Console.WriteLine(xmlRequest);
             }
@@ -40,7 +41,7 @@ namespace Litle.Sdk
             System.Net.WebResponse resp = req.GetResponse();
             if (resp == null)
             {
-               return null;
+                return null;
             }
             string xmlResponse;
             using (var reader = new System.IO.StreamReader(resp.GetResponseStream()))
@@ -86,37 +87,58 @@ namespace Litle.Sdk
             }
 
             return resp.GetResponseStream();
-       
+
         }
 
         virtual public void FtpDropOff(string filePath, Dictionary<String, String> config)
         {
             string uri = config["sftpUrl"];
-            System.Net.ServicePointManager.Expect100Continue = false;
-            System.Net.FtpWebRequest req = (System.Net.FtpWebRequest) System.Net.FtpWebRequest.Create(uri);
+            string username = config["sftpUsername"];
+            string password = config["sftpPassword"];
+            string fileName = Path.GetFileName(filePath);
 
-            req.Method = System.Net.WebRequestMethods.Ftp.UploadFile;
-            req.Credentials = new NetworkCredential(config["sftpUsername"], config["sftpPassword"]);
+            //UserInfo userInfo = new MyUserInfo();
 
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
-            using(Stream ftpStream = req.GetRequestStream())
-            {
-                int bytesRead = 0;
-                byte[] buffer = new byte[1024];
+            JSch jsch = new JSch();
+            Session session = jsch.getSession(username, uri);
+            session.connect();
 
-                do
-                {
-                    bytesRead = fileStream.Read(buffer, 0, buffer.Length);
-                    ftpStream.Write(buffer, 0, bytesRead);
-                }
-                while (bytesRead > 0);
-            }
+            Channel channel = session.openChannel("sftp");
+            channel.connect();
+            ChannelSftp channelSftp = (ChannelSftp)channel;
 
-            FtpWebResponse response = (FtpWebResponse)req.GetResponse();
+            channelSftp.put(filePath, "litle/batches", ChannelSftp.OVERWRITE);
 
-            //Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+            channelSftp.rename("litle/batches/" + fileName, "litle/batches/README.xml");
 
-            response.Close();
+            channelSftp.quit();
+            session.disconnect();
+            //System.Net.ServicePointManager.Expect100Continue = false;
+            //System.Net.FtpWebRequest req = (System.Net.FtpWebRequest) System.Net.FtpWebRequest.Create(uri);
+
+
+            //req.Method = System.Net.WebRequestMethods.Ftp.UploadFile;
+            //req.Credentials = new NetworkCredential(config["sftpUsername"], config["sftpPassword"]);
+
+            //using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
+            //using (Stream ftpStream = req.GetRequestStream())
+            //{
+            //    int bytesRead = 0;
+            //    byte[] buffer = new byte[1024];
+
+            //    do
+            //    {
+            //        bytesRead = fileStream.Read(buffer, 0, buffer.Length);
+            //        ftpStream.Write(buffer, 0, bytesRead);
+            //    }
+            //    while (bytesRead > 0);
+            //}
+
+            //FtpWebResponse response = (FtpWebResponse)req.GetResponse();
+
+            ////Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+
+            //response.Close();
 
             //if ("true".Equals(config["printxml"]))
 
