@@ -37,18 +37,20 @@ namespace Litle.Sdk.Test.Unit
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleRequest.*<batchRequest.*<authorization.*<card>.*<number>4100000000000002</number>.*</card>.*</authorization>.*</batchRequest.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></batchResponse></litleResponse>");
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleRequest.*<batchRequest.*<authorization.*<card>.*<number>4100000000000002</number>.*</card>.*</authorization>.*<authorization.*<card>.*<number>4100000000000002</number>.*</card>.*</authorization>.*</batchRequest.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse><authorizationResponse><litleTxnId>124</litleTxnId></authorizationResponse></batchResponse></litleResponse>");
 
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addAuthorization(authorization);
             litleBatchRequest.addAuthorization(authorization);
             litle.addBatch(litleBatchRequest);
 
             litleResponse litleResponse = litle.sendToLitle();
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[1].litleTxnId);
         }
 
         [Test]
@@ -58,7 +60,6 @@ namespace Litle.Sdk.Test.Unit
             authreversal.litleTxnId = 12345678000;
             authreversal.amount = 106;
             authreversal.payPalNotes = "Notes";
-
 
             var mock = new Mock<Communications>();
 
@@ -466,6 +467,82 @@ namespace Litle.Sdk.Test.Unit
 
             litleResponse litleResponse = litle.sendToLitle();
             Assert.AreEqual("Default Report Group", litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].reportGroup);
+        }
+
+        [Test]
+        public void testLargeBatch()
+        {
+            authorization authorization = new authorization();
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000002";
+            card.expDate = "1210";
+            authorization.card = card;
+
+            sale sale = new sale();
+            sale.orderId = "12344";
+            sale.amount = 106;
+            sale.orderSource = orderSourceType.ecommerce;
+            sale.card = card;
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.addSale(sale);
+
+            litleBatchRequest litleBatchRequest2 = new litleBatchRequest();
+            litleBatchRequest2.addAuthorization(authorization);
+            litleBatchRequest2.addSale(sale);
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?" + 
+                "<batchRequest.*?<authorization.*? reportGroup=\"Default Report Group\">.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?" + 
+                "<sale.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</sale>*?</batchRequest.*?" +
+                "<batchRequest.*?<authorization.*? reportGroup=\"Default Report Group\">.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?" +
+                "<sale.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</sale>*?</batchRequest.*?"
+                , RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                
+                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>"+
+                "<batchResponse><authorizationResponse reportGroup='Default Report Group'><litleTxnId>123</litleTxnId></authorizationResponse><saleResponse><litleTxnId>123</litleTxnId></saleResponse></batchResponse>" + 
+                "<batchResponse><authorizationResponse reportGroup='Default Report Group'><litleTxnId>123</litleTxnId></authorizationResponse><saleResponse><litleTxnId>123</litleTxnId></saleResponse></batchResponse></litleResponse>");
+            
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+
+            litle.addBatch(litleBatchRequest);
+            litle.addBatch(litleBatchRequest2);
+
+            litleResponse litleResponse = litle.sendToLitle();
+            Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfSaleResponse[0].litleTxnId);
+            Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[1].listOfSaleResponse[0].litleTxnId);
+            Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId);
+            Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[1].listOfAuthorizationResponse[0].litleTxnId);
+        }
+
+        [Test]
+        public void testSerializeToFile()
+        {
+            string filePath = "";
+            authorization authorization = new authorization();
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000002";
+            card.expDate = "1210";
+            authorization.card = card;
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addAuthorization(authorization);
+            filePath = litle.addBatch(litleBatchRequest);
+
+            string resultFile = litle.SerializeToFile(filePath);
+
+            Assert.IsTrue(resultFile.Contains(DateTime.Now.ToString("MM-dd-yyyy")));
         }
     }
 }

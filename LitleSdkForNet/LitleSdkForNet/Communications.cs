@@ -91,12 +91,12 @@ namespace Litle.Sdk
 
         virtual public void FtpDropOff(string filePath, Dictionary<String, String> config)
         {
-            string uri = config["url"];
+            string uri = config["sftpUrl"];
             System.Net.ServicePointManager.Expect100Continue = false;
             System.Net.FtpWebRequest req = (System.Net.FtpWebRequest) System.Net.FtpWebRequest.Create(uri);
 
             req.Method = System.Net.WebRequestMethods.Ftp.UploadFile;
-            req.Credentials = new NetworkCredential(config["username"], config["password"]);
+            req.Credentials = new NetworkCredential(config["sftpUsername"], config["sftpPassword"]);
 
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
             using(Stream ftpStream = req.GetRequestStream())

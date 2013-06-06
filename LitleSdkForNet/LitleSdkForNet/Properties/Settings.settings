@@ -29,5 +29,14 @@
     <Setting Name="merchantId" Type="System.String" Scope="User">
       <Value Profile="(Default)">101</Value>
     </Setting>
+    <Setting Name="sftpUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sftp://litle.com/something</Value>
+    </Setting>
+    <Setting Name="sftpUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="sftpPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

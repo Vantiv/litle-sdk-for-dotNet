@@ -33,6 +33,11 @@ namespace Litle.Sdk
             config["merchantId"] = Properties.Settings.Default.merchantId;
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
+            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
+            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
+            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+
+            communication = new Communications();
 
             listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
@@ -66,7 +71,7 @@ namespace Litle.Sdk
             this.communication = communication;
         }
 
-        public void addBatch(litleBatchRequest litleBatchRequest)
+        public string addBatch(litleBatchRequest litleBatchRequest)
         {
             fillInReportGroup(litleBatchRequest);
 
@@ -82,6 +87,8 @@ namespace Litle.Sdk
             listOfLitleBatchRequest.Add(litleBatchRequest);
             fPath = SerializeBatchRequestToFile(litleBatchRequest, fPath);
             numOfLitleBatchRequest++;
+
+            return fPath;
         }
 
         public litleResponse sendToLitle()

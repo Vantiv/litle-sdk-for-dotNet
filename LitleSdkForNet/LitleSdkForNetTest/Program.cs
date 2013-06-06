@@ -13,7 +13,7 @@ namespace LitleSdkForNetTest
             Litle.Sdk.Test.Unit.TestLitleOnlineBatch testLitleOnlineBatch = new Litle.Sdk.Test.Unit.TestLitleOnlineBatch();
 
             testLitleOnlineBatch.SetUpLitle();
-            testLitleOnlineBatch.testDefaultReportGroup();
+            testLitleOnlineBatch.testLargeBatch();
 
 
             string[] my_args = { Assembly.GetExecutingAssembly().Location };
