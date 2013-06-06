@@ -88,5 +88,38 @@ namespace Litle.Sdk
             return resp.GetResponseStream();
        
         }
+
+        virtual public void FtpDropOff(string filePath, Dictionary<String, String> config)
+        {
+            string uri = config["url"];
+            System.Net.ServicePointManager.Expect100Continue = false;
+            System.Net.FtpWebRequest req = (System.Net.FtpWebRequest) System.Net.FtpWebRequest.Create(uri);
+
+            req.Method = System.Net.WebRequestMethods.Ftp.UploadFile;
+            req.Credentials = new NetworkCredential(config["username"], config["password"]);
+
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
+            using(Stream ftpStream = req.GetRequestStream())
+            {
+                int bytesRead = 0;
+                byte[] buffer = new byte[1024];
+
+                do
+                {
+                    bytesRead = fileStream.Read(buffer, 0, buffer.Length);
+                    ftpStream.Write(buffer, 0, bytesRead);
+                }
+                while (bytesRead > 0);
+            }
+
+            FtpWebResponse response = (FtpWebResponse)req.GetResponse();
+
+            //Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
+
+            response.Close();
+
+            //if ("true".Equals(config["printxml"]))
+
+        }
     }
 }

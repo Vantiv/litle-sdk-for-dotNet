@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace Litle.Sdk
 {
-    public class LitleOnlineBatch
+    public class LitleBatch
     {
 
         private Dictionary<String, String> config;
@@ -20,7 +20,7 @@ namespace Litle.Sdk
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
-        public LitleOnlineBatch()
+        public LitleBatch()
         {
             config = new Dictionary<string, string>();
 
@@ -53,7 +53,7 @@ namespace Litle.Sdk
          * proxyPort
          * printxml (possible values "true" and "false" - defaults to false)
          */
-        public LitleOnlineBatch(Dictionary<String, String> config)
+        public LitleBatch(Dictionary<String, String> config)
         {
             this.config = config;
             communication = new Communications();
@@ -87,10 +87,7 @@ namespace Litle.Sdk
         public litleResponse sendToLitle()
         {
             string xmlRequest = this.Serialize();
-            SerializeToFile(fPath);
-            //string requestFileName = this.SerializeToFile(filePath);
             string xmlResponse = communication.HttpPost(xmlRequest, config);
-            //string responseFileName = communication.FtpSend(requestFileName, config);
             try
             {
                 litleResponse litleResponse = DeserializeObject(xmlResponse);
@@ -109,9 +106,8 @@ namespace Litle.Sdk
 
         public litleResponse sendToLitle_File()
         {
-            //string xmlRequest = this.Serialize();
             string requestFileName = this.SerializeToFile(fPath);
-            //string xmlResponse = communication.HttpPost(xmlRequest, config);
+
             //string responseFileName = communication.FtpSend(requestFileName, config);
             //try
             //{
@@ -144,7 +140,7 @@ namespace Litle.Sdk
                 }
 
 
-                string fileName = RandomGen.NextString(8); 
+                string fileName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ffff_") + RandomGen.NextString(8);
                 fileName += "_temp.xml";
 
                 filePath = directoryPath + fileName;
@@ -175,12 +171,8 @@ namespace Litle.Sdk
 
             string xmlFooter = "\r\n</litleRequest>";
 
-            //string currentPath = Environment.CurrentDirectory.ToString();
-            //string parentPath = Directory.GetParent(currentPath).ToString();
-            //string directoryPath = parentPath + "/batches/";
             string filePath;
             filePath = tempFilePath;
-            //filePath.Replace("temp_temp.xml", "temp.xml");
             filePath = filePath.Replace("_temp.xml", ".xml");
 
             Console.WriteLine(tempFilePath);
@@ -203,17 +195,20 @@ namespace Litle.Sdk
                 {
                     bytesRead = fsr.Read(buffer, 0, buffer.Length);
                     fs.Write(buffer, 0, bytesRead);
-                } 
+                }
                 while (bytesRead > 0);
             }
 
             using (FileStream fs = new FileStream(filePath, FileMode.Append))
             using (StreamWriter sw = new StreamWriter(fs))
-            {             
+            {
                 sw.Write(xmlFooter);
             }
 
             File.Delete(tempFilePath);
+
+            fPath = null;
+
             return filePath;
         }
 
@@ -265,6 +260,7 @@ namespace Litle.Sdk
 
     }
 
+
     public static class RandomGen
     {
         private static RNGCryptoServiceProvider _global = new RNGCryptoServiceProvider();
@@ -274,11 +270,12 @@ namespace Litle.Sdk
             Random inst = _local;
             if (inst == null)
             {
-                byte[] buffer = new byte[4];
+                byte[] buffer = new byte[8];
                 _global.GetBytes(buffer);
                 _local = inst = new Random(BitConverter.ToInt32(buffer, 0));
             }
-            return inst.Next();
+         
+            return _local.Next();
         }
 
         public static string NextString(int length)
@@ -287,10 +284,11 @@ namespace Litle.Sdk
 
             for (int i = 0; i < length; i++)
             {
-                result += Convert.ToChar(NextInt() % ('A' - 'Z') + 'A');
+                result += Convert.ToChar(NextInt() % ('Z' - 'A') + 'A');
             }
 
             return result;
         }
     }
+
 }

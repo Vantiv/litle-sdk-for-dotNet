@@ -13,12 +13,12 @@ namespace Litle.Sdk.Test.Unit
     class TestLitleOnlineBatch
     {
 
-        private LitleOnlineBatch litle;
+        private LitleBatch litle;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            litle = new LitleOnlineBatch();
+            litle = new LitleBatch();
         }
 
         [Test]
