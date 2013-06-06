@@ -197,10 +197,14 @@ namespace Litle.Sdk
             {
                 byte[] buffer = new byte[16];
 
-                while (fsr.Read(buffer, 0, buffer.Length) > 0)
+                int bytesRead = 0;
+
+                do
                 {
-                    fs.Write(buffer, 0, buffer.Length);
-                }
+                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
+                    fs.Write(buffer, 0, bytesRead);
+                } 
+                while (bytesRead > 0);
             }
 
             using (FileStream fs = new FileStream(filePath, FileMode.Append))
