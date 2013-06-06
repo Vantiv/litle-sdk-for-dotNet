@@ -8,6 +8,7 @@ using System.Text;
 using System.Xml.XPath;
 using System.Net;
 using Tamir.SharpSsh.jsch;
+using Tamir.SharpSsh;
 
 namespace Litle.Sdk
 {
@@ -99,20 +100,30 @@ namespace Litle.Sdk
 
             //UserInfo userInfo = new MyUserInfo();
 
-            JSch jsch = new JSch();
-            Session session = jsch.getSession(username, uri);
-            session.connect();
+            SshConnectionInfo info = new SshConnectionInfo();
+            info.Host = uri;
+            info.User = username;
+            info.Pass = password;
+            Sftp sshCp = new Sftp(uri, username);
+            sshCp.Connect();
 
-            Channel channel = session.openChannel("sftp");
-            channel.connect();
-            ChannelSftp channelSftp = (ChannelSftp)channel;
+            sshCp.Put(filePath, "/inbound/" + fileName);
+            sshCp.Close();
 
-            channelSftp.put(filePath, "litle/batches", ChannelSftp.OVERWRITE);
 
-            channelSftp.rename("litle/batches/" + fileName, "litle/batches/README.xml");
+            //JSch jsch = new JSch();
+            //Session session = jsch.getSession(username, uri);
+            //session.connect();
 
-            channelSftp.quit();
-            session.disconnect();
+            //ChannelSftp channelSftp = (ChannelSftp)session.openChannel("sftp");
+            //channelSftp.connect();
+
+            //channelSftp.put(filePath, "/inbound/", ChannelSftp.OVERWRITE);
+
+            //channelSftp.rename("/inbound/" + fileName, "/inbound/" + fileName + ".asc");
+
+            //channelSftp.quit();
+            //session.disconnect();
             //System.Net.ServicePointManager.Expect100Continue = false;
             //System.Net.FtpWebRequest req = (System.Net.FtpWebRequest) System.Net.FtpWebRequest.Create(uri);
 
@@ -142,6 +153,14 @@ namespace Litle.Sdk
 
             //if ("true".Equals(config["printxml"]))
 
+        }
+
+        public struct SshConnectionInfo
+        {
+            public string Host;
+            public string User;
+            public string Pass;
+            public string IdentityFile;
         }
     }
 }

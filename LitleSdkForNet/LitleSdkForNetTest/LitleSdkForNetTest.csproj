@@ -71,6 +71,7 @@
     <Compile Include="Certification\TestCert4Echeck.cs" />
     <Compile Include="Certification\TestCert5Token.cs" />
     <Compile Include="Certification\TestCert1Base.cs" />
+    <Compile Include="Certification\TestCert6Batch.cs" />
     <Compile Include="Functional\TestAuthReversal.cs" />
     <Compile Include="Functional\TestCapture.cs" />
     <Compile Include="Functional\TestCaptureGivenAuth.cs" />

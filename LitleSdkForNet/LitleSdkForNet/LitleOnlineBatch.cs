@@ -111,26 +111,11 @@ namespace Litle.Sdk
             }
         }
 
-        public litleResponse sendToLitle_File()
+        public void sendToLitle_File()
         {
-            string requestFileName = this.SerializeToFile(fPath);
+            string requestFilePath = this.SerializeToFile(fPath);
 
-            //string responseFileName = communication.FtpSend(requestFileName, config);
-            //try
-            //{
-            //    litleResponse litleResponse = DeserializeObject(xmlResponse);
-            //    if ("1".Equals(litleResponse))
-            //    {
-            //        throw new LitleOnlineException(litleResponse.message);
-            //    }
-            //    return litleResponse;
-            //}
-            //catch (InvalidOperationException ioe)
-            //{
-            //    throw new LitleOnlineException("Error validating xml data against the schema", ioe);
-            //}
-
-            return null;
+            communication.FtpDropOff(requestFilePath, config);
         }
 
         public string SerializeBatchRequestToFile(litleBatchRequest litleBatchRequest, string filePath)
