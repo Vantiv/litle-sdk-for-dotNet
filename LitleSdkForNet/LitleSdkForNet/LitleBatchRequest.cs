@@ -385,7 +385,7 @@ namespace Litle.Sdk
                 }
             }
 
-            xml += "</batchRequest>";
+            xml += "</batchRequest>\r\n";
 
             return xml;
         }

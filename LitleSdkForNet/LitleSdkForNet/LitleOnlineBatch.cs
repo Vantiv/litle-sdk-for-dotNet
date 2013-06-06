@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace Litle.Sdk
 {
@@ -13,6 +14,8 @@ namespace Litle.Sdk
         private Dictionary<String, String> config;
         private Communications communication;
         private List<litleBatchRequest> listOfLitleBatchRequest;
+        private int numOfLitleBatchRequest = 0;
+        private string fPath = null;
 
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
@@ -77,12 +80,17 @@ namespace Litle.Sdk
             }
 
             listOfLitleBatchRequest.Add(litleBatchRequest);
+            fPath = SerializeBatchRequestToFile(litleBatchRequest, fPath);
+            numOfLitleBatchRequest++;
         }
 
         public litleResponse sendToLitle()
         {
             string xmlRequest = this.Serialize();
+            SerializeToFile(fPath);
+            //string requestFileName = this.SerializeToFile(filePath);
             string xmlResponse = communication.HttpPost(xmlRequest, config);
+            //string responseFileName = communication.FtpSend(requestFileName, config);
             try
             {
                 litleResponse litleResponse = DeserializeObject(xmlResponse);
@@ -90,12 +98,119 @@ namespace Litle.Sdk
                 {
                     throw new LitleOnlineException(litleResponse.message);
                 }
+
                 return litleResponse;
             }
             catch (InvalidOperationException ioe)
             {
                 throw new LitleOnlineException("Error validating xml data against the schema", ioe);
             }
+        }
+
+        public litleResponse sendToLitle_File()
+        {
+            //string xmlRequest = this.Serialize();
+            string requestFileName = this.SerializeToFile(fPath);
+            //string xmlResponse = communication.HttpPost(xmlRequest, config);
+            //string responseFileName = communication.FtpSend(requestFileName, config);
+            //try
+            //{
+            //    litleResponse litleResponse = DeserializeObject(xmlResponse);
+            //    if ("1".Equals(litleResponse))
+            //    {
+            //        throw new LitleOnlineException(litleResponse.message);
+            //    }
+            //    return litleResponse;
+            //}
+            //catch (InvalidOperationException ioe)
+            //{
+            //    throw new LitleOnlineException("Error validating xml data against the schema", ioe);
+            //}
+
+            return null;
+        }
+
+        public string SerializeBatchRequestToFile(litleBatchRequest litleBatchRequest, string filePath)
+        {
+            if (filePath == null)
+            {
+                string currentPath = Environment.CurrentDirectory.ToString();
+                string parentPath = Directory.GetParent(currentPath).ToString();
+                string directoryPath = parentPath + "/batches/";
+
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+
+                string fileName = RandomGen.NextString(8); 
+                fileName += "_temp.xml";
+
+                filePath = directoryPath + fileName;
+
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                }
+            }
+
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Append))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.Write(litleBatchRequest.Serialize());
+                }
+            }
+
+
+            return filePath;
+        }
+
+        public string SerializeToFile(string tempFilePath)
+        {
+            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"8.17\"" +
+             " xmlns=\"http://www.litle.com/schema\" " +
+             "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
+
+            string xmlFooter = "\r\n</litleRequest>";
+
+            //string currentPath = Environment.CurrentDirectory.ToString();
+            //string parentPath = Directory.GetParent(currentPath).ToString();
+            //string directoryPath = parentPath + "/batches/";
+            string filePath;
+            filePath = tempFilePath;
+            //filePath.Replace("temp_temp.xml", "temp.xml");
+            filePath = filePath.Replace("_temp.xml", ".xml");
+
+            Console.WriteLine(tempFilePath);
+            Console.WriteLine(filePath);
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.Write(xmlHeader);
+            }
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Append))
+            using (FileStream fsr = new FileStream(tempFilePath, FileMode.Open))
+            {
+                byte[] buffer = new byte[16];
+
+                while (fsr.Read(buffer, 0, buffer.Length) > 0)
+                {
+                    fs.Write(buffer, 0, buffer.Length);
+                }
+            }
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Append))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {             
+                sw.Write(xmlFooter);
+            }
+
+            File.Delete(tempFilePath);
+            return filePath;
         }
 
         public string Serialize()
@@ -121,6 +236,12 @@ namespace Litle.Sdk
             return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
         }// serialize the xml
 
+        public static String SerializeObjectToFile(litleOnlineRequest req)
+        {
+
+            return "filename";
+        }
+
         public static litleResponse DeserializeObject(string response)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));
@@ -137,6 +258,35 @@ namespace Litle.Sdk
                 litleBatchRequest.reportGroup = config["reportGroup"];
             }
         }
+
     }
 
+    public static class RandomGen
+    {
+        private static RNGCryptoServiceProvider _global = new RNGCryptoServiceProvider();
+        private static Random _local;
+        public static int NextInt()
+        {
+            Random inst = _local;
+            if (inst == null)
+            {
+                byte[] buffer = new byte[4];
+                _global.GetBytes(buffer);
+                _local = inst = new Random(BitConverter.ToInt32(buffer, 0));
+            }
+            return inst.Next();
+        }
+
+        public static string NextString(int length)
+        {
+            string result = "";
+
+            for (int i = 0; i < length; i++)
+            {
+                result += Convert.ToChar(NextInt() % ('A' - 'Z') + 'A');
+            }
+
+            return result;
+        }
+    }
 }
