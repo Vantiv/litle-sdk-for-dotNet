@@ -36,6 +36,7 @@ namespace Litle.Sdk
             config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
             config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
             config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
 
             communication = new Communications();
 
@@ -111,12 +112,22 @@ namespace Litle.Sdk
             }
         }
 
-        public void sendToLitle_File()
+        public string sendToLitle_File()
         {
             string requestFilePath = this.SerializeToFile(fPath);
 
             communication.FtpDropOff(requestFilePath, config);
+            return Path.GetFileName(requestFilePath);
         }
+
+        public litleResponse receiveFromLitle_File(string destinationFilePath, string fileName)
+        {
+            communication.FtpPickUp(destinationFilePath, config, fileName);
+
+            litleResponse litleResponse = (litleResponse)LitleBatch.DeserializeObjectFromFile(destinationFilePath);
+            return litleResponse;
+        }
+
 
         public string SerializeBatchRequestToFile(litleBatchRequest litleBatchRequest, string filePath)
         {
@@ -237,6 +248,15 @@ namespace Litle.Sdk
         {
             XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));
             StringReader reader = new StringReader(response);
+            litleResponse i = (litleResponse)serializer.Deserialize(reader);
+            return i;
+
+        }// deserialize the object
+
+        public static litleResponse DeserializeObjectFromFile(string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));
+            XmlTextReader reader = new XmlTextReader(filePath);
             litleResponse i = (litleResponse)serializer.Deserialize(reader);
             return i;
 

@@ -10,10 +10,10 @@ namespace LitleSdkForNetTest
         [STAThread]
         static void Main(string[] args)
         {
-            Litle.Sdk.Test.Unit.TestLitleOnlineBatch testLitleOnlineBatch = new Litle.Sdk.Test.Unit.TestLitleOnlineBatch();
+            Litle.Sdk.Test.Certification.TestCert6Batch test = new Litle.Sdk.Test.Certification.TestCert6Batch();
 
-            testLitleOnlineBatch.SetUpLitle();
-            testLitleOnlineBatch.testLargeBatch();
+            test.setUp();
+            test.Test1Auth();
 
 
             string[] my_args = { Assembly.GetExecutingAssembly().Location };

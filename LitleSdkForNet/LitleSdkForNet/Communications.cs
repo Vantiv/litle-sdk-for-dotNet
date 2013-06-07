@@ -125,6 +125,39 @@ namespace Litle.Sdk
             session.disconnect();
         }
 
+        virtual public void FtpPickUp(string destinationFilePath, Dictionary<String, String> config, string fileName)
+        {
+            ChannelSftp channelSftp = null;
+            Channel channel;
+
+            string currentPath = Environment.CurrentDirectory.ToString();
+            string parentPath = Directory.GetParent(currentPath).ToString();
+
+            string url = config["sftpUrl"];
+            string username = config["sftpUsername"];
+            string password = config["sftpPassword"];
+            string knownHostsFile = parentPath + "\\" + config["knownHostsFile"];
+
+            JSch jsch = new JSch();
+            jsch.setKnownHosts(knownHostsFile);
+            Console.WriteLine("known hosts file set: " + knownHostsFile);
+
+            Session session = jsch.getSession(username, url);
+            session.setPassword(password);
+
+            session.connect();
+
+            channel = session.openChannel("sftp");
+            channel.connect();
+            channelSftp = (ChannelSftp)channel;
+
+            channelSftp.get("outbound/" + fileName + ".asc", destinationFilePath);
+            channelSftp.quit();
+
+            session.disconnect();
+
+        }
+
         public struct SshConnectionInfo
         {
             public string Host;

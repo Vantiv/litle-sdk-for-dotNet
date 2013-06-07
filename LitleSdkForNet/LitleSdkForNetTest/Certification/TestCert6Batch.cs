@@ -54,7 +54,11 @@ namespace Litle.Sdk.Test.Certification
 
             litleBatchRequest.addAuthorization(authorization);
             litle.addBatch(litleBatchRequest);
-            litle.sendToLitle_File();
+            string batchName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
+            Assert.NotNull(litleResponse);
+            Assert.AreSame(litleResponse.response, "000");
+            //Assert.AreSame(litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId, 
             //litleResponse litleResponse = litle.sendToLitle_File();
 
 

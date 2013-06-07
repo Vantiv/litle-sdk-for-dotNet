@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Communications.cs" />
     <Compile Include="LitleBatchRequest.cs" />
-    <Compile Include="LitleOnlineBatch.cs" />
+    <Compile Include="LitleBatch.cs" />
     <Compile Include="LitleOnlineException.cs" />
     <Compile Include="LitleOnline.cs" />
     <Compile Include="Settings.cs" />

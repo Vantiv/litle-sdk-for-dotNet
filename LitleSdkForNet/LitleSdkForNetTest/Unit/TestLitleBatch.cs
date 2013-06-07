@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestLitleOnlineBatch
+    class TestLitleBatch
     {
 
         private LitleBatch litle;
