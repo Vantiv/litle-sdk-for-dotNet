@@ -10,7 +10,6 @@ namespace Litle.Sdk
         public string id;
 
         public string merchantId;
-        public string merchantSdk;
 
         public int numAccountUpdates;
         public string reportGroup;
@@ -226,7 +225,7 @@ namespace Litle.Sdk
                 }
 
                 xml += "numEcheckSales=\"" + listOfEcheckSale.Count + "\"\r\n";
-                xml += "echeckSaleAmount=\"" + sum + "\"\r\n";
+                xml += "echeckSalesAmount=\"" + sum + "\"\r\n";
             }
 
             if (listOfEcheckCredit != null)
@@ -261,7 +260,7 @@ namespace Litle.Sdk
             }
 
             // to ask about accountUpdate
-            xml += "numAccountUpdate=\"" + numAccountUpdates + "\"\r\n";
+            xml += "numAccountUpdates=\"" + numAccountUpdates + "\"\r\n";
 
             if (listOfRegisterTokenRequest != null)
             {
@@ -273,13 +272,7 @@ namespace Litle.Sdk
                 xml += "numUpdateCardValidationNumOnTokens=\"" + listOfUpdateCardValidationNumOnToken.Count + "\"\r\n";
             }
 
-            xml += "merchantId=\"" + config["merchantId"] + "\"\r\n";
-            xml += "merchantSdk=\"" + merchantSdk + "\">\r\n";
-
-            authentication.user = config["username"];
-            authentication.password = config["password"];
-
-            xml += authentication.Serialize();
+            xml += "merchantId=\"" + config["merchantId"] + "\">\r\n";
 
             if (listOfAuthorization != null)
             {

@@ -10,9 +10,10 @@ namespace Litle.Sdk
 {
     public class LitleBatch
     {
-
+        private authentication authentication;
         private Dictionary<String, String> config;
         private Communications communication;
+        private litleXmlSerializer litleXmlSerializer;
         private List<litleBatchRequest> listOfLitleBatchRequest;
         private int numOfLitleBatchRequest = 0;
         private string fPath = null;
@@ -40,6 +41,12 @@ namespace Litle.Sdk
 
             communication = new Communications();
 
+            authentication = new authentication();
+            authentication.user = config["username"];
+            authentication.password = config["password"];
+
+            litleXmlSerializer = new litleXmlSerializer();
+
             listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
 
@@ -64,12 +71,21 @@ namespace Litle.Sdk
             this.config = config;
             communication = new Communications();
 
+            authentication = new authentication();
+            authentication.user = config["username"];
+            authentication.password = config["password"];
+
             listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
 
         public void setCommunication(Communications communication)
         {
             this.communication = communication;
+        }
+
+        public void setLitleXmlSerializer(litleXmlSerializer litleXmlSerializer)
+        {
+            this.litleXmlSerializer = litleXmlSerializer;
         }
 
         public string addBatch(litleBatchRequest litleBatchRequest)
@@ -98,7 +114,7 @@ namespace Litle.Sdk
             string xmlResponse = communication.HttpPost(xmlRequest, config);
             try
             {
-                litleResponse litleResponse = DeserializeObject(xmlResponse);
+                litleResponse litleResponse = litleXmlSerializer.DeserializeObject(xmlResponse);
                 if ("1".Equals(litleResponse))
                 {
                     throw new LitleOnlineException(litleResponse.message);
@@ -120,14 +136,19 @@ namespace Litle.Sdk
             return Path.GetFileName(requestFilePath);
         }
 
+
+        public void blockUntilResponse(string fileName, int timeOut)
+        {
+            communication.FtpPoll(fileName, timeOut, config);
+        }
+
         public litleResponse receiveFromLitle_File(string destinationFilePath, string fileName)
         {
             communication.FtpPickUp(destinationFilePath, config, fileName);
 
-            litleResponse litleResponse = (litleResponse)LitleBatch.DeserializeObjectFromFile(destinationFilePath);
+            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(destinationFilePath);
             return litleResponse;
         }
-
 
         public string SerializeBatchRequestToFile(litleBatchRequest litleBatchRequest, string filePath)
         {
@@ -185,6 +206,7 @@ namespace Litle.Sdk
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.Write(xmlHeader);
+                sw.Write(authentication.Serialize());
             }
 
             using (FileStream fs = new FileStream(filePath, FileMode.Append))
@@ -229,38 +251,6 @@ namespace Litle.Sdk
             xml += "\r\n</litleRequest>";
             return xml;
         }
-
-        public static String SerializeObject(litleOnlineRequest req)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineRequest));
-            MemoryStream ms = new MemoryStream();
-            serializer.Serialize(ms, req);
-            return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
-        }// serialize the xml
-
-        public static String SerializeObjectToFile(litleOnlineRequest req)
-        {
-
-            return "filename";
-        }
-
-        public static litleResponse DeserializeObject(string response)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));
-            StringReader reader = new StringReader(response);
-            litleResponse i = (litleResponse)serializer.Deserialize(reader);
-            return i;
-
-        }// deserialize the object
-
-        public static litleResponse DeserializeObjectFromFile(string filePath)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));
-            XmlTextReader reader = new XmlTextReader(filePath);
-            litleResponse i = (litleResponse)serializer.Deserialize(reader);
-            return i;
-
-        }// deserialize the object
 
         private void fillInReportGroup(litleBatchRequest litleBatchRequest)
         {

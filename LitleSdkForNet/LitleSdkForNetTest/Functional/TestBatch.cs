@@ -9,6 +9,7 @@ namespace Litle.Sdk.Test.Certification
     [TestFixture]
     class TestCert6Batch
     {
+        private string responseDir = "C:\\RESPONSES\\";
         private LitleBatch litle;
 
         [TestFixtureSetUp]
@@ -51,48 +52,215 @@ namespace Litle.Sdk.Test.Certification
             authorization.card = card;
 
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
-
             litleBatchRequest.addAuthorization(authorization);
             litle.addBatch(litleBatchRequest);
+
+            string batchName = litle.sendToLitle_File();
+
+            litle.blockUntilResponse(batchName, (int)(3 * 60 * 1000 + 2.5 * 1000 + (1/5) * 1000));
+
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreSame("0", litleResponse.response);
+        }
+
+
+        [Test]
+        public void SimpleAuthWithCard()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333"; //This needs to compile too            
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addAuthorization(authorization);
+            litle.addBatch(litleBatchRequest);
+
             string batchName = litle.sendToLitle_File();
             litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
+
             Assert.NotNull(litleResponse);
-            Assert.AreSame(litleResponse.response, "000");
-            //Assert.AreSame(litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId, 
-            //litleResponse litleResponse = litle.sendToLitle_File();
+            Assert.AreSame("0", litleResponse.response);
+        }
+
+        [Test]
+        public void simpleAuthWithPaypal()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "123456";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            payPal paypal = new payPal();
+            paypal.payerId = "1234";
+            paypal.token = "1234";
+            paypal.transactionId = "123456";
+            authorization.paypal = paypal; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333"; //This needs to compile too            
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addAuthorization(authorization);
+            litle.addBatch(litleBatchRequest);
+
+            string batchName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreEqual("Approved", litleResponse.message);
+        }
+
+        [Test]
+        public void posWithoutCapabilityAndEntryMode()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            pos pos = new pos();
+            pos.cardholderId = posCardholderIdTypeEnum.pin;
+            authorization.pos = pos;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000002";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333"; //This needs to compile too            
+
+            try
+            {
+                litleBatchRequest litleBatchRequest = new litleBatchRequest();
+                litleBatchRequest.addAuthorization(authorization);
+                litle.addBatch(litleBatchRequest);
+                //expected exception;
+            }
+            catch (LitleOnlineException e)
+            {
+                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+            }
+        }
+
+        [Test]
+        public void trackData()
+        {
+            authorization authorization = new authorization();
+            authorization.id = "AX54321678";
+            authorization.reportGroup = "RG27";
+            authorization.orderId = "12z58743y1";
+            authorization.amount = 12522L;
+            authorization.orderSource = orderSourceType.retail;
+            contact billToAddress = new contact();
+            billToAddress.zip = "95032";
+            authorization.billToAddress = billToAddress;
+            cardType card = new cardType();
+            card.track = "%B40000001^Doe/JohnP^06041...?;40001=0604101064200?";
+            authorization.card = card;
+            pos pos = new pos();
+            pos.capability = posCapabilityTypeEnum.magstripe;
+            pos.entryMode = posEntryModeTypeEnum.completeread;
+            pos.cardholderId = posCardholderIdTypeEnum.signature;
+            authorization.pos = pos;
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addAuthorization(authorization);
+            litle.addBatch(litleBatchRequest);
+
+            string batchName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreEqual("Approved", litleResponse.message);
+        }
 
 
-            //capture capture = new capture();
-            //capture.litleTxnId = response.litleTxnId;
+        [Test]
+        public void SimpleAuthReversal()
+        {
+            authReversal reversal = new authReversal();
+            reversal.litleTxnId = 12345678000L;
+            reversal.amount = 106;
+            reversal.payPalNotes = "Notes";
 
-            //litleBatchRequest.addCapture(capture);
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchFileName, batchFileName);
 
+            Assert.AreEqual("Approved", litleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse[0].message);
+        }
 
+        [Test]
+        public void SimpleCapture()
+        {
+            capture capture = new capture();
+            capture.litleTxnId = 123456000;
+            capture.amount = 106;
+            capture.payPalNotes = "Notes";
 
-            //credit credit = new credit();
-            //credit.litleTxnId = captureResponse.litleTxnId;
-            //creditResponse creditResponse = litle.Credit(credit);
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addCapture(capture);
+            litle.addBatch(litleBatchRequest);
 
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchFileName, batchFileName);
 
-            //voidTxn newvoid = new voidTxn();
+            Assert.AreEqual("Approved", litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[0].message);
+        }
 
-            //            Assert.AreEqual("000", response.response);
-            //Assert.AreEqual("Approved", response.message);
-            //Assert.AreEqual("11111 ", response.authCode);
-            //Assert.AreEqual("01", response.fraudResult.avsResult);
-            //Assert.AreEqual("M", response.fraudResult.cardValidationResult);
+        [Test]
+        public void simpleCaptureWithPartial()
+        {
+            capture capture = new capture();
+            capture.litleTxnId = 123456000;
+            capture.amount = 106;
+            capture.partial = true;
+            capture.payPalNotes = "Notes";
 
-            //            captureResponse captureResponse = litle.Capture(capture);
-            //Assert.AreEqual("000", captureResponse.response);
-            //Assert.AreEqual("Approved", captureResponse.message);
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addCapture(capture);
+            litle.addBatch(litleBatchRequest);
 
-            //            Assert.AreEqual("000", creditResponse.response);
-            //Assert.AreEqual("Approved", creditResponse.message);
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchFileName, batchFileName);
 
-            //newvoid.litleTxnId = creditResponse.litleTxnId;
-            //litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            //Assert.AreEqual("000", voidResponse.response);
-            //Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("Approved", litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[0].message);
+        }
+
+        [Test]
+        public void complexCapture()
+        {
+            capture capture = new capture();
+            capture.litleTxnId = 123456000;
+            capture.amount = 106;
+            capture.payPalNotes = "Notes";
+            enhancedData enhanceddata = new enhancedData();
+            enhanceddata.customerReference = "Litle";
+            enhanceddata.salesTax = 50;
+            enhanceddata.deliveryType = enhancedDataDeliveryType.TBD;
+            capture.enhancedData = enhanceddata;
+            capture.payPalOrderComplete = true;
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addCapture(capture);
+            litle.addBatch(litleBatchRequest);
+
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchFileName, batchFileName);
+
+            Assert.AreEqual("Approved", litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[0].message);
         }
 
         //[Test]

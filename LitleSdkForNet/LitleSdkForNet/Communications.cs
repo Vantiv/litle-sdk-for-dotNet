@@ -9,6 +9,7 @@ using System.Xml.XPath;
 using System.Net;
 using Tamir.SharpSsh.jsch;
 using Tamir.SharpSsh;
+using System.Timers;
 
 namespace Litle.Sdk
 {
@@ -107,7 +108,6 @@ namespace Litle.Sdk
 
             JSch jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);
-            Console.WriteLine("known hosts file set: " + knownHostsFile);
 
             Session session = jsch.getSession(username, url);
             session.setPassword(password);
@@ -125,6 +125,47 @@ namespace Litle.Sdk
             session.disconnect();
         }
 
+        virtual public void FtpPoll(string fileName, int timeout, Dictionary<string, string> config)
+        {
+            ChannelSftp channelSftp = null;
+            Channel channel;
+
+            string currentPath = Environment.CurrentDirectory.ToString();
+            string parentPath = Directory.GetParent(currentPath).ToString();
+
+            string url = config["sftpUrl"];
+            string username = config["sftpUsername"];
+            string password = config["sftpPassword"];
+            string knownHostsFile = parentPath + "\\" + config["knownHostsFile"];
+
+            JSch jsch = new JSch();
+            jsch.setKnownHosts(knownHostsFile);
+
+            Session session = jsch.getSession(username, url);
+            session.setPassword(password);
+
+            session.connect();
+
+            channel = session.openChannel("sftp");
+            channel.connect();
+            channelSftp = (ChannelSftp)channel;
+
+            //check if file exists
+            SftpATTRS sftpATTRS = null;
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            do
+            {
+                try
+                {
+                    sftpATTRS = channelSftp.lstat("outbound/" + fileName);
+                }
+                catch (Exception ex)
+                {
+                }
+            } while (sftpATTRS == null && stopWatch.Elapsed.TotalMilliseconds <= timeout);
+        }
+
         virtual public void FtpPickUp(string destinationFilePath, Dictionary<String, String> config, string fileName)
         {
             ChannelSftp channelSftp = null;
@@ -140,7 +181,6 @@ namespace Litle.Sdk
 
             JSch jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);
-            Console.WriteLine("known hosts file set: " + knownHostsFile);
 
             Session session = jsch.getSession(username, url);
             session.setPassword(password);
