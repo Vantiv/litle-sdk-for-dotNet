@@ -93,66 +93,36 @@ namespace Litle.Sdk
 
         virtual public void FtpDropOff(string filePath, Dictionary<String, String> config)
         {
-            string uri = config["sftpUrl"];
+            ChannelSftp channelSftp = null;
+            Channel channel;
+
+            string currentPath = Environment.CurrentDirectory.ToString();
+            string parentPath = Directory.GetParent(currentPath).ToString();
+
+            string url = config["sftpUrl"];
             string username = config["sftpUsername"];
             string password = config["sftpPassword"];
+            string knownHostsFile = parentPath + "\\"  + config["knownHostsFile"];
             string fileName = Path.GetFileName(filePath);
 
-            //UserInfo userInfo = new MyUserInfo();
+            JSch jsch = new JSch();
+            jsch.setKnownHosts(knownHostsFile);
+            Console.WriteLine("known hosts file set: " + knownHostsFile);
 
-            SshConnectionInfo info = new SshConnectionInfo();
-            info.Host = uri;
-            info.User = username;
-            info.Pass = password;
-            Sftp sshCp = new Sftp(uri, username);
-            sshCp.Connect();
+            Session session = jsch.getSession(username, url);
+            session.setPassword(password);
 
-            sshCp.Put(filePath, "/inbound/" + fileName);
-            sshCp.Close();
+            session.connect();
 
+            channel = session.openChannel("sftp");
+            channel.connect();
+            channelSftp = (ChannelSftp)channel;
 
-            //JSch jsch = new JSch();
-            //Session session = jsch.getSession(username, uri);
-            //session.connect();
+            channelSftp.put(filePath, "inbound/" + fileName, ChannelSftp.OVERWRITE);
+            channelSftp.rename("inbound/" + fileName, "inbound/" + fileName + ".asc");
+            channelSftp.quit();
 
-            //ChannelSftp channelSftp = (ChannelSftp)session.openChannel("sftp");
-            //channelSftp.connect();
-
-            //channelSftp.put(filePath, "/inbound/", ChannelSftp.OVERWRITE);
-
-            //channelSftp.rename("/inbound/" + fileName, "/inbound/" + fileName + ".asc");
-
-            //channelSftp.quit();
-            //session.disconnect();
-            //System.Net.ServicePointManager.Expect100Continue = false;
-            //System.Net.FtpWebRequest req = (System.Net.FtpWebRequest) System.Net.FtpWebRequest.Create(uri);
-
-
-            //req.Method = System.Net.WebRequestMethods.Ftp.UploadFile;
-            //req.Credentials = new NetworkCredential(config["sftpUsername"], config["sftpPassword"]);
-
-            //using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
-            //using (Stream ftpStream = req.GetRequestStream())
-            //{
-            //    int bytesRead = 0;
-            //    byte[] buffer = new byte[1024];
-
-            //    do
-            //    {
-            //        bytesRead = fileStream.Read(buffer, 0, buffer.Length);
-            //        ftpStream.Write(buffer, 0, bytesRead);
-            //    }
-            //    while (bytesRead > 0);
-            //}
-
-            //FtpWebResponse response = (FtpWebResponse)req.GetResponse();
-
-            ////Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription);
-
-            //response.Close();
-
-            //if ("true".Equals(config["printxml"]))
-
+            session.disconnect();
         }
 
         public struct SshConnectionInfo
