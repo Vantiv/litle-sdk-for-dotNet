@@ -166,5 +166,17 @@ namespace Litle.Sdk.Properties {
                 this["sftpPassword"] = value;
             }
         }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("knownhosts")]
+        public string knownHostsFile {
+            get {
+                return ((string)(this["knownHostsFile"]));
+            }
+            set {
+                this["knownHostsFile"] = value;
+            }
+        }
+
     }
 }
