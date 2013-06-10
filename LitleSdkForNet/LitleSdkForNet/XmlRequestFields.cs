@@ -569,7 +569,16 @@ namespace Litle.Sdk
         public orderSourceType orderSource;
         public contact billToAddress;
         public echeckType echeck;
-        public echeckTokenType token;
+
+        [Obsolete()]
+        public echeckTokenType token
+        {
+            get { return echeckToken; }
+            set { echeckToken = value; }
+        }
+
+        public echeckTokenType echeckToken;
+
         public merchantDataType merchantData;
 
         public string Serialize()
@@ -596,7 +605,7 @@ namespace Litle.Sdk
                 if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
                 if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
-                else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
+                else if (echeckToken != null) xml += "\r\n<echeckToken>" + echeckToken.Serialize() + "</echeckToken>";
                 if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
                 if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
             }
