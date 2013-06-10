@@ -4,10 +4,10 @@ using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
 
-namespace Litle.Sdk.Test.Certification
+namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    class TestCert6Batch
+    class TestBatch
     {
         private string responseDir = "C:\\RESPONSES\\";
         private LitleBatch litle;

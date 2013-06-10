@@ -17,6 +17,7 @@ namespace Litle.Sdk
         private List<litleBatchRequest> listOfLitleBatchRequest;
         private int numOfLitleBatchRequest = 0;
         private string fPath = null;
+        private litleTime litleTime;
 
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
@@ -46,7 +47,7 @@ namespace Litle.Sdk
             authentication.password = config["password"];
 
             litleXmlSerializer = new litleXmlSerializer();
-
+            litleTime = new litleTime();
             listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
 
@@ -86,6 +87,11 @@ namespace Litle.Sdk
         public void setLitleXmlSerializer(litleXmlSerializer litleXmlSerializer)
         {
             this.litleXmlSerializer = litleXmlSerializer;
+        }
+
+        public void setLitleTime(litleTime litleTime)
+        {
+            this.litleTime = litleTime;
         }
 
         public string addBatch(litleBatchRequest litleBatchRequest)
@@ -164,7 +170,7 @@ namespace Litle.Sdk
                 }
 
 
-                string fileName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ffff_") + RandomGen.NextString(8);
+                string fileName = litleTime.getCurrentTime("MM-dd-yyyy_HH-mm-ss-ffff_") + RandomGen.NextString(8);
                 fileName += "_temp.xml";
 
                 filePath = directoryPath + fileName;
@@ -290,6 +296,14 @@ namespace Litle.Sdk
             }
 
             return result;
+        }
+    }
+
+    public class litleTime
+    {
+        public virtual String getCurrentTime(String format)
+        {
+            return DateTime.Now.ToString(format);
         }
     }
 
