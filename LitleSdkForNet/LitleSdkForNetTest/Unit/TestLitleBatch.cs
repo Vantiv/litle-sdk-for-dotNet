@@ -46,7 +46,7 @@ namespace Litle.Sdk.Test.Unit
             authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
             mockAuthorizationResponse2.litleTxnId = 124;
 
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse2);
 
@@ -89,7 +89,7 @@ namespace Litle.Sdk.Test.Unit
             mockAuthReversalResponse1.litleTxnId = 123;
             authReversalResponse mockAuthReversalResponse2 = new authReversalResponse();
             mockAuthReversalResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse.Add(mockAuthReversalResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse.Add(mockAuthReversalResponse2);
 
@@ -130,7 +130,7 @@ namespace Litle.Sdk.Test.Unit
             mockCaptureResponse1.litleTxnId = 123;
             captureResponse mockCaptureResponse2 = new captureResponse();
             mockCaptureResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse.Add(mockCaptureResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse.Add(mockCaptureResponse2);
 
@@ -182,7 +182,7 @@ namespace Litle.Sdk.Test.Unit
             mockCaptureGivenAuthResponse1.litleTxnId = 123;
             captureGivenAuthResponse mockCaptureGivenAuthResponse2 = new captureGivenAuthResponse();
             mockCaptureGivenAuthResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfCaptureGivenAuthResponse.Add(mockCaptureGivenAuthResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfCaptureGivenAuthResponse.Add(mockCaptureGivenAuthResponse2);
 
@@ -229,7 +229,7 @@ namespace Litle.Sdk.Test.Unit
             mockCreditResponse1.litleTxnId = 123;
             creditResponse mockCreditResponse2 = new creditResponse();
             mockCreditResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfCreditResponse.Add(mockCreditResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfCreditResponse.Add(mockCreditResponse2);
 
@@ -270,7 +270,7 @@ namespace Litle.Sdk.Test.Unit
             mockEcheckCreditResponse1.litleTxnId = 123;
             echeckCreditResponse mockEcheckCreditResponse2 = new echeckCreditResponse();
             mockEcheckCreditResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckCreditResponse.Add(mockEcheckCreditResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckCreditResponse.Add(mockEcheckCreditResponse2);
 
@@ -310,7 +310,7 @@ namespace Litle.Sdk.Test.Unit
             mockEcheckRedepositResponse1.litleTxnId = 123;
             echeckRedepositResponse mockEcheckRedepositResponse2 = new echeckRedepositResponse();
             mockEcheckRedepositResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckRedepositResponse.Add(mockEcheckRedepositResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckRedepositResponse.Add(mockEcheckRedepositResponse2);
 
@@ -364,7 +364,7 @@ namespace Litle.Sdk.Test.Unit
             mockEcheckSalesResponse1.litleTxnId = 123;
             echeckSalesResponse mockEcheckSalesResponse2 = new echeckSalesResponse();
             mockEcheckSalesResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckSalesResponse.Add(mockEcheckSalesResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckSalesResponse.Add(mockEcheckSalesResponse2);
 
@@ -418,7 +418,7 @@ namespace Litle.Sdk.Test.Unit
             mockEcheckVerificationResponse1.litleTxnId = 123;
             echeckVerificationResponse mockEcheckVerificationResponse2 = new echeckVerificationResponse();
             mockEcheckVerificationResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckVerificationResponse.Add(mockEcheckVerificationResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckVerificationResponse.Add(mockEcheckVerificationResponse2);
 
@@ -465,7 +465,7 @@ namespace Litle.Sdk.Test.Unit
             mockForceCaptureResponse1.litleTxnId = 123;
             forceCaptureResponse mockForceCaptureResponse2 = new forceCaptureResponse();
             mockForceCaptureResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfForceCaptureResponse.Add(mockForceCaptureResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfForceCaptureResponse.Add(mockForceCaptureResponse2);
 
@@ -512,7 +512,7 @@ namespace Litle.Sdk.Test.Unit
             mockSaleResponse1.litleTxnId = 123;
             saleResponse mockSaleResponse2 = new saleResponse();
             mockSaleResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfSaleResponse.Add(mockSaleResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfSaleResponse.Add(mockSaleResponse2);
 
@@ -553,7 +553,7 @@ namespace Litle.Sdk.Test.Unit
             mockRegisterTokenResponse1.litleTxnId = 123;
             registerTokenResponse mockRegisterTokenResponse2 = new registerTokenResponse();
             mockRegisterTokenResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfRegisterTokenResponse.Add(mockRegisterTokenResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfRegisterTokenResponse.Add(mockRegisterTokenResponse2);
 
@@ -601,7 +601,7 @@ namespace Litle.Sdk.Test.Unit
             mockAuthorizationResponse1.litleTxnId = 123;
             authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
             mockAuthorizationResponse2.litleTxnId = 124;
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse2);
             mockLitleResponse.message = "Error validating xml data against the schema";
@@ -698,7 +698,7 @@ namespace Litle.Sdk.Test.Unit
             authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
             mockAuthorizationResponse2.litleTxnId = 124;
             mockAuthorizationResponse2.reportGroup = "Default Report Group";
-            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse.Add(new litleBatchResponse());
             mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse1);
             mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse2);
 

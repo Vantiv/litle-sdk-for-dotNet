@@ -101,7 +101,7 @@ namespace Litle.Sdk
             if (!litleBatchRequest.config.ContainsKey("username")) litleBatchRequest.config["username"] = config["username"];
             if (!litleBatchRequest.config.ContainsKey("password")) litleBatchRequest.config["password"] = config["password"];
             if (!litleBatchRequest.config.ContainsKey("merchantId")) litleBatchRequest.config["merchantId"] = config["merchantId"];
-            if (!litleBatchRequest.config.ContainsKey("reportGroup"))
+            if (!litleBatchRequest.config.ContainsKey("reportGroup") || litleBatchRequest.config["reportGroup"].Length < 1)
             {
                 litleBatchRequest.config["reportGroup"] = config["reportGroup"];
                 litleBatchRequest.updateReportGroup();
@@ -143,13 +143,20 @@ namespace Litle.Sdk
         }
 
 
-        public void blockUntilResponse(string fileName, int timeOut)
+        public void blockAndWaitForResponse(string fileName, int timeOut)
         {
             communication.FtpPoll(fileName, timeOut, config);
         }
 
         public litleResponse receiveFromLitle_File(string destinationFilePath, string batchFileName)
         {
+            string destinationDirectory = Path.GetDirectoryName(destinationFilePath);
+
+            if (!Directory.Exists(destinationDirectory))
+            {
+                Directory.CreateDirectory(destinationDirectory);
+            }
+
             communication.FtpPickUp(destinationFilePath, config, batchFileName);
 
             litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(destinationFilePath);
@@ -204,9 +211,6 @@ namespace Litle.Sdk
             string filePath;
             filePath = tempFilePath;
             filePath = filePath.Replace("_temp.xml", ".xml");
-
-            Console.WriteLine(tempFilePath);
-            Console.WriteLine(filePath);
 
             using (FileStream fs = new FileStream(filePath, FileMode.Create))
             using (StreamWriter sw = new StreamWriter(fs))

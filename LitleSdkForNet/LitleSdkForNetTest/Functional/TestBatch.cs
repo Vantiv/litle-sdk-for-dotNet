@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
+using System.IO;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
     class TestBatch
     {
-        private string responseDir = "C:\\RESPONSES\\";
+
+        private string responseDir;
         private LitleBatch litle;
 
         [TestFixtureSetUp]
@@ -26,49 +28,17 @@ namespace Litle.Sdk.Test.Functional
             //config.Add("printxml", "true");
 
             litle = new LitleBatch();
+
+            string currentPath = Environment.CurrentDirectory.ToString();
+            string parentPath = Directory.GetParent(currentPath).ToString();
+            responseDir = parentPath + "\\Responses\\";
         }
 
-
         [Test]
-        public void Test1Auth()
+        public void SimpleBatch()
         {
-            authorization authorization = new authorization();
-            authorization.orderId = "1";
-            authorization.amount = 10010;
-            authorization.orderSource = orderSourceType.ecommerce;
-            contact contact = new contact();
-            contact.name = "John Smith";
-            contact.addressLine1 = "1 Main St.";
-            contact.city = "Burlington";
-            contact.state = "MA";
-            contact.zip = "01803-3747";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010000000009";
-            card.expDate = "0112";
-            card.cardValidationNum = "349";
-            authorization.card = card;
-
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
-            litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle_File();
-
-            litle.blockUntilResponse(batchName, (int)(3 * 60 * 1000 + 2.5 * 1000 + (1/5) * 1000));
-
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
-
-            Assert.NotNull(litleResponse);
-            Assert.AreSame("0", litleResponse.response);
-        }
-
-
-        [Test]
-        public void SimpleAuthWithCard()
-        {
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
@@ -78,1142 +48,759 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "414100000000000000";
             card.expDate = "1210";
-            authorization.card = card; //This needs to compile
+            authorization.card = card; //This needs to compile      
 
-            customBilling cb = new customBilling();
-            cb.phone = "1112223333"; //This needs to compile too            
-
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
             litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
+            authorization authorization2 = new authorization();
+            authorization2.reportGroup = "Planets";
+            authorization2.orderId = "12345";
+            authorization2.amount = 106;
+            authorization2.orderSource = orderSourceType.ecommerce;
+            cardType card2 = new cardType();
+            card2.type = methodOfPaymentTypeEnum.VI;
+            card2.number = "414200000000000000";
+            card2.expDate = "1210";
+            authorization2.card = card2; //This needs to compile
 
-            Assert.NotNull(litleResponse);
-            Assert.AreSame("0", litleResponse.response);
-        }
+            litleBatchRequest.addAuthorization(authorization2);
 
-        [Test]
-        public void simpleAuthWithPaypal()
-        {
-            authorization authorization = new authorization();
-            authorization.reportGroup = "Planets";
-            authorization.orderId = "123456";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            payPal paypal = new payPal();
-            paypal.payerId = "1234";
-            paypal.token = "1234";
-            paypal.transactionId = "123456";
-            authorization.paypal = paypal; //This needs to compile
-
-            customBilling cb = new customBilling();
-            cb.phone = "1112223333"; //This needs to compile too            
-
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
-            litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
-
-            string batchName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
-
-            Assert.NotNull(litleResponse);
-            Assert.AreEqual("Approved", litleResponse.message);
-        }
-
-        [Test]
-        public void posWithoutCapabilityAndEntryMode()
-        {
-            authorization authorization = new authorization();
-            authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            pos pos = new pos();
-            pos.cardholderId = posCardholderIdTypeEnum.pin;
-            authorization.pos = pos;
-            cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card; //This needs to compile
-
-            customBilling cb = new customBilling();
-            cb.phone = "1112223333"; //This needs to compile too            
-
-            try
-            {
-                litleBatchRequest litleBatchRequest = new litleBatchRequest();
-                litleBatchRequest.addAuthorization(authorization);
-                litle.addBatch(litleBatchRequest);
-                //expected exception;
-            }
-            catch (LitleOnlineException e)
-            {
-                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
-            }
-        }
-
-        [Test]
-        public void trackData()
-        {
-            authorization authorization = new authorization();
-            authorization.id = "AX54321678";
-            authorization.reportGroup = "RG27";
-            authorization.orderId = "12z58743y1";
-            authorization.amount = 12522L;
-            authorization.orderSource = orderSourceType.retail;
-            contact billToAddress = new contact();
-            billToAddress.zip = "95032";
-            authorization.billToAddress = billToAddress;
-            cardType card = new cardType();
-            card.track = "%B40000001^Doe/JohnP^06041...?;40001=0604101064200?";
-            authorization.card = card;
-            pos pos = new pos();
-            pos.capability = posCapabilityTypeEnum.magstripe;
-            pos.entryMode = posEntryModeTypeEnum.completeread;
-            pos.cardholderId = posCardholderIdTypeEnum.signature;
-            authorization.pos = pos;
-
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
-            litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
-
-            string batchName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\" + batchName, batchName);
-
-            Assert.NotNull(litleResponse);
-            Assert.AreEqual("Approved", litleResponse.message);
-        }
-
-
-        [Test]
-        public void SimpleAuthReversal()
-        {
             authReversal reversal = new authReversal();
             reversal.litleTxnId = 12345678000L;
             reversal.amount = 106;
             reversal.payPalNotes = "Notes";
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchFileName, batchFileName);
+            litleBatchRequest.addAuthReversal(reversal);
 
-            Assert.AreEqual("Approved", litleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse[0].message);
-        }
+            authReversal reversal2 = new authReversal();
+            reversal2.litleTxnId = 12345678900L;
+            reversal2.amount = 106;
+            reversal2.payPalNotes = "Notes";
 
-        [Test]
-        public void SimpleCapture()
-        {
+            litleBatchRequest.addAuthReversal(reversal2);
+
             capture capture = new capture();
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "Notes";
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
             litleBatchRequest.addCapture(capture);
+
+            capture capture2 = new capture();
+            capture2.litleTxnId = 123456700;
+            capture2.amount = 106;
+            capture2.payPalNotes = "Notes";
+
+            litleBatchRequest.addCapture(capture2);
+
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            capturegivenauth.card = card;
+
+            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+
+            captureGivenAuth capturegivenauth2 = new captureGivenAuth();
+            capturegivenauth2.amount = 106;
+            capturegivenauth2.orderId = "12344";
+            authInformation authInfo2 = new authInformation();
+            authDate = new DateTime(2003, 10, 9);
+            authInfo2.authDate = authDate;
+            authInfo2.authCode = "543216";
+            authInfo2.authAmount = 12345;
+            capturegivenauth2.authInformation = authInfo;
+            capturegivenauth2.orderSource = orderSourceType.ecommerce;
+            capturegivenauth2.card = card2;
+
+            litleBatchRequest.addCaptureGivenAuth(capturegivenauth2);
+
+            credit creditObj = new credit();
+            creditObj.amount = 106;
+            creditObj.orderId = "2111";
+            creditObj.orderSource = orderSourceType.ecommerce;
+            creditObj.card = card;
+
+            litleBatchRequest.addCredit(creditObj);
+
+            credit creditObj2 = new credit();
+            creditObj2.amount = 106;
+            creditObj2.orderId = "2111";
+            creditObj2.orderSource = orderSourceType.ecommerce;
+            creditObj2.card = card2;
+
+            litleBatchRequest.addCredit(creditObj2);
+
+            echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.amount = 12L;
+            echeckcredit.orderId = "12345";
+            echeckcredit.orderSource = orderSourceType.ecommerce;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            echeckcredit.echeck = echeck;
+            contact billToAddress = new contact();
+            billToAddress.name = "Bob";
+            billToAddress.city = "Lowell";
+            billToAddress.state = "MA";
+            billToAddress.email = "litle.com";
+            echeckcredit.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckCredit(echeckcredit);
+
+            echeckCredit echeckcredit2 = new echeckCredit();
+            echeckcredit2.amount = 12L;
+            echeckcredit2.orderId = "12346";
+            echeckcredit2.orderSource = orderSourceType.ecommerce;
+            echeckType echeck2 = new echeckType();
+            echeck2.accType = echeckAccountTypeEnum.Checking;
+            echeck2.accNum = "12345657891";
+            echeck2.routingNum = "123456789";
+            echeck2.checkNum = "123455";
+            echeckcredit2.echeck = echeck2;
+            contact billToAddress2 = new contact();
+            billToAddress2.name = "Mike";
+            billToAddress2.city = "Lowell";
+            billToAddress2.state = "MA";
+            billToAddress2.email = "litle.com";
+            echeckcredit2.billToAddress = billToAddress2;
+
+            litleBatchRequest.addEcheckCredit(echeckcredit2);
+
+            echeckRedeposit echeckredeposit = new echeckRedeposit();
+            echeckredeposit.litleTxnId = 123456;
+            echeckredeposit.echeck = echeck;
+
+            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+
+            echeckRedeposit echeckredeposit2 = new echeckRedeposit();
+            echeckredeposit2.litleTxnId = 123457;
+            echeckredeposit2.echeck = echeck2;
+
+            litleBatchRequest.addEcheckRedeposit(echeckredeposit2);
+
+            echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.amount = 123456;
+            echeckSaleObj.orderId = "12345";
+            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+            echeckSaleObj.echeck = echeck;
+            echeckSaleObj.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckSale(echeckSaleObj);
+
+            echeckSale echeckSaleObj2 = new echeckSale();
+            echeckSaleObj2.amount = 123456;
+            echeckSaleObj2.orderId = "12346";
+            echeckSaleObj2.orderSource = orderSourceType.ecommerce;
+            echeckSaleObj2.echeck = echeck2;
+            echeckSaleObj2.billToAddress = billToAddress2;
+
+            litleBatchRequest.addEcheckSale(echeckSaleObj2);
+
+            echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.amount = 123456;
+            echeckVerificationObject.orderId = "12345";
+            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
+            echeckVerificationObject.echeck = echeck;
+            echeckVerificationObject.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+
+            echeckVerification echeckVerificationObject2 = new echeckVerification();
+            echeckVerificationObject2.amount = 123456;
+            echeckVerificationObject2.orderId = "12346";
+            echeckVerificationObject2.orderSource = orderSourceType.ecommerce;
+            echeckVerificationObject2.echeck = echeck2;
+            echeckVerificationObject2.billToAddress = billToAddress2;
+
+            litleBatchRequest.addEcheckVerification(echeckVerificationObject2);
+
+            forceCapture forcecapture = new forceCapture();
+            forcecapture.amount = 106;
+            forcecapture.orderId = "12344";
+            forcecapture.orderSource = orderSourceType.ecommerce;
+            forcecapture.card = card;
+
+            litleBatchRequest.addForceCapture(forcecapture);
+
+            forceCapture forcecapture2 = new forceCapture();
+            forcecapture2.amount = 106;
+            forcecapture2.orderId = "12345";
+            forcecapture2.orderSource = orderSourceType.ecommerce;
+            forcecapture2.card = card2;
+
+            litleBatchRequest.addForceCapture(forcecapture2);
+
+            sale saleObj = new sale();
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            saleObj.card = card;
+
+            litleBatchRequest.addSale(saleObj);
+
+            sale saleObj2 = new sale();
+            saleObj2.amount = 106;
+            saleObj2.litleTxnId = 123456;
+            saleObj2.orderId = "12345";
+            saleObj2.orderSource = orderSourceType.ecommerce;
+            saleObj2.card = card2;
+
+            litleBatchRequest.addSale(saleObj2);
+
+            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.orderId = "12344";
+            registerTokenRequest.accountNumber = "1233456789103801";
+            registerTokenRequest.reportGroup = "Planets";
+
+            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+
+            registerTokenRequestType registerTokenRequest2 = new registerTokenRequestType();
+            registerTokenRequest2.orderId = "12345";
+            registerTokenRequest2.accountNumber = "1233456789103801";
+            registerTokenRequest2.reportGroup = "Planets";
+
+            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
+
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchFileName, batchFileName);
+            string batchName = litle.sendToLitle_File();
 
-            Assert.AreEqual("Approved", litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[0].message);
+            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(4*2, 8*2));
+
+            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchName, batchName);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreSame("0", litleResponse.response);
+
+            foreach (litleBatchResponse litleBatchResponse in litleResponse.listOfLitleBatchResponse)
+            {
+                foreach (authorizationResponse authorizationResponse in litleBatchResponse.listOfAuthorizationResponse)
+                {
+                    Assert.AreSame("0", authorizationResponse.response);
+                }
+                foreach (authReversalResponse authReversalResponse in litleBatchResponse.listOfAuthReversalResponse)
+                {
+                    Assert.AreSame("0", authReversalResponse.response);
+                }
+                foreach (captureResponse captureResponse in litleBatchResponse.listOfCaptureResponse)
+                {
+                    Assert.AreSame("0", captureResponse.response);
+                }
+                foreach (captureGivenAuthResponse captureGivenAuthResponse in litleBatchResponse.listOfCaptureGivenAuthResponse)
+                {
+                    Assert.AreSame("0", captureGivenAuthResponse.response);
+                }
+                foreach (creditResponse creditResponse in litleBatchResponse.listOfCreditResponse)
+                {
+                    Assert.AreSame("0", creditResponse.response);
+                }
+                foreach (echeckCreditResponse echeckCreditResponse in litleBatchResponse.listOfEcheckCreditResponse)
+                {
+                    Assert.AreSame("0", echeckCreditResponse.response);
+                }
+                foreach (echeckRedepositResponse echeckRedepositResponse in litleBatchResponse.listOfEcheckRedepositResponse)
+                {
+                    Assert.AreSame("0", echeckRedepositResponse.response);
+                }
+                foreach (echeckSalesResponse echeckSalesResponse in litleBatchResponse.listOfEcheckSalesResponse)
+                {
+                    Assert.AreSame("0", echeckSalesResponse.response);
+                }
+                foreach (echeckVerificationResponse echeckVerificationResponse in litleBatchResponse.listOfEcheckVerificationResponse)
+                {
+                    Assert.AreSame("0", echeckVerificationResponse.response);
+                }
+                foreach (forceCaptureResponse forceCaptureResponse in litleBatchResponse.listOfForceCaptureResponse)
+                {
+                    Assert.AreSame("0", forceCaptureResponse.response);
+                }
+                foreach (saleResponse saleResponse in litleBatchResponse.listOfSaleResponse)
+                {
+                    Assert.AreSame("0", saleResponse.response);
+                }
+                foreach (registerTokenResponse registerTokenResponse in litleBatchResponse.listOfRegisterTokenResponse)
+                {
+                    Assert.AreSame("0", registerTokenResponse.response);
+                }
+            }
         }
 
+
+
         [Test]
-        public void simpleCaptureWithPartial()
+        public void nullBatchData()
         {
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile      
+
+            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.addAuthorization(null);
+
+            authReversal reversal = new authReversal();
+            reversal.litleTxnId = 12345678000L;
+            reversal.amount = 106;
+            reversal.payPalNotes = "Notes";
+
+            litleBatchRequest.addAuthReversal(reversal);
+            litleBatchRequest.addAuthReversal(null);
+
             capture capture = new capture();
             capture.litleTxnId = 123456000;
             capture.amount = 106;
-            capture.partial = true;
             capture.payPalNotes = "Notes";
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
             litleBatchRequest.addCapture(capture);
-            litle.addBatch(litleBatchRequest);
+            litleBatchRequest.addCapture(null);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchFileName, batchFileName);
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            capturegivenauth.card = card;
 
-            Assert.AreEqual("Approved", litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[0].message);
+            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.addCaptureGivenAuth(null);
+
+            credit creditObj = new credit();
+            creditObj.amount = 106;
+            creditObj.orderId = "2111";
+            creditObj.orderSource = orderSourceType.ecommerce;
+            creditObj.card = card;
+
+            litleBatchRequest.addCredit(creditObj);
+            litleBatchRequest.addCredit(null);
+
+            echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.amount = 12L;
+            echeckcredit.orderId = "12345";
+            echeckcredit.orderSource = orderSourceType.ecommerce;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            echeckcredit.echeck = echeck;
+            contact billToAddress = new contact();
+            billToAddress.name = "Bob";
+            billToAddress.city = "Lowell";
+            billToAddress.state = "MA";
+            billToAddress.email = "litle.com";
+            echeckcredit.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckCredit(echeckcredit);
+            litleBatchRequest.addEcheckCredit(null);
+
+            echeckRedeposit echeckredeposit = new echeckRedeposit();
+            echeckredeposit.litleTxnId = 123456;
+            echeckredeposit.echeck = echeck;
+
+            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.addEcheckRedeposit(null);
+
+            echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.amount = 123456;
+            echeckSaleObj.orderId = "12345";
+            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+            echeckSaleObj.echeck = echeck;
+            echeckSaleObj.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckSale(echeckSaleObj);
+            litleBatchRequest.addEcheckSale(null);
+
+            echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.amount = 123456;
+            echeckVerificationObject.orderId = "12345";
+            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
+            echeckVerificationObject.echeck = echeck;
+            echeckVerificationObject.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+            litleBatchRequest.addEcheckVerification(null);
+
+            forceCapture forcecapture = new forceCapture();
+            forcecapture.amount = 106;
+            forcecapture.orderId = "12344";
+            forcecapture.orderSource = orderSourceType.ecommerce;
+            forcecapture.card = card;
+
+            litleBatchRequest.addForceCapture(forcecapture);
+            litleBatchRequest.addForceCapture(null);
+
+            sale saleObj = new sale();
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            saleObj.card = card;
+
+            litleBatchRequest.addSale(saleObj);
+            litleBatchRequest.addSale(null);
+
+            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.orderId = "12344";
+            registerTokenRequest.accountNumber = "1233456789103801";
+            registerTokenRequest.reportGroup = "Planets";
+
+            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+            litleBatchRequest.addRegisterTokenRequest(null);
+
+            try
+            {
+                litle.addBatch(litleBatchRequest);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
         }
 
         [Test]
-        public void complexCapture()
+        public void InvalidCredientialsBatch()
         {
+            Dictionary<String, String> config = new Dictionary<String, String>();
+            config["url"] = Properties.Settings.Default.url;
+            config["reportGroup"] = Properties.Settings.Default.reportGroup;
+            config["username"] = Properties.Settings.Default.username;
+            config["printxml"] = Properties.Settings.Default.printxml;
+            config["timeout"] = Properties.Settings.Default.timeout;
+            config["proxyHost"] = Properties.Settings.Default.proxyHost;
+            config["merchantId"] = Properties.Settings.Default.merchantId;
+            config["password"] = Properties.Settings.Default.password;
+            config["proxyPort"] = Properties.Settings.Default.proxyPort;
+            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
+            config["sftpUsername"] = "InvalidUsername";
+            config["sftpPassword"] = "Password123";
+            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.config = config;
+
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile      
+
+            litleBatchRequest.addAuthorization(authorization);
+
+            authorization authorization2 = new authorization();
+            authorization2.reportGroup = "Planets";
+            authorization2.orderId = "12345";
+            authorization2.amount = 106;
+            authorization2.orderSource = orderSourceType.ecommerce;
+            cardType card2 = new cardType();
+            card2.type = methodOfPaymentTypeEnum.VI;
+            card2.number = "414200000000000000";
+            card2.expDate = "1210";
+            authorization2.card = card2; //This needs to compile
+
+            litleBatchRequest.addAuthorization(authorization2);
+
+            authReversal reversal = new authReversal();
+            reversal.litleTxnId = 12345678000L;
+            reversal.amount = 106;
+            reversal.payPalNotes = "Notes";
+
+            litleBatchRequest.addAuthReversal(reversal);
+
+            authReversal reversal2 = new authReversal();
+            reversal2.litleTxnId = 12345678900L;
+            reversal2.amount = 106;
+            reversal2.payPalNotes = "Notes";
+
+            litleBatchRequest.addAuthReversal(reversal2);
+
             capture capture = new capture();
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "Notes";
-            enhancedData enhanceddata = new enhancedData();
-            enhanceddata.customerReference = "Litle";
-            enhanceddata.salesTax = 50;
-            enhanceddata.deliveryType = enhancedDataDeliveryType.TBD;
-            capture.enhancedData = enhanceddata;
-            capture.payPalOrderComplete = true;
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
             litleBatchRequest.addCapture(capture);
+
+            capture capture2 = new capture();
+            capture2.litleTxnId = 123456700;
+            capture2.amount = 106;
+            capture2.payPalNotes = "Notes";
+
+            litleBatchRequest.addCapture(capture2);
+
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            capturegivenauth.card = card;
+
+            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+
+            captureGivenAuth capturegivenauth2 = new captureGivenAuth();
+            capturegivenauth2.amount = 106;
+            capturegivenauth2.orderId = "12344";
+            authInformation authInfo2 = new authInformation();
+            authDate = new DateTime(2003, 10, 9);
+            authInfo2.authDate = authDate;
+            authInfo2.authCode = "543216";
+            authInfo2.authAmount = 12345;
+            capturegivenauth2.authInformation = authInfo;
+            capturegivenauth2.orderSource = orderSourceType.ecommerce;
+            capturegivenauth2.card = card2;
+
+            litleBatchRequest.addCaptureGivenAuth(capturegivenauth2);
+
+            credit creditObj = new credit();
+            creditObj.amount = 106;
+            creditObj.orderId = "2111";
+            creditObj.orderSource = orderSourceType.ecommerce;
+            creditObj.card = card;
+
+            litleBatchRequest.addCredit(creditObj);
+
+            credit creditObj2 = new credit();
+            creditObj2.amount = 106;
+            creditObj2.orderId = "2111";
+            creditObj2.orderSource = orderSourceType.ecommerce;
+            creditObj2.card = card2;
+
+            litleBatchRequest.addCredit(creditObj2);
+
+            echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.amount = 12L;
+            echeckcredit.orderId = "12345";
+            echeckcredit.orderSource = orderSourceType.ecommerce;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            echeckcredit.echeck = echeck;
+            contact billToAddress = new contact();
+            billToAddress.name = "Bob";
+            billToAddress.city = "Lowell";
+            billToAddress.state = "MA";
+            billToAddress.email = "litle.com";
+            echeckcredit.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckCredit(echeckcredit);
+
+            echeckCredit echeckcredit2 = new echeckCredit();
+            echeckcredit2.amount = 12L;
+            echeckcredit2.orderId = "12346";
+            echeckcredit2.orderSource = orderSourceType.ecommerce;
+            echeckType echeck2 = new echeckType();
+            echeck2.accType = echeckAccountTypeEnum.Checking;
+            echeck2.accNum = "12345657891";
+            echeck2.routingNum = "123456789";
+            echeck2.checkNum = "123455";
+            echeckcredit2.echeck = echeck2;
+            contact billToAddress2 = new contact();
+            billToAddress2.name = "Mike";
+            billToAddress2.city = "Lowell";
+            billToAddress2.state = "MA";
+            billToAddress2.email = "litle.com";
+            echeckcredit2.billToAddress = billToAddress2;
+
+            litleBatchRequest.addEcheckCredit(echeckcredit2);
+
+            echeckRedeposit echeckredeposit = new echeckRedeposit();
+            echeckredeposit.litleTxnId = 123456;
+            echeckredeposit.echeck = echeck;
+
+            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+
+            echeckRedeposit echeckredeposit2 = new echeckRedeposit();
+            echeckredeposit2.litleTxnId = 123457;
+            echeckredeposit2.echeck = echeck2;
+
+            litleBatchRequest.addEcheckRedeposit(echeckredeposit2);
+
+            echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.amount = 123456;
+            echeckSaleObj.orderId = "12345";
+            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+            echeckSaleObj.echeck = echeck;
+            echeckSaleObj.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckSale(echeckSaleObj);
+
+            echeckSale echeckSaleObj2 = new echeckSale();
+            echeckSaleObj2.amount = 123456;
+            echeckSaleObj2.orderId = "12346";
+            echeckSaleObj2.orderSource = orderSourceType.ecommerce;
+            echeckSaleObj2.echeck = echeck2;
+            echeckSaleObj2.billToAddress = billToAddress2;
+
+            litleBatchRequest.addEcheckSale(echeckSaleObj2);
+
+            echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.amount = 123456;
+            echeckVerificationObject.orderId = "12345";
+            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
+            echeckVerificationObject.echeck = echeck;
+            echeckVerificationObject.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+
+            echeckVerification echeckVerificationObject2 = new echeckVerification();
+            echeckVerificationObject2.amount = 123456;
+            echeckVerificationObject2.orderId = "12346";
+            echeckVerificationObject2.orderSource = orderSourceType.ecommerce;
+            echeckVerificationObject2.echeck = echeck2;
+            echeckVerificationObject2.billToAddress = billToAddress2;
+
+            litleBatchRequest.addEcheckVerification(echeckVerificationObject2);
+
+            forceCapture forcecapture = new forceCapture();
+            forcecapture.amount = 106;
+            forcecapture.orderId = "12344";
+            forcecapture.orderSource = orderSourceType.ecommerce;
+            forcecapture.card = card;
+
+            litleBatchRequest.addForceCapture(forcecapture);
+
+            forceCapture forcecapture2 = new forceCapture();
+            forcecapture2.amount = 106;
+            forcecapture2.orderId = "12345";
+            forcecapture2.orderSource = orderSourceType.ecommerce;
+            forcecapture2.card = card2;
+
+            litleBatchRequest.addForceCapture(forcecapture2);
+
+            sale saleObj = new sale();
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            saleObj.card = card;
+
+            litleBatchRequest.addSale(saleObj);
+
+            sale saleObj2 = new sale();
+            saleObj2.amount = 106;
+            saleObj2.litleTxnId = 123456;
+            saleObj2.orderId = "12345";
+            saleObj2.orderSource = orderSourceType.ecommerce;
+            saleObj2.card = card2;
+
+            litleBatchRequest.addSale(saleObj2);
+
+            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.orderId = "12344";
+            registerTokenRequest.accountNumber = "1233456789103801";
+            registerTokenRequest.reportGroup = "Planets";
+
+            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+
+            registerTokenRequestType registerTokenRequest2 = new registerTokenRequestType();
+            registerTokenRequest2.orderId = "12345";
+            registerTokenRequest2.accountNumber = "1233456789103801";
+            registerTokenRequest2.reportGroup = "Planets";
+
+            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
+
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchFileName, batchFileName);
+            string batchName = litle.sendToLitle_File();
 
-            Assert.AreEqual("Approved", litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[0].message);
+            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(4 * 2, 8 * 2));
+
+            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchName, batchName);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreSame("0", litleResponse.response);
+
+            foreach (litleBatchResponse litleBatchResponse in litleResponse.listOfLitleBatchResponse)
+            {
+                foreach (authorizationResponse authorizationResponse in litleBatchResponse.listOfAuthorizationResponse)
+                {
+                    Assert.AreSame("0", authorizationResponse.response);
+                }
+                foreach (authReversalResponse authReversalResponse in litleBatchResponse.listOfAuthReversalResponse)
+                {
+                    Assert.AreSame("0", authReversalResponse.response);
+                }
+                foreach (captureResponse captureResponse in litleBatchResponse.listOfCaptureResponse)
+                {
+                    Assert.AreSame("0", captureResponse.response);
+                }
+                foreach (captureGivenAuthResponse captureGivenAuthResponse in litleBatchResponse.listOfCaptureGivenAuthResponse)
+                {
+                    Assert.AreSame("0", captureGivenAuthResponse.response);
+                }
+                foreach (creditResponse creditResponse in litleBatchResponse.listOfCreditResponse)
+                {
+                    Assert.AreSame("0", creditResponse.response);
+                }
+                foreach (echeckCreditResponse echeckCreditResponse in litleBatchResponse.listOfEcheckCreditResponse)
+                {
+                    Assert.AreSame("0", echeckCreditResponse.response);
+                }
+                foreach (echeckRedepositResponse echeckRedepositResponse in litleBatchResponse.listOfEcheckRedepositResponse)
+                {
+                    Assert.AreSame("0", echeckRedepositResponse.response);
+                }
+                foreach (echeckSalesResponse echeckSalesResponse in litleBatchResponse.listOfEcheckSalesResponse)
+                {
+                    Assert.AreSame("0", echeckSalesResponse.response);
+                }
+                foreach (echeckVerificationResponse echeckVerificationResponse in litleBatchResponse.listOfEcheckVerificationResponse)
+                {
+                    Assert.AreSame("0", echeckVerificationResponse.response);
+                }
+                foreach (forceCaptureResponse forceCaptureResponse in litleBatchResponse.listOfForceCaptureResponse)
+                {
+                    Assert.AreSame("0", forceCaptureResponse.response);
+                }
+                foreach (saleResponse saleResponse in litleBatchResponse.listOfSaleResponse)
+                {
+                    Assert.AreSame("0", saleResponse.response);
+                }
+                foreach (registerTokenResponse registerTokenResponse in litleBatchResponse.listOfRegisterTokenResponse)
+                {
+                    Assert.AreSame("0", registerTokenResponse.response);
+                }
+            }
         }
 
-        //[Test]
-        //public void Test1AVS()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "1";
-        //    authorization.amount = 0;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "John Smith";
-        //    contact.addressLine1 = "1 Main St.";
-        //    contact.city = "Burlington";
-        //    contact.state = "MA";
-        //    contact.zip = "01803-3747";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4457010000000009";
-        //    card.expDate = "0112";
-        //    card.cardValidationNum = "349";
-        //    authorization.card = card;
 
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("11111 ", response.authCode);
-        //    Assert.AreEqual("01", response.fraudResult.avsResult);
-        //    Assert.AreEqual("M", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test1Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "1";
-        //    sale.amount = 10010;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "John Smith";
-        //    contact.addressLine1 = "1 Main St.";
-        //    contact.city = "Burlington";
-        //    contact.state = "MA";
-        //    contact.zip = "01803-3747";
-        //    contact.country = countryTypeEnum.US;
-        //    sale.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4457010000000009";
-        //    card.expDate = "0112";
-        //    card.cardValidationNum = "349";
-        //    sale.card = card;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("11111 ", response.authCode);
-        //    Assert.AreEqual("01", response.fraudResult.avsResult);
-        //    Assert.AreEqual("M", response.fraudResult.cardValidationResult);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = response.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test2Auth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "2";
-        //    authorization.amount = 20020;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Mike J. Hammer";
-        //    contact.addressLine1 = "2 Main St.";
-        //    contact.addressLine2 = "Apt. 222";
-        //    contact.city = "Riverside";
-        //    contact.state = "RI";
-        //    contact.zip = "02915";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.MC;
-        //    card.number = "5112010000000003";
-        //    card.expDate = "0212";
-        //    card.cardValidationNum = "261";
-        //    authorization.card = card;
-        //    fraudCheckType authenticationvalue = new fraudCheckType();
-        //    authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-        //    authorization.cardholderAuthentication = authenticationvalue;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("22222", response.authCode);
-        //    Assert.AreEqual("10", response.fraudResult.avsResult);
-        //    Assert.AreEqual("M", response.fraudResult.cardValidationResult);
-
-        //    capture capture = new capture();
-        //    capture.litleTxnId = response.litleTxnId;
-        //    captureResponse captureresponse = litle.Capture(capture);
-        //    Assert.AreEqual("000", captureresponse.response);
-        //    Assert.AreEqual("Approved", captureresponse.message);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = captureresponse.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test2AVS()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "2";
-        //    authorization.amount = 0;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Mike J. Hammer";
-        //    contact.addressLine1 = "2 Main St.";
-        //    contact.addressLine2 = "Apt. 222";
-        //    contact.city = "Riverside";
-        //    contact.state = "RI";
-        //    contact.zip = "02915";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.MC;
-        //    card.number = "5112010000000003";
-        //    card.expDate = "0212";
-        //    card.cardValidationNum = "261";
-        //    authorization.card = card;
-        //    fraudCheckType authenticationvalue = new fraudCheckType();
-        //    authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-        //    authorization.cardholderAuthentication = authenticationvalue;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("22222", response.authCode);
-        //    Assert.AreEqual("10", response.fraudResult.avsResult);
-        //    Assert.AreEqual("M", response.fraudResult.cardValidationResult);
-
-        //}
-
-        //[Test]
-        //public void test2Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "2";
-        //    sale.amount = 20020;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Mike J. Hammer";
-        //    contact.addressLine1 = "2 Main St.";
-        //    contact.addressLine2 = "Apt. 222";
-        //    contact.city = "Riverside";
-        //    contact.state = "RI";
-        //    contact.zip = "02915";
-        //    contact.country = countryTypeEnum.US;
-        //    sale.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.MC;
-        //    card.number = "5112010000000003";
-        //    card.expDate = "0212";
-        //    card.cardValidationNum = "261";
-        //    sale.card = card;
-        //    fraudCheckType authenticationvalue = new fraudCheckType();
-        //    authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-        //    sale.cardholderAuthentication = authenticationvalue;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("22222", response.authCode);
-        //    Assert.AreEqual("10", response.fraudResult.avsResult);
-        //    Assert.AreEqual("M", response.fraudResult.cardValidationResult);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = response.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test3Auth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "3";
-        //    authorization.amount = 30030;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Eileen Jones";
-        //    contact.addressLine1 = "3 Main St.";
-        //    contact.city = "Bloomfield";
-        //    contact.state = "CT";
-        //    contact.zip = "06002";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.DI;
-        //    card.number = "6011010000000003";
-        //    card.expDate = "0312";
-        //    card.cardValidationNum = "758";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("33333", response.authCode);
-        //    Assert.AreEqual("10", response.fraudResult.avsResult);
-        //    Assert.AreEqual("M", response.fraudResult.cardValidationResult);
-
-        //    capture capture = new capture();
-        //    capture.litleTxnId = response.litleTxnId;
-        //    captureResponse captureResponse = litle.Capture(capture);
-        //    Assert.AreEqual("000", captureResponse.response);
-        //    Assert.AreEqual("Approved", captureResponse.message);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = captureResponse.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test3AVS()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "3";
-        //    authorization.amount = 0;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Eileen Jones";
-        //    contact.addressLine1 = "3 Main St.";
-        //    contact.city = "Bloomfield";
-        //    contact.state = "CT";
-        //    contact.zip = "06002";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.DI;
-        //    card.number = "6011010000000003";
-        //    card.expDate = "0312";
-        //    card.cardValidationNum = "758";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("33333", response.authCode);
-        //    Assert.AreEqual("10", response.fraudResult.avsResult);
-        //    Assert.AreEqual("M", response.fraudResult.cardValidationResult);
-
-        //}
-
-        //[Test]
-        //public void test3Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "3";
-        //    sale.amount = 30030;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Eileen Jones";
-        //    contact.addressLine1 = "3 Main St.";
-        //    contact.city = "Bloomfield";
-        //    contact.state = "CT";
-        //    contact.zip = "06002";
-        //    contact.country = countryTypeEnum.US;
-        //    sale.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.DI;
-        //    card.number = "6011010000000003";
-        //    card.expDate = "0312";
-        //    card.cardValidationNum = "758";
-        //    sale.card = card;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("33333", response.authCode);
-        //    Assert.AreEqual("10", response.fraudResult.avsResult);
-        //    Assert.AreEqual("M", response.fraudResult.cardValidationResult);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = response.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test4Auth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "4";
-        //    authorization.amount = 40040;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Bob Black";
-        //    contact.addressLine1 = "4 Main St.";
-        //    contact.city = "Laurel";
-        //    contact.state = "MD";
-        //    contact.zip = "20708";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.AX;
-        //    card.number = "375001000000005";
-        //    card.expDate = "0412";
-        //    card.cardValidationNum = "758";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("44444", response.authCode);
-        //    Assert.AreEqual("12", response.fraudResult.avsResult);
-
-        //    capture capture = new capture();
-        //    capture.litleTxnId = response.litleTxnId;
-        //    captureResponse captureresponse = litle.Capture(capture);
-        //    Assert.AreEqual("000", captureresponse.response);
-        //    Assert.AreEqual("Approved", captureresponse.message);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = captureresponse.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test4AVS()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "4";
-        //    authorization.amount = 0;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Bob Black";
-        //    contact.addressLine1 = "4 Main St.";
-        //    contact.city = "Laurel";
-        //    contact.state = "MD";
-        //    contact.zip = "20708";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.AX;
-        //    card.number = "375001000000005";
-        //    card.expDate = "0412";
-        //    card.cardValidationNum = "758";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("44444", response.authCode);
-        //    Assert.AreEqual("12", response.fraudResult.avsResult);
-        //}
-
-        //[Test]
-        //public void test4Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "4";
-        //    sale.amount = 40040;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Bob Black";
-        //    contact.addressLine1 = "4 Main St.";
-        //    contact.city = "Laurel";
-        //    contact.state = "MD";
-        //    contact.zip = "20708";
-        //    contact.country = countryTypeEnum.US;
-        //    sale.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.AX;
-        //    card.number = "375001000000005";
-        //    card.expDate = "0412";
-        //    card.cardValidationNum = "758";
-        //    sale.card = card;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("44444", response.authCode);
-        //    Assert.AreEqual("12", response.fraudResult.avsResult);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = response.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test5Auth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "5";
-        //    authorization.amount = 50050;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4457010200000007";
-        //    card.expDate = "0512";
-        //    card.cardValidationNum = "463";
-        //    authorization.card = card;
-        //    fraudCheckType authenticationvalue = new fraudCheckType();
-        //    authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-        //    authorization.cardholderAuthentication = authenticationvalue;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("55555 ", response.authCode);
-        //    Assert.AreEqual("32", response.fraudResult.avsResult);
-        //    Assert.AreEqual("N", response.fraudResult.cardValidationResult);
-
-        //    capture capture = new capture();
-        //    capture.litleTxnId = response.litleTxnId;
-        //    captureResponse captureresponse = litle.Capture(capture);
-        //    Assert.AreEqual("000", captureresponse.response);
-        //    Assert.AreEqual("Approved", captureresponse.message);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = captureresponse.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test5AVS()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "5";
-        //    authorization.amount = 0;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4457010200000007";
-        //    card.expDate = "0512";
-        //    card.cardValidationNum = "463";
-        //    authorization.card = card;
-        //    fraudCheckType authenticationvalue = new fraudCheckType();
-        //    authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-        //    authorization.cardholderAuthentication = authenticationvalue;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("55555 ", response.authCode);
-        //    Assert.AreEqual("32", response.fraudResult.avsResult);
-        //    Assert.AreEqual("N", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test5Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "5";
-        //    sale.amount = 50050;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4457010200000007";
-        //    card.expDate = "0512";
-        //    card.cardValidationNum = "463";
-        //    sale.card = card;
-        //    fraudCheckType authenticationvalue = new fraudCheckType();
-        //    authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-        //    sale.cardholderAuthentication = authenticationvalue;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("000", response.response);
-        //    Assert.AreEqual("Approved", response.message);
-        //    Assert.AreEqual("55555 ", response.authCode);
-        //    Assert.AreEqual("32", response.fraudResult.avsResult);
-        //    Assert.AreEqual("N", response.fraudResult.cardValidationResult);
-
-        //    credit credit = new credit();
-        //    credit.litleTxnId = response.litleTxnId;
-        //    creditResponse creditResponse = litle.Credit(credit);
-        //    Assert.AreEqual("000", creditResponse.response);
-        //    Assert.AreEqual("Approved", creditResponse.message);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = creditResponse.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("000", voidResponse.response);
-        //    Assert.AreEqual("Approved", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test6Auth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "6";
-        //    authorization.amount = 60060;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Joe Green";
-        //    contact.addressLine1 = "6 Main St.";
-        //    contact.city = "Derry";
-        //    contact.state = "NH";
-        //    contact.zip = "03038";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4457010100000008";
-        //    card.expDate = "0612";
-        //    card.cardValidationNum = "992";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("110", response.response);
-        //    Assert.AreEqual("Insufficient Funds", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //    Assert.AreEqual("P", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test6Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "6";
-        //    sale.amount = 60060;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Joe Green";
-        //    contact.addressLine1 = "6 Main St.";
-        //    contact.city = "Derry";
-        //    contact.state = "NH";
-        //    contact.zip = "03038";
-        //    contact.country = countryTypeEnum.US;
-        //    sale.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4457010100000008";
-        //    card.expDate = "0612";
-        //    card.cardValidationNum = "992";
-        //    sale.card = card;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("110", response.response);
-        //    Assert.AreEqual("Insufficient Funds", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //    Assert.AreEqual("P", response.fraudResult.cardValidationResult);
-
-        //    voidTxn newvoid = new voidTxn();
-        //    newvoid.litleTxnId = response.litleTxnId;
-        //    litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-        //    Assert.AreEqual("360", voidResponse.response);
-        //    Assert.AreEqual("No transaction found with specified litleTxnId", voidResponse.message);
-        //}
-
-        //[Test]
-        //public void test7Auth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "7";
-        //    authorization.amount = 70070;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Jane Murray";
-        //    contact.addressLine1 = "7 Main St.";
-        //    contact.city = "Amesbury";
-        //    contact.state = "MA";
-        //    contact.zip = "01913";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.MC;
-        //    card.number = "5112010100000002";
-        //    card.expDate = "0712";
-        //    card.cardValidationNum = "251";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("301", response.response);
-        //    Assert.AreEqual("Invalid Account Number", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //    Assert.AreEqual("N", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test7AVS()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "7";
-        //    authorization.amount = 0;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Jane Murray";
-        //    contact.addressLine1 = "7 Main St.";
-        //    contact.city = "Amesbury";
-        //    contact.state = "MA";
-        //    contact.zip = "01913";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.MC;
-        //    card.number = "5112010100000002";
-        //    card.expDate = "0712";
-        //    card.cardValidationNum = "251";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("301", response.response);
-        //    Assert.AreEqual("Invalid Account Number", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //    Assert.AreEqual("N", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test7Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "7";
-        //    sale.amount = 70070;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Jane Murray";
-        //    contact.addressLine1 = "7 Main St.";
-        //    contact.city = "Amesbury";
-        //    contact.state = "MA";
-        //    contact.zip = "01913";
-        //    contact.country = countryTypeEnum.US;
-        //    sale.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.MC;
-        //    card.number = "5112010100000002";
-        //    card.expDate = "0712";
-        //    card.cardValidationNum = "251";
-        //    sale.card = card;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("301", response.response);
-        //    Assert.AreEqual("Invalid Account Number", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //    Assert.AreEqual("N", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test8Auth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "8";
-        //    authorization.amount = 80080;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Mark Johnson";
-        //    contact.addressLine1 = "8 Main St.";
-        //    contact.city = "Manchester";
-        //    contact.state = "NH";
-        //    contact.zip = "03101";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.DI;
-        //    card.number = "6011010100000002";
-        //    card.expDate = "0812";
-        //    card.cardValidationNum = "184";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("123", response.response);
-        //    Assert.AreEqual("Call Discover", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //    Assert.AreEqual("P", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test8AVS()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "8";
-        //    authorization.amount = 0;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Mark Johnson";
-        //    contact.addressLine1 = "8 Main St.";
-        //    contact.city = "Manchester";
-        //    contact.state = "NH";
-        //    contact.zip = "03101";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.DI;
-        //    card.number = "6011010100000002";
-        //    card.expDate = "0812";
-        //    card.cardValidationNum = "184";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("123", response.response);
-        //    Assert.AreEqual("Call Discover", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //    Assert.AreEqual("P", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test8Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "8";
-        //    sale.amount = 80080;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "Mark Johnson";
-        //    contact.addressLine1 = "8 Main St.";
-        //    contact.city = "Manchester";
-        //    contact.state = "NH";
-        //    contact.zip = "03101";
-        //    contact.country = countryTypeEnum.US;
-        //    sale.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.DI;
-        //    card.number = "6011010100000002";
-        //    card.expDate = "0812";
-        //    card.cardValidationNum = "184";
-        //    sale.card = card;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("123", response.response);
-        //    Assert.AreEqual("Call Discover", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //    Assert.AreEqual("P", response.fraudResult.cardValidationResult);
-        //}
-
-        //[Test]
-        //public void test9Auth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "9";
-        //    authorization.amount = 90090;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "James Miller";
-        //    contact.addressLine1 = "9 Main St.";
-        //    contact.city = "Boston";
-        //    contact.state = "MA";
-        //    contact.zip = "02134";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.AX;
-        //    card.number = "375001010000003";
-        //    card.expDate = "0912";
-        //    card.cardValidationNum = "0421";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("303", response.response);
-        //    Assert.AreEqual("Pick Up Card", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //}
-
-        //[Test]
-        //public void test9AVS()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "9";
-        //    authorization.amount = 0;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "James Miller";
-        //    contact.addressLine1 = "9 Main St.";
-        //    contact.city = "Boston";
-        //    contact.state = "MA";
-        //    contact.zip = "02134";
-        //    contact.country = countryTypeEnum.US;
-        //    authorization.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.AX;
-        //    card.number = "375001010000003";
-        //    card.expDate = "0912";
-        //    card.cardValidationNum = "0421";
-        //    authorization.card = card;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("303", response.response);
-        //    Assert.AreEqual("Pick Up Card", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //}
-
-        //[Test]
-        //public void test9Sale()
-        //{
-        //    sale sale = new sale();
-        //    sale.orderId = "9";
-        //    sale.amount = 90090;
-        //    sale.orderSource = orderSourceType.ecommerce;
-        //    contact contact = new contact();
-        //    contact.name = "James Miller";
-        //    contact.addressLine1 = "9 Main St.";
-        //    contact.city = "Boston";
-        //    contact.state = "MA";
-        //    contact.zip = "02134";
-        //    contact.country = countryTypeEnum.US;
-        //    sale.billToAddress = contact;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.AX;
-        //    card.number = "375001010000003";
-        //    card.expDate = "0912";
-        //    card.cardValidationNum = "0421";
-        //    sale.card = card;
-
-        //    saleResponse response = litle.Sale(sale);
-        //    Assert.AreEqual("303", response.response);
-        //    Assert.AreEqual("Pick Up Card", response.message);
-        //    Assert.AreEqual("34", response.fraudResult.avsResult);
-        //}
-
-        //[Test]
-        //public void test10()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "10";
-        //    authorization.amount = 40000;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4457010140000141";
-        //    card.expDate = "0912";
-        //    authorization.card = card;
-        //    authorization.allowPartialAuth = true;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("010", response.response);
-        //    Assert.AreEqual("Partially Approved", response.message);
-        //    Assert.AreEqual("32000", response.approvedAmount);
-        //}
-
-        //[Test]
-        //public void test11()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "11";
-        //    authorization.amount = 60000;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.MC;
-        //    card.number = "5112010140000004";
-        //    card.expDate = "1111";
-        //    authorization.card = card;
-        //    authorization.allowPartialAuth = true;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("010", response.response);
-        //    Assert.AreEqual("Partially Approved", response.message);
-        //    Assert.AreEqual("48000", response.approvedAmount);
-        //}
-
-        //[Test]
-        //public void test12()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "12";
-        //    authorization.amount = 50000;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.AX;
-        //    card.number = "375001014000009";
-        //    card.expDate = "0412";
-        //    authorization.card = card;
-        //    authorization.allowPartialAuth = true;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("010", response.response);
-        //    Assert.AreEqual("Partially Approved", response.message);
-        //    Assert.AreEqual("40000", response.approvedAmount);
-        //}
-
-        //[Test]
-        //public void test13()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.orderId = "13";
-        //    authorization.amount = 15000;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.DI;
-        //    card.number = "6011010140000004";
-        //    card.expDate = "0812";
-        //    authorization.card = card;
-        //    authorization.allowPartialAuth = true;
-
-        //    authorizationResponse response = litle.Authorize(authorization);
-        //    Assert.AreEqual("010", response.response);
-        //    Assert.AreEqual("Partially Approved", response.message);
-        //    Assert.AreEqual("12000", response.approvedAmount);
-
-        //}
-
+        private int estimatedResponseTime(int numAuthsAndSales, int numRest)
+        {
+            return (int)(3 * 60 * 1000 + 2.5 * 1000 + numAuthsAndSales * (1 / 5) * 1000 + numRest * (1 / 50) * 1000);
+        }
     }
 }

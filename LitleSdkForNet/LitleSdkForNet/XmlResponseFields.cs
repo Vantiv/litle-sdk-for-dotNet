@@ -4060,12 +4060,12 @@ namespace Litle.Sdk
         [XmlAttributeAttribute()]
         public string version;
 
-        [XmlElement(typeof(batchResponse), ElementName = "batchResponse", IsNullable = false)]
-        public List<batchResponse> listOfLitleBatchResponse;
+        [XmlElement(typeof(litleBatchResponse), ElementName = "batchResponse", IsNullable = false)]
+        public List<litleBatchResponse> listOfLitleBatchResponse;
 
         public litleResponse()
         {
-            listOfLitleBatchResponse = new List<batchResponse>();
+            listOfLitleBatchResponse = new List<litleBatchResponse>();
         }
     }
 
@@ -4075,7 +4075,7 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class batchResponse
+    public class litleBatchResponse
     {
         [XmlElement(typeof(authorizationResponse), ElementName = "authorizationResponse", IsNullable = true)]
         public List<authorizationResponse> listOfAuthorizationResponse;
@@ -4116,7 +4116,7 @@ namespace Litle.Sdk
         [XmlElement(typeof(updateCardValidationNumOnTokenResponse), ElementName = "updateCardValidationNumOnTokenResponse", IsNullable = true)]
         public List<updateCardValidationNumOnTokenResponse> listOfUpdateCardValidationNumOnTokenResponse;
 
-        public batchResponse()
+        public litleBatchResponse()
         {
             listOfAuthorizationResponse = new List<authorizationResponse>();
             listOfCaptureResponse = new List<captureResponse>();
