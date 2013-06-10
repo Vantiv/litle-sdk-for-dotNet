@@ -4062,6 +4062,11 @@ namespace Litle.Sdk
 
         [XmlElement(typeof(batchResponse), ElementName = "batchResponse", IsNullable = false)]
         public List<batchResponse> listOfLitleBatchResponse;
+
+        public litleResponse()
+        {
+            listOfLitleBatchResponse = new List<batchResponse>();
+        }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
@@ -4111,7 +4116,22 @@ namespace Litle.Sdk
         [XmlElement(typeof(updateCardValidationNumOnTokenResponse), ElementName = "updateCardValidationNumOnTokenResponse", IsNullable = true)]
         public List<updateCardValidationNumOnTokenResponse> listOfUpdateCardValidationNumOnTokenResponse;
 
-
+        public batchResponse()
+        {
+            listOfAuthorizationResponse = new List<authorizationResponse>();
+            listOfCaptureResponse = new List<captureResponse>();
+            listOfForceCaptureResponse = new List<forceCaptureResponse>();
+            listOfCaptureGivenAuthResponse = new List<captureGivenAuthResponse>();
+            listOfSaleResponse = new List<saleResponse>();
+            listOfCreditResponse = new List<creditResponse>();
+            listOfEcheckSalesResponse = new List<echeckSalesResponse>();
+            listOfEcheckCreditResponse = new List<echeckCreditResponse>();
+            listOfEcheckVerificationResponse = new List<echeckVerificationResponse>();
+            listOfEcheckRedepositResponse = new List<echeckRedepositResponse>();
+            listOfAuthReversalResponse = new List<authReversalResponse>();
+            listOfRegisterTokenResponse = new List<registerTokenResponse>();
+            listOfUpdateCardValidationNumOnTokenResponse = new List<updateCardValidationNumOnTokenResponse>();
+        }
     }
 
     /// <remarks/>

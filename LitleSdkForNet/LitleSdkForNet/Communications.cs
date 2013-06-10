@@ -160,7 +160,7 @@ namespace Litle.Sdk
                 {
                     sftpATTRS = channelSftp.lstat("outbound/" + fileName);
                 }
-                catch (Exception ex)
+                catch 
                 {
                 }
             } while (sftpATTRS == null && stopWatch.Elapsed.TotalMilliseconds <= timeout);

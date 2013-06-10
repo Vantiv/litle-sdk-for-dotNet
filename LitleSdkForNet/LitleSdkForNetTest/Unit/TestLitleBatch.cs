@@ -12,8 +12,8 @@ namespace Litle.Sdk.Test.Unit
     [TestFixture]
     class TestLitleBatch
     {
-
         private LitleBatch litle;
+        private const string batchNameRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_[A-Z]{8}";
 
         [TestFixtureSetUp]
         public void SetUpLitle()
@@ -21,115 +21,137 @@ namespace Litle.Sdk.Test.Unit
             litle = new LitleBatch();
         }
 
-        //[Test]
-        //public void TestAuth()
-        //{
-        //    authorization authorization = new authorization();
-        //    authorization.reportGroup = "Planets";
-        //    authorization.orderId = "12344";
-        //    authorization.amount = 106;
-        //    authorization.orderSource = orderSourceType.ecommerce;
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4100000000000002";
-        //    card.expDate = "1210";
-        //    authorization.card = card;
+        [Test]
+        public void TestAuth()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000002";
+            card.expDate = "1210";
+            authorization.card = card;
 
-        //    var mockCommunications = new Mock<Communications>();
-        //    var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
-        //    litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            litleResponse mockLitleResponse = new litleResponse();
 
-        //    authorizationResponse mockAuthorizationResponse1 = new authorizationResponse();
-        //    mockAuthorizationResponse1.litleTxnId = 123;
-        //    authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
-        //    mockAuthorizationResponse1.litleTxnId = 124;
+            authorizationResponse mockAuthorizationResponse1 = new authorizationResponse();
+            mockAuthorizationResponse1.litleTxnId = 123;
+            authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
+            mockAuthorizationResponse2.litleTxnId = 124;
 
-        //    mockLitleResponse.listOfLitleBatchResponse = new List<batchResponse>();
-        //    mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
-        //    mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse = new List<authorizationResponse>();
-        //    mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse1);
-        //    mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse2);
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse2);
 
-        //    mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
-        //        .Returns(new litleResponse());
+            mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
 
-        //    Communications mockedCommunication = mockCommunications.Object;
-        //    litle.setCommunication(mockedCommunication);
-        //    litleBatchRequest litleBatchRequest = new litleBatchRequest();
-        //    litleBatchRequest.addAuthorization(authorization);
-        //    litleBatchRequest.addAuthorization(authorization);
-        //    litle.addBatch(litleBatchRequest);
+            Communications mockedCommunication = mockCommunications.Object;
+            litle.setCommunication(mockedCommunication);
+            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
 
-        //    litleResponse litleResponse = litle.sendToLitle();
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.addAuthorization(authorization);
+            litle.addBatch(litleBatchRequest);
 
-        //    Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId);
-        //    Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[1].litleTxnId);
-        //}
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES", batchFileName);
 
-        //[Test]
-        //public void testAuthReversal()
-        //{
-        //    authReversal authreversal = new authReversal();
-        //    authreversal.litleTxnId = 12345678000;
-        //    authreversal.amount = 106;
-        //    authreversal.payPalNotes = "Notes";
+            Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[1].litleTxnId);
 
-        //    litleResponse mockLitleResponse = new litleResponse();
-        //    var mock = new Mock<Communications>();
-        //    var mockXml = new Mock<litleXmlSerializer>();
-            
-        //    authorizationResponse mockAuthorizationResponse1 = new authorizationResponse();
-        //    mockAuthorizationResponse1.litleTxnId = 123;
-        //    authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
-        //    mockAuthorizationResponse1.litleTxnId = 124;
-        //    mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0] = mockAuthorizationResponse1;
-        //    mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[1] = mockAuthorizationResponse2;
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
+        }
 
-        //    mock.Setup(Communications => Communications.FtpDropOff(It.IsRegex("[0-1][0-9]-[0-3][0-9]-20[0-9]{2}_-[0-9]{2}-[0-9]{2}-[0-9]{4}_[A-Z]{8}", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
-        //    mock.Setup(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(),It.IsRegex("[0-1][0-9]-[0-3][0-9]-20[0-9]{2}_-[0-9]{2}-[0-9]{2}-[0-9]{4}_[A-Z]{8}", RegexOptions.Singleline)));
-        //    Communications mockedCommunication = mock.Object;
+        [Test]
+        public void testAuthReversal()
+        {
+            authReversal authreversal = new authReversal();
+            authreversal.litleTxnId = 12345678000;
+            authreversal.amount = 106;
+            authreversal.payPalNotes = "Notes";
 
-        //    mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsRegex("[0-1][0-9]-[0-3][0-9]-20[0-9]{2}_-[0-9]{2}-[0-9]{2}-[0-9]{4}_[A-Z]{8}", RegexOptions.Singleline)))
-        //        .Returns(mockLitleResponse);
-        //    litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-        //    litle.setCommunication(mockedCommunication);
-        //    litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-        //    litleBatchRequest litleBatchRequest = new litleBatchRequest();
-        //    litleBatchRequest.addAuthReversal(authreversal);
-        //    litle.addBatch(litleBatchRequest);
+            authReversalResponse mockAuthReversalResponse1 = new authReversalResponse();
+            mockAuthReversalResponse1.litleTxnId = 123;
+            authReversalResponse mockAuthReversalResponse2 = new authReversalResponse();
+            mockAuthReversalResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse.Add(mockAuthReversalResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse.Add(mockAuthReversalResponse2);
 
-        //    string batchFileName = litle.sendToLitle_File();
-        //    litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            Communications mockedCommunications = mockCommunications.Object;
 
-        //    Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse[0].litleTxnId);
-        //    mock.Verify(Communications => Communications.FtpDropOff(It.IsRegex("[0-1][0-9]-[0-3][0-9]-20[0-9]{2}_-[0-9]{2}-[0-9]{2}-[0-9]{4}_[A-Z]{8}", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
-        //    mock.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex("[0-1][0-9]-[0-3][0-9]-20[0-9]{2}_-[0-9]{2}-[0-9]{2}-[0-9]{4}_[A-Z]{8}", RegexOptions.Singleline)));
-        //}
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addAuthReversal(authreversal);
+            litleBatchRequest.addAuthReversal(authreversal);
+            litle.addBatch(litleBatchRequest);
+
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+
+            Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
+        }
 
         [Test]
         public void testCapture()
         {
             capture capture = new capture();
-            capture.litleTxnId = 123456000;
+            capture.litleTxnId = 12345678000;
             capture.amount = 106;
-            capture.payPalNotes = "Notes";
 
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            var mock = new Mock<Communications>();
+            captureResponse mockCaptureResponse1 = new captureResponse();
+            mockCaptureResponse1.litleTxnId = 123;
+            captureResponse mockCaptureResponse2 = new captureResponse();
+            mockCaptureResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse.Add(mockCaptureResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse.Add(mockCaptureResponse2);
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<capture.*?<litleTxnId>123456000</litleTxnId>.*?</capture>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><captureResponse><litleTxnId>123</litleTxnId></captureResponse></batchResponse></litleResponse>");
+            Communications mockedCommunications = mockCommunications.Object;
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addCapture(capture);
             litleBatchRequest.addCapture(capture);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -150,20 +172,38 @@ namespace Litle.Sdk.Test.Unit
             card.expDate = "1210";
             capturegivenauth.card = card;
 
-            var mock = new Mock<Communications>();
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<captureGivenAuth.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</captureGivenAuth>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></batchResponse></litleResponse>");
+            captureGivenAuthResponse mockCaptureGivenAuthResponse1 = new captureGivenAuthResponse();
+            mockCaptureGivenAuthResponse1.litleTxnId = 123;
+            captureGivenAuthResponse mockCaptureGivenAuthResponse2 = new captureGivenAuthResponse();
+            mockCaptureGivenAuthResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfCaptureGivenAuthResponse.Add(mockCaptureGivenAuthResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfCaptureGivenAuthResponse.Add(mockCaptureGivenAuthResponse2);
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            Communications mockedCommunications = mockCommunications.Object;
+
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
             litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfCaptureGivenAuthResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfCaptureGivenAuthResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -179,20 +219,38 @@ namespace Litle.Sdk.Test.Unit
             card.expDate = "1210";
             credit.card = card;
 
-            var mock = new Mock<Communications>();
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<credit.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</credit>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><creditResponse><litleTxnId>123</litleTxnId></creditResponse></batchResponse></litleResponse>");
+            creditResponse mockCreditResponse1 = new creditResponse();
+            mockCreditResponse1.litleTxnId = 123;
+            creditResponse mockCreditResponse2 = new creditResponse();
+            mockCreditResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfCreditResponse.Add(mockCreditResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfCreditResponse.Add(mockCreditResponse2);
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            Communications mockedCommunications = mockCommunications.Object;
+
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addCredit(credit);
             litleBatchRequest.addCredit(credit);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfCreditResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfCreditResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -202,20 +260,38 @@ namespace Litle.Sdk.Test.Unit
             echeckcredit.amount = 12;
             echeckcredit.litleTxnId = 123456789101112;
 
-            var mock = new Mock<Communications>();
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<echeckCredit.*?<litleTxnId>123456789101112</litleTxnId>.*?</echeckCredit>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><echeckCreditResponse><litleTxnId>123</litleTxnId></echeckCreditResponse></batchResponse></litleResponse>");
+            echeckCreditResponse mockEcheckCreditResponse1 = new echeckCreditResponse();
+            mockEcheckCreditResponse1.litleTxnId = 123;
+            echeckCreditResponse mockEcheckCreditResponse2 = new echeckCreditResponse();
+            mockEcheckCreditResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckCreditResponse.Add(mockEcheckCreditResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckCreditResponse.Add(mockEcheckCreditResponse2);
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            Communications mockedCommunications = mockCommunications.Object;
+
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addEcheckCredit(echeckcredit);
             litleBatchRequest.addEcheckCredit(echeckcredit);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfEcheckCreditResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfEcheckCreditResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -224,20 +300,38 @@ namespace Litle.Sdk.Test.Unit
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
 
-            var mock = new Mock<Communications>();
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<echeckRedeposit.*?<litleTxnId>123456</litleTxnId>.*?</echeckRedeposit>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></batchResponse></litleResponse>");
+            echeckRedepositResponse mockEcheckRedepositResponse1 = new echeckRedepositResponse();
+            mockEcheckRedepositResponse1.litleTxnId = 123;
+            echeckRedepositResponse mockEcheckRedepositResponse2 = new echeckRedepositResponse();
+            mockEcheckRedepositResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckRedepositResponse.Add(mockEcheckRedepositResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckRedepositResponse.Add(mockEcheckRedepositResponse2);
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            Communications mockedCommunications = mockCommunications.Object;
+
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
             litleBatchRequest.addEcheckRedeposit(echeckredeposit);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfEcheckRedepositResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfEcheckRedepositResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -260,21 +354,38 @@ namespace Litle.Sdk.Test.Unit
             contact.email = "litle.com";
             echecksale.billToAddress = contact;
 
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            var mock = new Mock<Communications>();
+            echeckSalesResponse mockEcheckSalesResponse1 = new echeckSalesResponse();
+            mockEcheckSalesResponse1.litleTxnId = 123;
+            echeckSalesResponse mockEcheckSalesResponse2 = new echeckSalesResponse();
+            mockEcheckSalesResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckSalesResponse.Add(mockEcheckSalesResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckSalesResponse.Add(mockEcheckSalesResponse2);
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<echeckSale.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckSale>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><echeckSalesResponse><litleTxnId>123</litleTxnId></echeckSalesResponse></batchResponse></litleResponse>");
+            Communications mockedCommunications = mockCommunications.Object;
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addEcheckSale(echecksale);
             litleBatchRequest.addEcheckSale(echecksale);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfEcheckSalesResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfEcheckSalesResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -297,21 +408,38 @@ namespace Litle.Sdk.Test.Unit
             contact.email = "litle.com";
             echeckverification.billToAddress = contact;
 
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            var mock = new Mock<Communications>();
+            echeckVerificationResponse mockEcheckVerificationResponse1 = new echeckVerificationResponse();
+            mockEcheckVerificationResponse1.litleTxnId = 123;
+            echeckVerificationResponse mockEcheckVerificationResponse2 = new echeckVerificationResponse();
+            mockEcheckVerificationResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckVerificationResponse.Add(mockEcheckVerificationResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfEcheckVerificationResponse.Add(mockEcheckVerificationResponse2);
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<echeckVerification.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckVerification>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></batchResponse></litleResponse>");
+            Communications mockedCommunications = mockCommunications.Object;
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addEcheckVerification(echeckverification);
             litleBatchRequest.addEcheckVerification(echeckverification);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfEcheckVerificationResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfEcheckVerificationResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -327,20 +455,38 @@ namespace Litle.Sdk.Test.Unit
             card.expDate = "1210";
             forcecapture.card = card;
 
-            var mock = new Mock<Communications>();
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<forceCapture.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</forceCapture>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></batchResponse></litleResponse>");
+            forceCaptureResponse mockForceCaptureResponse1 = new forceCaptureResponse();
+            mockForceCaptureResponse1.litleTxnId = 123;
+            forceCaptureResponse mockForceCaptureResponse2 = new forceCaptureResponse();
+            mockForceCaptureResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfForceCaptureResponse.Add(mockForceCaptureResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfForceCaptureResponse.Add(mockForceCaptureResponse2);
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            Communications mockedCommunications = mockCommunications.Object;
+
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addForceCapture(forcecapture);
             litleBatchRequest.addForceCapture(forcecapture);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfForceCaptureResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfForceCaptureResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -356,20 +502,38 @@ namespace Litle.Sdk.Test.Unit
             card.expDate = "1210";
             sale.card = card;
 
-            var mock = new Mock<Communications>();
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<sale.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</sale>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><saleResponse><litleTxnId>123</litleTxnId></saleResponse></batchResponse></litleResponse>");
+            saleResponse mockSaleResponse1 = new saleResponse();
+            mockSaleResponse1.litleTxnId = 123;
+            saleResponse mockSaleResponse2 = new saleResponse();
+            mockSaleResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfSaleResponse.Add(mockSaleResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfSaleResponse.Add(mockSaleResponse2);
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            Communications mockedCommunications = mockCommunications.Object;
+
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addSale(sale);
             litleBatchRequest.addSale(sale);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfSaleResponse[0].litleTxnId);
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfSaleResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -379,23 +543,38 @@ namespace Litle.Sdk.Test.Unit
             token.orderId = "12344";
             token.accountNumber = "1233456789103801";
 
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            var mock = new Mock<Communications>();
+            registerTokenResponse mockRegisterTokenResponse1 = new registerTokenResponse();
+            mockRegisterTokenResponse1.litleTxnId = 123;
+            registerTokenResponse mockRegisterTokenResponse2 = new registerTokenResponse();
+            mockRegisterTokenResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfRegisterTokenResponse.Add(mockRegisterTokenResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfRegisterTokenResponse.Add(mockRegisterTokenResponse2);
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<batchRequest.*?<registerTokenRequest.*?<accountNumber>1233456789103801</accountNumber>.*?</registerTokenRequest>.*?</batchRequest>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><batchResponse><registerTokenResponse><litleTxnId>123</litleTxnId></registerTokenResponse></batchResponse></litleResponse>");
+            Communications mockedCommunications = mockCommunications.Object;
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.addRegisterTokenRequest(token);
             litleBatchRequest.addRegisterTokenRequest(token);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitle();
+            string batchFileName = litle.sendToLitle_File();
+            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfRegisterTokenResponse[0].litleTxnId);
-
-
+            Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfRegisterTokenResponse[1].litleTxnId);
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsRegex(batchNameRegex, RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), It.IsRegex(batchNameRegex, RegexOptions.Singleline)));
         }
 
         [Test]
@@ -412,22 +591,37 @@ namespace Litle.Sdk.Test.Unit
             card.expDate = "1210";
             authorization.card = card;
 
-            var mock = new Mock<Communications>();
+            litleResponse mockLitleResponse = new litleResponse();
+            var mockCommunications = new Mock<Communications>();
+            var mockXml = new Mock<litleXmlSerializer>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleRequest.*?<authorization.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleResponse version='8.10' response='1' message='Error validating xml data against the schema' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleResponse>");
+            authorizationResponse mockAuthorizationResponse1 = new authorizationResponse();
+            mockAuthorizationResponse1.litleTxnId = 123;
+            authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
+            mockAuthorizationResponse2.litleTxnId = 124;
+            mockLitleResponse.listOfLitleBatchResponse.Add(new batchResponse());
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse1);
+            mockLitleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse.Add(mockAuthorizationResponse2);
+            mockLitleResponse.message = "Error validating xml data against the schema";
+            mockLitleResponse.response = "1";
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            Communications mockedCommunications = mockCommunications.Object;
+
+            mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>()))
+                .Returns(mockLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+
             try
             {
-
-                litle.setCommunication(mockedCommunication);
+                litle.setCommunication(mockedCommunications);
+                litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
                 litleBatchRequest litleBatchRequest = new litleBatchRequest();
+                litleBatchRequest.addAuthorization(authorization);
                 litleBatchRequest.addAuthorization(authorization);
                 litle.addBatch(litleBatchRequest);
 
-                litleResponse litleResponse = litle.sendToLitle();
+                string batchFileName = litle.sendToLitle_File();
+                litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
             }
             catch (LitleOnlineException e)
             {
@@ -572,7 +766,7 @@ namespace Litle.Sdk.Test.Unit
 
             string resultFile = litle.SerializeToFile(filePath);
 
-            Assert.IsTrue(resultFile.Contains(DateTime.Now.ToString("MM-dd-yyyy")));
+            Assert.IsTrue(resultFile.Contains(DateTime.Now.ToString("MM-dd-yyyy"))); //TODO CHECK
         }
     }
 }

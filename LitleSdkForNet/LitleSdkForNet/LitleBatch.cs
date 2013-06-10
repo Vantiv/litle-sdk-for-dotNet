@@ -142,9 +142,9 @@ namespace Litle.Sdk
             communication.FtpPoll(fileName, timeOut, config);
         }
 
-        public litleResponse receiveFromLitle_File(string destinationFilePath, string fileName)
+        public litleResponse receiveFromLitle_File(string destinationFilePath, string batchFileName)
         {
-            communication.FtpPickUp(destinationFilePath, config, fileName);
+            communication.FtpPickUp(destinationFilePath, config, batchFileName);
 
             litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(destinationFilePath);
             return litleResponse;
