@@ -279,59 +279,9 @@ namespace Litle.Sdk.Test.Functional
             litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
 
             Assert.NotNull(litleResponse);
-            Assert.AreSame("0", litleResponse.response);
-
-            foreach (litleBatchResponse litleBatchResponse in litleResponse.listOfLitleBatchResponse)
-            {
-                foreach (authorizationResponse authorizationResponse in litleBatchResponse.listOfAuthorizationResponse)
-                {
-                    Assert.AreSame("0", authorizationResponse.response);
-                }
-                foreach (authReversalResponse authReversalResponse in litleBatchResponse.listOfAuthReversalResponse)
-                {
-                    Assert.AreSame("0", authReversalResponse.response);
-                }
-                foreach (captureResponse captureResponse in litleBatchResponse.listOfCaptureResponse)
-                {
-                    Assert.AreSame("0", captureResponse.response);
-                }
-                foreach (captureGivenAuthResponse captureGivenAuthResponse in litleBatchResponse.listOfCaptureGivenAuthResponse)
-                {
-                    Assert.AreSame("0", captureGivenAuthResponse.response);
-                }
-                foreach (creditResponse creditResponse in litleBatchResponse.listOfCreditResponse)
-                {
-                    Assert.AreSame("0", creditResponse.response);
-                }
-                foreach (echeckCreditResponse echeckCreditResponse in litleBatchResponse.listOfEcheckCreditResponse)
-                {
-                    Assert.AreSame("0", echeckCreditResponse.response);
-                }
-                foreach (echeckRedepositResponse echeckRedepositResponse in litleBatchResponse.listOfEcheckRedepositResponse)
-                {
-                    Assert.AreSame("0", echeckRedepositResponse.response);
-                }
-                foreach (echeckSalesResponse echeckSalesResponse in litleBatchResponse.listOfEcheckSalesResponse)
-                {
-                    Assert.AreSame("0", echeckSalesResponse.response);
-                }
-                foreach (echeckVerificationResponse echeckVerificationResponse in litleBatchResponse.listOfEcheckVerificationResponse)
-                {
-                    Assert.AreSame("0", echeckVerificationResponse.response);
-                }
-                foreach (forceCaptureResponse forceCaptureResponse in litleBatchResponse.listOfForceCaptureResponse)
-                {
-                    Assert.AreSame("0", forceCaptureResponse.response);
-                }
-                foreach (saleResponse saleResponse in litleBatchResponse.listOfSaleResponse)
-                {
-                    Assert.AreSame("0", saleResponse.response);
-                }
-                foreach (registerTokenResponse registerTokenResponse in litleBatchResponse.listOfRegisterTokenResponse)
-                {
-                    Assert.AreSame("0", registerTokenResponse.response);
-                }
-            }
+            Assert.AreEqual("0", litleResponse.response);
+            Assert.AreEqual("Valid Format", litleResponse.message);
+            //Assert.AreEqual(24, litleResponse.listOfLitleBatchResponse[0]);
         }
 
 
@@ -725,59 +675,8 @@ namespace Litle.Sdk.Test.Functional
             litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
 
             Assert.NotNull(litleResponse);
-            Assert.AreSame("0", litleResponse.response);
-
-            foreach (litleBatchResponse litleBatchResponse in litleResponse.listOfLitleBatchResponse)
-            {
-                foreach (authorizationResponse authorizationResponse in litleBatchResponse.listOfAuthorizationResponse)
-                {
-                    Assert.AreSame("0", authorizationResponse.response);
-                }
-                foreach (authReversalResponse authReversalResponse in litleBatchResponse.listOfAuthReversalResponse)
-                {
-                    Assert.AreSame("0", authReversalResponse.response);
-                }
-                foreach (captureResponse captureResponse in litleBatchResponse.listOfCaptureResponse)
-                {
-                    Assert.AreSame("0", captureResponse.response);
-                }
-                foreach (captureGivenAuthResponse captureGivenAuthResponse in litleBatchResponse.listOfCaptureGivenAuthResponse)
-                {
-                    Assert.AreSame("0", captureGivenAuthResponse.response);
-                }
-                foreach (creditResponse creditResponse in litleBatchResponse.listOfCreditResponse)
-                {
-                    Assert.AreSame("0", creditResponse.response);
-                }
-                foreach (echeckCreditResponse echeckCreditResponse in litleBatchResponse.listOfEcheckCreditResponse)
-                {
-                    Assert.AreSame("0", echeckCreditResponse.response);
-                }
-                foreach (echeckRedepositResponse echeckRedepositResponse in litleBatchResponse.listOfEcheckRedepositResponse)
-                {
-                    Assert.AreSame("0", echeckRedepositResponse.response);
-                }
-                foreach (echeckSalesResponse echeckSalesResponse in litleBatchResponse.listOfEcheckSalesResponse)
-                {
-                    Assert.AreSame("0", echeckSalesResponse.response);
-                }
-                foreach (echeckVerificationResponse echeckVerificationResponse in litleBatchResponse.listOfEcheckVerificationResponse)
-                {
-                    Assert.AreSame("0", echeckVerificationResponse.response);
-                }
-                foreach (forceCaptureResponse forceCaptureResponse in litleBatchResponse.listOfForceCaptureResponse)
-                {
-                    Assert.AreSame("0", forceCaptureResponse.response);
-                }
-                foreach (saleResponse saleResponse in litleBatchResponse.listOfSaleResponse)
-                {
-                    Assert.AreSame("0", saleResponse.response);
-                }
-                foreach (registerTokenResponse registerTokenResponse in litleBatchResponse.listOfRegisterTokenResponse)
-                {
-                    Assert.AreSame("0", registerTokenResponse.response);
-                }
-            }
+            Assert.AreEqual("1", litleResponse.response);
+            //Assert.AreEqual("Valid Format", litleResponse.message);
         }
 
 
