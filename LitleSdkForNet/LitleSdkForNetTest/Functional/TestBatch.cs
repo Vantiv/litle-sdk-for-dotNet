@@ -10,7 +10,6 @@ namespace Litle.Sdk.Test.Functional
     [TestFixture]
     class TestBatch
     {
-
         private string responseDir;
         private LitleBatch litle;
 
@@ -46,7 +45,7 @@ namespace Litle.Sdk.Test.Functional
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "414100000000000000";
+            card.number = "4100000000000001";
             card.expDate = "1210";
             authorization.card = card; //This needs to compile      
 
@@ -59,7 +58,7 @@ namespace Litle.Sdk.Test.Functional
             authorization2.orderSource = orderSourceType.ecommerce;
             cardType card2 = new cardType();
             card2.type = methodOfPaymentTypeEnum.VI;
-            card2.number = "414200000000000000";
+            card2.number = "4242424242424242";
             card2.expDate = "1210";
             authorization2.card = card2; //This needs to compile
 
@@ -143,8 +142,8 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.orderSource = orderSourceType.ecommerce;
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
+            echeck.accNum = "1099999903";
+            echeck.routingNum = "114567895";
             echeck.checkNum = "123455";
             echeckcredit.echeck = echeck;
             contact billToAddress = new contact();
@@ -162,9 +161,9 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit2.orderSource = orderSourceType.ecommerce;
             echeckType echeck2 = new echeckType();
             echeck2.accType = echeckAccountTypeEnum.Checking;
-            echeck2.accNum = "12345657891";
-            echeck2.routingNum = "123456789";
-            echeck2.checkNum = "123455";
+            echeck2.accNum = "1099999903";
+            echeck2.routingNum = "114567895";
+            echeck2.checkNum = "123456";
             echeckcredit2.echeck = echeck2;
             contact billToAddress2 = new contact();
             billToAddress2.name = "Mike";
@@ -273,11 +272,11 @@ namespace Litle.Sdk.Test.Functional
 
             litle.addBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle_File();
+            string batchName = litle.sendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(4*2, 8*2));
+            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2*2, 10*2));
 
-            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchName, batchName);
+            litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreSame("0", litleResponse.response);
@@ -483,23 +482,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
-            Dictionary<String, String> config = new Dictionary<String, String>();
-            config["url"] = Properties.Settings.Default.url;
-            config["reportGroup"] = Properties.Settings.Default.reportGroup;
-            config["username"] = Properties.Settings.Default.username;
-            config["printxml"] = Properties.Settings.Default.printxml;
-            config["timeout"] = Properties.Settings.Default.timeout;
-            config["proxyHost"] = Properties.Settings.Default.proxyHost;
-            config["merchantId"] = Properties.Settings.Default.merchantId;
-            config["password"] = Properties.Settings.Default.password;
-            config["proxyPort"] = Properties.Settings.Default.proxyPort;
-            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            config["sftpUsername"] = "InvalidUsername";
-            config["sftpPassword"] = "Password123";
-            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
-            litleBatchRequest.config = config;
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -508,7 +491,7 @@ namespace Litle.Sdk.Test.Functional
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "414100000000000000";
+            card.number = "4100000000000001";
             card.expDate = "1210";
             authorization.card = card; //This needs to compile      
 
@@ -521,7 +504,7 @@ namespace Litle.Sdk.Test.Functional
             authorization2.orderSource = orderSourceType.ecommerce;
             cardType card2 = new cardType();
             card2.type = methodOfPaymentTypeEnum.VI;
-            card2.number = "414200000000000000";
+            card2.number = "4242424242424242";
             card2.expDate = "1210";
             authorization2.card = card2; //This needs to compile
 
@@ -605,8 +588,8 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.orderSource = orderSourceType.ecommerce;
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
+            echeck.accNum = "1099999903";
+            echeck.routingNum = "114567895";
             echeck.checkNum = "123455";
             echeckcredit.echeck = echeck;
             contact billToAddress = new contact();
@@ -624,9 +607,9 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit2.orderSource = orderSourceType.ecommerce;
             echeckType echeck2 = new echeckType();
             echeck2.accType = echeckAccountTypeEnum.Checking;
-            echeck2.accNum = "12345657891";
-            echeck2.routingNum = "123456789";
-            echeck2.checkNum = "123455";
+            echeck2.accNum = "1099999903";
+            echeck2.routingNum = "114567895";
+            echeck2.checkNum = "123456";
             echeckcredit2.echeck = echeck2;
             contact billToAddress2 = new contact();
             billToAddress2.name = "Mike";
@@ -735,11 +718,11 @@ namespace Litle.Sdk.Test.Functional
 
             litle.addBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle_File();
+            string batchName = litle.sendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(4 * 2, 8 * 2));
+            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
 
-            litleResponse litleResponse = litle.receiveFromLitle_File(responseDir + batchName, batchName);
+            litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreSame("0", litleResponse.response);
@@ -800,7 +783,7 @@ namespace Litle.Sdk.Test.Functional
 
         private int estimatedResponseTime(int numAuthsAndSales, int numRest)
         {
-            return (int)(3 * 60 * 1000 + 2.5 * 1000 + numAuthsAndSales * (1 / 5) * 1000 + numRest * (1 / 50) * 1000);
+            return (int)(5 * 60 * 1000 + 2.5 * 1000 + numAuthsAndSales * (1 / 5) * 1000 + numRest * (1 / 50) * 1000);
         }
     }
 }

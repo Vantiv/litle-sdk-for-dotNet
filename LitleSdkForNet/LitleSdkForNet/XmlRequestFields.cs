@@ -350,7 +350,7 @@ namespace Litle.Sdk
         public long litleTxnId;
         public processingInstructions processingInstructions;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<void";
             xml += " id=\"" + id + "\"";
@@ -521,7 +521,7 @@ namespace Litle.Sdk
         }
         public string payPalNotes;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<capture";
             xml += " id=\"" + id + "\"";
@@ -581,7 +581,7 @@ namespace Litle.Sdk
 
         public merchantDataType merchantData;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<echeckCredit";
             xml += " id=\"" + id + "\"";
@@ -646,7 +646,7 @@ namespace Litle.Sdk
         public echeckTokenType token;
         public merchantDataType merchantData;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<echeckSale";
             xml += " id=\"" + id + "\"";
@@ -705,7 +705,7 @@ namespace Litle.Sdk
         public echeckTokenType token;
         public merchantDataType merchantData;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<echeckVerification";
             xml += " id=\"" + id + "\"";
@@ -737,7 +737,7 @@ namespace Litle.Sdk
         public string paypageRegistrationId;
         public string cardValidationNum;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<registerTokenRequest";
             xml += " id=\"" + id + "\"";
@@ -764,7 +764,7 @@ namespace Litle.Sdk
         public string litleToken;
         public string cardValidationNum;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<updateCardValidationNumOnToken";
             xml += " id=\"" + id + "\"";
@@ -845,7 +845,7 @@ namespace Litle.Sdk
         public String payPalNotes;
         public String actionReason;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<credit";
             xml += " id=\"" + id + "\"";
@@ -1182,7 +1182,7 @@ namespace Litle.Sdk
         public echeckTokenType token;
         public merchantDataType merchantData;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<echeckRedeposit";
             xml += " id=\"" + id + "\"";
@@ -1281,7 +1281,7 @@ namespace Litle.Sdk
             }
         }
 
-        public String Serialize()
+        public override String Serialize()
         {
             string xml = "\r\n<authorization";
             xml += " id=\"" + id + "\"";
@@ -1477,7 +1477,7 @@ namespace Litle.Sdk
             }
         }
 
-        public String Serialize()
+        public override String Serialize()
         {
             string xml = "\r\n<sale";
             xml += " id=\"" + id + "\"";
@@ -1610,7 +1610,7 @@ namespace Litle.Sdk
         public amexAggregatorData amexAggregatorData;
         public merchantDataType merchantData;
 
-        public String Serialize()
+        public override String Serialize()
         {
             string xml = "\r\n<forceCapture";
             xml += " id=\"" + id + "\"";
@@ -1705,7 +1705,7 @@ namespace Litle.Sdk
         public amexAggregatorData amexAggregatorData;
         public merchantDataType merchantData;
 
-        public String Serialize()
+        public override String Serialize()
         {
             string xml = "\r\n<captureGivenAuth";
             xml += " id=\"" + id + "\"";
@@ -2360,7 +2360,7 @@ namespace Litle.Sdk
         public string payPalNotes;
         public string actionReason;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<authReversal";
             xml += " id=\"" + id + "\"";
@@ -2393,7 +2393,7 @@ namespace Litle.Sdk
     {
         public long litleTxnId;
 
-        public string Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<echeckVoid";
             xml += " id=\"" + id + "\"";

@@ -191,7 +191,23 @@ namespace Litle.Sdk
             channel.connect();
             channelSftp = (ChannelSftp)channel;
 
-            channelSftp.get("outbound/" + fileName + ".asc", destinationFilePath);
+            try
+            {
+                channelSftp.get("outbound/" + fileName + ".asc", destinationFilePath);
+                channelSftp.rm("outbound/" + fileName + ".asc");
+            }
+            catch (SftpException e )
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to retrieve and save the file from SFTP");
+                }
+            }
+
             channelSftp.quit();
 
             session.disconnect();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Litle.Sdk
 {
@@ -11,439 +12,343 @@ namespace Litle.Sdk
 
         public string merchantId;
 
+        //TODO ask what is this
         public int numAccountUpdates;
         public string reportGroup;
 
-
         public Dictionary<String, String> config;
 
-        private authentication authentication;
+        public string batchFilePath;
+        private string tempBatchFilePath;
+        private litleFileGenerator litleFileGenerator;
+        private litleTime litleTime;
 
-        private List<authorization> listOfAuthorization;
-        private List<capture> listOfCapture;
-        private List<credit> listOfCredit;
-        private List<sale> listOfSale;
-        private List<authReversal> listOfAuthReversal;
-        private List<echeckCredit> listOfEcheckCredit;
-        private List<echeckVerification> listOfEcheckVerification;
-        private List<echeckSale> listOfEcheckSale;
-        private List<registerTokenRequestType> listOfRegisterTokenRequest;
-        private List<forceCapture> listOfForceCapture;
-        private List<captureGivenAuth> listOfCaptureGivenAuth;
-        private List<echeckRedeposit> listOfEcheckRedeposit;
-        private List<updateCardValidationNumOnToken> listOfUpdateCardValidationNumOnToken;
+        private int numAuthorization;
+        private int numCapture;
+        private int numCredit;
+        private int numSale;
+        private int numAuthReversal;
+        private int numEcheckCredit;
+        private int numEcheckVerification;
+        private int numEcheckSale;
+        private int numRegisterTokenRequest;
+        private int numForceCapture;
+        private int numCaptureGivenAuth;
+        private int numEcheckRedeposit;
+        private int numUpdateCardValidationNumOnToken;
+
+        private long sumOfAuthorization;
+        private long sumOfAuthReversal;
+        private long sumOfCapture;
+        private long sumOfCredit;
+        private long sumOfSale;
+        private long sumOfForceCapture;
+        private long sumOfEcheckSale;
+        private long sumOfEcheckCredit;
+        private long sumOfEcheckVerification;
+        private long sumOfCaptureGivenAuth;
 
         public litleBatchRequest()
         {
             config = new Dictionary<String, String>();
 
-            authentication = new authentication();
+            config["url"] = Properties.Settings.Default.url;
+            config["reportGroup"] = Properties.Settings.Default.reportGroup;
+            config["username"] = Properties.Settings.Default.username;
+            config["printxml"] = Properties.Settings.Default.printxml;
+            config["timeout"] = Properties.Settings.Default.timeout;
+            config["proxyHost"] = Properties.Settings.Default.proxyHost;
+            config["merchantId"] = Properties.Settings.Default.merchantId;
+            config["password"] = Properties.Settings.Default.password;
+            config["proxyPort"] = Properties.Settings.Default.proxyPort;
+            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
+            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
+            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
 
-            listOfAuthorization = new List<authorization>();
-            listOfCapture = new List<capture>();
-            listOfCredit = new List<credit>();
-            listOfSale = new List<sale>();
-            listOfAuthReversal = new List<authReversal>();
-            listOfEcheckCredit = new List<echeckCredit>();
-            listOfEcheckVerification = new List<echeckVerification>();
-            listOfEcheckSale = new List<echeckSale>();
-            listOfRegisterTokenRequest = new List<registerTokenRequestType>();
-            listOfForceCapture = new List<forceCapture>();
-            listOfCaptureGivenAuth = new List<captureGivenAuth>();
-            listOfEcheckRedeposit = new List<echeckRedeposit>();
-            listOfUpdateCardValidationNumOnToken = new List<updateCardValidationNumOnToken>();
+            litleFileGenerator = new litleFileGenerator();
+            litleTime = new litleTime();
+
+            numAuthorization = 0;
+            numAuthReversal = 0;
+            numCapture = 0;
+            numCaptureGivenAuth = 0;
+            numCredit = 0;
+            numEcheckCredit = 0;
+            numEcheckRedeposit = 0;
+            numEcheckSale = 0;
+            numEcheckVerification = 0;
+            numForceCapture = 0;
+            numRegisterTokenRequest = 0;
+            numSale = 0;
+            numUpdateCardValidationNumOnToken = 0;
+
+            sumOfAuthorization = 0;
+            sumOfAuthReversal = 0;
+            sumOfCapture = 0;
+            sumOfCredit = 0;
+            sumOfSale = 0;
+            sumOfForceCapture = 0;
+            sumOfEcheckSale = 0;
+            sumOfEcheckCredit = 0;
+            sumOfEcheckVerification = 0;
+            sumOfCaptureGivenAuth = 0;
+        }
+
+        public litleBatchRequest(Dictionary<String, String> config)
+        {
+            this.config = config;
+
+            //authentication = new authentication();
+
+            //authentication.user = config["username"];
+            //authentication.password = config["password"];
         }
 
         public void addAuthorization(authorization authorization)
         {
-            listOfAuthorization.Add(authorization);
+            numAuthorization++;
+            sumOfAuthorization += authorization.amount;
+            fillInReportGroup(authorization);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, authorization);
         }
 
         public void addCapture(capture capture)
         {
-            listOfCapture.Add(capture);
+            numCapture++;
+            sumOfCapture += capture.amount;
+            fillInReportGroup(capture);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, capture);
         }
 
         public void addCredit(credit credit)
         {
-            listOfCredit.Add(credit);
+            numCredit++;
+            sumOfCredit += credit.amount;
+            fillInReportGroup(credit);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, credit);
         }
 
         public void addSale(sale sale)
         {
-            listOfSale.Add(sale);
+            numSale++;
+            sumOfSale += sale.amount;
+            fillInReportGroup(sale);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, sale);
         }
 
         public void addAuthReversal(authReversal authReversal)
         {
-            listOfAuthReversal.Add(authReversal);
+            numAuthReversal++;
+            sumOfAuthReversal += authReversal.amount;
+            fillInReportGroup(authReversal);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, authReversal);
         }
 
         public void addEcheckCredit(echeckCredit echeckCredit)
         {
-            listOfEcheckCredit.Add(echeckCredit);
+            numEcheckCredit++;
+            sumOfEcheckCredit += echeckCredit.amount;
+            fillInReportGroup(echeckCredit);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, echeckCredit);
         }
 
         public void addEcheckVerification(echeckVerification echeckVerification)
         {
-            listOfEcheckVerification.Add(echeckVerification);
+            numEcheckVerification++;
+            sumOfEcheckVerification += echeckVerification.amount;
+            fillInReportGroup(echeckVerification);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, echeckVerification);
         }
 
         public void addEcheckSale(echeckSale echeckSale)
         {
-            listOfEcheckSale.Add(echeckSale);
+            numEcheckSale++;
+            sumOfEcheckSale += echeckSale.amount;
+            fillInReportGroup(echeckSale);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, echeckSale);
         }
 
         public void addRegisterTokenRequest(registerTokenRequestType registerTokenRequestType)
         {
-            listOfRegisterTokenRequest.Add(registerTokenRequestType);
+            numRegisterTokenRequest++;
+            fillInReportGroup(registerTokenRequestType);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, registerTokenRequestType);
         }
 
         public void addForceCapture(forceCapture forceCapture)
         {
-            listOfForceCapture.Add(forceCapture);
+            numForceCapture++;
+            sumOfForceCapture += forceCapture.amount;
+            fillInReportGroup(forceCapture);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, forceCapture);
         }
 
         public void addCaptureGivenAuth(captureGivenAuth captureGivenAuth)
         {
-            listOfCaptureGivenAuth.Add(captureGivenAuth);
+            numCaptureGivenAuth++;
+            sumOfCaptureGivenAuth += captureGivenAuth.amount;
+            fillInReportGroup(captureGivenAuth);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, captureGivenAuth);
         }
 
         public void addEcheckRedeposit(echeckRedeposit echeckRedeposit)
         {
-            listOfEcheckRedeposit.Add(echeckRedeposit);
+            numEcheckRedeposit++;
+            fillInReportGroup(echeckRedeposit);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, echeckRedeposit);
         }
 
         public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
         {
-            listOfUpdateCardValidationNumOnToken.Add(updateCardValidationNumOnToken);
+            numUpdateCardValidationNumOnToken++;
+            fillInReportGroup(updateCardValidationNumOnToken);
+            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, updateCardValidationNumOnToken);
         }
 
         public String Serialize()
         {
-            string xml = "\r\n<batchRequest " +
+            string xmlHeader = "\r\n<batchRequest " +
                 "id=\"" + id + "\"\r\n";
 
-            if (listOfAuthorization != null)
+            if (numAuthorization != 0)
             {
-                long sum = 0;
+                xmlHeader += "numAuths=\"" + numAuthorization + "\"\r\n";
+                xmlHeader += "authAmount=\"" + sumOfAuthorization + "\"\r\n";
+            }
 
-                foreach (authorization a in listOfAuthorization)
+            if (numAuthReversal != 0)
+            {
+                xmlHeader += "numAuthReversals=\"" + numAuthReversal + "\"\r\n";
+                xmlHeader += "authReversalAmount=\"" + sumOfAuthReversal + "\"\r\n";
+            }
+
+            if (numCapture != 0)
+            {
+                xmlHeader += "numCaptures=\"" + numCapture + "\"\r\n";
+                xmlHeader += "captureAmount=\"" + sumOfCapture + "\"\r\n";
+            }
+
+            if (numCredit != 0)
+            {
+
+                xmlHeader += "numCredits=\"" + numCredit + "\"\r\n";
+                xmlHeader += "creditAmount=\"" + sumOfCredit + "\"\r\n";
+            }
+
+            if (numForceCapture != 0)
+            {
+
+                xmlHeader += "numForceCaptures=\"" + numForceCapture + "\"\r\n";
+                xmlHeader += "forceCaptureAmount=\"" + sumOfForceCapture + "\"\r\n";
+            }
+
+            if (numSale != 0)
+            {
+
+                xmlHeader += "numSales=\"" + numSale + "\"\r\n";
+                xmlHeader += "saleAmount=\"" + sumOfSale + "\"\r\n";
+            }
+
+            if (numCaptureGivenAuth != 0)
+            {
+
+                xmlHeader += "numCaptureGivenAuths=\"" + numCaptureGivenAuth + "\"\r\n";
+                xmlHeader += "captureGivenAuthAmount=\"" + sumOfCaptureGivenAuth + "\"\r\n";
+            }
+
+            if (numEcheckSale != 0)
+            {
+
+                xmlHeader += "numEcheckSales=\"" + numEcheckSale + "\"\r\n";
+                xmlHeader += "echeckSalesAmount=\"" + sumOfEcheckSale + "\"\r\n";
+            }
+
+            if (numEcheckCredit != 0)
+            {
+
+                xmlHeader += "numEcheckCredit=\"" + numEcheckCredit + "\"\r\n";
+                xmlHeader += "echeckCreditAmount=\"" + sumOfEcheckCredit + "\"\r\n";
+            }
+
+            if (numEcheckVerification != 0)
+            {
+
+                xmlHeader += "numEcheckVerification=\"" + numEcheckVerification + "\"\r\n";
+                xmlHeader += "echeckVerificationAmount=\"" + sumOfEcheckVerification + "\"\r\n";
+            }
+
+            if (numEcheckRedeposit != 0)
+            {
+                xmlHeader += "numEcheckRedeposit=\"" + numEcheckRedeposit + "\"\r\n";
+            }
+
+            xmlHeader += "numAccountUpdates=\"" + numAccountUpdates + "\"\r\n";
+
+            if (numRegisterTokenRequest != 0)
+            {
+                xmlHeader += "numTokenRegistrations=\"" + numRegisterTokenRequest + "\"\r\n";
+            }
+
+            if (numUpdateCardValidationNumOnToken != 0)
+            {
+                xmlHeader += "numUpdateCardValidationNumOnTokens=\"" + numUpdateCardValidationNumOnToken + "\"\r\n";
+            }
+
+            xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
+
+            string xmlFooter = "</batchRequest>\r\n";
+
+            batchFilePath = litleFileGenerator.createRandomFile(null, litleTime, "_batchRequest.xml");
+
+            using (FileStream fs = new FileStream(batchFilePath, FileMode.Append))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.Write(xmlHeader);
+            }
+
+            using (FileStream fs = new FileStream(batchFilePath, FileMode.Append))
+            using (FileStream fsr = new FileStream(tempBatchFilePath, FileMode.Open))
+            {
+                byte[] buffer = new byte[16];
+
+                int bytesRead = 0;
+
+                do
                 {
-                    sum += a.amount;
-
+                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
+                    fs.Write(buffer, 0, bytesRead);
                 }
-
-                xml += "numAuths=\"" + listOfAuthorization.Count + "\"\r\n";
-                xml += "authAmount=\"" + sum + "\"\r\n";
+                while (bytesRead > 0);
             }
 
-            if (listOfAuthReversal != null)
+            using (FileStream fs = new FileStream(batchFilePath, FileMode.Append))
+            using (StreamWriter sw = new StreamWriter(fs))
             {
-                long sum = 0;
-
-                foreach (authReversal ar in listOfAuthReversal)
-                {
-                    sum += ar.amount;
-                }
-
-                xml += "numAuthReversals=\"" + listOfAuthReversal.Count + "\"\r\n";
-                xml += "authReversalAmount=\"" + sum + "\"\r\n";
+                sw.Write(xmlFooter);
             }
 
-            if (listOfCapture != null)
-            {
-                long sum = 0;
+            File.Delete(tempBatchFilePath);
 
-                foreach (capture c in listOfCapture)
-                {
-                    sum += c.amount;
-                }
+            tempBatchFilePath = null;
 
-                xml += "numCaptures=\"" + listOfCapture.Count + "\"\r\n";
-                xml += "captureAmount=\"" + sum + "\"\r\n";
-            }
-
-            if (listOfCredit != null)
-            {
-                long sum = 0;
-
-                foreach (credit c in listOfCredit)
-                {
-                    sum += c.amount;
-                }
-
-                xml += "numCredits=\"" + listOfCredit.Count + "\"\r\n";
-                xml += "creditAmount=\"" + sum + "\"\r\n";
-            }
-            if (listOfForceCapture != null)
-            {
-                long sum = 0;
-
-                foreach (forceCapture fc in listOfForceCapture)
-                {
-                    sum += fc.amount;
-                }
-
-                xml += "numForceCaptures=\"" + listOfForceCapture.Count + "\"\r\n";
-                xml += "forceCaptureAmount=\"" + sum + "\"\r\n";
-            }
-
-            if (listOfSale != null)
-            {
-                long sum = 0;
-
-                foreach (sale s in listOfSale)
-                {
-                    sum += s.amount;
-                }
-
-                xml += "numSales=\"" + listOfSale.Count + "\"\r\n";
-                xml += "saleAmount=\"" + sum + "\"\r\n";
-            }
-
-            if (listOfCaptureGivenAuth != null)
-            {
-                long sum = 0;
-
-                foreach (captureGivenAuth cga in listOfCaptureGivenAuth)
-                {
-                    sum += cga.amount;
-                }
-
-                xml += "numCaptureGivenAuths=\"" + listOfCapture.Count + "\"\r\n";
-                xml += "captureGivenAuthAmount=\"" + sum + "\"\r\n";
-            }
-
-            if (listOfEcheckSale != null)
-            {
-                long sum = 0;
-
-                foreach (echeckSale es in listOfEcheckSale)
-                {
-                    sum += es.amount;
-                }
-
-                xml += "numEcheckSales=\"" + listOfEcheckSale.Count + "\"\r\n";
-                xml += "echeckSalesAmount=\"" + sum + "\"\r\n";
-            }
-
-            if (listOfEcheckCredit != null)
-            {
-                long sum = 0;
-
-                foreach (echeckCredit ec in listOfEcheckCredit)
-                {
-                    sum += ec.amount;
-                }
-
-                xml += "numEcheckCredit=\"" + listOfEcheckCredit.Count + "\"\r\n";
-                xml += "echeckCreditAmount=\"" + sum + "\"\r\n";
-            }
-
-            if (listOfEcheckVerification != null)
-            {
-                long sum = 0;
-
-                foreach (echeckVerification ev in listOfEcheckVerification)
-                {
-                    sum += ev.amount;
-                }
-
-                xml += "numEcheckVerification=\"" + listOfEcheckVerification.Count + "\"\r\n";
-                xml += "echeckVerificationAmount=\"" + sum + "\"\r\n";
-            }
-
-            if (listOfEcheckRedeposit != null)
-            {
-                xml += "numEcheckRedeposit=\"" + listOfEcheckRedeposit.Count + "\"\r\n";
-            }
-
-            // to ask about accountUpdate
-            xml += "numAccountUpdates=\"" + numAccountUpdates + "\"\r\n";
-
-            if (listOfRegisterTokenRequest != null)
-            {
-                xml += "numTokenRegistrations=\"" + listOfRegisterTokenRequest.Count + "\"\r\n";
-            }
-
-            if (listOfUpdateCardValidationNumOnToken != null)
-            {
-                xml += "numUpdateCardValidationNumOnTokens=\"" + listOfUpdateCardValidationNumOnToken.Count + "\"\r\n";
-            }
-
-            xml += "merchantId=\"" + config["merchantId"] + "\">\r\n";
-
-            if (listOfAuthorization != null)
-            {
-                foreach (authorization a in listOfAuthorization)
-                {
-                    xml += a.Serialize();
-                }
-            }
-
-            if (listOfAuthReversal != null)
-            {
-                foreach (authReversal ar in listOfAuthReversal)
-                {
-                    xml += ar.Serialize();
-                }
-            }
-
-            if (listOfCapture != null)
-            {
-                foreach (capture c in listOfCapture)
-                {
-                    xml += c.Serialize();
-                }
-            }
-
-            if (listOfCaptureGivenAuth != null)
-            {
-                foreach (captureGivenAuth cga in listOfCaptureGivenAuth)
-                {
-                    xml += cga.Serialize();
-                }
-            }
-
-            if (listOfCredit != null)
-            {
-                foreach (credit c in listOfCredit)
-                {
-                    xml += c.Serialize();
-                }
-            }
-
-            if (listOfEcheckCredit != null)
-            {
-                foreach (echeckCredit ec in listOfEcheckCredit)
-                {
-                    xml += ec.Serialize();
-                }
-            }
-
-            if (listOfEcheckRedeposit != null)
-            {
-                foreach (echeckRedeposit er in listOfEcheckRedeposit)
-                {
-                    xml += er.Serialize();
-                }
-            }
-
-            if (listOfEcheckSale != null)
-            {
-                foreach (echeckSale es in listOfEcheckSale)
-                {
-                    xml += es.Serialize();
-                }
-            }
-
-            if (listOfEcheckVerification != null)
-            {
-                foreach (echeckVerification ev in listOfEcheckVerification)
-                {
-                    xml += ev.Serialize();
-                }
-            }
-
-            if (listOfForceCapture != null)
-            {
-                foreach (forceCapture f in listOfForceCapture)
-                {
-                    xml += f.Serialize();
-                }
-            }
-
-            if (listOfRegisterTokenRequest != null)
-            {
-                foreach (registerTokenRequestType r in listOfRegisterTokenRequest)
-                {
-                    xml += r.Serialize();
-                }
-            }
-
-            if (listOfSale != null)
-            {
-                foreach (sale s in listOfSale)
-                {
-                    xml += s.Serialize();
-                }
-            }
-
-            if (listOfUpdateCardValidationNumOnToken != null)
-            {
-                foreach (updateCardValidationNumOnToken u in listOfUpdateCardValidationNumOnToken)
-                {
-                    xml += u.Serialize();
-                }
-            }
-
-            xml += "</batchRequest>\r\n";
-
-            return xml;
+            return batchFilePath;
         }
 
-        public void updateReportGroup()
+        private string saveElement(litleFileGenerator litleFileGenerator, litleTime litleTime, string filePath, transactionType element)
         {
-            foreach (authorization a in listOfAuthorization)
+            string fPath;
+            fPath = litleFileGenerator.createRandomFile(filePath, litleTime, "_temp_batchRequest.xml");
+
+            using (FileStream fs = new FileStream(fPath, FileMode.Append))
             {
-                fillInReportGroup(a);
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.Write(element.Serialize());
+                }
             }
 
-            foreach (capture c in listOfCapture)
-            {
-                fillInReportGroup(c);
-            }
-
-            foreach (sale s in listOfSale)
-            {
-                fillInReportGroup(s);
-            }
-
-            foreach (authReversal ar in listOfAuthReversal)
-            {
-                fillInReportGroup(ar);
-            }
-
-            foreach (echeckCredit e in listOfEcheckCredit)
-            {
-                fillInReportGroup(e);
-            }
-
-            foreach (echeckVerification e in listOfEcheckVerification)
-            {
-                fillInReportGroup(e);
-            }
-
-            foreach (echeckSale e in listOfEcheckSale)
-            {
-                fillInReportGroup(e);
-            }
-
-            foreach (registerTokenRequestType r in listOfRegisterTokenRequest)
-            {
-                fillInReportGroup(r);
-            }
-
-            foreach (forceCapture f in listOfForceCapture)
-            {
-                fillInReportGroup(f);
-            }
-
-            foreach (captureGivenAuth c in listOfCaptureGivenAuth)
-            {
-                fillInReportGroup(c);
-            }
-
-            foreach (echeckRedeposit e in listOfEcheckRedeposit)
-            {
-                fillInReportGroup(e);
-            }
-
-            foreach (updateCardValidationNumOnToken u in listOfUpdateCardValidationNumOnToken)
-            {
-                fillInReportGroup(u);
-            }
+            return fPath;
         }
 
         private void fillInReportGroup(transactionTypeWithReportGroup txn)

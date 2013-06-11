@@ -17,7 +17,7 @@ namespace Litle.Sdk.Test.Unit
         private const string timeRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_";
         private const string batchNameRegex = timeRegex + "[A-Z]{8}";
 
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetUpLitle()
         {
             litle = new LitleBatch();
@@ -63,8 +63,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addAuthorization(authorization);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[1].litleTxnId);
@@ -106,8 +106,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addAuthReversal(authreversal);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfAuthReversalResponse[1].litleTxnId);
@@ -147,8 +147,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addCapture(capture);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfCaptureResponse[1].litleTxnId);
@@ -199,8 +199,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfCaptureGivenAuthResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfCaptureGivenAuthResponse[1].litleTxnId);
@@ -246,8 +246,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addCredit(credit);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfCreditResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfCreditResponse[1].litleTxnId);
@@ -287,8 +287,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addEcheckCredit(echeckcredit);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfEcheckCreditResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfEcheckCreditResponse[1].litleTxnId);
@@ -327,8 +327,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addEcheckRedeposit(echeckredeposit);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfEcheckRedepositResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfEcheckRedepositResponse[1].litleTxnId);
@@ -381,8 +381,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addEcheckSale(echecksale);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfEcheckSalesResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfEcheckSalesResponse[1].litleTxnId);
@@ -435,8 +435,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addEcheckVerification(echeckverification);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfEcheckVerificationResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfEcheckVerificationResponse[1].litleTxnId);
@@ -482,8 +482,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addForceCapture(forcecapture);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfForceCaptureResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfForceCaptureResponse[1].litleTxnId);
@@ -529,8 +529,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addSale(sale);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfSaleResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfSaleResponse[1].litleTxnId);
@@ -570,8 +570,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addRegisterTokenRequest(token);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfRegisterTokenResponse[0].litleTxnId);
             Assert.AreEqual(124, litleResponse.listOfLitleBatchResponse[0].listOfRegisterTokenResponse[1].litleTxnId);
@@ -622,8 +622,8 @@ namespace Litle.Sdk.Test.Unit
                 litleBatchRequest.addAuthorization(authorization);
                 litle.addBatch(litleBatchRequest);
 
-                string batchFileName = litle.sendToLitle_File();
-                litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+                string batchFileName = litle.sendToLitle();
+                litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
             }
             catch (LitleOnlineException e)
             {
@@ -665,8 +665,8 @@ namespace Litle.Sdk.Test.Unit
                 litleBatchRequest.addAuthorization(authorization);
                 litle.addBatch(litleBatchRequest);
 
-                string batchFileName = litle.sendToLitle_File();
-                litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+                string batchFileName = litle.sendToLitle();
+                litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
             }
             catch (LitleOnlineException e)
             {
@@ -715,8 +715,8 @@ namespace Litle.Sdk.Test.Unit
             litleBatchRequest.addAuthorization(authorization);
             litle.addBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle_File();
-            litleResponse litleResponse = litle.receiveFromLitle_File("C:\\RESPONSES\\", batchFileName);
+            string batchFileName = litle.sendToLitle();
+            litleResponse litleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
 
             Assert.AreEqual(123, litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].litleTxnId);
             Assert.AreEqual("Default Report Group", litleResponse.listOfLitleBatchResponse[0].listOfAuthorizationResponse[0].reportGroup);
@@ -729,7 +729,6 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testSerializeToFile()
         {
-            string filePath = "";
             authorization authorization = new authorization();
             authorization.orderId = "12344";
             authorization.amount = 106;
@@ -747,9 +746,9 @@ namespace Litle.Sdk.Test.Unit
 
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
             litleBatchRequest.addAuthorization(authorization);
-            filePath = litle.addBatch(litleBatchRequest);
+            litle.addBatch(litleBatchRequest);
 
-            string resultFile = litle.SerializeToFile(filePath);
+            string resultFile = litle.Serialize();
 
             Assert.IsTrue(resultFile.Contains("01-01-1960_01-22-30-1234_"));
         }

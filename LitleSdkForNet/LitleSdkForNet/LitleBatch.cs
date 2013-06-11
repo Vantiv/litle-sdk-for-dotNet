@@ -14,10 +14,11 @@ namespace Litle.Sdk
         private Dictionary<String, String> config;
         private Communications communication;
         private litleXmlSerializer litleXmlSerializer;
-        private List<litleBatchRequest> listOfLitleBatchRequest;
         private int numOfLitleBatchRequest = 0;
-        private string fPath = null;
+        public string finalFilePath = null;
+        private string batchFilePath = null;
         private litleTime litleTime;
+        private litleFileGenerator litleFileGenerator;
 
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
@@ -48,7 +49,9 @@ namespace Litle.Sdk
 
             litleXmlSerializer = new litleXmlSerializer();
             litleTime = new litleTime();
-            listOfLitleBatchRequest = new List<litleBatchRequest>();
+            //listOfLitleBatchRequestFilePaths = new List<string>();
+            //listOfLitleBatchRequest = new List<litleBatchRequest>();
+            litleFileGenerator = new litleFileGenerator();
         }
 
         /**
@@ -76,7 +79,8 @@ namespace Litle.Sdk
             authentication.user = config["username"];
             authentication.password = config["password"];
 
-            listOfLitleBatchRequest = new List<litleBatchRequest>();
+            //listOfLitleBatchRequestFilePaths = new List<string>();
+            //listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
 
         public void setCommunication(Communications communication)
@@ -94,49 +98,17 @@ namespace Litle.Sdk
             this.litleTime = litleTime;
         }
 
-        public string addBatch(litleBatchRequest litleBatchRequest)
+        public void addBatch(litleBatchRequest litleBatchRequest)
         {
             fillInReportGroup(litleBatchRequest);
 
-            if (!litleBatchRequest.config.ContainsKey("username")) litleBatchRequest.config["username"] = config["username"];
-            if (!litleBatchRequest.config.ContainsKey("password")) litleBatchRequest.config["password"] = config["password"];
-            if (!litleBatchRequest.config.ContainsKey("merchantId")) litleBatchRequest.config["merchantId"] = config["merchantId"];
-            if (!litleBatchRequest.config.ContainsKey("reportGroup") || litleBatchRequest.config["reportGroup"].Length < 1)
-            {
-                litleBatchRequest.config["reportGroup"] = config["reportGroup"];
-                litleBatchRequest.updateReportGroup();
-            }
-
-            listOfLitleBatchRequest.Add(litleBatchRequest);
-            fPath = SerializeBatchRequestToFile(litleBatchRequest, fPath);
+            batchFilePath = SerializeBatchRequestToFile(litleBatchRequest, batchFilePath);
             numOfLitleBatchRequest++;
-
-            return fPath;
         }
 
-        public litleResponse sendToLitle()
+        public string sendToLitle()
         {
-            string xmlRequest = this.Serialize();
-            string xmlResponse = communication.HttpPost(xmlRequest, config);
-            try
-            {
-                litleResponse litleResponse = litleXmlSerializer.DeserializeObject(xmlResponse);
-                if ("1".Equals(litleResponse))
-                {
-                    throw new LitleOnlineException(litleResponse.message);
-                }
-
-                return litleResponse;
-            }
-            catch (InvalidOperationException ioe)
-            {
-                throw new LitleOnlineException("Error validating xml data against the schema", ioe);
-            }
-        }
-
-        public string sendToLitle_File()
-        {
-            string requestFilePath = this.SerializeToFile(fPath);
+            string requestFilePath = this.Serialize();
 
             communication.FtpDropOff(requestFilePath, config);
             return Path.GetFileName(requestFilePath);
@@ -148,7 +120,7 @@ namespace Litle.Sdk
             communication.FtpPoll(fileName, timeOut, config);
         }
 
-        public litleResponse receiveFromLitle_File(string destinationFilePath, string batchFileName)
+        public litleResponse receiveFromLitle(string destinationFilePath, string batchFileName)
         {
             string destinationDirectory = Path.GetDirectoryName(destinationFilePath);
 
@@ -157,7 +129,21 @@ namespace Litle.Sdk
                 Directory.CreateDirectory(destinationDirectory);
             }
 
-            communication.FtpPickUp(destinationFilePath, config, batchFileName);
+            try
+            {
+                communication.FtpPickUp(destinationFilePath, config, batchFileName);
+            }
+            catch (Tamir.SharpSsh.jsch.SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occurred while attempting to retrieve file.");
+                }
+            }
 
             litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(destinationFilePath);
             return litleResponse;
@@ -165,59 +151,9 @@ namespace Litle.Sdk
 
         public string SerializeBatchRequestToFile(litleBatchRequest litleBatchRequest, string filePath)
         {
-            if (filePath == null)
-            {
-                string currentPath = Environment.CurrentDirectory.ToString();
-                string parentPath = Directory.GetParent(currentPath).ToString();
-                string directoryPath = parentPath + "/batches/";
 
-                if (!Directory.Exists(directoryPath))
-                {
-                    Directory.CreateDirectory(directoryPath);
-                }
-
-
-                string fileName = litleTime.getCurrentTime("MM-dd-yyyy_HH-mm-ss-ffff_") + RandomGen.NextString(8);
-                fileName += "_temp.xml";
-
-                filePath = directoryPath + fileName;
-
-                using (FileStream fs = new FileStream(filePath, FileMode.Create))
-                {
-                }
-            }
-
-
-            using (FileStream fs = new FileStream(filePath, FileMode.Append))
-            {
-                using (StreamWriter sw = new StreamWriter(fs))
-                {
-                    sw.Write(litleBatchRequest.Serialize());
-                }
-            }
-
-
-            return filePath;
-        }
-
-        public string SerializeToFile(string tempFilePath)
-        {
-            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"8.17\"" +
-             " xmlns=\"http://www.litle.com/schema\" " +
-             "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
-
-            string xmlFooter = "\r\n</litleRequest>";
-
-            string filePath;
-            filePath = tempFilePath;
-            filePath = filePath.Replace("_temp.xml", ".xml");
-
-            using (FileStream fs = new FileStream(filePath, FileMode.Create))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.Write(xmlHeader);
-                sw.Write(authentication.Serialize());
-            }
+            filePath = litleFileGenerator.createRandomFile(filePath, litleTime, "_temp_litleRequest.xml");
+            string tempFilePath = litleBatchRequest.Serialize();
 
             using (FileStream fs = new FileStream(filePath, FileMode.Append))
             using (FileStream fsr = new FileStream(tempFilePath, FileMode.Open))
@@ -234,32 +170,57 @@ namespace Litle.Sdk
                 while (bytesRead > 0);
             }
 
-            using (FileStream fs = new FileStream(filePath, FileMode.Append))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.Write(xmlFooter);
-            }
-
             File.Delete(tempFilePath);
-
-            fPath = null;
 
             return filePath;
         }
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"8.17\"" +
-                " xmlns=\"http://www.litle.com/schema\" " +
-                "numBatchRequests=\"" + listOfLitleBatchRequest.Count + "\">";
+            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"8.17\"" +
+             " xmlns=\"http://www.litle.com/schema\" " +
+             "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
 
-            foreach (litleBatchRequest b in listOfLitleBatchRequest)
+            string xmlFooter = "\r\n</litleRequest>";
+
+            string filePath;
+
+            finalFilePath = litleFileGenerator.createRandomFile(finalFilePath, litleTime, ".xml");
+            filePath = finalFilePath;
+
+            using (FileStream fs = new FileStream(finalFilePath, FileMode.Create))
+            using (StreamWriter sw = new StreamWriter(fs))
             {
-                xml += b.Serialize();
+                sw.Write(xmlHeader);
+                sw.Write(authentication.Serialize());
             }
 
-            xml += "\r\n</litleRequest>";
-            return xml;
+            using (FileStream fs = new FileStream(finalFilePath, FileMode.Append))
+            using (FileStream fsr = new FileStream(batchFilePath, FileMode.Open))
+            {
+                byte[] buffer = new byte[16];
+
+                int bytesRead = 0;
+
+                do
+                {
+                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
+                    fs.Write(buffer, 0, bytesRead);
+                }
+                while (bytesRead > 0);
+            }
+
+            using (FileStream fs = new FileStream(finalFilePath, FileMode.Append))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.Write(xmlFooter);
+            }
+
+            File.Delete(batchFilePath);
+
+            finalFilePath = null;
+
+            return filePath;
         }
 
         private void fillInReportGroup(litleBatchRequest litleBatchRequest)
@@ -272,6 +233,34 @@ namespace Litle.Sdk
 
     }
 
+    public class litleFileGenerator
+    {
+
+        public string createRandomFile(string filePath, litleTime litleTime, string fileExtension)
+        {
+            if (filePath == null)
+            {
+                string currentPath = Environment.CurrentDirectory.ToString();
+                string parentPath = Directory.GetParent(currentPath).ToString();
+                string directoryPath = parentPath + "/batches/";
+
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                string fileName = litleTime.getCurrentTime("MM-dd-yyyy_HH-mm-ss-ffff_") + RandomGen.NextString(8);
+
+                filePath = directoryPath + fileName + fileExtension;
+
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                }
+            }
+
+            return filePath;
+        }
+    }
 
     public static class RandomGen
     {

@@ -90,6 +90,11 @@ namespace Litle.Sdk
                 this.customerIdField = value;
             }
         }
+
+        public virtual string Serialize()
+        {
+            return "Please implement this";
+        }
     }
 
     /// <remarks/>
