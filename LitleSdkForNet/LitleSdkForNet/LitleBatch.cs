@@ -227,7 +227,7 @@ namespace Litle.Sdk
 
         public virtual string AppendLineToFile(string filePath, string lineToAppend)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            using (FileStream fs = new FileStream(filePath, FileMode.Append))
             using (StreamWriter sw = new StreamWriter(fs))
             {
                 sw.Write(lineToAppend);
