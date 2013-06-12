@@ -143,7 +143,7 @@ namespace Litle.Sdk
                 }
                 else
                 {
-                    throw new LitleOnlineException("Error occurred while attempting to retrieve file.");
+                    throw new LitleOnlineException("Error occurred while attempting to retrieve file");
                 }
             }
 
