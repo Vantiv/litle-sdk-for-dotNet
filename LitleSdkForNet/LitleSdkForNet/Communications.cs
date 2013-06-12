@@ -194,19 +194,13 @@ namespace Litle.Sdk
             }
 
             //check if file exists
-            SftpATTRS sftpATTRS = null;
+            Tamir.SharpSsh.java.util.Vector lsResult;
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             do
             {
-                try
-                {
-                    sftpATTRS = channelSftp.lstat("outbound/" + fileName);
-                }
-                catch
-                {
-                }
-            } while (sftpATTRS == null && stopWatch.Elapsed.TotalMilliseconds <= timeout);
+                lsResult = channelSftp.ls("outbound/" + fileName);
+            } while (lsResult.size() < 1 && stopWatch.Elapsed.TotalMilliseconds <= timeout);
         }
 
         virtual public void FtpPickUp(string destinationFilePath, Dictionary<String, String> config, string fileName)

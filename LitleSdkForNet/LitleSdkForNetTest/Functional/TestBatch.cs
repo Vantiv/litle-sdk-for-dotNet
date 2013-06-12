@@ -13,7 +13,7 @@ namespace Litle.Sdk.Test.Functional
         private string responseDir;
         private LitleBatch litle;
 
-        [TestFixtureSetUp]
+        [SetUp]
         public void setUp()
         {
             //Dictionary<string, string> config = new Dictionary<string, string>();

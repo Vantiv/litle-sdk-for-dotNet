@@ -20,7 +20,7 @@ namespace Litle.Sdk
 
         public string batchFilePath;
         private string tempBatchFilePath;
-        private litleFileGenerator litleFileGenerator;
+        private litleFile litleFile;
         private litleTime litleTime;
 
         private int numAuthorization;
@@ -66,7 +66,7 @@ namespace Litle.Sdk
             config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
             config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
 
-            litleFileGenerator = new litleFileGenerator();
+            litleFile = new litleFile();
             litleTime = new litleTime();
 
             numAuthorization = 0;
@@ -98,11 +98,11 @@ namespace Litle.Sdk
         public litleBatchRequest(Dictionary<String, String> config)
         {
             this.config = config;
+        }
 
-            //authentication = new authentication();
-
-            //authentication.user = config["username"];
-            //authentication.password = config["password"];
+        public void setLitleFile(litleFile litleFileGenerator)
+        {
+            this.litleFile = litleFileGenerator;
         }
 
         public void addAuthorization(authorization authorization)
@@ -110,7 +110,7 @@ namespace Litle.Sdk
             numAuthorization++;
             sumOfAuthorization += authorization.amount;
             fillInReportGroup(authorization);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, authorization);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authorization);
         }
 
         public void addCapture(capture capture)
@@ -118,7 +118,7 @@ namespace Litle.Sdk
             numCapture++;
             sumOfCapture += capture.amount;
             fillInReportGroup(capture);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, capture);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, capture);
         }
 
         public void addCredit(credit credit)
@@ -126,7 +126,7 @@ namespace Litle.Sdk
             numCredit++;
             sumOfCredit += credit.amount;
             fillInReportGroup(credit);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, credit);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, credit);
         }
 
         public void addSale(sale sale)
@@ -134,7 +134,7 @@ namespace Litle.Sdk
             numSale++;
             sumOfSale += sale.amount;
             fillInReportGroup(sale);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, sale);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, sale);
         }
 
         public void addAuthReversal(authReversal authReversal)
@@ -142,7 +142,7 @@ namespace Litle.Sdk
             numAuthReversal++;
             sumOfAuthReversal += authReversal.amount;
             fillInReportGroup(authReversal);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, authReversal);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authReversal);
         }
 
         public void addEcheckCredit(echeckCredit echeckCredit)
@@ -150,7 +150,7 @@ namespace Litle.Sdk
             numEcheckCredit++;
             sumOfEcheckCredit += echeckCredit.amount;
             fillInReportGroup(echeckCredit);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, echeckCredit);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckCredit);
         }
 
         public void addEcheckVerification(echeckVerification echeckVerification)
@@ -158,7 +158,7 @@ namespace Litle.Sdk
             numEcheckVerification++;
             sumOfEcheckVerification += echeckVerification.amount;
             fillInReportGroup(echeckVerification);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, echeckVerification);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckVerification);
         }
 
         public void addEcheckSale(echeckSale echeckSale)
@@ -166,14 +166,14 @@ namespace Litle.Sdk
             numEcheckSale++;
             sumOfEcheckSale += echeckSale.amount;
             fillInReportGroup(echeckSale);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, echeckSale);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckSale);
         }
 
         public void addRegisterTokenRequest(registerTokenRequestType registerTokenRequestType)
         {
             numRegisterTokenRequest++;
             fillInReportGroup(registerTokenRequestType);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, registerTokenRequestType);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, registerTokenRequestType);
         }
 
         public void addForceCapture(forceCapture forceCapture)
@@ -181,7 +181,7 @@ namespace Litle.Sdk
             numForceCapture++;
             sumOfForceCapture += forceCapture.amount;
             fillInReportGroup(forceCapture);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, forceCapture);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, forceCapture);
         }
 
         public void addCaptureGivenAuth(captureGivenAuth captureGivenAuth)
@@ -189,21 +189,21 @@ namespace Litle.Sdk
             numCaptureGivenAuth++;
             sumOfCaptureGivenAuth += captureGivenAuth.amount;
             fillInReportGroup(captureGivenAuth);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, captureGivenAuth);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, captureGivenAuth);
         }
 
         public void addEcheckRedeposit(echeckRedeposit echeckRedeposit)
         {
             numEcheckRedeposit++;
             fillInReportGroup(echeckRedeposit);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, echeckRedeposit);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckRedeposit);
         }
 
         public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
         {
             numUpdateCardValidationNumOnToken++;
             fillInReportGroup(updateCardValidationNumOnToken);
-            tempBatchFilePath = saveElement(litleFileGenerator, litleTime, tempBatchFilePath, updateCardValidationNumOnToken);
+            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, updateCardValidationNumOnToken);
         }
 
         public String Serialize()
@@ -299,54 +299,23 @@ namespace Litle.Sdk
 
             string xmlFooter = "</batchRequest>\r\n";
 
-            batchFilePath = litleFileGenerator.createRandomFile(null, litleTime, "_batchRequest.xml");
+            batchFilePath = litleFile.createRandomFile(null, litleTime, "_batchRequest.xml");
 
-            using (FileStream fs = new FileStream(batchFilePath, FileMode.Append))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.Write(xmlHeader);
-            }
-
-            using (FileStream fs = new FileStream(batchFilePath, FileMode.Append))
-            using (FileStream fsr = new FileStream(tempBatchFilePath, FileMode.Open))
-            {
-                byte[] buffer = new byte[16];
-
-                int bytesRead = 0;
-
-                do
-                {
-                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
-                    fs.Write(buffer, 0, bytesRead);
-                }
-                while (bytesRead > 0);
-            }
-
-            using (FileStream fs = new FileStream(batchFilePath, FileMode.Append))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.Write(xmlFooter);
-            }
-
-            File.Delete(tempBatchFilePath);
+            litleFile.AppendLineToFile(batchFilePath, xmlHeader);
+            litleFile.AppendFileToFile(batchFilePath, tempBatchFilePath);
+            litleFile.AppendLineToFile(batchFilePath, xmlFooter);
 
             tempBatchFilePath = null;
 
             return batchFilePath;
         }
 
-        private string saveElement(litleFileGenerator litleFileGenerator, litleTime litleTime, string filePath, transactionType element)
+        private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionType element)
         {
             string fPath;
-            fPath = litleFileGenerator.createRandomFile(filePath, litleTime, "_temp_batchRequest.xml");
+            fPath = litleFile.createRandomFile(filePath, litleTime, "_temp_batchRequest.xml");
 
-            using (FileStream fs = new FileStream(fPath, FileMode.Append))
-            {
-                using (StreamWriter sw = new StreamWriter(fs))
-                {
-                    sw.Write(element.Serialize());
-                }
-            }
+            litleFile.AppendLineToFile(fPath, element.Serialize());
 
             return fPath;
         }

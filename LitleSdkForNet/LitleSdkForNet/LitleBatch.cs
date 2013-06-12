@@ -18,7 +18,7 @@ namespace Litle.Sdk
         public string finalFilePath = null;
         private string batchFilePath = null;
         private litleTime litleTime;
-        private litleFileGenerator litleFileGenerator;
+        private litleFile litleFile;
 
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
@@ -51,7 +51,7 @@ namespace Litle.Sdk
             litleTime = new litleTime();
             //listOfLitleBatchRequestFilePaths = new List<string>();
             //listOfLitleBatchRequest = new List<litleBatchRequest>();
-            litleFileGenerator = new litleFileGenerator();
+            litleFile = new litleFile();
         }
 
         /**
@@ -78,9 +78,6 @@ namespace Litle.Sdk
             authentication = new authentication();
             authentication.user = config["username"];
             authentication.password = config["password"];
-
-            //listOfLitleBatchRequestFilePaths = new List<string>();
-            //listOfLitleBatchRequest = new List<litleBatchRequest>();
         }
 
         public void setCommunication(Communications communication)
@@ -96,6 +93,11 @@ namespace Litle.Sdk
         public void setLitleTime(litleTime litleTime)
         {
             this.litleTime = litleTime;
+        }
+
+        public void setLitleFile(litleFile litleFile)
+        {
+            this.litleFile = litleFile;
         }
 
         public void addBatch(litleBatchRequest litleBatchRequest)
@@ -152,25 +154,10 @@ namespace Litle.Sdk
         public string SerializeBatchRequestToFile(litleBatchRequest litleBatchRequest, string filePath)
         {
 
-            filePath = litleFileGenerator.createRandomFile(filePath, litleTime, "_temp_litleRequest.xml");
+            filePath = litleFile.createRandomFile(filePath, litleTime, "_temp_litleRequest.xml");
             string tempFilePath = litleBatchRequest.Serialize();
 
-            using (FileStream fs = new FileStream(filePath, FileMode.Append))
-            using (FileStream fsr = new FileStream(tempFilePath, FileMode.Open))
-            {
-                byte[] buffer = new byte[16];
-
-                int bytesRead = 0;
-
-                do
-                {
-                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
-                    fs.Write(buffer, 0, bytesRead);
-                }
-                while (bytesRead > 0);
-            }
-
-            File.Delete(tempFilePath);
+            litleFile.AppendFileToFile(filePath, tempFilePath);
 
             return filePath;
         }
@@ -185,38 +172,15 @@ namespace Litle.Sdk
 
             string filePath;
 
-            finalFilePath = litleFileGenerator.createRandomFile(finalFilePath, litleTime, ".xml");
+            finalFilePath = litleFile.createRandomFile(finalFilePath, litleTime, ".xml");
             filePath = finalFilePath;
 
-            using (FileStream fs = new FileStream(finalFilePath, FileMode.Create))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.Write(xmlHeader);
-                sw.Write(authentication.Serialize());
-            }
+            litleFile.AppendLineToFile(finalFilePath, xmlHeader);
+            litleFile.AppendLineToFile(finalFilePath, authentication.Serialize());
 
-            using (FileStream fs = new FileStream(finalFilePath, FileMode.Append))
-            using (FileStream fsr = new FileStream(batchFilePath, FileMode.Open))
-            {
-                byte[] buffer = new byte[16];
+            litleFile.AppendFileToFile(finalFilePath, batchFilePath);
 
-                int bytesRead = 0;
-
-                do
-                {
-                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
-                    fs.Write(buffer, 0, bytesRead);
-                }
-                while (bytesRead > 0);
-            }
-
-            using (FileStream fs = new FileStream(finalFilePath, FileMode.Append))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.Write(xmlFooter);
-            }
-
-            File.Delete(batchFilePath);
+            litleFile.AppendLineToFile(finalFilePath, xmlFooter);
 
             finalFilePath = null;
 
@@ -233,10 +197,10 @@ namespace Litle.Sdk
 
     }
 
-    public class litleFileGenerator
+    public class litleFile
     {
 
-        public string createRandomFile(string filePath, litleTime litleTime, string fileExtension)
+        public virtual string createRandomFile(string filePath, litleTime litleTime, string fileExtension)
         {
             if (filePath == null)
             {
@@ -260,6 +224,41 @@ namespace Litle.Sdk
 
             return filePath;
         }
+
+        public virtual string AppendLineToFile(string filePath, string lineToAppend)
+        {
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            using (StreamWriter sw = new StreamWriter(fs))
+            {
+                sw.Write(lineToAppend);
+            }
+
+            return filePath;
+        }
+
+
+        public virtual string AppendFileToFile(string filePathToAppendTo, string filePathToAppend)
+        {
+
+            using (FileStream fs = new FileStream(filePathToAppendTo, FileMode.Append))
+            using (FileStream fsr = new FileStream(filePathToAppend, FileMode.Open))
+            {
+                byte[] buffer = new byte[16];
+
+                int bytesRead = 0;
+
+                do
+                {
+                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
+                    fs.Write(buffer, 0, bytesRead);
+                }
+                while (bytesRead > 0);
+            }
+
+            File.Delete(filePathToAppend);
+
+            return filePathToAppendTo;
+        }
     }
 
     public static class RandomGen
@@ -275,7 +274,7 @@ namespace Litle.Sdk
                 _global.GetBytes(buffer);
                 _local = inst = new Random(BitConverter.ToInt32(buffer, 0));
             }
-         
+
             return _local.Next();
         }
 
