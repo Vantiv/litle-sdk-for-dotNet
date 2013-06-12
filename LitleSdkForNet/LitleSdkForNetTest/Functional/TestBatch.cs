@@ -12,8 +12,9 @@ namespace Litle.Sdk.Test.Functional
     {
         private string responseDir;
         private LitleBatch litle;
+        private Dictionary<String, String> invalidConfig;
 
-        [SetUp]
+        [TestFixtureSetUp]
         public void setUp()
         {
             //Dictionary<string, string> config = new Dictionary<string, string>();
@@ -26,11 +27,30 @@ namespace Litle.Sdk.Test.Functional
             //config.Add("password", "TESTCASE");
             //config.Add("printxml", "true");
 
-            litle = new LitleBatch();
+            invalidConfig = new Dictionary<String, String>();
+            invalidConfig["url"] = Properties.Settings.Default.url;
+            invalidConfig["reportGroup"] = Properties.Settings.Default.reportGroup;
+            invalidConfig["username"] = Properties.Settings.Default.username;
+            invalidConfig["printxml"] = Properties.Settings.Default.printxml;
+            invalidConfig["timeout"] = Properties.Settings.Default.timeout;
+            invalidConfig["proxyHost"] = Properties.Settings.Default.proxyHost;
+            invalidConfig["merchantId"] = Properties.Settings.Default.merchantId;
+            invalidConfig["password"] = Properties.Settings.Default.password;
+            invalidConfig["proxyPort"] = Properties.Settings.Default.proxyPort;
+            invalidConfig["sftpUrl"] = Properties.Settings.Default.sftpUrl;
+            invalidConfig["sftpUsername"] = "badUsername";
+            invalidConfig["sftpPassword"] = "badPassword";
+            invalidConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
 
             string currentPath = Environment.CurrentDirectory.ToString();
             string parentPath = Directory.GetParent(currentPath).ToString();
             responseDir = parentPath + "\\Responses\\";
+        }
+
+        [SetUp]
+        public void setUpBeforeTest()
+        {
+            litle = new LitleBatch();
         }
 
         [Test]
@@ -303,7 +323,14 @@ namespace Litle.Sdk.Test.Functional
             authorization.card = card; //This needs to compile      
 
             litleBatchRequest.addAuthorization(authorization);
-            litleBatchRequest.addAuthorization(null);
+            try
+            {
+                litleBatchRequest.addAuthorization(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             authReversal reversal = new authReversal();
             reversal.litleTxnId = 12345678000L;
@@ -311,7 +338,14 @@ namespace Litle.Sdk.Test.Functional
             reversal.payPalNotes = "Notes";
 
             litleBatchRequest.addAuthReversal(reversal);
-            litleBatchRequest.addAuthReversal(null);
+            try
+            {
+                litleBatchRequest.addAuthReversal(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             capture capture = new capture();
             capture.litleTxnId = 123456000;
@@ -319,7 +353,14 @@ namespace Litle.Sdk.Test.Functional
             capture.payPalNotes = "Notes";
 
             litleBatchRequest.addCapture(capture);
-            litleBatchRequest.addCapture(null);
+            try
+            {
+                litleBatchRequest.addCapture(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             captureGivenAuth capturegivenauth = new captureGivenAuth();
             capturegivenauth.amount = 106;
@@ -334,7 +375,14 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.card = card;
 
             litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
-            litleBatchRequest.addCaptureGivenAuth(null);
+            try
+            {
+                litleBatchRequest.addCaptureGivenAuth(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             credit creditObj = new credit();
             creditObj.amount = 106;
@@ -343,7 +391,14 @@ namespace Litle.Sdk.Test.Functional
             creditObj.card = card;
 
             litleBatchRequest.addCredit(creditObj);
-            litleBatchRequest.addCredit(null);
+            try
+            {
+                litleBatchRequest.addCredit(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             echeckCredit echeckcredit = new echeckCredit();
             echeckcredit.amount = 12L;
@@ -363,14 +418,28 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.billToAddress = billToAddress;
 
             litleBatchRequest.addEcheckCredit(echeckcredit);
-            litleBatchRequest.addEcheckCredit(null);
+            try
+            {
+                litleBatchRequest.addEcheckCredit(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
             echeckredeposit.echeck = echeck;
 
             litleBatchRequest.addEcheckRedeposit(echeckredeposit);
-            litleBatchRequest.addEcheckRedeposit(null);
+            try
+            {
+                litleBatchRequest.addEcheckRedeposit(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.amount = 123456;
@@ -380,7 +449,14 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.billToAddress = billToAddress;
 
             litleBatchRequest.addEcheckSale(echeckSaleObj);
-            litleBatchRequest.addEcheckSale(null);
+            try
+            {
+                litleBatchRequest.addEcheckSale(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.amount = 123456;
@@ -390,7 +466,14 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject.billToAddress = billToAddress;
 
             litleBatchRequest.addEcheckVerification(echeckVerificationObject);
-            litleBatchRequest.addEcheckVerification(null);
+            try
+            {
+                litleBatchRequest.addEcheckVerification(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             forceCapture forcecapture = new forceCapture();
             forcecapture.amount = 106;
@@ -399,7 +482,14 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.card = card;
 
             litleBatchRequest.addForceCapture(forcecapture);
-            litleBatchRequest.addForceCapture(null);
+            try
+            {
+                litleBatchRequest.addForceCapture(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             sale saleObj = new sale();
             saleObj.amount = 106;
@@ -409,7 +499,14 @@ namespace Litle.Sdk.Test.Functional
             saleObj.card = card;
 
             litleBatchRequest.addSale(saleObj);
-            litleBatchRequest.addSale(null);
+            try
+            {
+                litleBatchRequest.addSale(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
             registerTokenRequest.orderId = "12344";
@@ -417,7 +514,14 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.reportGroup = "Planets";
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
-            litleBatchRequest.addRegisterTokenRequest(null);
+            try
+            {
+                litleBatchRequest.addRegisterTokenRequest(null);
+            }
+            catch (System.NullReferenceException e)
+            {
+                Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
+            }
 
             try
             {
