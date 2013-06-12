@@ -103,7 +103,7 @@ namespace Litle.Sdk
             string url = config["sftpUrl"];
             string username = config["sftpUsername"];
             string password = config["sftpPassword"];
-            string knownHostsFile = parentPath + "\\"  + config["knownHostsFile"];
+            string knownHostsFile = parentPath + "\\" + config["knownHostsFile"];
             string fileName = Path.GetFileName(filePath);
 
             JSch jsch = new JSch();
@@ -112,14 +112,43 @@ namespace Litle.Sdk
             Session session = jsch.getSession(username, url);
             session.setPassword(password);
 
-            session.connect();
+            try
+            {
+                session.connect();
 
-            channel = session.openChannel("sftp");
-            channel.connect();
-            channelSftp = (ChannelSftp)channel;
+                channel = session.openChannel("sftp");
+                channel.connect();
+                channelSftp = (ChannelSftp)channel;
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
+                }
+            }
 
-            channelSftp.put(filePath, "inbound/" + fileName, ChannelSftp.OVERWRITE);
-            channelSftp.rename("inbound/" + fileName, "inbound/" + fileName + ".asc");
+            try
+            {
+                channelSftp.put(filePath, "inbound/" + fileName, ChannelSftp.OVERWRITE);
+                channelSftp.rename("inbound/" + fileName, "inbound/" + fileName + ".asc");
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to upload and save the file to SFTP");
+                }
+            }
+
             channelSftp.quit();
 
             session.disconnect();
@@ -144,11 +173,25 @@ namespace Litle.Sdk
             Session session = jsch.getSession(username, url);
             session.setPassword(password);
 
-            session.connect();
+            try
+            {
+                session.connect();
 
-            channel = session.openChannel("sftp");
-            channel.connect();
-            channelSftp = (ChannelSftp)channel;
+                channel = session.openChannel("sftp");
+                channel.connect();
+                channelSftp = (ChannelSftp)channel;
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
+                }
+            }
 
             //check if file exists
             SftpATTRS sftpATTRS = null;
@@ -160,7 +203,7 @@ namespace Litle.Sdk
                 {
                     sftpATTRS = channelSftp.lstat("outbound/" + fileName);
                 }
-                catch 
+                catch
                 {
                 }
             } while (sftpATTRS == null && stopWatch.Elapsed.TotalMilliseconds <= timeout);
@@ -185,18 +228,32 @@ namespace Litle.Sdk
             Session session = jsch.getSession(username, url);
             session.setPassword(password);
 
-            session.connect();
+            try
+            {
+                session.connect();
 
-            channel = session.openChannel("sftp");
-            channel.connect();
-            channelSftp = (ChannelSftp)channel;
+                channel = session.openChannel("sftp");
+                channel.connect();
+                channelSftp = (ChannelSftp)channel;
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
+                }
+            }
 
             try
             {
                 channelSftp.get("outbound/" + fileName + ".asc", destinationFilePath);
                 channelSftp.rm("outbound/" + fileName + ".asc");
             }
-            catch (SftpException e )
+            catch (SftpException e)
             {
                 if (e.message != null)
                 {
