@@ -17,21 +17,6 @@ namespace Litle.Sdk
             return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
         }// serialize the xml
 
-        virtual public String SerializeObjectToFile(litleOnlineRequest req)
-        {
-
-            return "filename";
-        }
-
-        virtual public litleResponse DeserializeObject(string response)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));
-            StringReader reader = new StringReader(response);
-            litleResponse i = (litleResponse)serializer.Deserialize(reader);
-            return i;
-
-        }// deserialize the object
-
         virtual public litleResponse DeserializeObjectFromFile(string filePath)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));

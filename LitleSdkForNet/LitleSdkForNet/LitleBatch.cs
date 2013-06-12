@@ -131,21 +131,7 @@ namespace Litle.Sdk
                 Directory.CreateDirectory(destinationDirectory);
             }
 
-            try
-            {
-                communication.FtpPickUp(destinationFilePath, config, batchFileName);
-            }
-            catch (Tamir.SharpSsh.jsch.SftpException e)
-            {
-                if (e.message != null)
-                {
-                    throw new LitleOnlineException(e.message);
-                }
-                else
-                {
-                    throw new LitleOnlineException("Error occurred while attempting to retrieve file");
-                }
-            }
+            communication.FtpPickUp(destinationFilePath, config, batchFileName);
 
             litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(destinationFilePath);
             return litleResponse;
