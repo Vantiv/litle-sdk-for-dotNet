@@ -108,6 +108,17 @@ namespace Litle.Sdk
             numOfLitleBatchRequest++;
         }
 
+        public litleResponse sendToLitleWithStream(string responseFileDirectory)
+        {
+            string requestFilePath = this.Serialize();
+            string batchName = Path.GetFileName(requestFilePath);
+
+            string responseFilePath = communication.socketStream(requestFilePath, responseFileDirectory, config);
+
+            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
+            return litleResponse;
+        }
+
         public string sendToLitle()
         {
             string requestFilePath = this.Serialize();
