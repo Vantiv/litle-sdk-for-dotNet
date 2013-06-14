@@ -40,6 +40,8 @@ namespace Litle.Sdk
             config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
             config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
             config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            config["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl;
+            config["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
 
             communication = new Communications();
 
@@ -49,8 +51,6 @@ namespace Litle.Sdk
 
             litleXmlSerializer = new litleXmlSerializer();
             litleTime = new litleTime();
-            //listOfLitleBatchRequestFilePaths = new List<string>();
-            //listOfLitleBatchRequest = new List<litleBatchRequest>();
             litleFile = new litleFile();
         }
 

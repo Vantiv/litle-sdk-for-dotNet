@@ -4045,29 +4045,29 @@ namespace Litle.Sdk
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    //[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class litleResponse : IXmlSerializable
     {
-        [XmlElementAttribute("id")]
-        public string batchId;
+        //[XmlElementAttribute("id")]
+        public string id;
 
-        [XmlElementAttribute()]
+        //[XmlElementAttribute()]
         public long litleBatchId;
 
-        [XmlElementAttribute()]
+        //[XmlElementAttribute()]
         public long litleSessionId;
 
-        [XmlElementAttribute()]
+        //[XmlElementAttribute()]
         public string merchantId;
 
-        [XmlAttributeAttribute()]
+        //[XmlAttributeAttribute()]
         public string response;
 
-        [XmlAttributeAttribute()]
+        //[XmlAttributeAttribute()]
         public string message;
 
-        [XmlAttributeAttribute()]
+        //[XmlAttributeAttribute()]
         public string version;
 
         private XmlReader xmlReader;
@@ -4087,7 +4087,7 @@ namespace Litle.Sdk
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            batchId = reader.GetAttribute("id");
+            id = reader.GetAttribute("id");
             litleBatchId = Int64.Parse(reader.GetAttribute("litleBatchId"));
             litleSessionId = Int64.Parse(reader.GetAttribute("litleSessionId"));
             merchantId = reader.GetAttribute("merchantId");
@@ -4107,7 +4107,7 @@ namespace Litle.Sdk
             throw new System.NotImplementedException("The method or operation is not implemented.");
         }
 
-        public litleBatchResponse nextLitleBatchResponse()
+        virtual public litleBatchResponse nextLitleBatchResponse()
         {
             if (xmlReader.ReadState != ReadState.Closed)
             {
@@ -4302,7 +4302,7 @@ namespace Litle.Sdk
         //    return 0;
         //}
 
-        public authorizationResponse nextAuthorizationResponse()
+        virtual public authorizationResponse nextAuthorizationResponse()
         {
             if (authorizationResponseReader.ReadState != ReadState.Closed)
             {
@@ -4319,7 +4319,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public authReversalResponse nextAuthReversalResponse()
+        virtual public authReversalResponse nextAuthReversalResponse()
         {
             if (authReversalResponseReader.ReadState != ReadState.Closed)
             {
@@ -4336,7 +4336,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public captureResponse nextCaptureResponse()
+        virtual public captureResponse nextCaptureResponse()
         {
             if (captureGivenAuthResponseReader.ReadState != ReadState.Closed)
             {
@@ -4353,7 +4353,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public captureGivenAuthResponse nextCaptureGivenAuthResponse()
+        virtual public captureGivenAuthResponse nextCaptureGivenAuthResponse()
         {
             if (captureGivenAuthResponseReader.ReadState != ReadState.Closed)
             {
@@ -4370,7 +4370,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public creditResponse nextCreditResponse()
+        virtual public creditResponse nextCreditResponse()
         {
             if (echeckCreditResponseReader.ReadState != ReadState.Closed)
             {
@@ -4387,7 +4387,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public echeckCreditResponse nextEcheckCreditResponse()
+        virtual public echeckCreditResponse nextEcheckCreditResponse()
         {
             if (echeckCreditResponseReader.ReadState != ReadState.Closed)
             {
@@ -4404,7 +4404,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public echeckRedepositResponse nextEcheckRedepositResponse()
+        virtual public echeckRedepositResponse nextEcheckRedepositResponse()
         {
             if (echeckRedepositResponseReader.ReadState != ReadState.Closed)
             {
@@ -4421,7 +4421,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public echeckSalesResponse nextEcheckSalesResponse()
+        virtual public echeckSalesResponse nextEcheckSalesResponse()
         {
             if (echeckSalesResponseReader.ReadState != ReadState.Closed)
             {
@@ -4438,7 +4438,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public echeckVerificationResponse nextEcheckVerificationResponse()
+        virtual public echeckVerificationResponse nextEcheckVerificationResponse()
         {
             if (echeckVerificationResponseReader.ReadState != ReadState.Closed)
             {
@@ -4455,7 +4455,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public forceCaptureResponse nextForceCaptureResponse()
+        virtual public forceCaptureResponse nextForceCaptureResponse()
         {
             if (forceCaptureResponseReader.ReadState != ReadState.Closed)
             {
@@ -4472,7 +4472,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public registerTokenResponse nextRegisterTokenResponse()
+        virtual public registerTokenResponse nextRegisterTokenResponse()
         {
             if (registerTokenResponseReader.ReadState != ReadState.Closed)
             {
@@ -4489,7 +4489,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public saleResponse nextSaleResponse()
+        virtual public saleResponse nextSaleResponse()
         {
             if (saleResponseReader.ReadState != ReadState.Closed)
             {
@@ -4506,7 +4506,7 @@ namespace Litle.Sdk
             return null;
         }
 
-        public updateCardValidationNumOnTokenResponse nextUpdateCardValidationNumOnTokenResponse()
+        virtual public updateCardValidationNumOnTokenResponse nextUpdateCardValidationNumOnTokenResponse()
         {
             if (updateCardValidationNumOnTokenResponseReader.ReadState != ReadState.Closed)
             {

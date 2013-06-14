@@ -11,11 +11,30 @@ using Tamir.SharpSsh.jsch;
 using Tamir.SharpSsh;
 using System.Timers;
 using System.Net.Sockets;
+using System.Net.Security;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Litle.Sdk
 {
     public class Communications
     {
+
+        public static bool ValidateServerCertificate(
+             object sender,
+             X509Certificate certificate,
+             X509Chain chain,
+             SslPolicyErrors sslPolicyErrors)
+        {
+            if (sslPolicyErrors == SslPolicyErrors.None)
+                return true;
+
+            Console.WriteLine("Certificate error: {0}", sslPolicyErrors);
+
+            // Do not allow this client to communicate with unauthenticated servers. 
+            return false;
+        }
+
         virtual public string HttpPost(string xmlRequest, Dictionary<String, String> config)
         {
             string uri = config["url"];
@@ -62,32 +81,35 @@ namespace Litle.Sdk
         {
             string url = config["onlineBatchUrl"];
             int port = Int32.Parse(config["onlineBatchPort"]);
-            IPHostEntry hostEntry = Dns.GetHostEntry(url);
-            Socket socket = null;
-
+            TcpClient tcpClient;
+            SslStream sslStream;
+                    
             //PROXY?
             if (config.ContainsKey("proxyHost") && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"].Length > 0)
             {
-                //WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
-                //myproxy.BypassProxyOnLocal = true;
+                WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
+                myproxy.BypassProxyOnLocal = true;
                 //req.Proxy = myproxy;
             }
 
-            foreach (IPAddress ipAddress in hostEntry.AddressList)
+            try
             {
-                IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, port);
-                Socket tempSocket = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                tempSocket.Connect(ipAddress, port);
-
-                if (tempSocket.Connected)
-                {
-                    socket = tempSocket;
-                }
+                tcpClient = new TcpClient(url, port);
+                sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
+            }
+            catch (SocketException)
+            {
+                throw new LitleOnlineException("Error establishing a network connection");
             }
 
-            if (socket == null)
+            try 
             {
-                throw new LitleOnlineException("Error establishing a network socket");
+                sslStream.AuthenticateAsClient(url);
+            } 
+            catch (AuthenticationException)
+            {
+                tcpClient.Close();
+                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed");  
             }
 
             using (FileStream readFileStream = new FileStream(xmlRequestFilePath, FileMode.Open))
@@ -105,7 +127,8 @@ namespace Litle.Sdk
                         Console.Write(charBuffer);
                     }
 
-                    socket.Send(Encoding.UTF8.GetBytes(charBuffer));
+                    sslStream.Write(Encoding.UTF8.GetBytes(charBuffer));
+                    sslStream.Flush();
                 } while (charsRead > 0);
             }
 
@@ -117,7 +140,6 @@ namespace Litle.Sdk
             }
 
             using (FileStream writeFileStream = new FileStream(xmlResponseDestinationDirectory + batchName, FileMode.Create))
-            using (StreamWriter writer = new StreamWriter(writeFileStream))
             {
                 char[] charBuffer = new char[1024];
                 byte[] byteBuffer = new byte[1024 * sizeof(char)];
@@ -125,17 +147,19 @@ namespace Litle.Sdk
 
                 do
                 {
-                    bytesRead = socket.Receive(byteBuffer, byteBuffer.Length, 0);
+                    bytesRead = sslStream.Read(byteBuffer, byteBuffer.Length, 0);
                     charBuffer = Encoding.UTF8.GetChars(byteBuffer);
 
                     if ("true".Equals(config["printxml"]))
                     {
                         Console.Write(charBuffer);
                     }
-
-                    writer.Write(charBuffer);
+                    Console.WriteLine(bytesRead);
+                    writeFileStream.Write(byteBuffer, 0, bytesRead);
                 } while (bytesRead > 0);
             }
+
+            tcpClient.Close();
 
             return xmlResponseDestinationDirectory + batchName;
         }
