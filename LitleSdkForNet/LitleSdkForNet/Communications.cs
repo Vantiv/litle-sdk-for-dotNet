@@ -14,6 +14,7 @@ using System.Net.Sockets;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
+using System.Reflection;
 
 namespace Litle.Sdk
 {
@@ -83,53 +84,84 @@ namespace Litle.Sdk
             int port = Int32.Parse(config["onlineBatchPort"]);
             TcpClient tcpClient;
             SslStream sslStream;
-                    
+
             //PROXY?
             if (config.ContainsKey("proxyHost") && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"].Length > 0)
             {
                 WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
                 myproxy.BypassProxyOnLocal = true;
-                //req.Proxy = myproxy;
+
+                var webRequest = WebRequest.Create(url);
+                webRequest.Proxy = myproxy;
+
+                var webResponse = webRequest.GetResponse();
+                var resposeStream = webResponse.GetResponseStream();
+
+                const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+
+                var rsType = resposeStream.GetType();
+                var connectionProperty = rsType.GetProperty("Connection", flags);
+
+                var connection = connectionProperty.GetValue(resposeStream, null);
+                var connectionType = connection.GetType();
+                var networkStreamProperty = connectionType.GetProperty("NetworkStream", flags);
+
+                var networkStream = networkStreamProperty.GetValue(connection, null);
+                var nsType = networkStream.GetType();
+                var socketProperty = nsType.GetProperty("Socket", flags);
+                var socket = (Socket)socketProperty.GetValue(networkStream, null);
+                try
+                {
+                    tcpClient = new TcpClient { Client = socket };
+                    sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
+                }
+                catch (SocketException)
+                {
+                    throw new LitleOnlineException("Error establishing a network connection");
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    tcpClient = new TcpClient(url, port);
+                    sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
+                }
+                catch (SocketException)
+                {
+                    throw new LitleOnlineException("Error establishing a network connection");
+                }
             }
 
             try
             {
-                tcpClient = new TcpClient(url, port);
-                sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
-            }
-            catch (SocketException)
-            {
-                throw new LitleOnlineException("Error establishing a network connection");
-            }
-
-            try 
-            {
                 sslStream.AuthenticateAsClient(url);
-            } 
+            }
             catch (AuthenticationException)
             {
                 tcpClient.Close();
-                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed");  
+                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed");
             }
 
             using (FileStream readFileStream = new FileStream(xmlRequestFilePath, FileMode.Open))
-            using (StreamReader reader = new StreamReader(readFileStream))
             {
-                int charsRead = 0;
-                char[] charBuffer = new char[1024];
+                int bytesRead = -1;
+                byte[] byteBuffer;
 
                 do
                 {
-                    charsRead = reader.Read(charBuffer, 0, charBuffer.Length);
+                    byteBuffer = new byte[1024 * sizeof(char)];
+                    bytesRead = readFileStream.Read(byteBuffer, 0, byteBuffer.Length);
 
                     if ("true".Equals(config["printxml"]))
                     {
-                        Console.Write(charBuffer);
+                        Console.Write(Encoding.UTF8.GetChars(byteBuffer));
                     }
 
-                    sslStream.Write(Encoding.UTF8.GetBytes(charBuffer));
+                    sslStream.Write(byteBuffer, 0, bytesRead);
                     sslStream.Flush();
-                } while (charsRead > 0);
+                } while (bytesRead != 0);
             }
 
             string batchName = Path.GetFileName(xmlRequestFilePath);
@@ -141,13 +173,15 @@ namespace Litle.Sdk
 
             using (FileStream writeFileStream = new FileStream(xmlResponseDestinationDirectory + batchName, FileMode.Create))
             {
-                char[] charBuffer = new char[1024];
-                byte[] byteBuffer = new byte[1024 * sizeof(char)];
-                int bytesRead = 0;            
+                char[] charBuffer;
+                byte[] byteBuffer;
+                int bytesRead = 0;
 
                 do
                 {
-                    bytesRead = sslStream.Read(byteBuffer, byteBuffer.Length, 0);
+                    charBuffer = new char[1024];
+                    byteBuffer = new byte[1024 * sizeof(char)];
+                    bytesRead = sslStream.Read(byteBuffer, 0, byteBuffer.Length);
                     charBuffer = Encoding.UTF8.GetChars(byteBuffer);
 
                     if ("true".Equals(config["printxml"]))

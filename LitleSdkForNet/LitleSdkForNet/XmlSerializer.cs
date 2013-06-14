@@ -19,9 +19,10 @@ namespace Litle.Sdk
 
         virtual public litleResponse DeserializeObjectFromFile(string filePath)
         {
+            litleResponse i;
             XmlSerializer serializer = new XmlSerializer(typeof(litleResponse));
             XmlTextReader reader = new XmlTextReader(filePath);
-            litleResponse i = (litleResponse)serializer.Deserialize(reader);
+            i = (litleResponse)serializer.Deserialize(reader);
             return i;
 
         }// deserialize the object
