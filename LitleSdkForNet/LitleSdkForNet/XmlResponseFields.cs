@@ -4041,43 +4041,23 @@ namespace Litle.Sdk
         }
     }
 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    //[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class litleResponse : IXmlSerializable
     {
-        //[XmlElementAttribute("id")]
         public string id;
-
-        //[XmlElementAttribute()]
         public long litleBatchId;
-
-        //[XmlElementAttribute()]
         public long litleSessionId;
-
-        //[XmlElementAttribute()]
         public string merchantId;
-
-        //[XmlAttributeAttribute()]
         public string response;
-
-        //[XmlAttributeAttribute()]
         public string message;
-
-        //[XmlAttributeAttribute()]
         public string version;
 
         private XmlReader xmlReader;
 
-        //[XmlElement(typeof(litleBatchResponse), ElementName = "batchResponse", IsNullable = false)]
-        //public List<litleBatchResponse> listOfLitleBatchResponse;
-
         public litleResponse()
         {
-            //listOfLitleBatchResponse = new List<litleBatchResponse>();
         }
 
         XmlSchema IXmlSerializable.GetSchema()
@@ -4087,19 +4067,13 @@ namespace Litle.Sdk
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            id = reader.GetAttribute("id");
-            litleBatchId = Int64.Parse(reader.GetAttribute("litleBatchId"));
-            litleSessionId = Int64.Parse(reader.GetAttribute("litleSessionId"));
-            merchantId = reader.GetAttribute("merchantId");
-            response = reader.GetAttribute("response");
-            message = reader.GetAttribute("message");
             version = reader.GetAttribute("version");
+            message = reader.GetAttribute("message");
+            response = reader.GetAttribute("response");
+            
+            litleSessionId = Int64.Parse(reader.GetAttribute("litleSessionId"));
 
-            reader.ReadStartElement();
             xmlReader = reader;
-            //reader.LineNumber
-            ////this.type = Type.GetType(typeName);
-            //reader.ReadEndElement();
         }
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
@@ -4111,33 +4085,32 @@ namespace Litle.Sdk
         {
             if (xmlReader.ReadState != ReadState.Closed)
             {
-                if (xmlReader.ReadToFollowing("batchResponse"))
-                {
-                    return (litleBatchResponse)xmlReader.ReadElementContentAs(typeof(litleResponse), null);
-                }
-                else
-                {
-                    xmlReader.Close();
-                }
+                //xmlReader.
+                //if (xmlReader.ReadToFollowing("batchResponse"))
+                //{
+                //    xmlReader.
+                //    return (litleBatchResponse)xmlReader.ReadElementContentAs(typeof(litleResponse), null);
+                //}
+                //else
+                //{
+                //    xmlReader.Close();
+                //}
             }
 
             return null;
         }
-
-        //public int count()
-        //{
-        //    return 0;
-        //}
     }
 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.Serializable()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class litleBatchResponse : IXmlSerializable
     {
+        public string id;
+        public long litleBatchId;
+        public string merchantId;
+
         private XmlReader originalXmlReader;
         private XmlReader authorizationResponseReader;
         private XmlReader authReversalResponseReader;
@@ -4152,60 +4125,8 @@ namespace Litle.Sdk
         private XmlReader registerTokenResponseReader;
         private XmlReader updateCardValidationNumOnTokenResponseReader;
 
-        //[XmlElement(typeof(authorizationResponse), ElementName = "authorizationResponse", IsNullable = true)]
-        //public List<authorizationResponse> listOfAuthorizationResponse;
-
-        //[XmlElement(typeof(captureResponse), ElementName = "captureResponse", IsNullable = true)]
-        //public List<captureResponse> listOfCaptureResponse;
-
-        //[XmlElement(typeof(forceCaptureResponse), ElementName = "forceCaptureResponse", IsNullable = true)]
-        //public List<forceCaptureResponse> listOfForceCaptureResponse;
-
-        //[XmlElement(typeof(captureGivenAuthResponse), ElementName = "captureGivenAuthResponse", IsNullable = true)]
-        //public List<captureGivenAuthResponse> listOfCaptureGivenAuthResponse;
-
-        //[XmlElement(typeof(saleResponse), ElementName = "saleResponse", IsNullable = true)]
-        //public List<saleResponse> listOfSaleResponse;
-
-        //[XmlElement(typeof(creditResponse), ElementName = "creditResponse", IsNullable = true)]
-        //public List<creditResponse> listOfCreditResponse;
-
-        //[XmlElement(typeof(echeckSalesResponse), ElementName = "echeckSalesResponse", IsNullable = true)]
-        //public List<echeckSalesResponse> listOfEcheckSalesResponse;
-
-        //[XmlElement(typeof(echeckCreditResponse), ElementName = "echeckCreditResponse", IsNullable = true)]
-        //public List<echeckCreditResponse> listOfEcheckCreditResponse;
-
-        //[XmlElement(typeof(echeckVerificationResponse), ElementName = "echeckVerificationResponse", IsNullable = true)]
-        //public List<echeckVerificationResponse> listOfEcheckVerificationResponse;
-
-        //[XmlElement(typeof(echeckRedepositResponse), ElementName = "echeckRedepositResponse", IsNullable = true)]
-        //public List<echeckRedepositResponse> listOfEcheckRedepositResponse;
-
-        //[XmlElement(typeof(authReversalResponse), ElementName = "authReversalResponse", IsNullable = true)]
-        //public List<authReversalResponse> listOfAuthReversalResponse;
-
-        //[XmlElement(typeof(registerTokenResponse), ElementName = "registerTokenResponse", IsNullable = true)]
-        //public List<registerTokenResponse> listOfRegisterTokenResponse;
-
-        //[XmlElement(typeof(updateCardValidationNumOnTokenResponse), ElementName = "updateCardValidationNumOnTokenResponse", IsNullable = true)]
-        //public List<updateCardValidationNumOnTokenResponse> listOfUpdateCardValidationNumOnTokenResponse;
-
         public litleBatchResponse()
         {
-            //listOfAuthorizationResponse = new List<authorizationResponse>();
-            //listOfCaptureResponse = new List<captureResponse>();
-            //listOfForceCaptureResponse = new List<forceCaptureResponse>();
-            //listOfCaptureGivenAuthResponse = new List<captureGivenAuthResponse>();
-            //listOfSaleResponse = new List<saleResponse>();
-            //listOfCreditResponse = new List<creditResponse>();
-            //listOfEcheckSalesResponse = new List<echeckSalesResponse>();
-            //listOfEcheckCreditResponse = new List<echeckCreditResponse>();
-            //listOfEcheckVerificationResponse = new List<echeckVerificationResponse>();
-            //listOfEcheckRedepositResponse = new List<echeckRedepositResponse>();
-            //listOfAuthReversalResponse = new List<authReversalResponse>();
-            //listOfRegisterTokenResponse = new List<registerTokenResponse>();
-            //listOfUpdateCardValidationNumOnTokenResponse = new List<updateCardValidationNumOnTokenResponse>();
         }
 
         XmlSchema IXmlSerializable.GetSchema()
@@ -4215,9 +4136,12 @@ namespace Litle.Sdk
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            reader.ReadStartElement();
-            originalXmlReader = reader;
+            //reader.ReadStartElement("batchResponse");
+            id = reader.GetAttribute("id");
+            litleBatchId = Int64.Parse(reader.GetAttribute("litleBatchId"));
+            merchantId = reader.GetAttribute("merchantId");
 
+            originalXmlReader = reader;
             authorizationResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
             authReversalResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
             captureResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
@@ -4236,71 +4160,6 @@ namespace Litle.Sdk
         {
             throw new System.NotImplementedException("The method or operation is not implemented.");
         }
-
-        //public int authorizationResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int authReversalResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int captureResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int captureGivenAuthResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int creditResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int echeckCreditResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int echeckRedepositResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int echeckSalesResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int echeckVerificationResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int forceCaptureResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int registerTokenRequestCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int saleResponseCount()
-        //{
-        //    return 0;
-        //}
-
-        //public int updateCardValidationNumOnTokenResponseCount()
-        //{
-        //    return 0;
-        //}
 
         virtual public authorizationResponse nextAuthorizationResponse()
         {
