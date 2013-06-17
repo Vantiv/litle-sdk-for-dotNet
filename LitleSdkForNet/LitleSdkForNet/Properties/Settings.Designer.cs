@@ -177,6 +177,29 @@ namespace Litle.Sdk.Properties {
                 this["knownHostsFile"] = value;
             }
         }
-
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("cert.litle.com")]
+        public string onlineBatchUrl {
+            get {
+                return ((string)(this["onlineBatchUrl"]));
+            }
+            set {
+                this["onlineBatchUrl"] = value;
+            }
+        }  
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15000")]
+        public string onlineBatchPort {
+            get {
+                return ((string)(this["onlineBatchPort"]));
+            }
+            set {
+                this["onlineBatchPort"] = value;
+            }
+        }
     }
 }
