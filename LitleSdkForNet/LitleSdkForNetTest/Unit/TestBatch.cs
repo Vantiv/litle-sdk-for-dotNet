@@ -852,6 +852,70 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void testUpdateCardValidationNumOnToken()
+        {
+            updateCardValidationNumOnToken updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
+            updateCardValidationNumOnToken.orderId = "12344";
+            updateCardValidationNumOnToken.litleToken = "123";
+
+            var mockLitleResponse = new Mock<litleResponse>();
+            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
+            var mockCommunications = new Mock<Communications>();
+            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleFile = new Mock<litleFile>();
+
+            updateCardValidationNumOnTokenResponse mockUpdateCardValidationNumOnTokenResponse1 = new updateCardValidationNumOnTokenResponse();
+            mockUpdateCardValidationNumOnTokenResponse1.litleTxnId = 123;
+            updateCardValidationNumOnTokenResponse mockUpdateCardValidationNumOnTokenResponse2 = new updateCardValidationNumOnTokenResponse();
+            mockUpdateCardValidationNumOnTokenResponse2.litleTxnId = 124;
+
+            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse())
+                .Returns(mockUpdateCardValidationNumOnTokenResponse1)
+                .Returns(mockUpdateCardValidationNumOnTokenResponse2)
+                .Returns((updateCardValidationNumOnTokenResponse)null);
+
+            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+
+            mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
+            litleResponse mockedLitleResponse = mockLitleResponse.Object;
+
+            Communications mockedCommunications = mockCommunications.Object;
+
+            mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
+            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+
+            mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<litleTime>(), It.IsAny<String>())).Returns(mockFilePath);
+            mockLitleFile.Setup(litleFile => litleFile.AppendFileToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
+            mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
+            litleFile mockedLitleFile = mockLitleFile.Object;
+
+            litle.setCommunication(mockedCommunications);
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.setLitleFile(mockedLitleFile);
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.setLitleFile(mockedLitleFile);
+            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+            litle.addBatch(litleBatchRequest);
+
+            string batchFileName = litle.sendToLitle();
+
+            litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
+            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            updateCardValidationNumOnTokenResponse actualUpdateCardValidationNumOnTokenResponse1 = actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
+            updateCardValidationNumOnTokenResponse actualUpdateCardValidationNumOnTokenResponse2 = actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
+            updateCardValidationNumOnTokenResponse nullUpdateCardValidationNumOnTokenResponse = actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
+
+            Assert.AreEqual(123, actualUpdateCardValidationNumOnTokenResponse1.litleTxnId);
+            Assert.AreEqual(124, actualUpdateCardValidationNumOnTokenResponse2.litleTxnId);
+            Assert.IsNull(nullUpdateCardValidationNumOnTokenResponse);
+
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(mockFilePath, It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
+        }
+
+        [Test]
         public void testLitleOnlineException()
         {
             authorization authorization = new authorization();

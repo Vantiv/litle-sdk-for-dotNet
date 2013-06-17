@@ -83,7 +83,7 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
-            authorization.card = card; //This needs to compile      
+            authorization.card = card; 
 
             litleBatchRequest.addAuthorization(authorization);
 
@@ -96,7 +96,7 @@ namespace Litle.Sdk.Test.Functional
             card2.type = methodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
-            authorization2.card = card2; //This needs to compile
+            authorization2.card = card2;
 
             litleBatchRequest.addAuthorization(authorization2);
 
@@ -306,6 +306,20 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
 
+            updateCardValidationNumOnToken updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
+            updateCardValidationNumOnToken.orderId = "12344";
+            updateCardValidationNumOnToken.cardValidationNum = "123456789";
+            updateCardValidationNumOnToken.orderId = "12345";
+
+            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+
+            updateCardValidationNumOnToken updateCardValidationNumOnToken2 = new updateCardValidationNumOnToken();
+            updateCardValidationNumOnToken2.orderId = "12345";
+            updateCardValidationNumOnToken2.cardValidationNum = "123456789";
+            updateCardValidationNumOnToken2.orderId = "12346";
+
+            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
+
             litle.addBatch(litleBatchRequest);
 
             string batchName = litle.sendToLitle();
@@ -329,6 +343,104 @@ namespace Litle.Sdk.Test.Functional
 
                     authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
                 }
+
+                authReversalResponse authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
+                while (authReversalResponse != null)
+                {
+                    Assert.AreEqual("360", authReversalResponse.response);
+
+                    authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
+                }
+
+                captureResponse captureResponse = litleBatchResponse.nextCaptureResponse();
+                while (captureResponse != null)
+                {
+                    Assert.AreEqual("360", captureResponse.response);
+
+                    captureResponse = litleBatchResponse.nextCaptureResponse();
+                }
+
+                captureGivenAuthResponse captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
+                while (captureGivenAuthResponse != null)
+                {
+                    Assert.AreEqual("000", captureGivenAuthResponse.response);
+
+                    captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
+                }
+
+                creditResponse creditResponse = litleBatchResponse.nextCreditResponse();
+                while (creditResponse != null)
+                {
+                    Assert.AreEqual("000", creditResponse.response);
+
+                    creditResponse = litleBatchResponse.nextCreditResponse();
+                }
+
+                echeckCreditResponse echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
+                while (echeckCreditResponse != null)
+                {
+                    Assert.AreEqual("000", echeckCreditResponse.response);
+
+                    echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
+                }
+
+                echeckRedepositResponse echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
+                while (echeckRedepositResponse != null)
+                {
+                    Assert.AreEqual("000", echeckRedepositResponse.response);
+
+                    echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
+                }
+
+                echeckSalesResponse echeckSalesResponse = litleBatchResponse.nextEcheckSalesResponse();
+                while (echeckSalesResponse != null)
+                {
+                    Assert.AreEqual("000", echeckSalesResponse.response);
+
+                    echeckSalesResponse = litleBatchResponse.nextEcheckSalesResponse();
+                }
+
+                echeckVerificationResponse echeckVerificationResponse = litleBatchResponse.nextEcheckVerificationResponse();
+                while (echeckVerificationResponse != null)
+                {
+                    Assert.AreEqual("957", echeckVerificationResponse.response);
+
+                    echeckVerificationResponse = litleBatchResponse.nextEcheckVerificationResponse();
+                }
+
+                forceCaptureResponse forceCaptureResponse = litleBatchResponse.nextForceCaptureResponse();
+                while (forceCaptureResponse != null)
+                {
+                    Assert.AreEqual("000", forceCaptureResponse.response);
+
+                    forceCaptureResponse = litleBatchResponse.nextForceCaptureResponse();
+                }
+
+                registerTokenResponse registerTokenResponse = litleBatchResponse.nextRegisterTokenResponse();
+                while (registerTokenResponse != null)
+                {
+                    Assert.AreEqual("820", registerTokenResponse.response);
+
+                    registerTokenResponse = litleBatchResponse.nextRegisterTokenResponse();
+                }
+
+                saleResponse saleResponse = litleBatchResponse.nextSaleResponse();
+                while (saleResponse != null)
+                {
+                    Assert.AreEqual("000", saleResponse.response);
+
+                    saleResponse = litleBatchResponse.nextSaleResponse();
+                }
+
+                updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
+                while (updateCardValidationNumOnTokenResponse != null)
+                {
+                    Assert.AreEqual("000", updateCardValidationNumOnTokenResponse.response);
+
+                    updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
+                }
+
+                litleBatchResponse = litleResponse.nextLitleBatchResponse();
             }
         }
 
