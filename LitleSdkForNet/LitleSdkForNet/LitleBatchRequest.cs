@@ -7,7 +7,6 @@ namespace Litle.Sdk
 {
     public partial class litleBatchRequest
     {
-
         public string id;
 
         public string merchantId;
@@ -100,9 +99,129 @@ namespace Litle.Sdk
             this.config = config;
         }
 
-        public void setLitleFile(litleFile litleFileGenerator)
+        public void setLitleFile(litleFile litleFile)
         {
-            this.litleFile = litleFileGenerator;
+            this.litleFile = litleFile;
+        }
+
+        public void setLitleTime(litleTime litleTime)
+        {
+            this.litleTime = litleTime;
+        }
+
+        public int getNumAuthorization()
+        {
+            return numAuthorization; 
+        }
+
+        public int getNumCapture()
+        {
+            return numCapture;
+        }
+
+        public int getNumCredit()
+        {
+            return numCapture;
+        }
+
+        public int getNumSale()
+        {
+            return numSale;
+        }
+
+        public int getAuthReversal()
+        {
+            return numAuthReversal;
+        }
+
+        public int getNumEcheckCredit()
+        {
+            return numEcheckCredit;
+        }
+
+        public int getNumEcheckVerification()
+        {
+            return numEcheckVerification;
+        }
+
+        public int getNumEcheckSale()
+        {
+            return numEcheckSale;
+        }
+
+        public int getNumRegisterTokenRequest()
+        {
+            return numRegisterTokenRequest;
+        }
+
+        public int getNumForceCapture()
+        {
+            return numForceCapture;
+        }
+
+        public int getNumCaptureGivenAuth()
+        {
+            return numCaptureGivenAuth;
+        }
+
+        public int getNumEcheckRedeposit()
+        {
+            return numEcheckRedeposit;
+        }
+
+        public int getNumUpdateCardValidationNumOnToken()
+        {
+            return numUpdateCardValidationNumOnToken;
+        }
+
+        public long getSumOfAuthorization()
+        {
+            return sumOfAuthorization;
+        }
+
+        public long getSumOfAuthReversal()
+        {
+            return sumOfAuthReversal;
+        }
+
+        public long getSumOfCapture()
+        {
+            return sumOfCapture;
+        }
+
+        public long getSumOfCredit()
+        {
+            return sumOfCredit;
+        }
+
+        public long getSumOfSale()
+        {
+            return sumOfSale;
+        }
+
+        public long getSumOfForceCapture()
+        {
+            return sumOfForceCapture;
+        }
+
+        public long getSumOfEcheckSale()
+        {
+            return sumOfEcheckSale;
+        }
+
+        public long getSumOfEcheckCredit()
+        {
+            return sumOfEcheckCredit;
+        }
+
+        public long getSumOfEcheckVerification()
+        {
+            return sumOfEcheckVerification;
+        }
+
+        public long getSumOfCaptureGivenAuth()
+        {
+            return sumOfCaptureGivenAuth;
         }
 
         public void addAuthorization(authorization authorization)

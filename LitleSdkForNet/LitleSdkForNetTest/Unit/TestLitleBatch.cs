@@ -11,7 +11,7 @@ using Moq.Language.Flow;
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestBatch
+    class TestLitleBatch
     {
         private LitleBatch litle;
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";
