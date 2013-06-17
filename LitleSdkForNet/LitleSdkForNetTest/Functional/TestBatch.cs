@@ -317,10 +317,20 @@ namespace Litle.Sdk.Test.Functional
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
-            //Assert.AreEqual(24, litleResponse.listOfLitleBatchResponse[0]);
+
+            litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+
+            while (litleBatchResponse != null)
+            {
+                authorizationResponse authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
+                while (authorizationResponse != null)
+                {
+                    Assert.AreEqual("000", authorizationResponse.response);
+
+                    authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
+                }
+            }
         }
-
-
 
         [Test]
         public void nullBatchData()

@@ -188,7 +188,6 @@ namespace Litle.Sdk
                     {
                         Console.Write(charBuffer);
                     }
-                    Console.WriteLine(bytesRead);
                     writeFileStream.Write(byteBuffer, 0, bytesRead);
                 } while (bytesRead > 0);
             }
