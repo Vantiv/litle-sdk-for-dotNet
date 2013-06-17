@@ -4057,6 +4057,10 @@ namespace Litle.Sdk
         private XmlReader xmlReader;
         private string filePath;
 
+        public litleResponse()
+        {
+        }
+
         public litleResponse(string filePath)
         {
             XmlTextReader reader = new XmlTextReader(filePath);
