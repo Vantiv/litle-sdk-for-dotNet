@@ -4044,7 +4044,7 @@ namespace Litle.Sdk
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class litleResponse : IXmlSerializable
+    public partial class litleResponse
     {
         public string id;
         public long litleBatchId;
@@ -4055,46 +4055,50 @@ namespace Litle.Sdk
         public string version;
 
         private XmlReader xmlReader;
+        private string filePath;
 
-        public litleResponse()
+        public litleResponse(string filePath)
         {
+            XmlTextReader reader = new XmlTextReader(filePath);
+            readXml(reader, filePath);
         }
 
-        XmlSchema IXmlSerializable.GetSchema()
+        public litleResponse(XmlReader reader, string filePath)
         {
-            return null;
+            readXml(reader, filePath);
         }
 
-        void IXmlSerializable.ReadXml(XmlReader reader)
+        public void readXml(XmlReader reader, string filePath)
         {
-            version = reader.GetAttribute("version");
-            message = reader.GetAttribute("message");
-            response = reader.GetAttribute("response");
-            
-            litleSessionId = Int64.Parse(reader.GetAttribute("litleSessionId"));
+            if (reader.ReadToFollowing("litleResponse"))
+            {
+                version = reader.GetAttribute("version");
+                message = reader.GetAttribute("message");
+                response = reader.GetAttribute("response");
+                litleSessionId = Int64.Parse(reader.GetAttribute("litleSessionId"));
 
-            xmlReader = reader;
-        }
+                reader.ReadToDescendant("batchResponse");
+            }
+            else
+            {
+                reader.Close();
+            }
 
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            throw new System.NotImplementedException("The method or operation is not implemented.");
+            this.xmlReader = reader;
+            this.filePath = filePath;
         }
 
         virtual public litleBatchResponse nextLitleBatchResponse()
         {
-            if (xmlReader.ReadState != ReadState.Closed)
+            if (xmlReader.ReadState != ReadState.Closed && xmlReader.LocalName == "batchResponse")
             {
-                //xmlReader.
-                //if (xmlReader.ReadToFollowing("batchResponse"))
-                //{
-                //    xmlReader.
-                //    return (litleBatchResponse)xmlReader.ReadElementContentAs(typeof(litleResponse), null);
-                //}
-                //else
-                //{
-                //    xmlReader.Close();
-                //}
+                litleBatchResponse litleBatchResponse = new litleBatchResponse(xmlReader, filePath);
+                if (!xmlReader.ReadToFollowing("batchResponse"))
+                {
+                    xmlReader.Close();
+                }
+
+                return litleBatchResponse;
             }
 
             return null;
@@ -4105,7 +4109,7 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class litleBatchResponse : IXmlSerializable
+    public class litleBatchResponse
     {
         public string id;
         public long litleBatchId;
@@ -4116,6 +4120,7 @@ namespace Litle.Sdk
         private XmlReader authReversalResponseReader;
         private XmlReader captureResponseReader;
         private XmlReader captureGivenAuthResponseReader;
+        private XmlReader creditResponseReader;
         private XmlReader forceCaptureResponseReader;
         private XmlReader echeckCreditResponseReader;
         private XmlReader echeckRedepositResponseReader;
@@ -4129,50 +4134,102 @@ namespace Litle.Sdk
         {
         }
 
-        XmlSchema IXmlSerializable.GetSchema()
+        public litleBatchResponse(XmlReader xmlReader, string filePath)
         {
-            return null;
+            readXml(xmlReader, filePath);
         }
 
-        void IXmlSerializable.ReadXml(XmlReader reader)
+
+        public void readXml(XmlReader reader, string filePath)
         {
-            //reader.ReadStartElement("batchResponse");
             id = reader.GetAttribute("id");
             litleBatchId = Int64.Parse(reader.GetAttribute("litleBatchId"));
             merchantId = reader.GetAttribute("merchantId");
 
             originalXmlReader = reader;
-            authorizationResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            authReversalResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            captureResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            captureGivenAuthResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            forceCaptureResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            echeckCreditResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            echeckRedepositResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            echeckSalesResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            echeckVerificationResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            saleResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            registerTokenResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-            updateCardValidationNumOnTokenResponseReader = XmlTextReader.Create(reader, new XmlReaderSettings());
-        }
+            authorizationResponseReader = new XmlTextReader(filePath);
+            authReversalResponseReader = new XmlTextReader(filePath);
+            captureResponseReader = new XmlTextReader(filePath);
+            captureGivenAuthResponseReader = new XmlTextReader(filePath);
+            creditResponseReader = new XmlTextReader(filePath);
+            forceCaptureResponseReader = new XmlTextReader(filePath);
+            echeckCreditResponseReader = new XmlTextReader(filePath);
+            echeckRedepositResponseReader = new XmlTextReader(filePath);
+            echeckSalesResponseReader = new XmlTextReader(filePath);
+            echeckVerificationResponseReader = new XmlTextReader(filePath);
+            saleResponseReader = new XmlTextReader(filePath);
+            registerTokenResponseReader = new XmlTextReader(filePath);
+            updateCardValidationNumOnTokenResponseReader = new XmlTextReader(filePath);
 
-        void IXmlSerializable.WriteXml(XmlWriter writer)
-        {
-            throw new System.NotImplementedException("The method or operation is not implemented.");
+            if (!authorizationResponseReader.ReadToFollowing("authorizationResponse"))
+            {
+                authorizationResponseReader.Close();
+            }
+            if (!authReversalResponseReader.ReadToFollowing("authReversalResponse"))
+            {
+                authReversalResponseReader.Close();
+            }
+            if (!captureResponseReader.ReadToFollowing("captureResponse"))
+            {
+                captureResponseReader.Close();
+            }
+            if (!captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
+            {
+                captureGivenAuthResponseReader.Close();
+            }
+            if (!creditResponseReader.ReadToFollowing("creditResponse"))
+            {
+                creditResponseReader.Close();
+            }
+            if (!forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
+            {
+                forceCaptureResponseReader.Close();
+            }
+            if (!echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
+            {
+                echeckCreditResponseReader.Close();
+            }
+            if (!echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
+            {
+                echeckRedepositResponseReader.Close();
+            }
+            if (!echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
+            {
+                echeckSalesResponseReader.Close();
+            }
+            if (!echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
+            {
+                echeckVerificationResponseReader.Close();
+            }
+            if (!saleResponseReader.ReadToFollowing("saleResponse"))
+            {
+                saleResponseReader.Close();
+            }
+            if (!registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
+            {
+                registerTokenResponseReader.Close();
+            }
+            if (!updateCardValidationNumOnTokenResponseReader.ReadToFollowing("updateCardValidationNumOnTokenResponse"))
+            {
+                updateCardValidationNumOnTokenResponseReader.Close();
+            }
         }
 
         virtual public authorizationResponse nextAuthorizationResponse()
         {
             if (authorizationResponseReader.ReadState != ReadState.Closed)
             {
-                if (authorizationResponseReader.ReadToFollowing("authorizationResponse"))
-                {
-                    return (authorizationResponse)authorizationResponseReader.ReadElementContentAs(typeof(authorizationResponse), null);
-                }
-                else
+                string response = authorizationResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(authorizationResponse));
+                StringReader reader = new StringReader(response);
+                authorizationResponse i = (authorizationResponse)serializer.Deserialize(reader);
+
+                if (!authorizationResponseReader.ReadToFollowing("authorizationResponse"))
                 {
                     authorizationResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4182,14 +4239,17 @@ namespace Litle.Sdk
         {
             if (authReversalResponseReader.ReadState != ReadState.Closed)
             {
-                if (authReversalResponseReader.ReadToFollowing("authReversalResponse"))
-                {
-                    return (authReversalResponse)authReversalResponseReader.ReadElementContentAs(typeof(authReversalResponse), null);
-                }
-                else
+                string response = authReversalResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(authReversalResponse));
+                StringReader reader = new StringReader(response);
+                authReversalResponse i = (authReversalResponse)serializer.Deserialize(reader);
+
+                if (!authReversalResponseReader.ReadToFollowing("authReversalResponse"))
                 {
                     authReversalResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4197,16 +4257,19 @@ namespace Litle.Sdk
 
         virtual public captureResponse nextCaptureResponse()
         {
-            if (captureGivenAuthResponseReader.ReadState != ReadState.Closed)
+            if (captureResponseReader.ReadState != ReadState.Closed)
             {
-                if (captureGivenAuthResponseReader.ReadToFollowing("captureResponse"))
+                string response = captureResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(captureResponse));
+                StringReader reader = new StringReader(response);
+                captureResponse i = (captureResponse)serializer.Deserialize(reader);
+
+                if (!captureResponseReader.ReadToFollowing("captureResponse"))
                 {
-                    return (captureResponse)captureGivenAuthResponseReader.ReadElementContentAs(typeof(captureResponse), null);
+                    captureResponseReader.Close();
                 }
-                else
-                {
-                    captureGivenAuthResponseReader.Close();
-                }
+
+                return i;
             }
 
             return null;
@@ -4216,14 +4279,17 @@ namespace Litle.Sdk
         {
             if (captureGivenAuthResponseReader.ReadState != ReadState.Closed)
             {
-                if (captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
-                {
-                    return (captureGivenAuthResponse)captureGivenAuthResponseReader.ReadElementContentAs(typeof(captureGivenAuthResponse), null);
-                }
-                else
+                string response = captureGivenAuthResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(captureGivenAuthResponse));
+                StringReader reader = new StringReader(response);
+                captureGivenAuthResponse i = (captureGivenAuthResponse)serializer.Deserialize(reader);
+
+                if (!captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
                 {
                     captureGivenAuthResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4231,16 +4297,19 @@ namespace Litle.Sdk
 
         virtual public creditResponse nextCreditResponse()
         {
-            if (echeckCreditResponseReader.ReadState != ReadState.Closed)
+            if (creditResponseReader.ReadState != ReadState.Closed)
             {
-                if (echeckCreditResponseReader.ReadToFollowing("creditResponse"))
+                string response = creditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(creditResponse));
+                StringReader reader = new StringReader(response);
+                creditResponse i = (creditResponse)serializer.Deserialize(reader);
+
+                if (!creditResponseReader.ReadToFollowing("creditResponse"))
                 {
-                    return (creditResponse)authorizationResponseReader.ReadElementContentAs(typeof(creditResponse), null);
+                    creditResponseReader.Close();
                 }
-                else
-                {
-                    echeckCreditResponseReader.Close();
-                }
+
+                return i;
             }
 
             return null;
@@ -4250,14 +4319,17 @@ namespace Litle.Sdk
         {
             if (echeckCreditResponseReader.ReadState != ReadState.Closed)
             {
-                if (echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
-                {
-                    return (echeckCreditResponse)echeckCreditResponseReader.ReadElementContentAs(typeof(echeckCreditResponse), null);
-                }
-                else
+                string response = echeckCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckCreditResponse));
+                StringReader reader = new StringReader(response);
+                echeckCreditResponse i = (echeckCreditResponse)serializer.Deserialize(reader);
+
+                if (!echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
                 {
                     echeckCreditResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4267,14 +4339,17 @@ namespace Litle.Sdk
         {
             if (echeckRedepositResponseReader.ReadState != ReadState.Closed)
             {
-                if (echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
-                {
-                    return (echeckRedepositResponse)echeckRedepositResponseReader.ReadElementContentAs(typeof(echeckRedepositResponse), null);
-                }
-                else
+                string response = echeckRedepositResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckRedepositResponse));
+                StringReader reader = new StringReader(response);
+                echeckRedepositResponse i = (echeckRedepositResponse)serializer.Deserialize(reader);
+
+                if (!echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
                 {
                     echeckRedepositResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4284,14 +4359,17 @@ namespace Litle.Sdk
         {
             if (echeckSalesResponseReader.ReadState != ReadState.Closed)
             {
-                if (echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
-                {
-                    return (echeckSalesResponse)echeckSalesResponseReader.ReadElementContentAs(typeof(echeckSalesResponse), null);
-                }
-                else
+                string response = echeckSalesResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckSalesResponse));
+                StringReader reader = new StringReader(response);
+                echeckSalesResponse i = (echeckSalesResponse)serializer.Deserialize(reader);
+
+                if (!echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
                 {
                     echeckSalesResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4301,14 +4379,17 @@ namespace Litle.Sdk
         {
             if (echeckVerificationResponseReader.ReadState != ReadState.Closed)
             {
-                if (echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
-                {
-                    return (echeckVerificationResponse)echeckVerificationResponseReader.ReadElementContentAs(typeof(echeckVerificationResponse), null);
-                }
-                else
+                string response = echeckVerificationResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckVerificationResponse));
+                StringReader reader = new StringReader(response);
+                echeckVerificationResponse i = (echeckVerificationResponse)serializer.Deserialize(reader);
+
+                if (!echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
                 {
                     echeckVerificationResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4318,14 +4399,17 @@ namespace Litle.Sdk
         {
             if (forceCaptureResponseReader.ReadState != ReadState.Closed)
             {
-                if (forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
-                {
-                    return (forceCaptureResponse)forceCaptureResponseReader.ReadElementContentAs(typeof(forceCaptureResponse), null);
-                }
-                else
+                string response = forceCaptureResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(forceCaptureResponse));
+                StringReader reader = new StringReader(response);
+                forceCaptureResponse i = (forceCaptureResponse)serializer.Deserialize(reader);
+
+                if (!forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
                 {
                     forceCaptureResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4335,14 +4419,17 @@ namespace Litle.Sdk
         {
             if (registerTokenResponseReader.ReadState != ReadState.Closed)
             {
-                if (registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
-                {
-                    return (registerTokenResponse)registerTokenResponseReader.ReadElementContentAs(typeof(registerTokenResponse), null);
-                }
-                else
+                string response = registerTokenResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(registerTokenResponse));
+                StringReader reader = new StringReader(response);
+                registerTokenResponse i = (registerTokenResponse)serializer.Deserialize(reader);
+
+                if (!registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
                 {
                     registerTokenResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4352,14 +4439,17 @@ namespace Litle.Sdk
         {
             if (saleResponseReader.ReadState != ReadState.Closed)
             {
-                if (saleResponseReader.ReadToFollowing("saleResponse"))
-                {
-                    return (saleResponse)saleResponseReader.ReadElementContentAs(typeof(saleResponse), null);
-                }
-                else
+                string response = saleResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(saleResponse));
+                StringReader reader = new StringReader(response);
+                saleResponse i = (saleResponse)serializer.Deserialize(reader);
+
+                if (!saleResponseReader.ReadToFollowing("saleResponse"))
                 {
                     saleResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
@@ -4369,14 +4459,17 @@ namespace Litle.Sdk
         {
             if (updateCardValidationNumOnTokenResponseReader.ReadState != ReadState.Closed)
             {
-                if (updateCardValidationNumOnTokenResponseReader.ReadToFollowing("updateCardValidationNumOnTokenResponse"))
-                {
-                    return (updateCardValidationNumOnTokenResponse)updateCardValidationNumOnTokenResponseReader.ReadElementContentAs(typeof(updateCardValidationNumOnTokenResponse), null);
-                }
-                else
+                string response = updateCardValidationNumOnTokenResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(updateCardValidationNumOnTokenResponse));
+                StringReader reader = new StringReader(response);
+                updateCardValidationNumOnTokenResponse i = (updateCardValidationNumOnTokenResponse)serializer.Deserialize(reader);
+
+                if (!updateCardValidationNumOnTokenResponseReader.ReadToFollowing("saleResponse"))
                 {
                     updateCardValidationNumOnTokenResponseReader.Close();
                 }
+
+                return i;
             }
 
             return null;
