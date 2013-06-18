@@ -15,6 +15,7 @@ namespace Litle.Sdk
         private Communications communication;
         private litleXmlSerializer litleXmlSerializer;
         private int numOfLitleBatchRequest = 0;
+        private int numOfRFRRequest = 0;
         public string finalFilePath = null;
         private string batchFilePath = null;
         private litleTime litleTime;
@@ -102,10 +103,30 @@ namespace Litle.Sdk
 
         public void addBatch(litleBatchRequest litleBatchRequest)
         {
+            if (numOfRFRRequest != 0)
+            {
+                throw new LitleOnlineException("Can not add a batch request to a batch with an RFRrequest!");
+            }
+
             fillInReportGroup(litleBatchRequest);
 
             batchFilePath = SerializeBatchRequestToFile(litleBatchRequest, batchFilePath);
             numOfLitleBatchRequest++;
+        }
+
+        public void addRFRRequest(RFRRequest rfrRequest)
+        {
+            if (numOfLitleBatchRequest != 0)
+            {
+                throw new LitleOnlineException("Can not add an RFRRequest to a batch with requests!");
+            }
+            else if (numOfRFRRequest >= 1)
+            {
+                throw new LitleOnlineException("Can not add more than one RFRRequest to a batch!");
+            }
+
+            batchFilePath = SerializeRFRRequestToFile(rfrRequest, batchFilePath);
+            numOfRFRRequest++;
         }
 
         public litleResponse sendToLitleWithStream(string responseFileDirectory)
@@ -135,12 +156,7 @@ namespace Litle.Sdk
 
         public litleResponse receiveFromLitle(string destinationFilePath, string batchFileName)
         {
-            string destinationDirectory = Path.GetDirectoryName(destinationFilePath);
-
-            if (!Directory.Exists(destinationDirectory))
-            {
-                Directory.CreateDirectory(destinationDirectory);
-            }
+            litleFile.createDirectory(destinationFilePath);
 
             communication.FtpPickUp(destinationFilePath, config, batchFileName);
 
@@ -153,6 +169,16 @@ namespace Litle.Sdk
 
             filePath = litleFile.createRandomFile(filePath, litleTime, "_temp_litleRequest.xml");
             string tempFilePath = litleBatchRequest.Serialize();
+
+            litleFile.AppendFileToFile(filePath, tempFilePath);
+
+            return filePath;
+        }
+
+        public string SerializeRFRRequestToFile(RFRRequest rfrRequest, string filePath)
+        {
+            filePath = litleFile.createRandomFile(filePath, litleTime, "_temp_litleRequest.xml");
+            string tempFilePath = rfrRequest.Serialize();
 
             litleFile.AppendFileToFile(filePath, tempFilePath);
 
@@ -255,6 +281,16 @@ namespace Litle.Sdk
             File.Delete(filePathToAppend);
 
             return filePathToAppendTo;
+        }
+
+        public virtual void createDirectory(string destinationFilePath)
+        {
+            string destinationDirectory = Path.GetDirectoryName(destinationFilePath);
+
+            if (!Directory.Exists(destinationDirectory))
+            {
+                Directory.CreateDirectory(destinationDirectory);
+            }
         }
     }
 

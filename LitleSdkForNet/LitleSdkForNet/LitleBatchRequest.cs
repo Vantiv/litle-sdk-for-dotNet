@@ -111,7 +111,7 @@ namespace Litle.Sdk
 
         public int getNumAuthorization()
         {
-            return numAuthorization; 
+            return numAuthorization;
         }
 
         public int getNumCapture()
@@ -453,6 +453,46 @@ namespace Litle.Sdk
             {
                 txn.reportGroup = config["reportGroup"];
             }
+        }
+    }
+
+    public class RFRRequest
+    {
+        public long litleSessionId;
+
+        private litleTime litleTime;
+        private litleFile litleFile;
+
+        public RFRRequest()
+        {
+            litleTime = new litleTime();
+            litleFile = new litleFile();
+        }
+
+        public void setLitleFile(litleFile litleFile)
+        {
+            this.litleFile = litleFile;
+        }
+
+        public void setLitleTime(litleTime litleTime)
+        {
+            this.litleTime = litleTime;
+        }
+
+        public string Serialize()
+        {
+            string xmlHeader = "<RFRRequest>\r\n";
+            string xmlFooter = "</RFRRequest>\r\n";
+
+            string filePath = litleFile.createRandomFile(null, litleTime, "_RFRRequest.xml");
+
+            string xmlBody = "<litleSessionId>" + litleSessionId + "</litleSessionId>\r\n";
+
+            litleFile.AppendLineToFile(filePath, xmlHeader);
+            litleFile.AppendLineToFile(filePath, xmlBody);
+            litleFile.AppendLineToFile(filePath, xmlFooter);
+
+            return filePath;
         }
     }
 }

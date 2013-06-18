@@ -4054,7 +4054,9 @@ namespace Litle.Sdk
         public string message;
         public string version;
 
-        private XmlReader xmlReader;
+        private XmlReader originalXmlReader;
+        private XmlReader batchResponseReader;
+        private XmlReader rfrResponseReader;
         private string filePath;
 
         public litleResponse()
@@ -4080,29 +4082,53 @@ namespace Litle.Sdk
                 message = reader.GetAttribute("message");
                 response = reader.GetAttribute("response");
                 litleSessionId = Int64.Parse(reader.GetAttribute("litleSessionId"));
-
-                reader.ReadToDescendant("batchResponse");
             }
             else
             {
                 reader.Close();
             }
 
-            this.xmlReader = reader;
+            this.originalXmlReader = reader;
             this.filePath = filePath;
+
+            this.batchResponseReader = new XmlTextReader(filePath);
+            batchResponseReader.ReadToDescendant("batchResponse");
+
+            this.rfrResponseReader = new XmlTextReader(filePath);
+            rfrResponseReader.ReadToDescendant("RFRResponse");
         }
 
         virtual public litleBatchResponse nextLitleBatchResponse()
         {
-            if (xmlReader.ReadState != ReadState.Closed && xmlReader.LocalName == "batchResponse")
+            if (batchResponseReader.ReadState != ReadState.Closed && batchResponseReader.LocalName == "batchResponse")
             {
-                litleBatchResponse litleBatchResponse = new litleBatchResponse(xmlReader, filePath);
-                if (!xmlReader.ReadToFollowing("batchResponse"))
+                litleBatchResponse litleBatchResponse = new litleBatchResponse(batchResponseReader, filePath);
+                if (!batchResponseReader.ReadToFollowing("batchResponse"))
                 {
-                    xmlReader.Close();
+                    batchResponseReader.Close();
                 }
 
                 return litleBatchResponse;
+            }
+
+            return null;
+        }
+
+        virtual public RFRResponse nextRFRResponse()
+        {
+            if (rfrResponseReader.ReadState != ReadState.Closed && rfrResponseReader.LocalName == "RFRResponse")
+            {
+                string response = rfrResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(RFRResponse));
+                StringReader reader = new StringReader(response);
+                RFRResponse rfrResponse = (RFRResponse)serializer.Deserialize(reader);
+
+                if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
+                {
+                    rfrResponseReader.Close();
+                }
+
+                return rfrResponse;
             }
 
             return null;
@@ -4478,6 +4504,16 @@ namespace Litle.Sdk
 
             return null;
         }
+    }
+
+    [System.Serializable()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public class RFRResponse
+    {
+        public string response;
+        public string message;
     }
 
     /// <remarks/>
