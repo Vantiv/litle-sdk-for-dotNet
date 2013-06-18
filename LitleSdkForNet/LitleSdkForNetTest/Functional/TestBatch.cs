@@ -83,7 +83,7 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
-            authorization.card = card;       
+            authorization.card = card;
 
             litleBatchRequest.addAuthorization(authorization);
 
@@ -96,7 +96,7 @@ namespace Litle.Sdk.Test.Functional
             card2.type = methodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
-            authorization2.card = card2; 
+            authorization2.card = card2;
 
             litleBatchRequest.addAuthorization(authorization2);
 
@@ -308,15 +308,15 @@ namespace Litle.Sdk.Test.Functional
 
             updateCardValidationNumOnToken updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
             updateCardValidationNumOnToken.orderId = "12344";
-            updateCardValidationNumOnToken.cardValidationNum = "123456789";
-            updateCardValidationNumOnToken.orderId = "12345";
+            updateCardValidationNumOnToken.cardValidationNum = "123";
+            updateCardValidationNumOnToken.litleToken = "4100000000000001";
 
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
 
             updateCardValidationNumOnToken updateCardValidationNumOnToken2 = new updateCardValidationNumOnToken();
             updateCardValidationNumOnToken2.orderId = "12345";
-            updateCardValidationNumOnToken2.cardValidationNum = "123456789";
-            updateCardValidationNumOnToken2.orderId = "12346";
+            updateCardValidationNumOnToken2.cardValidationNum = "123";
+            updateCardValidationNumOnToken2.litleToken = "4242424242424242";
 
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
             litle.addBatch(litleBatchRequest);
@@ -434,7 +434,7 @@ namespace Litle.Sdk.Test.Functional
                 updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
                 while (updateCardValidationNumOnTokenResponse != null)
                 {
-                    Assert.AreEqual("000", updateCardValidationNumOnTokenResponse.response);
+                    Assert.AreEqual("823", updateCardValidationNumOnTokenResponse.response);
 
                     updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
                 }

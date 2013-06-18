@@ -13,14 +13,28 @@ namespace Litle.Sdk
         {
             XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineRequest));
             MemoryStream ms = new MemoryStream();
-            serializer.Serialize(ms, req);
+            try
+            {
+                serializer.Serialize(ms, req);
+            }
+            catch (XmlException e)
+            {
+                throw new LitleOnlineException("Error in sending request to Litle!", e);
+            }
             return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
         }// serialize the xml
 
         virtual public litleResponse DeserializeObjectFromFile(string filePath)
         {
             litleResponse i;
-            i = new litleResponse(filePath);
+            try
+            {
+                i = new litleResponse(filePath);
+            }
+            catch (XmlException e)
+            {
+                throw new LitleOnlineException("Error in recieving response from Litle!", e);
+            }
             return i;
         }// deserialize the object
     }

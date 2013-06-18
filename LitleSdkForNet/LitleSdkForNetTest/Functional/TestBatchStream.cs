@@ -308,20 +308,24 @@ namespace Litle.Sdk.Test.Functional
 
             updateCardValidationNumOnToken updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
             updateCardValidationNumOnToken.orderId = "12344";
-            updateCardValidationNumOnToken.cardValidationNum = "123456789";
-            updateCardValidationNumOnToken.orderId = "12345";
+            updateCardValidationNumOnToken.cardValidationNum = "123";
+            updateCardValidationNumOnToken.litleToken = "4100000000000001";
 
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
 
             updateCardValidationNumOnToken updateCardValidationNumOnToken2 = new updateCardValidationNumOnToken();
             updateCardValidationNumOnToken2.orderId = "12345";
-            updateCardValidationNumOnToken2.cardValidationNum = "123456789";
-            updateCardValidationNumOnToken2.orderId = "12346";
+            updateCardValidationNumOnToken2.cardValidationNum = "123";
+            updateCardValidationNumOnToken2.litleToken = "4242424242424242";
 
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
             litle.addBatch(litleBatchRequest);
 
             litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreEqual("0", litleResponse.response);
+            Assert.AreEqual("Valid Format", litleResponse.message);
 
             litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
             while (litleBatchResponse != null)
@@ -425,7 +429,7 @@ namespace Litle.Sdk.Test.Functional
                 updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
                 while (updateCardValidationNumOnTokenResponse != null)
                 {
-                    Assert.AreEqual("000", updateCardValidationNumOnTokenResponse.response);
+                    Assert.AreEqual("823", updateCardValidationNumOnTokenResponse.response);
 
                     updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
                 }
