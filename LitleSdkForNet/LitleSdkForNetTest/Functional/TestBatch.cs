@@ -332,7 +332,6 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Valid Format", litleResponse.message);
 
             litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
-
             while (litleBatchResponse != null)
             {
                 authorizationResponse authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
@@ -386,7 +385,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckRedepositResponse echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
                 while (echeckRedepositResponse != null)
                 {
-                    Assert.AreEqual("000", echeckRedepositResponse.response);
+                    Assert.AreEqual("360", echeckRedepositResponse.response);
 
                     echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
                 }
