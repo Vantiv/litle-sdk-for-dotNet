@@ -121,7 +121,7 @@ namespace Litle.Sdk
 
         public int getNumCredit()
         {
-            return numCapture;
+            return numCredit;
         }
 
         public int getNumSale()
@@ -129,7 +129,7 @@ namespace Litle.Sdk
             return numSale;
         }
 
-        public int getAuthReversal()
+        public int getNumAuthReversal()
         {
             return numAuthReversal;
         }

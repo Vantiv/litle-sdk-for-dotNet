@@ -83,7 +83,7 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
-            authorization.card = card; 
+            authorization.card = card;       
 
             litleBatchRequest.addAuthorization(authorization);
 
@@ -96,7 +96,7 @@ namespace Litle.Sdk.Test.Functional
             card2.type = methodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
-            authorization2.card = card2;
+            authorization2.card = card2; 
 
             litleBatchRequest.addAuthorization(authorization2);
 
@@ -319,7 +319,6 @@ namespace Litle.Sdk.Test.Functional
             updateCardValidationNumOnToken2.orderId = "12346";
 
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
-
             litle.addBatch(litleBatchRequest);
 
             string batchName = litle.sendToLitle();

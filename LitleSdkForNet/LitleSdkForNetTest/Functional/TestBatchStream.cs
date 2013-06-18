@@ -83,7 +83,7 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
-            authorization.card = card; //This needs to compile      
+            authorization.card = card;       
 
             litleBatchRequest.addAuthorization(authorization);
 
@@ -96,7 +96,7 @@ namespace Litle.Sdk.Test.Functional
             card2.type = methodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
-            authorization2.card = card2; //This needs to compile
+            authorization2.card = card2; 
 
             litleBatchRequest.addAuthorization(authorization2);
 

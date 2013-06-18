@@ -1135,6 +1135,8 @@ namespace Litle.Sdk.Test.Unit
             string resultFile = litle.Serialize();
 
             Assert.IsTrue(resultFile.Equals(mockFilePath));
+
+            mockLitleFile.Verify(litleFile => litleFile.AppendFileToFile(mockFilePath, It.IsAny<String>()));
         }
     }
 }
