@@ -65,6 +65,26 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void testAddAccountUpdate()
+        {
+            accountUpdate accountUpdate = new accountUpdate();
+            accountUpdate.reportGroup = "Planets";
+            accountUpdate.orderId = "12344";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000002";
+            card.expDate = "1210";
+            accountUpdate.card = card;
+
+            batchRequest.addAccountUpdate(accountUpdate);
+
+            Assert.AreEqual(1, batchRequest.getNumAccountUpdates());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, accountUpdate.Serialize()));
+        }
+
+        [Test]
         public void testAuthReversal()
         {
             authReversal authreversal = new authReversal();

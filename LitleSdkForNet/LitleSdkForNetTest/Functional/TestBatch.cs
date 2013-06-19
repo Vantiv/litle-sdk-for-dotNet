@@ -443,6 +443,52 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
+        public void accountUpdateBatch()
+        {
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+
+            accountUpdate accountUpdate1 = new accountUpdate();
+            accountUpdate1.orderId = "1111";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            accountUpdate1.card = card;
+
+            litleBatchRequest.addAccountUpdate(accountUpdate1);
+
+            accountUpdate accountUpdate2 = new accountUpdate();
+            accountUpdate2.orderId = "1112";
+            accountUpdate2.card = card;
+
+            litleBatchRequest.addAccountUpdate(accountUpdate2);
+            
+            litle.addBatch(litleBatchRequest);
+            string batchName = litle.sendToLitle();
+
+            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(0, 1 * 2));
+
+            litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreEqual("0", litleResponse.response);
+            Assert.AreEqual("Valid Format", litleResponse.message);
+
+            litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            while (litleBatchResponse != null)
+            {
+                accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                while (accountUpdateResponse != null)
+                {
+                    Assert.AreEqual("000", accountUpdateResponse.response);
+
+                    accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                }
+                litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            }
+        }
+
+        [Test]
         public void nullBatchData()
         {
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
@@ -456,7 +502,7 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "414100000000000000";
             card.expDate = "1210";
-            authorization.card = card; //This needs to compile      
+            authorization.card = card;       
 
             litleBatchRequest.addAuthorization(authorization);
             try

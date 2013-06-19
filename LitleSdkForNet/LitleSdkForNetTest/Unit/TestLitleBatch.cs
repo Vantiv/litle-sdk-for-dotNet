@@ -46,6 +46,73 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void testAccountUpdate()
+        {
+            accountUpdate accountUpdate = new accountUpdate();
+            accountUpdate.reportGroup = "Planets";
+            accountUpdate.orderId = "12344";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000002";
+            card.expDate = "1210";
+            accountUpdate.card = card;
+
+            var mockLitleResponse = new Mock<litleResponse>();
+            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
+            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+
+            accountUpdateResponse mockAccountUpdateResponse1 = new accountUpdateResponse();
+            mockAccountUpdateResponse1.litleTxnId = 123;
+            mockAccountUpdateResponse1.response = "000";
+            accountUpdateResponse mockAccountUpdateResponse2 = new accountUpdateResponse();
+            mockAccountUpdateResponse2.litleTxnId = 124;
+            mockAccountUpdateResponse2.response = "000";
+            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextAccountUpdateResponse())
+                .Returns(mockAccountUpdateResponse1)
+                .Returns(mockAccountUpdateResponse2)
+                .Returns((accountUpdateResponse)null);
+            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+
+            mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
+            litleResponse mockedLitleResponse = mockLitleResponse.Object;
+
+            mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
+
+            Communications mockedCommunication = mockCommunications.Object;
+            litle.setCommunication(mockedCommunication);
+
+            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+
+            litleFile mockedLitleFile = mockLitleFile.Object;
+            litle.setLitleFile(mockedLitleFile);
+
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            litleBatchRequest.setLitleFile(mockedLitleFile);
+            litleBatchRequest.addAccountUpdate(accountUpdate);
+            litleBatchRequest.addAccountUpdate(accountUpdate);
+            litle.addBatch(litleBatchRequest);
+
+            string batchFileName = litle.sendToLitle();
+            litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES", batchFileName);
+            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            accountUpdateResponse actualAccountUpdateResponse1 = actualLitleBatchResponse.nextAccountUpdateResponse();
+            accountUpdateResponse actualAccountUpdateResponse2 = actualLitleBatchResponse.nextAccountUpdateResponse();
+            accountUpdateResponse nullAccountUpdateResponse = actualLitleBatchResponse.nextAccountUpdateResponse();
+
+            Assert.AreSame(mockedLitleBatchResponse, actualLitleBatchResponse);
+            Assert.AreEqual(123, actualAccountUpdateResponse1.litleTxnId);
+            Assert.AreEqual("000", actualAccountUpdateResponse1.response);
+            Assert.AreEqual(124, actualAccountUpdateResponse2.litleTxnId);
+            Assert.AreEqual("000", actualAccountUpdateResponse2.response);
+            Assert.IsNull(nullAccountUpdateResponse);
+
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(mockFilePath, It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
+        }
+
+
+        [Test]
         public void testAuth()
         {
             authorization authorization = new authorization();

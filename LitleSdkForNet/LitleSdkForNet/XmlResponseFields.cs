@@ -98,7 +98,7 @@ namespace Litle.Sdk
 
         public virtual string Serialize()
         {
-            return "Please implement this";
+            throw new NotImplementedException();
         }
     }
 
@@ -4146,6 +4146,7 @@ namespace Litle.Sdk
         public string merchantId;
 
         private XmlReader originalXmlReader;
+        private XmlReader accountUpdateResponseReader;
         private XmlReader authorizationResponseReader;
         private XmlReader authReversalResponseReader;
         private XmlReader captureResponseReader;
@@ -4177,6 +4178,7 @@ namespace Litle.Sdk
             merchantId = reader.GetAttribute("merchantId");
 
             originalXmlReader = reader;
+            accountUpdateResponseReader = new XmlTextReader(filePath);
             authorizationResponseReader = new XmlTextReader(filePath);
             authReversalResponseReader = new XmlTextReader(filePath);
             captureResponseReader = new XmlTextReader(filePath);
@@ -4191,6 +4193,10 @@ namespace Litle.Sdk
             registerTokenResponseReader = new XmlTextReader(filePath);
             updateCardValidationNumOnTokenResponseReader = new XmlTextReader(filePath);
 
+            if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
+            {
+                accountUpdateResponseReader.Close();
+            }
             if (!authorizationResponseReader.ReadToFollowing("authorizationResponse"))
             {
                 authorizationResponseReader.Close();
@@ -4243,6 +4249,26 @@ namespace Litle.Sdk
             {
                 updateCardValidationNumOnTokenResponseReader.Close();
             }
+        }
+
+        virtual public accountUpdateResponse nextAccountUpdateResponse()
+        {
+            if (accountUpdateResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = accountUpdateResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(accountUpdateResponse));
+                StringReader reader = new StringReader(response);
+                accountUpdateResponse i = (accountUpdateResponse)serializer.Deserialize(reader);
+
+                if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
+                {
+                    accountUpdateResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
         }
 
         virtual public authorizationResponse nextAuthorizationResponse()
@@ -4515,6 +4541,35 @@ namespace Litle.Sdk
         public string response;
         public string message;
     }
+
+    [System.Serializable()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public class accountUpdateResponseCardTokenType : cardTokenType
+    {
+        public string bin;
+    }
+
+    [System.Serializable()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public class accountUpdateResponse : transactionTypeWithReportGroup
+    {
+        public long litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public string message;
+
+        //Optional child elements
+        public cardType updatedCard;
+        public cardType originalCard;
+        public accountUpdateResponseCardTokenType originalToken;
+        public accountUpdateResponseCardTokenType updatedToken;
+    }
+
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]

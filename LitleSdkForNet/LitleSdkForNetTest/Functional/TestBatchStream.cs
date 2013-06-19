@@ -438,7 +438,48 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
+        [Test]
+        public void accountUpdateBatch()
+        {
+            litleBatchRequest litleBatchRequest = new litleBatchRequest();
 
+            accountUpdate accountUpdate1 = new accountUpdate();
+            accountUpdate1.orderId = "1111";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            accountUpdate1.card = card;
+
+            litleBatchRequest.addAccountUpdate(accountUpdate1);
+
+            accountUpdate accountUpdate2 = new accountUpdate();
+            accountUpdate2.orderId = "1112";
+            accountUpdate2.card = card;
+
+            litleBatchRequest.addAccountUpdate(accountUpdate2);
+
+            litle.addBatch(litleBatchRequest);
+            litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreEqual("0", litleResponse.response);
+            Assert.AreEqual("Valid Format", litleResponse.message);
+
+            litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            while (litleBatchResponse != null)
+            {
+                accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                Assert.NotNull(accountUpdateResponse);
+                while (accountUpdateResponse != null)
+                {
+                    Assert.AreEqual("301", accountUpdateResponse.response);
+
+                    accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                }
+                litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            }
+        }
 
         [Test]
         public void nullBatchData()

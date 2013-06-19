@@ -201,7 +201,14 @@ namespace Litle.Sdk
             litleFile.AppendLineToFile(finalFilePath, xmlHeader);
             litleFile.AppendLineToFile(finalFilePath, authentication.Serialize());
 
-            litleFile.AppendFileToFile(finalFilePath, batchFilePath);
+            if (batchFilePath != null)
+            {
+                litleFile.AppendFileToFile(finalFilePath, batchFilePath);
+            }
+            else
+            {
+                throw new LitleOnlineException("No batch was added to the LitleBatch!");
+            }
 
             litleFile.AppendLineToFile(finalFilePath, xmlFooter);
 

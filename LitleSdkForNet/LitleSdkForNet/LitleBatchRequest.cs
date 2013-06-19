@@ -8,11 +8,7 @@ namespace Litle.Sdk
     public partial class litleBatchRequest
     {
         public string id;
-
         public string merchantId;
-
-        //TODO ask what is this
-        public int numAccountUpdates;
         public string reportGroup;
 
         public Dictionary<String, String> config;
@@ -23,6 +19,7 @@ namespace Litle.Sdk
         private litleTime litleTime;
 
         private int numAuthorization;
+        private int numAccountUpdates;
         private int numCapture;
         private int numCredit;
         private int numSale;
@@ -46,6 +43,8 @@ namespace Litle.Sdk
         private long sumOfEcheckCredit;
         private long sumOfEcheckVerification;
         private long sumOfCaptureGivenAuth;
+
+        private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
 
         public litleBatchRequest()
         {
@@ -112,6 +111,11 @@ namespace Litle.Sdk
         public int getNumAuthorization()
         {
             return numAuthorization;
+        }
+
+        public int getNumAccountUpdates()
+        {
+            return numAccountUpdates;
         }
 
         public int getNumCapture()
@@ -226,103 +230,208 @@ namespace Litle.Sdk
 
         public void addAuthorization(authorization authorization)
         {
-            numAuthorization++;
-            sumOfAuthorization += authorization.amount;
-            fillInReportGroup(authorization);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authorization);
+            if (numAccountUpdates == 0)
+            {
+                numAuthorization++;
+                sumOfAuthorization += authorization.amount;
+                fillInReportGroup(authorization);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authorization);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addCapture(capture capture)
         {
-            numCapture++;
-            sumOfCapture += capture.amount;
-            fillInReportGroup(capture);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, capture);
+            if (numAccountUpdates == 0)
+            {
+                numCapture++;
+                sumOfCapture += capture.amount;
+                fillInReportGroup(capture);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, capture);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addCredit(credit credit)
         {
-            numCredit++;
-            sumOfCredit += credit.amount;
-            fillInReportGroup(credit);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, credit);
+            if (numAccountUpdates == 0)
+            {
+                numCredit++;
+                sumOfCredit += credit.amount;
+                fillInReportGroup(credit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, credit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addSale(sale sale)
         {
-            numSale++;
-            sumOfSale += sale.amount;
-            fillInReportGroup(sale);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, sale);
+            if (numAccountUpdates == 0)
+            {
+                numSale++;
+                sumOfSale += sale.amount;
+                fillInReportGroup(sale);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, sale);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addAuthReversal(authReversal authReversal)
         {
-            numAuthReversal++;
-            sumOfAuthReversal += authReversal.amount;
-            fillInReportGroup(authReversal);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authReversal);
+            if (numAccountUpdates == 0)
+            {
+                numAuthReversal++;
+                sumOfAuthReversal += authReversal.amount;
+                fillInReportGroup(authReversal);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authReversal);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addEcheckCredit(echeckCredit echeckCredit)
         {
-            numEcheckCredit++;
-            sumOfEcheckCredit += echeckCredit.amount;
-            fillInReportGroup(echeckCredit);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckCredit);
+            if (numAccountUpdates == 0)
+            {
+                numEcheckCredit++;
+                sumOfEcheckCredit += echeckCredit.amount;
+                fillInReportGroup(echeckCredit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckCredit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addEcheckVerification(echeckVerification echeckVerification)
         {
-            numEcheckVerification++;
-            sumOfEcheckVerification += echeckVerification.amount;
-            fillInReportGroup(echeckVerification);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckVerification);
+            if (numAccountUpdates == 0)
+            {
+                numEcheckVerification++;
+                sumOfEcheckVerification += echeckVerification.amount;
+                fillInReportGroup(echeckVerification);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckVerification);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addEcheckSale(echeckSale echeckSale)
         {
-            numEcheckSale++;
-            sumOfEcheckSale += echeckSale.amount;
-            fillInReportGroup(echeckSale);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckSale);
+            if (numAccountUpdates == 0)
+            {
+                numEcheckSale++;
+                sumOfEcheckSale += echeckSale.amount;
+                fillInReportGroup(echeckSale);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckSale);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addRegisterTokenRequest(registerTokenRequestType registerTokenRequestType)
         {
-            numRegisterTokenRequest++;
-            fillInReportGroup(registerTokenRequestType);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, registerTokenRequestType);
+            if (numAccountUpdates == 0)
+            {
+                numRegisterTokenRequest++;
+                fillInReportGroup(registerTokenRequestType);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, registerTokenRequestType);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addForceCapture(forceCapture forceCapture)
         {
-            numForceCapture++;
-            sumOfForceCapture += forceCapture.amount;
-            fillInReportGroup(forceCapture);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, forceCapture);
+            if (numAccountUpdates == 0)
+            {
+                numForceCapture++;
+                sumOfForceCapture += forceCapture.amount;
+                fillInReportGroup(forceCapture);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, forceCapture);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addCaptureGivenAuth(captureGivenAuth captureGivenAuth)
         {
-            numCaptureGivenAuth++;
-            sumOfCaptureGivenAuth += captureGivenAuth.amount;
-            fillInReportGroup(captureGivenAuth);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, captureGivenAuth);
+            if (numAccountUpdates == 0)
+            {
+                numCaptureGivenAuth++;
+                sumOfCaptureGivenAuth += captureGivenAuth.amount;
+                fillInReportGroup(captureGivenAuth);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, captureGivenAuth);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addEcheckRedeposit(echeckRedeposit echeckRedeposit)
         {
-            numEcheckRedeposit++;
-            fillInReportGroup(echeckRedeposit);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckRedeposit);
+            if (numAccountUpdates == 0)
+            {
+                numEcheckRedeposit++;
+                fillInReportGroup(echeckRedeposit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckRedeposit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
         {
-            numUpdateCardValidationNumOnToken++;
-            fillInReportGroup(updateCardValidationNumOnToken);
-            tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, updateCardValidationNumOnToken);
+            if (numAccountUpdates == 0)
+            {
+                numUpdateCardValidationNumOnToken++;
+                fillInReportGroup(updateCardValidationNumOnToken);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, updateCardValidationNumOnToken);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addAccountUpdate(accountUpdate accountUpdate)
+        {
+            if (isOnlyAccountUpdates())
+            {
+                numAccountUpdates++;
+                fillInReportGroup(accountUpdate);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, accountUpdate);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
         }
 
         public String Serialize()
@@ -453,6 +562,25 @@ namespace Litle.Sdk
             {
                 txn.reportGroup = config["reportGroup"];
             }
+        }
+
+        private bool isOnlyAccountUpdates()
+        {
+            bool result = numAuthorization == 0
+                && numAuthReversal == 0
+                && numCapture == 0
+                && numCaptureGivenAuth == 0
+                && numCredit == 0
+                && numEcheckCredit == 0
+                && numEcheckRedeposit == 0
+                && numEcheckSale == 0
+                && numEcheckVerification == 0
+                && numForceCapture == 0
+                && numRegisterTokenRequest == 0
+                && numSale == 0
+                && numUpdateCardValidationNumOnToken == 0;
+
+            return result;
         }
     }
 
