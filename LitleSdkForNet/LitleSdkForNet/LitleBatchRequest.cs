@@ -587,6 +587,7 @@ namespace Litle.Sdk
     public class RFRRequest
     {
         public long litleSessionId;
+        public accountUpdateFileRequestData accountUpdateFileRequestData;
 
         private litleTime litleTime;
         private litleFile litleFile;
@@ -609,13 +610,23 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xmlHeader = "<RFRRequest>\r\n";
-            string xmlFooter = "</RFRRequest>\r\n";
+            string xmlHeader = "\r\n<RFRRequest>";
+            string xmlFooter = "\r\n</RFRRequest>";
 
             string filePath = litleFile.createRandomFile(null, litleTime, "_RFRRequest.xml");
 
-            string xmlBody = "<litleSessionId>" + litleSessionId + "</litleSessionId>\r\n";
+            string xmlBody = "";
 
+            if (accountUpdateFileRequestData != null)
+            {
+                xmlBody += "\r\n<accountUpdateFileRequestData>";
+                xmlBody += accountUpdateFileRequestData.Serialize();
+                xmlBody += "\r\n</accountUpdateFileRequestData>";
+            }
+            else
+            {
+                xmlBody += "\r\n<litleSessionId>" + litleSessionId + "</litleSessionId>";
+            }
             litleFile.AppendLineToFile(filePath, xmlHeader);
             litleFile.AppendLineToFile(filePath, xmlBody);
             litleFile.AppendLineToFile(filePath, xmlFooter);

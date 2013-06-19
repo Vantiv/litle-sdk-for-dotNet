@@ -115,9 +115,9 @@ namespace Litle.Sdk
                     tcpClient = new TcpClient { Client = socket };
                     sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
                 }
-                catch (SocketException)
+                catch (SocketException e)
                 {
-                    throw new LitleOnlineException("Error establishing a network connection");
+                    throw new LitleOnlineException("Error establishing a network connection", e);
                 }
 
             }
@@ -128,9 +128,9 @@ namespace Litle.Sdk
                     tcpClient = new TcpClient(url, port);
                     sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
                 }
-                catch (SocketException)
+                catch (SocketException e)
                 {
-                    throw new LitleOnlineException("Error establishing a network connection");
+                    throw new LitleOnlineException("Error establishing a network connection", e);
                 }
             }
 

@@ -2456,20 +2456,17 @@ namespace Litle.Sdk
 
     public class accountUpdateFileRequestData
     {
-        public string merchantId;
+        public string merchantId = Properties.Settings.Default.merchantId;
         public DateTime postDay; //YYYY-MM-DD
 
         public string Serialize()
         {
-            string xml = "\r\n<accountUpdateFileRequestData>";
-            xml += "\r\n<merchantId>" + merchantId + "</merchantId>";
+            string xml = "\r\n<merchantId>" + merchantId + "</merchantId>";
 
             if (postDay != null)
             {
                 xml += "\r\n<postDay>" + postDay.ToString("YYYY-MM-DD") + "<postDay>";
             }
-
-            xml += "\r\n</accountUpdateFileRequestData>";
 
             return xml;
         }
