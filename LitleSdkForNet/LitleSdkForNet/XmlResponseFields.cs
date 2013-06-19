@@ -4170,6 +4170,75 @@ namespace Litle.Sdk
             readXml(xmlReader, filePath);
         }
 
+        public void setAccountUpdateResponseReader(XmlReader xmlReader)
+        {
+            this.accountUpdateResponseReader = xmlReader;
+        }
+
+        public void setAuthorizationResponseReader(XmlReader xmlReader)
+        {
+            this.authorizationResponseReader = xmlReader;
+        }
+
+        public void setAuthReversalResponseReader(XmlReader xmlReader)
+        {
+            this.authReversalResponseReader = xmlReader;
+        }
+
+        public void setCaptureResponseReader(XmlReader xmlReader)
+        {
+            this.captureResponseReader = xmlReader;
+        }
+
+        public void setCaptureGivenAuthResponseReader(XmlReader xmlReader)
+        {
+            this.captureGivenAuthResponseReader = xmlReader;
+        }
+
+        public void setCreditResponseReader(XmlReader xmlReader)
+        {
+            this.accountUpdateResponseReader = xmlReader;
+        }
+
+        public void setForceCaptureResponseReader(XmlReader xmlReader)
+        {
+            this.forceCaptureResponseReader = xmlReader;
+        }
+
+        public void setEcheckCreditResponseReader(XmlReader xmlReader)
+        {
+            this.echeckCreditResponseReader = xmlReader;
+        }
+
+        public void setEcheckRedepositResponseReader(XmlReader xmlReader)
+        {
+            this.echeckRedepositResponseReader = xmlReader;
+        }
+
+        public void setEcheckSalesResponseReader(XmlReader xmlReader)
+        {
+            this.echeckSalesResponseReader = xmlReader;
+        }
+
+        public void setEcheckVerificationResponseReader(XmlReader xmlReader)
+        {
+            this.echeckVerificationResponseReader = xmlReader;
+        }
+
+        public void setSaleResponseReader(XmlReader xmlReader)
+        {
+            this.saleResponseReader = xmlReader;
+        }
+
+        public void setRegisterTokenResponseReader(XmlReader xmlReader)
+        {
+            this.registerTokenResponseReader = xmlReader;
+        }
+
+        public void setUpdateCardValidationNumOnTokenResponseReader(XmlReader xmlReader)
+        {
+            this.updateCardValidationNumOnTokenResponseReader = xmlReader;
+        }
 
         public void readXml(XmlReader reader, string filePath)
         {
