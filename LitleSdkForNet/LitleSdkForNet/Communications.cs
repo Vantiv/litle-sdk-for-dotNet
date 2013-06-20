@@ -144,6 +144,11 @@ namespace Litle.Sdk
                 throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed");
             }
 
+            if ("true".Equals(config["printxml"]))
+            {
+                Console.WriteLine("Using XML File: " + xmlRequestFilePath);
+            }
+
             using (FileStream readFileStream = new FileStream(xmlRequestFilePath, FileMode.Open))
             {
                 int bytesRead = -1;
@@ -153,11 +158,6 @@ namespace Litle.Sdk
                 {
                     byteBuffer = new byte[1024 * sizeof(char)];
                     bytesRead = readFileStream.Read(byteBuffer, 0, byteBuffer.Length);
-
-                    if ("true".Equals(config["printxml"]))
-                    {
-                        Console.Write(Encoding.UTF8.GetChars(byteBuffer));
-                    }
 
                     sslStream.Write(byteBuffer, 0, bytesRead);
                     sslStream.Flush();
@@ -169,6 +169,11 @@ namespace Litle.Sdk
             if (!Directory.Exists(destinationDirectory))
             {
                 Directory.CreateDirectory(destinationDirectory);
+            }
+
+            if ("true".Equals(config["printxml"]))
+            {
+                Console.WriteLine("Writing to XML File: " + xmlResponseDestinationDirectory);
             }
 
             using (FileStream writeFileStream = new FileStream(xmlResponseDestinationDirectory + batchName, FileMode.Create))
@@ -184,10 +189,6 @@ namespace Litle.Sdk
                     bytesRead = sslStream.Read(byteBuffer, 0, byteBuffer.Length);
                     charBuffer = Encoding.UTF8.GetChars(byteBuffer);
 
-                    if ("true".Equals(config["printxml"]))
-                    {
-                        Console.Write(charBuffer);
-                    }
                     writeFileStream.Write(byteBuffer, 0, bytesRead);
                 } while (bytesRead > 0);
             }

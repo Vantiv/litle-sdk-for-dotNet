@@ -135,14 +135,9 @@ namespace Litle.Sdk.Test.Unit
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            authorizationResponse mockAuthorizationResponse1 = new authorizationResponse();
-            mockAuthorizationResponse1.litleTxnId = 123;
-            authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
-            mockAuthorizationResponse2.litleTxnId = 124;
-
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
-                .Returns("<authorizationResponse id=\"\" reportGroup=\"Planets\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><orderId>12345</orderId><response>000</response><responseTime>2013-06-19T19:54:42</responseTime><message>Approved</message><authCode>123457</authCode><fraudResult><avsResult>00</avsResult></fraudResult><tokenResponse><litleToken>1711000103054242</litleToken><tokenResponseCode>802</tokenResponseCode><tokenMessage>Account number was previously registered</tokenMessage><type>VI</type><bin>424242</bin></tokenResponse></authorizationResponse>")
-             .Returns("<authorizationResponse id=\"\" reportGroup=\"Planets\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>124</litleTxnId><orderId>12345</orderId><response>000</response><responseTime>2013-06-19T19:54:42</responseTime><message>Approved</message><authCode>123457</authCode><fraudResult><avsResult>00</avsResult></fraudResult><tokenResponse><litleToken>1711000103054242</litleToken><tokenResponseCode>802</tokenResponseCode><tokenMessage>Account number was previously registered</tokenMessage><type>VI</type><bin>424242</bin></tokenResponse></authorizationResponse>");
+                .Returns("<authorizationResponse id=\"\" reportGroup=\"Planets\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><orderId>123</orderId><response>000</response><responseTime>2013-06-19T19:54:42</responseTime><message>Approved</message><authCode>123457</authCode><fraudResult><avsResult>00</avsResult></fraudResult><tokenResponse><litleToken>1711000103054242</litleToken><tokenResponseCode>802</tokenResponseCode><tokenMessage>Account number was previously registered</tokenMessage><type>VI</type><bin>424242</bin></tokenResponse></authorizationResponse>")
+             .Returns("<authorizationResponse id=\"\" reportGroup=\"Planets\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>124</litleTxnId><orderId>124</orderId><response>000</response><responseTime>2013-06-19T19:54:42</responseTime><message>Approved</message><authCode>123457</authCode><fraudResult><avsResult>00</avsResult></fraudResult><tokenResponse><litleToken>1711000103054242</litleToken><tokenResponseCode>802</tokenResponseCode><tokenMessage>Account number was previously registered</tokenMessage><type>VI</type><bin>424242</bin></tokenResponse></authorizationResponse>");
 
             litleBatchResponse mockLitleBatchResponse = new litleBatchResponse();
             mockLitleBatchResponse.setAuthorizationResponseReader(mockXmlReader.Object);
@@ -189,33 +184,27 @@ namespace Litle.Sdk.Test.Unit
             authreversal.payPalNotes = "Notes";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            authReversalResponse mockAuthReversalResponse1 = new authReversalResponse();
-            mockAuthReversalResponse1.litleTxnId = 123;
-            authReversalResponse mockAuthReversalResponse2 = new authReversalResponse();
-            mockAuthReversalResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<authReversalResponse id=\"123\" customerId=\"Customer Id\" reportGroup=\"Auth Reversals\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><orderId>abc123</orderId><response>000</response><responseTime>2011-08-30T13:15:43</responseTime><message>Approved</message></authReversalResponse>")
+             .Returns("<authReversalResponse id=\"123\" customerId=\"Customer Id\" reportGroup=\"Auth Reversals\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>124</litleTxnId><orderId>abc123</orderId><response>000</response><responseTime>2011-08-30T13:15:43</responseTime><message>Approved</message></authReversalResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextAuthReversalResponse())
-                .Returns(mockAuthReversalResponse1)
-                .Returns(mockAuthReversalResponse2)
-                .Returns((authReversalResponse)null);
+            litleBatchResponse mockLitleBatchResponse = new litleBatchResponse();
+            mockLitleBatchResponse.setAuthReversalResponseReader(mockXmlReader.Object);
 
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
-
-            mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
+            mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
 
-            Communications mockedCommunications = mockCommunications.Object;
-
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
+
+            Communications mockedCommunications = mockCommunications.Object;
+            litle.setCommunication(mockedCommunications);
+
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
 
             litleFile mockedLitleFile = mockLitleFile.Object;
-
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
             litleBatchRequest litleBatchRequest = new litleBatchRequest();
@@ -248,20 +237,14 @@ namespace Litle.Sdk.Test.Unit
             capture.amount = 106;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            captureResponse mockCaptureResponse1 = new captureResponse();
-            mockCaptureResponse1.litleTxnId = 123;
-            captureResponse mockCaptureResponse2 = new captureResponse();
-            mockCaptureResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+              .Returns("<captureResponse id=\"123\" reportGroup=\"RG27\" xmlns=\"http://www.litle.com/schema\"> <litleTxnId>123</litleTxnId> <orderId>12z58743y1</orderId> <response>000</response> <responseTime>2011-09-01T10:24:31</responseTime> <message>message</message> </captureResponse>")
+              .Returns("<captureResponse id=\"124\" reportGroup=\"RG27\" xmlns=\"http://www.litle.com/schema\"> <litleTxnId>124</litleTxnId> <orderId>12z58743y1</orderId> <response>000</response> <responseTime>2011-09-01T10:24:31</responseTime> <message>message</message> </captureResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextCaptureResponse())
-                .Returns(mockCaptureResponse1)
-                .Returns(mockCaptureResponse2)
-                .Returns((captureResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setCaptureResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -318,20 +301,14 @@ namespace Litle.Sdk.Test.Unit
             capturegivenauth.card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            captureGivenAuthResponse mockCaptureGivenAuthResponse1 = new captureGivenAuthResponse();
-            mockCaptureGivenAuthResponse1.litleTxnId = 123;
-            captureGivenAuthResponse mockCaptureGivenAuthResponse2 = new captureGivenAuthResponse();
-            mockCaptureGivenAuthResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<captureGivenAuthResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></captureGivenAuthResponse>")
+                .Returns("<captureGivenAuthResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></captureGivenAuthResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextCaptureGivenAuthResponse())
-                .Returns(mockCaptureGivenAuthResponse1)
-                .Returns(mockCaptureGivenAuthResponse2)
-                .Returns((captureGivenAuthResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setCaptureGivenAuthResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -383,20 +360,14 @@ namespace Litle.Sdk.Test.Unit
             credit.card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            creditResponse mockCreditResponse1 = new creditResponse();
-            mockCreditResponse1.litleTxnId = 123;
-            creditResponse mockCreditResponse2 = new creditResponse();
-            mockCreditResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<creditResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></creditResponse>")
+                .Returns("<creditResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></creditResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextCreditResponse())
-                .Returns(mockCreditResponse1)
-                .Returns(mockCreditResponse2)
-                .Returns((creditResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setCreditResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -442,20 +413,14 @@ namespace Litle.Sdk.Test.Unit
             echeckcredit.litleTxnId = 123456789101112;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            echeckCreditResponse mockEcheckCreditResponse1 = new echeckCreditResponse();
-            mockEcheckCreditResponse1.litleTxnId = 123;
-            echeckCreditResponse mockEcheckCreditResponse2 = new echeckCreditResponse();
-            mockEcheckCreditResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<echeckCreditResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckCreditResponse>")
+                .Returns("<echeckCreditResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></echeckCreditResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextEcheckCreditResponse())
-                .Returns(mockEcheckCreditResponse1)
-                .Returns(mockEcheckCreditResponse2)
-                .Returns((echeckCreditResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setEcheckCreditResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -500,20 +465,14 @@ namespace Litle.Sdk.Test.Unit
             echeckredeposit.litleTxnId = 123456;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            echeckRedepositResponse mockEcheckRedepositResponse1 = new echeckRedepositResponse();
-            mockEcheckRedepositResponse1.litleTxnId = 123;
-            echeckRedepositResponse mockEcheckRedepositResponse2 = new echeckRedepositResponse();
-            mockEcheckRedepositResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<echeckRedepositResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckRedepositResponse>")
+                .Returns("<echeckRedepositResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></echeckRedepositResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextEcheckRedepositResponse())
-                .Returns(mockEcheckRedepositResponse1)
-                .Returns(mockEcheckRedepositResponse2)
-                .Returns((echeckRedepositResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setEcheckRedepositResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -572,20 +531,14 @@ namespace Litle.Sdk.Test.Unit
             echecksale.billToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            echeckSalesResponse mockEcheckSalesResponse1 = new echeckSalesResponse();
-            mockEcheckSalesResponse1.litleTxnId = 123;
-            echeckSalesResponse mockEcheckSalesResponse2 = new echeckSalesResponse();
-            mockEcheckSalesResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<echeckSalesResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckSalesResponse>")
+                .Returns("<echeckSalesResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></echeckSalesResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextEcheckSalesResponse())
-                .Returns(mockEcheckSalesResponse1)
-                .Returns(mockEcheckSalesResponse2)
-                .Returns((echeckSalesResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setEcheckSalesResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -644,20 +597,14 @@ namespace Litle.Sdk.Test.Unit
             echeckverification.billToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            echeckVerificationResponse mockEcheckVerificationResponse1 = new echeckVerificationResponse();
-            mockEcheckVerificationResponse1.litleTxnId = 123;
-            echeckVerificationResponse mockEcheckVerificationResponse2 = new echeckVerificationResponse();
-            mockEcheckVerificationResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<echeckVerificationResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckVerificationResponse>")
+                .Returns("<echeckVerificationResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></echeckVerificationResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextEcheckVerificationResponse())
-                .Returns(mockEcheckVerificationResponse1)
-                .Returns(mockEcheckVerificationResponse2)
-                .Returns((echeckVerificationResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setEcheckVerificationResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -709,20 +656,14 @@ namespace Litle.Sdk.Test.Unit
             forcecapture.card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            forceCaptureResponse mockForceCaptureResponse1 = new forceCaptureResponse();
-            mockForceCaptureResponse1.litleTxnId = 123;
-            forceCaptureResponse mockForceCaptureResponse2 = new forceCaptureResponse();
-            mockForceCaptureResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<forceCaptureResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></forceCaptureResponse>")
+                .Returns("<forceCaptureResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></forceCaptureResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextForceCaptureResponse())
-                .Returns(mockForceCaptureResponse1)
-                .Returns(mockForceCaptureResponse2)
-                .Returns((forceCaptureResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setForceCaptureResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -774,20 +715,14 @@ namespace Litle.Sdk.Test.Unit
             sale.card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            saleResponse mockSaleResponse1 = new saleResponse();
-            mockSaleResponse1.litleTxnId = 123;
-            saleResponse mockSaleResponse2 = new saleResponse();
-            mockSaleResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<saleResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></saleResponse>")
+                .Returns("<saleResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></saleResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextSaleResponse())
-                .Returns(mockSaleResponse1)
-                .Returns(mockSaleResponse2)
-                .Returns((saleResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setSaleResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -833,20 +768,14 @@ namespace Litle.Sdk.Test.Unit
             token.accountNumber = "1233456789103801";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            registerTokenResponse mockRegisterTokenResponse1 = new registerTokenResponse();
-            mockRegisterTokenResponse1.litleTxnId = 123;
-            registerTokenResponse mockRegisterTokenResponse2 = new registerTokenResponse();
-            mockRegisterTokenResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<registerTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></registerTokenResponse>")
+                .Returns("<registerTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></registerTokenResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextRegisterTokenResponse())
-                .Returns(mockRegisterTokenResponse1)
-                .Returns(mockRegisterTokenResponse2)
-                .Returns((registerTokenResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setRegisterTokenResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -892,20 +821,14 @@ namespace Litle.Sdk.Test.Unit
             updateCardValidationNumOnToken.litleToken = "123";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            updateCardValidationNumOnTokenResponse mockUpdateCardValidationNumOnTokenResponse1 = new updateCardValidationNumOnTokenResponse();
-            mockUpdateCardValidationNumOnTokenResponse1.litleTxnId = 123;
-            updateCardValidationNumOnTokenResponse mockUpdateCardValidationNumOnTokenResponse2 = new updateCardValidationNumOnTokenResponse();
-            mockUpdateCardValidationNumOnTokenResponse2.litleTxnId = 124;
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<updateCardValidationNumOnTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></updateCardValidationNumOnTokenResponse>")
+                .Returns("<updateCardValidationNumOnTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></updateCardValidationNumOnTokenResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse())
-                .Returns(mockUpdateCardValidationNumOnTokenResponse1)
-                .Returns(mockUpdateCardValidationNumOnTokenResponse2)
-                .Returns((updateCardValidationNumOnTokenResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setUpdateCardValidationNumOnTokenResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -989,6 +912,7 @@ namespace Litle.Sdk.Test.Unit
                 litle.setLitleFile(mockedLitleFile);
                 litleBatchRequest litleBatchRequest = new litleBatchRequest();
                 litleBatchRequest.setLitleFile(mockedLitleFile);
+
                 litleBatchRequest.addAuthorization(authorization);
                 litleBatchRequest.addAuthorization(authorization);
                 litle.addBatch(litleBatchRequest);
@@ -1034,6 +958,7 @@ namespace Litle.Sdk.Test.Unit
                 litle.setLitleFile(mockedLitleFile);
                 litleBatchRequest litleBatchRequest = new litleBatchRequest();
                 litleBatchRequest.setLitleFile(mockedLitleFile);
+
                 litleBatchRequest.addAuthorization(authorization);
                 litleBatchRequest.addAuthorization(authorization);
                 litle.addBatch(litleBatchRequest);
@@ -1061,22 +986,14 @@ namespace Litle.Sdk.Test.Unit
             authorization.card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
-            authorizationResponse mockAuthorizationResponse1 = new authorizationResponse();
-            mockAuthorizationResponse1.litleTxnId = 123;
-            mockAuthorizationResponse1.reportGroup = "Default Report Group";
-            authorizationResponse mockAuthorizationResponse2 = new authorizationResponse();
-            mockAuthorizationResponse2.litleTxnId = 124;
-            mockAuthorizationResponse2.reportGroup = "Default Report Group";
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns("<authorizationResponse reportGroup=\"Default Report Group\" xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></authorizationResponse>")
+                .Returns("<authorizationResponse reportGroup=\"Default Report Group\" xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></authorizationResponse>");
 
-            mockLitleBatchResponse.SetupSequence(litleBatchResponse => litleBatchResponse.nextAuthorizationResponse())
-                .Returns(mockAuthorizationResponse1)
-                .Returns(mockAuthorizationResponse2)
-                .Returns((authorizationResponse)null);
-
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            mockedLitleBatchResponse.setUpdateCardValidationNumOnTokenResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -1111,6 +1028,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("Default Report Group", actualAuthorizationResponse2.reportGroup);
             Assert.IsNull(nullAuthorizationResponse);
 
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsRegex(".*reportGroup=\"Default Report Group\".*", RegexOptions.Singleline)));
             mockCommunications.Verify(Communications => Communications.FtpDropOff(mockFilePath, It.IsAny<Dictionary<String, String>>()));
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
@@ -1152,15 +1070,15 @@ namespace Litle.Sdk.Test.Unit
             RFRRequest rfrRequest = new RFRRequest();
             rfrRequest.litleSessionId = 123456789;
 
-            RFRResponse mockedRFRResponse = new RFRResponse();
-            mockedRFRResponse.response = "0";
-            mockedRFRResponse.message = "Testing";
+            var mockBatchXmlReader = new Mock<XmlReader>();
+            mockBatchXmlReader.Setup(XmlReader => XmlReader.ReadState).Returns(ReadState.Closed);
+            
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadState).Returns(ReadState.Interactive).Returns(ReadState.Closed);
+            mockXmlReader.Setup(XmlReader => XmlReader.ReadOuterXml()).Returns("<RFRResponse response=\"1\" message=\"The account update file is not ready yet. Please try again later.\" xmlns='http://www.litle.com/schema'> </RFRResponse>");
 
-            var mockLitleResponse = new Mock<litleResponse>();
-            mockLitleResponse.SetupSequence(litleResponse => litleResponse.nextRFRResponse())
-                .Returns(mockedRFRResponse)
-                .Returns((RFRResponse)null);
-            litleResponse mockedLitleResponse = mockLitleResponse.Object;
+            litleResponse mockedLitleResponse = new litleResponse();
+            mockedLitleResponse.setRfrResponseReader(mockXmlReader.Object);
+            mockedLitleResponse.setBatchResponseReader(mockBatchXmlReader.Object);
 
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
@@ -1187,8 +1105,9 @@ namespace Litle.Sdk.Test.Unit
             RFRResponse actualRFRResponse = actualLitleResponse.nextRFRResponse();
             RFRResponse nullRFRResponse = actualLitleResponse.nextRFRResponse();
 
-            Assert.AreEqual("0", actualRFRResponse.response);
-            Assert.AreEqual("Testing", actualRFRResponse.message);
+            Assert.IsNotNull(actualRFRResponse);
+            Assert.AreEqual("1", actualRFRResponse.response);
+            Assert.AreEqual("The account update file is not ready yet. Please try again later.", actualRFRResponse.message);
             Assert.IsNull(nullLitleBatchResponse);
             Assert.IsNull(nullRFRResponse);
 

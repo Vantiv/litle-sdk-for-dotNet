@@ -4074,6 +4074,16 @@ namespace Litle.Sdk
             readXml(reader, filePath);
         }
 
+        public void setBatchResponseReader(XmlReader xmlReader)
+        {
+            this.batchResponseReader = xmlReader;
+        }
+
+        public void setRfrResponseReader(XmlReader xmlReader)
+        {
+            this.rfrResponseReader = xmlReader;
+        }
+
         public void readXml(XmlReader reader, string filePath)
         {
             if (reader.ReadToFollowing("litleResponse"))
@@ -4100,7 +4110,7 @@ namespace Litle.Sdk
 
         virtual public litleBatchResponse nextLitleBatchResponse()
         {
-            if (batchResponseReader.ReadState != ReadState.Closed && batchResponseReader.LocalName == "batchResponse")
+            if (batchResponseReader.ReadState != ReadState.Closed)
             {
                 litleBatchResponse litleBatchResponse = new litleBatchResponse(batchResponseReader, filePath);
                 if (!batchResponseReader.ReadToFollowing("batchResponse"))
@@ -4116,7 +4126,7 @@ namespace Litle.Sdk
 
         virtual public RFRResponse nextRFRResponse()
         {
-            if (rfrResponseReader.ReadState != ReadState.Closed && rfrResponseReader.LocalName == "RFRResponse")
+            if (rfrResponseReader.ReadState != ReadState.Closed)
             {
                 string response = rfrResponseReader.ReadOuterXml();
                 XmlSerializer serializer = new XmlSerializer(typeof(RFRResponse));
@@ -4197,7 +4207,7 @@ namespace Litle.Sdk
 
         public void setCreditResponseReader(XmlReader xmlReader)
         {
-            this.accountUpdateResponseReader = xmlReader;
+            this.creditResponseReader = xmlReader;
         }
 
         public void setForceCaptureResponseReader(XmlReader xmlReader)
@@ -4607,7 +4617,9 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class RFRResponse
     {
+        [XmlAttribute]
         public string response;
+        [XmlAttribute]
         public string message;
     }
 

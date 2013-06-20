@@ -480,7 +480,7 @@ namespace Litle.Sdk.Test.Functional
                 accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
                 while (accountUpdateResponse != null)
                 {
-                    Assert.AreEqual("000", accountUpdateResponse.response);
+                    Assert.AreEqual("301", accountUpdateResponse.response);
 
                     accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
                 }

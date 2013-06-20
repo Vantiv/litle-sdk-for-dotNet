@@ -50,9 +50,9 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.AreEqual(mockFilePath, rfrRequest.Serialize());
 
-            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "<RFRRequest>\r\n"));
-            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "<litleSessionId>123456789</litleSessionId>\r\n"));
-            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "</RFRRequest>\r\n"));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n<RFRRequest>"));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n<litleSessionId>123456789</litleSessionId>"));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n</RFRRequest>"));
         }
     }
 }
