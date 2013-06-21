@@ -1,0 +1,51 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Litle.Sdk.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.testlitle.com/sandbox/communicator/online</Value>
+    </Setting>
+    <Setting Name="reportGroup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default Report Group</Value>
+    </Setting>
+    <Setting Name="username" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="printxml" Type="System.String" Scope="User">
+      <Value Profile="(Default)">false</Value>
+    </Setting>
+    <Setting Name="timeout" Type="System.String" Scope="User">
+      <Value Profile="(Default)">65</Value>
+    </Setting>
+    <Setting Name="proxyHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="proxyPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="merchantId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">101</Value>
+    </Setting>
+    <Setting Name="sftpUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cert.litle.com</Value>
+    </Setting>
+    <Setting Name="knownHostsFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">knownhosts</Value>
+    </Setting>
+    <Setting Name="sftpUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="sftpPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="onlineBatchUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cert.litle.com</Value>
+    </Setting>
+    <Setting Name="onlineBatchPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">15000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

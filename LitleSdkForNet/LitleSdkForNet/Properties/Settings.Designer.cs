@@ -133,13 +133,25 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sftp://litle.com/something")]
+        [global::System.Configuration.DefaultSettingValueAttribute("cert.litle.com")]
         public string sftpUrl {
             get {
                 return ((string)(this["sftpUrl"]));
             }
             set {
                 this["sftpUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("knownhosts")]
+        public string knownHostsFile {
+            get {
+                return ((string)(this["knownHostsFile"]));
+            }
+            set {
+                this["knownHostsFile"] = value;
             }
         }
         
@@ -166,17 +178,6 @@ namespace Litle.Sdk.Properties {
                 this["sftpPassword"] = value;
             }
         }
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("knownhosts")]
-        public string knownHostsFile {
-            get {
-                return ((string)(this["knownHostsFile"]));
-            }
-            set {
-                this["knownHostsFile"] = value;
-            }
-        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -188,7 +189,7 @@ namespace Litle.Sdk.Properties {
             set {
                 this["onlineBatchUrl"] = value;
             }
-        }  
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

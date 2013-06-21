@@ -236,7 +236,7 @@ namespace Litle.Sdk
             {
                 string currentPath = Environment.CurrentDirectory.ToString();
                 string parentPath = Directory.GetParent(currentPath).ToString();
-                string directoryPath = parentPath + "/batches/";
+                string directoryPath = parentPath + "/Requests/";
 
                 if (!Directory.Exists(directoryPath))
                 {
