@@ -101,7 +101,7 @@ namespace Litle.Sdk
             this.litleFile = litleFile;
         }
 
-        public void addBatch(litleBatchRequest litleBatchRequest)
+        public void addBatch(batchRequest litleBatchRequest)
         {
             if (numOfRFRRequest != 0)
             {
@@ -164,7 +164,7 @@ namespace Litle.Sdk
             return litleResponse;
         }
 
-        public string SerializeBatchRequestToFile(litleBatchRequest litleBatchRequest, string filePath)
+        public string SerializeBatchRequestToFile(batchRequest litleBatchRequest, string filePath)
         {
 
             filePath = litleFile.createRandomFile(filePath, litleTime, "_temp_litleRequest.xml");
@@ -217,7 +217,7 @@ namespace Litle.Sdk
             return filePath;
         }
 
-        private void fillInReportGroup(litleBatchRequest litleBatchRequest)
+        private void fillInReportGroup(batchRequest litleBatchRequest)
         {
             if (litleBatchRequest.reportGroup == null)
             {

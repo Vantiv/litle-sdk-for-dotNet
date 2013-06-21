@@ -64,7 +64,7 @@ namespace Litle.Sdk.Test.Unit
             accountUpdate.card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
+            var mockLitleBatchResponse = new Mock<batchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
             accountUpdateResponse mockAccountUpdateResponse1 = new accountUpdateResponse();
@@ -77,7 +77,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockAccountUpdateResponse1)
                 .Returns(mockAccountUpdateResponse2)
                 .Returns((accountUpdateResponse)null);
-            litleBatchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
+            batchResponse mockedLitleBatchResponse = mockLitleBatchResponse.Object;
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -93,7 +93,7 @@ namespace Litle.Sdk.Test.Unit
             litleFile mockedLitleFile = mockLitleFile.Object;
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addAccountUpdate(accountUpdate);
             litleBatchRequest.addAccountUpdate(accountUpdate);
@@ -101,7 +101,7 @@ namespace Litle.Sdk.Test.Unit
 
             string batchFileName = litle.sendToLitle();
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             accountUpdateResponse actualAccountUpdateResponse1 = actualLitleBatchResponse.nextAccountUpdateResponse();
             accountUpdateResponse actualAccountUpdateResponse2 = actualLitleBatchResponse.nextAccountUpdateResponse();
             accountUpdateResponse nullAccountUpdateResponse = actualLitleBatchResponse.nextAccountUpdateResponse();
@@ -139,7 +139,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<authorizationResponse id=\"\" reportGroup=\"Planets\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><orderId>123</orderId><response>000</response><responseTime>2013-06-19T19:54:42</responseTime><message>Approved</message><authCode>123457</authCode><fraudResult><avsResult>00</avsResult></fraudResult><tokenResponse><litleToken>1711000103054242</litleToken><tokenResponseCode>802</tokenResponseCode><tokenMessage>Account number was previously registered</tokenMessage><type>VI</type><bin>424242</bin></tokenResponse></authorizationResponse>")
              .Returns("<authorizationResponse id=\"\" reportGroup=\"Planets\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>124</litleTxnId><orderId>124</orderId><response>000</response><responseTime>2013-06-19T19:54:42</responseTime><message>Approved</message><authCode>123457</authCode><fraudResult><avsResult>00</avsResult></fraudResult><tokenResponse><litleToken>1711000103054242</litleToken><tokenResponseCode>802</tokenResponseCode><tokenMessage>Account number was previously registered</tokenMessage><type>VI</type><bin>424242</bin></tokenResponse></authorizationResponse>");
 
-            litleBatchResponse mockLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockLitleBatchResponse = new batchResponse();
             mockLitleBatchResponse.setAuthorizationResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockLitleBatchResponse);
@@ -156,7 +156,7 @@ namespace Litle.Sdk.Test.Unit
             litleFile mockedLitleFile = mockLitleFile.Object;
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addAuthorization(authorization);
             litleBatchRequest.addAuthorization(authorization);
@@ -164,7 +164,7 @@ namespace Litle.Sdk.Test.Unit
 
             string batchFileName = litle.sendToLitle();
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
             Assert.AreEqual(123, actualLitleBatchResponse.nextAuthorizationResponse().litleTxnId);
@@ -190,7 +190,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<authReversalResponse id=\"123\" customerId=\"Customer Id\" reportGroup=\"Auth Reversals\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><orderId>abc123</orderId><response>000</response><responseTime>2011-08-30T13:15:43</responseTime><message>Approved</message></authReversalResponse>")
              .Returns("<authReversalResponse id=\"123\" customerId=\"Customer Id\" reportGroup=\"Auth Reversals\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>124</litleTxnId><orderId>abc123</orderId><response>000</response><responseTime>2011-08-30T13:15:43</responseTime><message>Approved</message></authReversalResponse>");
 
-            litleBatchResponse mockLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockLitleBatchResponse = new batchResponse();
             mockLitleBatchResponse.setAuthReversalResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockLitleBatchResponse);
@@ -207,7 +207,7 @@ namespace Litle.Sdk.Test.Unit
             litleFile mockedLitleFile = mockLitleFile.Object;
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addAuthReversal(authreversal);
             litleBatchRequest.addAuthReversal(authreversal);
@@ -216,7 +216,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             authReversalResponse actualAuthReversalResponse1 = actualLitleBatchResponse.nextAuthReversalResponse();
             authReversalResponse actualAuthReversalResponse2 = actualLitleBatchResponse.nextAuthReversalResponse();
             authReversalResponse nullAuthReversalResponse = actualLitleBatchResponse.nextAuthReversalResponse();
@@ -243,7 +243,7 @@ namespace Litle.Sdk.Test.Unit
               .Returns("<captureResponse id=\"123\" reportGroup=\"RG27\" xmlns=\"http://www.litle.com/schema\"> <litleTxnId>123</litleTxnId> <orderId>12z58743y1</orderId> <response>000</response> <responseTime>2011-09-01T10:24:31</responseTime> <message>message</message> </captureResponse>")
               .Returns("<captureResponse id=\"124\" reportGroup=\"RG27\" xmlns=\"http://www.litle.com/schema\"> <litleTxnId>124</litleTxnId> <orderId>12z58743y1</orderId> <response>000</response> <responseTime>2011-09-01T10:24:31</responseTime> <message>message</message> </captureResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setCaptureResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -260,7 +260,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addCapture(capture);
             litleBatchRequest.addCapture(capture);
@@ -269,7 +269,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             captureResponse actualCaptureResponse1 = actualLitleBatchResponse.nextCaptureResponse();
             captureResponse actualCaptureResponse2 = actualLitleBatchResponse.nextCaptureResponse();
             captureResponse nullCaptureResponse = actualLitleBatchResponse.nextCaptureResponse();
@@ -307,7 +307,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<captureGivenAuthResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></captureGivenAuthResponse>")
                 .Returns("<captureGivenAuthResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></captureGivenAuthResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setCaptureGivenAuthResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -324,7 +324,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
             litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
@@ -333,7 +333,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             captureGivenAuthResponse actualCaptureGivenAuthReponse1 = actualLitleBatchResponse.nextCaptureGivenAuthResponse();
             captureGivenAuthResponse actualCaptureGivenAuthReponse2 = actualLitleBatchResponse.nextCaptureGivenAuthResponse();
             captureGivenAuthResponse nullCaptureGivenAuthReponse = actualLitleBatchResponse.nextCaptureGivenAuthResponse();
@@ -366,7 +366,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<creditResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></creditResponse>")
                 .Returns("<creditResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></creditResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setCreditResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -383,7 +383,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addCredit(credit);
             litleBatchRequest.addCredit(credit);
@@ -392,7 +392,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             creditResponse actualCreditReponse1 = actualLitleBatchResponse.nextCreditResponse();
             creditResponse actualCreditReponse2 = actualLitleBatchResponse.nextCreditResponse();
             creditResponse nullCreditReponse1 = actualLitleBatchResponse.nextCreditResponse();
@@ -419,7 +419,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<echeckCreditResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckCreditResponse>")
                 .Returns("<echeckCreditResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></echeckCreditResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setEcheckCreditResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -436,7 +436,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addEcheckCredit(echeckcredit);
             litleBatchRequest.addEcheckCredit(echeckcredit);
@@ -445,7 +445,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             echeckCreditResponse actualEcheckCreditResponse1 = actualLitleBatchResponse.nextEcheckCreditResponse();
             echeckCreditResponse actualEcheckCreditResponse2 = actualLitleBatchResponse.nextEcheckCreditResponse();
             echeckCreditResponse nullEcheckCreditResponse = actualLitleBatchResponse.nextEcheckCreditResponse();
@@ -471,7 +471,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<echeckRedepositResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckRedepositResponse>")
                 .Returns("<echeckRedepositResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></echeckRedepositResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setEcheckRedepositResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -488,7 +488,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addEcheckRedeposit(echeckredeposit);
             litleBatchRequest.addEcheckRedeposit(echeckredeposit);
@@ -497,7 +497,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             echeckRedepositResponse actualEcheckRedepositResponse1 = actualLitleBatchResponse.nextEcheckRedepositResponse();
             echeckRedepositResponse actualEcheckRedepositResponse2 = actualLitleBatchResponse.nextEcheckRedepositResponse();
             echeckRedepositResponse nullEcheckRedepositResponse = actualLitleBatchResponse.nextEcheckRedepositResponse();
@@ -537,7 +537,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<echeckSalesResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckSalesResponse>")
                 .Returns("<echeckSalesResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></echeckSalesResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setEcheckSalesResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -554,7 +554,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addEcheckSale(echecksale);
             litleBatchRequest.addEcheckSale(echecksale);
@@ -563,7 +563,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             echeckSalesResponse actualEcheckSalesResponse1 = actualLitleBatchResponse.nextEcheckSalesResponse();
             echeckSalesResponse actualEcheckSalesResponse2 = actualLitleBatchResponse.nextEcheckSalesResponse();
             echeckSalesResponse nullEcheckSalesResponse = actualLitleBatchResponse.nextEcheckSalesResponse();
@@ -603,7 +603,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<echeckVerificationResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckVerificationResponse>")
                 .Returns("<echeckVerificationResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></echeckVerificationResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setEcheckVerificationResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -620,7 +620,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addEcheckVerification(echeckverification);
             litleBatchRequest.addEcheckVerification(echeckverification);
@@ -629,7 +629,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             echeckVerificationResponse actualEcheckVerificationResponse1 = actualLitleBatchResponse.nextEcheckVerificationResponse();
             echeckVerificationResponse actualEcheckVerificationResponse2 = actualLitleBatchResponse.nextEcheckVerificationResponse();
             echeckVerificationResponse nullEcheckVerificationResponse = actualLitleBatchResponse.nextEcheckVerificationResponse();
@@ -662,7 +662,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<forceCaptureResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></forceCaptureResponse>")
                 .Returns("<forceCaptureResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></forceCaptureResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setForceCaptureResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -679,7 +679,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addForceCapture(forcecapture);
             litleBatchRequest.addForceCapture(forcecapture);
@@ -688,7 +688,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             forceCaptureResponse actualForceCaptureResponse1 = actualLitleBatchResponse.nextForceCaptureResponse();
             forceCaptureResponse actualForceCaptureResponse2 = actualLitleBatchResponse.nextForceCaptureResponse();
             forceCaptureResponse nullForceCaptureResponse = actualLitleBatchResponse.nextForceCaptureResponse();
@@ -721,7 +721,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<saleResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></saleResponse>")
                 .Returns("<saleResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></saleResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setSaleResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -738,7 +738,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addSale(sale);
             litleBatchRequest.addSale(sale);
@@ -747,7 +747,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             saleResponse actualSaleResponse1 = actualLitleBatchResponse.nextSaleResponse();
             saleResponse actualSaleResponse2 = actualLitleBatchResponse.nextSaleResponse();
             saleResponse nullSaleResponse = actualLitleBatchResponse.nextSaleResponse();
@@ -774,7 +774,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<registerTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></registerTokenResponse>")
                 .Returns("<registerTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></registerTokenResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setRegisterTokenResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -791,7 +791,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addRegisterTokenRequest(token);
             litleBatchRequest.addRegisterTokenRequest(token);
@@ -800,7 +800,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             registerTokenResponse actualRegisterTokenResponse1 = actualLitleBatchResponse.nextRegisterTokenResponse();
             registerTokenResponse actualRegisterTokenResponse2 = actualLitleBatchResponse.nextRegisterTokenResponse();
             registerTokenResponse nullRegisterTokenResponse = actualLitleBatchResponse.nextRegisterTokenResponse();
@@ -827,7 +827,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<updateCardValidationNumOnTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></updateCardValidationNumOnTokenResponse>")
                 .Returns("<updateCardValidationNumOnTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></updateCardValidationNumOnTokenResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
+            batchResponse mockedLitleBatchResponse = new batchResponse();
             mockedLitleBatchResponse.setUpdateCardValidationNumOnTokenResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
@@ -844,7 +844,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
@@ -853,7 +853,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             updateCardValidationNumOnTokenResponse actualUpdateCardValidationNumOnTokenResponse1 = actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
             updateCardValidationNumOnTokenResponse actualUpdateCardValidationNumOnTokenResponse2 = actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
             updateCardValidationNumOnTokenResponse nullUpdateCardValidationNumOnTokenResponse = actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
@@ -881,7 +881,7 @@ namespace Litle.Sdk.Test.Unit
             authorization.card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleBatchResponse = new Mock<litleBatchResponse>();
+            var mockLitleBatchResponse = new Mock<batchResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
             authorizationResponse mockAuthorizationResponse1 = new authorizationResponse();
@@ -910,7 +910,7 @@ namespace Litle.Sdk.Test.Unit
                 litle.setCommunication(mockedCommunications);
                 litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
                 litle.setLitleFile(mockedLitleFile);
-                litleBatchRequest litleBatchRequest = new litleBatchRequest();
+                batchRequest litleBatchRequest = new batchRequest();
                 litleBatchRequest.setLitleFile(mockedLitleFile);
 
                 litleBatchRequest.addAuthorization(authorization);
@@ -956,7 +956,7 @@ namespace Litle.Sdk.Test.Unit
                 litle.setCommunication(mockedCommunications);
                 litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
                 litle.setLitleFile(mockedLitleFile);
-                litleBatchRequest litleBatchRequest = new litleBatchRequest();
+                batchRequest litleBatchRequest = new batchRequest();
                 litleBatchRequest.setLitleFile(mockedLitleFile);
 
                 litleBatchRequest.addAuthorization(authorization);
@@ -992,8 +992,8 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<authorizationResponse reportGroup=\"Default Report Group\" xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></authorizationResponse>")
                 .Returns("<authorizationResponse reportGroup=\"Default Report Group\" xmlns='http://www.litle.com/schema'><litleTxnId>124</litleTxnId></authorizationResponse>");
 
-            litleBatchResponse mockedLitleBatchResponse = new litleBatchResponse();
-            mockedLitleBatchResponse.setUpdateCardValidationNumOnTokenResponseReader(mockXmlReader.Object);
+            batchResponse mockedLitleBatchResponse = new batchResponse();
+            mockedLitleBatchResponse.setAuthorizationResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextLitleBatchResponse()).Returns(mockedLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -1008,7 +1008,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunications);
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addAuthorization(authorization);
             litleBatchRequest.addAuthorization(authorization);
@@ -1017,7 +1017,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             authorizationResponse actualAuthorizationResponse1 = actualLitleBatchResponse.nextAuthorizationResponse();
             authorizationResponse actualAuthorizationResponse2 = actualLitleBatchResponse.nextAuthorizationResponse();
             authorizationResponse nullAuthorizationResponse = actualLitleBatchResponse.nextAuthorizationResponse();
@@ -1052,7 +1052,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleTime(mockedLitleTime);
             litle.setLitleFile(mockedLitleFile);
 
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addAuthorization(authorization);
             litle.addBatch(litleBatchRequest);
@@ -1101,7 +1101,7 @@ namespace Litle.Sdk.Test.Unit
             string batchFileName = litle.sendToLitle();
 
             litleResponse actualLitleResponse = litle.receiveFromLitle("C:\\RESPONSES\\", batchFileName);
-            litleBatchResponse nullLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
+            batchResponse nullLitleBatchResponse = actualLitleResponse.nextLitleBatchResponse();
             RFRResponse actualRFRResponse = actualLitleResponse.nextRFRResponse();
             RFRResponse nullRFRResponse = actualLitleResponse.nextRFRResponse();
 

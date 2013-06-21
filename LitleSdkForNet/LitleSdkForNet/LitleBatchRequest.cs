@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Litle.Sdk
 {
-    public partial class litleBatchRequest
+    public partial class batchRequest
     {
         public string id;
         public string merchantId;
@@ -46,7 +46,7 @@ namespace Litle.Sdk
 
         private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
 
-        public litleBatchRequest()
+        public batchRequest()
         {
             config = new Dictionary<String, String>();
 
@@ -93,7 +93,7 @@ namespace Litle.Sdk
             sumOfCaptureGivenAuth = 0;
         }
 
-        public litleBatchRequest(Dictionary<String, String> config)
+        public batchRequest(Dictionary<String, String> config)
         {
             this.config = config;
         }

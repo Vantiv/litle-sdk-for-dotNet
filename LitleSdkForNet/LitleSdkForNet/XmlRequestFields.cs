@@ -2457,7 +2457,7 @@ namespace Litle.Sdk
     public class accountUpdateFileRequestData
     {
         public string merchantId = Properties.Settings.Default.merchantId;
-        public DateTime postDay; //YYYY-MM-DD
+        public DateTime postDay; //yyyy-MM-dd
 
         public string Serialize()
         {
@@ -2465,7 +2465,7 @@ namespace Litle.Sdk
 
             if (postDay != null)
             {
-                xml += "\r\n<postDay>" + postDay.ToString("YYYY-MM-DD") + "<postDay>";
+                xml += "\r\n<postDay>" + postDay.ToString("yyyy-MM-dd") + "</postDay>";
             }
 
             return xml;

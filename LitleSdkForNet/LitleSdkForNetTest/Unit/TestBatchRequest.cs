@@ -13,7 +13,7 @@ namespace Litle.Sdk.Test.Unit
     [TestFixture]
     class TestBatchRequest
     {
-        private litleBatchRequest batchRequest;
+        private batchRequest batchRequest;
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";
         private const string timeRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_";
         private const string batchNameRegex = timeRegex + "[A-Z]{8}";
@@ -36,7 +36,7 @@ namespace Litle.Sdk.Test.Unit
         [SetUp]
         public void beforeTestSetup()
         {
-            batchRequest = new litleBatchRequest();
+            batchRequest = new batchRequest();
             batchRequest.setLitleFile(mockLitleFile.Object);
             batchRequest.setLitleTime(mockLitleTime.Object);
         }

@@ -72,7 +72,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleBatch()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -331,7 +331,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
 
-            litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
             while (litleBatchResponse != null)
             {
                 authorizationResponse authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
@@ -445,7 +445,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void accountUpdateBatch()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             accountUpdate accountUpdate1 = new accountUpdate();
             accountUpdate1.orderId = "1111";
@@ -474,7 +474,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
 
-            litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
             while (litleBatchResponse != null)
             {
                 accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
@@ -491,7 +491,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void nullBatchData()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -718,7 +718,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -971,7 +971,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidSftpCredientialsBatch()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";

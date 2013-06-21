@@ -173,7 +173,7 @@ namespace Litle.Sdk
 
             if ("true".Equals(config["printxml"]))
             {
-                Console.WriteLine("Writing to XML File: " + xmlResponseDestinationDirectory);
+                Console.WriteLine("Writing to XML File: " + xmlResponseDestinationDirectory + batchName);
             }
 
             using (FileStream writeFileStream = new FileStream(xmlResponseDestinationDirectory + batchName, FileMode.Create))

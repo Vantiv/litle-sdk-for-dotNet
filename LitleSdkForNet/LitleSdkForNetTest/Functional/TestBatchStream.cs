@@ -72,7 +72,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleBatch()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -327,7 +327,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
 
-            litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
             while (litleBatchResponse != null)
             {
                 authorizationResponse authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
@@ -441,7 +441,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void accountUpdateBatch()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             accountUpdate accountUpdate1 = new accountUpdate();
             accountUpdate1.orderId = "1111";
@@ -466,7 +466,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
 
-            litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
             while (litleBatchResponse != null)
             {
                 accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
@@ -482,9 +482,10 @@ namespace Litle.Sdk.Test.Functional
         }
 
         //[Test]
-        //public void testRFR()
+        //public void RFRBatch()
         //{
-        //    litleBatchRequest litleBatchRequest = new litleBatchRequest();
+        //    batchRequest litleBatchRequest = new batchRequest();
+        //    litleBatchRequest.id = "1234567A";
 
         //    accountUpdate accountUpdate1 = new accountUpdate();
         //    accountUpdate1.orderId = "1111";
@@ -505,13 +506,9 @@ namespace Litle.Sdk.Test.Functional
         //    litle.addBatch(litleBatchRequest);
         //    litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
 
-        //    long sessionId = litleResponse.litleSessionId;
-
         //    Assert.NotNull(litleResponse);
-        //    Assert.AreEqual("0", litleResponse.response);
-        //    Assert.AreEqual("Valid Format", litleResponse.message);
 
-        //    litleBatchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+        //    batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
         //    Assert.NotNull(litleBatchResponse);
         //    while (litleBatchResponse != null)
         //    {
@@ -528,20 +525,22 @@ namespace Litle.Sdk.Test.Functional
 
         //    LitleBatch litleRfr = new LitleBatch();
         //    RFRRequest rfrRequest = new RFRRequest();
-        //    rfrRequest.litleSessionId = sessionId;
+        //    accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
+        //    accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
+        //    accountUpdateFileRequestData.postDay = DateTime.Now.AddDays(-1);
+        //    rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
 
         //    litleRfr.addRFRRequest(rfrRequest);
         //    litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream(responseDir);
 
         //    Assert.NotNull(litleRfrResponse);
-        //    Assert.AreEqual("0", litleRfrResponse.response);
-        //    Assert.AreEqual("Valid Format", litleRfrResponse.message);
 
-        //    RFRResponse rfrResponse = litleResponse.nextRFRResponse();
+        //    RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
         //    Assert.NotNull(rfrResponse);
         //    while (rfrResponse != null)
         //    {
-        //        Assert.AreEqual("000", rfrResponse.response);
+        //        Assert.AreEqual("1", rfrResponse.response);
+        //        Assert.AreEqual("The account update file is not ready yet. Please try again later.", rfrResponse.message);
 
         //        rfrResponse = litleResponse.nextRFRResponse();
         //    }
@@ -550,7 +549,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void nullBatchData()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -777,7 +776,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -1026,7 +1025,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidSftpCredientialsBatch()
         {
-            litleBatchRequest litleBatchRequest = new litleBatchRequest();
+            batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";

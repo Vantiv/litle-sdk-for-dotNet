@@ -4091,7 +4091,12 @@ namespace Litle.Sdk
                 version = reader.GetAttribute("version");
                 message = reader.GetAttribute("message");
                 response = reader.GetAttribute("response");
-                litleSessionId = Int64.Parse(reader.GetAttribute("litleSessionId"));
+
+                string rawLitleSessionId = reader.GetAttribute("litleSessionId");
+                if (rawLitleSessionId != null)
+                {
+                    litleSessionId = Int64.Parse(rawLitleSessionId);
+                }
             }
             else
             {
@@ -4102,17 +4107,24 @@ namespace Litle.Sdk
             this.filePath = filePath;
 
             this.batchResponseReader = new XmlTextReader(filePath);
-            batchResponseReader.ReadToDescendant("batchResponse");
+            if (!batchResponseReader.ReadToFollowing("batchResponse"))
+            {
+                batchResponseReader.Close();
+            }
 
             this.rfrResponseReader = new XmlTextReader(filePath);
-            rfrResponseReader.ReadToDescendant("RFRResponse");
+            if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
+            {
+                rfrResponseReader.Close();
+            }
+
         }
 
-        virtual public litleBatchResponse nextLitleBatchResponse()
+        virtual public batchResponse nextLitleBatchResponse()
         {
             if (batchResponseReader.ReadState != ReadState.Closed)
             {
-                litleBatchResponse litleBatchResponse = new litleBatchResponse(batchResponseReader, filePath);
+                batchResponse litleBatchResponse = new batchResponse(batchResponseReader, filePath);
                 if (!batchResponseReader.ReadToFollowing("batchResponse"))
                 {
                     batchResponseReader.Close();
@@ -4149,7 +4161,7 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class litleBatchResponse
+    public class batchResponse
     {
         public string id;
         public long litleBatchId;
@@ -4171,11 +4183,11 @@ namespace Litle.Sdk
         private XmlReader registerTokenResponseReader;
         private XmlReader updateCardValidationNumOnTokenResponseReader;
 
-        public litleBatchResponse()
+        public batchResponse()
         {
         }
 
-        public litleBatchResponse(XmlReader xmlReader, string filePath)
+        public batchResponse(XmlReader xmlReader, string filePath)
         {
             readXml(xmlReader, filePath);
         }
