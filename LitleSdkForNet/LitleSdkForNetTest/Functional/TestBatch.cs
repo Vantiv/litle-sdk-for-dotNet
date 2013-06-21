@@ -56,16 +56,6 @@ namespace Litle.Sdk.Test.Functional
         [SetUp]
         public void setUpBeforeTest()
         {
-            //Dictionary<string, string> config = new Dictionary<string, string>();
-            //config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            //config.Add("reportGroup", "Default Report Group");
-            //config.Add("username", "DOTNET");
-            //config.Add("version", "8.13");
-            //config.Add("timeout", "65");
-            //config.Add("merchantId", "101");
-            //config.Add("password", "TESTCASE");
-            //config.Add("printxml", "true");
-
             litle = new LitleBatch();
         }
 
@@ -462,7 +452,7 @@ namespace Litle.Sdk.Test.Functional
             accountUpdate2.card = card;
 
             litleBatchRequest.addAccountUpdate(accountUpdate2);
-            
+
             litle.addBatch(litleBatchRequest);
             string batchName = litle.sendToLitle();
 
@@ -489,6 +479,76 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
+        public void RFRBatch()
+        {
+            batchRequest litleBatchRequest = new batchRequest();
+            litleBatchRequest.id = "1234567A";
+
+            accountUpdate accountUpdate1 = new accountUpdate();
+            accountUpdate1.orderId = "1111";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4242424242424242";
+            card.expDate = "1210";
+            accountUpdate1.card = card;
+
+            litleBatchRequest.addAccountUpdate(accountUpdate1);
+
+            accountUpdate accountUpdate2 = new accountUpdate();
+            accountUpdate2.orderId = "1112";
+            accountUpdate2.card = card;
+
+            litleBatchRequest.addAccountUpdate(accountUpdate2);
+            litle.addBatch(litleBatchRequest);
+
+            string batchName = litle.sendToLitle();
+            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(0, 1 * 2));
+            litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
+
+            Assert.NotNull(litleResponse);
+
+            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            Assert.NotNull(litleBatchResponse);
+            while (litleBatchResponse != null)
+            {
+                accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                Assert.NotNull(accountUpdateResponse);
+                while (accountUpdateResponse != null)
+                {
+                    Assert.AreEqual("000", accountUpdateResponse.response);
+
+                    accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                }
+                litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            }
+
+            LitleBatch litleRfr = new LitleBatch();
+            RFRRequest rfrRequest = new RFRRequest();
+            accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
+            accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
+            accountUpdateFileRequestData.postDay = DateTime.Now;
+            rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
+
+            litleRfr.addRFRRequest(rfrRequest);
+
+            string rfrBatchName = litle.sendToLitle();
+            litle.blockAndWaitForResponse(rfrBatchName, estimatedResponseTime(0, 1 * 2));
+            litleResponse litleRfrResponse = litle.receiveFromLitle(responseDir + rfrBatchName, rfrBatchName);
+
+            Assert.NotNull(litleRfrResponse);
+
+            RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
+            Assert.NotNull(rfrResponse);
+            while (rfrResponse != null)
+            {
+                Assert.AreEqual("1", rfrResponse.response);
+                Assert.AreEqual("The account update file is not ready yet.  Please try again later.", rfrResponse.message);
+
+                rfrResponse = litleResponse.nextRFRResponse();
+            }
+        }
+
+        [Test]
         public void nullBatchData()
         {
             batchRequest litleBatchRequest = new batchRequest();
@@ -502,7 +562,7 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "414100000000000000";
             card.expDate = "1210";
-            authorization.card = card;       
+            authorization.card = card;
 
             litleBatchRequest.addAuthorization(authorization);
             try
