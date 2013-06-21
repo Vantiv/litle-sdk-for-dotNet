@@ -82,57 +82,19 @@ namespace Litle.Sdk
         {
             string url = config["onlineBatchUrl"];
             int port = Int32.Parse(config["onlineBatchPort"]);
-            TcpClient tcpClient;
-            SslStream sslStream;
+            TcpClient tcpClient = null;
+            SslStream sslStream = null;
 
-            //PROXY?
-            if (config.ContainsKey("proxyHost") && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"].Length > 0)
+            try
             {
-                WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
-                myproxy.BypassProxyOnLocal = true;
-
-                var webRequest = WebRequest.Create(url);
-                webRequest.Proxy = myproxy;
-
-                var webResponse = webRequest.GetResponse();
-                var resposeStream = webResponse.GetResponseStream();
-
-                const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-
-                var rsType = resposeStream.GetType();
-                var connectionProperty = rsType.GetProperty("Connection", flags);
-
-                var connection = connectionProperty.GetValue(resposeStream, null);
-                var connectionType = connection.GetType();
-                var networkStreamProperty = connectionType.GetProperty("NetworkStream", flags);
-
-                var networkStream = networkStreamProperty.GetValue(connection, null);
-                var nsType = networkStream.GetType();
-                var socketProperty = nsType.GetProperty("Socket", flags);
-                var socket = (Socket)socketProperty.GetValue(networkStream, null);
-                try
-                {
-                    tcpClient = new TcpClient { Client = socket };
-                    sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
-                }
-                catch (SocketException e)
-                {
-                    throw new LitleOnlineException("Error establishing a network connection", e);
-                }
-
+                tcpClient = new TcpClient(url, port);
+                sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
             }
-            else
+            catch (SocketException e)
             {
-                try
-                {
-                    tcpClient = new TcpClient(url, port);
-                    sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
-                }
-                catch (SocketException e)
-                {
-                    throw new LitleOnlineException("Error establishing a network connection", e);
-                }
+                throw new LitleOnlineException("Error establishing a network connection", e);
             }
+
 
             try
             {
@@ -194,6 +156,7 @@ namespace Litle.Sdk
             }
 
             tcpClient.Close();
+            sslStream.Close();
 
             return xmlResponseDestinationDirectory + batchName;
         }
@@ -231,6 +194,17 @@ namespace Litle.Sdk
                 if (e.message != null)
                 {
                     throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
+                }
+            }
+            catch (JSchException e)
+            {
+                if (e.Message != null)
+                {
+                    throw new LitleOnlineException(e.Message);
                 }
                 else
                 {
