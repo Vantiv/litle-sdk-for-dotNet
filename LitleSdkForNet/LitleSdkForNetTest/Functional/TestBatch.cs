@@ -11,7 +11,7 @@ namespace Litle.Sdk.Test.Functional
     class TestBatch
     {
         private string responseDir;
-        private LitleBatch litle;
+        private litleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
 
@@ -56,7 +56,7 @@ namespace Litle.Sdk.Test.Functional
         [SetUp]
         public void setUpBeforeTest()
         {
-            litle = new LitleBatch();
+            litle = new litleRequest();
         }
 
         [Test]
@@ -522,7 +522,7 @@ namespace Litle.Sdk.Test.Functional
                 litleBatchResponse = litleResponse.nextLitleBatchResponse();
             }
 
-            LitleBatch litleRfr = new LitleBatch();
+            litleRequest litleRfr = new litleRequest();
             RFRRequest rfrRequest = new RFRRequest();
             accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
             accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;

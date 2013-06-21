@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace Litle.Sdk
 {
-    public class LitleBatch
+    public class litleRequest
     {
         private authentication authentication;
         private Dictionary<String, String> config;
@@ -24,7 +24,7 @@ namespace Litle.Sdk
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
-        public LitleBatch()
+        public litleRequest()
         {
             config = new Dictionary<string, string>();
 
@@ -71,7 +71,7 @@ namespace Litle.Sdk
          * proxyPort
          * printxml (possible values "true" and "false" - defaults to false)
          */
-        public LitleBatch(Dictionary<String, String> config)
+        public litleRequest(Dictionary<String, String> config)
         {
             this.config = config;
             communication = new Communications();
