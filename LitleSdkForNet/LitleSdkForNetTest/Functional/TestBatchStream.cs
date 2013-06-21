@@ -481,70 +481,70 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        //[Test]
-        //public void RFRBatch()
-        //{
-        //    batchRequest litleBatchRequest = new batchRequest();
-        //    litleBatchRequest.id = "1234567A";
+        [Test]
+        public void RFRBatch()
+        {
+            batchRequest litleBatchRequest = new batchRequest();
+            litleBatchRequest.id = "1234567A";
 
-        //    accountUpdate accountUpdate1 = new accountUpdate();
-        //    accountUpdate1.orderId = "1111";
-        //    cardType card = new cardType();
-        //    card.type = methodOfPaymentTypeEnum.VI;
-        //    card.number = "4242424242424242";
-        //    card.expDate = "1210";
-        //    accountUpdate1.card = card;
+            accountUpdate accountUpdate1 = new accountUpdate();
+            accountUpdate1.orderId = "1111";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4242424242424242";
+            card.expDate = "1210";
+            accountUpdate1.card = card;
 
-        //    litleBatchRequest.addAccountUpdate(accountUpdate1);
+            litleBatchRequest.addAccountUpdate(accountUpdate1);
 
-        //    accountUpdate accountUpdate2 = new accountUpdate();
-        //    accountUpdate2.orderId = "1112";
-        //    accountUpdate2.card = card;
+            accountUpdate accountUpdate2 = new accountUpdate();
+            accountUpdate2.orderId = "1112";
+            accountUpdate2.card = card;
 
-        //    litleBatchRequest.addAccountUpdate(accountUpdate2);
+            litleBatchRequest.addAccountUpdate(accountUpdate2);
 
-        //    litle.addBatch(litleBatchRequest);
-        //    litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
+            litle.addBatch(litleBatchRequest);
+            litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
 
-        //    Assert.NotNull(litleResponse);
+            Assert.NotNull(litleResponse);
 
-        //    batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
-        //    Assert.NotNull(litleBatchResponse);
-        //    while (litleBatchResponse != null)
-        //    {
-        //        accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
-        //        Assert.NotNull(accountUpdateResponse);
-        //        while (accountUpdateResponse != null)
-        //        {
-        //            Assert.AreEqual("000", accountUpdateResponse.response);
+            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            Assert.NotNull(litleBatchResponse);
+            while (litleBatchResponse != null)
+            {
+                accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                Assert.NotNull(accountUpdateResponse);
+                while (accountUpdateResponse != null)
+                {
+                    Assert.AreEqual("000", accountUpdateResponse.response);
 
-        //            accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
-        //        }
-        //        litleBatchResponse = litleResponse.nextLitleBatchResponse();
-        //    }
+                    accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                }
+                litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            }
 
-        //    LitleBatch litleRfr = new LitleBatch();
-        //    RFRRequest rfrRequest = new RFRRequest();
-        //    accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
-        //    accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
-        //    accountUpdateFileRequestData.postDay = DateTime.Now.AddDays(-1);
-        //    rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
+            LitleBatch litleRfr = new LitleBatch();
+            RFRRequest rfrRequest = new RFRRequest();
+            accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
+            accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
+            accountUpdateFileRequestData.postDay = DateTime.Now;
+            rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
 
-        //    litleRfr.addRFRRequest(rfrRequest);
-        //    litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream(responseDir);
+            litleRfr.addRFRRequest(rfrRequest);
+            litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream(responseDir);
 
-        //    Assert.NotNull(litleRfrResponse);
+            Assert.NotNull(litleRfrResponse);
 
-        //    RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
-        //    Assert.NotNull(rfrResponse);
-        //    while (rfrResponse != null)
-        //    {
-        //        Assert.AreEqual("1", rfrResponse.response);
-        //        Assert.AreEqual("The account update file is not ready yet. Please try again later.", rfrResponse.message);
+            RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
+            Assert.NotNull(rfrResponse);
+            while (rfrResponse != null)
+            {
+                Assert.AreEqual("1", rfrResponse.response);
+                Assert.AreEqual("The account update file is not ready yet.  Please try again later.", rfrResponse.message);
 
-        //        rfrResponse = litleResponse.nextRFRResponse();
-        //    }
-        //}
+                rfrResponse = litleResponse.nextRFRResponse();
+            }
+        }
 
         [Test]
         public void nullBatchData()

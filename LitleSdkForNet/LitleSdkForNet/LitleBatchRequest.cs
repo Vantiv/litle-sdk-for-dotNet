@@ -610,7 +610,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xmlHeader = "\r\n<RFRRequest>";
+            string xmlHeader = "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">";
             string xmlFooter = "\r\n</RFRRequest>";
 
             string filePath = litleFile.createRandomFile(null, litleTime, "_RFRRequest.xml");
