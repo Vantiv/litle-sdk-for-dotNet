@@ -95,7 +95,6 @@ namespace Litle.Sdk
                 throw new LitleOnlineException("Error establishing a network connection", e);
             }
 
-
             try
             {
                 sslStream.AuthenticateAsClient(url);
@@ -166,13 +165,10 @@ namespace Litle.Sdk
             ChannelSftp channelSftp = null;
             Channel channel;
 
-            string currentPath = Environment.CurrentDirectory.ToString();
-            string parentPath = Directory.GetParent(currentPath).ToString();
-
             string url = config["sftpUrl"];
             string username = config["sftpUsername"];
             string password = config["sftpPassword"];
-            string knownHostsFile = parentPath + "\\" + config["knownHostsFile"];
+            string knownHostsFile = config["knownHostsFile"];
             string filePath = fileDirectory + fileName;
 
             JSch jsch = new JSch();
