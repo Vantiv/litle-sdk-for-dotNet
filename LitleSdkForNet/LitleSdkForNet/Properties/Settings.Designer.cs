@@ -145,7 +145,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("knownhosts")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Litle\\dll\\knownhosts")]
         public string knownHostsFile {
             get {
                 return ((string)(this["knownHostsFile"]));

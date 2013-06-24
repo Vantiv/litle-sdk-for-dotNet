@@ -33,7 +33,7 @@
       <Value Profile="(Default)">cert.litle.com</Value>
     </Setting>
     <Setting Name="knownHostsFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">knownhosts</Value>
+      <Value Profile="(Default)">C:\Litle\dll\knownhosts</Value>
     </Setting>
     <Setting Name="sftpUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">dotnet</Value>
