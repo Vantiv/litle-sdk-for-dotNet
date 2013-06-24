@@ -239,13 +239,10 @@ namespace Litle.Sdk
             ChannelSftp channelSftp = null;
             Channel channel;
 
-            string currentPath = Environment.CurrentDirectory.ToString();
-            string parentPath = Directory.GetParent(currentPath).ToString();
-
             string url = config["sftpUrl"];
             string username = config["sftpUsername"];
             string password = config["sftpPassword"];
-            string knownHostsFile = parentPath + "\\" + config["knownHostsFile"];
+            string knownHostsFile = config["knownHostsFile"];
 
             JSch jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);
@@ -294,13 +291,10 @@ namespace Litle.Sdk
             ChannelSftp channelSftp = null;
             Channel channel;
 
-            string currentPath = Environment.CurrentDirectory.ToString();
-            string parentPath = Directory.GetParent(currentPath).ToString();
-
             string url = config["sftpUrl"];
             string username = config["sftpUsername"];
             string password = config["sftpPassword"];
-            string knownHostsFile = parentPath + "\\" + config["knownHostsFile"];
+            string knownHostsFile = config["knownHostsFile"];
 
             JSch jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);

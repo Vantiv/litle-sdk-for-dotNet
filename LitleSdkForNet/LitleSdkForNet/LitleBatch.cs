@@ -175,7 +175,7 @@ namespace Litle.Sdk
 
             communication.FtpPickUp(responseDirectory + batchFileName, config, batchFileName);
 
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(config["responseDirectory"] + batchFileName);
+            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseDirectory+ batchFileName);
             return litleResponse;
         }
 
