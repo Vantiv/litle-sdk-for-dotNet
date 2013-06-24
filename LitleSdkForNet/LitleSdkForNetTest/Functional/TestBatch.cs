@@ -316,7 +316,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
 
-            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
             while (litleBatchResponse != null)
             {
                 authorizationResponse authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
@@ -423,7 +423,7 @@ namespace Litle.Sdk.Test.Functional
                     updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
                 }
 
-                litleBatchResponse = litleResponse.nextLitleBatchResponse();
+                litleBatchResponse = litleResponse.nextBatchResponse();
             }
         }
 
@@ -459,7 +459,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
 
-            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
             while (litleBatchResponse != null)
             {
                 accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
@@ -469,7 +469,7 @@ namespace Litle.Sdk.Test.Functional
 
                     accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
                 }
-                litleBatchResponse = litleResponse.nextLitleBatchResponse();
+                litleBatchResponse = litleResponse.nextBatchResponse();
             }
         }
 
@@ -502,7 +502,7 @@ namespace Litle.Sdk.Test.Functional
 
             Assert.NotNull(litleResponse);
 
-            batchResponse litleBatchResponse = litleResponse.nextLitleBatchResponse();
+            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
             Assert.NotNull(litleBatchResponse);
             while (litleBatchResponse != null)
             {
@@ -514,7 +514,7 @@ namespace Litle.Sdk.Test.Functional
 
                     accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
                 }
-                litleBatchResponse = litleResponse.nextLitleBatchResponse();
+                litleBatchResponse = litleResponse.nextBatchResponse();
             }
 
             litleRequest litleRfr = new litleRequest();

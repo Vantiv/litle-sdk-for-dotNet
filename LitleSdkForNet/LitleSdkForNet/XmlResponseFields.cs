@@ -4120,7 +4120,7 @@ namespace Litle.Sdk
 
         }
 
-        virtual public batchResponse nextLitleBatchResponse()
+        virtual public batchResponse nextBatchResponse()
         {
             if (batchResponseReader.ReadState != ReadState.Closed)
             {
