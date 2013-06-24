@@ -161,7 +161,7 @@ namespace Litle.Sdk
             return xmlResponseDestinationDirectory + batchName;
         }
 
-        virtual public void FtpDropOff(string filePath, Dictionary<String, String> config)
+        virtual public void FtpDropOff(string fileDirectory, string fileName, Dictionary<String, String> config)
         {
             ChannelSftp channelSftp = null;
             Channel channel;
@@ -173,7 +173,7 @@ namespace Litle.Sdk
             string username = config["sftpUsername"];
             string password = config["sftpPassword"];
             string knownHostsFile = parentPath + "\\" + config["knownHostsFile"];
-            string fileName = Path.GetFileName(filePath);
+            string filePath = fileDirectory + fileName;
 
             JSch jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);

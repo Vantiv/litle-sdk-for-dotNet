@@ -10,7 +10,6 @@ namespace Litle.Sdk.Test.Functional
     [TestFixture]
     class TestBatch
     {
-        private string responseDir;
         private litleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
@@ -47,10 +46,6 @@ namespace Litle.Sdk.Test.Functional
             invalidSftpConfig["sftpUsername"] = "badSftpUsername";
             invalidSftpConfig["sftpPassword"] = "badSftpPassword";
             invalidSftpConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-
-            string currentPath = Environment.CurrentDirectory.ToString();
-            string parentPath = Directory.GetParent(currentPath).ToString();
-            responseDir = parentPath + "\\Responses\\";
         }
 
         [SetUp]
@@ -315,7 +310,7 @@ namespace Litle.Sdk.Test.Functional
 
             litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
 
-            litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
+            litleResponse litleResponse = litle.receiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -458,7 +453,7 @@ namespace Litle.Sdk.Test.Functional
 
             litle.blockAndWaitForResponse(batchName, estimatedResponseTime(0, 1 * 2));
 
-            litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
+            litleResponse litleResponse = litle.receiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -503,7 +498,7 @@ namespace Litle.Sdk.Test.Functional
 
             string batchName = litle.sendToLitle();
             litle.blockAndWaitForResponse(batchName, estimatedResponseTime(0, 1 * 2));
-            litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
+            litleResponse litleResponse = litle.receiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
 
@@ -533,7 +528,7 @@ namespace Litle.Sdk.Test.Functional
 
             string rfrBatchName = litle.sendToLitle();
             litle.blockAndWaitForResponse(rfrBatchName, estimatedResponseTime(0, 1 * 2));
-            litleResponse litleRfrResponse = litle.receiveFromLitle(responseDir + rfrBatchName, rfrBatchName);
+            litleResponse litleRfrResponse = litle.receiveFromLitle(rfrBatchName);
 
             Assert.NotNull(litleRfrResponse);
 
@@ -1020,7 +1015,7 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                litleResponse litleResponse = litle.receiveFromLitle(responseDir + batchName, batchName);
+                litleResponse litleResponse = litle.receiveFromLitle(batchName);
             }
             catch (LitleOnlineException e)
             {

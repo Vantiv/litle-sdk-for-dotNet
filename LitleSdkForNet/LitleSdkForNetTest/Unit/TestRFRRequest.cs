@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Unit
             mockLitleFile = new Mock<litleFile>();
             mockLitleTime = new Mock<litleTime>();
 
-            mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>())).Returns(mockFilePath);
+            mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
             mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
         }
 

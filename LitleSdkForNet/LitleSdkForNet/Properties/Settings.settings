@@ -47,5 +47,11 @@
     <Setting Name="onlineBatchPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">15000</Value>
     </Setting>
+    <Setting Name="requestDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Litle\</Value>
+    </Setting>
+    <Setting Name="responseDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Litle\</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

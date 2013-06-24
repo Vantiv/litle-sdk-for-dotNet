@@ -202,5 +202,29 @@ namespace Litle.Sdk.Properties {
                 this["onlineBatchPort"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Litle\\")]
+        public string requestDirectory {
+            get {
+                return ((string)(this["requestDirectory"]));
+            }
+            set {
+                this["requestDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Litle\\")]
+        public string responseDirectory {
+            get {
+                return ((string)(this["responseDirectory"]));
+            }
+            set {
+                this["responseDirectory"] = value;
+            }
+        }
     }
 }

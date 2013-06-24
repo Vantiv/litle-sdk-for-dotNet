@@ -10,7 +10,6 @@ namespace Litle.Sdk.Test.Functional
     [TestFixture]
     class TestBatchStream
     {
-        private string responseDir;
         private litleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
@@ -47,10 +46,6 @@ namespace Litle.Sdk.Test.Functional
             invalidSftpConfig["sftpUsername"] = "badSftpUsername";
             invalidSftpConfig["sftpPassword"] = "badSftpPassword";
             invalidSftpConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-
-            string currentPath = Environment.CurrentDirectory.ToString();
-            string parentPath = Directory.GetParent(currentPath).ToString();
-            responseDir = parentPath + "\\Responses\\";
         }
 
         [SetUp]
@@ -311,7 +306,7 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
             litle.addBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
+            litleResponse litleResponse = litle.sendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -450,7 +445,7 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.addAccountUpdate(accountUpdate2);
 
             litle.addBatch(litleBatchRequest);
-            litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
+            litleResponse litleResponse = litle.sendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -494,7 +489,7 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.addAccountUpdate(accountUpdate2);
 
             litle.addBatch(litleBatchRequest);
-            litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
+            litleResponse litleResponse = litle.sendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
 
@@ -521,7 +516,7 @@ namespace Litle.Sdk.Test.Functional
             rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
 
             litleRfr.addRFRRequest(rfrRequest);
-            litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream(responseDir);
+            litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream();
 
             Assert.NotNull(litleRfrResponse);
 
@@ -1004,7 +999,7 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
+                litleResponse litleResponse = litle.sendToLitleWithStream();
             }
             catch (LitleOnlineException e)
             {
@@ -1252,7 +1247,7 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                litleResponse litleResponse = litle.sendToLitleWithStream(responseDir);
+                litleResponse litleResponse = litle.sendToLitleWithStream();
             }
             catch (LitleOnlineException e)
             {

@@ -29,7 +29,7 @@ namespace Litle.Sdk.Test.Unit
             mockLitleFile = new Mock<litleFile>();
             mockLitleTime = new Mock<litleTime>();
 
-            mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>())).Returns(mockFilePath);
+            mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
             mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
         }
 
@@ -60,7 +60,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumAuthorization());
             Assert.AreEqual(authorization.amount, batchRequest.getSumOfAuthorization());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, authorization.Serialize()));
         }
 
@@ -80,7 +80,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.AreEqual(1, batchRequest.getNumAccountUpdates());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, accountUpdate.Serialize()));
         }
 
@@ -97,7 +97,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumAuthReversal());
             Assert.AreEqual(authreversal.amount, batchRequest.getSumOfAuthReversal());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, authreversal.Serialize()));
         }
 
@@ -113,7 +113,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumCapture());
             Assert.AreEqual(capture.amount, batchRequest.getSumOfCapture());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, capture.Serialize()));
         }
 
@@ -140,7 +140,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumCaptureGivenAuth());
             Assert.AreEqual(capturegivenauth.amount, batchRequest.getSumOfCaptureGivenAuth());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, capturegivenauth.Serialize()));
         }
 
@@ -162,7 +162,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumCredit());
             Assert.AreEqual(credit.amount, batchRequest.getSumOfCredit());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, credit.Serialize()));
         }
 
@@ -178,7 +178,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumEcheckCredit());
             Assert.AreEqual(echeckcredit.amount, batchRequest.getSumOfEcheckCredit());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckcredit.Serialize()));
         }
 
@@ -192,7 +192,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.AreEqual(1, batchRequest.getNumEcheckRedeposit());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckredeposit.Serialize()));
         }
 
@@ -221,7 +221,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumEcheckSale());
             Assert.AreEqual(echecksale.amount, batchRequest.getSumOfEcheckSale());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echecksale.Serialize()));
         }
 
@@ -250,7 +250,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumEcheckVerification());
             Assert.AreEqual(echeckverification.amount, batchRequest.getSumOfEcheckVerification());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckverification.Serialize()));
         }
 
@@ -272,7 +272,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumForceCapture());
             Assert.AreEqual(forcecapture.amount, batchRequest.getSumOfForceCapture());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, forcecapture.Serialize()));
         }
 
@@ -294,7 +294,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(1, batchRequest.getNumSale());
             Assert.AreEqual(sale.amount, batchRequest.getSumOfSale());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, sale.Serialize()));
         }
 
@@ -309,7 +309,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.AreEqual(1, batchRequest.getNumRegisterTokenRequest());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, token.Serialize()));
         }
 
@@ -324,7 +324,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.AreEqual(1, batchRequest.getNumUpdateCardValidationNumOnToken());
 
-            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), mockLitleTime.Object, It.IsAny<String>()));
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, updateCardValidationNumOnToken.Serialize()));
         } 
     }

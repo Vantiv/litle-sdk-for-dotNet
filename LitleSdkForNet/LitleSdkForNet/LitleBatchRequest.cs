@@ -17,6 +17,8 @@ namespace Litle.Sdk
         private string tempBatchFilePath;
         private litleFile litleFile;
         private litleTime litleTime;
+        private string requestDirectory;
+        private string responseDirectory;
 
         private int numAuthorization;
         private int numAccountUpdates;
@@ -63,6 +65,11 @@ namespace Litle.Sdk
             config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
             config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
             config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+            config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+
+            requestDirectory = config["requestDirectory"] + "\\Requests\\";
+            responseDirectory = config["responseDirectory"] + "\\Responses\\";
 
             litleFile = new litleFile();
             litleTime = new litleTime();
@@ -527,7 +534,7 @@ namespace Litle.Sdk
 
             string xmlFooter = "</batchRequest>\r\n";
 
-            batchFilePath = litleFile.createRandomFile(null, litleTime, "_batchRequest.xml");
+            batchFilePath = litleFile.createRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
 
             litleFile.AppendLineToFile(batchFilePath, xmlHeader);
             litleFile.AppendFileToFile(batchFilePath, tempBatchFilePath);
@@ -541,7 +548,7 @@ namespace Litle.Sdk
         private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionType element)
         {
             string fPath;
-            fPath = litleFile.createRandomFile(filePath, litleTime, "_temp_batchRequest.xml");
+            fPath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_batchRequest.xml", litleTime);
 
             litleFile.AppendLineToFile(fPath, element.Serialize());
 
@@ -591,11 +598,41 @@ namespace Litle.Sdk
 
         private litleTime litleTime;
         private litleFile litleFile;
+        private string requestDirectory;
+        private string responseDirectory;
+
+        private Dictionary<String, String> config;
 
         public RFRRequest()
         {
+            config = new Dictionary<String, String>();
+
+            config["url"] = Properties.Settings.Default.url;
+            config["reportGroup"] = Properties.Settings.Default.reportGroup;
+            config["username"] = Properties.Settings.Default.username;
+            config["printxml"] = Properties.Settings.Default.printxml;
+            config["timeout"] = Properties.Settings.Default.timeout;
+            config["proxyHost"] = Properties.Settings.Default.proxyHost;
+            config["merchantId"] = Properties.Settings.Default.merchantId;
+            config["password"] = Properties.Settings.Default.password;
+            config["proxyPort"] = Properties.Settings.Default.proxyPort;
+            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
+            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
+            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+            config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+
             litleTime = new litleTime();
             litleFile = new litleFile();
+
+            requestDirectory = config["requestDirectory"] + "\\Requests\\";
+            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+        }
+
+        public void setConfig(Dictionary<String, String> config)
+        {
+            this.config = config;
         }
 
         public void setLitleFile(litleFile litleFile)
@@ -613,7 +650,7 @@ namespace Litle.Sdk
             string xmlHeader = "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">";
             string xmlFooter = "\r\n</RFRRequest>";
 
-            string filePath = litleFile.createRandomFile(null, litleTime, "_RFRRequest.xml");
+            string filePath = litleFile.createRandomFile(requestDirectory, null, "_RFRRequest.xml", litleTime);
 
             string xmlBody = "";
 
