@@ -149,7 +149,7 @@ namespace Litle.Sdk
             string requestFilePath = this.Serialize();
             string batchName = Path.GetFileName(requestFilePath);
 
-            string responseFilePath = communication.socketStream(requestFilePath, config["responseDirectory"], config);
+            string responseFilePath = communication.socketStream(requestFilePath, responseDirectory, config);
 
             litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
             return litleResponse;
@@ -159,7 +159,7 @@ namespace Litle.Sdk
         {
             string requestFilePath = this.Serialize();
 
-            communication.FtpDropOff(config["requestDirectory"], Path.GetFileName(requestFilePath), config);
+            communication.FtpDropOff(requestDirectory, Path.GetFileName(requestFilePath), config);
             return Path.GetFileName(requestFilePath);
         }
 
@@ -171,9 +171,9 @@ namespace Litle.Sdk
 
         public litleResponse receiveFromLitle(string batchFileName)
         {
-            litleFile.createDirectory(config["responseDirectory"]);
+            litleFile.createDirectory(responseDirectory);
 
-            communication.FtpPickUp(config["responseDirectory"] + batchFileName, config, batchFileName);
+            communication.FtpPickUp(responseDirectory + batchFileName, config, batchFileName);
 
             litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(config["responseDirectory"] + batchFileName);
             return litleResponse;
