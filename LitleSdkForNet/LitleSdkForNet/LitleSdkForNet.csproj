@@ -35,9 +35,16 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tamir.SharpSSH, Version=1.1.1.13, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Tamir.SharpSSH.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="XmlSerializer.cs" />
     <Compile Include="Communications.cs" />
+    <Compile Include="LitleBatchRequest.cs" />
+    <Compile Include="LitleBatch.cs" />
     <Compile Include="LitleOnlineException.cs" />
     <Compile Include="LitleOnline.cs" />
     <Compile Include="Settings.cs" />

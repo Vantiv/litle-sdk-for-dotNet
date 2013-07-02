@@ -31,7 +31,7 @@ namespace Litle.Sdk
         }
 
         /**
-         * Construct a LitleOnline specifying the configuration i ncode.  This should be used by integration that have another way
+         * Construct a LitleOnline specifying the configuration in code.  This should be used by integration that have another way
          * to specify their configuration settings or where different configurations are needed for different instances of LitleOnline.
          * 
          * Properties that *must* be set are:
