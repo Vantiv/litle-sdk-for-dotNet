@@ -7,17 +7,41 @@ using System.Diagnostics;
 using System.Text;
 using System.Xml.XPath;
 using System.Net;
+using Tamir.SharpSsh.jsch;
+using Tamir.SharpSsh;
+using System.Timers;
+using System.Net.Sockets;
+using System.Net.Security;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
+using System.Reflection;
 
 namespace Litle.Sdk
 {
     public class Communications
     {
-        virtual public string HttpPost(string xmlRequest, Dictionary<String,String> config)
+
+        public static bool ValidateServerCertificate(
+             object sender,
+             X509Certificate certificate,
+             X509Chain chain,
+             SslPolicyErrors sslPolicyErrors)
+        {
+            if (sslPolicyErrors == SslPolicyErrors.None)
+                return true;
+
+            Console.WriteLine("Certificate error: {0}", sslPolicyErrors);
+
+            // Do not allow this client to communicate with unauthenticated servers. 
+            return false;
+        }
+
+        virtual public string HttpPost(string xmlRequest, Dictionary<String, String> config)
         {
             string uri = config["url"];
             System.Net.ServicePointManager.Expect100Continue = false;
             System.Net.WebRequest req = System.Net.WebRequest.Create(uri);
-            if("true".Equals(config["printxml"])) 
+            if ("true".Equals(config["printxml"]))
             {
                 Console.WriteLine(xmlRequest);
             }
@@ -40,7 +64,7 @@ namespace Litle.Sdk
             System.Net.WebResponse resp = req.GetResponse();
             if (resp == null)
             {
-               return null;
+                return null;
             }
             string xmlResponse;
             using (var reader = new System.IO.StreamReader(resp.GetResponseStream()))
@@ -52,6 +76,277 @@ namespace Litle.Sdk
                 Console.WriteLine(xmlResponse);
             }
             return xmlResponse;
+        }
+
+        virtual public string socketStream(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<String, String> config)
+        {
+            string url = config["onlineBatchUrl"];
+            int port = Int32.Parse(config["onlineBatchPort"]);
+            TcpClient tcpClient = null;
+            SslStream sslStream = null;
+
+            try
+            {
+                tcpClient = new TcpClient(url, port);
+                sslStream = new SslStream(tcpClient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
+            }
+            catch (SocketException e)
+            {
+                throw new LitleOnlineException("Error establishing a network connection", e);
+            }
+
+            try
+            {
+                sslStream.AuthenticateAsClient(url);
+            }
+            catch (AuthenticationException)
+            {
+                tcpClient.Close();
+                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed");
+            }
+
+            if ("true".Equals(config["printxml"]))
+            {
+                Console.WriteLine("Using XML File: " + xmlRequestFilePath);
+            }
+
+            using (FileStream readFileStream = new FileStream(xmlRequestFilePath, FileMode.Open))
+            {
+                int bytesRead = -1;
+                byte[] byteBuffer;
+
+                do
+                {
+                    byteBuffer = new byte[1024 * sizeof(char)];
+                    bytesRead = readFileStream.Read(byteBuffer, 0, byteBuffer.Length);
+
+                    sslStream.Write(byteBuffer, 0, bytesRead);
+                    sslStream.Flush();
+                } while (bytesRead != 0);
+            }
+
+            string batchName = Path.GetFileName(xmlRequestFilePath);
+            string destinationDirectory = Path.GetDirectoryName(xmlResponseDestinationDirectory);
+            if (!Directory.Exists(destinationDirectory))
+            {
+                Directory.CreateDirectory(destinationDirectory);
+            }
+
+            if ("true".Equals(config["printxml"]))
+            {
+                Console.WriteLine("Writing to XML File: " + xmlResponseDestinationDirectory + batchName);
+            }
+
+            using (FileStream writeFileStream = new FileStream(xmlResponseDestinationDirectory + batchName, FileMode.Create))
+            {
+                char[] charBuffer;
+                byte[] byteBuffer;
+                int bytesRead = 0;
+
+                do
+                {
+                    charBuffer = new char[1024];
+                    byteBuffer = new byte[1024 * sizeof(char)];
+                    bytesRead = sslStream.Read(byteBuffer, 0, byteBuffer.Length);
+                    charBuffer = Encoding.UTF8.GetChars(byteBuffer);
+
+                    writeFileStream.Write(byteBuffer, 0, bytesRead);
+                } while (bytesRead > 0);
+            }
+
+            tcpClient.Close();
+            sslStream.Close();
+
+            return xmlResponseDestinationDirectory + batchName;
+        }
+
+        virtual public void FtpDropOff(string fileDirectory, string fileName, Dictionary<String, String> config)
+        {
+            ChannelSftp channelSftp = null;
+            Channel channel;
+
+            string url = config["sftpUrl"];
+            string username = config["sftpUsername"];
+            string password = config["sftpPassword"];
+            string knownHostsFile = config["knownHostsFile"];
+            string filePath = fileDirectory + fileName;
+
+            JSch jsch = new JSch();
+            jsch.setKnownHosts(knownHostsFile);
+
+            Session session = jsch.getSession(username, url);
+            session.setPassword(password);
+
+            try
+            {
+                session.connect();
+
+                channel = session.openChannel("sftp");
+                channel.connect();
+                channelSftp = (ChannelSftp)channel;
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
+                }
+            }
+            catch (JSchException e)
+            {
+                if (e.Message != null)
+                {
+                    throw new LitleOnlineException(e.Message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
+                }
+            }
+
+            try
+            {
+                channelSftp.put(filePath, "inbound/" + fileName, ChannelSftp.OVERWRITE);
+                channelSftp.rename("inbound/" + fileName, "inbound/" + fileName + ".asc");
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to upload and save the file to SFTP");
+                }
+            }
+
+            channelSftp.quit();
+
+            session.disconnect();
+        }
+
+        virtual public void FtpPoll(string fileName, int timeout, Dictionary<string, string> config)
+        {
+            ChannelSftp channelSftp = null;
+            Channel channel;
+
+            string url = config["sftpUrl"];
+            string username = config["sftpUsername"];
+            string password = config["sftpPassword"];
+            string knownHostsFile = config["knownHostsFile"];
+
+            JSch jsch = new JSch();
+            jsch.setKnownHosts(knownHostsFile);
+
+            Session session = jsch.getSession(username, url);
+            session.setPassword(password);
+
+            try
+            {
+                session.connect();
+
+                channel = session.openChannel("sftp");
+                channel.connect();
+                channelSftp = (ChannelSftp)channel;
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
+                }
+            }
+
+            //check if file exists
+            SftpATTRS sftpATTRS = null;
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            do
+            {
+                try
+                {
+                    sftpATTRS = channelSftp.lstat("outbound/" + fileName);
+                }
+                catch
+                {
+                }
+            } while (sftpATTRS == null && stopWatch.Elapsed.TotalMilliseconds <= timeout);
+        }
+
+        virtual public void FtpPickUp(string destinationFilePath, Dictionary<String, String> config, string fileName)
+        {
+            ChannelSftp channelSftp = null;
+            Channel channel;
+
+            string url = config["sftpUrl"];
+            string username = config["sftpUsername"];
+            string password = config["sftpPassword"];
+            string knownHostsFile = config["knownHostsFile"];
+
+            JSch jsch = new JSch();
+            jsch.setKnownHosts(knownHostsFile);
+
+            Session session = jsch.getSession(username, url);
+            session.setPassword(password);
+
+            try
+            {
+                session.connect();
+
+                channel = session.openChannel("sftp");
+                channel.connect();
+                channelSftp = (ChannelSftp)channel;
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
+                }
+            }
+
+            try
+            {
+                channelSftp.get("outbound/" + fileName + ".asc", destinationFilePath);
+                channelSftp.rm("outbound/" + fileName + ".asc");
+            }
+            catch (SftpException e)
+            {
+                if (e.message != null)
+                {
+                    throw new LitleOnlineException(e.message);
+                }
+                else
+                {
+                    throw new LitleOnlineException("Error occured while attempting to retrieve and save the file from SFTP");
+                }
+            }
+
+            channelSftp.quit();
+
+            session.disconnect();
+
+        }
+
+        public struct SshConnectionInfo
+        {
+            public string Host;
+            public string User;
+            public string Pass;
+            public string IdentityFile;
         }
     }
 }
