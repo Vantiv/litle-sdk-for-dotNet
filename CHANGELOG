@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== Version 8.17.2 (April 12, 2013)
+
+* Feature: Batch support - see https://gist.github.com/litleSDK/5852101, https://gist.github.com/litleSDK/5852156, https://gist.github.com/litleSDK/5852307 and https://gist.github.com/litleSDK/5852344 for examples
+
 == Version 8.17.1 (April 12, 2013)
 
 * Bugfix: The dll version being reported by 8.17.0.0 was 8.16.2.0.  Change made to build process to verify artifact versions.
