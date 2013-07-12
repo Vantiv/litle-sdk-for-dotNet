@@ -48,18 +48,7 @@ namespace Litle.Sdk
             config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
             config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
-            communication = new Communications();
-
-            authentication = new authentication();
-            authentication.user = config["username"];
-            authentication.password = config["password"];
-
-            requestDirectory = config["requestDirectory"] + "\\Requests\\";
-            responseDirectory = config["responseDirectory"] + "\\Responses\\";
-
-            litleXmlSerializer = new litleXmlSerializer();
-            litleTime = new litleTime();
-            litleFile = new litleFile();
+            initializeRequest();
         }
 
         /**
@@ -89,11 +78,24 @@ namespace Litle.Sdk
         public litleRequest(Dictionary<String, String> config)
         {
             this.config = config;
+
+            initializeRequest();
+        }
+
+        private void initializeRequest()
+        {
             communication = new Communications();
 
             authentication = new authentication();
             authentication.user = config["username"];
             authentication.password = config["password"];
+
+            requestDirectory = config["requestDirectory"] + "\\Requests\\";
+            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+
+            litleXmlSerializer = new litleXmlSerializer();
+            litleTime = new litleTime();
+            litleFile = new litleFile();
         }
 
         public void setCommunication(Communications communication)
