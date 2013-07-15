@@ -112,14 +112,34 @@ namespace Litle.Sdk
             sumOfCaptureGivenAuth = 0;
         }
 
+        public string getResponseDirectory()
+        {
+            return this.responseDirectory;
+        }
+
+        public string getRequestDirectory()
+        {
+            return this.requestDirectory;
+        }
+
         public void setLitleFile(litleFile litleFile)
         {
             this.litleFile = litleFile;
         }
 
+        public litleFile getLitleFile()
+        {
+            return this.litleFile;
+        }
+
         public void setLitleTime(litleTime litleTime)
         {
             this.litleTime = litleTime;
+        }
+
+        public litleTime getLitleTime()
+        {
+            return this.litleTime;
         }
 
         public int getNumAuthorization()
@@ -637,6 +657,32 @@ namespace Litle.Sdk
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
         }
 
+        public RFRRequest(Dictionary<String, String> config)
+        {
+            this.config = config;
+
+            initializeRequest();
+        }
+
+        private void initializeRequest()
+        {
+            requestDirectory = config["requestDirectory"] + "\\Requests\\";
+            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+
+            litleFile = new litleFile();
+            litleTime = new litleTime();
+        }
+
+        public string getRequestDirectory()
+        {
+            return this.requestDirectory;
+        }
+
+        public string getResponseDirectory()
+        {
+            return this.responseDirectory;
+        }
+
         public void setConfig(Dictionary<String, String> config)
         {
             this.config = config;
@@ -647,9 +693,19 @@ namespace Litle.Sdk
             this.litleFile = litleFile;
         }
 
+        public litleFile getLitleFile()
+        {
+            return this.litleFile;
+        }
+
         public void setLitleTime(litleTime litleTime)
         {
             this.litleTime = litleTime;
+        }
+
+        public litleTime getLitleTime()
+        {
+            return this.litleTime;
         }
 
         public string Serialize()
