@@ -98,9 +98,29 @@ namespace Litle.Sdk
             litleFile = new litleFile();
         }
 
+        public authentication getAuthenication()
+        {
+            return this.authentication;
+        }
+
+        public string getRequestDirectory()
+        {
+            return this.requestDirectory;
+        }
+
+        public string getResponseDirectory()
+        {
+            return this.responseDirectory;
+        }
+
         public void setCommunication(Communications communication)
         {
             this.communication = communication;
+        }
+
+        public Communications getCommunication()
+        {
+            return this.communication;
         }
 
         public void setLitleXmlSerializer(litleXmlSerializer litleXmlSerializer)
@@ -108,14 +128,29 @@ namespace Litle.Sdk
             this.litleXmlSerializer = litleXmlSerializer;
         }
 
+        public litleXmlSerializer getLitleXmlSerializer()
+        {
+            return this.litleXmlSerializer;
+        }
+
         public void setLitleTime(litleTime litleTime)
         {
             this.litleTime = litleTime;
         }
 
+        public litleTime getLitleTime()
+        {
+            return this.litleTime;
+        }
+
         public void setLitleFile(litleFile litleFile)
         {
             this.litleFile = litleFile;
+        }
+
+        public litleFile getLitleFile()
+        {
+            return this.litleFile;
         }
 
         public void addBatch(batchRequest litleBatchRequest)
@@ -177,7 +212,7 @@ namespace Litle.Sdk
 
             communication.FtpPickUp(responseDirectory + batchFileName, config, batchFileName);
 
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseDirectory+ batchFileName);
+            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseDirectory + batchFileName);
             return litleResponse;
         }
 
