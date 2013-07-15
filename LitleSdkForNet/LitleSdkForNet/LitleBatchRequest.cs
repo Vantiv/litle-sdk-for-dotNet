@@ -68,6 +68,18 @@ namespace Litle.Sdk
             config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
             config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
+            initializeRequest();
+        }
+
+        public batchRequest(Dictionary<String, String> config)
+        {
+            this.config = config;
+
+            initializeRequest();
+        }
+
+        private void initializeRequest()
+        {
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
 
@@ -98,11 +110,6 @@ namespace Litle.Sdk
             sumOfEcheckCredit = 0;
             sumOfEcheckVerification = 0;
             sumOfCaptureGivenAuth = 0;
-        }
-
-        public batchRequest(Dictionary<String, String> config)
-        {
-            this.config = config;
         }
 
         public void setLitleFile(litleFile litleFile)
