@@ -821,6 +821,71 @@ namespace Litle.Sdk
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    public partial class recurringResponse
+    {
+        private long subscriptionIdField;
+        private string responseCodeField;
+        private string responseMessageField;
+        private long recurringTxnIdField;
+
+        /// <remarks/>
+        public long subscriptionId
+        {
+            get
+            {
+                return this.subscriptionIdField;
+            }
+            set
+            {
+                this.subscriptionIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string responseCode
+        {
+            get
+            {
+                return this.responseCodeField;
+            }
+            set
+            {
+                this.responseCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string responseMessage
+        {
+            get
+            {
+                return this.responseMessageField;
+            }
+            set
+            {
+                this.responseMessageField = value;
+            }
+        }
+
+        /// <remarks/>
+        public long recurringTxnId
+        {
+            get
+            {
+                return this.recurringTxnIdField;
+            }
+            set
+            {
+                this.recurringTxnIdField = value;
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
     public partial class voidRecyclingResponseType
     {
         private long creditLitleTxnIdField;
@@ -2876,6 +2941,8 @@ namespace Litle.Sdk
 
         private recyclingType recyclingField;
 
+        private recurringResponse recurringResponseField;
+
         private bool duplicateField;
 
         private bool duplicateFieldSpecified;
@@ -3088,6 +3155,19 @@ namespace Litle.Sdk
             set
             {
                 this.enhancedAuthResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public recurringResponse recurringResponse
+        {
+            get
+            {
+                return this.recurringResponseField;
+            }
+            set
+            {
+                this.recurringResponseField = value;
             }
         }
 

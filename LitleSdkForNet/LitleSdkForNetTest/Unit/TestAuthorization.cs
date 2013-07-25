@@ -149,5 +149,30 @@ namespace Litle.Sdk.Test.Unit
             litle.Authorize(auth);
         }
 
+        [Test]
+        public void TestMethodOfPaymentAllowsGiftCard()
+        {
+            authorization auth = new authorization();
+            auth.orderId = "12344";
+            auth.amount = 2;
+            auth.orderSource = orderSourceType.ecommerce;
+            auth.reportGroup = "Planets";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.GC;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            auth.card = card;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<card>\r\n<type>GC</type>\r\n<number>414100000000000000</number>\r\n<expDate>1210</expDate>\r\n</card>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Authorize(auth);
+        }
+
+
     }
 }

@@ -39,6 +39,9 @@ namespace Litle.Sdk
         EC,
 
         /// <remarks/>
+        GC,
+
+        /// <remarks/>
         [System.Xml.Serialization.XmlEnumAttribute("")]
         Item,
     }
