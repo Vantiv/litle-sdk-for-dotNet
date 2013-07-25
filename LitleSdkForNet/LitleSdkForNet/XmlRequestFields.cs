@@ -28,7 +28,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.17\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.18\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -1479,6 +1479,8 @@ namespace Litle.Sdk
                 this.fraudFilterOverrideSet = true;
             }
         }
+        public recurringRequest recurringRequest;
+        public litleInternalRecurringRequest litleInternalRecurringRequest;
 
         public override String Serialize()
         {
@@ -1577,7 +1579,14 @@ namespace Litle.Sdk
                 xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
             }
             if (fraudFilterOverrideSet) xml += "\r\n<fraudFilterOverride>" + fraudFilterOverrideField.ToString().ToLower() + "</fraudFilterOverride>";
-
+            if (recurringRequest != null)
+            {
+                xml += "\r\n<recurringRequest>" + recurringRequest.Serialize() + "\r\n</recurringRequest>";
+            }
+            if (litleInternalRecurringRequest != null)
+            {
+                xml += "\r\n<litleInternalRecurringRequest>" + litleInternalRecurringRequest.Serialize() + "\r\n</litleInternalRecurringRequest>";
+            }
             xml += "\r\n</sale>";
             return xml;
         }
@@ -1856,6 +1865,34 @@ namespace Litle.Sdk
         }
     }
 
+    public partial class litleInternalRecurringRequest
+    {
+        public string subscriptionId;
+        public string recurringTxnId;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (subscriptionId != null) xml += "\r\n<subscriptionId>" + subscriptionId + "</subscriptionId>";
+            if (recurringTxnId != null) xml += "\r\n<recurringTxnId>" + recurringTxnId + "</recurringTxnId>";
+            return xml;
+        }
+    }
+
+    public partial class subscription
+    {
+        public string planCode;
+        public int numberOfPaymentsRemaining;
+
+        public string Serialize()
+        {
+            string xml = "";
+            xml += "\r\n<planCode>" + planCode + "</planCode>";
+            xml += "\r\n<numberOfPaymentsRemaining>" + numberOfPaymentsRemaining + "</numberOfPaymentsRemaining>";
+            return xml;
+        }
+    }
+
     public partial class filteringType
     {
         private bool prepaidField;
@@ -1912,6 +1949,19 @@ namespace Litle.Sdk
             return xml;
         }
     }
+
+    public partial class recurringRequest
+    {
+        public subscription subscription;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (subscription != null) xml += "\r\n<subscription>" + subscription.Serialize() + "\r\n</subscription>";
+            return xml;
+        }
+    }
+
 
     public partial class healthcareAmounts
     {
