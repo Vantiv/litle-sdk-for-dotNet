@@ -87,6 +87,7 @@
     <Compile Include="Functional\TestAuth.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\TestXmlFieldsSerializer.cs" />
     <Compile Include="Unit\TestBatchRequest.cs" />
     <Compile Include="Unit\TestCaptureGivenAuth.cs" />
     <Compile Include="Unit\TestForceCapture.cs" />

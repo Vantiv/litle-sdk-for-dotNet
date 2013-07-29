@@ -173,6 +173,87 @@ namespace Litle.Sdk.Test.Unit
             litle.Authorize(auth);
         }
 
+        [Test]
+        public void TestRecurringRequest()
+        {
+            authorization auth = new authorization();
+            auth.card = new cardType();
+            auth.card.type = methodOfPaymentTypeEnum.VI;
+            auth.card.number = "4100000000000001";
+            auth.card.expDate = "1213";
+            auth.orderId = "12344";
+            auth.amount = 2;
+            auth.orderSource = orderSourceType.ecommerce;
+            auth.fraudFilterOverride = true;
+            auth.recurringRequest = new recurringRequest();
+            auth.recurringRequest.subscription = new subscription();
+            auth.recurringRequest.subscription.planCode = "abc123";
+            auth.recurringRequest.subscription.numberOfPayments = 12;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<fraudFilterOverride>true</fraudFilterOverride>\r\n<recurringRequest>\r\n<subscription>\r\n<planCode>abc123</planCode>\r\n<numberOfPayments>12</numberOfPayments>\r\n</subscription>\r\n</recurringRequest>\r\n</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Authorize(auth);
+        }
+
+        [Test]
+        public void TestDebtRepayment()
+        {
+            authorization auth = new authorization();
+            auth.card = new cardType();
+            auth.card.type = methodOfPaymentTypeEnum.VI;
+            auth.card.number = "4100000000000001";
+            auth.card.expDate = "1213";
+            auth.orderId = "12344";
+            auth.amount = 2;
+            auth.orderSource = orderSourceType.ecommerce;
+            auth.fraudFilterOverride = true;
+            auth.debtRepayment = true;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<fraudFilterOverride>true</fraudFilterOverride>\r\n<debtRepayment>true</debtRepayment>\r\n</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Authorize(auth);
+        }
+
+        [Test]
+        public void TestRecurringResponse_Full()
+        {
+            String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage><recurringTxnId>678</recurringTxnId></recurringResponse></authorizationResponse></litleOnlineResponse>";
+            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            authorizationResponse authorizationResponse = (authorizationResponse)litleOnlineResponse.Item;
+
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(12, authorizationResponse.recurringResponse.subscriptionId);
+            Assert.AreEqual("345", authorizationResponse.recurringResponse.responseCode);
+            Assert.AreEqual("Foo", authorizationResponse.recurringResponse.responseMessage);
+            Assert.AreEqual(678, authorizationResponse.recurringResponse.recurringTxnId);
+        }
+
+        [Test]
+        public void TestRecurringResponse_NoRecurringTxnId()
+        {
+            String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage></recurringResponse></authorizationResponse></litleOnlineResponse>";
+            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            authorizationResponse authorizationResponse = (authorizationResponse)litleOnlineResponse.Item;
+
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(12, authorizationResponse.recurringResponse.subscriptionId);
+            Assert.AreEqual("345", authorizationResponse.recurringResponse.responseCode);
+            Assert.AreEqual("Foo", authorizationResponse.recurringResponse.responseMessage);
+            Assert.AreEqual(0, authorizationResponse.recurringResponse.recurringTxnId);
+        }
+
+
+
 
     }
 }

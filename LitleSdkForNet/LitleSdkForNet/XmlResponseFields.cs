@@ -1777,6 +1777,8 @@ namespace Litle.Sdk
 
         private recyclingType recyclingField;
 
+        private recurringResponse recurringResponseField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -2011,6 +2013,19 @@ namespace Litle.Sdk
             set
             {
                 this.recyclingField = value;
+            }
+        }
+
+        /// <remarks/>
+        public recurringResponse recurringResponse
+        {
+            get
+            {
+                return this.recurringResponseField;
+            }
+            set
+            {
+                this.recurringResponseField = value;
             }
         }
     }
