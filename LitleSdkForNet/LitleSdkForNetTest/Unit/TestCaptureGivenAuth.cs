@@ -57,5 +57,56 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(capture);
         }
+
+        [Test]
+        public void TestDebtRepayment_True()
+        {
+            captureGivenAuth captureGivenAuth = new captureGivenAuth();
+            captureGivenAuth.merchantData = new merchantDataType();
+            captureGivenAuth.debtRepayment = true;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n<debtRepayment>true</debtRepayment>\r\n</captureGivenAuth>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.CaptureGivenAuth(captureGivenAuth);
+        }
+
+        [Test]
+        public void TestDebtRepayment_False()
+        {
+            captureGivenAuth captureGivenAuth = new captureGivenAuth();
+            captureGivenAuth.merchantData = new merchantDataType();
+            captureGivenAuth.debtRepayment = false;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n<debtRepayment>false</debtRepayment>\r\n</captureGivenAuth>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.CaptureGivenAuth(captureGivenAuth);
+        }
+
+        [Test]
+        public void TestDebtRepayment_Optional()
+        {
+            captureGivenAuth captureGivenAuth = new captureGivenAuth();
+            captureGivenAuth.merchantData = new merchantDataType();
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n</captureGivenAuth>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.CaptureGivenAuth(captureGivenAuth);
+        }
+
     }
 }

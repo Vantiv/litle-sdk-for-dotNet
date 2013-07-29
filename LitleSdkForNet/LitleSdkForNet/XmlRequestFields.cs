@@ -28,7 +28,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.18\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.19\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -1283,6 +1283,22 @@ namespace Litle.Sdk
                 this.fraudFilterOverrideSet = true;
             }
         }
+        public recurringRequest recurringRequest;
+        private bool debtRepaymentField;
+        private bool debtRepaymentSet;
+        public bool debtRepayment
+        {
+            get
+            {
+                return this.debtRepaymentField;
+            }
+            set
+            {
+                this.debtRepaymentField = value;
+                this.debtRepaymentSet = true;
+            }
+        }
+
 
         public override String Serialize()
         {
@@ -1385,6 +1401,11 @@ namespace Litle.Sdk
                     xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
                 }
                 if (fraudFilterOverrideSet) xml += "\r\n<fraudFilterOverride>" + fraudFilterOverrideField.ToString().ToLower() + "</fraudFilterOverride>";
+                if (recurringRequest != null)
+                {
+                    xml += "\r\n<recurringRequest>" + recurringRequest.Serialize() + "\r\n</recurringRequest>";
+                }
+                if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
             }
             xml += "\r\n</authorization>";
             return xml;
@@ -1481,6 +1502,20 @@ namespace Litle.Sdk
         }
         public recurringRequest recurringRequest;
         public litleInternalRecurringRequest litleInternalRecurringRequest;
+        private bool debtRepaymentField;
+        private bool debtRepaymentSet;
+        public bool debtRepayment
+        {
+            get
+            {
+                return this.debtRepaymentField;
+            }
+            set
+            {
+                this.debtRepaymentField = value;
+                this.debtRepaymentSet = true;
+            }
+        }
 
         public override String Serialize()
         {
@@ -1587,6 +1622,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<litleInternalRecurringRequest>" + litleInternalRecurringRequest.Serialize() + "\r\n</litleInternalRecurringRequest>";
             }
+            if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
             xml += "\r\n</sale>";
             return xml;
         }
@@ -1621,6 +1657,20 @@ namespace Litle.Sdk
         public pos pos;
         public amexAggregatorData amexAggregatorData;
         public merchantDataType merchantData;
+        private bool debtRepaymentField;
+        private bool debtRepaymentSet;
+        public bool debtRepayment
+        {
+            get
+            {
+                return this.debtRepaymentField;
+            }
+            set
+            {
+                this.debtRepaymentField = value;
+                this.debtRepaymentSet = true;
+            }
+        }
 
         public override String Serialize()
         {
@@ -1679,6 +1729,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
             }
+            if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
             xml += "\r\n</forceCapture>";
             return xml;
         }
@@ -1716,6 +1767,20 @@ namespace Litle.Sdk
         public pos pos;
         public amexAggregatorData amexAggregatorData;
         public merchantDataType merchantData;
+        private bool debtRepaymentField;
+        private bool debtRepaymentSet;
+        public bool debtRepayment
+        {
+            get
+            {
+                return this.debtRepaymentField;
+            }
+            set
+            {
+                this.debtRepaymentField = value;
+                this.debtRepaymentSet = true;
+            }
+        }
 
         public override String Serialize()
         {
@@ -1783,7 +1848,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
             }
-
+            if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
             xml += "\r\n</captureGivenAuth>";
             return xml;
         }
@@ -1882,13 +1947,36 @@ namespace Litle.Sdk
     public partial class subscription
     {
         public string planCode;
-        public int numberOfPaymentsRemaining;
+        private bool numberOfPaymentsSet;
+        private int numberOfPaymentsField;
+        public int numberOfPayments
+        {
+            get { return this.numberOfPaymentsField; }
+            set { this.numberOfPaymentsField = value; this.numberOfPaymentsSet = true; }
+        }
+        private bool startDateSet;
+        private DateTime startDateField;
+        public DateTime startDate
+        {
+            get { return this.startDateField; }
+            set { this.startDateField = value; this.startDateSet = true; }
+        }
+        private bool amountSet;
+        private long amountField;
+        public long amount
+        {
+            get { return this.amountField; }
+            set { this.amountField = value; this.amountSet = true; }
+        }
+
 
         public string Serialize()
         {
             string xml = "";
             xml += "\r\n<planCode>" + planCode + "</planCode>";
-            xml += "\r\n<numberOfPaymentsRemaining>" + numberOfPaymentsRemaining + "</numberOfPaymentsRemaining>";
+            if(numberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + numberOfPayments + "</numberOfPayments>";
+            if (startDateSet) xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDateField) + "</startDate>";
+            if(amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
             return xml;
         }
     }
