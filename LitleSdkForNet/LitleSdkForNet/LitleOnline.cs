@@ -257,9 +257,7 @@ namespace Litle.Sdk
         private litleOnlineResponse sendToLitle(litleOnlineRequest request)
         {
             string xmlRequest = request.Serialize();
-            Console.WriteLine(xmlRequest);
             string xmlResponse = communication.HttpPost(xmlRequest,config);
-            Console.WriteLine(xmlResponse);
             try
             {
                 litleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);

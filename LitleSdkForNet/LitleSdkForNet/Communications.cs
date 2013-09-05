@@ -179,10 +179,6 @@ namespace Litle.Sdk
 
             try
             {
-                Console.WriteLine(url);
-                Console.WriteLine(username);
-                Console.WriteLine(password);
-                Console.WriteLine(knownHostsFile);
                 session.connect();
 
                 channel = session.openChannel("sftp");
