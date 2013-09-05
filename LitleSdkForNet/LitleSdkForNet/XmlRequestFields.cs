@@ -25,10 +25,12 @@ namespace Litle.Sdk
         public echeckRedeposit echeckRedeposit;
         public echeckVoid echeckVoid;
         public updateCardValidationNumOnToken updateCardValidationNumOnToken;
+        public updateSubscription updateSubscription;
+        public cancelSubscription cancelSubscription;
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.19\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.20\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -46,6 +48,8 @@ namespace Litle.Sdk
             else if (echeckRedeposit != null) xml += echeckRedeposit.Serialize();
             else if (echeckVoid != null) xml += echeckVoid.Serialize();
             else if (updateCardValidationNumOnToken != null) xml += updateCardValidationNumOnToken.Serialize();
+            else if (updateSubscription != null) xml += updateSubscription.Serialize();
+            else if (cancelSubscription != null) xml += cancelSubscription.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -1850,6 +1854,80 @@ namespace Litle.Sdk
             }
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
             xml += "\r\n</captureGivenAuth>";
+            return xml;
+        }
+    }
+
+    public partial class cancelSubscription : recurringTransactionType
+    {
+        private long subscriptionIdField;
+        private bool subscriptionIdSet;
+        public long subscriptionId
+        {
+            get
+            {
+                return this.subscriptionIdField;
+            }
+            set
+            {
+                this.subscriptionIdField = value;
+                this.subscriptionIdSet = true;
+            }
+        }
+
+        public override String Serialize()
+        {
+            string xml = "\r\n<cancelSubscription>";
+            if (subscriptionIdSet) xml += "\r\n<subscriptionId>" + subscriptionIdField + "</subscriptionId>";
+            xml += "\r\n</cancelSubscription>";
+            return xml;
+        }
+    }
+
+    public partial class updateSubscription : recurringTransactionType
+    {
+        private long subscriptionIdField;
+        private bool subscriptionIdSet;
+        public long subscriptionId
+        {
+            get
+            {
+                return this.subscriptionIdField;
+            }
+            set
+            {
+                this.subscriptionIdField = value;
+                this.subscriptionIdSet = true;
+            }
+        }
+
+        public string planCode;
+        public contact billToAddress;
+        public cardType card;
+        private DateTime billingDateField;
+        private bool billingDateSet;
+        public DateTime billingDate
+        {
+            get
+            {
+                return this.billingDateField;
+            }
+            set
+            {
+                this.billingDateField = value;
+                this.billingDateSet = true;
+            }
+        }
+
+        public override String Serialize()
+        {
+            string xml = "\r\n<updateSubscription>";
+            if (subscriptionIdSet) xml += "\r\n<subscriptionId>" + subscriptionIdField + "</subscriptionId>";
+            if (planCode != null) xml += "\r\n<planCode>" + planCode + "</planCode>";
+            if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
+            if (card != null) xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            if (billingDateSet) xml += "\r\n<billingDate>" + XmlUtil.toXsdDate(billingDateField) + "</billingDate>";
+            xml += "\r\n</updateSubscription>";
             return xml;
         }
     }

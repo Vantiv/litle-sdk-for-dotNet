@@ -34,6 +34,8 @@ namespace Litle.Sdk
         private int numCaptureGivenAuth;
         private int numEcheckRedeposit;
         private int numUpdateCardValidationNumOnToken;
+        private int numUpdateSubscriptions;
+        private int numCancelSubscriptions;
 
         private long sumOfAuthorization;
         private long sumOfAuthReversal;
@@ -99,6 +101,8 @@ namespace Litle.Sdk
             numRegisterTokenRequest = 0;
             numSale = 0;
             numUpdateCardValidationNumOnToken = 0;
+            numUpdateSubscriptions = 0;
+            numCancelSubscriptions = 0;
 
             sumOfAuthorization = 0;
             sumOfAuthReversal = 0;
@@ -210,6 +214,16 @@ namespace Litle.Sdk
         public int getNumUpdateCardValidationNumOnToken()
         {
             return numUpdateCardValidationNumOnToken;
+        }
+
+        public int getNumUpdateSubscriptions()
+        {
+            return numUpdateSubscriptions;
+        }
+
+        public int getNumCancelSubscriptions()
+        {
+            return numCancelSubscriptions;
         }
 
         public long getSumOfAuthorization()
@@ -454,6 +468,32 @@ namespace Litle.Sdk
             }
         }
 
+        public void addUpdateSubscription(updateSubscription updateSubscription)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numUpdateSubscriptions++;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, updateSubscription);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addCancelSubscription(cancelSubscription cancelSubscription)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numCancelSubscriptions++;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, cancelSubscription);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
         public void addAccountUpdate(accountUpdate accountUpdate)
         {
             if (isOnlyAccountUpdates())
@@ -557,6 +597,16 @@ namespace Litle.Sdk
                 xmlHeader += "numUpdateCardValidationNumOnTokens=\"" + numUpdateCardValidationNumOnToken + "\"\r\n";
             }
 
+            if (numUpdateSubscriptions != 0)
+            {
+                xmlHeader += "numUpdateSubscriptions=\"" + numUpdateSubscriptions + "\"\r\n";
+            }
+
+            if (numCancelSubscriptions != 0)
+            {
+                xmlHeader += "numCancelSubscriptions=\"" + numCancelSubscriptions + "\"\r\n";
+            }
+
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
 
             string xmlFooter = "</batchRequest>\r\n";
@@ -572,7 +622,7 @@ namespace Litle.Sdk
             return batchFilePath;
         }
 
-        private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionType element)
+        private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionRequest element)
         {
             string fPath;
             fPath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_batchRequest.xml", litleTime);
