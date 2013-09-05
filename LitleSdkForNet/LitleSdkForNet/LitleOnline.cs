@@ -64,7 +64,7 @@ namespace Litle.Sdk
             request.authorization = auth;
 
             litleOnlineResponse response = sendToLitle(request);
-            authorizationResponse authResponse = (authorizationResponse)response.Item;
+            authorizationResponse authResponse = (authorizationResponse)response.authorizationResponse;
             return authResponse;
         }
 
@@ -75,7 +75,7 @@ namespace Litle.Sdk
             request.authReversal = reversal;
 
             litleOnlineResponse response = sendToLitle(request);
-            authReversalResponse reversalResponse = (authReversalResponse)response.Item;
+            authReversalResponse reversalResponse = (authReversalResponse)response.authReversalResponse;
             return reversalResponse;
         }
 
@@ -86,7 +86,7 @@ namespace Litle.Sdk
             request.capture = capture;
 
             litleOnlineResponse response = sendToLitle(request);
-            captureResponse captureResponse = (captureResponse)response.Item;
+            captureResponse captureResponse = (captureResponse)response.captureResponse;
             return captureResponse;
         }
 
@@ -97,7 +97,7 @@ namespace Litle.Sdk
             request.captureGivenAuth = captureGivenAuth;
 
             litleOnlineResponse response = sendToLitle(request);
-            captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)response.Item;
+            captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)response.captureGivenAuthResponse;
             return captureGivenAuthResponse;
         }
 
@@ -108,7 +108,7 @@ namespace Litle.Sdk
             request.credit = credit;
 
             litleOnlineResponse response = sendToLitle(request);
-            creditResponse creditResponse = (creditResponse)response.Item;
+            creditResponse creditResponse = (creditResponse)response.creditResponse;
             return creditResponse;
         }
 
@@ -119,7 +119,7 @@ namespace Litle.Sdk
             request.echeckCredit = echeckCredit;
 
             litleOnlineResponse response = sendToLitle(request);
-            echeckCreditResponse echeckCreditResponse = (echeckCreditResponse)response.Item;
+            echeckCreditResponse echeckCreditResponse = (echeckCreditResponse)response.echeckCreditResponse;
             return echeckCreditResponse;
         }
 
@@ -130,7 +130,7 @@ namespace Litle.Sdk
             request.echeckRedeposit = echeckRedeposit;
 
             litleOnlineResponse response = sendToLitle(request);
-            echeckRedepositResponse echeckRedepositResponse = (echeckRedepositResponse)response.Item;
+            echeckRedepositResponse echeckRedepositResponse = (echeckRedepositResponse)response.echeckRedepositResponse;
             return echeckRedepositResponse;
         }
 
@@ -141,7 +141,7 @@ namespace Litle.Sdk
             request.echeckSale = echeckSale;
 
             litleOnlineResponse response = sendToLitle(request);
-            echeckSalesResponse echeckSalesResponse = (echeckSalesResponse)response.Item;
+            echeckSalesResponse echeckSalesResponse = (echeckSalesResponse)response.echeckSalesResponse;
             return echeckSalesResponse;
         }
 
@@ -152,7 +152,7 @@ namespace Litle.Sdk
             request.echeckVerification = echeckVerification;
 
             litleOnlineResponse response = sendToLitle(request);
-            echeckVerificationResponse echeckVerificationResponse = (echeckVerificationResponse)response.Item;
+            echeckVerificationResponse echeckVerificationResponse = (echeckVerificationResponse)response.echeckVerificationResponse;
             return echeckVerificationResponse;
         }
 
@@ -163,7 +163,7 @@ namespace Litle.Sdk
             request.forceCapture = forceCapture;
 
             litleOnlineResponse response = sendToLitle(request);
-            forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)response.Item;
+            forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)response.forceCaptureResponse;
             return forceCaptureResponse;
         }
 
@@ -174,7 +174,7 @@ namespace Litle.Sdk
             request.sale = sale;
 
             litleOnlineResponse response = sendToLitle(request);
-            saleResponse saleResponse = (saleResponse)response.Item;
+            saleResponse saleResponse = (saleResponse)response.saleResponse;
             return saleResponse;
         }
 
@@ -185,7 +185,7 @@ namespace Litle.Sdk
             request.registerTokenRequest = tokenRequest;
 
             litleOnlineResponse response = sendToLitle(request);
-            registerTokenResponse registerTokenResponse = (registerTokenResponse)response.Item;
+            registerTokenResponse registerTokenResponse = (registerTokenResponse)response.registerTokenResponse;
             return registerTokenResponse;
         }
 
@@ -196,7 +196,7 @@ namespace Litle.Sdk
             request.voidTxn = v;
 
             litleOnlineResponse response = sendToLitle(request);
-            litleOnlineResponseTransactionResponseVoidResponse voidResponse = (litleOnlineResponseTransactionResponseVoidResponse)response.Item;
+            litleOnlineResponseTransactionResponseVoidResponse voidResponse = (litleOnlineResponseTransactionResponseVoidResponse)response.voidResponse;
             return voidResponse;
         }
 
@@ -207,7 +207,7 @@ namespace Litle.Sdk
             request.echeckVoid = v;
 
             litleOnlineResponse response = sendToLitle(request);
-            litleOnlineResponseTransactionResponseEcheckVoidResponse voidResponse = (litleOnlineResponseTransactionResponseEcheckVoidResponse)response.Item;
+            litleOnlineResponseTransactionResponseEcheckVoidResponse voidResponse = (litleOnlineResponseTransactionResponseEcheckVoidResponse)response.echeckVoidResponse;
             return voidResponse;
         }
 
@@ -218,7 +218,27 @@ namespace Litle.Sdk
             request.updateCardValidationNumOnToken = updateCardValidationNumOnToken;
 
             litleOnlineResponse response = sendToLitle(request);
-            updateCardValidationNumOnTokenResponse updateResponse = (updateCardValidationNumOnTokenResponse)response.Item;
+            updateCardValidationNumOnTokenResponse updateResponse = (updateCardValidationNumOnTokenResponse)response.updateCardValidationNumOnTokenResponse;
+            return updateResponse;
+        }
+
+        public cancelSubscriptionResponse CancelSubscription(cancelSubscription cancelSubscription)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.cancelSubscription = cancelSubscription;
+
+            litleOnlineResponse response = sendToLitle(request);
+            cancelSubscriptionResponse cancelResponse = (cancelSubscriptionResponse)response.cancelSubscriptionResponse;
+            return cancelResponse;
+        }
+
+        public updateSubscriptionResponse UpdateSubscription(updateSubscription updateSubscription)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.updateSubscription = updateSubscription;
+
+            litleOnlineResponse response = sendToLitle(request);
+            updateSubscriptionResponse updateResponse = (updateSubscriptionResponse)response.updateSubscriptionResponse;
             return updateResponse;
         }
 
@@ -226,7 +246,7 @@ namespace Litle.Sdk
         {
             litleOnlineRequest request = new litleOnlineRequest();
             request.merchantId = config["merchantId"];
-            request.merchantSdk = "DotNet;8.19.0";
+            request.merchantSdk = "DotNet;8.20.0";
             authentication authentication = new authentication();
             authentication.password = config["password"];
             authentication.user = config["username"];
@@ -237,7 +257,9 @@ namespace Litle.Sdk
         private litleOnlineResponse sendToLitle(litleOnlineRequest request)
         {
             string xmlRequest = request.Serialize();
+            Console.WriteLine(xmlRequest);
             string xmlResponse = communication.HttpPost(xmlRequest,config);
+            Console.WriteLine(xmlResponse);
             try
             {
                 litleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);

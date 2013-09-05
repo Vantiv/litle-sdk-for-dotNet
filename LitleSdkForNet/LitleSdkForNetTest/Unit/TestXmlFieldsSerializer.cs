@@ -12,13 +12,10 @@ namespace Litle.Sdk.Test.Unit
     [TestFixture]
     class TestXmlFieldsSerializer
     {
-        
-        //private LitleOnline litle;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-         //   litle = new LitleOnline();
         }
 
         [Test]
@@ -46,6 +43,63 @@ namespace Litle.Sdk.Test.Unit
             String xml = request.Serialize();
             System.Text.RegularExpressions.Match match = Regex.Match(xml, "<subscription>\r\n<planCode>123abc</planCode>\r\n</subscription>");
             Assert.IsTrue(match.Success, xml);
+        }
+
+        [Test]
+        public void TestUpdateSubscription_Full()
+        {
+            updateSubscription update = new updateSubscription();
+            update.billingDate = new DateTime(2002, 10, 9);
+            contact billToAddress = new contact();
+            billToAddress.name = "Greg Dake";
+            billToAddress.city = "Lowell";
+            billToAddress.state = "MA";
+            billToAddress.email = "sdksupport@litle.com";
+            update.billToAddress = billToAddress;
+            cardType card = new cardType();
+            card.number = "4100000000000001";
+            card.expDate = "1215";
+            card.type = methodOfPaymentTypeEnum.VI;
+            update.card = card;
+            update.planCode = "abcdefg";
+            update.subscriptionId = 12345;
+
+            String actual = update.Serialize();
+            String expected = "\r\n<updateSubscription>\r\n<subscriptionId>12345</subscriptionId>\r\n<planCode>abcdefg</planCode>\r\n<billToAddress>\r\n<name>Greg Dake</name>\r\n<city>Lowell</city>\r\n<state>MA</state>\r\n<email>sdksupport@litle.com</email>\r\n</billToAddress>\r\n<card>\r\n<type>VI</type>\r\n<number>4100000000000001</number>\r\n<expDate>1215</expDate>\r\n</card>\r\n<billingDate>2002-10-09</billingDate>\r\n</updateSubscription>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testUpdateSubscription_OnlyRequired()
+        {
+            updateSubscription update = new updateSubscription();
+            update.subscriptionId = 12345;
+
+            String actual = update.Serialize();
+            String expected = "\r\n<updateSubscription>\r\n<subscriptionId>12345</subscriptionId>\r\n</updateSubscription>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TestCancelSubscription_Full()
+        {
+            cancelSubscription cancel = new cancelSubscription();
+            cancel.subscriptionId = 12345;
+
+            String actual = cancel.Serialize();
+            String expected = "\r\n<cancelSubscription>\r\n<subscriptionId>12345</subscriptionId>\r\n</cancelSubscription>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testCancelSubscription_OnlyRequired()
+        {
+            cancelSubscription update = new cancelSubscription();
+            update.subscriptionId = 12345;
+
+            String actual = update.Serialize();
+            String expected = "\r\n<cancelSubscription>\r\n<subscriptionId>12345</subscriptionId>\r\n</cancelSubscription>";
+            Assert.AreEqual(expected, actual);
         }
 
 

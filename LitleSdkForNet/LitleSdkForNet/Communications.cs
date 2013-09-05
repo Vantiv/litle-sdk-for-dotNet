@@ -99,10 +99,10 @@ namespace Litle.Sdk
             {
                 sslStream.AuthenticateAsClient(url);
             }
-            catch (AuthenticationException)
+            catch (AuthenticationException e)
             {
                 tcpClient.Close();
-                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed");
+                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed", e);
             }
 
             if ("true".Equals(config["printxml"]))
@@ -179,6 +179,10 @@ namespace Litle.Sdk
 
             try
             {
+                Console.WriteLine(url);
+                Console.WriteLine(username);
+                Console.WriteLine(password);
+                Console.WriteLine(knownHostsFile);
                 session.connect();
 
                 channel = session.openChannel("sftp");
@@ -189,7 +193,7 @@ namespace Litle.Sdk
             {
                 if (e.message != null)
                 {
-                    throw new LitleOnlineException(e.message);
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection",e);
                 }
                 else
                 {
@@ -200,7 +204,7 @@ namespace Litle.Sdk
             {
                 if (e.Message != null)
                 {
-                    throw new LitleOnlineException(e.Message);
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
                 }
                 else
                 {
@@ -217,7 +221,7 @@ namespace Litle.Sdk
             {
                 if (e.message != null)
                 {
-                    throw new LitleOnlineException(e.message);
+                    throw new LitleOnlineException("Error occured while attempting to upload and save the file to SFTP", e);
                 }
                 else
                 {
@@ -258,7 +262,7 @@ namespace Litle.Sdk
             {
                 if (e.message != null)
                 {
-                    throw new LitleOnlineException(e.message);
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
                 }
                 else
                 {
@@ -310,7 +314,7 @@ namespace Litle.Sdk
             {
                 if (e.message != null)
                 {
-                    throw new LitleOnlineException(e.message);
+                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
                 }
                 else
                 {

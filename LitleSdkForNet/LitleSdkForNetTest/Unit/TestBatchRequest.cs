@@ -358,6 +358,47 @@ namespace Litle.Sdk.Test.Unit
 
             mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, updateCardValidationNumOnToken.Serialize()));
+        }
+
+        [Test]
+        public void testUpdateSubscription()
+        {
+            updateSubscription update = new updateSubscription();
+            update.billingDate = new DateTime(2002, 10, 9);
+            contact billToAddress = new contact();
+            billToAddress.name = "Greg Dake";
+            billToAddress.city = "Lowell";
+            billToAddress.state = "MA";
+            billToAddress.email = "sdksupport@litle.com";
+            update.billToAddress = billToAddress;
+            cardType card = new cardType();
+            card.number = "4100000000000001";
+            card.expDate = "1215";
+            card.type = methodOfPaymentTypeEnum.VI;
+            update.card = card;
+            update.planCode = "abcdefg";
+            update.subscriptionId = 12345;
+
+            batchRequest.addUpdateSubscription(update);
+
+            Assert.AreEqual(1, batchRequest.getNumUpdateSubscriptions());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, update.Serialize()));
+        }
+
+        [Test]
+        public void testCancelSubscription()
+        {
+            cancelSubscription cancel = new cancelSubscription();
+            cancel.subscriptionId = 12345;
+
+            batchRequest.addCancelSubscription(cancel);
+
+            Assert.AreEqual(1, batchRequest.getNumCancelSubscriptions());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, cancel.Serialize()));
         } 
     }
 }
