@@ -306,6 +306,135 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void testActivate()
+        {
+            activate activate = new activate();
+            activate.orderId = "2";
+            activate.orderSource = orderSourceType.ecommerce;
+            activate.card = new cardType();
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<activate.*?<orderId>2</orderId>.*?</activate>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><activateResponse><litleTxnId>123</litleTxnId></activateResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            activateResponse activateResponse = litle.Activate(activate);
+            Assert.AreEqual("123", activateResponse.litleTxnId);
+        }
+
+        [Test]
+        public void testDeactivate()
+        {
+            deactivate deactivate = new deactivate();
+            deactivate.orderId = "2";
+            deactivate.orderSource = orderSourceType.ecommerce;
+            deactivate.card = new cardType();
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<deactivate.*?<orderId>2</orderId>.*?</deactivate>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><deactivateResponse><litleTxnId>123</litleTxnId></deactivateResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            deactivateResponse deactivateResponse = litle.Deactivate(deactivate);
+            Assert.AreEqual("123", deactivateResponse.litleTxnId);
+        }
+
+        [Test]
+        public void testLoad()
+        {
+            load load = new load();
+            load.orderId = "2";
+            load.orderSource = orderSourceType.ecommerce;
+            load.card = new cardType();
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<load.*?<orderId>2</orderId>.*?</load>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><loadResponse><litleTxnId>123</litleTxnId></loadResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            loadResponse loadResponse = litle.Load(load);
+            Assert.AreEqual("123", loadResponse.litleTxnId);
+        }
+
+        [Test]
+        public void testUnload()
+        {
+            unload unload = new unload();
+            unload.orderId = "2";
+            unload.orderSource = orderSourceType.ecommerce;
+            unload.card = new cardType();
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<unload.*?<orderId>2</orderId>.*?</unload>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><unloadResponse><litleTxnId>123</litleTxnId></unloadResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            unloadResponse unloadResponse = litle.Unload(unload);
+            Assert.AreEqual("123", unloadResponse.litleTxnId);
+        }
+
+        [Test]
+        public void testBalanceInquiry()
+        {
+            balanceInquiry balanceInquiry = new balanceInquiry();
+            balanceInquiry.orderId = "2";
+            balanceInquiry.orderSource = orderSourceType.ecommerce;
+            balanceInquiry.card = new cardType();
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<balanceInquiry.*?<orderId>2</orderId>.*?</balanceInquiry>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><balanceInquiryResponse><litleTxnId>123</litleTxnId></balanceInquiryResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            balanceInquiryResponse balanceInquiryResponse = litle.BalanceInquiry(balanceInquiry);
+            Assert.AreEqual("123", balanceInquiryResponse.litleTxnId);
+        }
+
+        [Test]
+        public void testCreatePlan()
+        {
+            createPlan createPlan = new createPlan();
+            createPlan.planCode = "theCode";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<createPlan.*?<planCode>theCode</planCode>.*?</createPlan>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><createPlanResponse><planCode>theCode</planCode></createPlanResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            createPlanResponse createPlanResponse = litle.CreatePlan(createPlan);
+            Assert.AreEqual("theCode", createPlanResponse.planCode);
+        }
+
+        [Test]
+        public void testUpdatePlan()
+        {
+            updatePlan updatePlan = new updatePlan();
+            updatePlan.planCode = "theCode";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<updatePlan.*?<planCode>theCode</planCode>.*?</updatePlan>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><updatePlanResponse><planCode>theCode</planCode></updatePlanResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            updatePlanResponse updatePlanResponse = litle.UpdatePlan(updatePlan);
+            Assert.AreEqual("theCode", updatePlanResponse.planCode);
+        }
+
+        [Test]
         public void testLitleOnlineException()
         {
             authorization authorization = new authorization();

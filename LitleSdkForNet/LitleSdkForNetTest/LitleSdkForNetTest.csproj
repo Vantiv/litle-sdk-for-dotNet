@@ -87,6 +87,7 @@
     <Compile Include="Functional\TestAuth.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\TestXmlFieldsUnserializer.cs" />
     <Compile Include="Unit\TestCancelSubscription.cs" />
     <Compile Include="Unit\TestUpdateSubscription.cs" />
     <Compile Include="Unit\TestXmlFieldsSerializer.cs" />

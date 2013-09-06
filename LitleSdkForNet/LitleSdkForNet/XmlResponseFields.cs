@@ -1877,6 +1877,8 @@ namespace Litle.Sdk
 
         private recurringResponse recurringResponseField;
 
+        public giftCardResponse giftCardResponse;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -2296,7 +2298,6 @@ namespace Litle.Sdk
         }
     }
 
-
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.SerializableAttribute()]
@@ -2622,7 +2623,7 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class authReversalResponse : transactionTypeWithReportGroup
     {
-
+        public giftCardResponse giftCardResponse;
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -2740,6 +2741,8 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class captureResponse : transactionTypeWithReportGroup
     {
+        public giftCardResponse giftCardResponse;
+        public fraudResult fraudResult;
 
         private long litleTxnIdField;
 
@@ -2905,7 +2908,8 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class forceCaptureResponse : transactionTypeWithReportGroup
     {
-
+        public giftCardResponse giftCardResponse;
+        public fraudResult fraudResult;
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -3053,7 +3057,8 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class captureGivenAuthResponse : transactionTypeWithReportGroup
     {
-
+        public giftCardResponse giftCardResponse;
+        public fraudResult fraudResult;
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -3186,7 +3191,7 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class saleResponse : transactionTypeWithReportGroup
     {
-
+        public giftCardResponse giftCardResponse;
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -3517,7 +3522,8 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class creditResponse : transactionTypeWithReportGroup
     {
-
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -4330,36 +4336,6 @@ namespace Litle.Sdk
 
         private string versionField;
 
-//        /// <remarks/>
-        //[System.Xml.Serialization.XmlElementAttribute("authReversalResponse", typeof(authReversalResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("authorizationResponse", typeof(authorizationResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("captureGivenAuthResponse", typeof(captureGivenAuthResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("captureResponse", typeof(captureResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("creditResponse", typeof(creditResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("echeckCreditResponse", typeof(echeckCreditResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("echeckRedepositResponse", typeof(echeckRedepositResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("echeckSalesResponse", typeof(echeckSalesResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("echeckVerificationResponse", typeof(echeckVerificationResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("echeckVoidResponse", typeof(litleOnlineResponseTransactionResponseEcheckVoidResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("forceCaptureResponse", typeof(forceCaptureResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("registerTokenResponse", typeof(registerTokenResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("saleResponse", typeof(saleResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("voidResponse", typeof(litleOnlineResponseTransactionResponseVoidResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("updateCardValidationNumOnTokenResponse", typeof(updateCardValidationNumOnTokenResponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("cancelSubscriptionResponse", typeof(cancelSubscriptionReponse))]
-        //[System.Xml.Serialization.XmlElementAttribute("updateSubscriptionResponse", typeof(updateSubscriptionReponse))]
-        //public transactionResponse Item
-        //{
-            //get
-            //{
-                //return this.itemField;
-            //}
-            //set
-            //{
-                //this.itemField = value;
-            //}
-        //}
-
         public authReversalResponse authReversalResponse;
         public authorizationResponse authorizationResponse;
         public captureGivenAuthResponse captureGivenAuthResponse;
@@ -4377,6 +4353,13 @@ namespace Litle.Sdk
         public updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse;
         public cancelSubscriptionResponse cancelSubscriptionResponse;
         public updateSubscriptionResponse updateSubscriptionResponse;
+        public activateResponse activateResponse;
+        public deactivateResponse deactivateResponse;
+        public loadResponse loadResponse;
+        public unloadResponse unloadResponse;
+        public balanceInquiryResponse balanceInquiryResponse;
+        public createPlanResponse createPlanResponse;
+        public updatePlanResponse updatePlanResponse;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -4564,6 +4547,13 @@ namespace Litle.Sdk
         private XmlReader updateCardValidationNumOnTokenResponseReader;
         private XmlReader cancelSubscriptionResponseReader;
         private XmlReader updateSubscriptionResponseReader;
+        private XmlReader createPlanResponseReader;
+        private XmlReader updatePlanResponseReader;
+        private XmlReader activateResponseReader;
+        private XmlReader deactivateResponseReader;
+        private XmlReader loadResponseReader;
+        private XmlReader unloadResponseReader;
+        private XmlReader balanceInquiryResponseReader;
 
         public batchResponse()
         {
@@ -4654,6 +4644,39 @@ namespace Litle.Sdk
             this.updateSubscriptionResponseReader = xmlReader;
         }
 
+        public void setCreatePlanResponseReader(XmlReader xmlReader)
+        {
+            this.createPlanResponseReader = xmlReader;
+        }
+
+        public void setUpdatePlanResponseReader(XmlReader xmlReader)
+        {
+            this.updatePlanResponseReader = xmlReader;
+        }
+
+        public void setActivateResponseReader(XmlReader xmlReader)
+        {
+            this.activateResponseReader = xmlReader;
+        }
+        public void setDeactivateResponseReader(XmlReader xmlReader)
+        {
+            this.deactivateResponseReader = xmlReader;
+        }
+        public void setLoadResponseReader(XmlReader xmlReader)
+        {
+            this.loadResponseReader = xmlReader;
+        }
+        public void setUnloadResponseReader(XmlReader xmlReader)
+        {
+            this.unloadResponseReader = xmlReader;
+        }
+        public void setBalanceInquiryResponseReader(XmlReader xmlReader)
+        {
+            this.balanceInquiryResponseReader = xmlReader;
+        }
+        
+
+
         public void readXml(XmlReader reader, string filePath)
         {
             id = reader.GetAttribute("id");
@@ -4677,6 +4700,13 @@ namespace Litle.Sdk
             updateCardValidationNumOnTokenResponseReader = new XmlTextReader(filePath);
             cancelSubscriptionResponseReader = new XmlTextReader(filePath);
             updateSubscriptionResponseReader = new XmlTextReader(filePath);
+            createPlanResponseReader = new XmlTextReader(filePath);
+            updatePlanResponseReader = new XmlTextReader(filePath);
+            activateResponseReader = new XmlTextReader(filePath);
+            deactivateResponseReader = new XmlTextReader(filePath);
+            loadResponseReader = new XmlTextReader(filePath);
+            unloadResponseReader = new XmlTextReader(filePath);
+            balanceInquiryResponseReader = new XmlTextReader(filePath);
 
             if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
             {
@@ -4742,6 +4772,35 @@ namespace Litle.Sdk
             {
                 updateSubscriptionResponseReader.Close();
             }
+            if (!createPlanResponseReader.ReadToFollowing("createPlanResponse"))
+            {
+                createPlanResponseReader.Close();
+            }
+            if (!updatePlanResponseReader.ReadToFollowing("updatePlanResponse"))
+            {
+                updatePlanResponseReader.Close();
+            }
+            if (!activateResponseReader.ReadToFollowing("activateResponse"))
+            {
+                activateResponseReader.Close();
+            }
+            if (!loadResponseReader.ReadToFollowing("loadResponse"))
+            {
+                loadResponseReader.Close();
+            }
+            if (!deactivateResponseReader.ReadToFollowing("deactivateResponse"))
+            {
+                deactivateResponseReader.Close();
+            }
+            if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
+            {
+                unloadResponseReader.Close();
+            }
+            if (!balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
+            {
+                balanceInquiryResponseReader.Close();
+            }
+
         }
 
         virtual public accountUpdateResponse nextAccountUpdateResponse()
@@ -5063,7 +5122,150 @@ namespace Litle.Sdk
 
             return null;
         }
+
+        virtual public createPlanResponse nextCreatePlanResponse()
+        {
+            if (createPlanResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = createPlanResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(createPlanResponse));
+                StringReader reader = new StringReader(response);
+                createPlanResponse i = (createPlanResponse)serializer.Deserialize(reader);
+
+                if (!createPlanResponseReader.ReadToFollowing("createPlanResponse"))
+                {
+                    createPlanResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public updatePlanResponse nextUpdatePlanResponse()
+        {
+            if (updatePlanResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = updatePlanResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(updatePlanResponse));
+                StringReader reader = new StringReader(response);
+                updatePlanResponse i = (updatePlanResponse)serializer.Deserialize(reader);
+
+                if (!updatePlanResponseReader.ReadToFollowing("updatePlanResponse"))
+                {
+                    updatePlanResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public activateResponse nextActivateResponse()
+        {
+            if (activateResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = activateResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(activateResponse));
+                StringReader reader = new StringReader(response);
+                activateResponse i = (activateResponse)serializer.Deserialize(reader);
+
+                if (!activateResponseReader.ReadToFollowing("activateResponse"))
+                {
+                    activateResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public deactivateResponse nextDeactivateResponse()
+        {
+            if (deactivateResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = deactivateResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(deactivateResponse));
+                StringReader reader = new StringReader(response);
+                deactivateResponse i = (deactivateResponse)serializer.Deserialize(reader);
+
+                if (!deactivateResponseReader.ReadToFollowing("deactivateResponse"))
+                {
+                    deactivateResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public loadResponse nextLoadResponse()
+        {
+            if (loadResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = loadResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(loadResponse));
+                StringReader reader = new StringReader(response);
+                loadResponse i = (loadResponse)serializer.Deserialize(reader);
+
+                if (!loadResponseReader.ReadToFollowing("loadResponse"))
+                {
+                    loadResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public unloadResponse nextUnloadResponse()
+        {
+            if (unloadResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = unloadResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(unloadResponse));
+                StringReader reader = new StringReader(response);
+                unloadResponse i = (unloadResponse)serializer.Deserialize(reader);
+
+                if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
+                {
+                    unloadResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public balanceInquiryResponse nextBalanceInquiryResponse()
+        {
+            if (balanceInquiryResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = balanceInquiryResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(balanceInquiryResponse));
+                StringReader reader = new StringReader(response);
+                balanceInquiryResponse i = (balanceInquiryResponse)serializer.Deserialize(reader);
+
+                if (!balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
+                {
+                    balanceInquiryResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+    
     }
+
+
 
     [System.Serializable()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5357,5 +5559,136 @@ namespace Litle.Sdk
                 this.recyclingField = value;
             }
         }
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    public partial class giftCardResponse
+    {
+        public String availableBalance;
+        public String beginningBalance;
+        public String endingBalance;
+        public String cashBackAmount;
+    }
+
+        /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class activateResponse : transactionTypeWithReportGroup
+    {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool duplicate;
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class loadResponse : transactionTypeWithReportGroup
+    {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool duplicate;
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class unloadResponse : transactionTypeWithReportGroup
+    {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool duplicate;
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class balanceInquiryResponse : transactionTypeWithReportGroup
+    {
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class deactivateResponse : transactionTypeWithReportGroup
+    {
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class createPlanResponse : recurringTransactionResponseType
+    {
+        public string planCode;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class updatePlanResponse : recurringTransactionResponseType
+    {
+        public string planCode;
     }
 }

@@ -171,6 +171,12 @@ namespace Litle.Sdk
             string knownHostsFile = config["knownHostsFile"];
             string filePath = fileDirectory + fileName;
 
+            bool printxml = config["printxml"] == "true";
+            if (printxml)
+            {
+                Console.WriteLine("Known hosts file path: " + knownHostsFile);
+            }
+
             JSch jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);
 
@@ -187,42 +193,29 @@ namespace Litle.Sdk
             }
             catch (SftpException e)
             {
-                if (e.message != null)
-                {
-                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection",e);
-                }
-                else
-                {
-                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
-                }
+                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection",e);
             }
             catch (JSchException e)
             {
-                if (e.Message != null)
-                {
-                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
-                }
-                else
-                {
-                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
-                }
+                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
             }
 
             try
             {
-                channelSftp.put(filePath, "inbound/" + fileName, ChannelSftp.OVERWRITE);
-                channelSftp.rename("inbound/" + fileName, "inbound/" + fileName + ".asc");
+                if (printxml)
+                {
+                    Console.WriteLine("Dropping off local file " + filePath + " to inbound/" + fileName + ".prg");
+                }
+                channelSftp.put(filePath, "inbound/" + fileName + ".prg", ChannelSftp.OVERWRITE);
+                if (printxml)
+                {
+                    Console.WriteLine("File copied - renaming from inbound/" + fileName + ".prg to inbound/" + fileName + ".asc");
+                }
+                channelSftp.rename("inbound/" + fileName + ".prg", "inbound/" + fileName + ".asc");
             }
             catch (SftpException e)
             {
-                if (e.message != null)
-                {
-                    throw new LitleOnlineException("Error occured while attempting to upload and save the file to SFTP", e);
-                }
-                else
-                {
-                    throw new LitleOnlineException("Error occured while attempting to upload and save the file to SFTP");
-                }
+                throw new LitleOnlineException("Error occured while attempting to upload and save the file to SFTP", e);
             }
 
             channelSftp.quit();
@@ -232,6 +225,12 @@ namespace Litle.Sdk
 
         virtual public void FtpPoll(string fileName, int timeout, Dictionary<string, string> config)
         {
+            fileName = fileName + ".asc";
+            bool printxml = config["printxml"] == "true";
+            if (printxml)
+            {
+                Console.WriteLine("Polling for outbound result file.  Timeout set to " + timeout + "ms. File to wait for is " + fileName);
+            }
             ChannelSftp channelSftp = null;
             Channel channel;
 
@@ -256,14 +255,7 @@ namespace Litle.Sdk
             }
             catch (SftpException e)
             {
-                if (e.message != null)
-                {
-                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
-                }
-                else
-                {
-                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
-                }
+                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
             }
 
             //check if file exists
@@ -272,12 +264,25 @@ namespace Litle.Sdk
             stopWatch.Start();
             do
             {
+                if (printxml)
+                {
+                    Console.WriteLine("Elapsed time is " + stopWatch.Elapsed.TotalMilliseconds);
+                }
                 try
                 {
                     sftpATTRS = channelSftp.lstat("outbound/" + fileName);
+                    if (printxml)
+                    {
+                        Console.WriteLine("Attrs of file are: " + sftpATTRS.ToString());
+                    }
                 }
-                catch
+                catch (SftpException e)
                 {
+                    if (printxml)
+                    {
+                        Console.WriteLine(e.message);
+                    }
+                    System.Threading.Thread.Sleep(30000);
                 }
             } while (sftpATTRS == null && stopWatch.Elapsed.TotalMilliseconds <= timeout);
         }
@@ -287,6 +292,8 @@ namespace Litle.Sdk
             ChannelSftp channelSftp = null;
             Channel channel;
 
+            bool printxml = config["printxml"] == "true";
+
             string url = config["sftpUrl"];
             string username = config["sftpUsername"];
             string password = config["sftpPassword"];
@@ -308,31 +315,26 @@ namespace Litle.Sdk
             }
             catch (SftpException e)
             {
-                if (e.message != null)
-                {
-                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
-                }
-                else
-                {
-                    throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection");
-                }
+                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
             }
 
             try
             {
+                if (printxml)
+                {
+                    Console.WriteLine("Picking up remote file outbound/" + fileName + ".asc");
+                    Console.WriteLine("Putting it at " + destinationFilePath);
+                }
                 channelSftp.get("outbound/" + fileName + ".asc", destinationFilePath);
+                if (printxml)
+                {
+                    Console.WriteLine("Removing remote file output/" + fileName + ".asc");
+                }
                 channelSftp.rm("outbound/" + fileName + ".asc");
             }
             catch (SftpException e)
             {
-                if (e.message != null)
-                {
-                    throw new LitleOnlineException(e.message);
-                }
-                else
-                {
-                    throw new LitleOnlineException("Error occured while attempting to retrieve and save the file from SFTP");
-                }
+                throw new LitleOnlineException("Error occured while attempting to retrieve and save the file from SFTP", e);
             }
 
             channelSftp.quit();

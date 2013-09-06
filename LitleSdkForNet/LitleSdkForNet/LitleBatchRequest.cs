@@ -36,6 +36,13 @@ namespace Litle.Sdk
         private int numUpdateCardValidationNumOnToken;
         private int numUpdateSubscriptions;
         private int numCancelSubscriptions;
+        private int numCreatePlans;
+        private int numUpdatePlans;
+        private int numActivates;
+        private int numDeactivates;
+        private int numLoads;
+        private int numUnloads;
+        private int numBalanceInquiries;
 
         private long sumOfAuthorization;
         private long sumOfAuthReversal;
@@ -47,6 +54,9 @@ namespace Litle.Sdk
         private long sumOfEcheckCredit;
         private long sumOfEcheckVerification;
         private long sumOfCaptureGivenAuth;
+        private long activateAmount;
+        private long loadAmount;
+        private long unloadAmount;
 
         private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
 
@@ -224,6 +234,56 @@ namespace Litle.Sdk
         public int getNumCancelSubscriptions()
         {
             return numCancelSubscriptions;
+        }
+
+        public int getNumCreatePlans()
+        {
+            return numCreatePlans;
+        }
+
+        public int getNumUpdatePlans()
+        {
+            return numUpdatePlans;
+        }
+
+        public int getNumActivates()
+        {
+            return numActivates;
+        }
+
+        public int getNumDeactivates()
+        {
+            return numDeactivates;
+        }
+
+        public int getNumLoads()
+        {
+            return numLoads;
+        }
+
+        public int getNumUnloads()
+        {
+            return numUnloads;
+        }
+
+        public int getNumBalanceInquiries()
+        {
+            return numBalanceInquiries;
+        }
+
+        public long getLoadAmount()
+        {
+            return loadAmount;
+        }
+
+        public long getUnloadAmount()
+        {
+            return unloadAmount;
+        }
+
+        public long getActivateAmount()
+        {
+            return activateAmount;
         }
 
         public long getSumOfAuthorization()
@@ -494,6 +554,100 @@ namespace Litle.Sdk
             }
         }
 
+        public void addCreatePlan(createPlan createPlan)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numCreatePlans++;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, createPlan);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addUpdatePlan(updatePlan updatePlan)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numUpdatePlans++;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, updatePlan);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addActivate(activate activate)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numActivates++;
+                activateAmount += activate.amount;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, activate);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addDeactivate(deactivate deactivate)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numDeactivates++;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, deactivate);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addLoad(load load)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numLoads++;
+                loadAmount += load.amount;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, load);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addUnload(unload unload)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numUnloads++;
+                unloadAmount += unload.amount;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, unload);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addBalanceInquiry(balanceInquiry balanceInquiry)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numBalanceInquiries++;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, balanceInquiry);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
         public void addAccountUpdate(accountUpdate accountUpdate)
         {
             if (isOnlyAccountUpdates())
@@ -510,8 +664,24 @@ namespace Litle.Sdk
 
         public String Serialize()
         {
-            string xmlHeader = "\r\n<batchRequest " +
-                "id=\"" + id + "\"\r\n";
+            string xmlHeader = generateXmlHeader();
+
+            string xmlFooter = "</batchRequest>\r\n";
+
+            batchFilePath = litleFile.createRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
+
+            litleFile.AppendLineToFile(batchFilePath, xmlHeader);
+            litleFile.AppendFileToFile(batchFilePath, tempBatchFilePath);
+            litleFile.AppendLineToFile(batchFilePath, xmlFooter);
+
+            tempBatchFilePath = null;
+
+            return batchFilePath;
+        }
+
+        public string generateXmlHeader()
+        {
+            string xmlHeader = "\r\n<batchRequest " + "id=\"" + id + "\"\r\n";
 
             if (numAuthorization != 0)
             {
@@ -585,7 +755,10 @@ namespace Litle.Sdk
                 xmlHeader += "numEcheckRedeposit=\"" + numEcheckRedeposit + "\"\r\n";
             }
 
-            xmlHeader += "numAccountUpdates=\"" + numAccountUpdates + "\"\r\n";
+            if (numAccountUpdates != 0)
+            {
+                xmlHeader += "numAccountUpdates=\"" + numAccountUpdates + "\"\r\n";
+            }
 
             if (numRegisterTokenRequest != 0)
             {
@@ -607,19 +780,47 @@ namespace Litle.Sdk
                 xmlHeader += "numCancelSubscriptions=\"" + numCancelSubscriptions + "\"\r\n";
             }
 
+            if (numCreatePlans != 0)
+            {
+                xmlHeader += "numCreatePlans=\"" + numCreatePlans + "\"\r\n";
+            }
+
+            if (numUpdatePlans != 0)
+            {
+                xmlHeader += "numUpdatePlans=\"" + numUpdatePlans + "\"\r\n";
+            }
+
+            if (numActivates != 0)
+            {
+                xmlHeader += "numUpdateActivates=\"" + numActivates + "\"\r\n";
+                xmlHeader += "activateAmount=\"" + activateAmount + "\"\r\n";
+            }
+
+            if (numDeactivates != 0)
+            {
+                xmlHeader += "numDeactivates=\"" + numDeactivates + "\"\r\n";
+            }
+
+            if (numLoads != 0)
+            {
+                xmlHeader += "numLoads=\"" + numLoads + "\"\r\n";
+                xmlHeader += "loadAmount=\"" + loadAmount + "\"\r\n";
+            }
+
+            if (numUnloads != 0)
+            {
+                xmlHeader += "numUnloads=\"" + numUnloads + "\"\r\n";
+                xmlHeader += "unloadAmount=\"" + unloadAmount + "\"\r\n";
+            }
+
+            if (numBalanceInquiries != 0)
+            {
+                xmlHeader += "numBalanceInquirys=\"" + numBalanceInquiries + "\"\r\n";
+            }
+            xmlHeader += "merchantSdk=\"DotNet;8.21.0\"\r\n";
+
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
-
-            string xmlFooter = "</batchRequest>\r\n";
-
-            batchFilePath = litleFile.createRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
-
-            litleFile.AppendLineToFile(batchFilePath, xmlHeader);
-            litleFile.AppendFileToFile(batchFilePath, tempBatchFilePath);
-            litleFile.AppendLineToFile(batchFilePath, xmlFooter);
-
-            tempBatchFilePath = null;
-
-            return batchFilePath;
+            return xmlHeader;
         }
 
         private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionRequest element)

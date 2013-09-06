@@ -27,10 +27,17 @@ namespace Litle.Sdk
         public updateCardValidationNumOnToken updateCardValidationNumOnToken;
         public updateSubscription updateSubscription;
         public cancelSubscription cancelSubscription;
+        public activate activate;
+        public deactivate deactivate;
+        public load load;
+        public unload unload;
+        public balanceInquiry balanceInquiry;
+        public createPlan createPlan;
+        public updatePlan updatePlan;
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.20\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.21\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -50,6 +57,13 @@ namespace Litle.Sdk
             else if (updateCardValidationNumOnToken != null) xml += updateCardValidationNumOnToken.Serialize();
             else if (updateSubscription != null) xml += updateSubscription.Serialize();
             else if (cancelSubscription != null) xml += cancelSubscription.Serialize();
+            else if (activate != null) xml += activate.Serialize();
+            else if (deactivate != null) xml += deactivate.Serialize();
+            else if (load != null) xml += load.Serialize();
+            else if (unload != null) xml += unload.Serialize();
+            else if (balanceInquiry != null) xml += balanceInquiry.Serialize();
+            else if (createPlan != null) xml += createPlan.Serialize();
+            else if (updatePlan != null) xml += updatePlan.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -1884,6 +1898,111 @@ namespace Litle.Sdk
         }
     }
 
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    public enum intervalType
+    {
+        ANNUAL,
+        SEMIANNUAL,
+        QUARTERLY,
+        MONTHLY,
+        WEEKLY
+    }
+
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    public enum trialIntervalType
+    {
+        MONTH,
+        DAY
+    }
+
+    public partial class createPlan : recurringTransactionType
+    {
+        public string planCode;
+        public string name;
+
+        private string descriptionField;
+        private bool descriptionSet;
+        public string description
+        {
+            get { return this.descriptionField; }
+            set { this.descriptionField = value; this.descriptionSet = true; }
+        }
+
+        public intervalType intervalType;
+        public long amount;
+
+        public int numberOfPaymentsField;
+        public bool numberOfPaymentsSet;
+        public int numberOfPayments
+        {
+            get { return this.numberOfPaymentsField; }
+            set { this.numberOfPaymentsField = value; this.numberOfPaymentsSet = true; }
+        }
+
+        public int trialNumberOfIntervalsField;
+        public bool trialNumberOfIntervalsSet;
+        public int trialNumberOfIntervals
+        {
+            get { return this.trialNumberOfIntervalsField; }
+            set { this.trialNumberOfIntervalsField = value; this.trialNumberOfIntervalsSet = true; }
+        }
+
+        private trialIntervalType trialIntervalTypeField;
+        private bool trialIntervalTypeSet;
+        public trialIntervalType trialIntervalType 
+        {
+            get { return this.trialIntervalTypeField; }
+            set { this.trialIntervalTypeField = value; this.trialIntervalTypeSet = true; }
+        }
+
+        private bool activeField;
+        private bool activeSet;
+        public bool active
+        {
+            get { return this.activeField; }
+            set { this.activeField = value; this.activeSet = true; }
+        }
+
+        public override String Serialize()
+        {
+            string xml = "\r\n<createPlan>";
+            xml += "\r\n<planCode>" + planCode + "</planCode>";
+            xml += "\r\n<name>" + name + "</name>";
+            if (descriptionSet) xml += "\r\n<description>" + descriptionField + "</description>";
+            xml += "\r\n<intervalType>" + intervalType + "</intervalType>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            if (numberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + numberOfPaymentsField + "</numberOfPayments>";
+            if (trialNumberOfIntervalsSet) xml += "\r\n<trialNumberOfIntervals>" + trialNumberOfIntervalsField + "</trialNumberOfIntervals>";
+            if (trialIntervalTypeSet) xml += "\r\n<trialIntervalType>" + trialIntervalTypeField + "</trialIntervalType>";
+            if (activeSet) xml += "\r\n<active>" + activeField.ToString().ToLower() + "</active>";
+            xml += "\r\n</createPlan>";
+            return xml;
+        }
+    }
+
+    public partial class updatePlan : recurringTransactionType
+    {
+        public string planCode;
+
+        private bool activeField;
+        private bool activeSet;
+        public bool active
+        {
+            get { return this.activeField; }
+            set { this.activeField = value; this.activeSet = true; }
+        }
+
+        public override String Serialize()
+        {
+            string xml = "\r\n<updatePlan>";
+            xml += "\r\n<planCode>" + planCode + "</planCode>";
+            if (activeSet) xml += "\r\n<active>" + activeField.ToString().ToLower() + "</active>";
+            xml += "\r\n</updatePlan>";
+            return xml;
+        }
+    }
     public partial class updateSubscription : recurringTransactionType
     {
         private long subscriptionIdField;
@@ -1919,6 +2038,23 @@ namespace Litle.Sdk
             }
         }
 
+        public List<createDiscount> createDiscounts;
+        public List<updateDiscount> updateDiscounts;
+        public List<deleteDiscount> deleteDiscounts;
+        public List<createAddOn> createAddOns;
+        public List<updateAddOn> updateAddOns;
+        public List<deleteAddOn> deleteAddOns;
+
+        public updateSubscription()
+        {
+            createDiscounts = new List<createDiscount>();
+            updateDiscounts = new List<updateDiscount>();
+            deleteDiscounts = new List<deleteDiscount>();
+            createAddOns = new List<createAddOn>();
+            updateAddOns = new List<updateAddOn>();
+            deleteAddOns = new List<deleteAddOn>();
+        }
+
         public override String Serialize()
         {
             string xml = "\r\n<updateSubscription>";
@@ -1927,6 +2063,30 @@ namespace Litle.Sdk
             if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
             if (card != null) xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
             if (billingDateSet) xml += "\r\n<billingDate>" + XmlUtil.toXsdDate(billingDateField) + "</billingDate>";
+            foreach (createDiscount createDiscount in createDiscounts) 
+            {
+                xml += "\r\n<createDiscount>" + createDiscount.Serialize() + "\r\n</createDiscount>";
+            }
+            foreach (updateDiscount updateDiscount in updateDiscounts)
+            {
+                xml += "\r\n<updateDiscount>" + updateDiscount.Serialize() + "\r\n</updateDiscount>";
+            }
+            foreach (deleteDiscount deleteDiscount in deleteDiscounts)
+            {
+                xml += "\r\n<deleteDiscount>" + deleteDiscount.Serialize() + "\r\n</deleteDiscount>";
+            }
+            foreach (createAddOn createAddOn in createAddOns)
+            {
+                xml += "\r\n<createAddOn>" + createAddOn.Serialize() + "\r\n</createAddOn>";
+            }
+            foreach (updateAddOn updateAddOn in updateAddOns)
+            {
+                xml += "\r\n<updateAddOn>" + updateAddOn.Serialize() + "\r\n</updateAddOn>";
+            }
+            foreach (deleteAddOn deleteAddOn in deleteAddOns)
+            {
+                xml += "\r\n<deleteAddOn>" + deleteAddOn.Serialize() + "\r\n</deleteAddOn>";
+            }
             xml += "\r\n</updateSubscription>";
             return xml;
         }
@@ -2013,14 +2173,184 @@ namespace Litle.Sdk
         public string subscriptionId;
         public string recurringTxnId;
 
+        private bool finalPaymentField;
+        private bool finalPaymentSet;
+        public bool finalPayment
+        {
+            get { return this.finalPaymentField; }
+            set { this.finalPaymentField = value; this.finalPaymentSet = true; }
+        }
+
         public string Serialize()
         {
             string xml = "";
             if (subscriptionId != null) xml += "\r\n<subscriptionId>" + subscriptionId + "</subscriptionId>";
             if (recurringTxnId != null) xml += "\r\n<recurringTxnId>" + recurringTxnId + "</recurringTxnId>";
+            if(finalPaymentSet) xml += "\r\n<finalPayment>" + finalPaymentField.ToString().ToLower() + "</finalPayment>";
             return xml;
         }
     }
+
+    public partial class createDiscount
+    {
+        public string discountCode;
+        public string name;
+        public long amount;
+        public DateTime startDate;
+        public DateTime endDate;
+
+        public string Serialize()
+        {
+            string xml = "";
+            xml += "\r\n<discountCode>" + discountCode + "</discountCode>";
+            xml += "\r\n<name>" + name + "</name>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDate) + "</startDate>";
+            xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDate) + "</endDate>";
+            return xml;
+        }
+    }
+
+    public partial class updateDiscount
+    {
+        public string discountCode;
+
+        private string nameField;
+        private bool nameSet;
+        public string name
+        {
+            get { return this.nameField; }
+            set { this.nameField = value; this.nameSet = true; }
+        }
+
+        private long amountField;
+        private bool amountSet;
+        public long amount
+        {
+            get { return this.amountField; }
+            set { this.amountField = value; this.amountSet = true; }
+        }
+
+        private DateTime startDateField;
+        private bool startDateSet;
+        public DateTime startDate
+        {
+            get { return this.startDateField; }
+            set { this.startDateField = value; this.startDateSet = true; }
+        }
+
+        private DateTime endDateField;
+        private bool endDateSet;
+        public DateTime endDate
+        {
+            get { return this.endDateField; }
+            set { this.endDateField = value; this.endDateSet = true; }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            xml += "\r\n<discountCode>" + discountCode + "</discountCode>";
+            if (nameSet) xml += "\r\n<name>" + nameField + "</name>";
+            if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
+            if (startDateSet) xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDateField) + "</startDate>";
+            if (endDateSet) xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDateField) + "</endDate>";
+            return xml;
+        }
+    }
+
+    public partial class deleteDiscount
+    {
+        public string discountCode;
+
+        public string Serialize()
+        {
+            string xml = "";
+            xml += "\r\n<discountCode>" + discountCode + "</discountCode>";
+            return xml;
+        }
+    }
+
+    public partial class createAddOn
+    {
+        public string addOnCode;
+        public string name;
+        public long amount;
+        public DateTime startDate;
+        public DateTime endDate;
+
+        public string Serialize()
+        {
+            string xml = "";
+            xml += "\r\n<addOnCode>" + addOnCode + "</addOnCode>";
+            xml += "\r\n<name>" + name + "</name>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDate) + "</startDate>";
+            xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDate) + "</endDate>";
+            return xml;
+        }
+    }
+
+    public partial class updateAddOn
+    {
+        public string addOnCode;
+
+        private string nameField;
+        private bool nameSet;
+        public string name
+        {
+            get { return this.nameField; }
+            set { this.nameField = value; this.nameSet = true; }
+        }
+
+        private long amountField;
+        private bool amountSet;
+        public long amount
+        {
+            get { return this.amountField; }
+            set { this.amountField = value; this.amountSet = true; }
+        }
+
+        private DateTime startDateField;
+        private bool startDateSet;
+        public DateTime startDate
+        {
+            get { return this.startDateField; }
+            set { this.startDateField = value; this.startDateSet = true; }
+        }
+
+        private DateTime endDateField;
+        private bool endDateSet;
+        public DateTime endDate
+        {
+            get { return this.endDateField; }
+            set { this.endDateField = value; this.endDateSet = true; }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            xml += "\r\n<addOnCode>" + addOnCode + "</addOnCode>";
+            if (nameSet) xml += "\r\n<name>" + nameField + "</name>";
+            if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
+            if (startDateSet) xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDateField) + "</startDate>";
+            if (endDateSet) xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDateField) + "</endDate>";
+            return xml;
+        }
+    }
+
+    public partial class deleteAddOn
+    {
+        public string addOnCode;
+
+        public string Serialize()
+        {
+            string xml = "";
+            xml += "\r\n<addOnCode>" + addOnCode + "</addOnCode>";
+            return xml;
+        }
+    }
+
 
     public partial class subscription
     {
@@ -2047,6 +2377,15 @@ namespace Litle.Sdk
             set { this.amountField = value; this.amountSet = true; }
         }
 
+        public List<createDiscount> createDiscounts;
+        public List<createAddOn> createAddOns;
+
+        public subscription()
+        {
+            createDiscounts = new List<createDiscount>();
+            createAddOns = new List<createAddOn>();
+        }
+
 
         public string Serialize()
         {
@@ -2055,6 +2394,15 @@ namespace Litle.Sdk
             if(numberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + numberOfPayments + "</numberOfPayments>";
             if (startDateSet) xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDateField) + "</startDate>";
             if(amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
+            foreach(createDiscount createDiscount in createDiscounts) 
+            {
+                xml += "\r\n<createDiscount>" + createDiscount.Serialize() + "\r\n</createDiscount>";
+            }
+            foreach (createAddOn createAddOn in createAddOns)
+            {
+                xml += "\r\n<createAddOn>" + createAddOn.Serialize() + "\r\n</createAddOn>";
+            }
+
             return xml;
         }
     }
@@ -2554,7 +2902,7 @@ namespace Litle.Sdk
             }
             if (cardValidationNum != null)
             {
-                xml += "<cardValidationNum>" + cardValidationNum + "</cardValidationNum>";
+                xml += "\r\n<cardValidationNum>" + cardValidationNum + "</cardValidationNum>";
             }
             return xml;
         }
@@ -2687,4 +3035,127 @@ namespace Litle.Sdk
             return xml;
         }
     }
+
+    public partial class activate : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public long amount;
+        public orderSourceType orderSource;
+        public cardType card;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<activate";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n</activate>";
+            return xml;
+        }
+    }
+
+    public partial class deactivate : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public orderSourceType orderSource;
+        public cardType card;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<deactivate";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n</deactivate>";
+            return xml;
+        }
+    }
+
+    public partial class load : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public long amount;
+        public orderSourceType orderSource;
+        public cardType card;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<load";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n</load>";
+            return xml;
+        }
+    }
+
+    public partial class unload : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public long amount;
+        public orderSourceType orderSource;
+        public cardType card;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<unload";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            xml += "\r\n<amount>" + amount + "</amount>";
+            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n</unload>";
+            return xml;
+        }
+    }
+
+    public partial class balanceInquiry : transactionTypeWithReportGroup
+    {
+        public string orderId;
+        public orderSourceType orderSource;
+        public cardType card;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<balanceInquiry";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<orderId>" + orderId + "</orderId>";
+            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n</balanceInquiry>";
+            return xml;
+        }
+    }
+
+
 }
