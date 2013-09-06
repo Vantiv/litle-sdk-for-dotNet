@@ -172,10 +172,13 @@ namespace Litle.Sdk
             string filePath = fileDirectory + fileName;
 
             bool printxml = config["printxml"] == "true";
-            if (printxml)
-            {
+            //if (printxml)
+            //{
+                Console.WriteLine("Sftp Url: " + url);
+                Console.WriteLine("Username: " + username);
+                Console.WriteLine("Password: " + password);
                 Console.WriteLine("Known hosts file path: " + knownHostsFile);
-            }
+            //}
 
             JSch jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);
