@@ -242,11 +242,81 @@ namespace Litle.Sdk
             return updateResponse;
         }
 
+        public activateResponse Activate(activate activate)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.activate = activate;
+
+            litleOnlineResponse response = sendToLitle(request);
+            activateResponse activateResponse = response.activateResponse;
+            return activateResponse;
+        }
+
+        public deactivateResponse Deactivate(deactivate deactivate)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.deactivate = deactivate;
+
+            litleOnlineResponse response = sendToLitle(request);
+            deactivateResponse deactivateResponse = response.deactivateResponse;
+            return deactivateResponse;
+        }
+
+        public loadResponse Load(load load)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.load = load;
+
+            litleOnlineResponse response = sendToLitle(request);
+            loadResponse loadResponse = response.loadResponse;
+            return loadResponse;
+        }
+
+        public unloadResponse Unload(unload unload)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.unload = unload;
+
+            litleOnlineResponse response = sendToLitle(request);
+            unloadResponse unloadResponse = response.unloadResponse;
+            return unloadResponse;
+        }
+
+        public balanceInquiryResponse BalanceInquiry(balanceInquiry balanceInquiry)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.balanceInquiry = balanceInquiry;
+
+            litleOnlineResponse response = sendToLitle(request);
+            balanceInquiryResponse balanceInquiryResponse = response.balanceInquiryResponse;
+            return balanceInquiryResponse;
+        }
+
+        public createPlanResponse CreatePlan(createPlan createPlan)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.createPlan = createPlan;
+
+            litleOnlineResponse response = sendToLitle(request);
+            createPlanResponse createPlanResponse = response.createPlanResponse;
+            return createPlanResponse;
+        }
+
+        public updatePlanResponse UpdatePlan(updatePlan updatePlan)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.updatePlan = updatePlan;
+
+            litleOnlineResponse response = sendToLitle(request);
+            updatePlanResponse updatePlanResponse = response.updatePlanResponse;
+            return updatePlanResponse;
+        }
+
         private litleOnlineRequest createLitleOnlineRequest()
         {
             litleOnlineRequest request = new litleOnlineRequest();
             request.merchantId = config["merchantId"];
-            request.merchantSdk = "DotNet;8.20.0";
+            request.merchantSdk = "DotNet;8.21.0";
             authentication authentication = new authentication();
             authentication.password = config["password"];
             authentication.user = config["username"];

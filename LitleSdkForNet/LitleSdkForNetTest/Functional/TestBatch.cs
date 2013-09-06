@@ -1274,7 +1274,7 @@ namespace Litle.Sdk.Test.Functional
 
         private int estimatedResponseTime(int numAuthsAndSales, int numRest)
         {
-            return (int)(5 * 60 * 1000 + 2.5 * 1000 + numAuthsAndSales * (1 / 5) * 1000 + numRest * (1 / 50) * 1000);
+            return (int)(5 * 60 * 1000 + 2.5 * 1000 + numAuthsAndSales * (1 / 5) * 1000 + numRest * (1 / 50) * 1000) * 5;
         }
     }
 }

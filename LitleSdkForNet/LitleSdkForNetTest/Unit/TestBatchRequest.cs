@@ -42,6 +42,26 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void testBatchRequestContainsMerchantSdkAttribute()
+        {
+            Dictionary<String, String> mockConfig = new Dictionary<string, string>();
+
+            mockConfig["merchantId"] = "01234";
+            mockConfig["requestDirectory"] = "C:\\MockRequests";
+            mockConfig["responseDirectory"] = "C:\\MockResponses";
+
+            batchRequest = new batchRequest(mockConfig);
+
+            String actual = batchRequest.generateXmlHeader();
+            String expected = @"
+<batchRequest id=""""
+merchantSdk=""DotNet;8.21.0""
+merchantId=""01234"">
+";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
         public void testInitialization()
         {
             Dictionary<String, String> mockConfig = new Dictionary<string, string>();
@@ -385,6 +405,113 @@ namespace Litle.Sdk.Test.Unit
 
             mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, update.Serialize()));
+        }
+
+        [Test]
+        public void testCreatePlan()
+        {
+            createPlan createPlan = new createPlan();
+
+            batchRequest.addCreatePlan(createPlan);
+
+            Assert.AreEqual(1, batchRequest.getNumCreatePlans());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, createPlan.Serialize()));
+        }
+
+        [Test]
+        public void testUpdatePlan()
+        {
+            updatePlan updatePlan = new updatePlan();
+
+            batchRequest.addUpdatePlan(updatePlan);
+
+            Assert.AreEqual(1, batchRequest.getNumUpdatePlans());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, updatePlan.Serialize()));
+        }
+
+        [Test]
+        public void testActivate()
+        {
+            activate activate = new activate();
+            activate.amount = 500;
+            activate.orderSource = orderSourceType.ecommerce;
+            activate.card = new cardType();
+
+            batchRequest.addActivate(activate);
+
+            Assert.AreEqual(1, batchRequest.getNumActivates());
+            Assert.AreEqual(500, batchRequest.getActivateAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, activate.Serialize()));
+        }
+
+        [Test]
+        public void testDeactivate()
+        {
+            deactivate deactivate = new deactivate();
+            deactivate.orderSource = orderSourceType.ecommerce;
+            deactivate.card = new cardType();
+
+            batchRequest.addDeactivate(deactivate);
+
+            Assert.AreEqual(1, batchRequest.getNumDeactivates());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, deactivate.Serialize()));
+        }
+
+        [Test]
+        public void testLoad()
+        {
+            load load = new load();
+            load.amount = 600;
+            load.orderSource = orderSourceType.ecommerce;
+            load.card = new cardType();
+
+            batchRequest.addLoad(load);
+
+            Assert.AreEqual(1, batchRequest.getNumLoads());
+            Assert.AreEqual(600, batchRequest.getLoadAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, load.Serialize()));
+        }
+
+        [Test]
+        public void testUnload()
+        {
+            unload unload = new unload();
+            unload.amount = 700;
+            unload.orderSource = orderSourceType.ecommerce;
+            unload.card = new cardType();
+
+            batchRequest.addUnload(unload);
+
+            Assert.AreEqual(1, batchRequest.getNumUnloads());
+            Assert.AreEqual(700, batchRequest.getUnloadAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, unload.Serialize()));
+        }
+
+        [Test]
+        public void testBalanceInquiry()
+        {
+            balanceInquiry balanceInquiry = new balanceInquiry();
+            balanceInquiry.orderSource = orderSourceType.ecommerce;
+            balanceInquiry.card = new cardType();
+
+            batchRequest.addBalanceInquiry(balanceInquiry);
+
+            Assert.AreEqual(1, batchRequest.getNumBalanceInquiries());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, balanceInquiry.Serialize()));
         }
 
         [Test]
