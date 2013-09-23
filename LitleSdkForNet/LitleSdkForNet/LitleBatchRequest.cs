@@ -681,7 +681,7 @@ namespace Litle.Sdk
 
         public string generateXmlHeader()
         {
-            string xmlHeader = "\r\n<batchRequest " + "id=\"" + id + "\"\r\n";
+            string xmlHeader = "\r\n<batchRequest id=\"" + id + "\"\r\n";
 
             if (numAuthorization != 0)
             {
@@ -817,7 +817,7 @@ namespace Litle.Sdk
             {
                 xmlHeader += "numBalanceInquirys=\"" + numBalanceInquiries + "\"\r\n";
             }
-            xmlHeader += "merchantSdk=\"DotNet;8.21.0\"\r\n";
+            xmlHeader += "merchantSdk=\"DotNet;8.22.0\"\r\n";
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
