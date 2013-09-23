@@ -333,7 +333,7 @@ namespace Litle.Sdk.Test.Unit
         public void TestEnhancedAuthResponseCanContainVirtualAccountNumber()
         {
             String xml = @"
-<enhancedAuthResponse>
+<enhancedAuthResponse xmlns=""http://www.litle.com/schema"">
 <virtualAccountNumber>123456</virtualAccountNumber>
 </enhancedAuthResponse>";
             XmlSerializer serializer = new XmlSerializer(typeof(enhancedAuthResponse));
@@ -363,7 +363,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theId", authReversalResponse.id);
             Assert.AreEqual("theCustomerId", authReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", authReversalResponse.reportGroup);
-            Assert.AreEqual("1", authReversalResponse.litleTxnId);
+            Assert.AreEqual(1, authReversalResponse.litleTxnId);
             Assert.AreEqual("2", authReversalResponse.orderId);
             Assert.AreEqual("000", authReversalResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), authReversalResponse.responseTime);
