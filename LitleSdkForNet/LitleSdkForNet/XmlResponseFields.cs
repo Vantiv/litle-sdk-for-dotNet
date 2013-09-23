@@ -2296,6 +2296,8 @@ namespace Litle.Sdk
                 this.responseTimeField = value;
             }
         }
+
+        public tokenResponseType tokenResponse;
     }
 
     /// <remarks/>
@@ -2487,6 +2489,8 @@ namespace Litle.Sdk
                 this.cardProductTypeFieldSpecified = value;
             }
         }
+
+        public string virtualAccountNumber;
     }
 
     /// <remarks/>
@@ -4360,6 +4364,12 @@ namespace Litle.Sdk
         public balanceInquiryResponse balanceInquiryResponse;
         public createPlanResponse createPlanResponse;
         public updatePlanResponse updatePlanResponse;
+        public refundReversalResponse refundReversalResponse;
+        public depositReversalResponse depositReversalResponse;
+        public activateReversalResponse activateReversalResponse;
+        public deactivateReversalResponse deactivateReversalResponse;
+        public loadReversalResponse loadReversalResponse;
+        public unloadReversalResponse unloadReversalResponse;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -4674,8 +4684,6 @@ namespace Litle.Sdk
         {
             this.balanceInquiryResponseReader = xmlReader;
         }
-        
-
 
         public void readXml(XmlReader reader, string filePath)
         {
@@ -5579,6 +5587,17 @@ namespace Litle.Sdk
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    public partial class virtualGiftCardResponseType
+    {
+        public String accountNumber;
+        public String cardValidationNum;
+    }
+
+        /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class activateResponse : transactionTypeWithReportGroup
     {
@@ -5592,6 +5611,7 @@ namespace Litle.Sdk
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+        public virtualGiftCardResponseType virtualGiftCardResponse;
     }
 
     /// <remarks/>
@@ -5691,4 +5711,113 @@ namespace Litle.Sdk
     {
         public string planCode;
     }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class loadReversalResponse : transactionTypeWithReportGroup
+    {
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class unloadReversalResponse : transactionTypeWithReportGroup
+    {
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class deactivateReversalResponse : transactionTypeWithReportGroup
+    {
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class activateReversalResponse : transactionTypeWithReportGroup
+    {
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class refundReversalResponse : transactionTypeWithReportGroup
+    {
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class depositReversalResponse : transactionTypeWithReportGroup
+    {
+        public string litleTxnId;
+        public string orderId;
+        public string response;
+        public DateTime responseTime;
+        public DateTime postDate;
+        public string message;
+        public fraudResult fraudResult;
+        public giftCardResponse giftCardResponse;
+    }
+
 }

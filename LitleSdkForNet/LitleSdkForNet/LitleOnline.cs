@@ -312,6 +312,66 @@ namespace Litle.Sdk
             return updatePlanResponse;
         }
 
+        public refundReversalResponse RefundReversal(refundReversal refundReversal)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.refundReversal = refundReversal;
+
+            litleOnlineResponse response = sendToLitle(request);
+            refundReversalResponse refundReversalResponse = response.refundReversalResponse;
+            return refundReversalResponse;
+        }
+
+        public depositReversalResponse DepositReversal(depositReversal depositReversal)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.depositReversal = depositReversal;
+
+            litleOnlineResponse response = sendToLitle(request);
+            depositReversalResponse depositReversalResponse = response.depositReversalResponse;
+            return depositReversalResponse;
+        }
+
+        public activateReversalResponse ActivateReversal(activateReversal activateReversal)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.activateReversal = activateReversal;
+
+            litleOnlineResponse response = sendToLitle(request);
+            activateReversalResponse activateReversalResponse = response.activateReversalResponse;
+            return activateReversalResponse;
+        }
+
+        public deactivateReversalResponse DeactivateReversal(deactivateReversal deactivateReversal)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.deactivateReversal = deactivateReversal;
+
+            litleOnlineResponse response = sendToLitle(request);
+            deactivateReversalResponse deactivateReversalResponse = response.deactivateReversalResponse;
+            return deactivateReversalResponse;
+        }
+
+        public loadReversalResponse LoadReversal(loadReversal loadReversal)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.loadReversal = loadReversal;
+
+            litleOnlineResponse response = sendToLitle(request);
+            loadReversalResponse loadReversalResponse = response.loadReversalResponse;
+            return loadReversalResponse;
+        }
+
+        public unloadReversalResponse UnloadReversal(unloadReversal unloadReversal)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.unloadReversal = unloadReversal;
+
+            litleOnlineResponse response = sendToLitle(request);
+            unloadReversalResponse unloadReversalResponse = response.unloadReversalResponse;
+            return unloadReversalResponse;
+        }
+
         private litleOnlineRequest createLitleOnlineRequest()
         {
             litleOnlineRequest request = new litleOnlineRequest();
