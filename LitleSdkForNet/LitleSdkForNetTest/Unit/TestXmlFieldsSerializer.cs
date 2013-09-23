@@ -430,7 +430,7 @@ namespace Litle.Sdk.Test.Unit
 <updateSubscription>
 <subscriptionId>1</subscriptionId>
 <paypage>
-<paypageRegistrationId>123456</paypageRegistrationId>
+<paypageRegistrationId>abc123</paypageRegistrationId>
 </paypage>
 </updateSubscription>";
             Assert.AreEqual(expected, actual);
@@ -521,10 +521,8 @@ namespace Litle.Sdk.Test.Unit
 
             String actual = virtualGiftCard.Serialize();
             String expected = @"
-<virtualGiftCard>
 <accountNumberLength>16</accountNumberLength>
-<giftCardBin>123456</giftCardBin>
-</virtualGiftCard>";
+<giftCardBin>123456</giftCardBin>";
             Assert.AreEqual(expected, actual);
         }
 
