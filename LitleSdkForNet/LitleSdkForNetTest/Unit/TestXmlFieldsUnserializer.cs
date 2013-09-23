@@ -308,5 +308,263 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("thePlan", updatePlanResponse.planCode);
         }
 
+        [Test]
+        public void TestUpdateSubscriptionResponseCanContainTokenResponse()
+        {
+            String xml = @"
+<updateSubscriptionResponse xmlns=""http://www.litle.com/schema"">
+<litleTxnId>1</litleTxnId>
+<response>000</response>
+<message>Approved</message>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<subscriptionId>123</subscriptionId>
+<tokenResponse>
+<litleToken>123456</litleToken>
+</tokenResponse>
+</updateSubscriptionResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(updateSubscriptionResponse));
+            StringReader reader = new StringReader(xml);
+            updateSubscriptionResponse updateSubscriptionResponse = (updateSubscriptionResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("123", updateSubscriptionResponse.subscriptionId);
+            Assert.AreEqual("123456", updateSubscriptionResponse.tokenResponse.litleToken);
+        }
+
+        [Test]
+        public void TestEnhancedAuthResponseCanContainVirtualAccountNumber()
+        {
+            String xml = @"
+<enhancedAuthResponse>
+<virtualAccountNumber>123456</virtualAccountNumber>
+</enhancedAuthResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(enhancedAuthResponse));
+            StringReader reader = new StringReader(xml);
+            enhancedAuthResponse enhancedAuthResponse = (enhancedAuthResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("123456", enhancedAuthResponse.virtualAccountNumber);
+        }
+
+        [Test]
+        public void TestAuthReversalResponseCanContainGiftCardResponse()
+        {
+            String xml = @"
+<authReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>1</litleTxnId>
+<orderId>2</orderId>
+<response>000</response>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<postDate>2013-09-05</postDate>
+<message>Foo</message>
+<giftCardResponse>
+<availableBalance>5</availableBalance>
+</giftCardResponse>
+</authReversalResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(authReversalResponse));
+            StringReader reader = new StringReader(xml);
+            authReversalResponse authReversalResponse = (authReversalResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("theId", authReversalResponse.id);
+            Assert.AreEqual("theCustomerId", authReversalResponse.customerId);
+            Assert.AreEqual("theReportGroup", authReversalResponse.reportGroup);
+            Assert.AreEqual("1", authReversalResponse.litleTxnId);
+            Assert.AreEqual("2", authReversalResponse.orderId);
+            Assert.AreEqual("000", authReversalResponse.response);
+            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), authReversalResponse.responseTime);
+            Assert.AreEqual(new DateTime(2013, 9, 5), authReversalResponse.postDate);
+            Assert.AreEqual("Foo", authReversalResponse.message);
+            Assert.AreEqual("5", authReversalResponse.giftCardResponse.availableBalance);
+        }
+
+        [Test]
+        public void TestDepositReversalResponseCanContainGiftCardResponse()
+        {
+            String xml = @"
+<depositReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>1</litleTxnId>
+<orderId>2</orderId>
+<response>000</response>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<postDate>2013-09-05</postDate>
+<message>Foo</message>
+<giftCardResponse>
+<availableBalance>5</availableBalance>
+</giftCardResponse>
+</depositReversalResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(depositReversalResponse));
+            StringReader reader = new StringReader(xml);
+            depositReversalResponse depositReversalResponse = (depositReversalResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("theId", depositReversalResponse.id);
+            Assert.AreEqual("theCustomerId", depositReversalResponse.customerId);
+            Assert.AreEqual("theReportGroup", depositReversalResponse.reportGroup);
+            Assert.AreEqual("1", depositReversalResponse.litleTxnId);
+            Assert.AreEqual("2", depositReversalResponse.orderId);
+            Assert.AreEqual("000", depositReversalResponse.response);
+            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), depositReversalResponse.responseTime);
+            Assert.AreEqual(new DateTime(2013, 9, 5), depositReversalResponse.postDate);
+            Assert.AreEqual("Foo", depositReversalResponse.message);
+            Assert.AreEqual("5", depositReversalResponse.giftCardResponse.availableBalance);
+        }
+
+        [Test]
+        public void TestActivateReversalResponseCanContainGiftCardResponse()
+        {
+            String xml = @"
+<activateReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>1</litleTxnId>
+<orderId>2</orderId>
+<response>000</response>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<postDate>2013-09-05</postDate>
+<message>Foo</message>
+<giftCardResponse>
+<availableBalance>5</availableBalance>
+</giftCardResponse>
+</activateReversalResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(activateReversalResponse));
+            StringReader reader = new StringReader(xml);
+            activateReversalResponse activateReversalResponse = (activateReversalResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("theId", activateReversalResponse.id);
+            Assert.AreEqual("theCustomerId", activateReversalResponse.customerId);
+            Assert.AreEqual("theReportGroup", activateReversalResponse.reportGroup);
+            Assert.AreEqual("1", activateReversalResponse.litleTxnId);
+            Assert.AreEqual("2", activateReversalResponse.orderId);
+            Assert.AreEqual("000", activateReversalResponse.response);
+            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), activateReversalResponse.responseTime);
+            Assert.AreEqual(new DateTime(2013, 9, 5), activateReversalResponse.postDate);
+            Assert.AreEqual("Foo", activateReversalResponse.message);
+            Assert.AreEqual("5", activateReversalResponse.giftCardResponse.availableBalance);
+        }
+
+        [Test]
+        public void TestDeactivateReversalResponseCanContainGiftCardResponse()
+        {
+            String xml = @"
+<deactivateReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>1</litleTxnId>
+<orderId>2</orderId>
+<response>000</response>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<postDate>2013-09-05</postDate>
+<message>Foo</message>
+<giftCardResponse>
+<availableBalance>5</availableBalance>
+</giftCardResponse>
+</deactivateReversalResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(deactivateReversalResponse));
+            StringReader reader = new StringReader(xml);
+            deactivateReversalResponse deactivateReversalResponse = (deactivateReversalResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("theId", deactivateReversalResponse.id);
+            Assert.AreEqual("theCustomerId", deactivateReversalResponse.customerId);
+            Assert.AreEqual("theReportGroup", deactivateReversalResponse.reportGroup);
+            Assert.AreEqual("1", deactivateReversalResponse.litleTxnId);
+            Assert.AreEqual("2", deactivateReversalResponse.orderId);
+            Assert.AreEqual("000", deactivateReversalResponse.response);
+            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), deactivateReversalResponse.responseTime);
+            Assert.AreEqual(new DateTime(2013, 9, 5), deactivateReversalResponse.postDate);
+            Assert.AreEqual("Foo", deactivateReversalResponse.message);
+            Assert.AreEqual("5", deactivateReversalResponse.giftCardResponse.availableBalance);
+        }
+
+        [Test]
+        public void TestLoadReversalResponseCanContainGiftCardResponse()
+        {
+            String xml = @"
+<loadReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>1</litleTxnId>
+<orderId>2</orderId>
+<response>000</response>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<postDate>2013-09-05</postDate>
+<message>Foo</message>
+<giftCardResponse>
+<availableBalance>5</availableBalance>
+</giftCardResponse>
+</loadReversalResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(loadReversalResponse));
+            StringReader reader = new StringReader(xml);
+            loadReversalResponse loadReversalResponse = (loadReversalResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("theId", loadReversalResponse.id);
+            Assert.AreEqual("theCustomerId", loadReversalResponse.customerId);
+            Assert.AreEqual("theReportGroup", loadReversalResponse.reportGroup);
+            Assert.AreEqual("1", loadReversalResponse.litleTxnId);
+            Assert.AreEqual("2", loadReversalResponse.orderId);
+            Assert.AreEqual("000", loadReversalResponse.response);
+            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), loadReversalResponse.responseTime);
+            Assert.AreEqual(new DateTime(2013, 9, 5), loadReversalResponse.postDate);
+            Assert.AreEqual("Foo", loadReversalResponse.message);
+            Assert.AreEqual("5", loadReversalResponse.giftCardResponse.availableBalance);
+        }
+
+        [Test]
+        public void TestUnloadReversalResponseCanContainGiftCardResponse()
+        {
+            String xml = @"
+<unloadReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>1</litleTxnId>
+<orderId>2</orderId>
+<response>000</response>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<postDate>2013-09-05</postDate>
+<message>Foo</message>
+<giftCardResponse>
+<availableBalance>5</availableBalance>
+</giftCardResponse>
+</unloadReversalResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(unloadReversalResponse));
+            StringReader reader = new StringReader(xml);
+            unloadReversalResponse unloadReversalResponse = (unloadReversalResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("theId", unloadReversalResponse.id);
+            Assert.AreEqual("theCustomerId", unloadReversalResponse.customerId);
+            Assert.AreEqual("theReportGroup", unloadReversalResponse.reportGroup);
+            Assert.AreEqual("1", unloadReversalResponse.litleTxnId);
+            Assert.AreEqual("2", unloadReversalResponse.orderId);
+            Assert.AreEqual("000", unloadReversalResponse.response);
+            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), unloadReversalResponse.responseTime);
+            Assert.AreEqual(new DateTime(2013, 9, 5), unloadReversalResponse.postDate);
+            Assert.AreEqual("Foo", unloadReversalResponse.message);
+            Assert.AreEqual("5", unloadReversalResponse.giftCardResponse.availableBalance);
+        }
+
+        [Test]
+        public void TestActivateResponseCanContainVirtualGiftCardResponse()
+        {
+            String xml = @"
+<activateResponse reportGroup=""A"" id=""3"" customerId=""4"" duplicate=""true"" xmlns=""http://www.litle.com/schema"">
+<litleTxnId>1</litleTxnId>
+<orderId>2</orderId>
+<response>000</response>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<message>Approved</message>
+<virtualGiftCardResponse>
+<accountNumber>123</accountNumber>
+</virtualGiftCardResponse>
+</activateResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(activateResponse));
+            StringReader reader = new StringReader(xml);
+            activateResponse activateResponse = (activateResponse)serializer.Deserialize(reader);
+
+            Assert.AreEqual("123",activateResponse.virtualGiftCardResponse.accountNumber);
+        }
+
+        [Test]
+        public void TestVirtualGiftCardResponse()
+        {
+            String xml = @"
+<activateResponse reportGroup=""A"" id=""3"" customerId=""4"" duplicate=""true"" xmlns=""http://www.litle.com/schema"">
+<litleTxnId>1</litleTxnId>
+<orderId>2</orderId>
+<response>000</response>
+<responseTime>2013-09-05T14:23:45</responseTime>
+<message>Approved</message>
+<virtualGiftCardResponse>
+<accountNumber>123</accountNumber>
+<cardValidationNum>abc</cardValidationNum>
+</virtualGiftCardResponse>
+</activateResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(activateResponse));
+            StringReader reader = new StringReader(xml);
+            activateResponse activateResponse = (activateResponse)serializer.Deserialize(reader);
+
+            Assert.AreEqual("123", activateResponse.virtualGiftCardResponse.accountNumber);
+            Assert.AreEqual("abc", activateResponse.virtualGiftCardResponse.cardValidationNum);
+        }
+
     }
 }

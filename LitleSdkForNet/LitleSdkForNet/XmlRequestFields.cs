@@ -34,6 +34,12 @@ namespace Litle.Sdk
         public balanceInquiry balanceInquiry;
         public createPlan createPlan;
         public updatePlan updatePlan;
+        public refundReversal refundReversal;
+        public loadReversal loadReversal;
+        public depositReversal depositReversal;
+        public activateReversal activateReversal;
+        public deactivateReversal deactivateReversal;
+        public unloadReversal unloadReversal;
 
         public string Serialize()
         {
@@ -64,6 +70,12 @@ namespace Litle.Sdk
             else if (balanceInquiry != null) xml += balanceInquiry.Serialize();
             else if (createPlan != null) xml += createPlan.Serialize();
             else if (updatePlan != null) xml += updatePlan.Serialize();
+            else if (refundReversal != null) xml += refundReversal.Serialize();
+            else if (loadReversal != null) xml += loadReversal.Serialize();
+            else if (depositReversal != null) xml += depositReversal.Serialize();
+            else if (activateReversal != null) xml += activateReversal.Serialize();
+            else if (deactivateReversal != null) xml += deactivateReversal.Serialize();
+            else if (unloadReversal != null) xml += unloadReversal.Serialize();
             xml += "\r\n</litleOnlineRequest>";
             return xml;
         }
@@ -2023,6 +2035,8 @@ namespace Litle.Sdk
         public string planCode;
         public contact billToAddress;
         public cardType card;
+        public cardTokenType token;
+        public cardPaypageType paypage;
         private DateTime billingDateField;
         private bool billingDateSet;
         public DateTime billingDate
@@ -2062,6 +2076,8 @@ namespace Litle.Sdk
             if (planCode != null) xml += "\r\n<planCode>" + planCode + "</planCode>";
             if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
             if (card != null) xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            else if (token != null) xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+            else if (paypage != null) xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
             if (billingDateSet) xml += "\r\n<billingDate>" + XmlUtil.toXsdDate(billingDateField) + "</billingDate>";
             foreach (createDiscount createDiscount in createDiscounts) 
             {
@@ -2908,6 +2924,28 @@ namespace Litle.Sdk
         }
     }
 
+    public partial class virtualGiftCardType
+    {
+        public int accountNumberLength
+        {
+            get { return this.accountNumberLengthField; }
+            set { this.accountNumberLengthField = value; accountNumberLengthSet = true; }
+        }
+        private int accountNumberLengthField;
+        private bool accountNumberLengthSet;
+
+        public string giftCardBin;
+
+        public String Serialize()
+        {
+            String xml = "";
+            if (accountNumberLengthSet) xml += "\r\n<accountNumberLength>" + accountNumberLengthField + "</accountNumberLength>";
+            if (giftCardBin != null) xml += "\r\n<giftCardBin>" + giftCardBin + "</giftCardBin>";
+            return xml;
+        }
+
+    }
+
     public partial class authReversal : transactionTypeWithReportGroup
     {
         public long litleTxnId;
@@ -3042,6 +3080,7 @@ namespace Litle.Sdk
         public long amount;
         public orderSourceType orderSource;
         public cardType card;
+        public virtualGiftCardType virtualGiftCard;
 
         public override string Serialize()
         {
@@ -3055,7 +3094,8 @@ namespace Litle.Sdk
             xml += "\r\n<orderId>" + orderId + "</orderId>";
             xml += "\r\n<amount>" + amount + "</amount>";
             xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            if (card != null) xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            else if (virtualGiftCard != null) xml += "\r\n<virtualGiftCard>" + virtualGiftCard.Serialize() + "\r\n</virtualGiftCard>";
             xml += "\r\n</activate>";
             return xml;
         }
@@ -3157,5 +3197,118 @@ namespace Litle.Sdk
         }
     }
 
+    public partial class loadReversal : transactionTypeWithReportGroup
+    {
+        public String litleTxnId;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<loadReversal";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n</loadReversal>";
+            return xml;
+        }
+    }
+
+    public partial class unloadReversal : transactionTypeWithReportGroup
+    {
+        public String litleTxnId;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<unloadReversal";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n</unloadReversal>";
+            return xml;
+        }
+    }
+
+    public partial class deactivateReversal : transactionTypeWithReportGroup
+    {
+        public String litleTxnId;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<deactivateReversal";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n</deactivateReversal>";
+            return xml;
+        }
+    }
+
+    public partial class activateReversal : transactionTypeWithReportGroup
+    {
+        public String litleTxnId;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<activateReversal";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n</activateReversal>";
+            return xml;
+        }
+    }
+
+    public partial class refundReversal : transactionTypeWithReportGroup
+    {
+        public String litleTxnId;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<refundReversal";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n</refundReversal>";
+            return xml;
+        }
+    }
+
+    public partial class depositReversal : transactionTypeWithReportGroup
+    {
+        public String litleTxnId;
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<depositReversal";
+            xml += " id=\"" + id + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + customerId + "\"";
+            }
+            xml += " reportGroup=\"" + reportGroup + "\">";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n</depositReversal>";
+            return xml;
+        }
+    }
 
 }

@@ -399,6 +399,45 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void testUpdateSubscription_CanContainToken()
+        {
+            updateSubscription update = new updateSubscription();
+            update.subscriptionId = 1;
+            update.token = new cardTokenType();
+            update.token.litleToken = "123456";
+
+            String actual = update.Serialize();
+            String expected = @"
+<updateSubscription>
+<subscriptionId>1</subscriptionId>
+<token>
+<litleToken>123456</litleToken>
+</token>
+</updateSubscription>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testUpdateSubscription_CanContainPaypage()
+        {
+            updateSubscription update = new updateSubscription();
+            update.subscriptionId = 1;
+            update.paypage = new cardPaypageType();
+            update.paypage.paypageRegistrationId = "abc123";
+
+            String actual = update.Serialize();
+            String expected = @"
+<updateSubscription>
+<subscriptionId>1</subscriptionId>
+<paypage>
+<paypageRegistrationId>123456</paypageRegistrationId>
+</paypage>
+</updateSubscription>";
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [Test]
         public void TestCancelSubscription_Full()
         {
             cancelSubscription cancel = new cancelSubscription();
@@ -447,6 +486,45 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </activate>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testActivate_VirtualGiftCard()
+        {
+            activate activate = new activate();
+            activate.orderId = "12345";
+            activate.amount = 200;
+            activate.orderSource = orderSourceType.ecommerce;
+            activate.id = "theId";
+            activate.reportGroup = "theReportGroup";
+            activate.virtualGiftCard = new virtualGiftCardType();
+
+            String actual = activate.Serialize();
+            String expected = @"
+<activate id=""theId"" reportGroup=""theReportGroup"">
+<orderId>12345</orderId>
+<amount>200</amount>
+<orderSource>ecommerce</orderSource>
+<virtualGiftCard>
+</virtualGiftCard>
+</activate>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testVirtualGiftCard_Full()
+        {
+            virtualGiftCardType virtualGiftCard = new virtualGiftCardType();
+            virtualGiftCard.accountNumberLength = 16;
+            virtualGiftCard.giftCardBin = "123456";
+
+            String actual = virtualGiftCard.Serialize();
+            String expected = @"
+<virtualGiftCard>
+<accountNumberLength>16</accountNumberLength>
+<giftCardBin>123456</giftCardBin>
+</virtualGiftCard>";
             Assert.AreEqual(expected, actual);
         }
 
@@ -842,6 +920,108 @@ namespace Litle.Sdk.Test.Unit
             String actual = dao.Serialize();
             String expected = @"
 <addOnCode>1</addOnCode>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testDepositReversal_Full()
+        {
+            depositReversal depositReversal = new depositReversal();
+            depositReversal.id = "theId";
+            depositReversal.reportGroup = "theReportGroup";
+            depositReversal.customerId = "theCustomerId";
+            depositReversal.litleTxnId = "123";
+
+            String actual = depositReversal.Serialize();
+            String expected = @"
+<depositReversal id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>123</litleTxnId>
+</depositReversal>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testRefundReversal_Full()
+        {
+            refundReversal refundReversal = new refundReversal();
+            refundReversal.id = "theId";
+            refundReversal.reportGroup = "theReportGroup";
+            refundReversal.customerId = "theCustomerId";
+            refundReversal.litleTxnId = "123";
+
+            String actual = refundReversal.Serialize();
+            String expected = @"
+<refundReversal id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>123</litleTxnId>
+</refundReversal>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testActivateReversal_Full()
+        {
+            activateReversal activateReversal = new activateReversal();
+            activateReversal.id = "theId";
+            activateReversal.reportGroup = "theReportGroup";
+            activateReversal.customerId = "theCustomerId";
+            activateReversal.litleTxnId = "123";
+
+            String actual = activateReversal.Serialize();
+            String expected = @"
+<activateReversal id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>123</litleTxnId>
+</activateReversal>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testDeactivateReversal_Full()
+        {
+            deactivateReversal deactivateReversal = new deactivateReversal();
+            deactivateReversal.id = "theId";
+            deactivateReversal.reportGroup = "theReportGroup";
+            deactivateReversal.customerId = "theCustomerId";
+            deactivateReversal.litleTxnId = "123";
+
+            String actual = deactivateReversal.Serialize();
+            String expected = @"
+<deactivateReversal id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>123</litleTxnId>
+</deactivateReversal>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testLoadReversal_Full()
+        {
+            loadReversal loadReversal = new loadReversal();
+            loadReversal.id = "theId";
+            loadReversal.reportGroup = "theReportGroup";
+            loadReversal.customerId = "theCustomerId";
+            loadReversal.litleTxnId = "123";
+
+            String actual = loadReversal.Serialize();
+            String expected = @"
+<loadReversal id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>123</litleTxnId>
+</loadReversal>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void testUnloadReversal_Full()
+        {
+            unloadReversal unloadReversal = new unloadReversal();
+            unloadReversal.id = "theId";
+            unloadReversal.reportGroup = "theReportGroup";
+            unloadReversal.customerId = "theCustomerId";
+            unloadReversal.litleTxnId = "123";
+
+            String actual = unloadReversal.Serialize();
+            String expected = @"
+<unloadReversal id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<litleTxnId>123</litleTxnId>
+</unloadReversal>";
             Assert.AreEqual(expected, actual);
         }
 
