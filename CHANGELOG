@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.22.1 (Nov 12, 2013)
+* Bugfix: Make it simpler to access fields in the accountUpdater response without requiring casting and introspection.
+
 == Version 8.22.0 (Sept 23, 2013)
 * Feature: Support for the following new gift card transactions: ActivateReversal, DeactivateReversal, LoadReversal, RefundReversal, UnloadReversal, DepositReversal
 * Feature: UpdateSubscription now can take token or paypage updates, and can return token in the response

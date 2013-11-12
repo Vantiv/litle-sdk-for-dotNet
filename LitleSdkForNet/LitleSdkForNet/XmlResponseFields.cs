@@ -2309,48 +2309,15 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class accountUpdater
     {
-
-        private object[] itemsField;
-
-        private ItemsChoiceType2[] itemsElementNameField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("extendedCardResponse", typeof(extendedCardResponseType))]
-        [System.Xml.Serialization.XmlElementAttribute("newAccountInfo", typeof(echeckAccountInfoType))]
-        [System.Xml.Serialization.XmlElementAttribute("newCardInfo", typeof(cardAccountInfoType))]
-        [System.Xml.Serialization.XmlElementAttribute("newCardTokenInfo", typeof(cardTokenInfoType))]
-        [System.Xml.Serialization.XmlElementAttribute("newTokenInfo", typeof(echeckTokenInfoType))]
-        [System.Xml.Serialization.XmlElementAttribute("originalAccountInfo", typeof(echeckAccountInfoType))]
-        [System.Xml.Serialization.XmlElementAttribute("originalCardInfo", typeof(cardAccountInfoType))]
-        [System.Xml.Serialization.XmlElementAttribute("originalCardTokenInfo", typeof(cardTokenInfoType))]
-        [System.Xml.Serialization.XmlElementAttribute("originalTokenInfo", typeof(echeckTokenInfoType))]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public object[] Items
-        {
-            get
-            {
-                return this.itemsField;
-            }
-            set
-            {
-                this.itemsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemsChoiceType2[] ItemsElementName
-        {
-            get
-            {
-                return this.itemsElementNameField;
-            }
-            set
-            {
-                this.itemsElementNameField = value;
-            }
-        }
+        public extendedCardResponseType extendedCardResponse;
+        public echeckAccountInfoType newAccountInfo;
+        public cardAccountInfoType newCardInfo;
+        public cardTokenInfoType newCardTokenInfo;
+        public echeckTokenInfoType newTokenInfo;
+        public echeckAccountInfoType originalAccountInfo;
+        public cardAccountInfoType originalCardInfo;
+        public cardTokenInfoType originalCardTokenInfo;
+        public echeckTokenInfoType originalTokenInfo;
     }
 
     /// <remarks/>
