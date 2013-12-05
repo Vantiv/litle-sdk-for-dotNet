@@ -39,7 +39,6 @@ namespace Litle.Sdk
         virtual public string HttpPost(string xmlRequest, Dictionary<String, String> config)
         {
             string uri = config["url"];
-            System.Net.ServicePointManager.Expect100Continue = false;
             System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
             if ("true".Equals(config["printxml"]))
             {
@@ -48,6 +47,7 @@ namespace Litle.Sdk
             req.ContentType = "text/xml";
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 10000;
+            req.ServicePoint.Expect100Continue = false;
             if (config.ContainsKey("proxyHost") && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"].Length > 0)
             {
                 WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
