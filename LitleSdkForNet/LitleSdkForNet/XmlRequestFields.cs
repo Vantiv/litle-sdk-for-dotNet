@@ -1151,7 +1151,7 @@ namespace Litle.Sdk
             if (termsAndConditionsSet) xml += "\r\n<termsAndConditions>" + termsAndConditionsField + "</termsAndConditions>";
             if (preapprovalNumber != null) xml += "\r\n<preapprovalNumber>" + preapprovalNumber + "</preapprovalNumber>";
             if (merchantPromotionalCodeSet) xml += "\r\n<merchantPromotionalCode>" + merchantPromotionalCodeField + "</merchantPromotionalCode>";
-            if (virtualAuthenticationKeyPresenceIndicator != null) xml += "\r\n<virtualAuthenticationKeyPresenceIndictor>" + virtualAuthenticationKeyPresenceIndicator + "</virtualAuthenticationKeyPresenceIndicator>";
+            if (virtualAuthenticationKeyPresenceIndicator != null) xml += "\r\n<virtualAuthenticationKeyPresenceIndicator>" + virtualAuthenticationKeyPresenceIndicator + "</virtualAuthenticationKeyPresenceIndicator>";
             if (virtualAuthenticationKeyData != null) xml += "\r\n<virtualAuthenticationKeyData>" + virtualAuthenticationKeyData + "</virtualAuthenticationKeyData>";
             if (itemCategoryCodeSet) xml += "\r\n<itemCategoryCode>" + itemCategoryCodeField + "</itemCategoryCode>";
             return xml;
@@ -2883,7 +2883,7 @@ namespace Litle.Sdk
             string xml = "";
             if (authenticationValue != null) xml += "\r\n<authenticationValue>" + authenticationValue + "</authenticationValue>";
             if (authenticationTransactionId != null) xml += "\r\n<authenticationTransactionId>" + authenticationTransactionId + "</authenticationTransactionId>";
-            if (customerIpAddress != null) xml += "\r\n<customerIdAddress>" + customerIpAddress + "</customerIpAddress>";
+            if (customerIpAddress != null) xml += "\r\n<customerIpAddress>" + customerIpAddress + "</customerIpAddress>";
             if (authenticatedByMerchantSet) xml += "\r\n<authenticatedByMerchant>" + authenticatedByMerchantField + "</authenticatedByMerchant>";
             return xml;
         }
