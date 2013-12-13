@@ -123,6 +123,32 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.message);
         }
+
+        [Test]
+        public void AuthWithAmpersand()
+        {
+            authorization authorization = new authorization();
+            authorization.orderId = "1";
+            authorization.amount = 10010;
+            authorization.orderSource = orderSourceType.ecommerce;
+            contact contact = new contact();
+            contact.name = "John & Jane Smith";
+            contact.addressLine1 = "1 Main St.";
+            contact.city = "Burlington";
+            contact.state = "MA";
+            contact.zip = "01803-3747";
+            contact.country = countryTypeEnum.US;
+            authorization.billToAddress = contact;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4457010000000009";
+            card.expDate = "0112";
+            card.cardValidationNum = "349";
+            authorization.card = card;
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
             
     }
 }
