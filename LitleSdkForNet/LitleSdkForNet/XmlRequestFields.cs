@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace Litle.Sdk
 {
@@ -77,6 +78,7 @@ namespace Litle.Sdk
             else if (deactivateReversal != null) xml += deactivateReversal.Serialize();
             else if (unloadReversal != null) xml += unloadReversal.Serialize();
             xml += "\r\n</litleOnlineRequest>";
+
             return xml;
         }
     }
@@ -219,7 +221,7 @@ namespace Litle.Sdk
             }
             if (employerName != null)
             {
-                xml += "\r\n<employerName>" + employerName + "</employerName>";
+                xml += "\r\n<employerName>" + XmlConvert.EncodeName(employerName) + "</employerName>";
             }
             if (customerWorkTelephone != null)
             {
@@ -1169,9 +1171,9 @@ namespace Litle.Sdk
         {
             string xml = "";
             if (phone != null) xml += "\r\n<phone>" + phone + "</phone>";
-            else if (city != null) xml += "\r\n<city>" + city + "</city>";
+            else if (city != null) xml += "\r\n<city>" + XmlConvert.EncodeName(city) + "</city>";
             else if (url != null) xml += "\r\n<url>" + url + "</url>";
-            if (descriptor != null) xml += "\r\n<descriptor>" + descriptor + "</descriptor>";
+            if (descriptor != null) xml += "\r\n<descriptor>" + XmlConvert.EncodeName(descriptor) + "</descriptor>";
             return xml;
         }
     }
@@ -1981,8 +1983,8 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<createPlan>";
             xml += "\r\n<planCode>" + planCode + "</planCode>";
-            xml += "\r\n<name>" + name + "</name>";
-            if (descriptionSet) xml += "\r\n<description>" + descriptionField + "</description>";
+            xml += "\r\n<name>" + XmlConvert.EncodeName(name) + "</name>";
+            if (descriptionSet) xml += "\r\n<description>" + XmlConvert.EncodeName(descriptionField) + "</description>";
             xml += "\r\n<intervalType>" + intervalType + "</intervalType>";
             xml += "\r\n<amount>" + amount + "</amount>";
             if (numberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + numberOfPaymentsField + "</numberOfPayments>";
@@ -2219,7 +2221,7 @@ namespace Litle.Sdk
         {
             string xml = "";
             xml += "\r\n<discountCode>" + discountCode + "</discountCode>";
-            xml += "\r\n<name>" + name + "</name>";
+            xml += "\r\n<name>" + XmlConvert.EncodeName(name) + "</name>";
             xml += "\r\n<amount>" + amount + "</amount>";
             xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDate) + "</startDate>";
             xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDate) + "</endDate>";
@@ -2267,7 +2269,7 @@ namespace Litle.Sdk
         {
             string xml = "";
             xml += "\r\n<discountCode>" + discountCode + "</discountCode>";
-            if (nameSet) xml += "\r\n<name>" + nameField + "</name>";
+            if (nameSet) xml += "\r\n<name>" + XmlConvert.EncodeName(nameField) + "</name>";
             if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
             if (startDateSet) xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDateField) + "</startDate>";
             if (endDateSet) xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDateField) + "</endDate>";
@@ -2299,7 +2301,7 @@ namespace Litle.Sdk
         {
             string xml = "";
             xml += "\r\n<addOnCode>" + addOnCode + "</addOnCode>";
-            xml += "\r\n<name>" + name + "</name>";
+            xml += "\r\n<name>" + XmlConvert.EncodeName(name) + "</name>";
             xml += "\r\n<amount>" + amount + "</amount>";
             xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDate) + "</startDate>";
             xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDate) + "</endDate>";
@@ -2591,15 +2593,15 @@ namespace Litle.Sdk
         public string Serialize()
         {
             string xml = "";
-            if (name != null) xml += "\r\n<name>" + name + "</name>";
-            if (firstName != null) xml += "\r\n<firstName>" + firstName + "</firstName>";
+            if (name != null) xml += "\r\n<name>" + XmlConvert.EncodeName(name) + "</name>";
+            if (firstName != null) xml += "\r\n<firstName>" + XmlConvert.EncodeName(firstName) + "</firstName>";
             if (middleInitial != null) xml += "\r\n<middleInitial>" + middleInitial + "</middleInitial>";
-            if (lastName != null) xml += "\r\n<lastName>" + lastName + "</lastName>";
-            if (companyName != null) xml += "\r\n<companyName>" + companyName + "</companyName>";
-            if (addressLine1 != null) xml += "\r\n<addressLine1>" + addressLine1 + "</addressLine1>";
-            if (addressLine2 != null) xml += "\r\n<addressLine2>" + addressLine2 + "</addressLine2>";
-            if (addressLine3 != null) xml += "\r\n<addressLine3>" + addressLine3 + "</addressLine3>";
-            if (city != null) xml += "\r\n<city>" + city + "</city>";
+            if (lastName != null) xml += "\r\n<lastName>" + XmlConvert.EncodeName(lastName) + "</lastName>";
+            if (companyName != null) xml += "\r\n<companyName>" + XmlConvert.EncodeName(companyName) + "</companyName>";
+            if (addressLine1 != null) xml += "\r\n<addressLine1>" + XmlConvert.EncodeName(addressLine1) + "</addressLine1>";
+            if (addressLine2 != null) xml += "\r\n<addressLine2>" + XmlConvert.EncodeName(addressLine2) + "</addressLine2>";
+            if (addressLine3 != null) xml += "\r\n<addressLine3>" + XmlConvert.EncodeName(addressLine3) + "</addressLine3>";
+            if (city != null) xml += "\r\n<city>" + XmlConvert.EncodeName(city) + "</city>";
             if (state != null) xml += "\r\n<state>" + state + "</state>";
             if (zip != null) xml += "\r\n<zip>" + zip + "</zip>";
             if (countrySpecified) xml += "\r\n<country>" + countryField + "</country>";
@@ -2983,7 +2985,7 @@ namespace Litle.Sdk
             if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
             if (payPalNotes != null)
             {
-                xml += "\r\n<payPalNotes>" + payPalNotes + "</payPalNotes>";
+                xml += "\r\n<payPalNotes>" + XmlConvert.EncodeName(payPalNotes) + "</payPalNotes>";
             }
             if (actionReason != null)
             {
