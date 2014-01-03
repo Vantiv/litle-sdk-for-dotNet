@@ -123,6 +123,26 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.message);
         }
-            
+
+        [Test]
+        public void testAuthHandleSpecialCharacters()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "<'&\">";
+            authorization.orderId = "123456";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            payPal paypal = new payPal();
+            paypal.payerId = "1234";
+            paypal.token = "1234";
+            paypal.transactionId = "123456";
+            authorization.paypal = paypal; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "<'&\">"; //This needs to compile too            
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Approved", response.message);
+        }
     }
 }

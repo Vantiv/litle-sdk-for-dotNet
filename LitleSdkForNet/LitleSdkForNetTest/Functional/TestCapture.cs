@@ -67,6 +67,17 @@ namespace Litle.Sdk.Test.Functional
             captureResponse response = litle.Capture(capture);
             Assert.AreEqual("Approved", response.message);
         }
-            
+
+        [Test]
+        public void SimpleCaptureWithSpecial()
+        {
+            capture capture = new capture();
+            capture.litleTxnId = 123456000;
+            capture.amount = 106;
+            capture.payPalNotes = "<'&\">";
+
+            captureResponse response = litle.Capture(capture);
+            Assert.AreEqual("Approved", response.message);
+        }
     }
 }
