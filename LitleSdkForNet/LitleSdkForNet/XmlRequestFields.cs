@@ -1011,6 +1011,14 @@ namespace Litle.Sdk
         }
         public string terminalId;
 
+        private posCatLevelEnum catLevelField;
+        private bool catLevelSet;
+        public posCatLevelEnum catLevel
+        {
+            get { return this.catLevelField; }
+            set { this.catLevelField = value; catLevelSet = true; }
+        }
+
         public string Serialize()
         {
             string xml = "";
@@ -1018,6 +1026,7 @@ namespace Litle.Sdk
             if (entryModeSet) xml += "\r\n<entryMode>" + entryModeField + "</entryMode>";
             if (cardholderIdSet) xml += "\r\n<cardholderId>" + cardholderIdField + "</cardholderId>";
             if (terminalId != null) xml += "\r\n<terminalId>" + SecurityElement.Escape(terminalId) + "</terminalId>";
+            if (catLevelSet) xml += "\r\n<catLevel>" + catLevelField + "<catLevel>";
             xml += "\r\n";
             return xml;
         }
@@ -1330,7 +1339,11 @@ namespace Litle.Sdk
                 this.debtRepaymentSet = true;
             }
         }
-
+        public advancedFraudChecksType advancedFraudChecks
+        {
+            get { return this.advancedFraudChecks; }
+            set { this.advancedFraudChecks = value; }
+        }
 
         public override String Serialize()
         {
@@ -1438,7 +1451,11 @@ namespace Litle.Sdk
                     xml += "\r\n<recurringRequest>" + recurringRequest.Serialize() + "\r\n</recurringRequest>";
                 }
                 if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
-            }
+                }
+                if (advancedFraudChecks != null)
+                {
+                    xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
+                }
             xml += "\r\n</authorization>";
             return xml;
         }
@@ -1548,6 +1565,11 @@ namespace Litle.Sdk
                 this.debtRepaymentSet = true;
             }
         }
+        public advancedFraudChecksType advancedFraudChecks
+        {
+            get { return this.advancedFraudChecks; }
+            set { this.advancedFraudChecks = value; }
+        }
 
         public override String Serialize()
         {
@@ -1655,6 +1677,7 @@ namespace Litle.Sdk
                 xml += "\r\n<litleInternalRecurringRequest>" + litleInternalRecurringRequest.Serialize() + "\r\n</litleInternalRecurringRequest>";
             }
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (advancedFraudChecks != null) xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
             xml += "\r\n</sale>";
             return xml;
         }
@@ -2887,6 +2910,21 @@ namespace Litle.Sdk
             if (authenticationTransactionId != null) xml += "\r\n<authenticationTransactionId>" + SecurityElement.Escape(authenticationTransactionId) + "</authenticationTransactionId>";
             if (customerIpAddress != null) xml += "\r\n<customerIdAddress>" + SecurityElement.Escape(customerIpAddress) + "</customerIpAddress>";
             if (authenticatedByMerchantSet) xml += "\r\n<authenticatedByMerchant>" + authenticatedByMerchantField + "</authenticatedByMerchant>";
+            return xml;
+        }
+    }
+
+    public partial class advancedFraudChecksType
+    {
+        public string threatMetrixSessionId
+        {
+            get { return this.threatMetrixSessionId; }
+            set { this.threatMetrixSessionId = value; }
+        }
+        public string Serialize()
+        {
+            string xml = "";
+            if (threatMetrixSessionId != null) xml += "\r\n<threatMetrixSessionId>" + SecurityElement.Escape(threatMetrixSessionId) + "</threatMetrixSessionId>";
             return xml;
         }
     }

@@ -285,6 +285,16 @@ namespace Litle.Sdk
         /// <remarks/>
         completeread,
     }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    public enum posCatLevelEnum
+    {
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("self service")]
+        selfservice,
+    }
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
@@ -474,6 +484,12 @@ namespace Litle.Sdk
 
         private string advancedAVSResultField;
 
+        public advancedFraudResultsType advancedFraudResults
+        {
+            get { return this.advancedFraudResults; }
+            set { this.advancedFraudResults = value; }
+        }
+
         /// <remarks/>
         public string avsResult
         {
@@ -525,6 +541,40 @@ namespace Litle.Sdk
                 this.advancedAVSResultField = value;
             }
         }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class advancedFraudResultsType
+    {
+        public string deviceReviewStatus
+        {
+            get
+            {
+                return this.deviceReviewStatus;
+            }
+            set
+            {
+                this.deviceReviewStatus = value;
+            }
+        }
+        public long deviceReputationScore
+        {
+            get
+            {
+                return this.deviceReputationScore;
+            }
+            set
+            {
+                this.deviceReputationScore = value;
+            }
+        }
+    
     }
 
     /// <remarks/>
@@ -1879,6 +1929,12 @@ namespace Litle.Sdk
 
         public giftCardResponse giftCardResponse;
 
+        public advancedFraudResultsType advancedFraudResults
+        {
+            get { return this.advancedFraudResults; }
+            set { this.advancedFraudResults = value; }
+        }
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -2128,8 +2184,9 @@ namespace Litle.Sdk
                 this.recurringResponseField = value;
             }
         }
-    }
 
+    }
+    
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.SerializableAttribute()]
@@ -3376,6 +3433,7 @@ namespace Litle.Sdk
                 this.fraudResultField = value;
             }
         }
+
 
         /// <remarks/>
         public billMeLaterResponseData billMeLaterResponseData
