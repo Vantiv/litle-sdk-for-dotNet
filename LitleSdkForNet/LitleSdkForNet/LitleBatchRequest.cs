@@ -817,11 +817,11 @@ namespace Litle.Sdk
             {
                 xmlHeader += "numBalanceInquirys=\"" + numBalanceInquiries + "\"\r\n";
             }
-            xmlHeader += "merchantSdk=\"DotNet;8.22.1\"\r\n";
+            xmlHeader += "merchantSdk=\"DotNet;8.23.0\"\r\n";
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
-        }
+        }s
 
         private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionRequest element)
         {
