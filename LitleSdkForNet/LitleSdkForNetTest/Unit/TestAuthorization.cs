@@ -379,8 +379,6 @@ namespace Litle.Sdk.Test.Unit
             auth.advancedFraudChecks = new advancedFraudChecksType();
             auth.advancedFraudChecks.threatMetrixSessionId = "800";
 
-            // <fraudResult><advancedFraudResults><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult>
-
             String expectedResult = @"
 <authorization id="""" reportGroup="""">
 <litleTxnId>123</litleTxnId>
@@ -429,6 +427,39 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
             Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
             Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
+        }
+
+        [Test]
+        public void TestAuthWithPosCatLevelEnum()
+        {
+            authorization auth = new authorization();
+            auth.pos = new pos();
+            auth.orderId = "ABC123";
+            auth.amount = 98700;
+            auth.pos.catLevel = posCatLevelEnum.selfservice;
+
+            String expectedResult = @"
+<authorization id="""" reportGroup="""">
+<orderId>ABC123</orderId>
+<amount>98700</amount>
+<pos>
+<catLevel>selfservice</catLevel>
+
+</pos>
+</authorization>";
+
+            Assert.AreEqual(expectedResult, auth.Serialize());
+
+            var mock = new Mock<Communications>();
+            mock.Setup(Communications => Communications.HttpPost(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            authorizationResponse authorizationResponse = litle.Authorize(auth);
+
+            Assert.NotNull(authorizationResponse);
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
     }
 }
