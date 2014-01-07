@@ -539,10 +539,12 @@ namespace Litle.Sdk
         }
     }
 
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class advancedFraudResultsType
     {
         public string deviceReviewStatus;
@@ -1900,8 +1902,6 @@ namespace Litle.Sdk
         private recurringResponse recurringResponseField;
 
         public giftCardResponse giftCardResponse;
-
-        public advancedFraudResultsType advancedFraudResults;
 
         /// <remarks/>
         public long litleTxnId

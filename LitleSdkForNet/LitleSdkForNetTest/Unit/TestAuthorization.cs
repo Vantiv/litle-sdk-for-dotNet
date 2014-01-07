@@ -393,7 +393,7 @@ namespace Litle.Sdk.Test.Unit
 
             var mock = new Mock<Communications>();
             mock.Setup(Communications => Communications.HttpPost(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
@@ -401,11 +401,33 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.NotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
+        }
+
+        [Test]
+        public void TestAdvancedFraudResponse()
+        {
+            String xmlResponse = @"<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
+<authorizationResponse>
+<litleTxnId>123</litleTxnId>
+<fraudResult>
+<advancedFraudResults>
+<deviceReviewStatus>ReviewStatus</deviceReviewStatus>
+<deviceReputationScore>800</deviceReputationScore>
+</advancedFraudResults>
+</fraudResult>
+</authorizationResponse>
+</litleOnlineResponse>";
+
+            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            authorizationResponse authorizationResponse = (authorizationResponse)litleOnlineResponse.authorizationResponse;
+
+
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
             Assert.NotNull(authorizationResponse.fraudResult);
             Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults);
             Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
-            Assert.AreEqual("ReviewStatus", authorizationResponse.advancedFraudResults.deviceReviewStatus);
-            Assert.NotNull(authorizationResponse.advancedFraudResults.deviceReputationScore);
+            Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
+            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
             Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
         }
     }
