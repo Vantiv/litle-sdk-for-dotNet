@@ -484,11 +484,7 @@ namespace Litle.Sdk
 
         private string advancedAVSResultField;
 
-        public advancedFraudResultsType advancedFraudResults
-        {
-            get { return this.advancedFraudResults; }
-            set { this.advancedFraudResults = value; }
-        }
+        public advancedFraudResultsType advancedFraudResults;
 
         /// <remarks/>
         public string avsResult
@@ -546,35 +542,11 @@ namespace Litle.Sdk
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class advancedFraudResultsType
     {
-        public string deviceReviewStatus
-        {
-            get
-            {
-                return this.deviceReviewStatus;
-            }
-            set
-            {
-                this.deviceReviewStatus = value;
-            }
-        }
-        public long deviceReputationScore
-        {
-            get
-            {
-                return this.deviceReputationScore;
-            }
-            set
-            {
-                this.deviceReputationScore = value;
-            }
-        }
-    
+        public string deviceReviewStatus;
+        public int deviceReputationScore;
     }
 
     /// <remarks/>
@@ -1929,11 +1901,7 @@ namespace Litle.Sdk
 
         public giftCardResponse giftCardResponse;
 
-        public advancedFraudResultsType advancedFraudResults
-        {
-            get { return this.advancedFraudResults; }
-            set { this.advancedFraudResults = value; }
-        }
+        public advancedFraudResultsType advancedFraudResults;
 
         /// <remarks/>
         public long litleTxnId

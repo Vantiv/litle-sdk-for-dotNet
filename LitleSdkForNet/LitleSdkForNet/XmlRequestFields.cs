@@ -1339,11 +1339,7 @@ namespace Litle.Sdk
                 this.debtRepaymentSet = true;
             }
         }
-        public advancedFraudChecksType advancedFraudChecks
-        {
-            get { return this.advancedFraudChecks; }
-            set { this.advancedFraudChecks = value; }
-        }
+        public advancedFraudChecksType advancedFraudChecks;
 
         public override String Serialize()
         {
@@ -1565,11 +1561,7 @@ namespace Litle.Sdk
                 this.debtRepaymentSet = true;
             }
         }
-        public advancedFraudChecksType advancedFraudChecks
-        {
-            get { return this.advancedFraudChecks; }
-            set { this.advancedFraudChecks = value; }
-        }
+        public advancedFraudChecksType advancedFraudChecks;
 
         public override String Serialize()
         {
@@ -2916,11 +2908,8 @@ namespace Litle.Sdk
 
     public partial class advancedFraudChecksType
     {
-        public string threatMetrixSessionId
-        {
-            get { return this.threatMetrixSessionId; }
-            set { this.threatMetrixSessionId = value; }
-        }
+        public string threatMetrixSessionId;
+
         public string Serialize()
         {
             string xml = "";
