@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== Version 8.23.0 (Jan 7, 2014)
+* Feature: Support for Advanced Fraud Checks
+* Feature: Support for CatLevel in Pos
+
 == Version 8.22.1 (Nov 12, 2013)
 * Bugfix: Make it simpler to access fields in the accountUpdater response without requiring casting and introspection.
 
