@@ -2152,7 +2152,6 @@ namespace Litle.Sdk
                 this.recurringResponseField = value;
             }
         }
-
     }
     
     /// <remarks/>
@@ -2389,100 +2388,16 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class enhancedAuthResponse
     {
-
-        private enhancedAuthResponseFundingSource fundingSourceField;
-
-        private affluenceTypeEnum affluenceField;
-
-        private bool affluenceFieldSpecified;
-
-        private string issuerCountryField;
-
-        private cardProductTypeEnum cardProductTypeField;
-
-        private bool cardProductTypeFieldSpecified;
-
-        /// <remarks/>
-        public enhancedAuthResponseFundingSource fundingSource
-        {
-            get
-            {
-                return this.fundingSourceField;
-            }
-            set
-            {
-                this.fundingSourceField = value;
-            }
-        }
-
-        /// <remarks/>
-        public affluenceTypeEnum affluence
-        {
-            get
-            {
-                return this.affluenceField;
-            }
-            set
-            {
-                this.affluenceField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool affluenceSpecified
-        {
-            get
-            {
-                return this.affluenceFieldSpecified;
-            }
-            set
-            {
-                this.affluenceFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        public string issuerCountry
-        {
-            get
-            {
-                return this.issuerCountryField;
-            }
-            set
-            {
-                this.issuerCountryField = value;
-            }
-        }
-
-        /// <remarks/>
-        public cardProductTypeEnum cardProductType
-        {
-            get
-            {
-                return this.cardProductTypeField;
-            }
-            set
-            {
-                this.cardProductTypeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool cardProductTypeSpecified
-        {
-            get
-            {
-                return this.cardProductTypeFieldSpecified;
-            }
-            set
-            {
-                this.cardProductTypeFieldSpecified = value;
-            }
-        }
-
+        public string litleTxnId;
+        public string response;
+        public string message;
+        public System.DateTime responseTime;
+        public tokenResponseType tokenResponse;
         public string virtualAccountNumber;
+        public enhancedAuthResponseFundingSource fundingSource;
+        public affluenceTypeEnum affluence;
+        public string issuerCountry;
+
     }
 
     /// <remarks/>

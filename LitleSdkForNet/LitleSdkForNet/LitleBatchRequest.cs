@@ -821,7 +821,7 @@ namespace Litle.Sdk
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
-        }s
+        }
 
         private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionRequest element)
         {
