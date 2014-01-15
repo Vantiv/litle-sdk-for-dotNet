@@ -126,6 +126,29 @@ namespace Litle.Sdk.Test.Functional
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Approved", response.message);
         }
-            
+
+        [Test]
+        public void simpleCaptureGivenAuthWithTokenAndSpecialCharacters()
+        {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "<'&\">";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardTokenType cardtoken = new cardTokenType();
+            cardtoken.litleToken = "123456789101112";
+            cardtoken.expDate = "1210";
+            cardtoken.cardValidationNum = "555";
+            cardtoken.type = methodOfPaymentTypeEnum.VI;
+            capturegivenauth.token = cardtoken;
+            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
     }
 }

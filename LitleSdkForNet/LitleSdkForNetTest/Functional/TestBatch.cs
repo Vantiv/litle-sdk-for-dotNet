@@ -1272,6 +1272,51 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
+        [Test]
+        public void SimpleBatchWithSpecialCharacters()
+        {
+            batchRequest litleBatchRequest = new batchRequest();
+
+            authorization authorization = new authorization();
+            authorization.reportGroup = "<ReportGroup>";
+            authorization.orderId = "12344&'\"";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000001";
+            card.expDate = "1210";
+            authorization.card = card;
+
+            litleBatchRequest.addAuthorization(authorization);
+
+            litle.addBatch(litleBatchRequest);
+
+            string batchName = litle.sendToLitle();
+
+            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
+
+            litleResponse litleResponse = litle.receiveFromLitle(batchName);
+
+            Assert.NotNull(litleResponse);
+            Assert.AreEqual("0", litleResponse.response);
+            Assert.AreEqual("Valid Format", litleResponse.message);
+
+            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
+            while (litleBatchResponse != null)
+            {
+                authorizationResponse authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
+                while (authorizationResponse != null)
+                {
+                    Assert.AreEqual("000", authorizationResponse.response);
+
+                    authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
+                }
+
+                litleBatchResponse = litleResponse.nextBatchResponse();
+            }
+        }
+
         private int estimatedResponseTime(int numAuthsAndSales, int numRest)
         {
             return (int)(5 * 60 * 1000 + 2.5 * 1000 + numAuthsAndSales * (1 / 5) * 1000 + numRest * (1 / 50) * 1000) * 5;

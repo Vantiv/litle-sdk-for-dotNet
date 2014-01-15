@@ -1023,5 +1023,21 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void testSpecialCharacters_RefundReversal()
+        {
+            refundReversal refundReversal = new refundReversal();
+            refundReversal.id = "theId";
+            refundReversal.reportGroup = "<'&\">";
+            refundReversal.customerId = "theCustomerId";
+            refundReversal.litleTxnId = "123";
+
+            String actual = refundReversal.Serialize();
+            String expected = @"
+<refundReversal id=""theId"" customerId=""theCustomerId"" reportGroup=""&lt;&apos;&amp;&quot;&gt;"">
+<litleTxnId>123</litleTxnId>
+</refundReversal>";
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
