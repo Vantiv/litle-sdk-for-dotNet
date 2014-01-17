@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.23.2 (Jan 17, 2014)
+* Bugfix: Re-releasing 8.23.1.  The 8.23.1 dll was not the correct version.
+
 == Version 8.23.1 (Jan 16, 2014)
 * Bugfix: When sending pos catlevel of "self service", because this string is not a valid name, the xml generated was missing the space.  This fix changes posCatLevelEnum from an enum to a class and adds a Serialize() method that correctly converts the member name "selfservice" to the xml value named "self service"
 
