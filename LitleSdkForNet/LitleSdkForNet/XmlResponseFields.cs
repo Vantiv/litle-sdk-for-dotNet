@@ -285,16 +285,16 @@ namespace Litle.Sdk
         /// <remarks/>
         completeread,
     }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    public enum posCatLevelEnum
+
+    public sealed class posCatLevelEnum
     {
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("self service")]
-        selfservice,
+        public static readonly posCatLevelEnum selfservice = new posCatLevelEnum("self service");
+
+        private posCatLevelEnum(String value) { this.value = value; }
+        public string Serialize() { return value; }
+        private string value;
     }
+
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]

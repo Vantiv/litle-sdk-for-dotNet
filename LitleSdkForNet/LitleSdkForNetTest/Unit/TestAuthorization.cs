@@ -443,8 +443,7 @@ namespace Litle.Sdk.Test.Unit
 <orderId>ABC123</orderId>
 <amount>98700</amount>
 <pos>
-<catLevel>selfservice</catLevel>
-
+<catLevel>self service</catLevel>
 </pos>
 </authorization>";
 
