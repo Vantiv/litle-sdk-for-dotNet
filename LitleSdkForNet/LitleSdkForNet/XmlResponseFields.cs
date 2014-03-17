@@ -549,6 +549,7 @@ namespace Litle.Sdk
     {
         public string deviceReviewStatus;
         public int deviceReputationScore;
+        public string triggeredRule;
     }
 
     /// <remarks/>

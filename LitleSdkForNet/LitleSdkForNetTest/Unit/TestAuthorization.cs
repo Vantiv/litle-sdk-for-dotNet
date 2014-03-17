@@ -411,6 +411,7 @@ namespace Litle.Sdk.Test.Unit
 <advancedFraudResults>
 <deviceReviewStatus>ReviewStatus</deviceReviewStatus>
 <deviceReputationScore>800</deviceReputationScore>
+<triggeredRule>rule triggered</triggeredRule>
 </advancedFraudResults>
 </fraudResult>
 </authorizationResponse>
@@ -427,6 +428,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
             Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
             Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
+            Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule);
         }
 
         [Test]

@@ -239,7 +239,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"8.23\"" +
+            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"8.24\"" +
              " xmlns=\"http://www.litle.com/schema\" " +
              "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
 

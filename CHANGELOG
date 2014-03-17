@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== version 8.24.0 (Mar 17, 2014)
+* Feature: Added additional Advanced Fraud Check response field (triggeredRule)
+
 == Version 8.23.2 (Jan 17, 2014)
 * Bugfix: Re-releasing 8.23.1.  The 8.23.1 dll was not the correct version.
 
