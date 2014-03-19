@@ -37,6 +37,7 @@ namespace Litle.Sdk.Test.Functional
             StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
         }
 
+
         [Test]
         public void SimpleTokenWithPayPage()
         {

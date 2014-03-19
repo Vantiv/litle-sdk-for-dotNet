@@ -44,7 +44,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.24\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.25\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -862,6 +862,7 @@ namespace Litle.Sdk
         public orderSourceType orderSource;
         public contact billToAddress;
         public cardType card;
+        public mposType mpos;
         public cardTokenType token;
         public cardPaypageType paypage;
         public payPal paypal;
@@ -909,6 +910,7 @@ namespace Litle.Sdk
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
                 if (card != null) xml += "\r\n<card>" + card.Serialize() + "</card>";
                 else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
+                else if (mpos != null) xml += "\r\n<mpos>" + mpos.Serialize() + "</mpos>";
                 else if (paypage != null) xml += "\r\n<paypage>" + paypage.Serialize() + "</paypage>";
                 else if (paypal != null)
                 {
@@ -1274,6 +1276,7 @@ namespace Litle.Sdk
         public contact billToAddress;
         public contact shipToAddress;
         public cardType card;
+        public mposType mpos;
         public payPal paypal;
         public cardTokenType token;
         public cardPaypageType paypage;
@@ -1379,6 +1382,10 @@ namespace Litle.Sdk
                 else if (paypal != null)
                 {
                     xml += "\r\n<paypal>" + paypal.Serialize() + "\r\n</paypal>";
+                }
+                else if (mpos != null)
+                {
+                    xml += "\r\n<mpos>" + mpos.Serialize() + "\r\n</mpos>";
                 }
                 else if (token != null)
                 {
@@ -1487,6 +1494,7 @@ namespace Litle.Sdk
         public contact billToAddress;
         public contact shipToAddress;
         public cardType card;
+        public mposType mpos;
         public payPal paypal;
         public cardTokenType token;
         public cardPaypageType paypage;
@@ -1600,6 +1608,10 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
             }
+            else if (mpos != null)
+            {
+                xml += "\r\n<mpos>" + mpos.Serialize() + "</mpos>";
+            }
             else if (paypage != null)
             {
                 xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
@@ -1688,6 +1700,7 @@ namespace Litle.Sdk
         public orderSourceType orderSource;
         public contact billToAddress;
         public cardType card;
+        public mposType mpos;
         public cardTokenType token;
         public cardPaypageType paypage;
         public customBilling customBilling;
@@ -1743,6 +1756,10 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
             }
+            else if (mpos != null)
+            {
+                xml += "\r\n<mpos>" + mpos.Serialize() + "</mpos>";
+            }
             else if (paypage != null)
             {
                 xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
@@ -1797,6 +1814,7 @@ namespace Litle.Sdk
         public contact billToAddress;
         public contact shipToAddress;
         public cardType card;
+        public mposType mpos;
         public cardTokenType token;
         public cardPaypageType paypage;
         public customBilling customBilling;
@@ -1857,6 +1875,10 @@ namespace Litle.Sdk
             else if (token != null)
             {
                 xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+            }
+            else if (mpos != null)
+            {
+                xml += "\r\n<mpos>" + mpos.Serialize() + "</mpos>";
             }
             else if (paypage != null)
             {
@@ -2917,6 +2939,41 @@ namespace Litle.Sdk
         {
             string xml = "";
             if (threatMetrixSessionId != null) xml += "\r\n<threatMetrixSessionId>" + SecurityElement.Escape(threatMetrixSessionId) + "</threatMetrixSessionId>";
+            return xml;
+        }
+    }
+
+    public partial class mposType {
+        public string ksn;
+        public string formatId;
+        public string encryptedTrack;
+        public int track1Status;
+        public int track2Status;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (ksn != null)
+            {
+                xml += "\r\n<ksn>" + ksn + "</ksn>";
+            }
+            if (formatId != null)
+            {
+                xml += "\r\n<formatId>" + formatId + "</formatId>";
+            }
+            if (encryptedTrack != null)
+            {
+                xml += "\r\n<encryptedTrack>" + SecurityElement.Escape(encryptedTrack) + "</encryptedTrack>";
+            }
+            if (track1Status == 0 || track1Status == 1 )
+            {
+                xml += "\r\n<track1Status>" + track1Status + "</track1Status>";
+            }
+            if (track2Status == 0 || track2Status == 1)
+            {
+                xml += "\r\n<track2Status>" + track2Status + "</track2Status>";
+            }
+
             return xml;
         }
     }

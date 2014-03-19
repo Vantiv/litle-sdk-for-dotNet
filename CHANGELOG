@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== version 8.25.0 (Mar 19, 2014)
+* Feature: Added mpos element to auth, sale, force capture, capture given auth, and credit
+
+
 == version 8.24.0 (Mar 17, 2014)
 * Feature: Added additional Advanced Fraud Check response field (triggeredRule)
 

@@ -84,7 +84,7 @@ namespace Litle.Sdk.Test.Functional
             authorization2.card = card2;
 
             litleBatchRequest.addAuthorization(authorization2);
-
+            
             authReversal reversal = new authReversal();
             reversal.litleTxnId = 12345678000L;
             reversal.amount = 106;
@@ -164,7 +164,7 @@ namespace Litle.Sdk.Test.Functional
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
             echeck.accNum = "1099999903";
-            echeck.routingNum = "114567895";
+            echeck.routingNum = "011201995";
             echeck.checkNum = "123455";
             echeckcredit.echeck = echeck;
             contact billToAddress = new contact();
@@ -183,7 +183,7 @@ namespace Litle.Sdk.Test.Functional
             echeckType echeck2 = new echeckType();
             echeck2.accType = echeckAccountTypeEnum.Checking;
             echeck2.accNum = "1099999903";
-            echeck2.routingNum = "114567895";
+            echeck2.routingNum = "011201995";
             echeck2.checkNum = "123456";
             echeckcredit2.echeck = echeck2;
             contact billToAddress2 = new contact();
@@ -644,7 +644,7 @@ namespace Litle.Sdk.Test.Functional
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
             echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
+            echeck.routingNum = "011201995";
             echeck.checkNum = "123455";
             echeckcredit.echeck = echeck;
             contact billToAddress = new contact();
@@ -880,7 +880,7 @@ namespace Litle.Sdk.Test.Functional
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
             echeck.accNum = "1099999903";
-            echeck.routingNum = "114567895";
+            echeck.routingNum = "011201995";
             echeck.checkNum = "123455";
             echeckcredit.echeck = echeck;
             contact billToAddress = new contact();
@@ -899,7 +899,7 @@ namespace Litle.Sdk.Test.Functional
             echeckType echeck2 = new echeckType();
             echeck2.accType = echeckAccountTypeEnum.Checking;
             echeck2.accNum = "1099999903";
-            echeck2.routingNum = "114567895";
+            echeck2.routingNum = "011201995";
             echeck2.checkNum = "123456";
             echeckcredit2.echeck = echeck2;
             contact billToAddress2 = new contact();
@@ -1133,7 +1133,7 @@ namespace Litle.Sdk.Test.Functional
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
             echeck.accNum = "1099999903";
-            echeck.routingNum = "114567895";
+            echeck.routingNum = "011201995";
             echeck.checkNum = "123455";
             echeckcredit.echeck = echeck;
             contact billToAddress = new contact();
@@ -1152,7 +1152,7 @@ namespace Litle.Sdk.Test.Functional
             echeckType echeck2 = new echeckType();
             echeck2.accType = echeckAccountTypeEnum.Checking;
             echeck2.accNum = "1099999903";
-            echeck2.routingNum = "114567895";
+            echeck2.routingNum = "011201995";
             echeck2.checkNum = "123456";
             echeckcredit2.echeck = echeck2;
             contact billToAddress2 = new contact();
