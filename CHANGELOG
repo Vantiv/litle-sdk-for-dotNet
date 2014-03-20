@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.25.1 (Mar 20, 2014)
+* Feature: Added logFile setting for capturing requests & responses to a log file
+
 == version 8.25.0 (Mar 19, 2014)
 * Feature: Added mpos element to auth, sale, force capture, capture given auth, and credit
 
