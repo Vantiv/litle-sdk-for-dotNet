@@ -20,6 +20,8 @@ namespace Litle.Sdk
 {
     public class Communications
     {
+        private static readonly object _synLock = new object();
+
 
         public static bool ValidateServerCertificate(
              object sender,
@@ -36,15 +38,36 @@ namespace Litle.Sdk
             return false;
         }
 
+        public void log(String logMessage, String logFile)
+        {
+            lock (_synLock)
+            {
+                StreamWriter logWriter = new StreamWriter(logFile, true);
+                DateTime time = DateTime.Now;
+                logWriter.WriteLine(time.ToString());
+                logWriter.WriteLine(logMessage + "\r\n");
+                logWriter.Close();
+            }
+        }
+
         virtual public string HttpPost(string xmlRequest, Dictionary<String, String> config)
         {
+            string logFile = config["logFile"];
             string uri = config["url"];
             System.Net.ServicePointManager.Expect100Continue = false;
             System.Net.WebRequest req = System.Net.WebRequest.Create(uri);
             if ("true".Equals(config["printxml"]))
             {
                 Console.WriteLine(xmlRequest);
+                Console.WriteLine(logFile);
             }
+
+            //log request
+            if (logFile != null)
+            {
+                log(xmlRequest,logFile);
+            }
+
             req.ContentType = "text/xml";
             req.Method = "POST";
             if (config.ContainsKey("proxyHost") && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"].Length > 0)
@@ -59,6 +82,8 @@ namespace Litle.Sdk
             {
                 writer.Write(xmlRequest);
             }
+
+
 
             // read response
             System.Net.WebResponse resp = req.GetResponse();
@@ -75,6 +100,13 @@ namespace Litle.Sdk
             {
                 Console.WriteLine(xmlResponse);
             }
+
+            //log response
+            if (logFile != null)
+            {
+                log(xmlResponse,logFile);
+            }
+
             return xmlResponse;
         }
 
@@ -346,6 +378,7 @@ namespace Litle.Sdk
 
         }
 
+      
         public struct SshConnectionInfo
         {
             public string Host;

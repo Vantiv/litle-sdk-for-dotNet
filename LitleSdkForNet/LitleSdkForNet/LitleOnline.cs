@@ -27,6 +27,7 @@ namespace Litle.Sdk
             config["merchantId"] = Properties.Settings.Default.merchantId;
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
+            config["logFile"] = Properties.Settings.Default.logFile;
             communication = new Communications();
         }
 
