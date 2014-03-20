@@ -24,6 +24,7 @@ namespace Litle.Sdk.Test.Certification
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
+            config.Add("logFile", null);
             litle = new LitleOnline(config);
         }
 

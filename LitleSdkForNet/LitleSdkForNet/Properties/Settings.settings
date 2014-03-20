@@ -15,7 +15,7 @@
       <Value Profile="(Default)">dotnet</Value>
     </Setting>
     <Setting Name="printxml" Type="System.String" Scope="User">
-      <Value Profile="(Default)">false</Value>
+      <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="timeout" Type="System.String" Scope="User">
       <Value Profile="(Default)">65</Value>
@@ -30,7 +30,7 @@
       <Value Profile="(Default)">101</Value>
     </Setting>
     <Setting Name="sftpUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">cert.litle.com</Value>
+      <Value Profile="(Default)">prelive.litle.com</Value>
     </Setting>
     <Setting Name="knownHostsFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Litle\dll\knownhosts</Value>
@@ -42,7 +42,7 @@
       <Value Profile="(Default)">dotnet</Value>
     </Setting>
     <Setting Name="onlineBatchUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">cert.litle.com</Value>
+      <Value Profile="(Default)">prelive.litle.com</Value>
     </Setting>
     <Setting Name="onlineBatchPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">15000</Value>
@@ -52,6 +52,9 @@
     </Setting>
     <Setting Name="responseDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Litle\</Value>
+    </Setting>
+    <Setting Name="logFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">null</Value>
     </Setting>
   </Settings>
 </SettingsFile>
