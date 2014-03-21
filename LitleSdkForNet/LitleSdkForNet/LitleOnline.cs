@@ -28,6 +28,7 @@ namespace Litle.Sdk
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
             config["logFile"] = Properties.Settings.Default.logFile;
+            config["neuterAccountNums"] = Properties.Settings.Default.neuterAccountNums;
             communication = new Communications();
         }
 
@@ -377,7 +378,7 @@ namespace Litle.Sdk
         {
             litleOnlineRequest request = new litleOnlineRequest();
             request.merchantId = config["merchantId"];
-            request.merchantSdk = "DotNet;8.25.1";
+            request.merchantSdk = "DotNet;8.25.2";
             authentication authentication = new authentication();
             authentication.password = config["password"];
             authentication.user = config["username"];

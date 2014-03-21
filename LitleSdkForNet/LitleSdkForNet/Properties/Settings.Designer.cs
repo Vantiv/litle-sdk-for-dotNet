@@ -238,5 +238,17 @@ namespace Litle.Sdk.Properties {
                 this["logFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("true")]
+        public string neuterAccountNums {
+            get {
+                return ((string)(this["neuterAccountNums"]));
+            }
+            set {
+                this["neuterAccountNums"] = value;
+            }
+        }
     }
 }

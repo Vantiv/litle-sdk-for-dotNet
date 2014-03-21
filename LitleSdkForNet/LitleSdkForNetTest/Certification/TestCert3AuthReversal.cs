@@ -24,6 +24,7 @@ namespace Litle.Sdk.Test.Certification
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
             config.Add("logFile", null);
+            config.Add("neuterAccountNums", null);
             litle = new LitleOnline(config);
         }
 

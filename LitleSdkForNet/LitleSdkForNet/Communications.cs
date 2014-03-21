@@ -15,6 +15,7 @@ using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Litle.Sdk
 {
@@ -38,10 +39,26 @@ namespace Litle.Sdk
             return false;
         }
 
-        public void log(String logMessage, String logFile)
+        public void neuterXML(ref string inputXml)
+        {
+
+            string pattern1 = "(?i)<number>.*?</number>";
+            string pattern2 = "(?i)<accNum>.*?</accNum>";
+
+            Regex rgx1 = new Regex(pattern1);
+            Regex rgx2 = new Regex(pattern2);
+            inputXml = rgx1.Replace(inputXml, "<number>xxxxxxxxxxxxxxxx</number>");
+            inputXml = rgx2.Replace(inputXml, "<accNum>xxxxxxxxxx</accNum>");
+        }
+        
+        public void log(String logMessage, String logFile, bool neuter)
         {
             lock (_synLock)
             {
+                if (neuter)
+                {
+                    neuterXML(ref logMessage);
+                }
                 StreamWriter logWriter = new StreamWriter(logFile, true);
                 DateTime time = DateTime.Now;
                 logWriter.WriteLine(time.ToString());
@@ -55,6 +72,7 @@ namespace Litle.Sdk
             string logFile = config["logFile"];
             string uri = config["url"];
             System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
+            bool neuter = ("true".Equals(config["neuterAccountNums"]));
             if ("true".Equals(config["printxml"]))
             {
                 Console.WriteLine(xmlRequest);
@@ -64,7 +82,7 @@ namespace Litle.Sdk
             //log request
             if (logFile != null)
             {
-                log(xmlRequest,logFile);
+                log(xmlRequest,logFile, neuter);
             }
 
             req.ContentType = "text/xml";
@@ -105,7 +123,7 @@ namespace Litle.Sdk
             //log response
             if (logFile != null)
             {
-                log(xmlResponse,logFile);
+                log(xmlResponse,logFile,neuter);
             }
 
             return xmlResponse;

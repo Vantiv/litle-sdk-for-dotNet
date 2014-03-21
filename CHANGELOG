@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.25.2
+* Feature: Added neutering functionality to scrub cred card and Echeck account numbers in logFile by default
+
 == Version 8.25.1 (Mar 20, 2014)
 * Feature: Added logFile setting for capturing requests & responses to a log file
 

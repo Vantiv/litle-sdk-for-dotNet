@@ -24,6 +24,7 @@ namespace Litle.Sdk.Test.Functional
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
             config.Add("logFile", Properties.Settings.Default.logFile);
+            config.Add("neuterAccountNums", "true");
             litle = new LitleOnline(config);
         }
 

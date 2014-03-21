@@ -56,5 +56,8 @@
     <Setting Name="logFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">null</Value>
     </Setting>
+    <Setting Name="neuterAccountNums" Type="System.String" Scope="User">
+      <Value Profile="(Default)">true</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
