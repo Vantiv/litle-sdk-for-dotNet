@@ -89,7 +89,7 @@ namespace Litle.Sdk
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 10000;
             req.ServicePoint.Expect100Continue = false;
-            if (config.ContainsKey("proxyHost") && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"].Length > 0)
+            if (config.ContainsKey("proxyHost") && config["proxyHost"] != null && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"] != null && config["proxyPort"].Length > 0)
             {
                 WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
                 myproxy.BypassProxyOnLocal = true;

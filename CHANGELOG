@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.25.3
+* Bugfix: Eliminate NRE caused by passing in a null proxyHost or ProxyPort in the config Dictionary
+
 == Version 8.25.2
 * Feature: Added neutering functionality to scrub cred card and Echeck account numbers in logFile by default
 
