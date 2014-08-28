@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==version 9.00.0
+* Feature: support 9.00.0
+
 == Version 8.25.3
 * Bugfix: Eliminate NRE caused by passing in a null proxyHost or ProxyPort in the config Dictionary
 
