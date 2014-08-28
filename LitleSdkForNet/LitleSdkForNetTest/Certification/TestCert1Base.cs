@@ -18,7 +18,7 @@ namespace Litle.Sdk.Test.Certification
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
+            config.Add("version", "8.27");
             config.Add("timeout", "65");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
@@ -32,6 +32,7 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void Test1Auth()
         {
+           
             authorization authorization = new authorization();
             authorization.orderId = "1";
             authorization.amount = 10010;
