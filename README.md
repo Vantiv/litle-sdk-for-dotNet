@@ -78,6 +78,6 @@ using Litle.Sdk;
     Message: Approved
     Litle Transaction ID: <your-numeric-litle-txn-id>
 
-More examples can be found here [.Net Gists](https://www.litle.com/developers/dotnet/dotnet-examples)
+More examples can be found here [.Net Gists](https://gist.github.com/search?q=.net+sdk+Litle) and [Here](http://litleco.github.io/dotnet/)
 
 Please contact Litle & Co. with any further questions.   You can reach us at sdksupport@litle.com.
