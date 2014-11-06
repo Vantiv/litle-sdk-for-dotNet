@@ -191,5 +191,30 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.message);
         }
+
+        [Test]
+        public void authWithMasterPass()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card;
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333";
+
+            wallet mp = new wallet();
+            mp.walletSource = "MasterPass";
+            mp.walletSourceTypeId = "102";
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
     }
 }

@@ -1285,6 +1285,7 @@ namespace Litle.Sdk
         public processingInstructions processingInstructions;
         public pos pos;
         public customBilling customBilling;
+        public wallet wallet;
         private govtTaxTypeEnum taxTypeField;
         private bool taxTypeSet;
         public govtTaxTypeEnum taxType
@@ -1453,6 +1454,10 @@ namespace Litle.Sdk
                     xml += "\r\n<recurringRequest>" + recurringRequest.Serialize() + "\r\n</recurringRequest>";
                 }
                 if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+                if (wallet != null)
+                {
+                    xml += "\r\n<wallet>" + wallet.Serialize() + "</wallet>";
+                }
             }
             if (advancedFraudChecks != null)
             {
@@ -3399,5 +3404,17 @@ namespace Litle.Sdk
             return xml;
         }
     }
+    
+    public class wallet
+    {
+        public string walletSource;
+        public string walletSourceTypeId;
 
+        public string Serialize()
+        {
+            string xml = "\r\n<walletSourceType>" + SecurityElement.Escape(walletSource) + "</walletSourceType>";
+            xml += "\r\n<walletSourceTypeId>" + SecurityElement.Escape(walletSourceTypeId) + "</walletSourceTypeId>";
+            return xml;
+        }
+    }
 }
