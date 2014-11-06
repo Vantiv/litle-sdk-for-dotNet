@@ -69,7 +69,13 @@ namespace Litle.Sdk
 
         virtual public string HttpPost(string xmlRequest, Dictionary<String, String> config)
         {
-            string logFile = config["logFile"];
+            string logFile = null;
+            if (config.ContainsKey("logFile") &&
+                !string.IsNullOrEmpty(config["logFile"].Trim()))
+            {
+                logFile = config["logFile"];
+            }
+
             string uri = config["url"];
             System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
             bool neuter = ("true".Equals(config["neuterAccountNums"]));
