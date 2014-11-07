@@ -212,6 +212,7 @@ namespace Litle.Sdk.Test.Functional
             wallet mp = new wallet();
             mp.walletSource = "MasterPass";
             mp.walletSourceTypeId = "102";
+            authorization.wallet = mp;
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
