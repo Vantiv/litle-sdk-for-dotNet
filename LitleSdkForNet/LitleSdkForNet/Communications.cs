@@ -69,12 +69,29 @@ namespace Litle.Sdk
 
         virtual public string HttpPost(string xmlRequest, Dictionary<String, String> config)
         {
-            string logFile = config["logFile"];
+            string logFile = null;
+            if (config.ContainsKey("logFile"))
+            {
+                logFile = config["logFile"];
+            }
+            
             string uri = config["url"];
             System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
-            bool neuter = ("true".Equals(config["neuterAccountNums"]));
-            if ("true".Equals(config["printxml"]))
+            
+            bool neuter = false;
+            if (config.ContainsKey("neuterAccountNums"))
             {
+                neuter = ("true".Equals(config["neuterAccountNums"]));
+            }
+
+            bool printxml = false;
+            if (config.ContainsKey("printxml"))
+            {
+                if("true".Equals(config["printxml"])) {
+                    printxml = true;
+                }
+            }
+            if(printxml) {
                 Console.WriteLine(xmlRequest);
                 Console.WriteLine(logFile);
             }
@@ -115,7 +132,7 @@ namespace Litle.Sdk
             {
                 xmlResponse = reader.ReadToEnd().Trim();
             }
-            if ("true".Equals(config["printxml"]))
+            if (printxml)
             {
                 Console.WriteLine(xmlResponse);
             }

@@ -10,11 +10,12 @@ namespace Litle.Sdk.Test.Functional
     class TestAuth
     {
         private LitleOnline litle;
+        private Dictionary<string, string> config;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
+            config = new Dictionary<string, string>();
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
@@ -190,6 +191,66 @@ namespace Litle.Sdk.Test.Functional
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void TestNotHavingTheLogFileSettingShouldDefaultItsValueToNull()
+        {
+            config.Remove("logFile");
+
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card;
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
+
+        [Test]
+        public void TestNeuterAccountNumsShouldDefaultToFalse()
+        {
+            config.Remove("neuterAccountNums");
+
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card;
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
+
+        [Test]
+        public void TestPrintxmlShouldDefaultToFalse()
+        {
+            config.Remove("printxml");
+
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card;
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
         }
     }
 }
