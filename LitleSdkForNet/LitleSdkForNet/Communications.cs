@@ -106,7 +106,7 @@ namespace Litle.Sdk
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 10000;
             req.ServicePoint.Expect100Continue = false;
-            if (config.ContainsKey("proxyHost") && config["proxyHost"] != null && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"] != null && config["proxyPort"].Length > 0)
+            if (isProxyOn(config))
             {
                 WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
                 myproxy.BypassProxyOnLocal = true;
@@ -144,6 +144,10 @@ namespace Litle.Sdk
             }
 
             return xmlResponse;
+        }
+
+        public bool isProxyOn(Dictionary<String,String> config) {
+            return config.ContainsKey("proxyHost") && config["proxyHost"] != null && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"] != null && config["proxyPort"].Length > 0;
         }
 
         virtual public string socketStream(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<String, String> config)
