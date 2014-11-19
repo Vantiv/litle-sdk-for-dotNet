@@ -1086,7 +1086,7 @@ namespace Litle.Sdk
             string xml = "\r\n<litleToken>" + SecurityElement.Escape(litleToken) + "</litleToken>";
             if (expDate != null) xml += "\r\n<expDate>" + SecurityElement.Escape(expDate) + "</expDate>";
             if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
-            if (typeSet) xml += "\r\n<type>" + typeField + "</type>";
+            if (typeSet) xml += "\r\n<type>" + methodOfPaymentSerializer.Serialize(typeField) + "</type>";
             return xml;
         }
     }
@@ -1109,7 +1109,7 @@ namespace Litle.Sdk
             string xml = "\r\n<paypageRegistrationId>" + SecurityElement.Escape(paypageRegistrationId) + "</paypageRegistrationId>";
             if (expDate != null) xml += "\r\n<expDate>" + SecurityElement.Escape(expDate) + "</expDate>";
             if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
-            if (typeSet) xml += "\r\n<type>" + typeField + "</type>";
+            if (typeSet) xml += "\r\n<type>" + methodOfPaymentSerializer.Serialize(typeField) + "</type>";
             return xml;
         }
     }
@@ -2991,7 +2991,7 @@ namespace Litle.Sdk
             string xml = "";
             if (track == null)
             {
-                xml += "\r\n<type>" + type + "</type>";
+                xml += "\r\n<type>" + methodOfPaymentSerializer.Serialize(type) + "</type>";
                 if (number != null)
                 {
                     xml += "\r\n<number>" + SecurityElement.Escape(number) + "</number>";

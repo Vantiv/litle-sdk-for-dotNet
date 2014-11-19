@@ -39,7 +39,7 @@ namespace Litle.Sdk.Test.Unit
             recurringRequest request = new recurringRequest();
             request.subscription = new subscription();
             request.subscription.planCode = "123abc";
- 
+
             String xml = request.Serialize();
             System.Text.RegularExpressions.Match match = Regex.Match(xml, "<subscription>\r\n<planCode>123abc</planCode>\r\n</subscription>");
             Assert.IsTrue(match.Success, xml);
@@ -173,8 +173,8 @@ namespace Litle.Sdk.Test.Unit
             cd1.discountCode = "1";
             cd1.name = "cheaper";
             cd1.amount = 200;
-            cd1.startDate = new DateTime(2013,9,5);
-            cd1.endDate = new DateTime(2013,9,6);
+            cd1.startDate = new DateTime(2013, 9, 5);
+            cd1.endDate = new DateTime(2013, 9, 6);
 
             createDiscount cd2 = new createDiscount();
             cd2.discountCode = "2";
@@ -1037,6 +1037,22 @@ namespace Litle.Sdk.Test.Unit
 <refundReversal id=""theId"" customerId=""theCustomerId"" reportGroup=""&lt;&apos;&amp;&quot;&gt;"">
 <litleTxnId>123</litleTxnId>
 </refundReversal>";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TestEmptyMethodOfPayment()
+        {
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.Item;
+            card.number = "4100000000000001";
+            card.expDate = "1250";
+
+            String actual = card.Serialize();
+            String expected = @"
+<type></type>
+<number>4100000000000001</number>
+<expDate>1250</expDate>";
             Assert.AreEqual(expected, actual);
         }
     }

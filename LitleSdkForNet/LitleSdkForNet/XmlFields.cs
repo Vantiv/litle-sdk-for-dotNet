@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 namespace Litle.Sdk
 {
     /// <remarks/>
@@ -44,5 +43,21 @@ namespace Litle.Sdk
         /// <remarks/>
         [System.Xml.Serialization.XmlEnumAttribute("")]
         Item,
+    }
+
+    public abstract class methodOfPaymentSerializer
+    {
+        public static String Serialize(methodOfPaymentTypeEnum mop)
+        {
+            if (mop == methodOfPaymentTypeEnum.Item)
+            {
+                return "";
+            }
+            else
+            {
+                return mop.ToString();
+
+            }
+        }
     }
 }

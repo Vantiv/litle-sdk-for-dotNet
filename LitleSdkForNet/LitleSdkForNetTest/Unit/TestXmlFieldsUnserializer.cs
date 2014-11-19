@@ -600,7 +600,5 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("5300000000000000", authorizationResponse.accountUpdater.originalCardInfo.number);
             Assert.AreEqual("1100", authorizationResponse.accountUpdater.originalCardInfo.expDate);
         }
-
-
     }
 }
