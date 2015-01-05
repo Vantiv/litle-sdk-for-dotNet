@@ -12,7 +12,7 @@ using System.Xml;
 namespace Litle.Sdk.Test.Unit
 {
     [TestClass]
-    class TestBatch
+    public class TestBatch
     {
         private litleRequest litle;
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";

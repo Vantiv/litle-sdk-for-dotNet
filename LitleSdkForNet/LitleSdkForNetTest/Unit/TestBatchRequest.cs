@@ -11,7 +11,7 @@ using Moq.Language.Flow;
 namespace Litle.Sdk.Test.Unit
 {
     [TestClass]
-    class TestBatchRequest
+    public class TestBatchRequest
     {
         private batchRequest batchRequest;
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";

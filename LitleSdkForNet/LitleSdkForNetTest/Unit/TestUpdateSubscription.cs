@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace Litle.Sdk.Test.Unit
 {
     [TestClass]
-    class TestUpdateSubscription
+    public class TestUpdateSubscription
     {        
         private LitleOnline litle;
 

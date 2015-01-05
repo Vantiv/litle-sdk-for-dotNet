@@ -7,7 +7,7 @@ using Litle.Sdk;
 namespace Litle.Sdk.Test.Certification
 {
     [TestClass]
-    class TestCert3AuthReversal
+    public class TestCert3AuthReversal
     {
         private LitleOnline litle;
 

@@ -7,7 +7,7 @@ using Litle.Sdk;
 namespace Litle.Sdk.Test.Certification
 {
     [TestClass]
-    class TestCert4Echeck
+    public class TestCert4Echeck
     {
         private LitleOnline litle;
 

@@ -8,7 +8,7 @@ using System.IO;
 namespace Litle.Sdk.Test.Functional
 {
     [TestClass]
-    class TestBatch
+    public class TestBatch
     {
         private litleRequest litle;
         private Dictionary<String, String> invalidConfig;

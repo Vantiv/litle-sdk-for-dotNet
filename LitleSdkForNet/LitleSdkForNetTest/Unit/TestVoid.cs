@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace Litle.Sdk.Test.Unit
 {
     [TestClass]
-    class TestVoid
+    public class TestVoid
     {
         
         private LitleOnline litle;

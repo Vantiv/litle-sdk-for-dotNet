@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 namespace Litle.Sdk.Test.Unit
 {
     [TestClass]
-    class TestRFRRequest
+    public class TestRFRRequest
     {
         private RFRRequest rfrRequest;
 

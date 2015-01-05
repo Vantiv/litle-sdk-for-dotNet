@@ -7,7 +7,7 @@ using Litle.Sdk;
 namespace Litle.Sdk.Test.Functional
 {
     [TestClass]
-    class TestEcheckCredit
+    public class TestEcheckCredit
     {
         private LitleOnline litle;
 

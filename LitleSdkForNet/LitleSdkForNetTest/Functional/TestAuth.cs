@@ -7,7 +7,7 @@ using Litle.Sdk;
 namespace Litle.Sdk.Test.Functional
 {
     [TestClass]
-    class TestAuth
+    public class TestAuth
     {
         private LitleOnline litle;
         private Dictionary<string, string> config;

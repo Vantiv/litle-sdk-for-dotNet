@@ -12,7 +12,7 @@ using System.IO;
 namespace Litle.Sdk.Test.Unit
 {
     [TestClass]
-    class TestXmlFieldsUnserializer
+    public class TestXmlFieldsUnserializer
     {
 
         [TestInitialize]

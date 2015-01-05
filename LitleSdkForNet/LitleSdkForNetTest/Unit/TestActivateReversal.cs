@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace Litle.Sdk.Test.Unit
 {
     [TestClass]
-    class TestActivateReversal
+    public class TestActivateReversal
     {        
         private LitleOnline litle;
 

@@ -7,7 +7,7 @@ using Litle.Sdk;
 namespace Litle.Sdk.Test.Functional
 {
     [TestClass]
-    class TestAuthReversal
+    public class TestAuthReversal
     {
         private LitleOnline litle;
 

@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace Litle.Sdk.Test.Unit
 {
     [TestClass]
-    class TestUpdateCardValidationNumOnToken
+    public class TestUpdateCardValidationNumOnToken
     {
         
         private LitleOnline litle;
