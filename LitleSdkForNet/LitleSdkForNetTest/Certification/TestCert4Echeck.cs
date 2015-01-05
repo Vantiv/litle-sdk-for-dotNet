@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Certification
 {
-    [TestFixture]
+    [TestClass]
     class TestCert4Echeck
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Certification
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void test37()
         {
             echeckVerification verification = new echeckVerification();
@@ -50,7 +50,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid Account Number", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test38()
         {
             echeckVerification verification = new echeckVerification();
@@ -73,7 +73,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test39()
         {
             echeckVerification verification = new echeckVerification();
@@ -97,7 +97,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Declined - Negative Information on File", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test40()
         {
             echeckVerification verification = new echeckVerification();
@@ -121,7 +121,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Absolute Decline", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test41()
         {
             echeckSale sale = new echeckSale();
@@ -144,7 +144,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid Account Number", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test42()
         {
             echeckSale sale = new echeckSale();
@@ -166,7 +166,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test43()
         {
             echeckSale sale = new echeckSale();
@@ -189,7 +189,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test44()
         {
             echeckSale sale = new echeckSale();
@@ -212,7 +212,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid Bank Routing Number", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test45()
         {
             echeckCredit credit = new echeckCredit();
@@ -234,7 +234,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid Account Number", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test46()
         {
             echeckCredit credit = new echeckCredit();
@@ -257,7 +257,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test47()
         {
             echeckCredit credit = new echeckCredit();
@@ -280,7 +280,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test48()
         {
             echeckCredit credit = new echeckCredit();
@@ -291,7 +291,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test49()
         {
             echeckCredit credit = new echeckCredit();

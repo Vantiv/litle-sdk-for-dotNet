@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestToken
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Functional
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleToken()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
@@ -36,11 +36,11 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.accountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            StringAssert.Equals("Account number was successfully registered", rtokenResponse.message);
         }
 
 
-        [Test]
+        [TestMethod]
         public void SimpleTokenWithPayPage()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
@@ -48,10 +48,10 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.paypageRegistrationId = "1233456789101112";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            StringAssert.Equals("Account number was successfully registered", rtokenResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleTokenWithEcheck()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
@@ -62,10 +62,10 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.echeckForToken = echeckObj;
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
-            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            StringAssert.Equals("Account number was successfully registered", rtokenResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void TokenEcheckMissingRequiredField()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
@@ -81,7 +81,7 @@ namespace Litle.Sdk.Test.Functional
             }
             catch (LitleOnlineException e)
             {
-                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+                Assert.IsTrue(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
             

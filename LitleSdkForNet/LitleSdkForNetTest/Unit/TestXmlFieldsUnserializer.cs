@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -11,16 +11,16 @@ using System.IO;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestXmlFieldsUnserializer
     {
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
         }
 
-        [Test]
+        [TestMethod]
         public void TestAuthorizationResponseContainsGiftCardResponse()
         {
             String xml = "<authorizationResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></authorizationResponse>";
@@ -28,10 +28,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             authorizationResponse authorizationResponse = (authorizationResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(authorizationResponse.giftCardResponse);
+            Assert.IsNotNull(authorizationResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestAuthReversalResponseContainsGiftCardResponse()
         {
             String xml = "<authReversalResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></authReversalResponse>";
@@ -39,10 +39,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             authReversalResponse authReversalResponse = (authReversalResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(authReversalResponse.giftCardResponse);
+            Assert.IsNotNull(authReversalResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCaptureResponseContainsGiftCardResponse()
         {
             String xml = "<captureResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></captureResponse>";
@@ -50,10 +50,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             captureResponse captureResponse = (captureResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(captureResponse.giftCardResponse);
+            Assert.IsNotNull(captureResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCaptureResponseContainsFraudResult()
         {
             String xml = "<captureResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></captureResponse>";
@@ -61,10 +61,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             captureResponse captureResponse = (captureResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(captureResponse.fraudResult);
+            Assert.IsNotNull(captureResponse.fraudResult);
         }
 
-        [Test]
+        [TestMethod]
         public void TestForceCaptureResponseContainsGiftCardResponse()
         {
             String xml = "<forceCaptureResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></forceCaptureResponse>";
@@ -72,10 +72,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(forceCaptureResponse.giftCardResponse);
+            Assert.IsNotNull(forceCaptureResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestForceCaptureResponseContainsFraudResult()
         {
             String xml = "<forceCaptureResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></forceCaptureResponse>";
@@ -83,10 +83,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(forceCaptureResponse.fraudResult);
+            Assert.IsNotNull(forceCaptureResponse.fraudResult);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCaptureGivenAuthResponseContainsGiftCardResponse()
         {
             String xml = "<captureGivenAuthResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></captureGivenAuthResponse>";
@@ -94,10 +94,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(captureGivenAuthResponse.giftCardResponse);
+            Assert.IsNotNull(captureGivenAuthResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCaptureGivenAuthResponseContainsFraudResult()
         {
             String xml = "<captureGivenAuthResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></captureGivenAuthResponse>";
@@ -105,10 +105,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(captureGivenAuthResponse.fraudResult);
+            Assert.IsNotNull(captureGivenAuthResponse.fraudResult);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSaleResponseContainsGiftCardResponse()
         {
             String xml = "<saleResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></saleResponse>";
@@ -116,10 +116,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             saleResponse saleResponse = (saleResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(saleResponse.giftCardResponse);
+            Assert.IsNotNull(saleResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCreditResponseContainsGiftCardResponse()
         {
             String xml = "<creditResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></creditResponse>";
@@ -127,10 +127,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             creditResponse creditResponse = (creditResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(creditResponse.giftCardResponse);
+            Assert.IsNotNull(creditResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCreditResponseContainsFraudResult()
         {
             String xml = "<creditResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></creditResponse>";
@@ -138,10 +138,10 @@ namespace Litle.Sdk.Test.Unit
             StringReader reader = new StringReader(xml);
             creditResponse creditResponse = (creditResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(creditResponse.fraudResult);
+            Assert.IsNotNull(creditResponse.fraudResult);
         }
 
-        [Test]
+        [TestMethod]
         public void TestActivateResponse()
         {
             String xml = "<activateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></activateResponse>";
@@ -159,11 +159,11 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(new DateTime(2013,9,5,14,23,45), activateResponse.responseTime);
             Assert.AreEqual(new DateTime(2013,9,5), activateResponse.postDate);
             Assert.AreEqual("Approved", activateResponse.message);
-            Assert.NotNull(activateResponse.fraudResult);
-            Assert.NotNull(activateResponse.giftCardResponse);
+            Assert.IsNotNull(activateResponse.fraudResult);
+            Assert.IsNotNull(activateResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestLoadResponse()
         {
             String xml = "<loadResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></loadResponse>";
@@ -181,11 +181,11 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), loadResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), loadResponse.postDate);
             Assert.AreEqual("Approved", loadResponse.message);
-            Assert.NotNull(loadResponse.fraudResult);
-            Assert.NotNull(loadResponse.giftCardResponse);
+            Assert.IsNotNull(loadResponse.fraudResult);
+            Assert.IsNotNull(loadResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUnloadResponse()
         {
             String xml = "<unloadResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></unloadResponse>";
@@ -203,11 +203,11 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), unloadResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), unloadResponse.postDate);
             Assert.AreEqual("Approved", unloadResponse.message);
-            Assert.NotNull(unloadResponse.fraudResult);
-            Assert.NotNull(unloadResponse.giftCardResponse);
+            Assert.IsNotNull(unloadResponse.fraudResult);
+            Assert.IsNotNull(unloadResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestGiftCardResponse()
         {
             String xml = "<balanceInquiryResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><giftCardResponse><availableBalance>1</availableBalance><beginningBalance>2</beginningBalance><endingBalance>3</endingBalance><cashBackAmount>4</cashBackAmount></giftCardResponse></balanceInquiryResponse>";
@@ -222,7 +222,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("4", giftCardResponse.cashBackAmount);
         }
 
-        [Test]
+        [TestMethod]
         public void TestBalanceInquiryResponse()
         {
             String xml = "<balanceInquiryResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></balanceInquiryResponse>";
@@ -239,11 +239,11 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), balanceInquiryResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), balanceInquiryResponse.postDate);
             Assert.AreEqual("Approved", balanceInquiryResponse.message);
-            Assert.NotNull(balanceInquiryResponse.fraudResult);
-            Assert.NotNull(balanceInquiryResponse.giftCardResponse);
+            Assert.IsNotNull(balanceInquiryResponse.fraudResult);
+            Assert.IsNotNull(balanceInquiryResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDeactivateResponse()
         {
             String xml = "<deactivateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></deactivateResponse>";
@@ -260,11 +260,11 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), deactivateResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), deactivateResponse.postDate);
             Assert.AreEqual("Approved", deactivateResponse.message);
-            Assert.NotNull(deactivateResponse.fraudResult);
-            Assert.NotNull(deactivateResponse.giftCardResponse);
+            Assert.IsNotNull(deactivateResponse.fraudResult);
+            Assert.IsNotNull(deactivateResponse.giftCardResponse);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCreatePlanResponse()
         {
             String xml = @"
@@ -286,7 +286,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("thePlan", createPlanResponse.planCode);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdatePlanResponse()
         {
             String xml = @"
@@ -308,7 +308,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("thePlan", updatePlanResponse.planCode);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdateSubscriptionResponseCanContainTokenResponse()
         {
             String xml = @"
@@ -329,7 +329,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("123456", updateSubscriptionResponse.tokenResponse.litleToken);
         }
 
-        [Test]
+        [TestMethod]
         public void TestEnhancedAuthResponseCanContainVirtualAccountNumber()
         {
             String xml = @"
@@ -342,7 +342,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("123456", enhancedAuthResponse.virtualAccountNumber);
         }
 
-        [Test]
+        [TestMethod]
         public void TestAuthReversalResponseCanContainGiftCardResponse()
         {
             String xml = @"
@@ -372,7 +372,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("5", authReversalResponse.giftCardResponse.availableBalance);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDepositReversalResponseCanContainGiftCardResponse()
         {
             String xml = @"
@@ -402,7 +402,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("5", depositReversalResponse.giftCardResponse.availableBalance);
         }
 
-        [Test]
+        [TestMethod]
         public void TestActivateReversalResponseCanContainGiftCardResponse()
         {
             String xml = @"
@@ -432,7 +432,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("5", activateReversalResponse.giftCardResponse.availableBalance);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDeactivateReversalResponseCanContainGiftCardResponse()
         {
             String xml = @"
@@ -462,7 +462,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("5", deactivateReversalResponse.giftCardResponse.availableBalance);
         }
 
-        [Test]
+        [TestMethod]
         public void TestLoadReversalResponseCanContainGiftCardResponse()
         {
             String xml = @"
@@ -492,7 +492,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("5", loadReversalResponse.giftCardResponse.availableBalance);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUnloadReversalResponseCanContainGiftCardResponse()
         {
             String xml = @"
@@ -522,7 +522,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("5", unloadReversalResponse.giftCardResponse.availableBalance);
         }
 
-        [Test]
+        [TestMethod]
         public void TestActivateResponseCanContainVirtualGiftCardResponse()
         {
             String xml = @"
@@ -543,7 +543,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("123",activateResponse.virtualGiftCardResponse.accountNumber);
         }
 
-        [Test]
+        [TestMethod]
         public void TestVirtualGiftCardResponse()
         {
             String xml = @"
@@ -566,7 +566,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("abc", activateResponse.virtualGiftCardResponse.cardValidationNum);
         }
 
-        [Test]
+        [TestMethod]
         public void TestAccountUpdaterResponse()
         {
             String xml = @"

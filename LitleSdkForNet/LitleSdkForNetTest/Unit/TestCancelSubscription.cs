@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,18 +9,18 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestCancelSubscription
     {        
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestSimple()
         {
             cancelSubscription update = new cancelSubscription();

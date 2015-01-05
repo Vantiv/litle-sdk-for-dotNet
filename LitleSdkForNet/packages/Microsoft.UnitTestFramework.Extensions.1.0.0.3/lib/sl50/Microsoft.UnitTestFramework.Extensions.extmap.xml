@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<manifest>
+  <assembly>
+    <name>Microsoft.UnitTestFramework.Extensions</name>
+    <version>5.0.5.0</version>
+    <publickeytoken>5BF63060BAA03A11</publickeytoken>
+    <relpath>Microsoft.UnitTestFramework.Extensions.dll</relpath>
+    <extension downloadUri="Microsoft.UnitTestFramework.Extensions.zip" />
+  </assembly>
+</manifest>

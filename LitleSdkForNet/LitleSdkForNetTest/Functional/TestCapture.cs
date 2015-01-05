@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestCapture
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -29,7 +29,7 @@ namespace Litle.Sdk.Test.Functional
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleCapture()
         {
             capture capture = new capture();
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void simpleCaptureWithPartial()
         {
             capture capture = new capture();
@@ -54,7 +54,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void complexCapture()
         {
             capture capture = new capture();
@@ -71,7 +71,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleCaptureWithSpecial()
         {
             capture capture = new capture();

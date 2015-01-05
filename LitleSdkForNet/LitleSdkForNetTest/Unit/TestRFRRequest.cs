@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestRFRRequest
     {
         private RFRRequest rfrRequest;
@@ -22,7 +22,7 @@ namespace Litle.Sdk.Test.Unit
         private Mock<litleFile> mockLitleFile;
         private Mock<litleTime> mockLitleTime;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             mockLitleFile = new Mock<litleFile>();
@@ -32,13 +32,13 @@ namespace Litle.Sdk.Test.Unit
             mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
         }
 
-        [SetUp]
+        [ClassInitialize]
         public void setUpBeforeTest()
         {
             rfrRequest = new RFRRequest();
         }
 
-        [Test]
+        [TestMethod]
         public void testInitialization()
         {
             Dictionary<String, String> mockConfig = new Dictionary<string, string>();
@@ -66,11 +66,11 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("C:\\MockRequests\\Requests\\", rfrRequest.getRequestDirectory());
             Assert.AreEqual("C:\\MockResponses\\Responses\\", rfrRequest.getResponseDirectory());
 
-            Assert.NotNull(rfrRequest.getLitleTime());
-            Assert.NotNull(rfrRequest.getLitleFile());
+            Assert.IsNotNull(rfrRequest.getLitleTime());
+            Assert.IsNotNull(rfrRequest.getLitleFile());
         }
 
-        [Test]
+        [TestMethod]
         public void testSerialize()
         {
             litleFile mockedLitleFile = mockLitleFile.Object;

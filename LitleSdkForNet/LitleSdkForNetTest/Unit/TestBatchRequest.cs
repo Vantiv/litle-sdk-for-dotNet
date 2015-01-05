@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -10,7 +10,7 @@ using Moq.Language.Flow;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestBatchRequest
     {
         private batchRequest batchRequest;
@@ -23,7 +23,7 @@ namespace Litle.Sdk.Test.Unit
         private Mock<litleFile> mockLitleFile;
         private Mock<litleTime> mockLitleTime;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             mockLitleFile = new Mock<litleFile>();
@@ -33,7 +33,7 @@ namespace Litle.Sdk.Test.Unit
             mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
         }
 
-        [SetUp]
+        [ClassInitialize]
         public void beforeTestSetup()
         {
             batchRequest = new batchRequest();
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
             batchRequest.setLitleTime(mockLitleTime.Object);
         }
 
-        [Test]
+        [TestMethod]
         public void testBatchRequestContainsMerchantSdkAttribute()
         {
             Dictionary<String, String> mockConfig = new Dictionary<string, string>();
@@ -61,7 +61,7 @@ merchantId=""01234"">
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testInitialization()
         {
             Dictionary<String, String> mockConfig = new Dictionary<string, string>();
@@ -89,11 +89,11 @@ merchantId=""01234"">
             Assert.AreEqual("C:\\MockRequests\\Requests\\", batchRequest.getRequestDirectory());
             Assert.AreEqual("C:\\MockResponses\\Responses\\", batchRequest.getResponseDirectory());
 
-            Assert.NotNull(batchRequest.getLitleTime());
-            Assert.NotNull(batchRequest.getLitleFile());
+            Assert.IsNotNull(batchRequest.getLitleTime());
+            Assert.IsNotNull(batchRequest.getLitleFile());
         }
 
-        [Test]
+        [TestMethod]
         public void testAddAuthorization()
         {
             authorization authorization = new authorization();
@@ -116,7 +116,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, authorization.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testAddAccountUpdate()
         {
             accountUpdate accountUpdate = new accountUpdate();
@@ -136,7 +136,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, accountUpdate.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testAuthReversal()
         {
             authReversal authreversal = new authReversal();
@@ -153,7 +153,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, authreversal.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testCapture()
         {
             capture capture = new capture();
@@ -169,7 +169,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, capture.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testCaptureGivenAuth()
         {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
@@ -196,7 +196,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, capturegivenauth.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testCredit()
         {
             credit credit = new credit();
@@ -218,7 +218,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, credit.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckCredit()
         {
             echeckCredit echeckcredit = new echeckCredit();
@@ -234,7 +234,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckcredit.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckRedeposit()
         {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
@@ -248,7 +248,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckredeposit.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckSale()
         {
             echeckSale echecksale = new echeckSale();
@@ -277,7 +277,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echecksale.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckVerification()
         {
             echeckVerification echeckverification = new echeckVerification();
@@ -306,7 +306,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckverification.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testForceCapture()
         {
             forceCapture forcecapture = new forceCapture();
@@ -328,7 +328,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, forcecapture.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testSale()
         {
             sale sale = new sale();
@@ -350,7 +350,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, sale.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testToken()
         {
             registerTokenRequestType token = new registerTokenRequestType();
@@ -365,7 +365,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, token.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateCardValidationNumOnToken()
         {
             updateCardValidationNumOnToken updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
@@ -380,7 +380,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, updateCardValidationNumOnToken.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription()
         {
             updateSubscription update = new updateSubscription();
@@ -407,7 +407,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, update.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testCreatePlan()
         {
             createPlan createPlan = new createPlan();
@@ -420,7 +420,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, createPlan.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdatePlan()
         {
             updatePlan updatePlan = new updatePlan();
@@ -433,7 +433,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, updatePlan.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testActivate()
         {
             activate activate = new activate();
@@ -450,7 +450,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, activate.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testDeactivate()
         {
             deactivate deactivate = new deactivate();
@@ -465,7 +465,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, deactivate.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testLoad()
         {
             load load = new load();
@@ -482,7 +482,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, load.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testUnload()
         {
             unload unload = new unload();
@@ -499,7 +499,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, unload.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testBalanceInquiry()
         {
             balanceInquiry balanceInquiry = new balanceInquiry();
@@ -514,7 +514,7 @@ merchantId=""01234"">
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, balanceInquiry.Serialize()));
         }
 
-        [Test]
+        [TestMethod]
         public void testCancelSubscription()
         {
             cancelSubscription cancel = new cancelSubscription();

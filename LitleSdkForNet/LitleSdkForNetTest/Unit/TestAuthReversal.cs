@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,19 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestAuthReversal
     {
         
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount()
         {
             authReversal reversal = new authReversal();
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
             litle.AuthReversal(reversal);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_Optional()
         {
             authReversal reversal = new authReversal();

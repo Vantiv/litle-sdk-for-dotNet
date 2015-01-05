@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,19 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestUpdateCardValidationNumOnToken
     {
         
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestSimpleRequest()
         {
             updateCardValidationNumOnToken update = new updateCardValidationNumOnToken();
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
             litle.UpdateCardValidationNumOnToken(update);
         }
 
-        [Test]
+        [TestMethod]
         public void TestOrderIdIsOptional()
         {
             updateCardValidationNumOnToken update = new updateCardValidationNumOnToken();

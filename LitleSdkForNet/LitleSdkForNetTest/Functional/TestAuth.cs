@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestAuth
     {
         private LitleOnline litle;
         private Dictionary<string, string> config;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             config = new Dictionary<string, string>();
@@ -31,7 +31,7 @@ namespace Litle.Sdk.Test.Functional
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleAuthWithCard()
         {
             authorization authorization = new authorization();
@@ -51,7 +51,7 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }
-        [Test]
+        [TestMethod]
         public void SimpleAuthWithMpos()
         {
             authorization authorization = new authorization();
@@ -71,7 +71,7 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }
-         [Test]
+         [TestMethod]
         public void AuthWithAmpersand()
         {
             authorization authorization = new authorization();
@@ -95,7 +95,7 @@ namespace Litle.Sdk.Test.Functional
              authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
          }
-        [Test]
+        [TestMethod]
         public void simpleAuthWithPaypal()
         {
             authorization authorization = new authorization();
@@ -116,7 +116,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void posWithoutCapabilityAndEntryMode()
         {
             authorization authorization = new authorization();
@@ -143,11 +143,11 @@ namespace Litle.Sdk.Test.Functional
             }
             catch (LitleOnlineException e)
             {
-                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+                Assert.IsTrue(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
 
-        [Test]
+        [TestMethod]
         public void trackData()
         {
             authorization authorization = new authorization();
@@ -172,7 +172,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void testAuthHandleSpecialCharacters()
         {
             authorization authorization = new authorization();
@@ -193,7 +193,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void TestNotHavingTheLogFileSettingShouldDefaultItsValueToNull()
         {
             config.Remove("logFile");
@@ -213,7 +213,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("000", response.response);
         }
 
-        [Test]
+        [TestMethod]
         public void TestNeuterAccountNumsShouldDefaultToFalse()
         {
             config.Remove("neuterAccountNums");
@@ -233,7 +233,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("000", response.response);
         }
 
-        [Test]
+        [TestMethod]
         public void TestPrintxmlShouldDefaultToFalse()
         {
             config.Remove("printxml");

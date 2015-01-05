@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestEcheckSale
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Functional
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleEcheckSaleWithEcheck()
         {
             echeckSale echeckSaleObj = new echeckSale();
@@ -52,10 +52,10 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.billToAddress = contactObj;
 
             echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+            StringAssert.Equals("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void NoAmount()
         {
             echeckSale echeckSaleObj = new echeckSale();
@@ -68,11 +68,11 @@ namespace Litle.Sdk.Test.Functional
             }
             catch (LitleOnlineException e)
             {
-                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+                Assert.IsTrue(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
 
-        [Test]
+        [TestMethod]
         public void EcheckSaleWithShipTo()
         {
             echeckSale echeckSaleObj = new echeckSale();
@@ -99,10 +99,10 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.shipToAddress = contactObj;
 
             echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+            StringAssert.Equals("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void EcheckSaleWithEcheckToken()
         {
             echeckSale echeckSaleObj = new echeckSale();
@@ -133,10 +133,10 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.billToAddress = contactObj;
 
             echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+            StringAssert.Equals("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void EcheckSaleMissingBilling()
         {
             echeckSale echeckSaleObj = new echeckSale();
@@ -159,11 +159,11 @@ namespace Litle.Sdk.Test.Functional
             }
             catch (LitleOnlineException e)
             {
-                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+                Assert.IsTrue(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleEcheckSale()
         {
             echeckSale echeckSaleObj = new echeckSale();
@@ -172,7 +172,7 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.amount = 12;
 
             echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+            StringAssert.Equals("Approved", response.message);
         }
             
     }

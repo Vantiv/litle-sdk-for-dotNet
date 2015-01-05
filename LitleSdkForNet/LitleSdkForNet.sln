@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitleSdkForNet", "LitleSdkForNet\LitleSdkForNet.csproj", "{4A6E3397-DE37-4F91-A90F-E74C1D91E098}"
 EndProject
@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitleSdkForNetTest", "Litle
 		{4A6E3397-DE37-4F91-A90F-E74C1D91E098} = {4A6E3397-DE37-4F91-A90F-E74C1D91E098}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{29B822AC-38E2-4105-AEEB-DE8A4FDD6952}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{973D4FC3-49C4-4E28-AE20-04EB812BE038}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,19 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestAuthorization
     {
 
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestFraudFilterOverride()
         {
             authorization auth = new authorization();
@@ -40,11 +40,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestContactShouldSendEmailForEmail_NotZip()
         {
             authorization auth = new authorization();
@@ -66,11 +66,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void Test3dsAttemptedShouldNotSayItem()
         {
             authorization auth = new authorization();
@@ -92,11 +92,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void Test3dsAuthenticatedShouldNotSayItem()
         {
             authorization auth = new authorization();
@@ -118,11 +118,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount()
         {
             authorization auth = new authorization();
@@ -141,11 +141,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_Optional()
         {
             authorization auth = new authorization();
@@ -163,11 +163,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestMethodOfPaymentAllowsGiftCard()
         {
             authorization auth = new authorization();
@@ -190,11 +190,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringRequest()
         {
             authorization auth = new authorization();
@@ -220,11 +220,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment()
         {
             authorization auth = new authorization();
@@ -247,11 +247,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringResponse_Full()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage><recurringTxnId>678</recurringTxnId></recurringResponse></authorizationResponse></litleOnlineResponse>";
@@ -265,7 +265,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(678, authorizationResponse.recurringResponse.recurringTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringResponse_NoRecurringTxnId()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage></recurringResponse></authorizationResponse></litleOnlineResponse>";
@@ -279,7 +279,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(0, authorizationResponse.recurringResponse.recurringTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSimpleAuthWithFraudCheck()
         {
             authorization auth = new authorization();
@@ -320,11 +320,11 @@ namespace Litle.Sdk.Test.Unit
 
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSimpleAuthWithBillMeLaterRequest()
         {
             authorization auth = new authorization();
@@ -367,11 +367,11 @@ namespace Litle.Sdk.Test.Unit
 
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestAuthWithAdvancedFraud()
         {
             authorization auth = new authorization();
@@ -397,11 +397,11 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestAdvancedFraudResponse()
         {
             String xmlResponse = @"<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
@@ -422,16 +422,16 @@ namespace Litle.Sdk.Test.Unit
 
 
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
-            Assert.NotNull(authorizationResponse.fraudResult);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
+            Assert.IsNotNull(authorizationResponse.fraudResult);
+            Assert.IsNotNull(authorizationResponse.fraudResult.advancedFraudResults);
+            Assert.IsNotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
             Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
+            Assert.IsNotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
             Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
             Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule);
         }
 
-        [Test]
+        [TestMethod]
         public void TestAuthWithPosCatLevelEnum()
         {
             authorization auth = new authorization();
@@ -459,7 +459,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
-            Assert.NotNull(authorizationResponse);
+            Assert.IsNotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
     }

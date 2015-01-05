@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestEcheckCredit
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void beforeClass()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void simpleEcheckCredit()
         {
             echeckCredit echeckcredit = new echeckCredit();
@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void noLitleTxnId()
         {
             echeckCredit echeckcredit = new echeckCredit();
@@ -43,7 +43,7 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        [Test]
+        [TestMethod]
         public void echeckCreditWithEcheck()
         {
             echeckCredit echeckcredit = new echeckCredit();
@@ -66,7 +66,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void echeckCreditWithToken()
         {
             echeckCredit echeckcredit = new echeckCredit();
@@ -89,7 +89,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void missingBilling()
         {
             echeckCredit echeckcredit = new echeckCredit();

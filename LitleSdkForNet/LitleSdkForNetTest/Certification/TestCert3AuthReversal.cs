@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Certification
 {
-    [TestFixture]
+    [TestClass]
     class TestCert3AuthReversal
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Certification
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void test32()
         {
             authorization auth = new authorization();
@@ -71,7 +71,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Authorization amount has already been depleted", reversalResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test33()
         {
             authorization auth = new authorization();
@@ -111,7 +111,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", reversalResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test34()
         {
             authorization auth = new authorization();
@@ -147,7 +147,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", reversalResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test35()
         {
             authorization auth = new authorization();
@@ -189,7 +189,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", reversalResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test36()
         {
             authorization auth = new authorization();

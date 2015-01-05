@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,19 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestForceCapture
     {
         
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount()
         {
             forceCapture capture = new forceCapture();
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_Optional()
         {
             forceCapture capture = new forceCapture();
@@ -59,7 +59,7 @@ namespace Litle.Sdk.Test.Unit
             litle.ForceCapture(capture);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_True()
         {
             forceCapture forceCapture = new forceCapture();
@@ -76,7 +76,7 @@ namespace Litle.Sdk.Test.Unit
             litle.ForceCapture(forceCapture);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_False()
         {
             forceCapture forceCapture = new forceCapture();
@@ -93,7 +93,7 @@ namespace Litle.Sdk.Test.Unit
             litle.ForceCapture(forceCapture);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_Optional()
         {
             forceCapture forceCapture = new forceCapture();

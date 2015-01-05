@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,19 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestSale
     {
         
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestFraudFilterOverride()
         {
             sale sale = new sale();
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Sale(sale);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount()
         {
             sale sale = new sale();
@@ -60,7 +60,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Sale(sale);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_Optional()
         {
             sale sale = new sale();
@@ -78,7 +78,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Sale(sale);
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringRequest()
         {
             sale sale = new sale();
@@ -105,7 +105,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Sale(sale);
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringResponse_Full() {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage><recurringTxnId>678</recurringTxnId></recurringResponse></saleResponse></litleOnlineResponse>";
             litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
@@ -118,7 +118,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(678, saleResponse.recurringResponse.recurringTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringResponse_NoRecurringTxnId()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage></recurringResponse></saleResponse></litleOnlineResponse>";
@@ -132,7 +132,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(0,saleResponse.recurringResponse.recurringTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringRequest_Optional()
         {
             sale sale = new sale();
@@ -155,7 +155,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Sale(sale);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LitleInternalRecurringRequest()
         {
             sale sale = new sale();
@@ -203,7 +203,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Sale(sale);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_True()
         {
             sale sale = new sale();
@@ -220,7 +220,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Sale(sale);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_False()
         {
             sale sale = new sale();
@@ -237,7 +237,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Sale(sale);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_Optional()
         {
             sale sale = new sale();

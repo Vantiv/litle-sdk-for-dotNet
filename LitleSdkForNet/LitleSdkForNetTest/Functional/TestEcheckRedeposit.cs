@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestEcheckRedeposit
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -30,7 +30,7 @@ namespace Litle.Sdk.Test.Functional
         }
 
 
-        [Test]
+        [TestMethod]
         public void simpleEcheckRedeposit() {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
@@ -38,7 +38,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void echeckRedepositWithEcheck() {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
@@ -53,7 +53,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void echeckRedepositWithEcheckToken() {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;

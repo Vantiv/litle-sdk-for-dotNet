@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -11,7 +11,7 @@ using System.Xml;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestBatch
     {
         private litleRequest litle;
@@ -26,7 +26,7 @@ namespace Litle.Sdk.Test.Unit
         private Mock<Communications> mockCommunications;
         private Mock<XmlReader> mockXmlReader;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             mockLitleTime = new Mock<litleTime>();
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications = new Mock<Communications>();
         }
 
-        [SetUp]
+        [ClassInitialize]
         public void setUpBeforeEachTest()
         {
             litle = new litleRequest();
@@ -51,7 +51,7 @@ namespace Litle.Sdk.Test.Unit
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadState).Returns(ReadState.Initial).Returns(ReadState.Interactive).Returns(ReadState.Closed);
         }
 
-        [Test]
+        [TestMethod]
         public void testInitialization()
         {
             Dictionary<String, String> mockConfig = new Dictionary<string, string>();
@@ -79,13 +79,13 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("C:\\MockRequests\\Requests\\", litle.getRequestDirectory());
             Assert.AreEqual("C:\\MockResponses\\Responses\\", litle.getResponseDirectory());
 
-            Assert.NotNull(litle.getCommunication());
-            Assert.NotNull(litle.getLitleTime());
-            Assert.NotNull(litle.getLitleFile());
-            Assert.NotNull(litle.getLitleXmlSerializer());
+            Assert.IsNotNull(litle.getCommunication());
+            Assert.IsNotNull(litle.getLitleTime());
+            Assert.IsNotNull(litle.getLitleFile());
+            Assert.IsNotNull(litle.getLitleXmlSerializer());
         }
 
-        [Test]
+        [TestMethod]
         public void testAccountUpdate()
         {
             accountUpdate accountUpdate = new accountUpdate();
@@ -148,7 +148,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
 
-        [Test]
+        [TestMethod]
         public void testAuth()
         {
             authorization authorization = new authorization();
@@ -208,7 +208,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testAuthReversal()
         {
             authReversal authreversal = new authReversal();
@@ -265,7 +265,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testCapture()
         {
             capture capture = new capture();
@@ -320,7 +320,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testCaptureGivenAuth()
         {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
@@ -386,7 +386,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testCredit()
         {
             credit credit = new credit();
@@ -447,7 +447,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckCredit()
         {
             echeckCredit echeckcredit = new echeckCredit();
@@ -502,7 +502,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckRedeposit()
         {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
@@ -556,7 +556,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckSale()
         {
             echeckSale echecksale = new echeckSale();
@@ -624,7 +624,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckVerification()
         {
             echeckVerification echeckverification = new echeckVerification();
@@ -692,7 +692,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testForceCapture()
         {
             forceCapture forcecapture = new forceCapture();
@@ -753,7 +753,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testSale()
         {
             sale sale = new sale();
@@ -814,7 +814,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testToken()
         {
             registerTokenRequestType token = new registerTokenRequestType();
@@ -869,7 +869,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateCardValidationNumOnToken()
         {
             updateCardValidationNumOnToken updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
@@ -924,7 +924,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testLitleOnlineException()
         {
             authorization authorization = new authorization();
@@ -986,7 +986,7 @@ namespace Litle.Sdk.Test.Unit
             }
         }
 
-        [Test]
+        [TestMethod]
         public void testInvalidOperationException()
         {
             authorization authorization = new authorization();
@@ -1034,7 +1034,7 @@ namespace Litle.Sdk.Test.Unit
             }
         }
 
-        [Test]
+        [TestMethod]
         public void testDefaultReportGroup()
         {
             authorization authorization = new authorization();
@@ -1097,7 +1097,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testSerialize()
         {
             authorization authorization = new authorization();
@@ -1128,7 +1128,7 @@ namespace Litle.Sdk.Test.Unit
             mockLitleFile.Verify(litleFile => litleFile.AppendFileToFile(mockFilePath, It.IsAny<String>()));
         }
 
-        [Test]
+        [TestMethod]
         public void testRFRRequest()
         {
             RFRRequest rfrRequest = new RFRRequest();
@@ -1179,7 +1179,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testCancelSubscription()
         {
             cancelSubscription cancel = new cancelSubscription();
@@ -1230,7 +1230,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription()
         {
             updateSubscription update = new updateSubscription();
@@ -1294,7 +1294,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testCreatePlan()
         {
             createPlan createPlan = new createPlan();
@@ -1349,7 +1349,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdatePlan()
         {
             updatePlan updatePlan = new updatePlan();
@@ -1402,7 +1402,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testActivate()
         {
             activate activate = new activate();
@@ -1456,7 +1456,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testDeactivate()
         {
             deactivate deactivate = new deactivate();
@@ -1510,7 +1510,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testLoad()
         {
             load load = new load();
@@ -1564,7 +1564,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testUnload()
         {
             unload unload = new unload();
@@ -1618,7 +1618,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
 
-        [Test]
+        [TestMethod]
         public void testBalanceInquiry()
         {
             balanceInquiry balanceInquiry = new balanceInquiry();

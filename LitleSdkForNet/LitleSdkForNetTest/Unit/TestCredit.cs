@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,19 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestCredit
     {
         
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestActionReasonOnOrphanedRefund()
         {
             credit credit = new credit();
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Credit(credit);
         }
 
-        [Test]
+        [TestMethod]
         public void TestOrderSource_Set()
         {
             credit credit = new credit();
@@ -60,7 +60,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Credit(credit);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_Tied()
         {
             credit credit = new credit();
@@ -80,7 +80,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Credit(credit);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_TiedOptional()
         {
             credit credit = new credit();
@@ -99,7 +99,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Credit(credit);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_Orphan()
         {
             credit credit = new credit();
@@ -119,7 +119,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Credit(credit);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_OrphanOptional()
         {
             credit credit = new credit();
@@ -138,7 +138,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Credit(credit);
         }
 
-        [Test]
+        [TestMethod]
         public void TestPos_Tied()
         {
             credit credit = new credit();
@@ -159,7 +159,7 @@ namespace Litle.Sdk.Test.Unit
             litle.Credit(credit);
         }
 
-        [Test]
+        [TestMethod]
         public void TestPos_TiedOptional()
         {
             credit credit = new credit();

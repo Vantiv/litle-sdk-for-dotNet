@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,19 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestLitleOnline
     {
         
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestAuth()
         {
             authorization authorization = new authorization();
@@ -46,7 +46,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, authorize.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testAuthReversal()
         {
             authReversal authreversal = new authReversal();
@@ -66,7 +66,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, authreversalresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testCapture()
         {
             capture caputure = new capture();
@@ -86,7 +86,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, captureresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testCaptureGivenAuth()
         {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
@@ -115,7 +115,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, caputregivenauthresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testCredit()
         {
             credit credit = new credit();
@@ -139,7 +139,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, creditresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckCredit()
         {
             echeckCredit echeckcredit = new echeckCredit();
@@ -157,7 +157,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, echeckcreditresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckRedeposit()
         {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
@@ -174,7 +174,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, echeckredepositresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckSale()
         {
             echeckSale echecksale = new echeckSale();
@@ -206,7 +206,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, echecksaleresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testEcheckVerification()
         {
             echeckVerification echeckverification = new echeckVerification();
@@ -238,7 +238,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, echeckverificaitonresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testForceCapture()
         {
             forceCapture forcecapture = new forceCapture();
@@ -262,7 +262,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, forcecaptureresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testSale()
         {
             sale sale = new sale();
@@ -286,7 +286,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, saleresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testToken()
         {
             registerTokenRequestType token = new registerTokenRequestType();
@@ -305,7 +305,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(123, registertokenresponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testActivate()
         {
             activate activate = new activate();
@@ -324,7 +324,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("123", activateResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testDeactivate()
         {
             deactivate deactivate = new deactivate();
@@ -343,7 +343,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("123", deactivateResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testLoad()
         {
             load load = new load();
@@ -362,7 +362,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("123", loadResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testUnload()
         {
             unload unload = new unload();
@@ -381,7 +381,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("123", unloadResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testBalanceInquiry()
         {
             balanceInquiry balanceInquiry = new balanceInquiry();
@@ -400,7 +400,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("123", balanceInquiryResponse.litleTxnId);
         }
 
-        [Test]
+        [TestMethod]
         public void testCreatePlan()
         {
             createPlan createPlan = new createPlan();
@@ -417,7 +417,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theCode", createPlanResponse.planCode);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdatePlan()
         {
             updatePlan updatePlan = new updatePlan();
@@ -434,7 +434,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theCode", updatePlanResponse.planCode);
         }
 
-        [Test]
+        [TestMethod]
         public void testLitleOnlineException()
         {
             authorization authorization = new authorization();
@@ -465,7 +465,7 @@ namespace Litle.Sdk.Test.Unit
             }
         }
 
-        [Test]
+        [TestMethod]
         public void testInvalidOperationException()
         {
             authorization authorization = new authorization();
@@ -496,7 +496,7 @@ namespace Litle.Sdk.Test.Unit
             }
         }
 
-        [Test]
+        [TestMethod]
         public void testDefaultReportGroup()
         {
             authorization authorization = new authorization();
@@ -518,13 +518,6 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorize = litle.Authorize(authorization);
             Assert.AreEqual("Default Report Group", authorize.reportGroup);
-        }
-
-        [Test]
-        public void testSetMerchantSdk()
-        {
-
-        }
-            
+        }   
     }
 }

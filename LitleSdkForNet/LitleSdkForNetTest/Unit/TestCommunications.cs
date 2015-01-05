@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,18 +9,18 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestCommunications
     {
         private Communications objectUnderTest;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             objectUnderTest = new Communications();
         }
 
-        [Test]
+        [TestMethod]
         public void TestSettingProxyPropertiesToNullShouldTurnOffProxy()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();

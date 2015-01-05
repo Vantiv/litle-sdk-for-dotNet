@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Certification
 {
-    [TestFixture]
+    [TestClass]
     class TestCert2AuthEnhanced
     {
 
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -29,7 +29,7 @@ namespace Litle.Sdk.Test.Certification
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void test14()
         {
             authorization authorization = new authorization();
@@ -51,7 +51,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("GIFT", response.enhancedAuthResponse.fundingSource.prepaidCardType);
         }
 
-        [Test]
+        [TestMethod]
         public void test15()
         {
             authorization authorization = new authorization();
@@ -73,7 +73,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
         }
 
-        [Test]
+        [TestMethod]
         public void test16()
         {
             authorization authorization = new authorization();
@@ -95,7 +95,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
         }
 
-        [Test]
+        [TestMethod]
         public void test17()
         {
             authorization authorization = new authorization();
@@ -117,7 +117,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
         }
 
-        [Test]
+        [TestMethod]
         public void test18()
         {
             authorization authorization = new authorization();
@@ -139,7 +139,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
         }
 
-        [Test]
+        [TestMethod]
         public void test19()
         {
             authorization authorization = new authorization();
@@ -161,7 +161,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
         }
 
-        [Test]
+        [TestMethod]
         public void test20()
         {
             authorization authorization = new authorization();
@@ -183,7 +183,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
         }
 
-        [Test]
+        [TestMethod]
         public void test21()
         {
             authorization authorization = new authorization();
@@ -202,7 +202,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual(affluenceTypeEnum.AFFLUENT, response.enhancedAuthResponse.affluence);
         }
 
-        [Test]
+        [TestMethod]
         public void test22()
         {
             authorization authorization = new authorization();
@@ -221,7 +221,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual(affluenceTypeEnum.MASSAFFLUENT, response.enhancedAuthResponse.affluence);
         }
 
-        [Test]
+        [TestMethod]
         public void test23()
         {
             authorization authorization = new authorization();
@@ -241,7 +241,7 @@ namespace Litle.Sdk.Test.Certification
 
         }
 
-        [Test]
+        [TestMethod]
         public void test24()
         {
             authorization authorization = new authorization();
@@ -261,7 +261,7 @@ namespace Litle.Sdk.Test.Certification
 
         }
 
-        [Test]
+        [TestMethod]
         public void test25()
         {
             authorization authorization = new authorization();
@@ -281,7 +281,7 @@ namespace Litle.Sdk.Test.Certification
 
         }
 
-        [Test]
+        [TestMethod]
         public void test26()
         {
             authorization authorization = new authorization();
@@ -306,7 +306,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test27()
         {
             authorization authorization = new authorization();
@@ -332,7 +332,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test28()
         {
             authorization authorization = new authorization();
@@ -358,7 +358,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test29()
         {
             authorization authorization = new authorization();
@@ -387,7 +387,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test30()
         {
             authorization authorization = new authorization();
@@ -416,7 +416,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test31()
         {
             authorization authorization = new authorization();

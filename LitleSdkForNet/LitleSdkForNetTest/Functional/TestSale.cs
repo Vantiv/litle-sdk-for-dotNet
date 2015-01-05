@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestSale
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Functional
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleSaleWithCard()
         {
             sale saleObj = new sale();
@@ -43,10 +43,10 @@ namespace Litle.Sdk.Test.Functional
             saleObj.card = cardObj;
 
             saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            StringAssert.Equals("Approved", responseObj.message);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleSaleWithMpos()
         {
             sale saleObj = new sale();
@@ -63,10 +63,10 @@ namespace Litle.Sdk.Test.Functional
             saleObj.mpos = mpos;
 
             saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            StringAssert.Equals("Approved", responseObj.message);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleSaleWithPayPal()
         {
             sale saleObj = new sale();
@@ -80,7 +80,7 @@ namespace Litle.Sdk.Test.Functional
             payPalObj.transactionId = "123456";
             saleObj.paypal = payPalObj;
             saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            StringAssert.Equals("Approved", responseObj.message);
         }
             
     }

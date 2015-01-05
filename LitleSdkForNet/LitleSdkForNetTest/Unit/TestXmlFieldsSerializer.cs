@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,16 +9,16 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestXmlFieldsSerializer
     {
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringRequest_Full()
         {
             recurringRequest request = new recurringRequest();
@@ -33,7 +33,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.IsTrue(match.Success, xml);
         }
 
-        [Test]
+        [TestMethod]
         public void TestRecurringRequest_OnlyRequired()
         {
             recurringRequest request = new recurringRequest();
@@ -45,7 +45,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.IsTrue(match.Success, xml);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSubscription_CanContainCreateDiscounts()
         {
             subscription subscription = new subscription();
@@ -88,7 +88,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSubscription_CanContainCreateAddOns()
         {
             subscription subscription = new subscription();
@@ -131,7 +131,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdateSubscription_Full()
         {
             updateSubscription update = new updateSubscription();
@@ -155,7 +155,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_OnlyRequired()
         {
             updateSubscription update = new updateSubscription();
@@ -166,7 +166,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_CanContainCreateDiscounts()
         {
             createDiscount cd1 = new createDiscount();
@@ -210,7 +210,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_CanContainUpdateDiscounts()
         {
             updateDiscount ud1 = new updateDiscount();
@@ -254,7 +254,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_CanContainDeleteDiscounts()
         {
             deleteDiscount dd1 = new deleteDiscount();
@@ -282,7 +282,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_CanContainCreateAddOns()
         {
             createAddOn cao1 = new createAddOn();
@@ -326,7 +326,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_CanContainUpdateAddOns()
         {
             updateAddOn uao1 = new updateAddOn();
@@ -370,7 +370,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_CanContainDeleteAddOns()
         {
             deleteAddOn dao1 = new deleteAddOn();
@@ -398,7 +398,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_CanContainToken()
         {
             updateSubscription update = new updateSubscription();
@@ -417,7 +417,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUpdateSubscription_CanContainPaypage()
         {
             updateSubscription update = new updateSubscription();
@@ -437,7 +437,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
 
-        [Test]
+        [TestMethod]
         public void TestCancelSubscription_Full()
         {
             cancelSubscription cancel = new cancelSubscription();
@@ -451,7 +451,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testCancelSubscription_OnlyRequired()
         {
             cancelSubscription update = new cancelSubscription();
@@ -465,7 +465,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testActivate_Full()
         {
             activate activate = new activate();
@@ -489,7 +489,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testActivate_VirtualGiftCard()
         {
             activate activate = new activate();
@@ -512,7 +512,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testVirtualGiftCard_Full()
         {
             virtualGiftCardType virtualGiftCard = new virtualGiftCardType();
@@ -526,7 +526,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testDeactivate_Full()
         {
             deactivate deactivate = new deactivate();
@@ -548,7 +548,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testDeactivate_OnlyRequired()
         {
             deactivate deactivate = new deactivate();
@@ -570,7 +570,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testLoad_Full()
         {
             load load = new load();
@@ -594,7 +594,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testLoad_OnlyRequired()
         {
             load load = new load();
@@ -618,7 +618,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUnload_Full()
         {
             unload unload = new unload();
@@ -642,7 +642,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUnload_OnlyRequired()
         {
             unload unload = new unload();
@@ -666,7 +666,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testBalanceInquiry_Full()
         {
             balanceInquiry balanceInquiry = new balanceInquiry();
@@ -688,7 +688,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testBalanceInquiry_OnlyRequired()
         {
             balanceInquiry balanceInquiry = new balanceInquiry();
@@ -710,7 +710,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCreatePlan_Full()
         {
             createPlan create = new createPlan();
@@ -741,7 +741,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
 
-        [Test]
+        [TestMethod]
         public void TestCreatePlan_OnlyRequired()
         {
             createPlan create = new createPlan();
@@ -761,7 +761,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdatePlan_Full()
         {
             updatePlan update = new updatePlan();
@@ -777,7 +777,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TesLitleInternalRecurringRequestMustContainFinalPayment()
         {
             litleInternalRecurringRequest litleInternalRecurringRequest = new litleInternalRecurringRequest();
@@ -793,7 +793,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCreateDiscount_Full()
         {
             createDiscount cd = new createDiscount();
@@ -813,7 +813,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdateDiscount_Full()
         {
             updateDiscount ud = new updateDiscount();
@@ -833,7 +833,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdateDiscount_OnlyRequired()
         {
             updateDiscount ud = new updateDiscount();
@@ -845,7 +845,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDeleteDiscount()
         {
             deleteDiscount ud = new deleteDiscount();
@@ -857,7 +857,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCreateAddOn()
         {
             createAddOn cao = new createAddOn();
@@ -877,7 +877,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdateAddOn_Full()
         {
             updateAddOn uao = new updateAddOn();
@@ -897,7 +897,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestUpdateAddOn_OnlyRequired()
         {
             updateAddOn uao = new updateAddOn();
@@ -909,7 +909,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDeleteAddOn()
         {
             deleteAddOn dao = new deleteAddOn();
@@ -921,7 +921,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testDepositReversal_Full()
         {
             depositReversal depositReversal = new depositReversal();
@@ -938,7 +938,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testRefundReversal_Full()
         {
             refundReversal refundReversal = new refundReversal();
@@ -955,7 +955,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testActivateReversal_Full()
         {
             activateReversal activateReversal = new activateReversal();
@@ -972,7 +972,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testDeactivateReversal_Full()
         {
             deactivateReversal deactivateReversal = new deactivateReversal();
@@ -989,7 +989,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testLoadReversal_Full()
         {
             loadReversal loadReversal = new loadReversal();
@@ -1006,7 +1006,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testUnloadReversal_Full()
         {
             unloadReversal unloadReversal = new unloadReversal();
@@ -1023,7 +1023,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void testSpecialCharacters_RefundReversal()
         {
             refundReversal refundReversal = new refundReversal();
@@ -1040,7 +1040,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [TestMethod]
         public void TestEmptyMethodOfPayment()
         {
             cardType card = new cardType();

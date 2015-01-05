@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,18 +9,18 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestUpdateSubscription
     {        
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestSimple()
         {
             updateSubscription update = new updateSubscription();
@@ -50,7 +50,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("12345", response.subscriptionId);
             Assert.AreEqual("456", response.litleTxnId);
             Assert.AreEqual("000", response.response);
-            Assert.NotNull(response.responseTime);
+            Assert.IsNotNull(response.responseTime);
         }
 
 

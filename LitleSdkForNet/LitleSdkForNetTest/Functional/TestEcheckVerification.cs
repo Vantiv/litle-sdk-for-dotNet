@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestEcheckVerification
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -29,7 +29,7 @@ namespace Litle.Sdk.Test.Functional
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleEcheckVerification()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
@@ -53,10 +53,10 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject.billToAddress = contactObj;
 
             echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
-            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+            StringAssert.Equals("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void EcheckVerificationWithEcheckToken()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
@@ -80,10 +80,10 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject.billToAddress = contactObj;
 
             echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
-            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+            StringAssert.Equals("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void TestMissingBillingField()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
@@ -105,7 +105,7 @@ namespace Litle.Sdk.Test.Functional
             }
             catch (LitleOnlineException e)
             {
-                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+                Assert.IsTrue(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
     }

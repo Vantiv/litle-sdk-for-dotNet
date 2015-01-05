@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using System.IO;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestBatchStream
     {
         private litleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             invalidConfig = new Dictionary<String, String>();
@@ -50,13 +50,13 @@ namespace Litle.Sdk.Test.Functional
             
         }
 
-        [SetUp]
+        [ClassInitialize]
         public void setUpBeforeTest()
         {
             litle = new litleRequest();
         }
 
-        [Test]
+        [TestMethod]
         public void SimpleBatch()
         {
             batchRequest litleBatchRequest = new batchRequest();
@@ -310,7 +310,7 @@ namespace Litle.Sdk.Test.Functional
 
             litleResponse litleResponse = litle.sendToLitleWithStream();
 
-            Assert.NotNull(litleResponse);
+            Assert.IsNotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
 
@@ -425,7 +425,7 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        [Test]
+        [TestMethod]
         public void accountUpdateBatch()
         {
             batchRequest litleBatchRequest = new batchRequest();
@@ -449,7 +449,7 @@ namespace Litle.Sdk.Test.Functional
             litle.addBatch(litleBatchRequest);
             litleResponse litleResponse = litle.sendToLitleWithStream();
 
-            Assert.NotNull(litleResponse);
+            Assert.IsNotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
 
@@ -457,7 +457,7 @@ namespace Litle.Sdk.Test.Functional
             while (litleBatchResponse != null)
             {
                 accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
-                Assert.NotNull(accountUpdateResponse);
+                Assert.IsNotNull(accountUpdateResponse);
                 while (accountUpdateResponse != null)
                 {
                     Assert.AreEqual("301", accountUpdateResponse.response);
@@ -468,7 +468,7 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        [Test]
+        [TestMethod]
         public void RFRBatch()
         {
             batchRequest litleBatchRequest = new batchRequest();
@@ -493,14 +493,14 @@ namespace Litle.Sdk.Test.Functional
             litle.addBatch(litleBatchRequest);
             litleResponse litleResponse = litle.sendToLitleWithStream();
 
-            Assert.NotNull(litleResponse);
+            Assert.IsNotNull(litleResponse);
 
             batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
-            Assert.NotNull(litleBatchResponse);
+            Assert.IsNotNull(litleBatchResponse);
             while (litleBatchResponse != null)
             {
                 accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
-                Assert.NotNull(accountUpdateResponse);
+                Assert.IsNotNull(accountUpdateResponse);
                 while (accountUpdateResponse != null)
                 {
                     Assert.AreEqual("000", accountUpdateResponse.response);
@@ -520,10 +520,10 @@ namespace Litle.Sdk.Test.Functional
             litleRfr.addRFRRequest(rfrRequest);
             litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream();
 
-            Assert.NotNull(litleRfrResponse);
+            Assert.IsNotNull(litleRfrResponse);
 
             RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
-            Assert.NotNull(rfrResponse);
+            Assert.IsNotNull(rfrResponse);
             while (rfrResponse != null)
             {
                 Assert.AreEqual("1", rfrResponse.response);
@@ -533,7 +533,7 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        [Test]
+        [TestMethod]
         public void nullBatchData()
         {
             batchRequest litleBatchRequest = new batchRequest();
@@ -760,7 +760,7 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        [Test]
+        [TestMethod]
         public void InvalidCredientialsBatch()
         {
             batchRequest litleBatchRequest = new batchRequest();

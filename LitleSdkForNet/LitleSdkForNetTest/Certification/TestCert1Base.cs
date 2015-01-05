@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Certification
 {
-    [TestFixture]
+    [TestClass]
     class TestCert1Base
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -29,7 +29,7 @@ namespace Litle.Sdk.Test.Certification
         }
 
 
-        [Test]
+        [TestMethod]
         public void Test1Auth()
         {
            
@@ -78,7 +78,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void Test1AVS()
         {
             authorization authorization = new authorization();
@@ -108,7 +108,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test1Sale()
         {
             sale sale = new sale();
@@ -151,7 +151,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved",voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test2Auth()
         {
             authorization authorization = new authorization();
@@ -203,7 +203,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved",voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test2AVS()
         {
             authorization authorization = new authorization();
@@ -238,7 +238,7 @@ namespace Litle.Sdk.Test.Certification
 
         }
 
-        [Test]
+        [TestMethod]
         public void test2Sale()
         {
             sale sale = new sale();
@@ -284,7 +284,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test3Auth()
         {
             authorization authorization = new authorization();
@@ -332,7 +332,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test3AVS()
         {
             authorization authorization = new authorization();
@@ -363,7 +363,7 @@ namespace Litle.Sdk.Test.Certification
 
         }
 
-        [Test]
+        [TestMethod]
         public void test3Sale()
         {
             sale sale = new sale();
@@ -405,7 +405,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test4Auth()
         {
             authorization authorization = new authorization();
@@ -452,7 +452,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test4AVS()
         {
             authorization authorization = new authorization();
@@ -481,7 +481,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("12", response.fraudResult.avsResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test4Sale()
         {
             sale sale = new sale();
@@ -522,7 +522,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test5Auth()
         {
             authorization authorization = new authorization();
@@ -565,7 +565,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test5AVS()
         {
             authorization authorization = new authorization();
@@ -590,7 +590,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("N", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test5Sale()
         {
             sale sale = new sale();
@@ -627,7 +627,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test6Auth()
         {
             authorization authorization = new authorization();
@@ -656,7 +656,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("P", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test6Sale()
         {
             sale sale = new sale();
@@ -691,7 +691,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("No transaction found with specified litleTxnId", voidResponse.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test7Auth()
         {
             authorization authorization = new authorization();
@@ -720,7 +720,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("N", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test7AVS()
         {
             authorization authorization = new authorization();
@@ -749,7 +749,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("N", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test7Sale()
         {
             sale sale = new sale();
@@ -778,7 +778,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("N", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test8Auth()
         {
             authorization authorization = new authorization();
@@ -807,7 +807,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("P", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test8AVS()
         {
             authorization authorization = new authorization();
@@ -836,7 +836,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("P", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test8Sale()
         {
             sale sale = new sale();
@@ -865,7 +865,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("P", response.fraudResult.cardValidationResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test9Auth()
         {
             authorization authorization = new authorization();
@@ -893,7 +893,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("34", response.fraudResult.avsResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test9AVS()
         {
             authorization authorization = new authorization();
@@ -921,7 +921,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("34", response.fraudResult.avsResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test9Sale()
         {
             sale sale = new sale();
@@ -949,7 +949,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("34", response.fraudResult.avsResult);
         }
 
-        [Test]
+        [TestMethod]
         public void test10()
         {
             authorization authorization = new authorization();
@@ -969,7 +969,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("32000", response.approvedAmount);
         }
 
-        [Test]
+        [TestMethod]
         public void test11()
         {
             authorization authorization = new authorization();
@@ -989,7 +989,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("48000", response.approvedAmount);
         }
 
-        [Test]
+        [TestMethod]
         public void test12()
         {
             authorization authorization = new authorization();
@@ -1009,7 +1009,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("40000", response.approvedAmount);
         }
 
-        [Test]
+        [TestMethod]
         public void test13()
         {
             authorization authorization = new authorization();

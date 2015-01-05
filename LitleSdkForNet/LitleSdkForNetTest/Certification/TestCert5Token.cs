@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Certification
 {
-    [TestFixture]
+    [TestClass]
     class TestCert5Token
     {
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Certification
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void test50()
         {
             registerTokenRequestType request = new registerTokenRequestType();
@@ -43,7 +43,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Account number was successfully registered", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test51()
         {
             registerTokenRequestType request = new registerTokenRequestType();
@@ -55,7 +55,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Credit card number was invalid", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test52()
         {
             registerTokenRequestType request = new registerTokenRequestType();
@@ -70,7 +70,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Account number was previously registered", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test53()
         {
             registerTokenRequestType request = new registerTokenRequestType();
@@ -88,7 +88,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("111922223333000998", response.litleToken);
         }
 
-        [Test]
+        [TestMethod]
         public void test54()
         {
             registerTokenRequestType request = new registerTokenRequestType();
@@ -103,7 +103,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid bank routing number", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test55()
         {
             authorization auth = new authorization();
@@ -126,7 +126,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("543510", response.tokenResponse.bin);
         }
 
-        [Test]
+        [TestMethod]
         public void test56()
         {
             authorization auth = new authorization();
@@ -145,7 +145,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Invalid account number", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test57()
         {
             authorization auth = new authorization();
@@ -168,7 +168,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("543510", response.tokenResponse.bin);
         }
 
-        [Test]
+        [TestMethod]
         public void test59()
         {
             authorization auth = new authorization();
@@ -185,7 +185,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Token was not found", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test60()
         {
             authorization auth = new authorization();
@@ -202,7 +202,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Token was invalid", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void test61()
         {
             echeckSale sale = new echeckSale();
@@ -226,7 +226,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("111922223333444003", response.tokenResponse.litleToken);
         }
 
-        [Test]
+        [TestMethod]
         public void test62()
         {
             echeckSale sale = new echeckSale();
@@ -251,7 +251,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("111922223333444999", response.tokenResponse.litleToken);
         }
 
-        [Test]
+        [TestMethod]
         public void test63()
         {
             echeckSale sale = new echeckSale();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
@@ -9,19 +9,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
-    [TestFixture]
+    [TestClass]
     class TestCaptureGivenAuth
     {
         
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void SetUpLitle()
         {
             litle = new LitleOnline();
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount()
         {
             captureGivenAuth capture = new captureGivenAuth();
@@ -40,7 +40,7 @@ namespace Litle.Sdk.Test.Unit
             litle.CaptureGivenAuth(capture);
         }
 
-        [Test]
+        [TestMethod]
         public void TestSurchargeAmount_Optional()
         {
             captureGivenAuth capture = new captureGivenAuth();
@@ -58,7 +58,7 @@ namespace Litle.Sdk.Test.Unit
             litle.CaptureGivenAuth(capture);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_True()
         {
             captureGivenAuth captureGivenAuth = new captureGivenAuth();
@@ -75,7 +75,7 @@ namespace Litle.Sdk.Test.Unit
             litle.CaptureGivenAuth(captureGivenAuth);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_False()
         {
             captureGivenAuth captureGivenAuth = new captureGivenAuth();
@@ -92,7 +92,7 @@ namespace Litle.Sdk.Test.Unit
             litle.CaptureGivenAuth(captureGivenAuth);
         }
 
-        [Test]
+        [TestMethod]
         public void TestDebtRepayment_Optional()
         {
             captureGivenAuth captureGivenAuth = new captureGivenAuth();

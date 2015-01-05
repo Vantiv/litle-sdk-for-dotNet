@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
-    [TestFixture]
+    [TestClass]
     class TestCaptureGivenAuth
     {
 
         private LitleOnline litle;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
@@ -30,7 +30,7 @@ namespace Litle.Sdk.Test.Functional
             litle = new LitleOnline(config);
         }
 
-        [Test]
+        [TestMethod]
         public void simpleCaptureGivenAuthWithCard() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
             capturegivenauth.amount = 106;
@@ -51,7 +51,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void simpleCaptureGivenAuthWithMpos()
         {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
@@ -75,7 +75,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void simpleCaptureGivenAuthWithToken() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
             capturegivenauth.amount = 106;
@@ -97,7 +97,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void complexCaptureGivenAuth() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
             capturegivenauth.amount = 106;
@@ -127,7 +127,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void authInfo() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
             capturegivenauth.amount = 106;
@@ -154,7 +154,7 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
-        [Test]
+        [TestMethod]
         public void simpleCaptureGivenAuthWithTokenAndSpecialCharacters()
         {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
