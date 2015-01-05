@@ -19,11 +19,11 @@ namespace Litle.Sdk.Test.Unit
         private const string mockFileName = "TheRainbow.xml";
         private const string mockFilePath = "C:\\Somewhere\\\\Over\\\\" + mockFileName;
 
-        private Mock<litleFile> mockLitleFile;
-        private Mock<litleTime> mockLitleTime;
+        private static Mock<litleFile> mockLitleFile;
+        private static Mock<litleTime> mockLitleTime;
 
-        [TestInitialize]
-        public void setUp()
+        [ClassInitialize]
+        public static void setUpOnce(TestContext context)
         {
             mockLitleFile = new Mock<litleFile>();
             mockLitleTime = new Mock<litleTime>();
@@ -32,8 +32,8 @@ namespace Litle.Sdk.Test.Unit
             mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
         }
 
-        [ClassInitialize]
-        public void setUpBeforeTest()
+        [TestInitialize]
+        public void setUpBeforeEachTest()
         {
             rfrRequest = new RFRRequest();
         }

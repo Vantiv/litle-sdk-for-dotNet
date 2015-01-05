@@ -10,7 +10,7 @@ namespace Litle.Sdk.Test.Functional
     [TestClass]
     public class TestBatchStream
     {
-        private litleRequest litle;
+        private static litleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
 
@@ -51,7 +51,7 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [ClassInitialize]
-        public void setUpBeforeTest()
+        public static void setUpBeforeTest(TestContext context)
         {
             litle = new litleRequest();
         }

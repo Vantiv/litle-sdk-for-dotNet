@@ -14,20 +14,20 @@ namespace Litle.Sdk.Test.Unit
     [TestClass]
     public class TestBatch
     {
-        private litleRequest litle;
+        private static litleRequest litle;
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";
         private const string timeRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_";
         private const string batchNameRegex = timeRegex + "[A-Z]{8}";
         private const string mockFileName = "TheRainbow.xml";
         private const string mockFilePath = "C:\\Somewhere\\Over\\" + mockFileName;
 
-        private Mock<litleTime> mockLitleTime;
-        private Mock<litleFile> mockLitleFile;
-        private Mock<Communications> mockCommunications;
+        private static Mock<litleTime> mockLitleTime;
+        private static Mock<litleFile> mockLitleFile;
+        private static Mock<Communications> mockCommunications;
         private Mock<XmlReader> mockXmlReader;
 
-        [TestInitialize]
-        public void setUp()
+        [ClassInitialize]
+        public static void setUpOnce(TestContext context)
         {
             mockLitleTime = new Mock<litleTime>();
             mockLitleTime.Setup(litleTime => litleTime.getCurrentTime(It.Is<String>(resultFormat => resultFormat == timeFormat))).Returns("01-01-1960_01-22-30-1234_");
@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications = new Mock<Communications>();
         }
 
-        [ClassInitialize]
+        [TestInitialize]
         public void setUpBeforeEachTest()
         {
             litle = new litleRequest();
