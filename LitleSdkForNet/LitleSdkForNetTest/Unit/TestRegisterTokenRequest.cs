@@ -56,5 +56,32 @@ namespace Litle.Sdk.Test.Unit
             litle.RegisterToken(register);
         }
 
+        [Test]
+        public void TestSimpleRequestWithApplepay()
+        {
+            registerTokenRequestType register = new registerTokenRequestType();
+            register.orderId = "12344";
+            applepayType applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData = "454657413164";
+            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId = "1234";
+            applepay.header = applepayHeaderType;
+            applepay.data = "user";
+            applepay.signature = "sign";
+            applepay.version = "1";
+            register.applepay = applepay;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<registerTokenRequest.*<applepay>.*?<data>user</data>.*?</applepay>.*?</registerTokenRequest>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><registerTokenResponse><litleTxnId>4</litleTxnId><response>801</response><message>Token Successfully Registered</message><responseTime>2012-10-10T10:17:03</responseTime></registerTokenResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.RegisterToken(register);
+        }
+
     }
 }

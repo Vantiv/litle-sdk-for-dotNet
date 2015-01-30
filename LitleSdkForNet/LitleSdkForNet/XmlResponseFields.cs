@@ -1607,7 +1607,7 @@ namespace Litle.Sdk
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1635,6 +1635,8 @@ namespace Litle.Sdk
         private string messageField;
 
         private System.DateTime responseTimeField;
+
+        private applepayResponse applepayResponseField;
 
         /// <remarks/>
         public long litleTxnId
@@ -1766,6 +1768,19 @@ namespace Litle.Sdk
                 this.responseTimeField = value;
             }
         }
+
+        /// <remarks/>
+        public applepayResponse applepayResponse
+        {
+            get
+            {
+                return this.applepayResponseField;
+            }
+            set
+            {
+                this.applepayResponseField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -1855,305 +1870,269 @@ namespace Litle.Sdk
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class authorizationResponse : transactionTypeWithReportGroup
-    {
-
-        private long litleTxnIdField;
-
-        private string orderIdField;
-
-        private string responseField;
-
-        private System.DateTime responseTimeField;
-
-        private string cardProductIdField;
-
-        private System.DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private string messageField;
-
-        private string authCodeField;
-
-        private string authorizationResponseSubCodeField;
-
-        private string approvedAmountField;
-
-        private accountInfoType accountInformationField;
-
-        private accountUpdater accountUpdaterField;
-
-        private fraudResult fraudResultField;
-
-        private billMeLaterResponseData billMeLaterResponseDataField;
-
-        private tokenResponseType tokenResponseField;
-
-        private enhancedAuthResponse enhancedAuthResponseField;
-
-        private recyclingType recyclingField;
-
-        private recurringResponse recurringResponseField;
-
-        public giftCardResponse giftCardResponse;
-
-        /// <remarks/>
-        public long litleTxnId
-        {
-            get
-            {
-                return this.litleTxnIdField;
-            }
-            set
-            {
-                this.litleTxnIdField = value;
-            }
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+[System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+public partial class authorizationResponse : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private string orderIdField;
+    
+    private string responseField;
+    
+    private System.DateTime responseTimeField;
+    
+    private string cardProductIdField;
+    
+    private System.DateTime postDateField;
+    
+    private bool postDateFieldSpecified;
+    
+    private string messageField;
+    
+    private string authCodeField;
+    
+    private string authorizationResponseSubCodeField;
+    
+    private string approvedAmountField;
+    
+    private accountInfoType accountInformationField;
+    
+    private accountUpdater accountUpdaterField;
+    
+    private fraudResult fraudResultField;
+    
+    private billMeLaterResponseData billMeLaterResponseDataField;
+    
+    private tokenResponseType tokenResponseField;
+    
+    private enhancedAuthResponse enhancedAuthResponseField;
+    
+    private recyclingType recyclingField;
+    
+    private recurringResponse recurringResponseField;
+    
+    private giftCardResponse giftCardResponseField;
+    
+    private applepayResponse applepayResponseField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
         }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string response
-        {
-            get
-            {
-                return this.responseField;
-            }
-            set
-            {
-                this.responseField = value;
-            }
-        }
-
-        /// <remarks/>
-        public System.DateTime responseTime
-        {
-            get
-            {
-                return this.responseTimeField;
-            }
-            set
-            {
-                this.responseTimeField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string cardProductId
-        {
-            get
-            {
-                return this.cardProductIdField;
-            }
-            set
-            {
-                this.cardProductIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-        public System.DateTime postDate
-        {
-            get
-            {
-                return this.postDateField;
-            }
-            set
-            {
-                this.postDateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool postDateSpecified
-        {
-            get
-            {
-                return this.postDateFieldSpecified;
-            }
-            set
-            {
-                this.postDateFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        public string message
-        {
-            get
-            {
-                return this.messageField;
-            }
-            set
-            {
-                this.messageField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string authCode
-        {
-            get
-            {
-                return this.authCodeField;
-            }
-            set
-            {
-                this.authCodeField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string authorizationResponseSubCode
-        {
-            get
-            {
-                return this.authorizationResponseSubCodeField;
-            }
-            set
-            {
-                this.authorizationResponseSubCodeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
-        public string approvedAmount
-        {
-            get
-            {
-                return this.approvedAmountField;
-            }
-            set
-            {
-                this.approvedAmountField = value;
-            }
-        }
-
-        /// <remarks/>
-        public accountInfoType accountInformation
-        {
-            get
-            {
-                return this.accountInformationField;
-            }
-            set
-            {
-                this.accountInformationField = value;
-            }
-        }
-
-        /// <remarks/>
-        public accountUpdater accountUpdater
-        {
-            get
-            {
-                return this.accountUpdaterField;
-            }
-            set
-            {
-                this.accountUpdaterField = value;
-            }
-        }
-
-        /// <remarks/>
-        public fraudResult fraudResult
-        {
-            get
-            {
-                return this.fraudResultField;
-            }
-            set
-            {
-                this.fraudResultField = value;
-            }
-        }
-
-        /// <remarks/>
-        public billMeLaterResponseData billMeLaterResponseData
-        {
-            get
-            {
-                return this.billMeLaterResponseDataField;
-            }
-            set
-            {
-                this.billMeLaterResponseDataField = value;
-            }
-        }
-
-        /// <remarks/>
-        public tokenResponseType tokenResponse
-        {
-            get
-            {
-                return this.tokenResponseField;
-            }
-            set
-            {
-                this.tokenResponseField = value;
-            }
-        }
-
-        /// <remarks/>
-        public enhancedAuthResponse enhancedAuthResponse
-        {
-            get
-            {
-                return this.enhancedAuthResponseField;
-            }
-            set
-            {
-                this.enhancedAuthResponseField = value;
-            }
-        }
-
-        /// <remarks/>
-        public recyclingType recycling
-        {
-            get
-            {
-                return this.recyclingField;
-            }
-            set
-            {
-                this.recyclingField = value;
-            }
-        }
-
-        /// <remarks/>
-        public recurringResponse recurringResponse
-        {
-            get
-            {
-                return this.recurringResponseField;
-            }
-            set
-            {
-                this.recurringResponseField = value;
-            }
+        set {
+            this.litleTxnIdField = value;
         }
     }
+    
+    /// <remarks/>
+    public string orderId {
+        get {
+            return this.orderIdField;
+        }
+        set {
+            this.orderIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string response {
+        get {
+            return this.responseField;
+        }
+        set {
+            this.responseField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public System.DateTime responseTime {
+        get {
+            return this.responseTimeField;
+        }
+        set {
+            this.responseTimeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string cardProductId {
+        get {
+            return this.cardProductIdField;
+        }
+        set {
+            this.cardProductIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+    public System.DateTime postDate {
+        get {
+            return this.postDateField;
+        }
+        set {
+            this.postDateField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool postDateSpecified {
+        get {
+            return this.postDateFieldSpecified;
+        }
+        set {
+            this.postDateFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string message {
+        get {
+            return this.messageField;
+        }
+        set {
+            this.messageField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string authCode {
+        get {
+            return this.authCodeField;
+        }
+        set {
+            this.authCodeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string authorizationResponseSubCode {
+        get {
+            return this.authorizationResponseSubCodeField;
+        }
+        set {
+            this.authorizationResponseSubCodeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+    public string approvedAmount {
+        get {
+            return this.approvedAmountField;
+        }
+        set {
+            this.approvedAmountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public accountInfoType accountInformation {
+        get {
+            return this.accountInformationField;
+        }
+        set {
+            this.accountInformationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public accountUpdater accountUpdater {
+        get {
+            return this.accountUpdaterField;
+        }
+        set {
+            this.accountUpdaterField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public fraudResult fraudResult {
+        get {
+            return this.fraudResultField;
+        }
+        set {
+            this.fraudResultField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public billMeLaterResponseData billMeLaterResponseData {
+        get {
+            return this.billMeLaterResponseDataField;
+        }
+        set {
+            this.billMeLaterResponseDataField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public tokenResponseType tokenResponse {
+        get {
+            return this.tokenResponseField;
+        }
+        set {
+            this.tokenResponseField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public enhancedAuthResponse enhancedAuthResponse {
+        get {
+            return this.enhancedAuthResponseField;
+        }
+        set {
+            this.enhancedAuthResponseField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public recyclingType recycling {
+        get {
+            return this.recyclingField;
+        }
+        set {
+            this.recyclingField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public recurringResponse recurringResponse {
+        get {
+            return this.recurringResponseField;
+        }
+        set {
+            this.recurringResponseField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public giftCardResponse giftCardResponse {
+        get {
+            return this.giftCardResponseField;
+        }
+        set {
+            this.giftCardResponseField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public applepayResponse applepayResponse {
+        get {
+            return this.applepayResponseField;
+        }
+        set {
+            this.applepayResponseField = value;
+        }
+    }
+}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
@@ -3095,7 +3074,7 @@ namespace Litle.Sdk
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3103,7 +3082,7 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class saleResponse : transactionTypeWithReportGroup
     {
-        public giftCardResponse giftCardResponse;
+
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -3141,6 +3120,10 @@ namespace Litle.Sdk
         private recyclingType recyclingField;
 
         private recurringResponse recurringResponseField;
+
+        private giftCardResponse giftCardResponseField;
+
+        private applepayResponse applepayResponseField;
 
         private bool duplicateField;
 
@@ -3318,7 +3301,6 @@ namespace Litle.Sdk
             }
         }
 
-
         /// <remarks/>
         public billMeLaterResponseData billMeLaterResponseData
         {
@@ -3359,19 +3341,6 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public recurringResponse recurringResponse
-        {
-            get
-            {
-                return this.recurringResponseField;
-            }
-            set
-            {
-                this.recurringResponseField = value;
-            }
-        }
-
-        /// <remarks/>
         public accountUpdater accountUpdater
         {
             get
@@ -3394,6 +3363,45 @@ namespace Litle.Sdk
             set
             {
                 this.recyclingField = value;
+            }
+        }
+
+        /// <remarks/>
+        public recurringResponse recurringResponse
+        {
+            get
+            {
+                return this.recurringResponseField;
+            }
+            set
+            {
+                this.recurringResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public giftCardResponse giftCardResponse
+        {
+            get
+            {
+                return this.giftCardResponseField;
+            }
+            set
+            {
+                this.giftCardResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public applepayResponse applepayResponse
+        {
+            get
+            {
+                return this.applepayResponseField;
+            }
+            set
+            {
+                this.applepayResponseField = value;
             }
         }
 
@@ -5727,6 +5735,154 @@ namespace Litle.Sdk
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class applepayResponse
+    {
+
+        private string applicationPrimaryAccountNumberField;
+
+        private string applicationExpirationDateField;
+
+        private string currencyCodeField;
+
+        private string transactionAmountField;
+
+        private string cardholderNameField;
+
+        private string deviceManufacturerIdentifierField;
+
+        private string paymentDataTypeField;
+
+        private byte[] onlinePaymentCryptogramField;
+
+        private string eciIndicatorField;
+
+        /// <remarks/>
+        public string applicationPrimaryAccountNumber
+        {
+            get
+            {
+                return this.applicationPrimaryAccountNumberField;
+            }
+            set
+            {
+                this.applicationPrimaryAccountNumberField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string applicationExpirationDate
+        {
+            get
+            {
+                return this.applicationExpirationDateField;
+            }
+            set
+            {
+                this.applicationExpirationDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string currencyCode
+        {
+            get
+            {
+                return this.currencyCodeField;
+            }
+            set
+            {
+                this.currencyCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+        public string transactionAmount
+        {
+            get
+            {
+                return this.transactionAmountField;
+            }
+            set
+            {
+                this.transactionAmountField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string cardholderName
+        {
+            get
+            {
+                return this.cardholderNameField;
+            }
+            set
+            {
+                this.cardholderNameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string deviceManufacturerIdentifier
+        {
+            get
+            {
+                return this.deviceManufacturerIdentifierField;
+            }
+            set
+            {
+                this.deviceManufacturerIdentifierField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string paymentDataType
+        {
+            get
+            {
+                return this.paymentDataTypeField;
+            }
+            set
+            {
+                this.paymentDataTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] onlinePaymentCryptogram
+        {
+            get
+            {
+                return this.onlinePaymentCryptogramField;
+            }
+            set
+            {
+                this.onlinePaymentCryptogramField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string eciIndicator
+        {
+            get
+            {
+                return this.eciIndicatorField;
+            }
+            set
+            {
+                this.eciIndicatorField = value;
+            }
+        }
     }
 
 }

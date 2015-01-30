@@ -143,5 +143,24 @@ namespace Litle.Sdk.Test.Functional
             creditResponse response = litle.Credit(creditObj);
             Assert.AreEqual("Approved", response.message);
         }
+
+        [Test]
+        public void SimpleCreditWithSecondaryAmount()
+        {
+            credit creditObj = new credit();
+            creditObj.amount = 106;
+            creditObj.secondaryAmount = 50;
+            creditObj.orderId = "2111";
+            creditObj.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000001";
+            card.expDate = "1210";
+
+            creditObj.card = card;
+
+            creditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.message);
+        }
     }
 }

@@ -146,6 +146,29 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void TestSecondaryAmount()
+        {
+            authorization auth = new authorization();
+            auth.orderId = "12344";
+            auth.amount = 2;
+            auth.secondaryAmount = 1;
+            auth.orderSource = orderSourceType.ecommerce;
+            auth.reportGroup = "Planets";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            authorizationResponse authorizationResponse = litle.Authorize(auth);
+
+            Assert.NotNull(authorizationResponse);
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+        }
+
+        [Test]
         public void TestSurchargeAmount_Optional()
         {
             authorization auth = new authorization();
@@ -184,6 +207,39 @@ namespace Litle.Sdk.Test.Unit
             var mock = new Mock<Communications>();
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<card>\r\n<type>GC</type>\r\n<number>414100000000000000</number>\r\n<expDate>1210</expDate>\r\n</card>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            authorizationResponse authorizationResponse = litle.Authorize(auth);
+
+            Assert.NotNull(authorizationResponse);
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+        }
+
+        [Test]
+        public void TestMethodOfPaymentApplepay()
+        {
+            authorization auth = new authorization();
+            auth.orderId = "12344";
+            auth.amount = 2;
+            auth.orderSource = orderSourceType.applepay;
+            auth.reportGroup = "Planets";
+            applepayType applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData="454657413164";
+            applepayHeaderType.ephemeralPublicKey="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId="1234";
+            applepay.header = applepayHeaderType;
+            applepay.data = "user";
+            applepay.signature = "sign";
+            applepay.version = "1";
+            auth.applepay=applepay;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<authorization.*?<orderSource>applepay</orderSource>.*?<applepay>.*?<data>user</data>.*?</applepay>.*?</authorization>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;

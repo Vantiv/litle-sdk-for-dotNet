@@ -177,5 +177,28 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Approved", response.message);
         }
 
+        [Test]
+        public void simpleCaptureGivenAuthWithSecondaryAmount()
+        {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.secondaryAmount = 50;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
+            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
     }
 }

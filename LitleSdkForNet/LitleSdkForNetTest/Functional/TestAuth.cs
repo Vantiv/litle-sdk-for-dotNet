@@ -117,6 +117,32 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
+        public void simpleAuthWithApplepayAndSecondaryAmount()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "123456";
+            authorization.amount = 110;
+            authorization.secondaryAmount = 50;
+            authorization.orderSource = orderSourceType.applepay;
+            applepayType applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData = "454657413164";
+            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId = "1234";
+            applepay.header = applepayHeaderType;
+            applepay.data = "user";
+            applepay.signature = "sign";
+            applepay.version = "1";
+            authorization.applepay = applepay;       
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Insufficient Funds", response.message);
+            Assert.AreEqual("110", response.applepayResponse.transactionAmount);
+        }
+
+        [Test]
         public void posWithoutCapabilityAndEntryMode()
         {
             authorization authorization = new authorization();
