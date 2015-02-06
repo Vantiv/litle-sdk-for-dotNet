@@ -82,6 +82,62 @@ namespace Litle.Sdk.Test.Functional
             saleResponse responseObj = litle.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
         }
-            
+
+        [Test]
+        public void SimpleSaleWithApplepayAndSecondaryAmountAndWallet()
+        {
+            sale saleObj = new sale();
+            saleObj.amount = 110;
+            saleObj.secondaryAmount = 50;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            applepayType applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData = "454657413164";
+            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId = "1234";
+            applepay.header = applepayHeaderType;
+            applepay.data = "user";
+            applepay.signature = "sign";
+            applepay.version = "1";
+            saleObj.applepay = applepay;
+            wallet wallet = new Sdk.wallet();
+            wallet.walletSourceTypeId = "123";
+            wallet.walletSourceType = walletWalletSourceType.MasterPass;
+            saleObj.wallet = wallet;
+
+            saleResponse responseObj = litle.Sale(saleObj);
+            Assert.AreEqual("Insufficient Funds", responseObj.message);
+            Assert.AreEqual("110", responseObj.applepayResponse.transactionAmount);
+        }
+
+        [Test]
+        public void SimpleSaleWithInvalidFraudCheck()
+        {
+            sale saleObj = new sale();
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            cardType cardObj = new cardType();
+            cardObj.type = methodOfPaymentTypeEnum.VI;
+            cardObj.number = "4100000000000000";
+            cardObj.expDate = "1210";
+            saleObj.card = cardObj;
+            fraudCheckType cardholderAuthentication = new fraudCheckType();
+            cardholderAuthentication.authenticationValue = "123456789012345678901234567890123456789012345678901234567890";
+            saleObj.cardholderAuthentication = cardholderAuthentication;
+
+            try
+            {
+                saleResponse responseObj = litle.Sale(saleObj);
+            }
+            catch (LitleOnlineException e)
+            {
+                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+            }
+        }
     }
 }

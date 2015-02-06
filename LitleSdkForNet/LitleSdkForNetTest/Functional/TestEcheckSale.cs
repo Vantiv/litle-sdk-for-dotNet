@@ -174,6 +174,53 @@ namespace Litle.Sdk.Test.Functional
             echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
-            
+
+        [Test]
+        public void SimpleEcheckSaleWithSecondaryAmountWithOrderId()
+        {
+            echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.amount = 123456;
+            echeckSaleObj.secondaryAmount = 50;
+            echeckSaleObj.orderId = "12345";
+            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+
+            echeckType echeckTypeObj = new echeckType();
+            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
+            echeckTypeObj.accNum = "12345657890";
+            echeckTypeObj.routingNum = "123456789";
+            echeckTypeObj.checkNum = "123455";
+
+            contact contactObj = new contact();
+            contactObj.name = "Bob";
+            contactObj.city = "lowell";
+            contactObj.state = "MA";
+            contactObj.email = "litle.com";
+
+            echeckSaleObj.echeck = echeckTypeObj;
+            echeckSaleObj.billToAddress = contactObj;
+
+            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+        }
+
+        [Test]
+        public void SimpleEcheckSaleWithSecondaryAmount()
+        {
+            echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.amount = 123456;
+            echeckSaleObj.secondaryAmount = 50;
+            echeckSaleObj.litleTxnId = 1234565L;
+
+
+            try
+            {
+                ////expected exception;
+                echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            }
+            catch (LitleOnlineException e)
+            {
+                Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
+            }
+        }
     }
 }

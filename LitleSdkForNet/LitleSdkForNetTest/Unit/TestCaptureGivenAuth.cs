@@ -22,6 +22,25 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void TestSecondaryAmount()
+        {
+            captureGivenAuth capture = new captureGivenAuth();
+            capture.amount = 2;
+            capture.secondaryAmount = 1;
+            capture.orderSource = orderSourceType.ecommerce;
+            capture.reportGroup = "Planets";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.CaptureGivenAuth(capture);
+        }
+
+        [Test]
         public void TestSurchargeAmount()
         {
             captureGivenAuth capture = new captureGivenAuth();

@@ -252,5 +252,55 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             litle.Sale(sale);
         }
+
+        [Test]
+        public void TestSecondaryAmount()
+        {
+            sale sale = new sale();
+            sale.amount = 2;
+            sale.secondaryAmount = 1;
+            sale.orderSource = orderSourceType.ecommerce;
+            sale.reportGroup = "Planets";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Sale(sale);
+        }
+
+        [Test]
+        public void TestApplepayAndWallet()
+        {
+            sale sale = new sale();
+            sale.applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData = "454657413164";
+            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId = "1234";
+            sale.applepay.header = applepayHeaderType;
+            sale.applepay.data = "user";
+            sale.applepay.signature = "sign";
+            sale.applepay.version = "1";
+            sale.orderId = "12344";
+            sale.amount = 2;
+            sale.orderSource = orderSourceType.ecommerce;
+            wallet wallet = new Sdk.wallet();
+            wallet.walletSourceTypeId = "123";
+            sale.wallet = wallet;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<sale.*?<applepay>.*?<data>user</data>.*?</applepay>.*?<walletSourceTypeId>123</walletSourceTypeId>.*?</wallet>.*?</sale>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Sale(sale);
+        }
     }
 }

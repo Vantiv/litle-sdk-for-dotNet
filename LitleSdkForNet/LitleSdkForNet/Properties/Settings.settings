@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Litle.Sdk.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="url" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://www.testlitle.com/sandbox/communicator/online</Value>
-    </Setting>
     <Setting Name="reportGroup" Type="System.String" Scope="User">
       <Value Profile="(Default)">Default Report Group</Value>
     </Setting>
@@ -58,6 +55,9 @@
     </Setting>
     <Setting Name="neuterAccountNums" Type="System.String" Scope="User">
       <Value Profile="(Default)">true</Value>
+    </Setting>
+    <Setting Name="url" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://sdkdev-vm2:8081/sandbox/communicator/online</Value>
     </Setting>
   </Settings>
 </SettingsFile>

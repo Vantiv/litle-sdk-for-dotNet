@@ -35,6 +35,23 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.EcheckVoid(echeckVoid);
-        }            
+        }
+
+        [Test]
+        public void simpleForceCaptureWithSecondaryAmount()
+        {
+            forceCapture forcecapture = new forceCapture();
+            forcecapture.amount = 106;
+            forcecapture.secondaryAmount = 50;
+            forcecapture.orderId = "12344";
+            forcecapture.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000001";
+            card.expDate = "1210";
+            forcecapture.card = card;
+            forceCaptureResponse response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
     }
 }

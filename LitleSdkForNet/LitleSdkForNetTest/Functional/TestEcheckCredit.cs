@@ -113,5 +113,40 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
+        [Test]
+        public void echeckCreditWithSecondaryAmountWithOrderIdAndCcdPaymentInfo()
+        {
+            echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.amount = 12L;
+            echeckcredit.secondaryAmount = 50;
+            echeckcredit.orderId = "12345";
+            echeckcredit.orderSource = orderSourceType.ecommerce;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            echeck.ccdPaymentInformation = "9876554";
+            echeckcredit.echeck = echeck;
+            contact billToAddress = new contact();
+            billToAddress.name = "Bob";
+            billToAddress.city = "Lowell";
+            billToAddress.state = "MA";
+            billToAddress.email = "litle.com";
+            echeckcredit.billToAddress = billToAddress;
+            echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void echeckCreditWithSecondaryAmountWithLitleTxnId()
+        {
+            echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.amount = 12L;
+            echeckcredit.secondaryAmount = 50;
+            echeckcredit.litleTxnId = 12345L;
+            echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
+            Assert.AreEqual("Approved", response.message);
+        }
     }
 }

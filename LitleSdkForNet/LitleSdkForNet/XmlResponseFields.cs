@@ -1636,6 +1636,8 @@ namespace Litle.Sdk
 
         private System.DateTime responseTimeField;
 
+        private applepayResponse applepayResponseField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -1766,6 +1768,19 @@ namespace Litle.Sdk
                 this.responseTimeField = value;
             }
         }
+
+        /// <remarks/>
+        public applepayResponse applepayResponse
+        {
+            get
+            {
+                return this.applepayResponseField;
+            }
+            set
+            {
+                this.applepayResponseField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -1855,7 +1870,7 @@ namespace Litle.Sdk
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1902,7 +1917,9 @@ namespace Litle.Sdk
 
         private recurringResponse recurringResponseField;
 
-        public giftCardResponse giftCardResponse;
+        private giftCardResponse giftCardResponseField;
+
+        private applepayResponse applepayResponseField;
 
         /// <remarks/>
         public long litleTxnId
@@ -2151,6 +2168,32 @@ namespace Litle.Sdk
             set
             {
                 this.recurringResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public giftCardResponse giftCardResponse
+        {
+            get
+            {
+                return this.giftCardResponseField;
+            }
+            set
+            {
+                this.giftCardResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public applepayResponse applepayResponse
+        {
+            get
+            {
+                return this.applepayResponseField;
+            }
+            set
+            {
+                this.applepayResponseField = value;
             }
         }
     }
@@ -2535,7 +2578,6 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class authReversalResponse : transactionTypeWithReportGroup
     {
-        public giftCardResponse giftCardResponse;
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -2549,6 +2591,12 @@ namespace Litle.Sdk
         private bool postDateFieldSpecified;
 
         private string messageField;
+
+        public giftCardResponse giftCardResponse;
+
+        private bool duplicateField;
+
+        private bool duplicateFieldSpecified;
 
         /// <remarks/>
         public long litleTxnId
@@ -2640,6 +2688,34 @@ namespace Litle.Sdk
             set
             {
                 this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool duplicate
+        {
+            get
+            {
+                return this.duplicateField;
+            }
+            set
+            {
+                this.duplicateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool duplicateSpecified
+        {
+            get
+            {
+                return this.duplicateFieldSpecified;
+            }
+            set
+            {
+                this.duplicateFieldSpecified = value;
             }
         }
     }
@@ -3095,7 +3171,7 @@ namespace Litle.Sdk
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3103,7 +3179,7 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class saleResponse : transactionTypeWithReportGroup
     {
-        public giftCardResponse giftCardResponse;
+
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -3141,6 +3217,10 @@ namespace Litle.Sdk
         private recyclingType recyclingField;
 
         private recurringResponse recurringResponseField;
+
+        private giftCardResponse giftCardResponseField;
+
+        private applepayResponse applepayResponseField;
 
         private bool duplicateField;
 
@@ -3318,7 +3398,6 @@ namespace Litle.Sdk
             }
         }
 
-
         /// <remarks/>
         public billMeLaterResponseData billMeLaterResponseData
         {
@@ -3359,19 +3438,6 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public recurringResponse recurringResponse
-        {
-            get
-            {
-                return this.recurringResponseField;
-            }
-            set
-            {
-                this.recurringResponseField = value;
-            }
-        }
-
-        /// <remarks/>
         public accountUpdater accountUpdater
         {
             get
@@ -3394,6 +3460,45 @@ namespace Litle.Sdk
             set
             {
                 this.recyclingField = value;
+            }
+        }
+
+        /// <remarks/>
+        public recurringResponse recurringResponse
+        {
+            get
+            {
+                return this.recurringResponseField;
+            }
+            set
+            {
+                this.recurringResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public giftCardResponse giftCardResponse
+        {
+            get
+            {
+                return this.giftCardResponseField;
+            }
+            set
+            {
+                this.giftCardResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public applepayResponse applepayResponse
+        {
+            get
+            {
+                return this.applepayResponseField;
+            }
+            set
+            {
+                this.applepayResponseField = value;
             }
         }
 
@@ -5729,4 +5834,151 @@ namespace Litle.Sdk
         public giftCardResponse giftCardResponse;
     }
 
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class applepayResponse
+    {
+
+        private string applicationPrimaryAccountNumberField;
+
+        private string applicationExpirationDateField;
+
+        private string currencyCodeField;
+
+        private string transactionAmountField;
+
+        private string cardholderNameField;
+
+        private string deviceManufacturerIdentifierField;
+
+        private string paymentDataTypeField;
+
+        private byte[] onlinePaymentCryptogramField;
+
+        private string eciIndicatorField;
+
+        /// <remarks/>
+        public string applicationPrimaryAccountNumber
+        {
+            get
+            {
+                return this.applicationPrimaryAccountNumberField;
+            }
+            set
+            {
+                this.applicationPrimaryAccountNumberField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string applicationExpirationDate
+        {
+            get
+            {
+                return this.applicationExpirationDateField;
+            }
+            set
+            {
+                this.applicationExpirationDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string currencyCode
+        {
+            get
+            {
+                return this.currencyCodeField;
+            }
+            set
+            {
+                this.currencyCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+        public string transactionAmount
+        {
+            get
+            {
+                return this.transactionAmountField;
+            }
+            set
+            {
+                this.transactionAmountField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string cardholderName
+        {
+            get
+            {
+                return this.cardholderNameField;
+            }
+            set
+            {
+                this.cardholderNameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string deviceManufacturerIdentifier
+        {
+            get
+            {
+                return this.deviceManufacturerIdentifierField;
+            }
+            set
+            {
+                this.deviceManufacturerIdentifierField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string paymentDataType
+        {
+            get
+            {
+                return this.paymentDataTypeField;
+            }
+            set
+            {
+                this.paymentDataTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] onlinePaymentCryptogram
+        {
+            get
+            {
+                return this.onlinePaymentCryptogramField;
+            }
+            set
+            {
+                this.onlinePaymentCryptogramField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string eciIndicator
+        {
+            get
+            {
+                return this.eciIndicatorField;
+            }
+            set
+            {
+                this.eciIndicatorField = value;
+            }
+        }
+    }
 }
