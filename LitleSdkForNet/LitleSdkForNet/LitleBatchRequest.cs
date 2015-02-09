@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Security;
 
 namespace Litle.Sdk
 {
@@ -33,6 +34,8 @@ namespace Litle.Sdk
         private int numForceCapture;
         private int numCaptureGivenAuth;
         private int numEcheckRedeposit;
+        private int numEcheckPreNoteSale;
+        private int numEcheckPreNoteCredit;
         private int numUpdateCardValidationNumOnToken;
         private int numUpdateSubscriptions;
         private int numCancelSubscriptions;
@@ -105,6 +108,8 @@ namespace Litle.Sdk
             numCredit = 0;
             numEcheckCredit = 0;
             numEcheckRedeposit = 0;
+            numEcheckPreNoteSale = 0;
+            numEcheckPreNoteCredit = 0;
             numEcheckSale = 0;
             numEcheckVerification = 0;
             numForceCapture = 0;
@@ -219,6 +224,16 @@ namespace Litle.Sdk
         public int getNumEcheckRedeposit()
         {
             return numEcheckRedeposit;
+        }
+
+        public int getNumEcheckPreNoteSale()
+        {
+            return numEcheckPreNoteSale;
+        }
+
+        public int getNumEcheckPreNoteCredit()
+        {
+            return numEcheckPreNoteCredit;
         }
 
         public int getNumUpdateCardValidationNumOnToken()
@@ -514,6 +529,34 @@ namespace Litle.Sdk
             }
         }
 
+        public void addEcheckPreNoteSale(echeckPreNoteSale echeckPreNoteSale)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numEcheckPreNoteSale++;
+                fillInReportGroup(echeckPreNoteSale);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckPreNoteSale);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addEcheckPreNoteCredit(echeckPreNoteCredit echeckPreNoteCredit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numEcheckPreNoteCredit++;
+                fillInReportGroup(echeckPreNoteCredit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckPreNoteCredit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
         public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
         {
             if (numAccountUpdates == 0)
@@ -755,6 +798,16 @@ namespace Litle.Sdk
                 xmlHeader += "numEcheckRedeposit=\"" + numEcheckRedeposit + "\"\r\n";
             }
 
+            if (numEcheckPreNoteSale != 0)
+            {
+                xmlHeader += "numEcheckPreNoteSale=\"" + numEcheckPreNoteSale + "\"\r\n";
+            }
+
+            if (numEcheckPreNoteCredit != 0)
+            {
+                xmlHeader += "numEcheckPreNoteCredit=\"" + numEcheckPreNoteCredit + "\"\r\n";
+            }
+
             if (numAccountUpdates != 0)
             {
                 xmlHeader += "numAccountUpdates=\"" + numAccountUpdates + "\"\r\n";
@@ -983,6 +1036,260 @@ namespace Litle.Sdk
             litleFile.AppendLineToFile(filePath, xmlFooter);
 
             return filePath;
+        }
+    }
+
+    public partial class echeckPreNoteCredit : transactionTypeWithReportGroup
+    {
+
+        private string orderIdField;
+
+        private orderSourceType orderSourceField;
+
+        private contact billToAddressField;
+
+        private echeckType echeckField;
+
+        private merchantDataType merchantDataField;
+
+        /// <remarks/>
+        public string orderId
+        {
+            get
+            {
+                return this.orderIdField;
+            }
+            set
+            {
+                this.orderIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public orderSourceType orderSource
+        {
+            get
+            {
+                return this.orderSourceField;
+            }
+            set
+            {
+                this.orderSourceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public contact billToAddress
+        {
+            get
+            {
+                return this.billToAddressField;
+            }
+            set
+            {
+                this.billToAddressField = value;
+            }
+        }
+
+        /// <remarks/>
+        public echeckType echeck
+        {
+            get
+            {
+                return this.echeckField;
+            }
+            set
+            {
+                this.echeckField = value;
+            }
+        }
+
+        /// <remarks/>
+        public merchantDataType merchantData
+        {
+            get
+            {
+                return this.merchantDataField;
+            }
+            set
+            {
+                this.merchantDataField = value;
+            }
+        }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<echeckPreNoteCredit ";
+
+            if (id != null)
+            {
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            }
+            if (customerId != null)
+            {
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            }
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
+
+            if (orderSource != null)
+            {
+                xml += "\r\n<orderSource>";
+                xml += orderSource.Serialize();
+                xml += "\r\n</orderSource>";
+            }
+
+            if (billToAddress != null)
+            {
+                xml += "\r\n<billToAddress>";
+                xml += billToAddress.Serialize();
+                xml += "\r\n</billToAddress>";
+            }
+
+            if (echeck != null)
+            {
+                xml += "\r\n<echeck>";
+                xml += echeck.Serialize();
+                xml += "\r\n</echeck>";
+            }
+
+            if (merchantData != null)
+            {
+                xml += "\r\n<merchantData>";
+                xml += merchantData.Serialize();
+                xml += "\r\n</merchantData>";
+            }
+
+            xml += "\r\n</echeckPreNoteCredit>";
+
+            return xml;
+        }
+    }
+
+    public partial class echeckPreNoteSale : transactionTypeWithReportGroup
+    {
+
+        private string orderIdField;
+
+        private orderSourceType orderSourceField;
+
+        private contact billToAddressField;
+
+        private echeckType echeckField;
+
+        private merchantDataType merchantDataField;
+
+        /// <remarks/>
+        public string orderId
+        {
+            get
+            {
+                return this.orderIdField;
+            }
+            set
+            {
+                this.orderIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public orderSourceType orderSource
+        {
+            get
+            {
+                return this.orderSourceField;
+            }
+            set
+            {
+                this.orderSourceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public contact billToAddress
+        {
+            get
+            {
+                return this.billToAddressField;
+            }
+            set
+            {
+                this.billToAddressField = value;
+            }
+        }
+
+        /// <remarks/>
+        public echeckType echeck
+        {
+            get
+            {
+                return this.echeckField;
+            }
+            set
+            {
+                this.echeckField = value;
+            }
+        }
+
+        /// <remarks/>
+        public merchantDataType merchantData
+        {
+            get
+            {
+                return this.merchantDataField;
+            }
+            set
+            {
+                this.merchantDataField = value;
+            }
+        }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<echeckPreNoteSale ";
+
+            if (id != null)
+            {
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            }
+            if (customerId != null)
+            {
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            }
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
+
+            if (orderSource != null)
+            {
+                xml += "\r\n<orderSource>";
+                xml += orderSource.Serialize();
+                xml += "\r\n</orderSource>";
+            }
+
+            if (billToAddress != null)
+            {
+                xml += "\r\n<billToAddress>";
+                xml += billToAddress.Serialize();
+                xml += "\r\n</billToAddress>";
+            }
+
+            if (echeck != null)
+            {
+                xml += "\r\n<echeck>";
+                xml += echeck.Serialize();
+                xml += "\r\n</echeck>";
+            }
+
+            if (merchantData != null)
+            {
+                xml += "\r\n<merchantData>";
+                xml += merchantData.Serialize();
+                xml += "\r\n</merchantData>";
+            }
+
+            xml += "\r\n</echeckPreNoteSale>";
+
+            return xml;
         }
     }
 }

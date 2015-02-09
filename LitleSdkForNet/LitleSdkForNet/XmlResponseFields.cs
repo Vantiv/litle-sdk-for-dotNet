@@ -4576,6 +4576,8 @@ namespace Litle.Sdk
         private XmlReader activateResponseReader;
         private XmlReader deactivateResponseReader;
         private XmlReader loadResponseReader;
+        private XmlReader echeckPreNoteSaleResponseReader;
+        private XmlReader echeckPreNoteCreditResponseReader;
         private XmlReader unloadResponseReader;
         private XmlReader balanceInquiryResponseReader;
 
@@ -4690,6 +4692,14 @@ namespace Litle.Sdk
         {
             this.loadResponseReader = xmlReader;
         }
+        public void setEcheckPreNoteSaleResponseReader(XmlReader xmlReader)
+        {
+            this.echeckPreNoteSaleResponseReader = xmlReader;
+        }
+        public void setEcheckPreNoteCreditResponseReader(XmlReader xmlReader)
+        {
+            this.echeckPreNoteCreditResponseReader = xmlReader;
+        }
         public void setUnloadResponseReader(XmlReader xmlReader)
         {
             this.unloadResponseReader = xmlReader;
@@ -4727,6 +4737,8 @@ namespace Litle.Sdk
             activateResponseReader = new XmlTextReader(filePath);
             deactivateResponseReader = new XmlTextReader(filePath);
             loadResponseReader = new XmlTextReader(filePath);
+            echeckPreNoteSaleResponseReader = new XmlTextReader(filePath);
+            echeckPreNoteCreditResponseReader = new XmlTextReader(filePath);
             unloadResponseReader = new XmlTextReader(filePath);
             balanceInquiryResponseReader = new XmlTextReader(filePath);
 
@@ -4814,7 +4826,14 @@ namespace Litle.Sdk
             {
                 deactivateResponseReader.Close();
             }
-            if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
+            if (!echeckPreNoteSaleResponseReader.ReadToFollowing("echeckPreNoteSaleResponse"))
+            {
+                echeckPreNoteSaleResponseReader.Close();
+            }
+            if (!echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
+            {
+                echeckPreNoteCreditResponseReader.Close();
+            } if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
             {
                 unloadResponseReader.Close();
             }
@@ -5217,6 +5236,46 @@ namespace Litle.Sdk
                 if (!deactivateResponseReader.ReadToFollowing("deactivateResponse"))
                 {
                     deactivateResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public echeckPreNoteSaleResponse nextEcheckPreNoteSaleResponse()
+        {
+            if (echeckPreNoteSaleResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = echeckPreNoteSaleResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckPreNoteSaleResponse));
+                StringReader reader = new StringReader(response);
+                echeckPreNoteSaleResponse i = (echeckPreNoteSaleResponse)serializer.Deserialize(reader);
+
+                if (!echeckPreNoteSaleResponseReader.ReadToFollowing("echeckPreNoteSaleResponse"))
+                {
+                    echeckPreNoteSaleResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public echeckPreNoteCreditResponse nextEcheckPreNoteCreditResponse()
+        {
+            if (echeckPreNoteCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = echeckPreNoteCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckPreNoteCreditResponse));
+                StringReader reader = new StringReader(response);
+                echeckPreNoteCreditResponse i = (echeckPreNoteCreditResponse)serializer.Deserialize(reader);
+
+                if (!echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
+                {
+                    echeckPreNoteCreditResponseReader.Close();
                 }
 
                 return i;
@@ -5978,6 +6037,242 @@ namespace Litle.Sdk
             set
             {
                 this.eciIndicatorField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute("echeckPreNoteSaleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class echeckPreNoteSaleResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string orderIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        private bool duplicateField;
+
+        private bool duplicateFieldSpecified;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string orderId
+        {
+            get
+            {
+                return this.orderIdField;
+            }
+            set
+            {
+                this.orderIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool duplicate
+        {
+            get
+            {
+                return this.duplicateField;
+            }
+            set
+            {
+                this.duplicateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool duplicateSpecified
+        {
+            get
+            {
+                return this.duplicateFieldSpecified;
+            }
+            set
+            {
+                this.duplicateFieldSpecified = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute("echeckPreNoteCreditResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class echeckPreNoteCreditResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string orderIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        private bool duplicateField;
+
+        private bool duplicateFieldSpecified;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string orderId
+        {
+            get
+            {
+                return this.orderIdField;
+            }
+            set
+            {
+                this.orderIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool duplicate
+        {
+            get
+            {
+                return this.duplicateField;
+            }
+            set
+            {
+                this.duplicateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool duplicateSpecified
+        {
+            get
+            {
+                return this.duplicateFieldSpecified;
+            }
+            set
+            {
+                this.duplicateFieldSpecified = value;
             }
         }
     }
