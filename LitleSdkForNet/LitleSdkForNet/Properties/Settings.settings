@@ -5,26 +5,11 @@
     <Setting Name="reportGroup" Type="System.String" Scope="User">
       <Value Profile="(Default)">Default Report Group</Value>
     </Setting>
-    <Setting Name="username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">dotnet</Value>
-    </Setting>
-    <Setting Name="password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">dotnet</Value>
-    </Setting>
     <Setting Name="printxml" Type="System.String" Scope="User">
       <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="timeout" Type="System.String" Scope="User">
       <Value Profile="(Default)">65</Value>
-    </Setting>
-    <Setting Name="proxyHost" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="proxyPort" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="merchantId" Type="System.String" Scope="User">
-      <Value Profile="(Default)">101</Value>
     </Setting>
     <Setting Name="sftpUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">prelive.litle.com</Value>
@@ -57,7 +42,22 @@
       <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="url" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://sdkdev-vm2:8081/sandbox/communicator/online</Value>
+      <Value Profile="(Default)">https://www.testlitle.com/sandbox/communicator/online</Value>
+    </Setting>
+    <Setting Name="proxyHost" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="proxyPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="username" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dotnet</Value>
+    </Setting>
+    <Setting Name="merchantId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">011</Value>
     </Setting>
   </Settings>
 </SettingsFile>

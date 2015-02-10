@@ -1136,7 +1136,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<orderSource>";
                 xml += orderSource.Serialize();
-                xml += "\r\n</orderSource>";
+                xml += "</orderSource>";
             }
 
             if (billToAddress != null)
@@ -1263,7 +1263,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<orderSource>";
                 xml += orderSource.Serialize();
-                xml += "\r\n</orderSource>";
+                xml += "</orderSource>";
             }
 
             if (billToAddress != null)

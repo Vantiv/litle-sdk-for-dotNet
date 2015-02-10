@@ -210,8 +210,6 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.amount = 123456;
             echeckSaleObj.secondaryAmount = 50;
             echeckSaleObj.litleTxnId = 1234565L;
-
-
             try
             {
                 ////expected exception;

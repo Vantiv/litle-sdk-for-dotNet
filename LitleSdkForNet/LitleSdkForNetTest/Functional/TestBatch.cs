@@ -227,6 +227,38 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addEcheckSale(echeckSaleObj2);
 
+            echeckPreNoteSale echeckPreNoteSaleObj1 = new echeckPreNoteSale();
+            echeckPreNoteSaleObj1.orderId = "12345";
+            echeckPreNoteSaleObj1.orderSource = orderSourceType.ecommerce;
+            echeckPreNoteSaleObj1.echeck = echeck;
+            echeckPreNoteSaleObj1.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleObj1);
+
+            echeckPreNoteSale echeckPreNoteSaleObj2 = new echeckPreNoteSale();
+            echeckPreNoteSaleObj2.orderId = "12345";
+            echeckPreNoteSaleObj2.orderSource = orderSourceType.ecommerce;
+            echeckPreNoteSaleObj2.echeck = echeck2;
+            echeckPreNoteSaleObj2.billToAddress = billToAddress2;
+
+            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleObj2);
+
+            echeckPreNoteCredit echeckPreNoteCreditObj1 = new echeckPreNoteCredit();
+            echeckPreNoteCreditObj1.orderId = "12345";
+            echeckPreNoteCreditObj1.orderSource = orderSourceType.ecommerce;
+            echeckPreNoteCreditObj1.echeck = echeck;
+            echeckPreNoteCreditObj1.billToAddress = billToAddress;
+
+            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditObj1);
+
+            echeckPreNoteCredit echeckPreNoteCreditObj2 = new echeckPreNoteCredit();
+            echeckPreNoteCreditObj2.orderId = "12345";
+            echeckPreNoteCreditObj2.orderSource = orderSourceType.ecommerce;
+            echeckPreNoteCreditObj2.echeck = echeck2;
+            echeckPreNoteCreditObj2.billToAddress = billToAddress2;
+
+            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditObj2);
+
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
@@ -383,6 +415,22 @@ namespace Litle.Sdk.Test.Functional
                     Assert.AreEqual("000", echeckSalesResponse.response);
 
                     echeckSalesResponse = litleBatchResponse.nextEcheckSalesResponse();
+                }
+
+                echeckPreNoteSaleResponse echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
+                while (echeckPreNoteSaleResponse != null)
+                {
+                    Assert.AreEqual("330", echeckPreNoteSaleResponse.response);
+
+                    echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
+                }
+
+                echeckPreNoteCreditResponse echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
+                while (echeckPreNoteCreditResponse != null)
+                {
+                    Assert.AreEqual("330", echeckPreNoteCreditResponse.response);
+
+                    echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
                 }
 
                 echeckVerificationResponse echeckVerificationResponse = litleBatchResponse.nextEcheckVerificationResponse();

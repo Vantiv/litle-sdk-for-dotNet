@@ -526,6 +526,60 @@ merchantId=""01234"">
 
             mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, cancel.Serialize()));
-        } 
+        }
+
+        [Test]
+        public void testAddEcheckPreNoteSale()
+        {
+            echeckPreNoteSale echeckPreNoteSale = new echeckPreNoteSale();
+            echeckPreNoteSale.orderId = "12345";
+            echeckPreNoteSale.orderSource = orderSourceType.ecommerce;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            echeckPreNoteSale.echeck = echeck;
+            contact contact = new contact();
+            contact.name = "Bob";
+            contact.city = "lowell";
+            contact.state = "MA";
+            contact.email = "litle.com";
+            echeckPreNoteSale.billToAddress = contact;
+
+            batchRequest.addEcheckPreNoteSale(echeckPreNoteSale);
+
+            Assert.AreEqual(1, batchRequest.getNumEcheckPreNoteSale());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckPreNoteSale.Serialize()));
+        }
+
+        [Test]
+        public void testAddEcheckPreNoteCredit()
+        {
+            echeckPreNoteCredit echeckPreNoteCredit = new echeckPreNoteCredit();
+            echeckPreNoteCredit.orderId = "12345";
+            echeckPreNoteCredit.orderSource = orderSourceType.ecommerce;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            echeckPreNoteCredit.echeck = echeck;
+            contact contact = new contact();
+            contact.name = "Bob";
+            contact.city = "lowell";
+            contact.state = "MA";
+            contact.email = "litle.com";
+            echeckPreNoteCredit.billToAddress = contact;
+
+            batchRequest.addEcheckPreNoteCredit(echeckPreNoteCredit);
+
+            Assert.AreEqual(1, batchRequest.getNumEcheckPreNoteCredit());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckPreNoteCredit.Serialize()));
+        }
     }
 }
