@@ -6276,4 +6276,90 @@ namespace Litle.Sdk
             }
         }
     }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class fraudCheckResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string responseField;
+
+        private string messageField;
+
+        private System.DateTime responseTimeField;
+
+        private advancedFraudResultsType advancedFraudResultsField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public advancedFraudResultsType advancedFraudResults
+        {
+            get
+            {
+                return this.advancedFraudResultsField;
+            }
+            set
+            {
+                this.advancedFraudResultsField = value;
+            }
+        }
+    }
 }

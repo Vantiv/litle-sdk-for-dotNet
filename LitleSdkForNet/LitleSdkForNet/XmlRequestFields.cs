@@ -3021,11 +3021,50 @@ namespace Litle.Sdk
     public partial class advancedFraudChecksType
     {
         public string threatMetrixSessionId;
+        private string customAttribute1Field;
+        private bool customAttribute1Set;
+        public string customAttribute1 { 
+            get { return this.customAttribute1Field; } 
+            set { this.customAttribute1Field = value; customAttribute1Set = true; } 
+        }
+        private string customAttribute2Field;
+        private bool customAttribute2Set;
+        public string customAttribute2
+        {
+            get { return this.customAttribute2Field; }
+            set { this.customAttribute2Field = value; customAttribute2Set = true; }
+        }
+        private string customAttribute3Field;
+        private bool customAttribute3Set;
+        public string customAttribute3
+        {
+            get { return this.customAttribute3Field; }
+            set { this.customAttribute3Field = value; customAttribute3Set = true; }
+        }
+        private string customAttribute4Field;
+        private bool customAttribute4Set;
+        public string customAttribute4
+        {
+            get { return this.customAttribute4Field; }
+            set { this.customAttribute4Field = value; customAttribute4Set = true; }
+        }
+        private string customAttribute5Field;
+        private bool customAttribute5Set;
+        public string customAttribute5
+        {
+            get { return this.customAttribute5Field; }
+            set { this.customAttribute5Field = value; customAttribute5Set = true; }
+        }
 
         public string Serialize()
         {
             string xml = "";
             if (threatMetrixSessionId != null) xml += "\r\n<threatMetrixSessionId>" + SecurityElement.Escape(threatMetrixSessionId) + "</threatMetrixSessionId>";
+            if (customAttribute1Set) xml += "\r\n<customAttribute1>" + SecurityElement.Escape(customAttribute1Field) + "</customAttribute1>";
+            if (customAttribute2Set) xml += "\r\n<customAttribute2>" + SecurityElement.Escape(customAttribute2Field) + "</customAttribute2>";
+            if (customAttribute3Set) xml += "\r\n<customAttribute3>" + SecurityElement.Escape(customAttribute3Field) + "</customAttribute3>";
+            if (customAttribute4Set) xml += "\r\n<customAttribute4>" + SecurityElement.Escape(customAttribute4Field) + "</customAttribute4>";
+            if (customAttribute5Set) xml += "\r\n<customAttribute5>" + SecurityElement.Escape(customAttribute5Field) + "</customAttribute5>";
             return xml;
         }
     }
@@ -3540,5 +3579,63 @@ namespace Litle.Sdk
     public enum walletWalletSourceType
     {
         MasterPass
+    }
+
+    public partial class fraudCheck : transactionTypeWithReportGroup
+    {
+
+        public advancedFraudChecksType advancedFraudChecks;
+
+        private contact billToAddressField;
+        private bool billToAddressSet;
+        public contact billToAddress
+        {
+            get
+            {
+                return this.billToAddressField;
+            }
+            set
+            {
+                this.billToAddressField = value; this.billToAddressSet = true;
+            }
+        }
+
+        private contact shipToAddressField;
+        private bool shipToAddressSet;
+        public contact shipToAddress
+        {
+            get
+            {
+                return this.shipToAddressField;
+            }
+            set
+            {
+                this.shipToAddressField = value; this.shipToAddressSet = true;
+            }
+        }
+
+        private int amountField;
+        private bool amountSet;
+        public int amount
+        {
+            get
+            {
+                return this.amountField;
+            }
+            set
+            {
+                this.amountField = value; this.amountSet = true;
+            }
+        }
+
+        public override string Serialize()
+        {
+            string xml = "";
+            if (advancedFraudChecks != null) xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "</advancedFraudChecks>";
+            if (billToAddressSet) xml += "\r\n<billToAddress>" + billToAddressField.Serialize() + "</billToAddress>";
+            if (shipToAddressSet) xml += "\r\n<shipToAddress>" + shipToAddressField.Serialize() + "</shipToAddress>";
+            if (amountSet) xml += "\r\n<amount>" + amountField.ToString() + "</amount>";
+            return xml;
+        }
     }
 }
