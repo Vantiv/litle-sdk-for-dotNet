@@ -435,30 +435,43 @@ namespace Litle.Sdk.Test.Unit
         public void TestAuthWithAdvancedFraud()
         {
             authorization auth = new authorization();
-            auth.litleTxnId = 123;
+            auth.orderId = "123";
+            auth.amount = 10;
             auth.advancedFraudChecks = new advancedFraudChecksType();
             auth.advancedFraudChecks.threatMetrixSessionId = "800";
+            auth.advancedFraudChecks.customAttribute1 = "testAttribute1";
+            auth.advancedFraudChecks.customAttribute2 = "testAttribute2";
+            auth.advancedFraudChecks.customAttribute3 = "testAttribute3";
+            auth.advancedFraudChecks.customAttribute4 = "testAttribute4";
+            auth.advancedFraudChecks.customAttribute5 = "testAttribute5";
+
 
             String expectedResult = @"
 <authorization id="""" reportGroup="""">
-<litleTxnId>123</litleTxnId>
+<orderId>123</orderId>
+<amount>10</amount>
 <advancedFraudChecks>
 <threatMetrixSessionId>800</threatMetrixSessionId>
+<customAttribute1>testAttribute1</customAttribute1>
+<customAttribute2>testAttribute2</customAttribute2>
+<customAttribute3>testAttribute3</customAttribute3>
+<customAttribute4>testAttribute4</customAttribute4>
+<customAttribute5>testAttribute5</customAttribute5>
 </advancedFraudChecks>
 </authorization>";
-
+            string test = auth.Serialize();
             Assert.AreEqual(expectedResult, auth.Serialize());
 
             var mock = new Mock<Communications>();
             mock.Setup(Communications => Communications.HttpPost(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><orderId>123</orderId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual("123", authorizationResponse.orderId);
         }
 
         [Test]

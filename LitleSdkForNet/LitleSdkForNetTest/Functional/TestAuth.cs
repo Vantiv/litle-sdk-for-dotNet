@@ -283,5 +283,33 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }
+
+        [Test]
+        public void TestWithAdvancedFraudCheck()
+        {
+            config.Remove("printxml");
+
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card;
+            advancedFraudChecksType advancedFraudChecks = new advancedFraudChecksType();
+            advancedFraudChecks.threatMetrixSessionId = "800";
+            advancedFraudChecks.customAttribute1 = "testAttribute1";
+            advancedFraudChecks.customAttribute2 = "testAttribute2";
+            advancedFraudChecks.customAttribute3 = "testAttribute3";
+            advancedFraudChecks.customAttribute4 = "testAttribute4";
+            advancedFraudChecks.customAttribute5 = "testAttribute5";
+            authorization.advancedFraudChecks = advancedFraudChecks;
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
     }
 }
