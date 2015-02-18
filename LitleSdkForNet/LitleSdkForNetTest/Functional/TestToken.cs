@@ -106,6 +106,17 @@ namespace Litle.Sdk.Test.Functional
                 Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
-            
+
+        [Test]
+        public void TestSimpleTokenWithNullableTypeField()
+        {
+            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.orderId = "12344";
+            registerTokenRequest.accountNumber = "1233456789103801";
+            registerTokenRequest.reportGroup = "Planets";
+            registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
+            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            Assert.IsNull(rtokenResponse.type);
+        }
     }
 }
