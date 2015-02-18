@@ -334,12 +334,42 @@ namespace Litle.Sdk.Test.Unit
         {
             String xml = @"
 <enhancedAuthResponse xmlns=""http://www.litle.com/schema"">
-<virtualAccountNumber>123456</virtualAccountNumber>
+<virtualAccountNumber>true</virtualAccountNumber>
 </enhancedAuthResponse>";
             XmlSerializer serializer = new XmlSerializer(typeof(enhancedAuthResponse));
             StringReader reader = new StringReader(xml);
             enhancedAuthResponse enhancedAuthResponse = (enhancedAuthResponse)serializer.Deserialize(reader);
-            Assert.AreEqual("123456", enhancedAuthResponse.virtualAccountNumber);
+            Assert.IsTrue(enhancedAuthResponse.virtualAccountNumber);
+        }
+
+        [Test]
+        public void TestEnhancedAuthResponseWithCardProductType()
+        {
+            String xml = @"
+<enhancedAuthResponse xmlns=""http://www.litle.com/schema"">
+<virtualAccountNumber>true</virtualAccountNumber>
+<cardProductType>COMMERCIAL</cardProductType>
+</enhancedAuthResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(enhancedAuthResponse));
+            StringReader reader = new StringReader(xml);
+            enhancedAuthResponse enhancedAuthResponse = (enhancedAuthResponse)serializer.Deserialize(reader);
+            Assert.IsTrue(enhancedAuthResponse.virtualAccountNumber);
+            Assert.AreEqual(cardProductTypeEnum.COMMERCIAL, enhancedAuthResponse.cardProductType);
+        }
+
+        [Test]
+        public void TestEnhancedAuthResponseWithNullableEnumFields()
+        {
+            String xml = @"
+<enhancedAuthResponse xmlns=""http://www.litle.com/schema"">
+<virtualAccountNumber>1</virtualAccountNumber>
+</enhancedAuthResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(enhancedAuthResponse));
+            StringReader reader = new StringReader(xml);
+            enhancedAuthResponse enhancedAuthResponse = (enhancedAuthResponse)serializer.Deserialize(reader);
+            Assert.IsTrue(enhancedAuthResponse.virtualAccountNumber);
+            Assert.IsNull(enhancedAuthResponse.cardProductType);
+            Assert.IsNull(enhancedAuthResponse.affluence);
         }
 
         [Test]

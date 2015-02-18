@@ -1624,7 +1624,7 @@ namespace Litle.Sdk
 
         private string binField;
 
-        private methodOfPaymentTypeEnum typeField;
+        private methodOfPaymentTypeEnum? typeField;
 
         private bool typeFieldSpecified;
 
@@ -1691,11 +1691,11 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public methodOfPaymentTypeEnum? type
         {
             get
             {
-                return this.typeField;
+                return this.typeFieldSpecified ? this.typeField : null;
             }
             set
             {
@@ -2432,16 +2432,139 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class enhancedAuthResponse
     {
-        public string litleTxnId;
-        public string response;
-        public string message;
-        public System.DateTime responseTime;
-        public tokenResponseType tokenResponse;
-        public string virtualAccountNumber;
-        public enhancedAuthResponseFundingSource fundingSource;
-        public affluenceTypeEnum affluence;
-        public string issuerCountry;
+        //public string litleTxnId;
+        //public string response;
+        //public string message;
+        //public System.DateTime responseTime;
+        //public tokenResponseType tokenResponse;
+        //public string virtualAccountNumber;
+        //public enhancedAuthResponseFundingSource fundingSource;
+        //public affluenceTypeEnum affluence;
+        //public string issuerCountry;
 
+        private enhancedAuthResponseFundingSource fundingSourceField;
+
+        private affluenceTypeEnum? affluenceField;
+
+        private bool affluenceFieldSpecified;
+
+        private string issuerCountryField;
+
+        private cardProductTypeEnum? cardProductTypeField;
+
+        private bool cardProductTypeFieldSpecified;
+
+        private bool virtualAccountNumberField;
+
+        private bool virtualAccountNumberFieldSpecified;
+
+        /// <remarks/>
+        public enhancedAuthResponseFundingSource fundingSource
+        {
+            get
+            {
+                return this.fundingSourceField;
+            }
+            set
+            {
+                this.fundingSourceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public affluenceTypeEnum? affluence
+        {
+            get
+            {
+                return this.affluenceFieldSpecified ? this.affluenceField : null;
+                //(!null)?return ((affluenceTypeEnum?)this).affluenceField:return null;
+            }
+            set
+            {
+                this.affluenceField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool affluenceSpecified
+        {
+            get
+            {
+                return this.affluenceFieldSpecified;
+            }
+            set
+            {
+                this.affluenceFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public string issuerCountry
+        {
+            get
+            {
+                return this.issuerCountryField;
+            }
+            set
+            {
+                this.issuerCountryField = value;
+            }
+        }
+
+        /// <remarks/>
+        public cardProductTypeEnum? cardProductType
+        {
+            get
+            {
+                return this.cardProductTypeFieldSpecified ? this.cardProductTypeField : null;
+            }
+            set
+            {
+                this.cardProductTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool cardProductTypeSpecified
+        {
+            get
+            {
+                return this.cardProductTypeFieldSpecified;
+            }
+            set
+            {
+                this.cardProductTypeFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool virtualAccountNumber
+        {
+            get
+            {
+                return this.virtualAccountNumberField;
+            }
+            set
+            {
+                this.virtualAccountNumberField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool virtualAccountNumberSpecified
+        {
+            get
+            {
+                return this.virtualAccountNumberFieldSpecified;
+            }
+            set
+            {
+                this.virtualAccountNumberFieldSpecified = value;
+            }
+        }
     }
 
     /// <remarks/>
