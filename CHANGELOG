@@ -1,7 +1,11 @@
 = LitleOnline CHANGELOG
 
-==version 9.00.0
-* Feature: support 9.00.0
+== Version 8.29.0
+* Bugfix: Load proxy from setting file and adding constructor for accountUpdateFileRequestData and adding test cases
+* Bugfix: Fix bug in generating echeckAccountTypeEnum CorpSavings in request
+* Bugfix: Fix non-nullable enum fields bug, and add tests
+* Feature: Applepay support was added
+* Feature: Secondary amount support was added
 
 == Version 8.25.3
 * Bugfix: Eliminate NRE caused by passing in a null proxyHost or ProxyPort in the config Dictionary
