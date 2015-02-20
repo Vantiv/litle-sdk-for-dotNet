@@ -86,5 +86,35 @@ namespace Litle.Sdk.Test.Unit
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n<litleSessionId>123456789</litleSessionId>"));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n</RFRRequest>"));
         }
+
+        [Test]
+        public void testAccountUpdateFileRequestData()
+        {
+            Dictionary<String, String> mockConfig = new Dictionary<string, string>();
+
+            mockConfig["url"] = "https://www.mockurl.com";
+            mockConfig["reportGroup"] = "Mock Report Group";
+            mockConfig["username"] = "mockUser";
+            mockConfig["printxml"] = "false";
+            mockConfig["timeout"] = "35";
+            mockConfig["proxyHost"] = "www.mockproxy.com";
+            mockConfig["merchantId"] = "MOCKID";
+            mockConfig["password"] = "mockPassword";
+            mockConfig["proxyPort"] = "3000";
+            mockConfig["sftpUrl"] = "www.mockftp.com";
+            mockConfig["sftpUsername"] = "mockFtpUser";
+            mockConfig["sftpPassword"] = "mockFtpPassword";
+            mockConfig["knownHostsFile"] = "C:\\MockKnownHostsFile";
+            mockConfig["onlineBatchUrl"] = "www.mockbatch.com";
+            mockConfig["onlineBatchPort"] = "4000";
+            mockConfig["requestDirectory"] = "C:\\MockRequests";
+            mockConfig["responseDirectory"] = "C:\\MockResponses";
+
+            accountUpdateFileRequestData accountUpdateFileRequest = new accountUpdateFileRequestData(mockConfig);
+            accountUpdateFileRequestData accountUpdateFileRequestDefault = new accountUpdateFileRequestData();
+
+            Assert.AreEqual(accountUpdateFileRequestDefault.merchantId, Properties.Settings.Default.merchantId);
+            Assert.AreEqual(accountUpdateFileRequest.merchantId, mockConfig["merchantId"]);
+        }
     }
 }

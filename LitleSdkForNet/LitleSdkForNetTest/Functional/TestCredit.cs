@@ -23,7 +23,8 @@ namespace Litle.Sdk.Test.Functional
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
-
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
             config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
             litle = new LitleOnline(config);
@@ -136,6 +137,25 @@ namespace Litle.Sdk.Test.Functional
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000<>0000001";
+            card.expDate = "1210";
+
+            creditObj.card = card;
+
+            creditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void SimpleCreditWithSecondaryAmount()
+        {
+            credit creditObj = new credit();
+            creditObj.amount = 106;
+            creditObj.secondaryAmount = 50;
+            creditObj.orderId = "2111";
+            creditObj.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000001";
             card.expDate = "1210";
 
             creditObj.card = card;

@@ -303,6 +303,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             registerTokenResponse registertokenresponse = litle.RegisterToken(token);
             Assert.AreEqual(123, registertokenresponse.litleTxnId);
+            Assert.IsNull(registertokenresponse.type);
         }
 
         [Test]

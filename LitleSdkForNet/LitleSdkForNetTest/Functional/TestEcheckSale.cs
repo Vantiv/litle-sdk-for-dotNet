@@ -25,6 +25,8 @@ namespace Litle.Sdk.Test.Functional
             config.Add("printxml", "true");
             config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
             litle = new LitleOnline(config);
         }
 
@@ -170,6 +172,34 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.reportGroup = "Planets";
             echeckSaleObj.litleTxnId = 123456789101112;
             echeckSaleObj.amount = 12;
+
+            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+        }
+
+        [Test]
+        public void SimpleEcheckSaleWithSecondaryAmount()
+        {
+            echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.amount = 123456;
+            echeckSaleObj.secondaryAmount = 50;
+            echeckSaleObj.orderId = "12345";
+            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+
+            echeckType echeckTypeObj = new echeckType();
+            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
+            echeckTypeObj.accNum = "12345657890";
+            echeckTypeObj.routingNum = "123456789";
+            echeckTypeObj.checkNum = "123455";
+
+            contact contactObj = new contact();
+            contactObj.name = "Bob";
+            contactObj.city = "lowell";
+            contactObj.state = "MA";
+            contactObj.email = "litle.com";
+
+            echeckSaleObj.echeck = echeckTypeObj;
+            echeckSaleObj.billToAddress = contactObj;
 
             echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);

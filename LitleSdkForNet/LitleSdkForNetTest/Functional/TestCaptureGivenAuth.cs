@@ -24,7 +24,8 @@ namespace Litle.Sdk.Test.Functional
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
-
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
             config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
             litle = new LitleOnline(config);
@@ -173,6 +174,29 @@ namespace Litle.Sdk.Test.Functional
             cardtoken.cardValidationNum = "555";
             cardtoken.type = methodOfPaymentTypeEnum.VI;
             capturegivenauth.token = cardtoken;
+            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void simpleCaptureGivenAuthWithSecondaryAmount()
+        {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.secondaryAmount = 50;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Approved", response.message);
         }

@@ -45,7 +45,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.27\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.29\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -599,6 +599,13 @@ namespace Litle.Sdk
             get { return this.amountField; }
             set { this.amountField = value; amountSet = true; }
         }
+        private bool secondaryAmountSet;
+        private long secondaryAmountField;
+        public long secondaryAmount
+        {
+            get { return this.secondaryAmountField; }
+            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+        }
         public customBilling customBilling;
         public string orderId;
         public orderSourceType orderSource;
@@ -637,6 +644,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
                 xml += "\r\n<amount>" + amountField + "</amount>";
+                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
                 if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
                 if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
@@ -664,6 +672,13 @@ namespace Litle.Sdk
         {
             get { return this.amountField; }
             set { this.amountField = value; amountSet = true; }
+        }
+        private bool secondaryAmountSet;
+        private long secondaryAmountField;
+        public long secondaryAmount
+        {
+            get { return this.secondaryAmountField; }
+            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
         }
         public customBilling customBilling;
         public string orderId;
@@ -703,6 +718,7 @@ namespace Litle.Sdk
                 xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
                 if (verifySet) xml += "\r\n<verify>" + (verifyField ? "true" : "false") + "</verify>";
                 xml += "\r\n<amount>" + amountField + "</amount>";
+                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
                 if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
                 if (shipToAddress != null) xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "</shipToAddress>";
@@ -770,6 +786,7 @@ namespace Litle.Sdk
         public string accountNumber;
         public echeckForTokenType echeckForToken;
         public string paypageRegistrationId;
+        public applepayType applepay;
         public string cardValidationNum;
 
         public override string Serialize()
@@ -787,6 +804,7 @@ namespace Litle.Sdk
             if (accountNumber != null) xml += "\r\n<accountNumber>" + accountNumber + "</accountNumber>";
             else if (echeckForToken != null) xml += "\r\n<echeckForToken>" + echeckForToken.Serialize() + "</echeckForToken>";
             else if (paypageRegistrationId != null) xml += "\r\n<paypageRegistrationId>" + paypageRegistrationId + "</paypageRegistrationId>";
+            else if (applepay != null) xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
             if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + cardValidationNum + "</cardValidationNum>";
             xml += "\r\n</registerTokenRequest>";
             return xml;
@@ -849,6 +867,13 @@ namespace Litle.Sdk
             get { return this.amountField; }
             set { this.amountField = value; amountSet = true; }
         }
+        private bool secondaryAmountSet;
+        private long secondaryAmountField;
+        public long secondaryAmount
+        {
+            get { return this.secondaryAmountField; }
+            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+        }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
@@ -896,6 +921,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
                 if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
+                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
                 if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
                 if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
                 if (enhancedData != null) xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "</enhancedData>";
@@ -906,6 +932,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
                 xml += "\r\n<amount>" + amountField + "</amount>";
+                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
                 if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
                 if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
                 if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
@@ -954,6 +981,7 @@ namespace Litle.Sdk
         {
             string xml = "";
             string accTypeName = accTypeField.ToString();
+
             XmlEnumAttribute[] attributes =
                 (XmlEnumAttribute[])typeof(echeckAccountTypeEnum).GetMember(accTypeField.ToString())[0].GetCustomAttributes(typeof(XmlEnumAttribute), false);
             if (attributes.Length > 0) accTypeName = attributes[0].Name;
@@ -1052,6 +1080,42 @@ namespace Litle.Sdk
             if (payerId != null) xml += "\r\n<payerId>" + SecurityElement.Escape(payerId) + "</payerId>";
             if (payerEmail != null) xml += "\r\n<payerEmail>" + SecurityElement.Escape(payerEmail) + "</payerEmail>";
             if (token != null) xml += "\r\n<token>" + SecurityElement.Escape(token) + "</token>";
+            if (transactionId != null) xml += "\r\n<transactionId>" + SecurityElement.Escape(transactionId) + "</transactionId>";
+            return xml;
+        }
+    }
+
+    public partial class applepayType
+    {
+        public string data;
+        public applepayHeaderType header;
+        public string signature;
+        public string version;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (data != null) xml += "\r\n<data>" + SecurityElement.Escape(data) + "</data>";
+            if (header != null) xml += "\r\n<header>" + header.Serialize() + "</header>";
+            if (signature != null) xml += "\r\n<signature>" + SecurityElement.Escape(signature) + "</signature>";
+            if (version != null) xml += "\r\n<version>" + SecurityElement.Escape(version) + "</version>";
+            return xml;
+        }
+    }
+
+    public partial class applepayHeaderType
+    {
+        public string applicationData;
+        public string ephemeralPublicKey;
+        public string publicKeyHash;
+        public string transactionId;
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (applicationData != null) xml += "\r\n<applicationData>" + SecurityElement.Escape(applicationData) + "</applicationData>";
+            if (ephemeralPublicKey != null) xml += "\r\n<ephemeralPublicKey>" + SecurityElement.Escape(ephemeralPublicKey) + "</ephemeralPublicKey>";
+            if (publicKeyHash != null) xml += "\r\n<publicKeyHash>" + SecurityElement.Escape(publicKeyHash) + "</publicKeyHash>";
             if (transactionId != null) xml += "\r\n<transactionId>" + SecurityElement.Escape(transactionId) + "</transactionId>";
             return xml;
         }
@@ -1269,6 +1333,13 @@ namespace Litle.Sdk
         }
         public string orderId;
         public long amount;
+        private bool secondaryAmountSet;
+        private long secondaryAmountField;
+        public long secondaryAmount
+        {
+            get { return this.secondaryAmountField; }
+            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+        }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
@@ -1285,6 +1356,7 @@ namespace Litle.Sdk
         public payPal paypal;
         public cardTokenType token;
         public cardPaypageType paypage;
+        public applepayType applepay;
         public billMeLaterRequest billMeLaterRequest;
         public fraudCheckType cardholderAuthentication;
         public processingInstructions processingInstructions;
@@ -1365,6 +1437,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
                 xml += "\r\n<amount>" + amount + "</amount>";
+                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
                 if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
                 if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
 
@@ -1399,6 +1472,10 @@ namespace Litle.Sdk
                 else if (paypage != null)
                 {
                     xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+                }
+                else if (applepay != null)
+                {
+                    xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
                 }
                 if (billMeLaterRequest != null)
                 {
@@ -1487,6 +1564,13 @@ namespace Litle.Sdk
         }
         public string orderId;
         public long amount;
+        private bool secondaryAmountSet;
+        private long secondaryAmountField;
+        public long secondaryAmount
+        {
+            get { return this.secondaryAmountField; }
+            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+        }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
@@ -1503,6 +1587,7 @@ namespace Litle.Sdk
         public payPal paypal;
         public cardTokenType token;
         public cardPaypageType paypage;
+        public applepayType applepay;
         public billMeLaterRequest billMeLaterRequest;
         public fraudCheckType cardholderAuthentication;
         public customBilling customBilling;
@@ -1587,6 +1672,7 @@ namespace Litle.Sdk
             if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
             xml += "\r\n<orderId>" + orderId + "</orderId>";
             xml += "\r\n<amount>" + amount + "</amount>";
+            if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
             if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
             if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
             if (customerInfo != null)
@@ -1620,6 +1706,10 @@ namespace Litle.Sdk
             else if (paypage != null)
             {
                 xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+            }
+            else if (applepay != null)
+            {
+                xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
             }
             if (billMeLaterRequest != null)
             {
@@ -1695,6 +1785,13 @@ namespace Litle.Sdk
     {
         public string orderId;
         public long amount;
+        private bool secondaryAmountSet;
+        private long secondaryAmountField;
+        public long secondaryAmount
+        {
+            get { return this.secondaryAmountField; }
+            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+        }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
@@ -1747,6 +1844,7 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
             xml += "\r\n<amount>" + amount + "</amount>";
+            if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
             if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
             if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
             if (billToAddress != null)
@@ -1808,6 +1906,13 @@ namespace Litle.Sdk
         public string orderId;
         public authInformation authInformation;
         public long amount;
+        private bool secondaryAmountSet;
+        private long secondaryAmountField;
+        public long secondaryAmount
+        {
+            get { return this.secondaryAmountField; }
+            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+        }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
@@ -1863,6 +1968,7 @@ namespace Litle.Sdk
             xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
             if (authInformation != null) xml += "\r\n<authInformation>" + authInformation.Serialize() + "\r\n</authInformation>";
             xml += "\r\n<amount>" + amount + "</amount>";
+            if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
             if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
             if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
             if (billToAddress != null)
@@ -2605,6 +2711,8 @@ namespace Litle.Sdk
         public static readonly orderSourceType item3dsAuthenticated = new orderSourceType("3dsAuthenticated");
         public static readonly orderSourceType item3dsAttempted = new orderSourceType("3dsAttempted");
         public static readonly orderSourceType recurringtel = new orderSourceType("recurringtel");
+        public static readonly orderSourceType applepay = new orderSourceType("applepay");
+
 
         private orderSourceType(String value) { this.value = value; }
         public string Serialize() { return value; }
@@ -3152,7 +3260,15 @@ namespace Litle.Sdk
 
     public class accountUpdateFileRequestData
     {
-        public string merchantId = Properties.Settings.Default.merchantId;
+        public string merchantId;
+        public accountUpdateFileRequestData()
+        {
+            merchantId = Properties.Settings.Default.merchantId;
+        }
+        public accountUpdateFileRequestData(Dictionary<String,String> config) 
+        {
+            this.merchantId = config["merchantId"];
+        }
         public DateTime postDay; //yyyy-MM-dd
 
         public string Serialize()

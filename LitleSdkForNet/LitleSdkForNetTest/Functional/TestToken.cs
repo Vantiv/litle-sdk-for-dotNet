@@ -25,6 +25,8 @@ namespace Litle.Sdk.Test.Functional
             config.Add("printxml", "true");
             config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
             litle = new LitleOnline(config);
         }
 
@@ -66,6 +68,28 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
+        public void SimpleTokenWithApplepay()
+        {
+            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.orderId = "12344";
+            registerTokenRequest.reportGroup = "Planets";
+            applepayType applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData = "454657413164";
+            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId = "1234";
+            applepay.header = applepayHeaderType;
+            applepay.data = "user";
+            applepay.signature = "sign";
+            applepay.version = "1";
+            registerTokenRequest.applepay = applepay;
+            registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
+            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            Assert.AreEqual("0", rtokenResponse.applepayResponse.transactionAmount);
+        }
+
+        [Test]
         public void TokenEcheckMissingRequiredField()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
@@ -84,6 +108,17 @@ namespace Litle.Sdk.Test.Functional
                 Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
-            
+
+        [Test]
+        public void TestSimpleTokenWithNullableTypeField()
+        {
+            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.orderId = "12344";
+            registerTokenRequest.accountNumber = "1233456789103801";
+            registerTokenRequest.reportGroup = "Planets";
+            registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
+            StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
+            Assert.IsNull(rtokenResponse.type);
+        }
     }
 }

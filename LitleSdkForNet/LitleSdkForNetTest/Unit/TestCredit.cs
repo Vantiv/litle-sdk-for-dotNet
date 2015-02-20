@@ -139,6 +139,46 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void TestSecondaryAmount_Orphan()
+        {
+            credit credit = new credit();
+            credit.amount = 2;
+            credit.secondaryAmount = 1;
+            credit.orderId = "3";
+            credit.orderSource = orderSourceType.ecommerce;
+            credit.reportGroup = "Planets";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<orderId>3</orderId>\r\n<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Credit(credit);
+        }
+
+        [Test]
+        public void TestSecondaryAmount_Tied()
+        {
+            credit credit = new credit();
+            credit.amount = 2;
+            credit.secondaryAmount = 1;
+            credit.litleTxnId = 3;
+            credit.processingInstructions = new processingInstructions();
+            credit.reportGroup = "Planets";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<process.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Credit(credit);
+        }
+
+        [Test]
         public void TestPos_Tied()
         {
             credit credit = new credit();

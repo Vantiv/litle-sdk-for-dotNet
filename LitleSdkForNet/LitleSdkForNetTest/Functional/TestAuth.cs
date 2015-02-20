@@ -26,8 +26,9 @@ namespace Litle.Sdk.Test.Functional
             config.Add("printxml", "true");
             config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
-            config.Add("proxyHost", null);
-            config.Add("proxyPort", null);
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
+
             litle = new LitleOnline(config);
         }
 
@@ -114,6 +115,32 @@ namespace Litle.Sdk.Test.Functional
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void simpleAuthWithApplepayAndSecondaryAmount()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "123456";
+            authorization.amount = 110;
+            authorization.secondaryAmount = 50;
+            authorization.orderSource = orderSourceType.applepay;
+            applepayType applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData = "454657413164";
+            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId = "1234";
+            applepay.header = applepayHeaderType;
+            applepay.data = "user";
+            applepay.signature = "sign";
+            applepay.version = "1";
+            authorization.applepay = applepay;       
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Insufficient Funds", response.message);
+            Assert.AreEqual("110", response.applepayResponse.transactionAmount);
         }
 
         [Test]

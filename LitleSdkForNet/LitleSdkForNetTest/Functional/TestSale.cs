@@ -25,6 +25,8 @@ namespace Litle.Sdk.Test.Functional
             config.Add("printxml", "true");
             config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
             litle = new LitleOnline(config);
         }
 
@@ -81,6 +83,31 @@ namespace Litle.Sdk.Test.Functional
             saleObj.paypal = payPalObj;
             saleResponse responseObj = litle.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+        [Test]
+        public void SimpleSaleWithApplepayAndSecondaryAmount()
+        {
+            sale saleObj = new sale();
+            saleObj.amount = 110;
+            saleObj.secondaryAmount = 50;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            applepayType applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData = "454657413164";
+            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId = "1234";
+            applepay.header = applepayHeaderType;
+            applepay.data = "user";
+            applepay.signature = "sign";
+            applepay.version = "1";
+            saleObj.applepay = applepay;
+            saleResponse responseObj = litle.Sale(saleObj);
+            Assert.AreEqual("Insufficient Funds", responseObj.message);
+            Assert.AreEqual("110", responseObj.applepayResponse.transactionAmount);
         }
             
     }
