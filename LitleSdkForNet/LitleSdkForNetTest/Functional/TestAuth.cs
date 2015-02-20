@@ -26,8 +26,9 @@ namespace Litle.Sdk.Test.Functional
             config.Add("printxml", "true");
             config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
-            config.Add("proxyHost", null);
-            config.Add("proxyPort", null);
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
+
             litle = new LitleOnline(config);
         }
 

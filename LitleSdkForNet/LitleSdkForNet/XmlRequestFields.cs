@@ -3261,7 +3261,15 @@ namespace Litle.Sdk
 
     public class accountUpdateFileRequestData
     {
-        public string merchantId = Properties.Settings.Default.merchantId;
+        public string merchantId;
+        public accountUpdateFileRequestData()
+        {
+            merchantId = Properties.Settings.Default.merchantId;
+        }
+        public accountUpdateFileRequestData(Dictionary<String,String> config) 
+        {
+            this.merchantId = config["merchantId"];
+        }
         public DateTime postDay; //yyyy-MM-dd
 
         public string Serialize()
