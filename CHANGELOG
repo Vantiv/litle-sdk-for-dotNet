@@ -1,5 +1,15 @@
 = LitleOnline CHANGELOG
 
+==version 9.3.0
+* Bugfix: Load proxy from setting file and adding constructor for accountUpdateFileRequestData and adding test cases
+* Bugfix: Fix bug in generating echeckAccountTypeEnum CorpSavings in request
+* Bugfix: Fix non-nullable enum fields bug, and add tests
+* Feature: Applepay support was added
+* Feature: Secondary amount support was added
+* Feature: Wallet support was added
+* Feature: EcheckPreNoteSale batch transaction type support was added
+* Feature: EcheckPreNoteCredit batch transaction type support was added
+
 ==version 9.00.0
 * Feature: support 9.00.0
 
