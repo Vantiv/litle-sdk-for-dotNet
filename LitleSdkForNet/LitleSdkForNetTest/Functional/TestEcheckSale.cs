@@ -187,7 +187,7 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.orderSource = orderSourceType.ecommerce;
 
             echeckType echeckTypeObj = new echeckType();
-            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
+            echeckTypeObj.accType = echeckAccountTypeEnum.CorpSavings;
             echeckTypeObj.accNum = "12345657890";
             echeckTypeObj.routingNum = "123456789";
             echeckTypeObj.checkNum = "123455";

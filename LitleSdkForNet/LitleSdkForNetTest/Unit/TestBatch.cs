@@ -1746,7 +1746,7 @@ namespace Litle.Sdk.Test.Unit
             echeckPreNoteCredit.orderId = "12345";
             echeckPreNoteCredit.orderSource = orderSourceType.ecommerce;
             echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accType = echeckAccountTypeEnum.CorpSavings;
             echeck.accNum = "12345657890";
             echeck.routingNum = "123456789";
             echeck.checkNum = "123455";

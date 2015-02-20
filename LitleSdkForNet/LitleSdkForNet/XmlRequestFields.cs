@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security;
+using System.Xml.Serialization;
 
 namespace Litle.Sdk
 {
@@ -983,7 +984,11 @@ namespace Litle.Sdk
         public string Serialize()
         {
             string xml = "";
-            if (accTypeSet) xml += "\r\n<accType>" + accTypeField + "</accType>";
+            string accTypeName = accTypeField.ToString();
+            XmlEnumAttribute[] attributes = 
+                (XmlEnumAttribute[])typeof(echeckAccountTypeEnum).GetMember(accTypeField.ToString())[0].GetCustomAttributes(typeof(XmlEnumAttribute), false);
+            if (attributes.Length > 0) accTypeName = attributes[0].Name;
+            if (accTypeSet) xml += "\r\n<accType>" + accTypeName + "</accType>";
             if (accNum != null) xml += "\r\n<accNum>" + SecurityElement.Escape(accNum) + "</accNum>";
             if (routingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(routingNum) + "</routingNum>";
             if (checkNum != null) xml += "\r\n<checkNum>" + SecurityElement.Escape(checkNum) + "</checkNum>";
@@ -3273,7 +3278,15 @@ namespace Litle.Sdk
 
     public class accountUpdateFileRequestData
     {
-        public string merchantId = Properties.Settings.Default.merchantId;
+        public string merchantId;
+        public accountUpdateFileRequestData()
+        {
+            merchantId = Properties.Settings.Default.merchantId;
+        }
+        public accountUpdateFileRequestData(Dictionary<String,String> config) 
+        {
+            this.merchantId = config["merchantId"];
+        }
         public DateTime postDay; //yyyy-MM-dd
 
         public string Serialize()
