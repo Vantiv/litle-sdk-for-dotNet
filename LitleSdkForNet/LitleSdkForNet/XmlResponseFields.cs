@@ -4931,6 +4931,16 @@ namespace Litle.Sdk
             echeckPreNoteCreditResponseReader = new XmlTextReader(filePath);
             unloadResponseReader = new XmlTextReader(filePath);
             balanceInquiryResponseReader = new XmlTextReader(filePath);
+            submerchantCreditResponseReader = new XmlTextReader(filePath);
+            payFacCreditResponseReader = new XmlTextReader(filePath);
+            reserveCreditResponseReader = new XmlTextReader(filePath);
+            vendorCreditResponseReader = new XmlTextReader(filePath);
+            physicalCheckCreditResponseReader = new XmlTextReader(filePath);
+            submerchantDebitResponseReader = new XmlTextReader(filePath);
+            payFacDebitResponseReader = new XmlTextReader(filePath);
+            reserveDebitResponseReader = new XmlTextReader(filePath);
+            vendorDebitResponseReader = new XmlTextReader(filePath);
+            physicalCheckDebitResponseReader = new XmlTextReader(filePath);
 
             if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
             {
@@ -5031,7 +5041,46 @@ namespace Litle.Sdk
             {
                 balanceInquiryResponseReader.Close();
             }
-
+            if (!submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
+            {
+                submerchantCreditResponseReader.Close();
+            }
+            if (!payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
+            {
+                payFacCreditResponseReader.Close();
+            }
+            if (!vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
+            {
+                vendorCreditResponseReader.Close();
+            }
+            if (!reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
+            {
+                reserveCreditResponseReader.Close();
+            }
+            if (!physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
+            {
+                physicalCheckCreditResponseReader.Close();
+            }
+            if (!submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
+            {
+                submerchantDebitResponseReader.Close();
+            }
+            if (!payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
+            {
+                payFacDebitResponseReader.Close();
+            }
+            if (!vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
+            {
+                vendorDebitResponseReader.Close();
+            }
+            if (!reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
+            {
+                reserveDebitResponseReader.Close();
+            }
+            if (!physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
+            {
+                physicalCheckDebitResponseReader.Close();
+            }
         }
 
         virtual public accountUpdateResponse nextAccountUpdateResponse()

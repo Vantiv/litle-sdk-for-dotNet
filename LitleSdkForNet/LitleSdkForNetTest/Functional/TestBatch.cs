@@ -257,8 +257,6 @@ namespace Litle.Sdk.Test.Functional
             echeckPreNoteCreditObj2.echeck = echeck2;
             echeckPreNoteCreditObj2.billToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditObj2);
-
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
@@ -420,7 +418,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckPreNoteSaleResponse echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
                 while (echeckPreNoteSaleResponse != null)
                 {
-                    Assert.AreEqual("330", echeckPreNoteSaleResponse.response);
+                    Assert.AreEqual("000", echeckPreNoteSaleResponse.response);
 
                     echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
                 }
@@ -428,7 +426,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckPreNoteCreditResponse echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
                 while (echeckPreNoteCreditResponse != null)
                 {
-                    Assert.AreEqual("330", echeckPreNoteCreditResponse.response);
+                    Assert.AreEqual("000", echeckPreNoteCreditResponse.response);
 
                     echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
                 }
