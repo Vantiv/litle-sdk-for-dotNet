@@ -1160,8 +1160,7 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        //[Test]
-        //TODO: enable the test again!
+        [Test]
         public void PFIFInstructionTxnTest()
         {
             
