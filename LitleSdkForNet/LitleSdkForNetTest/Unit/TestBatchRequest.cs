@@ -55,7 +55,7 @@ namespace Litle.Sdk.Test.Unit
             String actual = batchRequest.generateXmlHeader();
             String expected = @"
 <batchRequest id=""""
-merchantSdk=""DotNet;9.3.0""
+merchantSdk=""DotNet;9.3.1""
 merchantId=""01234"">
 ";
             Assert.AreEqual(expected, actual);
@@ -580,6 +580,204 @@ merchantId=""01234"">
 
             mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckPreNoteCredit.Serialize()));
+        }
+
+        [Test]
+        public void testAddSubmerchantCredit()
+        {
+            submerchantCredit submerchantCredit = new submerchantCredit();
+            submerchantCredit.fundingSubmerchantId = "123456";
+            submerchantCredit.submerchantName = "merchant";
+            submerchantCredit.fundsTransferId = "123467";
+            submerchantCredit.amount = 106L;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            submerchantCredit.accountInfo = echeck;
+
+            batchRequest.addSubmerchantCredit(submerchantCredit);
+
+            Assert.AreEqual(1, batchRequest.getNumSubmerchantCredit());
+            Assert.AreEqual(106L, batchRequest.getSubmerchantCreditAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, submerchantCredit.Serialize()));
+        }
+
+        [Test]
+        public void testAddPayFacCredit()
+        {
+            payFacCredit payFacCredit = new payFacCredit();
+            payFacCredit.fundingSubmerchantId = "123456";
+            payFacCredit.fundsTransferId = "123467";
+            payFacCredit.amount = 107L;
+
+            batchRequest.addPayFacCredit(payFacCredit);
+
+            Assert.AreEqual(1, batchRequest.getNumPayFacCredit());
+            Assert.AreEqual(107L, batchRequest.getPayFacCreditAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, payFacCredit.Serialize()));
+        }
+
+        [Test]
+        public void testAddReserveCredit()
+        {
+            reserveCredit reserveCredit = new reserveCredit();
+            reserveCredit.fundingSubmerchantId = "123456";
+            reserveCredit.fundsTransferId = "123467";
+            reserveCredit.amount = 107L;
+
+            batchRequest.addReserveCredit(reserveCredit);
+
+            Assert.AreEqual(1, batchRequest.getNumReserveCredit());
+            Assert.AreEqual(107L, batchRequest.getReserveCreditAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, reserveCredit.Serialize()));
+        }
+
+        [Test]
+        public void testAddVendorCredit()
+        {
+            vendorCredit vendorCredit = new vendorCredit();
+            vendorCredit.fundingSubmerchantId = "123456";
+            vendorCredit.vendorName = "merchant";
+            vendorCredit.fundsTransferId = "123467";
+            vendorCredit.amount = 106L;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            vendorCredit.accountInfo = echeck;
+
+            batchRequest.addVendorCredit(vendorCredit);
+
+            Assert.AreEqual(1, batchRequest.getNumVendorCredit());
+            Assert.AreEqual(106L, batchRequest.getVendorCreditAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, vendorCredit.Serialize()));
+        }
+
+        [Test]
+        public void testAddPhysicalCheckCredit()
+        {
+            physicalCheckCredit physicalCheckCredit = new physicalCheckCredit();
+            physicalCheckCredit.fundingSubmerchantId = "123456";
+            physicalCheckCredit.fundsTransferId = "123467";
+            physicalCheckCredit.amount = 107L;
+
+            batchRequest.addPhysicalCheckCredit(physicalCheckCredit);
+
+            Assert.AreEqual(1, batchRequest.getNumPhysicalCheckCredit());
+            Assert.AreEqual(107L, batchRequest.getPhysicalCheckCreditAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, physicalCheckCredit.Serialize()));
+        }
+
+        [Test]
+        public void testAddSubmerchantDebit()
+        {
+            submerchantDebit submerchantDebit = new submerchantDebit();
+            submerchantDebit.fundingSubmerchantId = "123456";
+            submerchantDebit.submerchantName = "merchant";
+            submerchantDebit.fundsTransferId = "123467";
+            submerchantDebit.amount = 106L;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            submerchantDebit.accountInfo = echeck;
+
+            batchRequest.addSubmerchantDebit(submerchantDebit);
+
+            Assert.AreEqual(1, batchRequest.getNumSubmerchantDebit());
+            Assert.AreEqual(106L, batchRequest.getSubmerchantDebitAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, submerchantDebit.Serialize()));
+        }
+
+        [Test]
+        public void testAddPayFacDebit()
+        {
+            payFacDebit payFacDebit = new payFacDebit();
+            payFacDebit.fundingSubmerchantId = "123456";
+            payFacDebit.fundsTransferId = "123467";
+            payFacDebit.amount = 107L;
+
+            batchRequest.addPayFacDebit(payFacDebit);
+
+            Assert.AreEqual(1, batchRequest.getNumPayFacDebit());
+            Assert.AreEqual(107L, batchRequest.getPayFacDebitAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, payFacDebit.Serialize()));
+        }
+
+        [Test]
+        public void testAddReserveDebit()
+        {
+            reserveDebit reserveDebit = new reserveDebit();
+            reserveDebit.fundingSubmerchantId = "123456";
+            reserveDebit.fundsTransferId = "123467";
+            reserveDebit.amount = 107L;
+
+            batchRequest.addReserveDebit(reserveDebit);
+
+            Assert.AreEqual(1, batchRequest.getNumReserveDebit());
+            Assert.AreEqual(107L, batchRequest.getReserveDebitAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, reserveDebit.Serialize()));
+        }
+
+        [Test]
+        public void testAddVendorDebit()
+        {
+            vendorDebit vendorDebit = new vendorDebit();
+            vendorDebit.fundingSubmerchantId = "123456";
+            vendorDebit.vendorName = "merchant";
+            vendorDebit.fundsTransferId = "123467";
+            vendorDebit.amount = 106L;
+            echeckType echeck = new echeckType();
+            echeck.accType = echeckAccountTypeEnum.Checking;
+            echeck.accNum = "12345657890";
+            echeck.routingNum = "123456789";
+            echeck.checkNum = "123455";
+            vendorDebit.accountInfo = echeck;
+
+            batchRequest.addVendorDebit(vendorDebit);
+
+            Assert.AreEqual(1, batchRequest.getNumVendorDebit());
+            Assert.AreEqual(106L, batchRequest.getVendorDebitAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, vendorDebit.Serialize()));
+        }
+
+        [Test]
+        public void testAddPhysicalCheckDebit()
+        {
+            physicalCheckDebit physicalCheckDebit = new physicalCheckDebit();
+            physicalCheckDebit.fundingSubmerchantId = "123456";
+            physicalCheckDebit.fundsTransferId = "123467";
+            physicalCheckDebit.amount = 107L;
+
+            batchRequest.addPhysicalCheckDebit(physicalCheckDebit);
+
+            Assert.AreEqual(1, batchRequest.getNumPhysicalCheckDebit());
+            Assert.AreEqual(107L, batchRequest.getPhysicalCheckDebitAmount());
+
+            mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, physicalCheckDebit.Serialize()));
         }
     }
 }
