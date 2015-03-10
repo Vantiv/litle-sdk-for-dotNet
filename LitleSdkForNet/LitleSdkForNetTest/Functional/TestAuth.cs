@@ -15,7 +15,20 @@ namespace Litle.Sdk.Test.Functional
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            litle = new LitleOnline();
+            Dictionary<string, string> config = new Dictionary<string, string>();
+            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("reportGroup", "Default Report Group");
+            config.Add("username", "DOTNET");
+            config.Add("version", "8.13");
+            config.Add("timeout", "65");
+            config.Add("merchantId", "101");
+            config.Add("password", "TESTCASE");
+            config.Add("printxml", "true");
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
+            config.Add("logFile", Properties.Settings.Default.logFile);
+            config.Add("neuterAccountNums", "true");
+            litle = new LitleOnline(config);
         }
 
         [Test]
