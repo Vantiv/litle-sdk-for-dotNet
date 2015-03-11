@@ -518,18 +518,24 @@ namespace Litle.Sdk.Test.Functional
             rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
 
             litleRfr.addRFRRequest(rfrRequest);
-            litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream();
-
-            Assert.NotNull(litleRfrResponse);
-
-            RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
-            Assert.NotNull(rfrResponse);
-            while (rfrResponse != null)
+            try
             {
-                Assert.AreEqual("1", rfrResponse.response);
-                Assert.AreEqual("The account update file is not ready yet.  Please try again later.", rfrResponse.message);
+                litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream();
 
-                rfrResponse = litleResponse.nextRFRResponse();
+                Assert.NotNull(litleRfrResponse);
+
+                RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
+                Assert.NotNull(rfrResponse);
+                while (rfrResponse != null)
+                {
+                    Assert.AreEqual("1", rfrResponse.response);
+                    Assert.AreEqual("The account update file is not ready yet.  Please try again later.", rfrResponse.message);
+
+                    rfrResponse = litleResponse.nextRFRResponse();
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
