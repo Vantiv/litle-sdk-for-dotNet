@@ -781,6 +781,8 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
+            litleRequest litleIC = new litleRequest(invalidConfig);
+
             batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
@@ -1015,15 +1017,16 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
 
-            litle.addBatch(litleBatchRequest);
+            litleIC.addBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle();
+            string batchName = litleIC.sendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
+            litleIC.blockAndWaitForResponse(batchName, 60*1000*5);
 
             try
             {
-                litleResponse litleResponse = litle.receiveFromLitle(batchName);
+                litleResponse litleResponse = litleIC.receiveFromLitle(batchName);
+                Assert.Fail("Fail to throw a connection exception");
             }
             catch (LitleOnlineException e)
             {
@@ -1034,6 +1037,8 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidSftpCredientialsBatch()
         {
+            litleRequest litleISC = new litleRequest(invalidSftpConfig);
+
             batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
@@ -1268,11 +1273,12 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
 
-            litle.addBatch(litleBatchRequest);
+            litleISC.addBatch(litleBatchRequest);
 
             try
             {
-                string batchName = litle.sendToLitle();
+                string batchName = litleISC.sendToLitle();
+                Assert.Fail("Fail to throw a connection exception");
             }
             catch (LitleOnlineException e)
             {
