@@ -565,11 +565,11 @@ namespace Litle.Sdk.Test.Functional
             accountUpdateFileRequestData.postDay = DateTime.Now;
             rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
 
-            litleRfr.addRFRRequest(rfrRequest);
-            litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream();
+            litleRfr.addRFRRequest(rfrRequest);            
 
             try
             {
+                litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream();
                 Assert.NotNull(litleRfrResponse);
 
                 RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
