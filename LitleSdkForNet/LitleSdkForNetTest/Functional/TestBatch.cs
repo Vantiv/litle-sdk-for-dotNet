@@ -31,6 +31,8 @@ namespace Litle.Sdk.Test.Functional
             invalidConfig["sftpUsername"] = Properties.Settings.Default.sftpUrl;
             invalidConfig["sftpPassword"] = Properties.Settings.Default.sftpPassword;
             invalidConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            invalidConfig["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+            invalidConfig["responseDirectory"] = Properties.Settings.Default.responseDirectory;
            
 
             invalidSftpConfig = new Dictionary<String, String>();
@@ -47,6 +49,8 @@ namespace Litle.Sdk.Test.Functional
             invalidSftpConfig["sftpUsername"] = "badSftpUsername";
             invalidSftpConfig["sftpPassword"] = "badSftpPassword";
             invalidSftpConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            invalidSftpConfig["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+            invalidSftpConfig["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
         }
 
