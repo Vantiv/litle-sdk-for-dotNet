@@ -28,7 +28,7 @@ namespace Litle.Sdk.Test.Functional
             invalidConfig["password"] = "badPassword";
             invalidConfig["proxyPort"] = Properties.Settings.Default.proxyPort;
             invalidConfig["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            invalidConfig["sftpUsername"] = Properties.Settings.Default.sftpUrl;
+            invalidConfig["sftpUsername"] = Properties.Settings.Default.sftpUsername;
             invalidConfig["sftpPassword"] = Properties.Settings.Default.sftpPassword;
             invalidConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
             invalidConfig["requestDirectory"] = Properties.Settings.Default.requestDirectory;
