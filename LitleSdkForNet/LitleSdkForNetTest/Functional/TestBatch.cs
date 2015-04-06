@@ -577,7 +577,7 @@ namespace Litle.Sdk.Test.Functional
             litleRfr.addRFRRequest(rfrRequest);
 
             string rfrBatchName = litleRfr.sendToLitle();
-            litle.blockAndWaitForResponse(rfrBatchName, estimatedResponseTime(0, 1 * 2));
+            litle.blockAndWaitForResponse(rfrBatchName,120*1000);
             litleResponse litleRfrResponse = litle.receiveFromLitle(rfrBatchName);
 
             Assert.NotNull(litleRfrResponse);
