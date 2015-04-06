@@ -1,5 +1,11 @@
 = LitleOnline CHANGELOG
 
+==Version 9.3.2
+HTTP timeout is set to 500ms
+
+==Version 9.3.1 (March 9, 2015)
+* Feature: PFIF instruction transaction support was added
+
 ==version 9.3.0
 * Bugfix: Load proxy from setting file and adding constructor for accountUpdateFileRequestData and adding test cases
 * Bugfix: Fix bug in generating echeckAccountTypeEnum CorpSavings in request

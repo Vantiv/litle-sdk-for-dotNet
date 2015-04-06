@@ -28,9 +28,11 @@ namespace Litle.Sdk.Test.Functional
             invalidConfig["password"] = "badPassword";
             invalidConfig["proxyPort"] = Properties.Settings.Default.proxyPort;
             invalidConfig["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            invalidConfig["sftpUsername"] = Properties.Settings.Default.sftpUrl;
+            invalidConfig["sftpUsername"] = Properties.Settings.Default.sftpUsername;
             invalidConfig["sftpPassword"] = Properties.Settings.Default.sftpPassword;
             invalidConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            invalidConfig["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+            invalidConfig["responseDirectory"] = Properties.Settings.Default.responseDirectory;
            
 
             invalidSftpConfig = new Dictionary<String, String>();
@@ -47,6 +49,8 @@ namespace Litle.Sdk.Test.Functional
             invalidSftpConfig["sftpUsername"] = "badSftpUsername";
             invalidSftpConfig["sftpPassword"] = "badSftpPassword";
             invalidSftpConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            invalidSftpConfig["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+            invalidSftpConfig["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
         }
 
@@ -257,8 +261,6 @@ namespace Litle.Sdk.Test.Functional
             echeckPreNoteCreditObj2.echeck = echeck2;
             echeckPreNoteCreditObj2.billToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditObj2);
-
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
@@ -420,7 +422,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckPreNoteSaleResponse echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
                 while (echeckPreNoteSaleResponse != null)
                 {
-                    Assert.AreEqual("330", echeckPreNoteSaleResponse.response);
+                    Assert.AreEqual("000", echeckPreNoteSaleResponse.response);
 
                     echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
                 }
@@ -428,7 +430,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckPreNoteCreditResponse echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
                 while (echeckPreNoteCreditResponse != null)
                 {
-                    Assert.AreEqual("330", echeckPreNoteCreditResponse.response);
+                    Assert.AreEqual("000", echeckPreNoteCreditResponse.response);
 
                     echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
                 }
@@ -577,19 +579,23 @@ namespace Litle.Sdk.Test.Functional
             litleRfr.addRFRRequest(rfrRequest);
 
             string rfrBatchName = litleRfr.sendToLitle();
-            litle.blockAndWaitForResponse(rfrBatchName,120*1000);
-            litleResponse litleRfrResponse = litle.receiveFromLitle(rfrBatchName);
-
-            Assert.NotNull(litleRfrResponse);
-
-            RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
-            Assert.NotNull(rfrResponse);
-            while (rfrResponse != null)
+            
+            try
             {
-                Assert.AreEqual("1", rfrResponse.response);
-                Assert.AreEqual("The account update file is not ready yet.  Please try again later.", rfrResponse.message);
-
-                rfrResponse = litleResponse.nextRFRResponse();
+                litle.blockAndWaitForResponse(rfrBatchName, estimatedResponseTime(0, 1 * 2));
+                litleResponse litleRfrResponse = litle.receiveFromLitle(rfrBatchName);
+                Assert.NotNull(litleRfrResponse);
+                RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
+                Assert.NotNull(rfrResponse);
+                while (rfrResponse != null)
+                {
+                    Assert.AreEqual("1", rfrResponse.response);
+                    Assert.AreEqual("The account update file is not ready yet.  Please try again later.", rfrResponse.message);
+                    rfrResponse = litleResponse.nextRFRResponse();
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
@@ -823,6 +829,8 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
+            litleRequest litleIC = new litleRequest(invalidConfig);
+
             batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
@@ -1057,15 +1065,16 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
 
-            litle.addBatch(litleBatchRequest);
+            litleIC.addBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle();
+            string batchName = litleIC.sendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
+            litleIC.blockAndWaitForResponse(batchName, 60*1000*5);
 
             try
             {
-                litleResponse litleResponse = litle.receiveFromLitle(batchName);
+                litleResponse litleResponse = litleIC.receiveFromLitle(batchName);
+                Assert.Fail("Fail to throw a connection exception");
             }
             catch (LitleOnlineException e)
             {
@@ -1076,6 +1085,8 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidSftpCredientialsBatch()
         {
+            litleRequest litleISC = new litleRequest(invalidSftpConfig);
+
             batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
@@ -1310,11 +1321,12 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
 
-            litle.addBatch(litleBatchRequest);
+            litleISC.addBatch(litleBatchRequest);
 
             try
             {
-                string batchName = litle.sendToLitle();
+                string batchName = litleISC.sendToLitle();
+                Assert.Fail("Fail to throw a connection exception");
             }
             catch (LitleOnlineException e)
             {

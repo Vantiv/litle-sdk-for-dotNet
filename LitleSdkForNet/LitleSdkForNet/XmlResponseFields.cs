@@ -4703,6 +4703,16 @@ namespace Litle.Sdk
         private XmlReader echeckPreNoteCreditResponseReader;
         private XmlReader unloadResponseReader;
         private XmlReader balanceInquiryResponseReader;
+        private XmlReader submerchantCreditResponseReader;
+        private XmlReader payFacCreditResponseReader;
+        private XmlReader vendorCreditResponseReader;
+        private XmlReader reserveCreditResponseReader;
+        private XmlReader physicalCheckCreditResponseReader;
+        private XmlReader submerchantDebitResponseReader;
+        private XmlReader payFacDebitResponseReader;
+        private XmlReader vendorDebitResponseReader;
+        private XmlReader reserveDebitResponseReader;
+        private XmlReader physicalCheckDebitResponseReader;
 
         public batchResponse()
         {
@@ -4807,30 +4817,87 @@ namespace Litle.Sdk
         {
             this.activateResponseReader = xmlReader;
         }
+
         public void setDeactivateResponseReader(XmlReader xmlReader)
         {
             this.deactivateResponseReader = xmlReader;
         }
+
         public void setLoadResponseReader(XmlReader xmlReader)
         {
             this.loadResponseReader = xmlReader;
         }
+
         public void setEcheckPreNoteSaleResponseReader(XmlReader xmlReader)
         {
             this.echeckPreNoteSaleResponseReader = xmlReader;
         }
+
         public void setEcheckPreNoteCreditResponseReader(XmlReader xmlReader)
         {
             this.echeckPreNoteCreditResponseReader = xmlReader;
         }
+
         public void setUnloadResponseReader(XmlReader xmlReader)
         {
             this.unloadResponseReader = xmlReader;
         }
+
         public void setBalanceInquiryResponseReader(XmlReader xmlReader)
         {
             this.balanceInquiryResponseReader = xmlReader;
         }
+
+        public void setSubmerchantCreditResponseReader(XmlReader xmlReader)
+        {
+            this.submerchantCreditResponseReader = xmlReader;
+        }
+
+        public void setPayFacCreditResponseReader(XmlReader xmlReader)
+        {
+            this.payFacCreditResponseReader = xmlReader;
+        }
+
+        public void setReserveCreditResponseReader(XmlReader xmlReader)
+        {
+            this.reserveCreditResponseReader = xmlReader;
+        }
+
+        public void setVendorCreditResponseReader(XmlReader xmlReader)
+        {
+            this.vendorCreditResponseReader = xmlReader;
+        }
+
+        public void setPhysicalCheckCreditResponseReader(XmlReader xmlReader)
+        {
+            this.physicalCheckCreditResponseReader = xmlReader;
+        }
+
+        public void setSubmerchantDebitResponseReader(XmlReader xmlReader)
+        {
+            this.submerchantDebitResponseReader = xmlReader;
+        }
+
+        public void setPayFacDebitResponseReader(XmlReader xmlReader)
+        {
+            this.payFacDebitResponseReader = xmlReader;
+        }
+
+        public void setReserveDebitResponseReader(XmlReader xmlReader)
+        {
+            this.reserveDebitResponseReader = xmlReader;
+        }
+
+        public void setVendorDebitResponseReader(XmlReader xmlReader)
+        {
+            this.vendorDebitResponseReader = xmlReader;
+        }
+
+        public void setPhysicalCheckDebitResponseReader(XmlReader xmlReader)
+        {
+            this.physicalCheckDebitResponseReader = xmlReader;
+        }
+
 
         public void readXml(XmlReader reader, string filePath)
         {
@@ -4864,6 +4931,16 @@ namespace Litle.Sdk
             echeckPreNoteCreditResponseReader = new XmlTextReader(filePath);
             unloadResponseReader = new XmlTextReader(filePath);
             balanceInquiryResponseReader = new XmlTextReader(filePath);
+            submerchantCreditResponseReader = new XmlTextReader(filePath);
+            payFacCreditResponseReader = new XmlTextReader(filePath);
+            reserveCreditResponseReader = new XmlTextReader(filePath);
+            vendorCreditResponseReader = new XmlTextReader(filePath);
+            physicalCheckCreditResponseReader = new XmlTextReader(filePath);
+            submerchantDebitResponseReader = new XmlTextReader(filePath);
+            payFacDebitResponseReader = new XmlTextReader(filePath);
+            reserveDebitResponseReader = new XmlTextReader(filePath);
+            vendorDebitResponseReader = new XmlTextReader(filePath);
+            physicalCheckDebitResponseReader = new XmlTextReader(filePath);
 
             if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
             {
@@ -4964,7 +5041,46 @@ namespace Litle.Sdk
             {
                 balanceInquiryResponseReader.Close();
             }
-
+            if (!submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
+            {
+                submerchantCreditResponseReader.Close();
+            }
+            if (!payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
+            {
+                payFacCreditResponseReader.Close();
+            }
+            if (!vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
+            {
+                vendorCreditResponseReader.Close();
+            }
+            if (!reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
+            {
+                reserveCreditResponseReader.Close();
+            }
+            if (!physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
+            {
+                physicalCheckCreditResponseReader.Close();
+            }
+            if (!submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
+            {
+                submerchantDebitResponseReader.Close();
+            }
+            if (!payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
+            {
+                payFacDebitResponseReader.Close();
+            }
+            if (!vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
+            {
+                vendorDebitResponseReader.Close();
+            }
+            if (!reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
+            {
+                reserveDebitResponseReader.Close();
+            }
+            if (!physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
+            {
+                physicalCheckDebitResponseReader.Close();
+            }
         }
 
         virtual public accountUpdateResponse nextAccountUpdateResponse()
@@ -5459,6 +5575,206 @@ namespace Litle.Sdk
                 if (!balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
                 {
                     balanceInquiryResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public submerchantCreditResponse nextSubmerchantCreditResponse()
+        {
+            if (submerchantCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = submerchantCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(submerchantCreditResponse));
+                StringReader reader = new StringReader(response);
+                submerchantCreditResponse i = (submerchantCreditResponse)serializer.Deserialize(reader);
+
+                if (!submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
+                {
+                    submerchantCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public payFacCreditResponse nextPayFacCreditResponse()
+        {
+            if (payFacCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = payFacCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(payFacCreditResponse));
+                StringReader reader = new StringReader(response);
+                payFacCreditResponse i = (payFacCreditResponse)serializer.Deserialize(reader);
+
+                if (!payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
+                {
+                    payFacCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public vendorCreditResponse nextVendorCreditResponse()
+        {
+            if (vendorCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = vendorCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(vendorCreditResponse));
+                StringReader reader = new StringReader(response);
+                vendorCreditResponse i = (vendorCreditResponse)serializer.Deserialize(reader);
+
+                if (!vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
+                {
+                    vendorCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public reserveCreditResponse nextReserveCreditResponse()
+        {
+            if (reserveCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = reserveCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(reserveCreditResponse));
+                StringReader reader = new StringReader(response);
+                reserveCreditResponse i = (reserveCreditResponse)serializer.Deserialize(reader);
+
+                if (!reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
+                {
+                    reserveCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public physicalCheckCreditResponse nextPhysicalCheckCreditResponse()
+        {
+            if (physicalCheckCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = physicalCheckCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(physicalCheckCreditResponse));
+                StringReader reader = new StringReader(response);
+                physicalCheckCreditResponse i = (physicalCheckCreditResponse)serializer.Deserialize(reader);
+
+                if (!physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
+                {
+                    physicalCheckCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public submerchantDebitResponse nextSubmerchantDebitResponse()
+        {
+            if (submerchantDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = submerchantDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(submerchantDebitResponse));
+                StringReader reader = new StringReader(response);
+                submerchantDebitResponse i = (submerchantDebitResponse)serializer.Deserialize(reader);
+
+                if (!submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
+                {
+                    submerchantDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public payFacDebitResponse nextPayFacDebitResponse()
+        {
+            if (payFacDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = payFacDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(payFacDebitResponse));
+                StringReader reader = new StringReader(response);
+                payFacDebitResponse i = (payFacDebitResponse)serializer.Deserialize(reader);
+
+                if (!payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
+                {
+                    payFacDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public vendorDebitResponse nextVendorDebitResponse()
+        {
+            if (vendorDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = vendorDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(vendorDebitResponse));
+                StringReader reader = new StringReader(response);
+                vendorDebitResponse i = (vendorDebitResponse)serializer.Deserialize(reader);
+
+                if (!vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
+                {
+                    vendorDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public reserveDebitResponse nextReserveDebitResponse()
+        {
+            if (reserveDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = reserveDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(reserveDebitResponse));
+                StringReader reader = new StringReader(response);
+                reserveDebitResponse i = (reserveDebitResponse)serializer.Deserialize(reader);
+
+                if (!reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
+                {
+                    reserveDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public physicalCheckDebitResponse nextPhysicalCheckDebitResponse()
+        {
+            if (physicalCheckDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = physicalCheckDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(physicalCheckDebitResponse));
+                StringReader reader = new StringReader(response);
+                physicalCheckDebitResponse i = (physicalCheckDebitResponse)serializer.Deserialize(reader);
+
+                if (!physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
+                {
+                    physicalCheckDebitResponseReader.Close();
                 }
 
                 return i;
@@ -6482,6 +6798,850 @@ namespace Litle.Sdk
             set
             {
                 this.advancedFraudResultsField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class submerchantCreditResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class payFacCreditResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class vendorCreditResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class reserveCreditResponse : transactionTypeWithReportGroup {
+    
+    private long litleTxnIdField;
+    
+    private string fundsTransferIdField;
+    
+    private string responseField;
+    
+    private System.DateTime responseTimeField;
+    
+    private string messageField;
+    
+    /// <remarks/>
+    public long litleTxnId {
+        get {
+            return this.litleTxnIdField;
+        }
+        set {
+            this.litleTxnIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string fundsTransferId {
+        get {
+            return this.fundsTransferIdField;
+        }
+        set {
+            this.fundsTransferIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string response {
+        get {
+            return this.responseField;
+        }
+        set {
+            this.responseField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public System.DateTime responseTime {
+        get {
+            return this.responseTimeField;
+        }
+        set {
+            this.responseTimeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string message {
+        get {
+            return this.messageField;
+        }
+        set {
+            this.messageField = value;
+        }
+    }
+}
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class physicalCheckCreditResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class submerchantDebitResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class payFacDebitResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class vendorDebitResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class reserveDebitResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class physicalCheckDebitResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string fundsTransferIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private string messageField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string fundsTransferId
+        {
+            get
+            {
+                return this.fundsTransferIdField;
+            }
+            set
+            {
+                this.fundsTransferIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
             }
         }
     }

@@ -46,6 +46,16 @@ namespace Litle.Sdk
         private int numLoads;
         private int numUnloads;
         private int numBalanceInquiries;
+        private int numPayFacCredit;
+        private int numSubmerchantCredit;
+        private int numReserveCredit;
+        private int numVendorCredit;
+        private int numPhysicalCheckCredit;
+        private int numPayFacDebit;
+        private int numSubmerchantDebit;
+        private int numReserveDebit;
+        private int numVendorDebit;
+        private int numPhysicalCheckDebit;
 
         private long sumOfAuthorization;
         private long sumOfAuthReversal;
@@ -60,6 +70,16 @@ namespace Litle.Sdk
         private long activateAmount;
         private long loadAmount;
         private long unloadAmount;
+        private long payFacCreditAmount;
+        private long submerchantCreditAmount;
+        private long reserveCreditAmount;
+        private long vendorCreditAmount;
+        private long physicalCheckCreditAmount;
+        private long payFacDebitAmount;
+        private long submerchantDebitAmount;
+        private long reserveDebitAmount;
+        private long vendorDebitAmount;
+        private long physicalCheckDebitAmount;
 
         private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
 
@@ -118,6 +138,16 @@ namespace Litle.Sdk
             numUpdateCardValidationNumOnToken = 0;
             numUpdateSubscriptions = 0;
             numCancelSubscriptions = 0;
+            numPayFacCredit = 0;
+            numSubmerchantCredit = 0;
+            numReserveCredit = 0;
+            numVendorCredit = 0;
+            numPhysicalCheckCredit = 0;
+            numPayFacDebit = 0;
+            numSubmerchantDebit = 0;
+            numReserveDebit = 0;
+            numVendorDebit = 0;
+            numPhysicalCheckDebit = 0;
 
             sumOfAuthorization = 0;
             sumOfAuthReversal = 0;
@@ -129,6 +159,16 @@ namespace Litle.Sdk
             sumOfEcheckCredit = 0;
             sumOfEcheckVerification = 0;
             sumOfCaptureGivenAuth = 0;
+            payFacCreditAmount = 0;
+            submerchantCreditAmount = 0;
+            reserveCreditAmount = 0;
+            vendorCreditAmount = 0;
+            physicalCheckCreditAmount = 0;
+            payFacDebitAmount = 0;
+            submerchantDebitAmount = 0;
+            reserveDebitAmount = 0;
+            vendorDebitAmount = 0;
+            physicalCheckDebitAmount = 0;
         }
 
         public string getResponseDirectory()
@@ -286,6 +326,56 @@ namespace Litle.Sdk
             return numBalanceInquiries;
         }
 
+        public int getNumPayFacCredit()
+        {
+            return numPayFacCredit;
+        }
+
+        public int getNumSubmerchantCredit()
+        {
+            return numSubmerchantCredit;
+        }
+
+        public int getNumReserveCredit()
+        {
+            return numReserveCredit;
+        }
+
+        public int getNumVendorCredit()
+        {
+            return numVendorCredit;
+        }
+
+        public int getNumPhysicalCheckCredit()
+        {
+            return numPhysicalCheckCredit;
+        }
+
+        public int getNumPayFacDebit()
+        {
+            return numPayFacDebit;
+        }
+
+        public int getNumSubmerchantDebit()
+        {
+            return numSubmerchantDebit;
+        }
+
+        public int getNumReserveDebit()
+        {
+            return numReserveDebit;
+        }
+
+        public int getNumVendorDebit()
+        {
+            return numVendorDebit;
+        }
+
+        public int getNumPhysicalCheckDebit()
+        {
+            return numPhysicalCheckDebit;
+        }
+
         public long getLoadAmount()
         {
             return loadAmount;
@@ -349,6 +439,56 @@ namespace Litle.Sdk
         public long getSumOfCaptureGivenAuth()
         {
             return sumOfCaptureGivenAuth;
+        }
+
+        public long getPayFacCreditAmount()
+        {
+            return payFacCreditAmount;
+        }
+
+        public long getSubmerchantCreditAmount()
+        {
+            return submerchantCreditAmount;
+        }
+
+        public long getReserveCreditAmount()
+        {
+            return reserveCreditAmount;
+        }
+
+        public long getVendorCreditAmount()
+        {
+            return vendorCreditAmount;
+        }
+
+        public long getPhysicalCheckCreditAmount()
+        {
+            return physicalCheckCreditAmount;
+        }
+
+        public long getPayFacDebitAmount()
+        {
+            return payFacDebitAmount;
+        }
+
+        public long getSubmerchantDebitAmount()
+        {
+            return submerchantDebitAmount;
+        }
+
+        public long getReserveDebitAmount()
+        {
+            return reserveDebitAmount;
+        }
+
+        public long getVendorDebitAmount()
+        {
+            return vendorDebitAmount;
+        }
+
+        public long getPhysicalCheckDebitAmount()
+        {
+            return physicalCheckDebitAmount;
         }
 
         public void addAuthorization(authorization authorization)
@@ -705,6 +845,156 @@ namespace Litle.Sdk
             }
         }
 
+        public void addSubmerchantCredit(submerchantCredit submerchantCredit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numSubmerchantCredit++;
+                submerchantCreditAmount += (long)submerchantCredit.amount;
+                fillInReportGroup(submerchantCredit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, submerchantCredit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addPayFacCredit(payFacCredit payFacCredit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numPayFacCredit++;
+                payFacCreditAmount += (long)payFacCredit.amount;
+                fillInReportGroup(payFacCredit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, payFacCredit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addReserveCredit(reserveCredit reserveCredit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numReserveCredit++;
+                reserveCreditAmount += (long)reserveCredit.amount;
+                fillInReportGroup(reserveCredit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, reserveCredit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addVendorCredit(vendorCredit vendorCredit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numVendorCredit++;
+                vendorCreditAmount += (long)vendorCredit.amount;
+                fillInReportGroup(vendorCredit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, vendorCredit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addPhysicalCheckCredit(physicalCheckCredit physicalCheckCredit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numPhysicalCheckCredit++;
+                physicalCheckCreditAmount += (long)physicalCheckCredit.amount;
+                fillInReportGroup(physicalCheckCredit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, physicalCheckCredit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addSubmerchantDebit(submerchantDebit submerchantDebit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numSubmerchantDebit++;
+                submerchantDebitAmount += (long)submerchantDebit.amount;
+                fillInReportGroup(submerchantDebit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, submerchantDebit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addPayFacDebit(payFacDebit payFacDebit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numPayFacDebit++;
+                payFacDebitAmount += (long)payFacDebit.amount;
+                fillInReportGroup(payFacDebit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, payFacDebit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addReserveDebit(reserveDebit reserveDebit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numReserveDebit++;
+                reserveDebitAmount += (long)reserveDebit.amount;
+                fillInReportGroup(reserveDebit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, reserveDebit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addVendorDebit(vendorDebit vendorDebit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numVendorDebit++;
+                vendorDebitAmount += (long)vendorDebit.amount;
+                fillInReportGroup(vendorDebit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, vendorDebit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addPhysicalCheckDebit(physicalCheckDebit physicalCheckDebit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numPhysicalCheckDebit++;
+                physicalCheckDebitAmount += (long)physicalCheckDebit.amount;
+                fillInReportGroup(physicalCheckDebit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, physicalCheckDebit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
         public String Serialize()
         {
             string xmlHeader = generateXmlHeader();
@@ -870,7 +1160,78 @@ namespace Litle.Sdk
             {
                 xmlHeader += "numBalanceInquirys=\"" + numBalanceInquiries + "\"\r\n";
             }
-            xmlHeader += "merchantSdk=\"DotNet;9.3.0\"\r\n";
+
+            if (numPayFacCredit != 0)
+            {
+
+                xmlHeader += "numPayFacCredit=\"" + numPayFacCredit + "\"\r\n";
+                xmlHeader += "payFacCreditAmount=\"" + payFacCreditAmount + "\"\r\n";
+            }
+
+            if (numSubmerchantCredit != 0)
+            {
+
+                xmlHeader += "numSubmerchantCredit=\"" + numSubmerchantCredit + "\"\r\n";
+                xmlHeader += "submerchantCreditAmount=\"" + submerchantCreditAmount + "\"\r\n";
+            }
+
+            if (numReserveCredit != 0)
+            {
+
+                xmlHeader += "numReserveCredit=\"" + numReserveCredit + "\"\r\n";
+                xmlHeader += "reserveCreditAmount=\"" + reserveCreditAmount + "\"\r\n";
+            }
+
+            if (numVendorCredit != 0)
+            {
+
+                xmlHeader += "numVendorCredit=\"" + numVendorCredit + "\"\r\n";
+                xmlHeader += "vendorCreditAmount=\"" + vendorCreditAmount + "\"\r\n";
+            }
+
+            if (numPhysicalCheckCredit != 0)
+            {
+
+                xmlHeader += "numPhysicalCheckCredit=\"" + numPhysicalCheckCredit + "\"\r\n";
+                xmlHeader += "physicalCheckCreditAmount=\"" + physicalCheckCreditAmount + "\"\r\n";
+            }
+
+            if (numPayFacDebit != 0)
+            {
+
+                xmlHeader += "numPayFacDebit=\"" + numPayFacDebit + "\"\r\n";
+                xmlHeader += "payFacDebitAmount=\"" + payFacDebitAmount + "\"\r\n";
+            }
+
+            if (numSubmerchantDebit != 0)
+            {
+
+                xmlHeader += "numSubmerchantDebit=\"" + numSubmerchantDebit + "\"\r\n";
+                xmlHeader += "submerchantDebitAmount=\"" + submerchantDebitAmount + "\"\r\n";
+            }
+
+            if (numReserveDebit != 0)
+            {
+
+                xmlHeader += "numReserveDebit=\"" + numReserveDebit + "\"\r\n";
+                xmlHeader += "reserveDebitAmount=\"" + reserveDebitAmount + "\"\r\n";
+            }
+
+            if (numVendorDebit != 0)
+            {
+
+                xmlHeader += "numVendorDebit=\"" + numVendorDebit + "\"\r\n";
+                xmlHeader += "vendorDebitAmount=\"" + vendorDebitAmount + "\"\r\n";
+            }
+
+            if (numPhysicalCheckDebit != 0)
+            {
+
+                xmlHeader += "numPhysicalCheckDebit=\"" + numPhysicalCheckDebit + "\"\r\n";
+                xmlHeader += "physicalCheckDebitAmount=\"" + physicalCheckDebitAmount + "\"\r\n";
+            }
+
+            xmlHeader += "merchantSdk=\"DotNet;9.3.1\"\r\n";
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
@@ -905,18 +1266,39 @@ namespace Litle.Sdk
         private bool isOnlyAccountUpdates()
         {
             bool result = numAuthorization == 0
-                && numAuthReversal == 0
                 && numCapture == 0
-                && numCaptureGivenAuth == 0
                 && numCredit == 0
-                && numEcheckCredit == 0
-                && numEcheckRedeposit == 0
-                && numEcheckSale == 0
-                && numEcheckVerification == 0
-                && numForceCapture == 0
-                && numRegisterTokenRequest == 0
                 && numSale == 0
-                && numUpdateCardValidationNumOnToken == 0;
+                && numAuthReversal == 0
+                && numEcheckCredit == 0
+                && numEcheckVerification == 0
+                && numEcheckSale == 0
+                && numRegisterTokenRequest == 0
+                && numForceCapture == 0
+                && numCaptureGivenAuth == 0
+                && numEcheckRedeposit == 0
+                && numEcheckPreNoteSale == 0
+                && numEcheckPreNoteCredit == 0
+                && numUpdateCardValidationNumOnToken == 0
+                && numUpdateSubscriptions == 0
+                && numCancelSubscriptions == 0
+                && numCreatePlans == 0
+                && numUpdatePlans == 0
+                && numActivates == 0
+                && numDeactivates == 0
+                && numLoads == 0
+                && numUnloads == 0
+                && numBalanceInquiries == 0
+                && numPayFacCredit == 0
+                && numSubmerchantCredit == 0
+                && numReserveCredit == 0
+                && numVendorCredit == 0
+                && numPhysicalCheckCredit == 0
+                && numPayFacDebit == 0
+                && numSubmerchantDebit == 0
+                && numReserveDebit == 0
+                && numVendorDebit == 0
+                && numPhysicalCheckDebit == 0;
 
             return result;
         }
@@ -1288,6 +1670,368 @@ namespace Litle.Sdk
             }
 
             xml += "\r\n</echeckPreNoteSale>";
+
+            return xml;
+        }
+    }
+
+    public partial class submerchantCredit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string submerchantName { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public echeckType accountInfo { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<submerchantCredit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (submerchantName != null)
+                xml += "\r\n<submerchantName>" + SecurityElement.Escape(submerchantName) + "</submerchantName>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            if (accountInfo != null)
+            {
+                xml += "\r\n<accountInfo>";
+                xml += accountInfo.Serialize();
+                xml += "</accountInfo>";
+            }
+
+            xml += "\r\n</submerchantCredit>";
+
+            return xml;
+        }
+    }
+
+    public partial class payFacCredit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<payFacCredit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            xml += "\r\n</payFacCredit>";
+
+            return xml;
+        }
+    }
+
+    public partial class reserveCredit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<reserveCredit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            xml += "\r\n</reserveCredit>";
+
+            return xml;
+        }
+    }
+
+    public partial class vendorCredit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string vendorName { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public echeckType accountInfo { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<vendorCredit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (vendorName != null)
+                xml += "\r\n<vendorName>" + SecurityElement.Escape(vendorName) + "</vendorName>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            if (accountInfo != null)
+            {
+                xml += "\r\n<accountInfo>";
+                xml += accountInfo.Serialize();
+                xml += "</accountInfo>";
+            }
+
+            xml += "\r\n</vendorCredit>";
+
+            return xml;
+        }
+    }
+
+    public partial class physicalCheckCredit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<physicalCheckCredit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            xml += "\r\n</physicalCheckCredit>";
+
+            return xml;
+        }
+    }
+
+    public partial class submerchantDebit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string submerchantName { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public echeckType accountInfo { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<submerchantDebit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (submerchantName != null)
+                xml += "\r\n<submerchantName>" + SecurityElement.Escape(submerchantName) + "</submerchantName>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            if (accountInfo != null)
+            {
+                xml += "\r\n<accountInfo>";
+                xml += accountInfo.Serialize();
+                xml += "</accountInfo>";
+            }
+
+            xml += "\r\n</submerchantDebit>";
+
+            return xml;
+        }
+    }
+
+    public partial class payFacDebit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<payFacDebit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            xml += "\r\n</payFacDebit>";
+
+            return xml;
+        }
+    }
+
+    public partial class reserveDebit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<reserveDebit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            xml += "\r\n</reserveDebit>";
+
+            return xml;
+        }
+    }
+
+    public partial class vendorDebit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string vendorName { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public echeckType accountInfo { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<vendorDebit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (vendorName != null)
+                xml += "\r\n<vendorName>" + SecurityElement.Escape(vendorName) + "</vendorName>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            if (accountInfo != null)
+            {
+                xml += "\r\n<accountInfo>";
+                xml += accountInfo.Serialize();
+                xml += "</accountInfo>";
+            }
+
+            xml += "\r\n</vendorDebit>";
+
+            return xml;
+        }
+    }
+
+    public partial class physicalCheckDebit : transactionTypeWithReportGroup
+    {
+
+        public string fundingSubmerchantId { get; set; }
+
+        public string fundsTransferId { get; set; }
+
+        public long? amount { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<physicalCheckDebit ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (fundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+            if (fundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
+            if (amount != null)
+                xml += "\r\n<amount>" + amount + "</amount>";
+
+            xml += "\r\n</physicalCheckDebit>";
 
             return xml;
         }
