@@ -503,7 +503,7 @@ namespace Litle.Sdk.Test.Functional
             litle.addBatch(litleBatchRequest);
 
             string batchName = litle.sendToLitle();
-            litle.blockAndWaitForResponse(batchName,120000);
+            litle.blockAndWaitForResponse(batchName,estimatedResponseTime(0, 1 * 2));
             litleResponse litleResponse = litle.receiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
@@ -535,7 +535,7 @@ namespace Litle.Sdk.Test.Functional
             string rfrBatchName = litleRfr.sendToLitle();
             try
             {
-                litle.blockAndWaitForResponse(rfrBatchName, estimatedResponseTime(0, 1 * 2));
+                litle.blockAndWaitForResponse(rfrBatchName, 120000);
                 litleResponse litleRfrResponse = litle.receiveFromLitle(rfrBatchName);
 
                 Assert.NotNull(litleRfrResponse);
