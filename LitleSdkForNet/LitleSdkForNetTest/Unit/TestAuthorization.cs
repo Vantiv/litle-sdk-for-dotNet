@@ -518,5 +518,42 @@ namespace Litle.Sdk.Test.Unit
             Assert.NotNull(authorizationResponse);
             Assert.AreEqual(123, authorizationResponse.litleTxnId);
         }
+
+
+        [Test]
+        public void TestRecycleEngineActive()
+        {
+            String xmlResponse = @"<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
+<authorizationResponse>
+<litleTxnId>123</litleTxnId>
+<fraudResult>
+<advancedFraudResults>
+<deviceReviewStatus>ReviewStatus</deviceReviewStatus>
+<deviceReputationScore>800</deviceReputationScore>
+<triggeredRule>rule triggered</triggeredRule>
+</advancedFraudResults>
+</fraudResult>
+<recycling>
+<recycleEngineActive>1</recycleEngineActive>
+</recycling>
+</authorizationResponse>
+</litleOnlineResponse>";
+
+            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            authorizationResponse authorizationResponse = (authorizationResponse)litleOnlineResponse.authorizationResponse;
+
+
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.NotNull(authorizationResponse.fraudResult);
+            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults);
+            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
+            Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
+            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
+            Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
+            Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule);
+            Assert.AreEqual(true, authorizationResponse.recycling.recycleEngineActive);
+        }
+
+
     }
 }

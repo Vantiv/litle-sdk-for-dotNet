@@ -924,6 +924,8 @@ namespace Litle.Sdk
 
         private recycleAdviceType recycleAdviceField;
 
+        private bool recycleEngineActiveField;
+
         /// <remarks/>
         public recycleAdviceType recycleAdvice
         {
@@ -934,6 +936,19 @@ namespace Litle.Sdk
             set
             {
                 this.recycleAdviceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool recycleEngineActive
+        {
+            get
+            {
+                return this.recycleEngineActiveField;
+            }
+            set
+            {
+                this.recycleEngineActiveField = value;
             }
         }
     }
