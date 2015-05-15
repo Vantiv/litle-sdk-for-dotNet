@@ -2,6 +2,7 @@
 
 ==Version 9.3.2
 HTTP timeout is set to 500ms
+Add RecycleEngineActiveFlag
 
 ==Version 9.3.1 (March 9, 2015)
 * Feature: PFIF instruction transaction support was added
