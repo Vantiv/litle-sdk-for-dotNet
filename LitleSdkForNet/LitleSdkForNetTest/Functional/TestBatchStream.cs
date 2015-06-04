@@ -1171,12 +1171,12 @@ namespace Litle.Sdk.Test.Functional
             Dictionary<string, string> configOverride = new Dictionary<string, string>();
             configOverride["url"] = Properties.Settings.Default.url;
             configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
-            configOverride["username"] = "WEPAY";
+            configOverride["username"] = "BATCHSDKA";
             configOverride["printxml"] = Properties.Settings.Default.printxml;
             configOverride["timeout"] = Properties.Settings.Default.timeout;
             configOverride["proxyHost"] = Properties.Settings.Default.proxyHost;
-            configOverride["merchantId"] = "01109757";
-            configOverride["password"] = "cert2wFn";
+            configOverride["merchantId"] = "0180";
+            configOverride["password"] = "certpass";
             configOverride["proxyPort"] = Properties.Settings.Default.proxyPort;
             configOverride["sftpUrl"] = Properties.Settings.Default.sftpUrl;
             configOverride["sftpUsername"] = Properties.Settings.Default.sftpUsername;
