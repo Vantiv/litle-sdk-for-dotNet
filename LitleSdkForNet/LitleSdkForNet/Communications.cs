@@ -76,6 +76,7 @@ namespace Litle.Sdk
             }
             
             string uri = config["url"];
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls; 
             System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
             
             bool neuter = false;
