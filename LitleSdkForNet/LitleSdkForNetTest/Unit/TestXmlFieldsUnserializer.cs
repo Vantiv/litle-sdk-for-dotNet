@@ -144,17 +144,14 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestActivateResponse()
         {
-            String xml = "<activateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></activateResponse>";
+            String xml = "<activateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\"  xmlns=\"http://www.litle.com/schema\"><response>000</response><litleTxnId>1</litleTxnId><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></activateResponse>";
             XmlSerializer serializer = new XmlSerializer(typeof(activateResponse));
             StringReader reader = new StringReader(xml);
             activateResponse activateResponse = (activateResponse)serializer.Deserialize(reader);
 
             Assert.AreEqual("A", activateResponse.reportGroup);
-            Assert.AreEqual("3", activateResponse.id);
             Assert.AreEqual("4", activateResponse.customerId);
-            Assert.IsTrue(activateResponse.duplicate);
-            Assert.AreEqual("1", activateResponse.litleTxnId);
-            Assert.AreEqual("2", activateResponse.orderId);
+            Assert.AreEqual(1, activateResponse.litleTxnId);
             Assert.AreEqual("000", activateResponse.response);
             Assert.AreEqual(new DateTime(2013,9,5,14,23,45), activateResponse.responseTime);
             Assert.AreEqual(new DateTime(2013,9,5), activateResponse.postDate);
@@ -174,9 +171,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("A", loadResponse.reportGroup);
             Assert.AreEqual("3", loadResponse.id);
             Assert.AreEqual("4", loadResponse.customerId);
-            Assert.IsTrue(loadResponse.duplicate);
-            Assert.AreEqual("1", loadResponse.litleTxnId);
-            Assert.AreEqual("2", loadResponse.orderId);
+            Assert.AreEqual(1, loadResponse.litleTxnId);
             Assert.AreEqual("000", loadResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), loadResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), loadResponse.postDate);
@@ -194,11 +189,8 @@ namespace Litle.Sdk.Test.Unit
             unloadResponse unloadResponse = (unloadResponse)serializer.Deserialize(reader);
 
             Assert.AreEqual("A", unloadResponse.reportGroup);
-            Assert.AreEqual("3", unloadResponse.id);
             Assert.AreEqual("4", unloadResponse.customerId);
-            Assert.IsTrue(unloadResponse.duplicate);
-            Assert.AreEqual("1", unloadResponse.litleTxnId);
-            Assert.AreEqual("2", unloadResponse.orderId);
+            Assert.AreEqual(1, unloadResponse.litleTxnId);
             Assert.AreEqual("000", unloadResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), unloadResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), unloadResponse.postDate);
@@ -233,8 +225,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("A", balanceInquiryResponse.reportGroup);
             Assert.AreEqual("3", balanceInquiryResponse.id);
             Assert.AreEqual("4", balanceInquiryResponse.customerId);
-            Assert.AreEqual("1", balanceInquiryResponse.litleTxnId);
-            Assert.AreEqual("2", balanceInquiryResponse.orderId);
+            Assert.AreEqual(1, balanceInquiryResponse.litleTxnId);
             Assert.AreEqual("000", balanceInquiryResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), balanceInquiryResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), balanceInquiryResponse.postDate);
@@ -254,8 +245,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("A", deactivateResponse.reportGroup);
             Assert.AreEqual("3", deactivateResponse.id);
             Assert.AreEqual("4", deactivateResponse.customerId);
-            Assert.AreEqual("1", deactivateResponse.litleTxnId);
-            Assert.AreEqual("2", deactivateResponse.orderId);
+            Assert.AreEqual(1, deactivateResponse.litleTxnId);
             Assert.AreEqual("000", deactivateResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), deactivateResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), deactivateResponse.postDate);
@@ -394,7 +384,6 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theCustomerId", authReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", authReversalResponse.reportGroup);
             Assert.AreEqual(1, authReversalResponse.litleTxnId);
-            Assert.AreEqual("2", authReversalResponse.orderId);
             Assert.AreEqual("000", authReversalResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), authReversalResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), authReversalResponse.postDate);
@@ -423,8 +412,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theId", depositReversalResponse.id);
             Assert.AreEqual("theCustomerId", depositReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", depositReversalResponse.reportGroup);
-            Assert.AreEqual("1", depositReversalResponse.litleTxnId);
-            Assert.AreEqual("2", depositReversalResponse.orderId);
+            Assert.AreEqual(1, depositReversalResponse.litleTxnId);
             Assert.AreEqual("000", depositReversalResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), depositReversalResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), depositReversalResponse.postDate);
@@ -453,8 +441,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theId", activateReversalResponse.id);
             Assert.AreEqual("theCustomerId", activateReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", activateReversalResponse.reportGroup);
-            Assert.AreEqual("1", activateReversalResponse.litleTxnId);
-            Assert.AreEqual("2", activateReversalResponse.orderId);
+            Assert.AreEqual(1, activateReversalResponse.litleTxnId);
             Assert.AreEqual("000", activateReversalResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), activateReversalResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), activateReversalResponse.postDate);
@@ -483,8 +470,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theId", deactivateReversalResponse.id);
             Assert.AreEqual("theCustomerId", deactivateReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", deactivateReversalResponse.reportGroup);
-            Assert.AreEqual("1", deactivateReversalResponse.litleTxnId);
-            Assert.AreEqual("2", deactivateReversalResponse.orderId);
+            Assert.AreEqual(1, deactivateReversalResponse.litleTxnId);
             Assert.AreEqual("000", deactivateReversalResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), deactivateReversalResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), deactivateReversalResponse.postDate);
@@ -513,8 +499,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theId", loadReversalResponse.id);
             Assert.AreEqual("theCustomerId", loadReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", loadReversalResponse.reportGroup);
-            Assert.AreEqual("1", loadReversalResponse.litleTxnId);
-            Assert.AreEqual("2", loadReversalResponse.orderId);
+            Assert.AreEqual(1, loadReversalResponse.litleTxnId);
             Assert.AreEqual("000", loadReversalResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), loadReversalResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), loadReversalResponse.postDate);
@@ -543,8 +528,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("theId", unloadReversalResponse.id);
             Assert.AreEqual("theCustomerId", unloadReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", unloadReversalResponse.reportGroup);
-            Assert.AreEqual("1", unloadReversalResponse.litleTxnId);
-            Assert.AreEqual("2", unloadReversalResponse.orderId);
+            Assert.AreEqual(1, unloadReversalResponse.litleTxnId);
             Assert.AreEqual("000", unloadReversalResponse.response);
             Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), unloadReversalResponse.responseTime);
             Assert.AreEqual(new DateTime(2013, 9, 5), unloadReversalResponse.postDate);

@@ -45,7 +45,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.card = card;
             
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.mpos = mpos;
 
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.paypal = payPalObj;
 
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.card = card;
             
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -118,13 +118,13 @@ namespace Litle.Sdk.Test.Functional
             
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
+            card.number = "4100000000000000";
             card.expDate = "1210";
 
             creditObj.card = card;
 
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -142,7 +142,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.card = card;
 
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
     }
 }

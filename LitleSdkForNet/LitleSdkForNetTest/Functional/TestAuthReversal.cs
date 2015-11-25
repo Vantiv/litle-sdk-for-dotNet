@@ -39,7 +39,7 @@ namespace Litle.Sdk.Test.Functional
             reversal.payPalNotes = "Notes";
 
             authReversalResponse response = litle.AuthReversal(reversal);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
             
         [Test]
@@ -51,7 +51,7 @@ namespace Litle.Sdk.Test.Functional
             reversal.payPalNotes = "<'&\">";
 
             authReversalResponse response = litle.AuthReversal(reversal);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
     }
     }
 }

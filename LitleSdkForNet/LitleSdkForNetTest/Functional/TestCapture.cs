@@ -39,7 +39,7 @@ namespace Litle.Sdk.Test.Functional
             capture.payPalNotes = "Notes";
 
             captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Litle.Sdk.Test.Functional
             capture.payPalNotes = "Notes";
 
             captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace Litle.Sdk.Test.Functional
             capture.enhancedData = enhanceddata;
             capture.payPalOrderComplete = true;
             captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Litle.Sdk.Test.Functional
             capture.payPalNotes = "<'&\">";
 
             captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
     }
 }

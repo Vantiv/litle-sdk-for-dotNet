@@ -134,7 +134,7 @@ namespace Litle.Sdk.Test.Functional
             applepay.header = applepayHeaderType;
             applepay.data = "user";
             applepay.signature = "sign";
-            applepay.version = "1";
+            applepay.version = "12345";
             authorization.applepay = applepay;
 
             wallet wallet = new wallet();

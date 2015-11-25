@@ -26,7 +26,7 @@ namespace Litle.Sdk.Test.Unit
             loadReversal loadReversal = new loadReversal();
             loadReversal.id = "a";
             loadReversal.reportGroup = "b";
-            loadReversal.litleTxnId = "123";
+            loadReversal.litleTxnId = 123;
 
             var mock = new Mock<Communications>();
 
@@ -36,7 +36,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             loadReversalResponse response = litle.LoadReversal(loadReversal);
-            Assert.AreEqual("123", response.litleTxnId);
+            Assert.AreEqual(123, response.litleTxnId);
         }
 
 

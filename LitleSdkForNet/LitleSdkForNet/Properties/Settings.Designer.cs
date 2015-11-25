@@ -193,7 +193,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("iwp1.lowell.litle.com")]
         public string proxyHost {
             get {
                 return ((string)(this["proxyHost"]));
@@ -205,7 +205,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8080")]
         public string proxyPort {
             get {
                 return ((string)(this["proxyPort"]));

@@ -1634,8 +1634,6 @@ namespace Litle.Sdk
 
         private long litleTxnIdField;
 
-        private string orderIdField;
-
         private string litleTokenField;
 
         private string binField;
@@ -1667,18 +1665,6 @@ namespace Litle.Sdk
             }
         }
 
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
 
         /// <remarks/>
         public string litleToken
@@ -1811,8 +1797,6 @@ namespace Litle.Sdk
 
         private long litleTxnIdField;
 
-        private string orderIdField;
-
         private string responseField;
 
         private string messageField;
@@ -1829,19 +1813,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -1910,6 +1881,8 @@ namespace Litle.Sdk
         private bool postDateFieldSpecified;
 
         private string messageField;
+
+        private string cardSuffixField;
 
         private string authCodeField;
 
@@ -2040,6 +2013,18 @@ namespace Litle.Sdk
             set
             {
                 this.messageField = value;
+            }
+        }
+
+        public string cardSuffix
+        {
+            get
+            {
+                return this.cardSuffixField;
+            }
+            set
+            {
+                this.cardSuffixField = value;
             }
         }
 
@@ -2212,6 +2197,7 @@ namespace Litle.Sdk
                 this.applepayResponseField = value;
             }
         }
+
     }
     
     /// <remarks/>
@@ -2719,8 +2705,6 @@ namespace Litle.Sdk
     {
         private long litleTxnIdField;
 
-        private string orderIdField;
-
         private string responseField;
 
         private System.DateTime responseTimeField;
@@ -2733,9 +2717,6 @@ namespace Litle.Sdk
 
         public giftCardResponse giftCardResponse;
 
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
 
         /// <remarks/>
         public long litleTxnId
@@ -2747,19 +2728,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -2830,33 +2798,6 @@ namespace Litle.Sdk
             }
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -2873,8 +2814,6 @@ namespace Litle.Sdk
 
         private long litleTxnIdField;
 
-        private string orderIdField;
-
         private string responseField;
 
         private System.DateTime responseTimeField;
@@ -2887,10 +2826,6 @@ namespace Litle.Sdk
 
         private accountUpdater accountUpdaterField;
 
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
         /// <remarks/>
         public long litleTxnId
         {
@@ -2901,19 +2836,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -2997,33 +2919,6 @@ namespace Litle.Sdk
             }
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -3038,8 +2933,6 @@ namespace Litle.Sdk
         public giftCardResponse giftCardResponse;
         public fraudResult fraudResult;
         private long litleTxnIdField;
-
-        private string orderIdField;
 
         private string responseField;
 
@@ -3065,19 +2958,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -3188,8 +3068,6 @@ namespace Litle.Sdk
         public fraudResult fraudResult;
         private long litleTxnIdField;
 
-        private string orderIdField;
-
         private string responseField;
 
         private System.DateTime responseTimeField;
@@ -3212,19 +3090,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -3334,6 +3199,8 @@ namespace Litle.Sdk
         private bool postDateFieldSpecified;
 
         private string messageField;
+
+        private String cardSuffixField;
 
         private string authCodeField;
 
@@ -3468,6 +3335,20 @@ namespace Litle.Sdk
             set
             {
                 this.messageField = value;
+            }
+        }
+
+
+        /// <remarks/>
+        public string cardSuffix
+        {
+            get
+            {
+                return this.cardSuffixField;
+            }
+            set
+            {
+                this.cardSuffixField = value;
             }
         }
 
@@ -3683,8 +3564,6 @@ namespace Litle.Sdk
         public giftCardResponse giftCardResponse;
         private long litleTxnIdField;
 
-        private string orderIdField;
-
         private string responseField;
 
         private System.DateTime responseTimeField;
@@ -3696,10 +3575,6 @@ namespace Litle.Sdk
         private string messageField;
 
         private tokenResponseType tokenResponseField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
 
         /// <remarks/>
         public long litleTxnId
@@ -3714,18 +3589,6 @@ namespace Litle.Sdk
             }
         }
 
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
 
         /// <remarks/>
         public string response
@@ -3806,34 +3669,6 @@ namespace Litle.Sdk
                 this.tokenResponseField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -3847,8 +3682,6 @@ namespace Litle.Sdk
     {
 
         private long litleTxnIdField;
-
-        private string orderIdField;
 
         private string responseField;
 
@@ -3866,10 +3699,6 @@ namespace Litle.Sdk
 
         private tokenResponseType tokenResponseField;
 
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
         /// <remarks/>
         public long litleTxnId
         {
@@ -3880,19 +3709,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -4001,34 +3817,6 @@ namespace Litle.Sdk
                 this.tokenResponseField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -4042,8 +3830,6 @@ namespace Litle.Sdk
     {
 
         private long litleTxnIdField;
-
-        private string orderIdField;
 
         private string responseField;
 
@@ -4059,10 +3845,6 @@ namespace Litle.Sdk
 
         private tokenResponseType tokenResponseField;
 
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
         /// <remarks/>
         public long litleTxnId
         {
@@ -4073,19 +3855,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -4181,34 +3950,6 @@ namespace Litle.Sdk
                 this.tokenResponseField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -4222,8 +3963,6 @@ namespace Litle.Sdk
     {
 
         private long litleTxnIdField;
-
-        private string orderIdField;
 
         private string responseField;
 
@@ -4247,19 +3986,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -5831,7 +5557,6 @@ namespace Litle.Sdk
     public class accountUpdateResponse : transactionTypeWithReportGroup
     {
         public long litleTxnId;
-        public string orderId;
         public string response;
         public DateTime responseTime;
         public string message;
@@ -5863,10 +5588,6 @@ namespace Litle.Sdk
         private System.DateTime postDateField;
 
         private string messageField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
 
         /// <remarks/>
         public long litleTxnId
@@ -5934,33 +5655,6 @@ namespace Litle.Sdk
             }
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -5982,10 +5676,6 @@ namespace Litle.Sdk
         private System.DateTime postDateField;
 
         private string messageField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
 
         private voidRecyclingResponseType recyclingField;
 
@@ -6055,34 +5745,7 @@ namespace Litle.Sdk
             }
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
-            }
-        }
-
+        
         //private voidRecyclingResponseType recycling;
         public voidRecyclingResponseType recycling
         {
@@ -6126,20 +5789,33 @@ namespace Litle.Sdk
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema")]
     public partial class activateResponse : transactionTypeWithReportGroup
     {
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate;
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
+        public string message;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
-        public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
         public virtualGiftCardResponseType virtualGiftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+
     }
 
     /// <remarks/>
@@ -6151,15 +5827,27 @@ namespace Litle.Sdk
     public partial class loadResponse : transactionTypeWithReportGroup
     {
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate;
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField; 
+        public string message; 
+        
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
-        public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6171,15 +5859,26 @@ namespace Litle.Sdk
     public partial class unloadResponse : transactionTypeWithReportGroup
     {
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate;
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6190,14 +5889,26 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class balanceInquiryResponse : transactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6208,14 +5919,26 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class deactivateResponse : transactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6248,14 +5971,26 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class loadReversalResponse : transactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6266,14 +6001,26 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class unloadReversalResponse : transactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6284,14 +6031,26 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class deactivateReversalResponse : transactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6302,14 +6061,26 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class activateReversalResponse : transactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6320,14 +6091,26 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class refundReversalResponse : transactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6338,14 +6121,26 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class depositReversalResponse : transactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
+        public long litleTxnIdField;
         public string response;
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
         public fraudResult fraudResult;
         public giftCardResponse giftCardResponse;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -6508,17 +6303,12 @@ namespace Litle.Sdk
 
         private long litleTxnIdField;
 
-        private string orderIdField;
-
         private string responseField;
 
         private System.DateTime responseTimeField;
 
         private string messageField;
 
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
 
         /// <remarks/>
         public long litleTxnId
@@ -6530,19 +6320,6 @@ namespace Litle.Sdk
             set
             {
                 this.litleTxnIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
             }
         }
 
@@ -6585,33 +6362,7 @@ namespace Litle.Sdk
             }
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -6626,17 +6377,12 @@ namespace Litle.Sdk
 
         private long litleTxnIdField;
 
-        private string orderIdField;
-
         private string responseField;
 
         private System.DateTime responseTimeField;
 
         private string messageField;
 
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
 
         /// <remarks/>
         public long litleTxnId
@@ -6651,18 +6397,7 @@ namespace Litle.Sdk
             }
         }
 
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
+       
 
         /// <remarks/>
         public string response
@@ -6700,34 +6435,6 @@ namespace Litle.Sdk
             set
             {
                 this.messageField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool duplicate
-        {
-            get
-            {
-                return this.duplicateField;
-            }
-            set
-            {
-                this.duplicateField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool duplicateSpecified
-        {
-            get
-            {
-                return this.duplicateFieldSpecified;
-            }
-            set
-            {
-                this.duplicateFieldSpecified = value;
             }
         }
     }

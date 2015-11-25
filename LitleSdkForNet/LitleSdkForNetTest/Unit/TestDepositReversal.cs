@@ -26,7 +26,7 @@ namespace Litle.Sdk.Test.Unit
             depositReversal depositReversal = new depositReversal();
             depositReversal.id = "a";
             depositReversal.reportGroup = "b";
-            depositReversal.litleTxnId = "123";
+            depositReversal.litleTxnId = 123;
 
             var mock = new Mock<Communications>();
 
@@ -36,7 +36,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             depositReversalResponse response = litle.DepositReversal(depositReversal);
-            Assert.AreEqual("123", response.litleTxnId);
+            Assert.AreEqual(123, response.litleTxnId);
         }
 
 

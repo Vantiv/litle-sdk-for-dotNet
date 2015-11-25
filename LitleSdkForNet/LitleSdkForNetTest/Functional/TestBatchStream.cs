@@ -1147,7 +1147,6 @@ namespace Litle.Sdk.Test.Functional
                 echeckPreNoteSaleResponse echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
                 while (echeckPreNoteSaleResponse != null)
                 {
-                    Assert.AreEqual(echeckPreNoteSaleResponse.orderId, echeckPreNoteSaleResponse.response);
 
                     echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
                 }
@@ -1155,7 +1154,6 @@ namespace Litle.Sdk.Test.Functional
                 echeckPreNoteCreditResponse echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
                 while (echeckPreNoteCreditResponse != null)
                 {
-                    Assert.AreEqual(echeckPreNoteCreditResponse.orderId, echeckPreNoteCreditResponse.response);
 
                     echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
                 }

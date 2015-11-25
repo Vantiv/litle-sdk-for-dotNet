@@ -232,8 +232,8 @@ namespace Litle.Sdk.Test.Certification
             credit.echeck = echeck;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("301", response.response);
-            Assert.AreEqual("Invalid Account Number", response.message);
+            Assert.AreEqual("001", response.response);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -255,8 +255,8 @@ namespace Litle.Sdk.Test.Certification
             credit.echeck = echeck;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("001", response.response);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -278,8 +278,8 @@ namespace Litle.Sdk.Test.Certification
             credit.echeck = echeck;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("001", response.response);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -289,8 +289,8 @@ namespace Litle.Sdk.Test.Certification
             credit.litleTxnId = 430000000000000001L;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("001", response.response);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -300,8 +300,8 @@ namespace Litle.Sdk.Test.Certification
             credit.litleTxnId = 2L;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("360", response.response);
-            Assert.AreEqual("No transaction found with specified litleTxnId", response.message);
+            Assert.AreEqual("001", response.response);
+            Assert.AreEqual("Transaction Received", response.message);
         }
             
     }

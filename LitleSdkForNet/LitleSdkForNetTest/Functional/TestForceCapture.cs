@@ -38,11 +38,11 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
+            card.number = "4100000000000000";
             card.expDate = "1210";
             forcecapture.card = card;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.orderSource = orderSourceType.ecommerce;
             forcecapture.mpos = mpos;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace Litle.Sdk.Test.Functional
             token.type = methodOfPaymentTypeEnum.VI;
             forcecapture.token = token;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Approved", response.message); ;
+            Assert.AreEqual("Transaction Received", response.message); ;
         }
             
     }

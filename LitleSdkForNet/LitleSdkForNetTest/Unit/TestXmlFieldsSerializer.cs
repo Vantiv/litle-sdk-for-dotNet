@@ -928,7 +928,7 @@ namespace Litle.Sdk.Test.Unit
             depositReversal.id = "theId";
             depositReversal.reportGroup = "theReportGroup";
             depositReversal.customerId = "theCustomerId";
-            depositReversal.litleTxnId = "123";
+            depositReversal.litleTxnId = 123;
 
             String actual = depositReversal.Serialize();
             String expected = @"
@@ -945,7 +945,7 @@ namespace Litle.Sdk.Test.Unit
             refundReversal.id = "theId";
             refundReversal.reportGroup = "theReportGroup";
             refundReversal.customerId = "theCustomerId";
-            refundReversal.litleTxnId = "123";
+            refundReversal.litleTxnId = 123;
 
             String actual = refundReversal.Serialize();
             String expected = @"
@@ -962,7 +962,7 @@ namespace Litle.Sdk.Test.Unit
             activateReversal.id = "theId";
             activateReversal.reportGroup = "theReportGroup";
             activateReversal.customerId = "theCustomerId";
-            activateReversal.litleTxnId = "123";
+            activateReversal.litleTxnId = 123;
 
             String actual = activateReversal.Serialize();
             String expected = @"
@@ -979,7 +979,7 @@ namespace Litle.Sdk.Test.Unit
             deactivateReversal.id = "theId";
             deactivateReversal.reportGroup = "theReportGroup";
             deactivateReversal.customerId = "theCustomerId";
-            deactivateReversal.litleTxnId = "123";
+            deactivateReversal.litleTxnId = 123;
 
             String actual = deactivateReversal.Serialize();
             String expected = @"
@@ -996,7 +996,7 @@ namespace Litle.Sdk.Test.Unit
             loadReversal.id = "theId";
             loadReversal.reportGroup = "theReportGroup";
             loadReversal.customerId = "theCustomerId";
-            loadReversal.litleTxnId = "123";
+            loadReversal.litleTxnId = 123;
 
             String actual = loadReversal.Serialize();
             String expected = @"
@@ -1013,7 +1013,7 @@ namespace Litle.Sdk.Test.Unit
             unloadReversal.id = "theId";
             unloadReversal.reportGroup = "theReportGroup";
             unloadReversal.customerId = "theCustomerId";
-            unloadReversal.litleTxnId = "123";
+            unloadReversal.litleTxnId = 123;
 
             String actual = unloadReversal.Serialize();
             String expected = @"
@@ -1030,7 +1030,7 @@ namespace Litle.Sdk.Test.Unit
             refundReversal.id = "theId";
             refundReversal.reportGroup = "<'&\">";
             refundReversal.customerId = "theCustomerId";
-            refundReversal.litleTxnId = "123";
+            refundReversal.litleTxnId = 123;
 
             String actual = refundReversal.Serialize();
             String expected = @"

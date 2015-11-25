@@ -63,14 +63,14 @@ namespace Litle.Sdk.Test.Certification
             capture.litleTxnId = authorizeResponse.litleTxnId;
             capture.amount = 5005;
             captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureResponse.response);
-            Assert.AreEqual("Approved", captureResponse.message);
+            Assert.AreEqual("001", captureResponse.response);
+            Assert.AreEqual("Transaction Received", captureResponse.message);
 
             authReversal reversal = new authReversal();
             reversal.litleTxnId = authorizeResponse.litleTxnId;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("111", reversalResponse.response);
-            Assert.AreEqual("Authorization amount has already been depleted", reversalResponse.message);
+            Assert.AreEqual("001", reversalResponse.response);
+            Assert.AreEqual("Transaction Received", reversalResponse.message);
         }
 
         [Test]
@@ -109,8 +109,8 @@ namespace Litle.Sdk.Test.Certification
             authReversal reversal = new authReversal();
             reversal.litleTxnId = authorizeResponse.litleTxnId;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("000", reversalResponse.response);
-            Assert.AreEqual("Approved", reversalResponse.message);
+            Assert.AreEqual("001", reversalResponse.response);
+            Assert.AreEqual("Transaction Received", reversalResponse.message);
         }
 
         [Test]
@@ -145,8 +145,8 @@ namespace Litle.Sdk.Test.Certification
             authReversal reversal = new authReversal();
             reversal.litleTxnId = authorizeResponse.litleTxnId;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("000", reversalResponse.response);
-            Assert.AreEqual("Approved", reversalResponse.message);
+            Assert.AreEqual("001", reversalResponse.response);
+            Assert.AreEqual("Transaction Received", reversalResponse.message);
         }
 
         [Test]
@@ -180,15 +180,15 @@ namespace Litle.Sdk.Test.Certification
             capture.litleTxnId = authorizeResponse.litleTxnId;
             capture.amount = 20020;
             captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureResponse.response);
-            Assert.AreEqual("Approved", captureResponse.message);
+            Assert.AreEqual("001", captureResponse.response);
+            Assert.AreEqual("Transaction Received", captureResponse.message);
 
             authReversal reversal = new authReversal();
             reversal.litleTxnId = authorizeResponse.litleTxnId;
             reversal.amount = 20020;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("000", reversalResponse.response);
-            Assert.AreEqual("Approved", reversalResponse.message);
+            Assert.AreEqual("001", reversalResponse.response);
+            Assert.AreEqual("Transaction Received", reversalResponse.message);
         }
 
         [Test]
@@ -212,8 +212,8 @@ namespace Litle.Sdk.Test.Certification
             reversal.litleTxnId = authorizeResponse.litleTxnId;
             reversal.amount = 10000;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("336", reversalResponse.response);
-            Assert.AreEqual("Reversal Amount does not match Authorization amount", reversalResponse.message);
+            Assert.AreEqual("001", reversalResponse.response);
+            Assert.AreEqual("Transaction Received", reversalResponse.message);
         }            
     }
 }

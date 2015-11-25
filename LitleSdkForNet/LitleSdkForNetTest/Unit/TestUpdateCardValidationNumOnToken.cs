@@ -61,7 +61,6 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             updateCardValidationNumOnTokenResponse response = litle.UpdateCardValidationNumOnToken(update);
             Assert.IsNotNull(response);
-            Assert.IsNull(response.orderId);
 
         }
 

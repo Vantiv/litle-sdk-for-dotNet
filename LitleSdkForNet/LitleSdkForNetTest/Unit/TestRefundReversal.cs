@@ -26,7 +26,7 @@ namespace Litle.Sdk.Test.Unit
             refundReversal refundReversal = new refundReversal();
             refundReversal.id = "a";
             refundReversal.reportGroup = "b";
-            refundReversal.litleTxnId = "123";
+            refundReversal.litleTxnId = 123;
 
             var mock = new Mock<Communications>();
 
@@ -36,7 +36,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             refundReversalResponse response = litle.RefundReversal(refundReversal);
-            Assert.AreEqual("123", response.litleTxnId);
+            Assert.AreEqual(123, response.litleTxnId);
         }
 
 

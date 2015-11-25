@@ -45,7 +45,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"9.3\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"10.1\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -3427,7 +3427,7 @@ namespace Litle.Sdk
 
     public partial class loadReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public long litleTxnId;
 
         public override string Serialize()
         {
@@ -3438,7 +3438,7 @@ namespace Litle.Sdk
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
             xml += "\r\n</loadReversal>";
             return xml;
         }
@@ -3446,7 +3446,7 @@ namespace Litle.Sdk
 
     public partial class unloadReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public long litleTxnId;
 
         public override string Serialize()
         {
@@ -3457,7 +3457,7 @@ namespace Litle.Sdk
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
             xml += "\r\n</unloadReversal>";
             return xml;
         }
@@ -3465,7 +3465,7 @@ namespace Litle.Sdk
 
     public partial class deactivateReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public long litleTxnId;
 
         public override string Serialize()
         {
@@ -3476,7 +3476,7 @@ namespace Litle.Sdk
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
             xml += "\r\n</deactivateReversal>";
             return xml;
         }
@@ -3484,7 +3484,7 @@ namespace Litle.Sdk
 
     public partial class activateReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public long litleTxnId;
 
         public override string Serialize()
         {
@@ -3495,7 +3495,7 @@ namespace Litle.Sdk
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
             xml += "\r\n</activateReversal>";
             return xml;
         }
@@ -3503,7 +3503,7 @@ namespace Litle.Sdk
 
     public partial class refundReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public long litleTxnId;
 
         public override string Serialize()
         {
@@ -3514,7 +3514,7 @@ namespace Litle.Sdk
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
             xml += "\r\n</refundReversal>";
             return xml;
         }
@@ -3522,7 +3522,7 @@ namespace Litle.Sdk
 
     public partial class depositReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public long litleTxnId;
 
         public override string Serialize()
         {
@@ -3533,7 +3533,7 @@ namespace Litle.Sdk
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
             xml += "\r\n</depositReversal>";
             return xml;
         }
@@ -3591,8 +3591,11 @@ namespace Litle.Sdk
 
     public enum walletWalletSourceType
     {
-        MasterPass
+        MasterPass,
+        VisaCheckout
     }
+
+    
 
     public partial class fraudCheck : transactionTypeWithReportGroup
     {
@@ -3651,4 +3654,93 @@ namespace Litle.Sdk
             return xml;
         }
     }
+
+    public enum processingTypeEnumType
+    {
+        accountFunding
+    }
+
+    public partial class queryTransaction : transactionTypeWithReportGroup
+    {
+        public string origId;
+        public actionTypeEnum origActionType;
+        public long origLitleTxnId;
+        public string origOrderIdField;
+        private bool origOrderIdSet;
+        public string origAccountNumberField;
+        private bool origAccountNumberSet;
+
+        public string origOrderId
+        {
+            get
+            {
+                return this.origOrderIdField;
+            }
+            set
+            {
+                this.origOrderIdField = value; this.origOrderIdSet = true;
+            }
+        }
+
+        public string origAccountNumber
+        {
+            get
+            {
+                return this.origAccountNumberField;
+            }
+            set
+            {
+                this.origAccountNumberField = value; this.origAccountNumberSet = true;
+            }
+        }
+
+
+        public override string Serialize()
+        {
+
+            string xml = "\r\n<queryTransaction";
+            xml += " id=\"" + SecurityElement.Escape(id) + "\"";
+            if (customerId != null)
+            {
+                xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
+            }
+            xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+
+
+            xml += "\r\n<origId>" + SecurityElement.Escape(origId) + "</origId>";
+            xml += "\r\n<origActionType>" + origActionType + "</origActionType>";
+            if (origLitleTxnId != 0) xml += "\r\n<origLitleTxnId>" + origLitleTxnId + "</origLitleTxnId>";
+            if (origOrderIdSet) xml += "\r\n<origOrderId>" + SecurityElement.Escape(origOrderIdField) + "</origOrderId>";
+            if (origAccountNumberSet) xml += "\r\n<origAccountNumber>" + SecurityElement.Escape(origAccountNumberField) + "</origAccountNumber>";
+
+            xml += "\r\n</queryTransaction>";
+            return xml;
+        }
+
+    }
+
+    public enum actionTypeEnum
+    {
+        A,
+        D,
+        R,
+        AR,
+        G,
+        I,
+        J,
+        L,
+        LR,
+        P,
+        RR,
+        S,
+        T,
+        UR,
+        V,
+        W,
+        X
+       
+    }
+
+
+
 }

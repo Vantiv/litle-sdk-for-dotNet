@@ -64,20 +64,20 @@ namespace Litle.Sdk.Test.Certification
             capture capture = new capture();
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureResponse.response);
-            Assert.AreEqual("Approved", captureResponse.message);
+            Assert.AreEqual("001", captureResponse.response);
+            Assert.AreEqual("Transaction Received", captureResponse.message);
 
             credit credit = new credit();
             credit.litleTxnId = captureResponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn(); 
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -142,15 +142,15 @@ namespace Litle.Sdk.Test.Certification
             credit credit = new credit();
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000",voidResponse.response);
-            Assert.AreEqual("Approved",voidResponse.message);
+            Assert.AreEqual("001",voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -189,20 +189,20 @@ namespace Litle.Sdk.Test.Certification
             capture capture = new capture();
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureresponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureresponse.response);
-            Assert.AreEqual("Approved", captureresponse.message);
+            Assert.AreEqual("001", captureresponse.response);
+            Assert.AreEqual("Transaction Received", captureresponse.message);
 
             credit credit = new credit();
             credit.litleTxnId = captureresponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000",voidResponse.response);
-            Assert.AreEqual("Approved",voidResponse.message);
+            Assert.AreEqual("001",voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -276,14 +276,14 @@ namespace Litle.Sdk.Test.Certification
             credit credit = new credit();
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -318,20 +318,20 @@ namespace Litle.Sdk.Test.Certification
             capture capture = new capture();
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureResponse.response);
-            Assert.AreEqual("Approved", captureResponse.message);
+            Assert.AreEqual("001", captureResponse.response);
+            Assert.AreEqual("Transaction Received", captureResponse.message);
 
             credit credit = new credit();
             credit.litleTxnId = captureResponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -397,14 +397,14 @@ namespace Litle.Sdk.Test.Certification
             credit credit = new credit();
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -438,20 +438,20 @@ namespace Litle.Sdk.Test.Certification
             capture capture = new capture();
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureresponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureresponse.response);
-            Assert.AreEqual("Approved", captureresponse.message);
+            Assert.AreEqual("001", captureresponse.response);
+            Assert.AreEqual("Transaction Received", captureresponse.message);
 
             credit credit = new credit();
             credit.litleTxnId = captureresponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -514,14 +514,14 @@ namespace Litle.Sdk.Test.Certification
             credit credit = new credit();
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -551,20 +551,20 @@ namespace Litle.Sdk.Test.Certification
             capture capture = new capture();
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureresponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureresponse.response);
-            Assert.AreEqual("Approved", captureresponse.message);
+            Assert.AreEqual("001", captureresponse.response);
+            Assert.AreEqual("Transaction Received", captureresponse.message);
 
             credit credit = new credit();
             credit.litleTxnId = captureresponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -619,14 +619,14 @@ namespace Litle.Sdk.Test.Certification
             credit credit = new credit();
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("000", creditResponse.response);
-            Assert.AreEqual("Approved", creditResponse.message);
+            Assert.AreEqual("001", creditResponse.response);
+            Assert.AreEqual("Transaction Received", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]
@@ -689,8 +689,8 @@ namespace Litle.Sdk.Test.Certification
             voidTxn newvoid = new voidTxn();
             newvoid.litleTxnId = response.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("360", voidResponse.response);
-            Assert.AreEqual("No transaction found with specified litleTxnId", voidResponse.message);
+            Assert.AreEqual("001", voidResponse.response);
+            Assert.AreEqual("Transaction Received", voidResponse.message);
         }
 
         [Test]

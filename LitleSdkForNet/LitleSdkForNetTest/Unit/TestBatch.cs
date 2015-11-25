@@ -1414,7 +1414,7 @@ namespace Litle.Sdk.Test.Unit
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
-                .Returns("<activateResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId></activateResponse>")
+                .Returns("<activateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></activateResponse>")
                 .Returns("<activateResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>124</litleTxnId></activateResponse>");
 
             batchResponse mockLitleBatchResponse = new batchResponse();
@@ -1448,8 +1448,8 @@ namespace Litle.Sdk.Test.Unit
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
-            Assert.AreEqual("123", actualLitleBatchResponse.nextActivateResponse().litleTxnId);
-            Assert.AreEqual("124", actualLitleBatchResponse.nextActivateResponse().litleTxnId);
+            Assert.AreEqual(123, actualLitleBatchResponse.nextActivateResponse().litleTxnId);
+            Assert.AreEqual(124, actualLitleBatchResponse.nextActivateResponse().litleTxnId);
             Assert.IsNull(actualLitleBatchResponse.nextActivateResponse());
 
             mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
@@ -1502,8 +1502,8 @@ namespace Litle.Sdk.Test.Unit
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
-            Assert.AreEqual("123", actualLitleBatchResponse.nextDeactivateResponse().litleTxnId);
-            Assert.AreEqual("124", actualLitleBatchResponse.nextDeactivateResponse().litleTxnId);
+            Assert.AreEqual(123, actualLitleBatchResponse.nextDeactivateResponse().litleTxnId);
+            Assert.AreEqual(124, actualLitleBatchResponse.nextDeactivateResponse().litleTxnId);
             Assert.IsNull(actualLitleBatchResponse.nextDeactivateResponse());
 
             mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
@@ -1556,8 +1556,8 @@ namespace Litle.Sdk.Test.Unit
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
-            Assert.AreEqual("123", actualLitleBatchResponse.nextLoadResponse().litleTxnId);
-            Assert.AreEqual("124", actualLitleBatchResponse.nextLoadResponse().litleTxnId);
+            Assert.AreEqual(123, actualLitleBatchResponse.nextLoadResponse().litleTxnId);
+            Assert.AreEqual(124, actualLitleBatchResponse.nextLoadResponse().litleTxnId);
             Assert.IsNull(actualLitleBatchResponse.nextLoadResponse());
 
             mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
@@ -1610,8 +1610,8 @@ namespace Litle.Sdk.Test.Unit
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
-            Assert.AreEqual("123", actualLitleBatchResponse.nextUnloadResponse().litleTxnId);
-            Assert.AreEqual("124", actualLitleBatchResponse.nextUnloadResponse().litleTxnId);
+            Assert.AreEqual(123, actualLitleBatchResponse.nextUnloadResponse().litleTxnId);
+            Assert.AreEqual(124, actualLitleBatchResponse.nextUnloadResponse().litleTxnId);
             Assert.IsNull(actualLitleBatchResponse.nextUnloadResponse());
 
             mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
@@ -1664,8 +1664,8 @@ namespace Litle.Sdk.Test.Unit
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
-            Assert.AreEqual("123", actualLitleBatchResponse.nextBalanceInquiryResponse().litleTxnId);
-            Assert.AreEqual("124", actualLitleBatchResponse.nextBalanceInquiryResponse().litleTxnId);
+            Assert.AreEqual(123, actualLitleBatchResponse.nextBalanceInquiryResponse().litleTxnId);
+            Assert.AreEqual(124, actualLitleBatchResponse.nextBalanceInquiryResponse().litleTxnId);
             Assert.IsNull(actualLitleBatchResponse.nextBalanceInquiryResponse());
 
             mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));

@@ -26,7 +26,7 @@ namespace Litle.Sdk.Test.Unit
             activateReversal activateReversal = new activateReversal();
             activateReversal.id = "a";
             activateReversal.reportGroup = "b";
-            activateReversal.litleTxnId = "123";
+            activateReversal.litleTxnId = 123;
 
             var mock = new Mock<Communications>();
 
@@ -36,7 +36,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             activateReversalResponse response = litle.ActivateReversal(activateReversal);
-            Assert.AreEqual("123", response.litleTxnId);
+            Assert.AreEqual(123, response.litleTxnId);
         }
 
 

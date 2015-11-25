@@ -322,7 +322,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             activateResponse activateResponse = litle.Activate(activate);
-            Assert.AreEqual("123", activateResponse.litleTxnId);
+            Assert.AreEqual(123, activateResponse.litleTxnId);
         }
 
         [Test]
@@ -341,7 +341,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             deactivateResponse deactivateResponse = litle.Deactivate(deactivate);
-            Assert.AreEqual("123", deactivateResponse.litleTxnId);
+            Assert.AreEqual(123, deactivateResponse.litleTxnId);
         }
 
         [Test]
@@ -360,7 +360,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             loadResponse loadResponse = litle.Load(load);
-            Assert.AreEqual("123", loadResponse.litleTxnId);
+            Assert.AreEqual(123, loadResponse.litleTxnId);
         }
 
         [Test]
@@ -379,7 +379,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             unloadResponse unloadResponse = litle.Unload(unload);
-            Assert.AreEqual("123", unloadResponse.litleTxnId);
+            Assert.AreEqual(123, unloadResponse.litleTxnId);
         }
 
         [Test]
@@ -398,7 +398,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             balanceInquiryResponse balanceInquiryResponse = litle.BalanceInquiry(balanceInquiry);
-            Assert.AreEqual("123", balanceInquiryResponse.litleTxnId);
+            Assert.AreEqual(123, balanceInquiryResponse.litleTxnId);
         }
 
         [Test]

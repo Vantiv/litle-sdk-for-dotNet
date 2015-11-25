@@ -36,7 +36,7 @@ namespace Litle.Sdk.Test.Functional
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
             echeckRedepositResponse response = litle.EcheckRedeposit(echeckredeposit);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace Litle.Sdk.Test.Functional
 
             echeckredeposit.echeck = echeck;
             echeckRedepositResponse response = litle.EcheckRedeposit(echeckredeposit);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace Litle.Sdk.Test.Functional
 
             echeckredeposit.token = echeckToken;
             echeckRedepositResponse response = litle.EcheckRedeposit(echeckredeposit);
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Transaction Received", response.message);
         }
             
     }
