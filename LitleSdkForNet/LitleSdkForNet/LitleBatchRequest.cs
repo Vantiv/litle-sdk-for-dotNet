@@ -56,6 +56,7 @@ namespace Litle.Sdk
         private int numReserveDebit;
         private int numVendorDebit;
         private int numPhysicalCheckDebit;
+        private int numFundingInstructionVoid;
 
         private long sumOfAuthorization;
         private long sumOfAuthReversal;
@@ -148,6 +149,7 @@ namespace Litle.Sdk
             numReserveDebit = 0;
             numVendorDebit = 0;
             numPhysicalCheckDebit = 0;
+            numFundingInstructionVoid = 0;
 
             sumOfAuthorization = 0;
             sumOfAuthReversal = 0;
@@ -376,6 +378,11 @@ namespace Litle.Sdk
             return numPhysicalCheckDebit;
         }
 
+        public long getNumFundingInstrucionVoid()
+        {
+            return numFundingInstructionVoid;
+        }
+
         public long getLoadAmount()
         {
             return loadAmount;
@@ -490,6 +497,8 @@ namespace Litle.Sdk
         {
             return physicalCheckDebitAmount;
         }
+
+
 
         public void addAuthorization(authorization authorization)
         {
@@ -988,6 +997,20 @@ namespace Litle.Sdk
                 physicalCheckDebitAmount += (long)physicalCheckDebit.amount;
                 fillInReportGroup(physicalCheckDebit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, physicalCheckDebit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addFundingInstrucionVoid(fundingInstructionVoid fundingInstructionVoid)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numFundingInstructionVoid++;
+                fillInReportGroup(fundingInstructionVoid);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, fundingInstructionVoid);
             }
             else
             {
@@ -2036,4 +2059,26 @@ namespace Litle.Sdk
             return xml;
         }
     }
+
+    public partial class fundingInstructionVoid : transactionTypeWithReportGroup
+    {
+        public long? litleTxnId { get; set; }
+
+        public override string Serialize()
+        {
+            string xml = "\r\n<fundingInstructionVoid ";
+
+            if (id != null)
+                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+            if (customerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (litleTxnId != null)
+                xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n</fundingInstructionVoid>";
+
+            return xml;
+        }
+    }
+
 }

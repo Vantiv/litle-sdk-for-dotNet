@@ -374,6 +374,24 @@ namespace Litle.Sdk
             return unloadReversalResponse;
         }
 
+        public transactionTypeWithReportGroup queryTransaction(queryTransaction queryTransaction)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.queryTransaction = queryTransaction;
+
+            litleOnlineResponse litleresponse = sendToLitle(request);
+            transactionTypeWithReportGroup response = null;
+            if (!(litleresponse.queryTransactionResponse == null))
+            {
+                response = litleresponse.queryTransactionResponse;
+            }
+            else if (!(litleresponse.queryTransactionUnavailableResponse == null))
+            {
+                response = litleresponse.queryTransactionUnavailableResponse;
+            }
+            return response;
+        }
+
         private litleOnlineRequest createLitleOnlineRequest()
         {
             litleOnlineRequest request = new litleOnlineRequest();

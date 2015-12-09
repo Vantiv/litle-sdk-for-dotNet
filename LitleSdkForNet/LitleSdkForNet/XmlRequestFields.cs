@@ -42,6 +42,7 @@ namespace Litle.Sdk
         public activateReversal activateReversal;
         public deactivateReversal deactivateReversal;
         public unloadReversal unloadReversal;
+        public queryTransaction queryTransaction;
 
         public string Serialize()
         {
@@ -78,6 +79,7 @@ namespace Litle.Sdk
             else if (activateReversal != null) xml += activateReversal.Serialize();
             else if (deactivateReversal != null) xml += deactivateReversal.Serialize();
             else if (unloadReversal != null) xml += unloadReversal.Serialize();
+            else if (queryTransaction != null) xml += queryTransaction.Serialize();
             xml += "\r\n</litleOnlineRequest>";
 
             return xml;
