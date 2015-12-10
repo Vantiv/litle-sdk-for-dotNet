@@ -20,7 +20,7 @@ namespace Litle.Sdk.Test.Functional
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
-            config.Add("timeout", "65");
+            config.Add("timeout", "5000");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
