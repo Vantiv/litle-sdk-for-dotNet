@@ -7547,6 +7547,36 @@ namespace Litle.Sdk
                 this.messageField = value;
             }
         }
+        
+                /// <remarks/>
+        [XmlArray("results_max10")]
+        [XmlArrayItem("authorizationResponse", typeof(authorizationResponse))]
+        [XmlArrayItem("captureResponse", typeof(captureResponse))]
+        [XmlArrayItem("recurringResponse", typeof(recurringResponse))]
+        [XmlArrayItem("registerTokenResponse", typeof(registerTokenResponse))]
+        [XmlArrayItem("authReversalResponse", typeof(authReversalResponse))]
+        [XmlArrayItem("captureGivenAuthResponse", typeof(captureGivenAuthResponse))]
+        [XmlArrayItem("updateCardValidationNumOnTokenResponse", typeof(updateCardValidationNumOnTokenResponse))]
+        [XmlArrayItem("cancelSubscriptionResponse", typeof(cancelSubscriptionResponse))]
+        [XmlArrayItem("updateSubscriptionResponse", typeof(updateSubscriptionResponse))]
+        [XmlArrayItem("createPlanResponse", typeof(createPlanResponse))]
+        [XmlArrayItem("updatePlanResponse", typeof(updatePlanResponse))]
+        [XmlArrayItem("activateResponse", typeof(activateResponse))]
+        [XmlArrayItem("deactivateResponse", typeof(deactivateResponse))]
+        [XmlArrayItem("loadResponse", typeof(loadResponse))]
+        [XmlArrayItem("echeckPreNoteSaleResponse", typeof(echeckPreNoteSaleResponse))]
+        [XmlArrayItem("echeckPreNoteCreditResponse", typeof(echeckPreNoteCreditResponse))]
+        [XmlArrayItem("unloadResponse", typeof(unloadResponse))]
+        [XmlArrayItem("balanceInquiryResponse", typeof(balanceInquiryResponse))]
+        [XmlArrayItem("payFacCreditResponse", typeof(payFacCreditResponse))]
+        [XmlArrayItem("vendorDebitResponse", typeof(vendorDebitResponse))]
+        [XmlArrayItem("reserveDebitResponse", typeof(reserveDebitResponse))]
+        [XmlArrayItem("creditResponse", typeof(creditResponse))]
+        [XmlArrayItem("forceCaptureResponse", typeof(forceCaptureResponse))]
+        [XmlArrayItem("echeckCreditResponse", typeof(echeckCreditResponse))]
+        [XmlArrayItem("echeckRedepositResponse", typeof(echeckRedepositResponse))]
+        [XmlArrayItem("echeckSalesResponse", typeof(echeckSalesResponse))]
+        [XmlArrayItem("saleResponse", typeof(saleResponse))] 
 
         public ArrayList results_max10
         {
