@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 10.1 (Jan 12, 2016)
+* Feature: Added support for XML v10
+
 ==Version 9.3.2
 HTTP timeout is set to 500ms
 Add RecycleEngineActiveFlag
