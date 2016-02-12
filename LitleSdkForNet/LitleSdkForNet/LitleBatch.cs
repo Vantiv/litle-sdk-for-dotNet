@@ -10,6 +10,7 @@ namespace Litle.Sdk
 {
     public class litleRequest
     {
+        private IDictionary<string, StringBuilder> _memoryStreams; 
         private authentication authentication;
         private Dictionary<String, String> config;
         private Communications communication;
@@ -26,8 +27,9 @@ namespace Litle.Sdk
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
-        public litleRequest()
+        public litleRequest(IDictionary<string, StringBuilder> memoryStreams)
         {
+            _memoryStreams = memoryStreams;
             config = new Dictionary<string, string>();
 
             config["url"] = Properties.Settings.Default.url;
@@ -75,8 +77,9 @@ namespace Litle.Sdk
          * requestDirectory
          * responseDirectory
          */
-        public litleRequest(Dictionary<String, String> config)
+        public litleRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<String, String> config)
         {
+            _memoryStreams = memoryStreams;
             this.config = config;
 
             initializeRequest();
@@ -84,7 +87,7 @@ namespace Litle.Sdk
 
         private void initializeRequest()
         {
-            communication = new Communications();
+            communication = new Communications(_memoryStreams);
 
             authentication = new authentication();
             authentication.user = config["username"];
@@ -95,7 +98,7 @@ namespace Litle.Sdk
 
             litleXmlSerializer = new litleXmlSerializer();
             litleTime = new litleTime();
-            litleFile = new litleFile();
+            litleFile = new litleFile(_memoryStreams);
         }
 
         public authentication getAuthenication()
@@ -187,8 +190,8 @@ namespace Litle.Sdk
             string batchName = Path.GetFileName(requestFilePath);
 
             string responseFilePath = communication.socketStream(requestFilePath, responseDirectory, config);
-
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
+            
+            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(communication, responseFilePath);
             return litleResponse;
         }
 
@@ -208,11 +211,9 @@ namespace Litle.Sdk
 
         public litleResponse receiveFromLitle(string batchFileName)
         {
-            litleFile.createDirectory(responseDirectory);
-
             communication.FtpPickUp(responseDirectory + batchFileName, config, batchFileName);
 
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseDirectory + batchFileName);
+            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(communication, responseDirectory + batchFileName);
             return litleResponse;
         }
 
@@ -251,11 +252,14 @@ namespace Litle.Sdk
             filePath = finalFilePath;
 
             litleFile.AppendLineToFile(finalFilePath, xmlHeader);
+            var a = litleFile.ReadPosition(finalFilePath);
             litleFile.AppendLineToFile(finalFilePath, authentication.Serialize());
+            a = litleFile.ReadPosition(finalFilePath);
 
             if (batchFilePath != null)
             {
                 litleFile.AppendFileToFile(finalFilePath, batchFilePath);
+                a = litleFile.ReadPosition(finalFilePath);
             }
             else
             {
@@ -263,7 +267,7 @@ namespace Litle.Sdk
             }
 
             litleFile.AppendLineToFile(finalFilePath, xmlFooter);
-
+            a = litleFile.ReadPosition(finalFilePath);
             finalFilePath = null;
 
             return filePath;
@@ -281,74 +285,60 @@ namespace Litle.Sdk
 
     public class litleFile
     {
+        private readonly IDictionary<string, StringBuilder> _cache;
+
+        public litleFile(IDictionary<string, StringBuilder> cache)
+        {
+            _cache = cache;
+        }
+
+        public StringBuilder this[string name] { get { return _cache[name]; } } 
         public virtual string createRandomFile(string fileDirectory, string fileName, string fileExtension, litleTime litleTime)
         {
             string filePath = null;
             if (fileName == null || fileName == String.Empty)
             {
-                if (!Directory.Exists(fileDirectory))
-                {
-                    Directory.CreateDirectory(fileDirectory);
-                }
-
                 fileName = litleTime.getCurrentTime("MM-dd-yyyy_HH-mm-ss-ffff_") + RandomGen.NextString(8);
                 filePath = fileDirectory + fileName + fileExtension;
-
-                using (FileStream fs = new FileStream(filePath, FileMode.Create))
-                {
-                }
             }
             else
             {
                 filePath = fileDirectory + fileName;
             }
-
+            if (_cache.ContainsKey(filePath))
+            {
+                _cache[filePath] = new StringBuilder();
+            }
+            else
+            {
+                _cache.Add(filePath, new StringBuilder());
+            }
             return filePath;
         }
 
         public virtual string AppendLineToFile(string filePath, string lineToAppend)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Append))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.Write(lineToAppend);
-            }
-
+            StringBuilder ms = _cache[filePath];
+            ms.Append(lineToAppend);
             return filePath;
         }
-
+        public virtual string ReadPosition(string filepath)
+        {
+            var s = _cache[filepath];
+            return s.ToString();
+        }
 
         public virtual string AppendFileToFile(string filePathToAppendTo, string filePathToAppend)
         {
-
-            using (FileStream fs = new FileStream(filePathToAppendTo, FileMode.Append))
-            using (FileStream fsr = new FileStream(filePathToAppend, FileMode.Open))
+            var fs = _cache[filePathToAppendTo];
+            StringBuilder fsr = null;
+            if (filePathToAppend != null)
             {
-                byte[] buffer = new byte[16];
-
-                int bytesRead = 0;
-
-                do
-                {
-                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
-                    fs.Write(buffer, 0, bytesRead);
-                }
-                while (bytesRead > 0);
+                fsr = _cache[filePathToAppend];
+                fs.Append(fsr);
             }
-
-            File.Delete(filePathToAppend);
 
             return filePathToAppendTo;
-        }
-
-        public virtual void createDirectory(string destinationFilePath)
-        {
-            string destinationDirectory = Path.GetDirectoryName(destinationFilePath);
-
-            if (!Directory.Exists(destinationDirectory))
-            {
-                Directory.CreateDirectory(destinationDirectory);
-            }
         }
     }
 

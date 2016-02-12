@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -13,11 +14,13 @@ namespace Litle.Sdk.Test.Unit
     class TestActivateReversal
     {        
         private LitleOnline litle;
+        private IDictionary<string, StringBuilder> _memoryStreams;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            litle = new LitleOnline();
+            _memoryStreams = new Dictionary<string, StringBuilder>();
+            litle = new LitleOnline(_memoryStreams);
         }
 
         [Test]
@@ -28,7 +31,7 @@ namespace Litle.Sdk.Test.Unit
             activateReversal.reportGroup = "b";
             activateReversal.litleTxnId = "123";
 
-            var mock = new Mock<Communications>();
+            var mock = new Mock<Communications>(new Dictionary<string, StringBuilder>());
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>123</litleTxnId>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.22' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><activateReversalResponse><litleTxnId>123</litleTxnId></activateReversalResponse></litleOnlineResponse>");

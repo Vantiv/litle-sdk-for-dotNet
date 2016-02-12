@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -13,11 +14,13 @@ namespace Litle.Sdk.Test.Unit
     class TestCommunications
     {
         private Communications objectUnderTest;
+        private IDictionary<string, StringBuilder> memoryStreams;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            objectUnderTest = new Communications();
+            memoryStreams = new Dictionary<string, StringBuilder>();
+            objectUnderTest = new Communications(memoryStreams);
         }
 
         [Test]

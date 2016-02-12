@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -12,15 +13,16 @@ namespace Litle.Sdk.Test.Unit
     [TestFixture]
     class TestEcheckRedeposit
     {
-        
+
         private LitleOnline litle;
+        private IDictionary<string, StringBuilder> _memoryStreams;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            litle = new LitleOnline();
+            _memoryStreams = new Dictionary<string, StringBuilder>();
+            litle = new LitleOnline(_memoryStreams);
         }
-
         [Test]
         public void TestMerchantData()
         {
@@ -31,7 +33,7 @@ namespace Litle.Sdk.Test.Unit
             echeckRedeposit.merchantData.affiliate = "affil";
             echeckRedeposit.merchantData.merchantGroupingId = "mgi";
            
-            var mock = new Mock<Communications>();
+            var mock = new Mock<Communications>(_memoryStreams);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<echeckRedeposit.*<litleTxnId>1</litleTxnId>.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></litleOnlineResponse>");

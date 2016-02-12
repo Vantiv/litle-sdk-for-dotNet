@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -21,11 +22,13 @@ namespace Litle.Sdk.Test.Unit
 
         private Mock<litleFile> mockLitleFile;
         private Mock<litleTime> mockLitleTime;
+        private IDictionary<string, StringBuilder> _memoryCache;
 
         [TestFixtureSetUp]
         public void setUp()
         {
-            mockLitleFile = new Mock<litleFile>();
+            _memoryCache = new Dictionary<string, StringBuilder>();
+            mockLitleFile = new Mock<litleFile>(_memoryCache);
             mockLitleTime = new Mock<litleTime>();
 
             mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
@@ -35,7 +38,7 @@ namespace Litle.Sdk.Test.Unit
         [SetUp]
         public void setUpBeforeTest()
         {
-            rfrRequest = new RFRRequest();
+            rfrRequest = new RFRRequest(_memoryCache);
         }
 
         [Test]
@@ -61,7 +64,7 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            rfrRequest = new RFRRequest(mockConfig);
+            rfrRequest = new RFRRequest(_memoryCache, mockConfig);
 
             Assert.AreEqual("C:\\MockRequests\\Requests\\", rfrRequest.getRequestDirectory());
             Assert.AreEqual("C:\\MockResponses\\Responses\\", rfrRequest.getResponseDirectory());

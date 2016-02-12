@@ -24,12 +24,18 @@ namespace Litle.Sdk
             return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
         }// serialize the xml
 
-        virtual public litleResponse DeserializeObjectFromFile(string filePath)
+        virtual public litleResponse DeserializeObjectFromFile(Communications communications, string filePath)
         {
             litleResponse i;
             try
             {
-                i = new litleResponse(filePath);
+                var stream = communications[filePath];
+                var value = stream.ToString();
+                var bytes = Encoding.UTF8.GetBytes(value);
+                using (var memoryStream = new MemoryStream(bytes))
+                {
+                    i = new litleResponse(memoryStream);
+                }
             }
             catch (XmlException e)
             {
