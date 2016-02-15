@@ -184,7 +184,7 @@ namespace Litle.Sdk
 
             try
             {
-                sslStream.AuthenticateAsClient(url, new X509Certificate2Collection(), SslProtocols.Tls12, false);
+                sslStream.AuthenticateAsClient(url);
             }
             catch (AuthenticationException e)
             {
@@ -198,8 +198,7 @@ namespace Litle.Sdk
             }
 
             var memoryStream = this[xmlRequestFilePath];
-            var value = memoryStream.ToString();
-            var buffer = Encoding.UTF8.GetBytes(value);
+            var buffer = Encoding.UTF8.GetBytes(memoryStream.ToString());
             sslStream.Write(buffer);
             sslStream.Flush();
 
@@ -209,12 +208,16 @@ namespace Litle.Sdk
                 Console.WriteLine("Writing to XML File: " + xmlResponseDestinationDirectory + batchName);
             }
 
-            byte[] byteBuffer = new byte[tcpClient.ReceiveBufferSize];
+            byte[] byteBuffer = new byte[2048];
             StringBuilder messageData = new StringBuilder();
             int bytes = -1;
             do
             {
+                // Read the client's test message.
                 bytes = sslStream.Read(byteBuffer, 0, byteBuffer.Length);
+
+                // Use Decoder class to convert from bytes to UTF8
+                // in case a character spans two buffers.
                 var decoder = Encoding.UTF8.GetDecoder();
                 var chars = new char[decoder.GetCharCount(byteBuffer, 0, bytes)];
                 decoder.GetChars(byteBuffer, 0, bytes, chars, 0);

@@ -1069,27 +1069,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void EcheckPreNoteTestAll()
         {
-            var memoryStream = new Dictionary<string, StringBuilder>();
-
-            Dictionary<string, string> configOverride = new Dictionary<string, string>();
-            configOverride["url"] = Properties.Settings.Default.url;
-            configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
-            configOverride["username"] = "BATCHSDKA";
-            configOverride["printxml"] = Properties.Settings.Default.printxml;
-            configOverride["timeout"] = Properties.Settings.Default.timeout;
-            configOverride["proxyHost"] = Properties.Settings.Default.proxyHost;
-            configOverride["merchantId"] = "0180";
-            configOverride["password"] = "certpass";
-            configOverride["proxyPort"] = Properties.Settings.Default.proxyPort;
-            configOverride["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            configOverride["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            configOverride["sftpPassword"] = Properties.Settings.Default.sftpPassword;
-            configOverride["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            configOverride["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl;
-            configOverride["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
-            configOverride["requestDirectory"] = Properties.Settings.Default.requestDirectory;
-            configOverride["responseDirectory"] = Properties.Settings.Default.responseDirectory;
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams, configOverride);
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             contact billToAddress = new contact();
             billToAddress.name = "Mike";
