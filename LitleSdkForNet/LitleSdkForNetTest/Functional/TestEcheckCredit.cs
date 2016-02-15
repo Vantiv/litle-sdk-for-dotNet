@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -10,11 +11,13 @@ namespace Litle.Sdk.Test.Functional
     class TestEcheckCredit
     {
         private LitleOnline litle;
+        private IDictionary<string, StringBuilder> _memoryStreams;
 
         [TestFixtureSetUp]
         public void beforeClass()
         {
-            litle = new LitleOnline();
+            _memoryStreams = new Dictionary<string, StringBuilder>();
+            litle = new LitleOnline(_memoryStreams);
         }
 
         [Test]

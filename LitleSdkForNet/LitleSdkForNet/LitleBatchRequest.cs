@@ -13,6 +13,7 @@ namespace Litle.Sdk
         public string reportGroup;
 
         public Dictionary<String, String> config;
+        private IDictionary<string, StringBuilder> _memoryStreams; 
 
         public string batchFilePath;
         private string tempBatchFilePath;
@@ -83,8 +84,9 @@ namespace Litle.Sdk
 
         private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
 
-        public batchRequest()
+        public batchRequest(IDictionary<string, StringBuilder> memoryStreams)
         {
+            _memoryStreams = memoryStreams;
             config = new Dictionary<String, String>();
 
             config["url"] = Properties.Settings.Default.url;
@@ -106,8 +108,9 @@ namespace Litle.Sdk
             initializeRequest();
         }
 
-        public batchRequest(Dictionary<String, String> config)
+        public batchRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<String, String> config)
         {
+            _memoryStreams = memoryStreams;
             this.config = config;
 
             initializeRequest();
@@ -117,8 +120,8 @@ namespace Litle.Sdk
         {
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
-
-            litleFile = new litleFile();
+            
+            litleFile = new litleFile(_memoryStreams);
             litleTime = new litleTime();
 
             numAuthorization = 0;
@@ -683,7 +686,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void addEcheckPreNoteCredit(echeckPreNoteCredit echeckPreNoteCredit)
+        public string addEcheckPreNoteCredit(echeckPreNoteCredit echeckPreNoteCredit)
         {
             if (numAccountUpdates == 0)
             {
@@ -695,6 +698,7 @@ namespace Litle.Sdk
             {
                 throw new LitleOnlineException(accountUpdateErrorMessage);
             }
+            return tempBatchFilePath;
         }
 
         public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
@@ -1006,12 +1010,12 @@ namespace Litle.Sdk
             litleFile.AppendLineToFile(batchFilePath, xmlHeader);
             litleFile.AppendFileToFile(batchFilePath, tempBatchFilePath);
             litleFile.AppendLineToFile(batchFilePath, xmlFooter);
-
-            tempBatchFilePath = null;
+            
+            //tempBatchFilePath = null;
 
             return batchFilePath;
         }
-
+        
         public string generateXmlHeader()
         {
             string xmlHeader = "\r\n<batchRequest id=\"" + id + "\"\r\n";
@@ -1315,9 +1319,11 @@ namespace Litle.Sdk
         private string responseDirectory;
 
         private Dictionary<String, String> config;
+        private IDictionary<string, StringBuilder> _memoryStreams;
 
-        public RFRRequest()
+        public RFRRequest(IDictionary<string, StringBuilder> memoryStreams)
         {
+            _memoryStreams = memoryStreams;
             config = new Dictionary<String, String>();
 
             config["url"] = Properties.Settings.Default.url;
@@ -1337,14 +1343,15 @@ namespace Litle.Sdk
             config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
             litleTime = new litleTime();
-            litleFile = new litleFile();
+            litleFile = new litleFile(_memoryStreams);
 
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
         }
 
-        public RFRRequest(Dictionary<String, String> config)
+        public RFRRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<String, String> config)
         {
+            _memoryStreams = memoryStreams;
             this.config = config;
 
             initializeRequest();
@@ -1354,8 +1361,8 @@ namespace Litle.Sdk
         {
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
-
-            litleFile = new litleFile();
+            
+            litleFile = new litleFile(_memoryStreams);
             litleTime = new litleTime();
         }
 

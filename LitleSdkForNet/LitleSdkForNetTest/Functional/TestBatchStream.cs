@@ -4,6 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
 using System.IO;
+using System.Xml;
 
 namespace Litle.Sdk.Test.Functional
 {
@@ -13,10 +14,12 @@ namespace Litle.Sdk.Test.Functional
         private litleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
+        private Dictionary<String, StringBuilder> memoryStreams;
 
         [TestFixtureSetUp]
         public void setUp()
         {
+            memoryStreams = new Dictionary<string, StringBuilder>();
             invalidConfig = new Dictionary<String, String>();
             invalidConfig["url"] = Properties.Settings.Default.url;
             invalidConfig["reportGroup"] = Properties.Settings.Default.reportGroup;
@@ -53,13 +56,14 @@ namespace Litle.Sdk.Test.Functional
         [SetUp]
         public void setUpBeforeTest()
         {
-            litle = new litleRequest();
+            memoryStreams = new Dictionary<string, StringBuilder>();
+            litle = new litleRequest(memoryStreams);
         }
 
         [Test]
         public void SimpleBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -476,7 +480,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void accountUpdateBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             accountUpdate accountUpdate1 = new accountUpdate();
             accountUpdate1.orderId = "1111";
@@ -519,7 +523,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void RFRBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
             litleBatchRequest.id = "1234567A";
 
             accountUpdate accountUpdate1 = new accountUpdate();
@@ -558,8 +562,8 @@ namespace Litle.Sdk.Test.Functional
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
 
-            litleRequest litleRfr = new litleRequest();
-            RFRRequest rfrRequest = new RFRRequest();
+            litleRequest litleRfr = new litleRequest(memoryStreams);
+            RFRRequest rfrRequest = new RFRRequest(memoryStreams);
             accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
             accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
             accountUpdateFileRequestData.postDay = DateTime.Now;
@@ -589,7 +593,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void nullBatchData()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -816,7 +820,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -1065,7 +1069,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void EcheckPreNoteTestAll()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             contact billToAddress = new contact();
             billToAddress.name = "Mike";
@@ -1098,12 +1102,17 @@ namespace Litle.Sdk.Test.Functional
             echeckPreNoteSaleSuccess.billToAddress = billToAddress;
             litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleSuccess);
 
+            var litleFile = litleBatchRequest.getLitleFile();
+            var s = "";//ReadPosition(litleBatchRequest.Serialize(), litleFile);
+
             echeckPreNoteSale echeckPreNoteSaleRoutErr = new echeckPreNoteSale();
             echeckPreNoteSaleRoutErr.orderId = "900";
             echeckPreNoteSaleRoutErr.orderSource = orderSourceType.ecommerce;
             echeckPreNoteSaleRoutErr.echeck = echeckRoutErr;
             echeckPreNoteSaleRoutErr.billToAddress = billToAddress;
             litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleRoutErr);
+
+            //s = ReadPosition(litleBatchRequest.Serialize(), litleFile);
 
             echeckPreNoteSale echeckPreNoteSaleAccErr = new echeckPreNoteSale();
             echeckPreNoteSaleAccErr.orderId = "301";
@@ -1112,12 +1121,18 @@ namespace Litle.Sdk.Test.Functional
             echeckPreNoteSaleAccErr.billToAddress = billToAddress;
             litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleAccErr);
 
+            //s = ReadPosition(litleBatchRequest.Serialize(), litleFile);
+
             echeckPreNoteCredit echeckPreNoteCreditSuccess = new echeckPreNoteCredit();
             echeckPreNoteCreditSuccess.orderId = "000";
             echeckPreNoteCreditSuccess.orderSource = orderSourceType.ecommerce;
             echeckPreNoteCreditSuccess.echeck = echeckSuccess;
             echeckPreNoteCreditSuccess.billToAddress = billToAddress;
             litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditSuccess);
+
+            //s = ReadPosition(s, litleFile);
+
+            //s = ReadPosition(litleBatchRequest.Serialize(), litleFile);
 
             echeckPreNoteCredit echeckPreNoteCreditRoutErr = new echeckPreNoteCredit();
             echeckPreNoteCreditRoutErr.orderId = "900";
@@ -1126,12 +1141,16 @@ namespace Litle.Sdk.Test.Functional
             echeckPreNoteCreditRoutErr.billToAddress = billToAddress;
             litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditRoutErr);
 
+            //s = ReadPosition(litleBatchRequest.Serialize(), litleFile);
+
             echeckPreNoteCredit echeckPreNoteCreditAccErr = new echeckPreNoteCredit();
             echeckPreNoteCreditAccErr.orderId = "301";
             echeckPreNoteCreditAccErr.orderSource = orderSourceType.ecommerce;
             echeckPreNoteCreditAccErr.echeck = echeckAccErr;
             echeckPreNoteCreditAccErr.billToAddress = billToAddress;
             litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditAccErr);
+
+            //s = ReadPosition(litleBatchRequest.Serialize(), litleFile);
 
             litle.addBatch(litleBatchRequest);
 
@@ -1163,11 +1182,12 @@ namespace Litle.Sdk.Test.Functional
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
         }
+        
 
         [Test]
         public void PFIFInstructionTxnTest()
         {
-            
+            var memoryStream = new Dictionary<string, StringBuilder>();
             Dictionary<string, string> configOverride = new Dictionary<string, string>();
             configOverride["url"] = Properties.Settings.Default.url;
             configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
@@ -1187,9 +1207,9 @@ namespace Litle.Sdk.Test.Functional
             configOverride["requestDirectory"] = Properties.Settings.Default.requestDirectory;
             configOverride["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
-            litleRequest litleOverride = new litleRequest(configOverride);
+            litleRequest litleOverride = new litleRequest(memoryStream, configOverride);
 
-            batchRequest litleBatchRequest = new batchRequest(configOverride);
+            batchRequest litleBatchRequest = new batchRequest(memoryStream, configOverride);
 
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Corporate;

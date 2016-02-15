@@ -15,6 +15,7 @@ using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
 namespace Litle.Sdk
@@ -22,7 +23,20 @@ namespace Litle.Sdk
     public class Communications
     {
         private static readonly object _synLock = new object();
+        private readonly IDictionary<string, StringBuilder> _cache;
 
+        public Communications(IDictionary<string, StringBuilder> cache)
+        {
+            _cache = cache;
+        }
+
+        public StringBuilder this[string key]
+        {
+            get
+            {
+                return _cache[key];
+            }
+        }
 
         public static bool ValidateServerCertificate(
              object sender,
@@ -183,49 +197,34 @@ namespace Litle.Sdk
                 Console.WriteLine("Using XML File: " + xmlRequestFilePath);
             }
 
-            using (FileStream readFileStream = new FileStream(xmlRequestFilePath, FileMode.Open))
-            {
-                int bytesRead = -1;
-                byte[] byteBuffer;
-
-                do
-                {
-                    byteBuffer = new byte[1024 * sizeof(char)];
-                    bytesRead = readFileStream.Read(byteBuffer, 0, byteBuffer.Length);
-
-                    sslStream.Write(byteBuffer, 0, bytesRead);
-                    sslStream.Flush();
-                } while (bytesRead != 0);
-            }
+            var memoryStream = this[xmlRequestFilePath];
+            var buffer = Encoding.UTF8.GetBytes(memoryStream.ToString());
+            sslStream.Write(buffer);
+            sslStream.Flush();
 
             string batchName = Path.GetFileName(xmlRequestFilePath);
-            string destinationDirectory = Path.GetDirectoryName(xmlResponseDestinationDirectory);
-            if (!Directory.Exists(destinationDirectory))
-            {
-                Directory.CreateDirectory(destinationDirectory);
-            }
-
             if ("true".Equals(config["printxml"]))
             {
                 Console.WriteLine("Writing to XML File: " + xmlResponseDestinationDirectory + batchName);
             }
 
-            using (FileStream writeFileStream = new FileStream(xmlResponseDestinationDirectory + batchName, FileMode.Create))
+            byte[] byteBuffer = new byte[2048];
+            StringBuilder messageData = new StringBuilder();
+            int bytes = -1;
+            do
             {
-                char[] charBuffer;
-                byte[] byteBuffer;
-                int bytesRead = 0;
+                // Read the client's test message.
+                bytes = sslStream.Read(byteBuffer, 0, byteBuffer.Length);
 
-                do
-                {
-                    charBuffer = new char[1024];
-                    byteBuffer = new byte[1024 * sizeof(char)];
-                    bytesRead = sslStream.Read(byteBuffer, 0, byteBuffer.Length);
-                    charBuffer = Encoding.UTF8.GetChars(byteBuffer);
-
-                    writeFileStream.Write(byteBuffer, 0, bytesRead);
-                } while (bytesRead > 0);
-            }
+                // Use Decoder class to convert from bytes to UTF8
+                // in case a character spans two buffers.
+                var decoder = Encoding.UTF8.GetDecoder();
+                var chars = new char[decoder.GetCharCount(byteBuffer, 0, bytes)];
+                decoder.GetChars(byteBuffer, 0, bytes, chars, 0);
+                messageData.Append(chars);
+            } while (bytes != 0);
+            
+            _cache.Add(xmlResponseDestinationDirectory + batchName, messageData);
 
             tcpClient.Close();
             sslStream.Close();

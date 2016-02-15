@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -22,11 +23,14 @@ namespace Litle.Sdk.Test.Unit
 
         private Mock<litleFile> mockLitleFile;
         private Mock<litleTime> mockLitleTime;
+        private IDictionary<string, StringBuilder> memoryStreams;
 
         [TestFixtureSetUp]
         public void setUp()
         {
-            mockLitleFile = new Mock<litleFile>();
+
+            memoryStreams = new Dictionary<string, StringBuilder>();
+            mockLitleFile = new Mock<litleFile>(new Dictionary<string, StringBuilder>());
             mockLitleTime = new Mock<litleTime>();
 
             mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
@@ -36,7 +40,7 @@ namespace Litle.Sdk.Test.Unit
         [SetUp]
         public void beforeTestSetup()
         {
-            batchRequest = new batchRequest();
+            batchRequest = new batchRequest(memoryStreams);
             batchRequest.setLitleFile(mockLitleFile.Object);
             batchRequest.setLitleTime(mockLitleTime.Object);
         }
@@ -50,7 +54,7 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            batchRequest = new batchRequest(mockConfig);
+            batchRequest = new batchRequest(memoryStreams, mockConfig);
 
             String actual = batchRequest.generateXmlHeader();
             String expected = @"
@@ -84,7 +88,7 @@ merchantId=""01234"">
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            batchRequest = new batchRequest(mockConfig);
+            batchRequest = new batchRequest(memoryStreams, mockConfig);
 
             Assert.AreEqual("C:\\MockRequests\\Requests\\", batchRequest.getRequestDirectory());
             Assert.AreEqual("C:\\MockResponses\\Responses\\", batchRequest.getResponseDirectory());

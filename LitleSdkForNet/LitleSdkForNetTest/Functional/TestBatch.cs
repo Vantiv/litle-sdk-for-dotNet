@@ -13,10 +13,13 @@ namespace Litle.Sdk.Test.Functional
         private litleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
+        private IDictionary<string, StringBuilder> memoryStreams;
 
         [TestFixtureSetUp]
         public void setUp()
         {
+            memoryStreams = new Dictionary<string, StringBuilder>();
+
             invalidConfig = new Dictionary<String, String>();
             invalidConfig["url"] = Properties.Settings.Default.url;
             invalidConfig["reportGroup"] = Properties.Settings.Default.reportGroup;
@@ -57,13 +60,13 @@ namespace Litle.Sdk.Test.Functional
         [SetUp]
         public void setUpBeforeTest()
         {
-            litle = new litleRequest();
+            litle = new litleRequest(memoryStreams);
         }
 
         [Test]
         public void SimpleBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -482,7 +485,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void accountUpdateBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             accountUpdate accountUpdate1 = new accountUpdate();
             accountUpdate1.orderId = "1111";
@@ -528,7 +531,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void RFRBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
             litleBatchRequest.id = "1234567A";
 
             accountUpdate accountUpdate1 = new accountUpdate();
@@ -569,8 +572,8 @@ namespace Litle.Sdk.Test.Functional
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
 
-            litleRequest litleRfr = new litleRequest();
-            RFRRequest rfrRequest = new RFRRequest();
+            litleRequest litleRfr = new litleRequest(memoryStreams);
+            RFRRequest rfrRequest = new RFRRequest(memoryStreams);
             accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
             accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
             accountUpdateFileRequestData.postDay = DateTime.Now;
@@ -602,7 +605,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void nullBatchData()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -829,9 +832,9 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
-            litleRequest litleIC = new litleRequest(invalidConfig);
+            litleRequest litleIC = new litleRequest(memoryStreams, invalidConfig);
 
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -1085,9 +1088,9 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidSftpCredientialsBatch()
         {
-            litleRequest litleISC = new litleRequest(invalidSftpConfig);
+            litleRequest litleISC = new litleRequest(memoryStreams, invalidSftpConfig);
 
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -1337,7 +1340,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleBatchWithSpecialCharacters()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
 
             authorization authorization = new authorization();
             authorization.reportGroup = "<ReportGroup>";

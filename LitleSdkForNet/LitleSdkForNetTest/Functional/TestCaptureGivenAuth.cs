@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -11,16 +12,18 @@ namespace Litle.Sdk.Test.Functional
     {
 
         private LitleOnline litle;
+        private IDictionary<string, StringBuilder> _memoryCache;
 
         [TestFixtureSetUp]
         public void setUp()
         {
+            _memoryCache = new Dictionary<string, StringBuilder>();
             Dictionary<string, string> config = new Dictionary<string, string>();
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
-            config.Add("timeout", "65");
+            config.Add("timeout", "5000");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
@@ -28,7 +31,7 @@ namespace Litle.Sdk.Test.Functional
             config.Add("proxyPort", Properties.Settings.Default.proxyPort);
             config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(config);
+            litle = new LitleOnline(_memoryCache, config);
         }
 
         [Test]
