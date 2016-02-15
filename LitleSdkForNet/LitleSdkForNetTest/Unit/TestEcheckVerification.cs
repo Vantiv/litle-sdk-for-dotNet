@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
-using Litle.Sdk;
-using Moq;
 using System.Text.RegularExpressions;
-
+using Moq;
+using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestEcheckVerification
+    internal class TestEcheckVerification
     {
-
         private LitleOnline litle;
         private IDictionary<string, StringBuilder> _memoryStreams;
 
@@ -27,7 +22,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestMerchantData()
         {
-            echeckVerification echeckVerification = new echeckVerification();
+            var echeckVerification = new echeckVerification();
             echeckVerification.orderId = "1";
             echeckVerification.amount = 2;
             echeckVerification.orderSource = orderSourceType.ecommerce;
@@ -39,15 +34,21 @@ namespace Litle.Sdk.Test.Unit
             echeckVerification.merchantData.campaign = "camp";
             echeckVerification.merchantData.affiliate = "affil";
             echeckVerification.merchantData.merchantGroupingId = "mgi";
-           
+
             var mock = new Mock<Communications>(_memoryStreams);
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<echeckVerification.*<orderId>1</orderId>.*<amount>2</amount.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
-     
-            Communications mockedCommunication = mock.Object;
+            mock.Setup(
+                Communications =>
+                    Communications.HttpPost(
+                        It.IsRegex(
+                            ".*<echeckVerification.*<orderId>1</orderId>.*<amount>2</amount.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*",
+                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
+                .Returns(
+                    "<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
+
+            var mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.EcheckVerification(echeckVerification);
-        }            
+        }
     }
 }
