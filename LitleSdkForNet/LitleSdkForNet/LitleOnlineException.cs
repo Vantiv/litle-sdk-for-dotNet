@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Litle.Sdk
 {
@@ -8,12 +6,10 @@ namespace Litle.Sdk
     {
         public LitleOnlineException(string message) : base(message)
         {
-            
         }
 
         public LitleOnlineException(string message, Exception e) : base(message, e)
         {
-
         }
     }
 }
