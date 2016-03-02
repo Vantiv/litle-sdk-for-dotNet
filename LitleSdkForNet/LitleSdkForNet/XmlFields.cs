@@ -1,63 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.CodeDom.Compiler;
+using System.Xml.Serialization;
+
 namespace Litle.Sdk
 {
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    /// <remarks />
+    [GeneratedCode("xsd", "2.0.50727.42")]
+    [Serializable]
+    [XmlType(Namespace = "http://www.litle.com/schema")]
     public enum methodOfPaymentTypeEnum
     {
-
-        /// <remarks/>
+        /// <remarks />
         MC,
 
-        /// <remarks/>
+        /// <remarks />
         VI,
 
-        /// <remarks/>
+        /// <remarks />
         AX,
 
-        /// <remarks/>
+        /// <remarks />
         DC,
 
-        /// <remarks/>
+        /// <remarks />
         DI,
 
-        /// <remarks/>
+        /// <remarks />
         PP,
 
-        /// <remarks/>
+        /// <remarks />
         JC,
 
-        /// <remarks/>
+        /// <remarks />
         BL,
 
-        /// <remarks/>
+        /// <remarks />
         EC,
 
-        /// <remarks/>
+        /// <remarks />
         GC,
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("")]
-        Item,
+        /// <remarks />
+        [XmlEnum("")] Item
     }
 
     public abstract class methodOfPaymentSerializer
     {
-        public static String Serialize(methodOfPaymentTypeEnum mop)
+        public static string Serialize(methodOfPaymentTypeEnum mop)
         {
             if (mop == methodOfPaymentTypeEnum.Item)
             {
                 return "";
             }
-            else
-            {
-                return mop.ToString();
-
-            }
+            return mop.ToString();
         }
     }
 }

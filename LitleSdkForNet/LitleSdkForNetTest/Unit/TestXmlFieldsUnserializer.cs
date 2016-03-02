@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
-using Litle.Sdk;
-using Moq;
-using System.Text.RegularExpressions;
-using System.Xml.Serialization;
 using System.IO;
-
+using System.Xml.Serialization;
+using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestXmlFieldsUnserializer
+    internal class TestXmlFieldsUnserializer
     {
-
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
@@ -23,10 +16,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestAuthorizationResponseContainsGiftCardResponse()
         {
-            String xml = "<authorizationResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></authorizationResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(authorizationResponse));
-            StringReader reader = new StringReader(xml);
-            authorizationResponse authorizationResponse = (authorizationResponse)serializer.Deserialize(reader);
+            var xml =
+                "<authorizationResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></authorizationResponse>";
+            var serializer = new XmlSerializer(typeof (authorizationResponse));
+            var reader = new StringReader(xml);
+            var authorizationResponse = (authorizationResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(authorizationResponse.giftCardResponse);
         }
@@ -34,10 +28,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestAuthReversalResponseContainsGiftCardResponse()
         {
-            String xml = "<authReversalResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></authReversalResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(authReversalResponse));
-            StringReader reader = new StringReader(xml);
-            authReversalResponse authReversalResponse = (authReversalResponse)serializer.Deserialize(reader);
+            var xml =
+                "<authReversalResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></authReversalResponse>";
+            var serializer = new XmlSerializer(typeof (authReversalResponse));
+            var reader = new StringReader(xml);
+            var authReversalResponse = (authReversalResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(authReversalResponse.giftCardResponse);
         }
@@ -45,10 +40,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCaptureResponseContainsGiftCardResponse()
         {
-            String xml = "<captureResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></captureResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(captureResponse));
-            StringReader reader = new StringReader(xml);
-            captureResponse captureResponse = (captureResponse)serializer.Deserialize(reader);
+            var xml =
+                "<captureResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></captureResponse>";
+            var serializer = new XmlSerializer(typeof (captureResponse));
+            var reader = new StringReader(xml);
+            var captureResponse = (captureResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(captureResponse.giftCardResponse);
         }
@@ -56,10 +52,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCaptureResponseContainsFraudResult()
         {
-            String xml = "<captureResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></captureResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(captureResponse));
-            StringReader reader = new StringReader(xml);
-            captureResponse captureResponse = (captureResponse)serializer.Deserialize(reader);
+            var xml =
+                "<captureResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></captureResponse>";
+            var serializer = new XmlSerializer(typeof (captureResponse));
+            var reader = new StringReader(xml);
+            var captureResponse = (captureResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(captureResponse.fraudResult);
         }
@@ -67,10 +64,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestForceCaptureResponseContainsGiftCardResponse()
         {
-            String xml = "<forceCaptureResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></forceCaptureResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(forceCaptureResponse));
-            StringReader reader = new StringReader(xml);
-            forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)serializer.Deserialize(reader);
+            var xml =
+                "<forceCaptureResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></forceCaptureResponse>";
+            var serializer = new XmlSerializer(typeof (forceCaptureResponse));
+            var reader = new StringReader(xml);
+            var forceCaptureResponse = (forceCaptureResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(forceCaptureResponse.giftCardResponse);
         }
@@ -78,10 +76,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestForceCaptureResponseContainsFraudResult()
         {
-            String xml = "<forceCaptureResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></forceCaptureResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(forceCaptureResponse));
-            StringReader reader = new StringReader(xml);
-            forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)serializer.Deserialize(reader);
+            var xml =
+                "<forceCaptureResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></forceCaptureResponse>";
+            var serializer = new XmlSerializer(typeof (forceCaptureResponse));
+            var reader = new StringReader(xml);
+            var forceCaptureResponse = (forceCaptureResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(forceCaptureResponse.fraudResult);
         }
@@ -89,10 +88,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCaptureGivenAuthResponseContainsGiftCardResponse()
         {
-            String xml = "<captureGivenAuthResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></captureGivenAuthResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(captureGivenAuthResponse));
-            StringReader reader = new StringReader(xml);
-            captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)serializer.Deserialize(reader);
+            var xml =
+                "<captureGivenAuthResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></captureGivenAuthResponse>";
+            var serializer = new XmlSerializer(typeof (captureGivenAuthResponse));
+            var reader = new StringReader(xml);
+            var captureGivenAuthResponse = (captureGivenAuthResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(captureGivenAuthResponse.giftCardResponse);
         }
@@ -100,10 +100,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCaptureGivenAuthResponseContainsFraudResult()
         {
-            String xml = "<captureGivenAuthResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></captureGivenAuthResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(captureGivenAuthResponse));
-            StringReader reader = new StringReader(xml);
-            captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)serializer.Deserialize(reader);
+            var xml =
+                "<captureGivenAuthResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></captureGivenAuthResponse>";
+            var serializer = new XmlSerializer(typeof (captureGivenAuthResponse));
+            var reader = new StringReader(xml);
+            var captureGivenAuthResponse = (captureGivenAuthResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(captureGivenAuthResponse.fraudResult);
         }
@@ -111,10 +112,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSaleResponseContainsGiftCardResponse()
         {
-            String xml = "<saleResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></saleResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(saleResponse));
-            StringReader reader = new StringReader(xml);
-            saleResponse saleResponse = (saleResponse)serializer.Deserialize(reader);
+            var xml =
+                "<saleResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></saleResponse>";
+            var serializer = new XmlSerializer(typeof (saleResponse));
+            var reader = new StringReader(xml);
+            var saleResponse = (saleResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(saleResponse.giftCardResponse);
         }
@@ -122,10 +124,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCreditResponseContainsGiftCardResponse()
         {
-            String xml = "<creditResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></creditResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(creditResponse));
-            StringReader reader = new StringReader(xml);
-            creditResponse creditResponse = (creditResponse)serializer.Deserialize(reader);
+            var xml =
+                "<creditResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></creditResponse>";
+            var serializer = new XmlSerializer(typeof (creditResponse));
+            var reader = new StringReader(xml);
+            var creditResponse = (creditResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(creditResponse.giftCardResponse);
         }
@@ -133,10 +136,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCreditResponseContainsFraudResult()
         {
-            String xml = "<creditResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></creditResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(creditResponse));
-            StringReader reader = new StringReader(xml);
-            creditResponse creditResponse = (creditResponse)serializer.Deserialize(reader);
+            var xml =
+                "<creditResponse xmlns=\"http://www.litle.com/schema\"><fraudResult></fraudResult></creditResponse>";
+            var serializer = new XmlSerializer(typeof (creditResponse));
+            var reader = new StringReader(xml);
+            var creditResponse = (creditResponse) serializer.Deserialize(reader);
 
             Assert.NotNull(creditResponse.fraudResult);
         }
@@ -144,10 +148,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestActivateResponse()
         {
-            String xml = "<activateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></activateResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(activateResponse));
-            StringReader reader = new StringReader(xml);
-            activateResponse activateResponse = (activateResponse)serializer.Deserialize(reader);
+            var xml =
+                "<activateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></activateResponse>";
+            var serializer = new XmlSerializer(typeof (activateResponse));
+            var reader = new StringReader(xml);
+            var activateResponse = (activateResponse) serializer.Deserialize(reader);
 
             Assert.AreEqual("A", activateResponse.reportGroup);
             Assert.AreEqual("3", activateResponse.id);
@@ -156,8 +161,8 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("1", activateResponse.litleTxnId);
             Assert.AreEqual("2", activateResponse.orderId);
             Assert.AreEqual("000", activateResponse.response);
-            Assert.AreEqual(new DateTime(2013,9,5,14,23,45), activateResponse.responseTime);
-            Assert.AreEqual(new DateTime(2013,9,5), activateResponse.postDate);
+            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), activateResponse.responseTime);
+            Assert.AreEqual(new DateTime(2013, 9, 5), activateResponse.postDate);
             Assert.AreEqual("Approved", activateResponse.message);
             Assert.NotNull(activateResponse.fraudResult);
             Assert.NotNull(activateResponse.giftCardResponse);
@@ -166,10 +171,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestLoadResponse()
         {
-            String xml = "<loadResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></loadResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(loadResponse));
-            StringReader reader = new StringReader(xml);
-            loadResponse loadResponse = (loadResponse)serializer.Deserialize(reader);
+            var xml =
+                "<loadResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></loadResponse>";
+            var serializer = new XmlSerializer(typeof (loadResponse));
+            var reader = new StringReader(xml);
+            var loadResponse = (loadResponse) serializer.Deserialize(reader);
 
             Assert.AreEqual("A", loadResponse.reportGroup);
             Assert.AreEqual("3", loadResponse.id);
@@ -188,10 +194,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUnloadResponse()
         {
-            String xml = "<unloadResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></unloadResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(unloadResponse));
-            StringReader reader = new StringReader(xml);
-            unloadResponse unloadResponse = (unloadResponse)serializer.Deserialize(reader);
+            var xml =
+                "<unloadResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" duplicate=\"true\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></unloadResponse>";
+            var serializer = new XmlSerializer(typeof (unloadResponse));
+            var reader = new StringReader(xml);
+            var unloadResponse = (unloadResponse) serializer.Deserialize(reader);
 
             Assert.AreEqual("A", unloadResponse.reportGroup);
             Assert.AreEqual("3", unloadResponse.id);
@@ -210,11 +217,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestGiftCardResponse()
         {
-            String xml = "<balanceInquiryResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><giftCardResponse><availableBalance>1</availableBalance><beginningBalance>2</beginningBalance><endingBalance>3</endingBalance><cashBackAmount>4</cashBackAmount></giftCardResponse></balanceInquiryResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(balanceInquiryResponse));
-            StringReader reader = new StringReader(xml);
-            balanceInquiryResponse balanceInquiryResponse = (balanceInquiryResponse)serializer.Deserialize(reader);
-            giftCardResponse giftCardResponse = balanceInquiryResponse.giftCardResponse;
+            var xml =
+                "<balanceInquiryResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><giftCardResponse><availableBalance>1</availableBalance><beginningBalance>2</beginningBalance><endingBalance>3</endingBalance><cashBackAmount>4</cashBackAmount></giftCardResponse></balanceInquiryResponse>";
+            var serializer = new XmlSerializer(typeof (balanceInquiryResponse));
+            var reader = new StringReader(xml);
+            var balanceInquiryResponse = (balanceInquiryResponse) serializer.Deserialize(reader);
+            var giftCardResponse = balanceInquiryResponse.giftCardResponse;
 
             Assert.AreEqual("1", giftCardResponse.availableBalance);
             Assert.AreEqual("2", giftCardResponse.beginningBalance);
@@ -225,10 +233,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestBalanceInquiryResponse()
         {
-            String xml = "<balanceInquiryResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></balanceInquiryResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(balanceInquiryResponse));
-            StringReader reader = new StringReader(xml);
-            balanceInquiryResponse balanceInquiryResponse = (balanceInquiryResponse)serializer.Deserialize(reader);
+            var xml =
+                "<balanceInquiryResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></balanceInquiryResponse>";
+            var serializer = new XmlSerializer(typeof (balanceInquiryResponse));
+            var reader = new StringReader(xml);
+            var balanceInquiryResponse = (balanceInquiryResponse) serializer.Deserialize(reader);
 
             Assert.AreEqual("A", balanceInquiryResponse.reportGroup);
             Assert.AreEqual("3", balanceInquiryResponse.id);
@@ -246,10 +255,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDeactivateResponse()
         {
-            String xml = "<deactivateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></deactivateResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(deactivateResponse));
-            StringReader reader = new StringReader(xml);
-            deactivateResponse deactivateResponse = (deactivateResponse)serializer.Deserialize(reader);
+            var xml =
+                "<deactivateResponse reportGroup=\"A\" id=\"3\" customerId=\"4\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>1</litleTxnId><orderId>2</orderId><response>000</response><responseTime>2013-09-05T14:23:45</responseTime><postDate>2013-09-05</postDate><message>Approved</message><fraudResult></fraudResult><giftCardResponse></giftCardResponse></deactivateResponse>";
+            var serializer = new XmlSerializer(typeof (deactivateResponse));
+            var reader = new StringReader(xml);
+            var deactivateResponse = (deactivateResponse) serializer.Deserialize(reader);
 
             Assert.AreEqual("A", deactivateResponse.reportGroup);
             Assert.AreEqual("3", deactivateResponse.id);
@@ -267,7 +277,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCreatePlanResponse()
         {
-            String xml = @"
+            var xml = @"
 <createPlanResponse xmlns=""http://www.litle.com/schema"">
 <litleTxnId>1</litleTxnId>
 <response>000</response>
@@ -275,9 +285,9 @@ namespace Litle.Sdk.Test.Unit
 <responseTime>2013-09-05T14:23:45</responseTime>
 <planCode>thePlan</planCode>
 </createPlanResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(createPlanResponse));
-            StringReader reader = new StringReader(xml);
-            createPlanResponse createPlanResponse = (createPlanResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (createPlanResponse));
+            var reader = new StringReader(xml);
+            var createPlanResponse = (createPlanResponse) serializer.Deserialize(reader);
 
             Assert.AreEqual("1", createPlanResponse.litleTxnId);
             Assert.AreEqual("000", createPlanResponse.response);
@@ -289,7 +299,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUpdatePlanResponse()
         {
-            String xml = @"
+            var xml = @"
 <updatePlanResponse xmlns=""http://www.litle.com/schema"">
 <litleTxnId>1</litleTxnId>
 <response>000</response>
@@ -297,9 +307,9 @@ namespace Litle.Sdk.Test.Unit
 <responseTime>2013-09-05T14:23:45</responseTime>
 <planCode>thePlan</planCode>
 </updatePlanResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(updatePlanResponse));
-            StringReader reader = new StringReader(xml);
-            updatePlanResponse updatePlanResponse = (updatePlanResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (updatePlanResponse));
+            var reader = new StringReader(xml);
+            var updatePlanResponse = (updatePlanResponse) serializer.Deserialize(reader);
 
             Assert.AreEqual("1", updatePlanResponse.litleTxnId);
             Assert.AreEqual("000", updatePlanResponse.response);
@@ -311,7 +321,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUpdateSubscriptionResponseCanContainTokenResponse()
         {
-            String xml = @"
+            var xml = @"
 <updateSubscriptionResponse xmlns=""http://www.litle.com/schema"">
 <litleTxnId>1</litleTxnId>
 <response>000</response>
@@ -322,9 +332,9 @@ namespace Litle.Sdk.Test.Unit
 <litleToken>123456</litleToken>
 </tokenResponse>
 </updateSubscriptionResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(updateSubscriptionResponse));
-            StringReader reader = new StringReader(xml);
-            updateSubscriptionResponse updateSubscriptionResponse = (updateSubscriptionResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (updateSubscriptionResponse));
+            var reader = new StringReader(xml);
+            var updateSubscriptionResponse = (updateSubscriptionResponse) serializer.Deserialize(reader);
             Assert.AreEqual("123", updateSubscriptionResponse.subscriptionId);
             Assert.AreEqual("123456", updateSubscriptionResponse.tokenResponse.litleToken);
         }
@@ -332,27 +342,27 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestEnhancedAuthResponseCanContainVirtualAccountNumber()
         {
-            String xml = @"
+            var xml = @"
 <enhancedAuthResponse xmlns=""http://www.litle.com/schema"">
 <virtualAccountNumber>true</virtualAccountNumber>
 </enhancedAuthResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(enhancedAuthResponse));
-            StringReader reader = new StringReader(xml);
-            enhancedAuthResponse enhancedAuthResponse = (enhancedAuthResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (enhancedAuthResponse));
+            var reader = new StringReader(xml);
+            var enhancedAuthResponse = (enhancedAuthResponse) serializer.Deserialize(reader);
             Assert.IsTrue(enhancedAuthResponse.virtualAccountNumber);
         }
 
         [Test]
         public void TestEnhancedAuthResponseWithCardProductType()
         {
-            String xml = @"
+            var xml = @"
 <enhancedAuthResponse xmlns=""http://www.litle.com/schema"">
 <virtualAccountNumber>true</virtualAccountNumber>
 <cardProductType>COMMERCIAL</cardProductType>
 </enhancedAuthResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(enhancedAuthResponse));
-            StringReader reader = new StringReader(xml);
-            enhancedAuthResponse enhancedAuthResponse = (enhancedAuthResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (enhancedAuthResponse));
+            var reader = new StringReader(xml);
+            var enhancedAuthResponse = (enhancedAuthResponse) serializer.Deserialize(reader);
             Assert.IsTrue(enhancedAuthResponse.virtualAccountNumber);
             Assert.AreEqual(cardProductTypeEnum.COMMERCIAL, enhancedAuthResponse.cardProductType);
         }
@@ -360,13 +370,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestEnhancedAuthResponseWithNullableEnumFields()
         {
-            String xml = @"
+            var xml = @"
 <enhancedAuthResponse xmlns=""http://www.litle.com/schema"">
 <virtualAccountNumber>1</virtualAccountNumber>
 </enhancedAuthResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(enhancedAuthResponse));
-            StringReader reader = new StringReader(xml);
-            enhancedAuthResponse enhancedAuthResponse = (enhancedAuthResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (enhancedAuthResponse));
+            var reader = new StringReader(xml);
+            var enhancedAuthResponse = (enhancedAuthResponse) serializer.Deserialize(reader);
             Assert.IsTrue(enhancedAuthResponse.virtualAccountNumber);
             Assert.IsNull(enhancedAuthResponse.cardProductType);
             Assert.IsNull(enhancedAuthResponse.affluence);
@@ -375,7 +385,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestAuthReversalResponseCanContainGiftCardResponse()
         {
-            String xml = @"
+            var xml = @"
 <authReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
@@ -387,9 +397,9 @@ namespace Litle.Sdk.Test.Unit
 <availableBalance>5</availableBalance>
 </giftCardResponse>
 </authReversalResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(authReversalResponse));
-            StringReader reader = new StringReader(xml);
-            authReversalResponse authReversalResponse = (authReversalResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (authReversalResponse));
+            var reader = new StringReader(xml);
+            var authReversalResponse = (authReversalResponse) serializer.Deserialize(reader);
             Assert.AreEqual("theId", authReversalResponse.id);
             Assert.AreEqual("theCustomerId", authReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", authReversalResponse.reportGroup);
@@ -405,7 +415,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDepositReversalResponseCanContainGiftCardResponse()
         {
-            String xml = @"
+            var xml = @"
 <depositReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
@@ -417,9 +427,9 @@ namespace Litle.Sdk.Test.Unit
 <availableBalance>5</availableBalance>
 </giftCardResponse>
 </depositReversalResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(depositReversalResponse));
-            StringReader reader = new StringReader(xml);
-            depositReversalResponse depositReversalResponse = (depositReversalResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (depositReversalResponse));
+            var reader = new StringReader(xml);
+            var depositReversalResponse = (depositReversalResponse) serializer.Deserialize(reader);
             Assert.AreEqual("theId", depositReversalResponse.id);
             Assert.AreEqual("theCustomerId", depositReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", depositReversalResponse.reportGroup);
@@ -435,7 +445,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestActivateReversalResponseCanContainGiftCardResponse()
         {
-            String xml = @"
+            var xml = @"
 <activateReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
@@ -447,9 +457,9 @@ namespace Litle.Sdk.Test.Unit
 <availableBalance>5</availableBalance>
 </giftCardResponse>
 </activateReversalResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(activateReversalResponse));
-            StringReader reader = new StringReader(xml);
-            activateReversalResponse activateReversalResponse = (activateReversalResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (activateReversalResponse));
+            var reader = new StringReader(xml);
+            var activateReversalResponse = (activateReversalResponse) serializer.Deserialize(reader);
             Assert.AreEqual("theId", activateReversalResponse.id);
             Assert.AreEqual("theCustomerId", activateReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", activateReversalResponse.reportGroup);
@@ -465,7 +475,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDeactivateReversalResponseCanContainGiftCardResponse()
         {
-            String xml = @"
+            var xml = @"
 <deactivateReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
@@ -477,9 +487,9 @@ namespace Litle.Sdk.Test.Unit
 <availableBalance>5</availableBalance>
 </giftCardResponse>
 </deactivateReversalResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(deactivateReversalResponse));
-            StringReader reader = new StringReader(xml);
-            deactivateReversalResponse deactivateReversalResponse = (deactivateReversalResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (deactivateReversalResponse));
+            var reader = new StringReader(xml);
+            var deactivateReversalResponse = (deactivateReversalResponse) serializer.Deserialize(reader);
             Assert.AreEqual("theId", deactivateReversalResponse.id);
             Assert.AreEqual("theCustomerId", deactivateReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", deactivateReversalResponse.reportGroup);
@@ -495,7 +505,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestLoadReversalResponseCanContainGiftCardResponse()
         {
-            String xml = @"
+            var xml = @"
 <loadReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
@@ -507,9 +517,9 @@ namespace Litle.Sdk.Test.Unit
 <availableBalance>5</availableBalance>
 </giftCardResponse>
 </loadReversalResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(loadReversalResponse));
-            StringReader reader = new StringReader(xml);
-            loadReversalResponse loadReversalResponse = (loadReversalResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (loadReversalResponse));
+            var reader = new StringReader(xml);
+            var loadReversalResponse = (loadReversalResponse) serializer.Deserialize(reader);
             Assert.AreEqual("theId", loadReversalResponse.id);
             Assert.AreEqual("theCustomerId", loadReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", loadReversalResponse.reportGroup);
@@ -525,7 +535,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUnloadReversalResponseCanContainGiftCardResponse()
         {
-            String xml = @"
+            var xml = @"
 <unloadReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
@@ -537,9 +547,9 @@ namespace Litle.Sdk.Test.Unit
 <availableBalance>5</availableBalance>
 </giftCardResponse>
 </unloadReversalResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(unloadReversalResponse));
-            StringReader reader = new StringReader(xml);
-            unloadReversalResponse unloadReversalResponse = (unloadReversalResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (unloadReversalResponse));
+            var reader = new StringReader(xml);
+            var unloadReversalResponse = (unloadReversalResponse) serializer.Deserialize(reader);
             Assert.AreEqual("theId", unloadReversalResponse.id);
             Assert.AreEqual("theCustomerId", unloadReversalResponse.customerId);
             Assert.AreEqual("theReportGroup", unloadReversalResponse.reportGroup);
@@ -555,7 +565,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestActivateResponseCanContainVirtualGiftCardResponse()
         {
-            String xml = @"
+            var xml = @"
 <activateResponse reportGroup=""A"" id=""3"" customerId=""4"" duplicate=""true"" xmlns=""http://www.litle.com/schema"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
@@ -566,17 +576,17 @@ namespace Litle.Sdk.Test.Unit
 <accountNumber>123</accountNumber>
 </virtualGiftCardResponse>
 </activateResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(activateResponse));
-            StringReader reader = new StringReader(xml);
-            activateResponse activateResponse = (activateResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (activateResponse));
+            var reader = new StringReader(xml);
+            var activateResponse = (activateResponse) serializer.Deserialize(reader);
 
-            Assert.AreEqual("123",activateResponse.virtualGiftCardResponse.accountNumber);
+            Assert.AreEqual("123", activateResponse.virtualGiftCardResponse.accountNumber);
         }
 
         [Test]
         public void TestVirtualGiftCardResponse()
         {
-            String xml = @"
+            var xml = @"
 <activateResponse reportGroup=""A"" id=""3"" customerId=""4"" duplicate=""true"" xmlns=""http://www.litle.com/schema"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
@@ -588,9 +598,9 @@ namespace Litle.Sdk.Test.Unit
 <cardValidationNum>abc</cardValidationNum>
 </virtualGiftCardResponse>
 </activateResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(activateResponse));
-            StringReader reader = new StringReader(xml);
-            activateResponse activateResponse = (activateResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (activateResponse));
+            var reader = new StringReader(xml);
+            var activateResponse = (activateResponse) serializer.Deserialize(reader);
 
             Assert.AreEqual("123", activateResponse.virtualGiftCardResponse.accountNumber);
             Assert.AreEqual("abc", activateResponse.virtualGiftCardResponse.cardValidationNum);
@@ -599,7 +609,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestAccountUpdaterResponse()
         {
-            String xml = @"
+            var xml = @"
 <authorizationResponse xmlns=""http://www.litle.com/schema"">
 <accountUpdater>
 <extendedCardResponse>
@@ -618,9 +628,9 @@ namespace Litle.Sdk.Test.Unit
 </originalCardInfo>
 </accountUpdater>
 </authorizationResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(authorizationResponse));
-            StringReader reader = new StringReader(xml);
-            authorizationResponse authorizationResponse = (authorizationResponse)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (authorizationResponse));
+            var reader = new StringReader(xml);
+            var authorizationResponse = (authorizationResponse) serializer.Deserialize(reader);
             Assert.AreEqual("TheMessage", authorizationResponse.accountUpdater.extendedCardResponse.message);
             Assert.AreEqual("TheCode", authorizationResponse.accountUpdater.extendedCardResponse.code);
             Assert.AreEqual(methodOfPaymentTypeEnum.VI, authorizationResponse.accountUpdater.newCardInfo.type);
