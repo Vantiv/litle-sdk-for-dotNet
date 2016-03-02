@@ -13,7 +13,7 @@ namespace Litle.Sdk
         public string reportGroup;
 
         public Dictionary<string, string> config;
-        private readonly IDictionary<string, StringBuilder> _memoryStreams;
+        private readonly IDictionary<string, StringBuilder> _cache;
 
         public string batchFilePath;
         private string tempBatchFilePath;
@@ -84,9 +84,9 @@ namespace Litle.Sdk
 
         private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
 
-        public batchRequest(IDictionary<string, StringBuilder> memoryStreams)
+        public batchRequest(IDictionary<string, StringBuilder> cache)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             config = new Dictionary<string, string>();
 
             config["url"] = Settings.Default.url;
@@ -108,9 +108,9 @@ namespace Litle.Sdk
             initializeRequest();
         }
 
-        public batchRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<string, string> config)
+        public batchRequest(IDictionary<string, StringBuilder> cache, Dictionary<string, string> config)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             this.config = config;
 
             initializeRequest();
@@ -121,7 +121,7 @@ namespace Litle.Sdk
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
 
-            litleFile = new litleFile(_memoryStreams);
+            litleFile = new litleFile(_cache);
             litleTime = new litleTime();
 
             numAuthorization = 0;
@@ -686,7 +686,7 @@ namespace Litle.Sdk
             }
         }
 
-        public string addEcheckPreNoteCredit(echeckPreNoteCredit echeckPreNoteCredit)
+        public void addEcheckPreNoteCredit(echeckPreNoteCredit echeckPreNoteCredit)
         {
             if (numAccountUpdates == 0)
             {
@@ -698,7 +698,6 @@ namespace Litle.Sdk
             {
                 throw new LitleOnlineException(accountUpdateErrorMessage);
             }
-            return tempBatchFilePath;
         }
 
         public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
@@ -1303,11 +1302,11 @@ namespace Litle.Sdk
         private string responseDirectory;
 
         private Dictionary<string, string> config;
-        private readonly IDictionary<string, StringBuilder> _memoryStreams;
+        private readonly IDictionary<string, StringBuilder> _cache;
 
-        public RFRRequest(IDictionary<string, StringBuilder> memoryStreams)
+        public RFRRequest(IDictionary<string, StringBuilder> cache)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             config = new Dictionary<string, string>();
 
             config["url"] = Settings.Default.url;
@@ -1327,15 +1326,15 @@ namespace Litle.Sdk
             config["responseDirectory"] = Settings.Default.responseDirectory;
 
             litleTime = new litleTime();
-            litleFile = new litleFile(_memoryStreams);
+            litleFile = new litleFile(_cache);
 
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
         }
 
-        public RFRRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<string, string> config)
+        public RFRRequest(IDictionary<string, StringBuilder> cache, Dictionary<string, string> config)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             this.config = config;
 
             initializeRequest();
@@ -1346,7 +1345,7 @@ namespace Litle.Sdk
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
 
-            litleFile = new litleFile(_memoryStreams);
+            litleFile = new litleFile(_cache);
             litleTime = new litleTime();
         }
 

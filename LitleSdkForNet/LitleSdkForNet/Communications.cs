@@ -24,11 +24,6 @@ namespace Litle.Sdk
             _cache = cache;
         }
 
-        public StringBuilder this[string key]
-        {
-            get { return _cache[key]; }
-        }
-
         public static bool ValidateServerCertificate(
             object sender,
             X509Certificate certificate,
@@ -192,8 +187,8 @@ namespace Litle.Sdk
                 Console.WriteLine("Using XML File: " + xmlRequestFilePath);
             }
 
-            var memoryStream = this[xmlRequestFilePath];
-            var buffer = Encoding.UTF8.GetBytes(memoryStream.ToString());
+            var stringBuilder = _cache[xmlRequestFilePath];
+            var buffer = Encoding.UTF8.GetBytes(stringBuilder.ToString());
             sslStream.Write(buffer);
             sslStream.Flush();
 
