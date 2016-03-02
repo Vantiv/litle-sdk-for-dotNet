@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Litle.Sdk.Properties;
 using NUnit.Framework;
-using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    class TestEcheckRedeposit
+    internal class TestEcheckRedeposit
     {
         private LitleOnline litle;
+        private IDictionary<string, StringBuilder> _memoryCache;
 
         [TestFixtureSetUp]
         public void setUp()
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
+            _memoryCache = new Dictionary<string, StringBuilder>();
+            var config = new Dictionary<string, string>();
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
@@ -23,51 +24,53 @@ namespace Litle.Sdk.Test.Functional
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
-            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
-            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
-            config.Add("logFile", Properties.Settings.Default.logFile);
+            config.Add("proxyHost", Settings.Default.proxyHost);
+            config.Add("proxyPort", Settings.Default.proxyPort);
+            config.Add("logFile", Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(config);
+            litle = new LitleOnline(_memoryCache, config);
         }
 
 
         [Test]
-        public void simpleEcheckRedeposit() {
-            echeckRedeposit echeckredeposit = new echeckRedeposit();
+        public void simpleEcheckRedeposit()
+        {
+            var echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            echeckRedepositResponse response = litle.EcheckRedeposit(echeckredeposit);
+            var response = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void echeckRedepositWithEcheck() {
-            echeckRedeposit echeckredeposit = new echeckRedeposit();
+        public void echeckRedepositWithEcheck()
+        {
+            var echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            echeckType echeck = new echeckType();
+            var echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
             echeck.accNum = "12345657890";
             echeck.routingNum = "123456789";
             echeck.checkNum = "123455";
 
             echeckredeposit.echeck = echeck;
-            echeckRedepositResponse response = litle.EcheckRedeposit(echeckredeposit);
+            var response = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void echeckRedepositWithEcheckToken() {
-            echeckRedeposit echeckredeposit = new echeckRedeposit();
+        public void echeckRedepositWithEcheckToken()
+        {
+            var echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            echeckTokenType echeckToken = new echeckTokenType();
+            var echeckToken = new echeckTokenType();
             echeckToken.accType = echeckAccountTypeEnum.Checking;
             echeckToken.litleToken = "1234565789012";
             echeckToken.routingNum = "123456789";
             echeckToken.checkNum = "123455";
 
             echeckredeposit.token = echeckToken;
-            echeckRedepositResponse response = litle.EcheckRedeposit(echeckredeposit);
+            var response = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual("Approved", response.message);
         }
-            
     }
 }

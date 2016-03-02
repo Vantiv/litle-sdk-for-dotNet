@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Security;
+using System.Text;
+using Litle.Sdk.Properties;
 
 namespace Litle.Sdk
 {
-    public partial class batchRequest
+    public class batchRequest
     {
         public string id;
         public string merchantId;
         public string reportGroup;
 
-        public Dictionary<String, String> config;
+        public Dictionary<string, string> config;
+        private readonly IDictionary<string, StringBuilder> _memoryStreams;
 
         public string batchFilePath;
         private string tempBatchFilePath;
@@ -83,31 +84,33 @@ namespace Litle.Sdk
 
         private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
 
-        public batchRequest()
+        public batchRequest(IDictionary<string, StringBuilder> memoryStreams)
         {
-            config = new Dictionary<String, String>();
+            _memoryStreams = memoryStreams;
+            config = new Dictionary<string, string>();
 
-            config["url"] = Properties.Settings.Default.url;
-            config["reportGroup"] = Properties.Settings.Default.reportGroup;
-            config["username"] = Properties.Settings.Default.username;
-            config["printxml"] = Properties.Settings.Default.printxml;
-            config["timeout"] = Properties.Settings.Default.timeout;
-            config["proxyHost"] = Properties.Settings.Default.proxyHost;
-            config["merchantId"] = Properties.Settings.Default.merchantId;
-            config["password"] = Properties.Settings.Default.password;
-            config["proxyPort"] = Properties.Settings.Default.proxyPort;
-            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
-            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
-            config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+            config["url"] = Settings.Default.url;
+            config["reportGroup"] = Settings.Default.reportGroup;
+            config["username"] = Settings.Default.username;
+            config["printxml"] = Settings.Default.printxml;
+            config["timeout"] = Settings.Default.timeout;
+            config["proxyHost"] = Settings.Default.proxyHost;
+            config["merchantId"] = Settings.Default.merchantId;
+            config["password"] = Settings.Default.password;
+            config["proxyPort"] = Settings.Default.proxyPort;
+            config["sftpUrl"] = Settings.Default.sftpUrl;
+            config["sftpUsername"] = Settings.Default.sftpUsername;
+            config["sftpPassword"] = Settings.Default.sftpPassword;
+            config["knownHostsFile"] = Settings.Default.knownHostsFile;
+            config["requestDirectory"] = Settings.Default.requestDirectory;
+            config["responseDirectory"] = Settings.Default.responseDirectory;
 
             initializeRequest();
         }
 
-        public batchRequest(Dictionary<String, String> config)
+        public batchRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<string, string> config)
         {
+            _memoryStreams = memoryStreams;
             this.config = config;
 
             initializeRequest();
@@ -118,7 +121,7 @@ namespace Litle.Sdk
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
 
-            litleFile = new litleFile();
+            litleFile = new litleFile(_memoryStreams);
             litleTime = new litleTime();
 
             numAuthorization = 0;
@@ -173,12 +176,12 @@ namespace Litle.Sdk
 
         public string getResponseDirectory()
         {
-            return this.responseDirectory;
+            return responseDirectory;
         }
 
         public string getRequestDirectory()
         {
-            return this.requestDirectory;
+            return requestDirectory;
         }
 
         public void setLitleFile(litleFile litleFile)
@@ -188,7 +191,7 @@ namespace Litle.Sdk
 
         public litleFile getLitleFile()
         {
-            return this.litleFile;
+            return litleFile;
         }
 
         public void setLitleTime(litleTime litleTime)
@@ -198,7 +201,7 @@ namespace Litle.Sdk
 
         public litleTime getLitleTime()
         {
-            return this.litleTime;
+            return litleTime;
         }
 
         public int getNumAuthorization()
@@ -683,7 +686,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void addEcheckPreNoteCredit(echeckPreNoteCredit echeckPreNoteCredit)
+        public string addEcheckPreNoteCredit(echeckPreNoteCredit echeckPreNoteCredit)
         {
             if (numAccountUpdates == 0)
             {
@@ -695,6 +698,7 @@ namespace Litle.Sdk
             {
                 throw new LitleOnlineException(accountUpdateErrorMessage);
             }
+            return tempBatchFilePath;
         }
 
         public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
@@ -850,7 +854,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numSubmerchantCredit++;
-                submerchantCreditAmount += (long)submerchantCredit.amount;
+                submerchantCreditAmount += (long) submerchantCredit.amount;
                 fillInReportGroup(submerchantCredit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, submerchantCredit);
             }
@@ -865,7 +869,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numPayFacCredit++;
-                payFacCreditAmount += (long)payFacCredit.amount;
+                payFacCreditAmount += (long) payFacCredit.amount;
                 fillInReportGroup(payFacCredit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, payFacCredit);
             }
@@ -880,7 +884,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numReserveCredit++;
-                reserveCreditAmount += (long)reserveCredit.amount;
+                reserveCreditAmount += (long) reserveCredit.amount;
                 fillInReportGroup(reserveCredit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, reserveCredit);
             }
@@ -895,7 +899,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numVendorCredit++;
-                vendorCreditAmount += (long)vendorCredit.amount;
+                vendorCreditAmount += (long) vendorCredit.amount;
                 fillInReportGroup(vendorCredit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, vendorCredit);
             }
@@ -910,7 +914,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numPhysicalCheckCredit++;
-                physicalCheckCreditAmount += (long)physicalCheckCredit.amount;
+                physicalCheckCreditAmount += (long) physicalCheckCredit.amount;
                 fillInReportGroup(physicalCheckCredit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, physicalCheckCredit);
             }
@@ -925,7 +929,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numSubmerchantDebit++;
-                submerchantDebitAmount += (long)submerchantDebit.amount;
+                submerchantDebitAmount += (long) submerchantDebit.amount;
                 fillInReportGroup(submerchantDebit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, submerchantDebit);
             }
@@ -940,7 +944,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numPayFacDebit++;
-                payFacDebitAmount += (long)payFacDebit.amount;
+                payFacDebitAmount += (long) payFacDebit.amount;
                 fillInReportGroup(payFacDebit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, payFacDebit);
             }
@@ -955,7 +959,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numReserveDebit++;
-                reserveDebitAmount += (long)reserveDebit.amount;
+                reserveDebitAmount += (long) reserveDebit.amount;
                 fillInReportGroup(reserveDebit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, reserveDebit);
             }
@@ -970,7 +974,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numVendorDebit++;
-                vendorDebitAmount += (long)vendorDebit.amount;
+                vendorDebitAmount += (long) vendorDebit.amount;
                 fillInReportGroup(vendorDebit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, vendorDebit);
             }
@@ -985,7 +989,7 @@ namespace Litle.Sdk
             if (numAccountUpdates == 0)
             {
                 numPhysicalCheckDebit++;
-                physicalCheckDebitAmount += (long)physicalCheckDebit.amount;
+                physicalCheckDebitAmount += (long) physicalCheckDebit.amount;
                 fillInReportGroup(physicalCheckDebit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, physicalCheckDebit);
             }
@@ -995,11 +999,11 @@ namespace Litle.Sdk
             }
         }
 
-        public String Serialize()
+        public string Serialize()
         {
-            string xmlHeader = generateXmlHeader();
+            var xmlHeader = generateXmlHeader();
 
-            string xmlFooter = "</batchRequest>\r\n";
+            var xmlFooter = "</batchRequest>\r\n";
 
             batchFilePath = litleFile.createRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
 
@@ -1007,14 +1011,14 @@ namespace Litle.Sdk
             litleFile.AppendFileToFile(batchFilePath, tempBatchFilePath);
             litleFile.AppendLineToFile(batchFilePath, xmlFooter);
 
-            tempBatchFilePath = null;
+            //tempBatchFilePath = null;
 
             return batchFilePath;
         }
 
         public string generateXmlHeader()
         {
-            string xmlHeader = "\r\n<batchRequest id=\"" + id + "\"\r\n";
+            var xmlHeader = "\r\n<batchRequest id=\"" + id + "\"\r\n";
 
             if (numAuthorization != 0)
             {
@@ -1036,49 +1040,42 @@ namespace Litle.Sdk
 
             if (numCredit != 0)
             {
-
                 xmlHeader += "numCredits=\"" + numCredit + "\"\r\n";
                 xmlHeader += "creditAmount=\"" + sumOfCredit + "\"\r\n";
             }
 
             if (numForceCapture != 0)
             {
-
                 xmlHeader += "numForceCaptures=\"" + numForceCapture + "\"\r\n";
                 xmlHeader += "forceCaptureAmount=\"" + sumOfForceCapture + "\"\r\n";
             }
 
             if (numSale != 0)
             {
-
                 xmlHeader += "numSales=\"" + numSale + "\"\r\n";
                 xmlHeader += "saleAmount=\"" + sumOfSale + "\"\r\n";
             }
 
             if (numCaptureGivenAuth != 0)
             {
-
                 xmlHeader += "numCaptureGivenAuths=\"" + numCaptureGivenAuth + "\"\r\n";
                 xmlHeader += "captureGivenAuthAmount=\"" + sumOfCaptureGivenAuth + "\"\r\n";
             }
 
             if (numEcheckSale != 0)
             {
-
                 xmlHeader += "numEcheckSales=\"" + numEcheckSale + "\"\r\n";
                 xmlHeader += "echeckSalesAmount=\"" + sumOfEcheckSale + "\"\r\n";
             }
 
             if (numEcheckCredit != 0)
             {
-
                 xmlHeader += "numEcheckCredit=\"" + numEcheckCredit + "\"\r\n";
                 xmlHeader += "echeckCreditAmount=\"" + sumOfEcheckCredit + "\"\r\n";
             }
 
             if (numEcheckVerification != 0)
             {
-
                 xmlHeader += "numEcheckVerification=\"" + numEcheckVerification + "\"\r\n";
                 xmlHeader += "echeckVerificationAmount=\"" + sumOfEcheckVerification + "\"\r\n";
             }
@@ -1163,70 +1160,60 @@ namespace Litle.Sdk
 
             if (numPayFacCredit != 0)
             {
-
                 xmlHeader += "numPayFacCredit=\"" + numPayFacCredit + "\"\r\n";
                 xmlHeader += "payFacCreditAmount=\"" + payFacCreditAmount + "\"\r\n";
             }
 
             if (numSubmerchantCredit != 0)
             {
-
                 xmlHeader += "numSubmerchantCredit=\"" + numSubmerchantCredit + "\"\r\n";
                 xmlHeader += "submerchantCreditAmount=\"" + submerchantCreditAmount + "\"\r\n";
             }
 
             if (numReserveCredit != 0)
             {
-
                 xmlHeader += "numReserveCredit=\"" + numReserveCredit + "\"\r\n";
                 xmlHeader += "reserveCreditAmount=\"" + reserveCreditAmount + "\"\r\n";
             }
 
             if (numVendorCredit != 0)
             {
-
                 xmlHeader += "numVendorCredit=\"" + numVendorCredit + "\"\r\n";
                 xmlHeader += "vendorCreditAmount=\"" + vendorCreditAmount + "\"\r\n";
             }
 
             if (numPhysicalCheckCredit != 0)
             {
-
                 xmlHeader += "numPhysicalCheckCredit=\"" + numPhysicalCheckCredit + "\"\r\n";
                 xmlHeader += "physicalCheckCreditAmount=\"" + physicalCheckCreditAmount + "\"\r\n";
             }
 
             if (numPayFacDebit != 0)
             {
-
                 xmlHeader += "numPayFacDebit=\"" + numPayFacDebit + "\"\r\n";
                 xmlHeader += "payFacDebitAmount=\"" + payFacDebitAmount + "\"\r\n";
             }
 
             if (numSubmerchantDebit != 0)
             {
-
                 xmlHeader += "numSubmerchantDebit=\"" + numSubmerchantDebit + "\"\r\n";
                 xmlHeader += "submerchantDebitAmount=\"" + submerchantDebitAmount + "\"\r\n";
             }
 
             if (numReserveDebit != 0)
             {
-
                 xmlHeader += "numReserveDebit=\"" + numReserveDebit + "\"\r\n";
                 xmlHeader += "reserveDebitAmount=\"" + reserveDebitAmount + "\"\r\n";
             }
 
             if (numVendorDebit != 0)
             {
-
                 xmlHeader += "numVendorDebit=\"" + numVendorDebit + "\"\r\n";
                 xmlHeader += "vendorDebitAmount=\"" + vendorDebitAmount + "\"\r\n";
             }
 
             if (numPhysicalCheckDebit != 0)
             {
-
                 xmlHeader += "numPhysicalCheckDebit=\"" + numPhysicalCheckDebit + "\"\r\n";
                 xmlHeader += "physicalCheckDebitAmount=\"" + physicalCheckDebitAmount + "\"\r\n";
             }
@@ -1240,7 +1227,8 @@ namespace Litle.Sdk
         private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionRequest element)
         {
             string fPath;
-            fPath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_batchRequest.xml", litleTime);
+            fPath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_batchRequest.xml",
+                litleTime);
 
             litleFile.AppendLineToFile(fPath, element.Serialize());
 
@@ -1265,40 +1253,40 @@ namespace Litle.Sdk
 
         private bool isOnlyAccountUpdates()
         {
-            bool result = numAuthorization == 0
-                && numCapture == 0
-                && numCredit == 0
-                && numSale == 0
-                && numAuthReversal == 0
-                && numEcheckCredit == 0
-                && numEcheckVerification == 0
-                && numEcheckSale == 0
-                && numRegisterTokenRequest == 0
-                && numForceCapture == 0
-                && numCaptureGivenAuth == 0
-                && numEcheckRedeposit == 0
-                && numEcheckPreNoteSale == 0
-                && numEcheckPreNoteCredit == 0
-                && numUpdateCardValidationNumOnToken == 0
-                && numUpdateSubscriptions == 0
-                && numCancelSubscriptions == 0
-                && numCreatePlans == 0
-                && numUpdatePlans == 0
-                && numActivates == 0
-                && numDeactivates == 0
-                && numLoads == 0
-                && numUnloads == 0
-                && numBalanceInquiries == 0
-                && numPayFacCredit == 0
-                && numSubmerchantCredit == 0
-                && numReserveCredit == 0
-                && numVendorCredit == 0
-                && numPhysicalCheckCredit == 0
-                && numPayFacDebit == 0
-                && numSubmerchantDebit == 0
-                && numReserveDebit == 0
-                && numVendorDebit == 0
-                && numPhysicalCheckDebit == 0;
+            var result = numAuthorization == 0
+                         && numCapture == 0
+                         && numCredit == 0
+                         && numSale == 0
+                         && numAuthReversal == 0
+                         && numEcheckCredit == 0
+                         && numEcheckVerification == 0
+                         && numEcheckSale == 0
+                         && numRegisterTokenRequest == 0
+                         && numForceCapture == 0
+                         && numCaptureGivenAuth == 0
+                         && numEcheckRedeposit == 0
+                         && numEcheckPreNoteSale == 0
+                         && numEcheckPreNoteCredit == 0
+                         && numUpdateCardValidationNumOnToken == 0
+                         && numUpdateSubscriptions == 0
+                         && numCancelSubscriptions == 0
+                         && numCreatePlans == 0
+                         && numUpdatePlans == 0
+                         && numActivates == 0
+                         && numDeactivates == 0
+                         && numLoads == 0
+                         && numUnloads == 0
+                         && numBalanceInquiries == 0
+                         && numPayFacCredit == 0
+                         && numSubmerchantCredit == 0
+                         && numReserveCredit == 0
+                         && numVendorCredit == 0
+                         && numPhysicalCheckCredit == 0
+                         && numPayFacDebit == 0
+                         && numSubmerchantDebit == 0
+                         && numReserveDebit == 0
+                         && numVendorDebit == 0
+                         && numPhysicalCheckDebit == 0;
 
             return result;
         }
@@ -1314,37 +1302,40 @@ namespace Litle.Sdk
         private string requestDirectory;
         private string responseDirectory;
 
-        private Dictionary<String, String> config;
+        private Dictionary<string, string> config;
+        private readonly IDictionary<string, StringBuilder> _memoryStreams;
 
-        public RFRRequest()
+        public RFRRequest(IDictionary<string, StringBuilder> memoryStreams)
         {
-            config = new Dictionary<String, String>();
+            _memoryStreams = memoryStreams;
+            config = new Dictionary<string, string>();
 
-            config["url"] = Properties.Settings.Default.url;
-            config["reportGroup"] = Properties.Settings.Default.reportGroup;
-            config["username"] = Properties.Settings.Default.username;
-            config["printxml"] = Properties.Settings.Default.printxml;
-            config["timeout"] = Properties.Settings.Default.timeout;
-            config["proxyHost"] = Properties.Settings.Default.proxyHost;
-            config["merchantId"] = Properties.Settings.Default.merchantId;
-            config["password"] = Properties.Settings.Default.password;
-            config["proxyPort"] = Properties.Settings.Default.proxyPort;
-            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
-            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
-            config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+            config["url"] = Settings.Default.url;
+            config["reportGroup"] = Settings.Default.reportGroup;
+            config["username"] = Settings.Default.username;
+            config["printxml"] = Settings.Default.printxml;
+            config["timeout"] = Settings.Default.timeout;
+            config["proxyHost"] = Settings.Default.proxyHost;
+            config["merchantId"] = Settings.Default.merchantId;
+            config["password"] = Settings.Default.password;
+            config["proxyPort"] = Settings.Default.proxyPort;
+            config["sftpUrl"] = Settings.Default.sftpUrl;
+            config["sftpUsername"] = Settings.Default.sftpUsername;
+            config["sftpPassword"] = Settings.Default.sftpPassword;
+            config["knownHostsFile"] = Settings.Default.knownHostsFile;
+            config["requestDirectory"] = Settings.Default.requestDirectory;
+            config["responseDirectory"] = Settings.Default.responseDirectory;
 
             litleTime = new litleTime();
-            litleFile = new litleFile();
+            litleFile = new litleFile(_memoryStreams);
 
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
         }
 
-        public RFRRequest(Dictionary<String, String> config)
+        public RFRRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<string, string> config)
         {
+            _memoryStreams = memoryStreams;
             this.config = config;
 
             initializeRequest();
@@ -1355,21 +1346,21 @@ namespace Litle.Sdk
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
 
-            litleFile = new litleFile();
+            litleFile = new litleFile(_memoryStreams);
             litleTime = new litleTime();
         }
 
         public string getRequestDirectory()
         {
-            return this.requestDirectory;
+            return requestDirectory;
         }
 
         public string getResponseDirectory()
         {
-            return this.responseDirectory;
+            return responseDirectory;
         }
 
-        public void setConfig(Dictionary<String, String> config)
+        public void setConfig(Dictionary<string, string> config)
         {
             this.config = config;
         }
@@ -1381,7 +1372,7 @@ namespace Litle.Sdk
 
         public litleFile getLitleFile()
         {
-            return this.litleFile;
+            return litleFile;
         }
 
         public void setLitleTime(litleTime litleTime)
@@ -1391,17 +1382,17 @@ namespace Litle.Sdk
 
         public litleTime getLitleTime()
         {
-            return this.litleTime;
+            return litleTime;
         }
 
         public string Serialize()
         {
-            string xmlHeader = "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">";
-            string xmlFooter = "\r\n</RFRRequest>";
+            var xmlHeader = "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">";
+            var xmlFooter = "\r\n</RFRRequest>";
 
-            string filePath = litleFile.createRandomFile(requestDirectory, null, "_RFRRequest.xml", litleTime);
+            var filePath = litleFile.createRandomFile(requestDirectory, null, "_RFRRequest.xml", litleTime);
 
-            string xmlBody = "";
+            var xmlBody = "";
 
             if (accountUpdateFileRequestData != null)
             {
@@ -1421,87 +1412,26 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class echeckPreNoteCredit : transactionTypeWithReportGroup
+    public class echeckPreNoteCredit : transactionTypeWithReportGroup
     {
+        /// <remarks />
+        public string orderId { get; set; }
 
-        private string orderIdField;
+        /// <remarks />
+        public orderSourceType orderSource { get; set; }
 
-        private orderSourceType orderSourceField;
+        /// <remarks />
+        public contact billToAddress { get; set; }
 
-        private contact billToAddressField;
+        /// <remarks />
+        public echeckType echeck { get; set; }
 
-        private echeckType echeckField;
-
-        private merchantDataType merchantDataField;
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public orderSourceType orderSource
-        {
-            get
-            {
-                return this.orderSourceField;
-            }
-            set
-            {
-                this.orderSourceField = value;
-            }
-        }
-
-        /// <remarks/>
-        public contact billToAddress
-        {
-            get
-            {
-                return this.billToAddressField;
-            }
-            set
-            {
-                this.billToAddressField = value;
-            }
-        }
-
-        /// <remarks/>
-        public echeckType echeck
-        {
-            get
-            {
-                return this.echeckField;
-            }
-            set
-            {
-                this.echeckField = value;
-            }
-        }
-
-        /// <remarks/>
-        public merchantDataType merchantData
-        {
-            get
-            {
-                return this.merchantDataField;
-            }
-            set
-            {
-                this.merchantDataField = value;
-            }
-        }
+        /// <remarks />
+        public merchantDataType merchantData { get; set; }
 
         public override string Serialize()
         {
-            string xml = "\r\n<echeckPreNoteCredit ";
+            var xml = "\r\n<echeckPreNoteCredit ";
 
             if (id != null)
             {
@@ -1548,87 +1478,26 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class echeckPreNoteSale : transactionTypeWithReportGroup
+    public class echeckPreNoteSale : transactionTypeWithReportGroup
     {
+        /// <remarks />
+        public string orderId { get; set; }
 
-        private string orderIdField;
+        /// <remarks />
+        public orderSourceType orderSource { get; set; }
 
-        private orderSourceType orderSourceField;
+        /// <remarks />
+        public contact billToAddress { get; set; }
 
-        private contact billToAddressField;
+        /// <remarks />
+        public echeckType echeck { get; set; }
 
-        private echeckType echeckField;
-
-        private merchantDataType merchantDataField;
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public orderSourceType orderSource
-        {
-            get
-            {
-                return this.orderSourceField;
-            }
-            set
-            {
-                this.orderSourceField = value;
-            }
-        }
-
-        /// <remarks/>
-        public contact billToAddress
-        {
-            get
-            {
-                return this.billToAddressField;
-            }
-            set
-            {
-                this.billToAddressField = value;
-            }
-        }
-
-        /// <remarks/>
-        public echeckType echeck
-        {
-            get
-            {
-                return this.echeckField;
-            }
-            set
-            {
-                this.echeckField = value;
-            }
-        }
-
-        /// <remarks/>
-        public merchantDataType merchantData
-        {
-            get
-            {
-                return this.merchantDataField;
-            }
-            set
-            {
-                this.merchantDataField = value;
-            }
-        }
+        /// <remarks />
+        public merchantDataType merchantData { get; set; }
 
         public override string Serialize()
         {
-            string xml = "\r\n<echeckPreNoteSale ";
+            var xml = "\r\n<echeckPreNoteSale ";
 
             if (id != null)
             {
@@ -1675,9 +1544,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class submerchantCredit : transactionTypeWithReportGroup
+    public class submerchantCredit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string submerchantName { get; set; }
@@ -1690,7 +1558,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<submerchantCredit ";
+            var xml = "\r\n<submerchantCredit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1698,7 +1566,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (submerchantName != null)
                 xml += "\r\n<submerchantName>" + SecurityElement.Escape(submerchantName) + "</submerchantName>";
             if (fundsTransferId != null)
@@ -1719,9 +1588,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class payFacCredit : transactionTypeWithReportGroup
+    public class payFacCredit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string fundsTransferId { get; set; }
@@ -1730,7 +1598,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<payFacCredit ";
+            var xml = "\r\n<payFacCredit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1738,7 +1606,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (fundsTransferId != null)
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
@@ -1750,9 +1619,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class reserveCredit : transactionTypeWithReportGroup
+    public class reserveCredit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string fundsTransferId { get; set; }
@@ -1761,7 +1629,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<reserveCredit ";
+            var xml = "\r\n<reserveCredit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1769,7 +1637,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (fundsTransferId != null)
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
@@ -1781,9 +1650,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class vendorCredit : transactionTypeWithReportGroup
+    public class vendorCredit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string vendorName { get; set; }
@@ -1796,7 +1664,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<vendorCredit ";
+            var xml = "\r\n<vendorCredit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1804,7 +1672,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (vendorName != null)
                 xml += "\r\n<vendorName>" + SecurityElement.Escape(vendorName) + "</vendorName>";
             if (fundsTransferId != null)
@@ -1825,9 +1694,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class physicalCheckCredit : transactionTypeWithReportGroup
+    public class physicalCheckCredit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string fundsTransferId { get; set; }
@@ -1836,7 +1704,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<physicalCheckCredit ";
+            var xml = "\r\n<physicalCheckCredit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1844,7 +1712,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (fundsTransferId != null)
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
@@ -1856,9 +1725,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class submerchantDebit : transactionTypeWithReportGroup
+    public class submerchantDebit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string submerchantName { get; set; }
@@ -1871,7 +1739,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<submerchantDebit ";
+            var xml = "\r\n<submerchantDebit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1879,7 +1747,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (submerchantName != null)
                 xml += "\r\n<submerchantName>" + SecurityElement.Escape(submerchantName) + "</submerchantName>";
             if (fundsTransferId != null)
@@ -1900,9 +1769,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class payFacDebit : transactionTypeWithReportGroup
+    public class payFacDebit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string fundsTransferId { get; set; }
@@ -1911,7 +1779,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<payFacDebit ";
+            var xml = "\r\n<payFacDebit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1919,7 +1787,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (fundsTransferId != null)
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
@@ -1931,9 +1800,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class reserveDebit : transactionTypeWithReportGroup
+    public class reserveDebit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string fundsTransferId { get; set; }
@@ -1942,7 +1810,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<reserveDebit ";
+            var xml = "\r\n<reserveDebit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1950,7 +1818,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (fundsTransferId != null)
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
@@ -1962,9 +1831,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class vendorDebit : transactionTypeWithReportGroup
+    public class vendorDebit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string vendorName { get; set; }
@@ -1977,7 +1845,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<vendorDebit ";
+            var xml = "\r\n<vendorDebit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -1985,7 +1853,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (vendorName != null)
                 xml += "\r\n<vendorName>" + SecurityElement.Escape(vendorName) + "</vendorName>";
             if (fundsTransferId != null)
@@ -2006,9 +1875,8 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class physicalCheckDebit : transactionTypeWithReportGroup
+    public class physicalCheckDebit : transactionTypeWithReportGroup
     {
-
         public string fundingSubmerchantId { get; set; }
 
         public string fundsTransferId { get; set; }
@@ -2017,7 +1885,7 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "\r\n<physicalCheckDebit ";
+            var xml = "\r\n<physicalCheckDebit ";
 
             if (id != null)
                 xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
@@ -2025,7 +1893,8 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
             if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
             if (fundsTransferId != null)
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)

@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
+using Litle.Sdk.Properties;
 
 namespace Litle.Sdk
 {
     public class litleRequest
     {
+        private readonly IDictionary<string, StringBuilder> _memoryStreams;
         private authentication authentication;
-        private Dictionary<String, String> config;
+        private readonly Dictionary<string, string> config;
         private Communications communication;
         private litleXmlSerializer litleXmlSerializer;
-        private int numOfLitleBatchRequest = 0;
-        private int numOfRFRRequest = 0;
-        public string finalFilePath = null;
-        private string batchFilePath = null;
+        private int numOfLitleBatchRequest;
+        private int numOfRFRRequest;
+        public string finalFilePath;
+        private string batchFilePath;
         private string requestDirectory;
         private string responseDirectory;
         private litleTime litleTime;
@@ -26,27 +26,29 @@ namespace Litle.Sdk
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
-        public litleRequest()
+
+        public litleRequest(IDictionary<string, StringBuilder> memoryStreams)
         {
+            _memoryStreams = memoryStreams;
             config = new Dictionary<string, string>();
 
-            config["url"] = Properties.Settings.Default.url;
-            config["reportGroup"] = Properties.Settings.Default.reportGroup;
-            config["username"] = Properties.Settings.Default.username;
-            config["printxml"] = Properties.Settings.Default.printxml;
-            config["timeout"] = Properties.Settings.Default.timeout;
-            config["proxyHost"] = Properties.Settings.Default.proxyHost;
-            config["merchantId"] = Properties.Settings.Default.merchantId;
-            config["password"] = Properties.Settings.Default.password;
-            config["proxyPort"] = Properties.Settings.Default.proxyPort;
-            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
-            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            config["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl;
-            config["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
-            config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
-            config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+            config["url"] = Settings.Default.url;
+            config["reportGroup"] = Settings.Default.reportGroup;
+            config["username"] = Settings.Default.username;
+            config["printxml"] = Settings.Default.printxml;
+            config["timeout"] = Settings.Default.timeout;
+            config["proxyHost"] = Settings.Default.proxyHost;
+            config["merchantId"] = Settings.Default.merchantId;
+            config["password"] = Settings.Default.password;
+            config["proxyPort"] = Settings.Default.proxyPort;
+            config["sftpUrl"] = Settings.Default.sftpUrl;
+            config["sftpUsername"] = Settings.Default.sftpUsername;
+            config["sftpPassword"] = Settings.Default.sftpPassword;
+            config["knownHostsFile"] = Settings.Default.knownHostsFile;
+            config["onlineBatchUrl"] = Settings.Default.onlineBatchUrl;
+            config["onlineBatchPort"] = Settings.Default.onlineBatchPort;
+            config["requestDirectory"] = Settings.Default.requestDirectory;
+            config["responseDirectory"] = Settings.Default.responseDirectory;
 
             initializeRequest();
         }
@@ -75,8 +77,10 @@ namespace Litle.Sdk
          * requestDirectory
          * responseDirectory
          */
-        public litleRequest(Dictionary<String, String> config)
+
+        public litleRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<string, string> config)
         {
+            _memoryStreams = memoryStreams;
             this.config = config;
 
             initializeRequest();
@@ -84,7 +88,7 @@ namespace Litle.Sdk
 
         private void initializeRequest()
         {
-            communication = new Communications();
+            communication = new Communications(_memoryStreams);
 
             authentication = new authentication();
             authentication.user = config["username"];
@@ -95,22 +99,22 @@ namespace Litle.Sdk
 
             litleXmlSerializer = new litleXmlSerializer();
             litleTime = new litleTime();
-            litleFile = new litleFile();
+            litleFile = new litleFile(_memoryStreams);
         }
 
         public authentication getAuthenication()
         {
-            return this.authentication;
+            return authentication;
         }
 
         public string getRequestDirectory()
         {
-            return this.requestDirectory;
+            return requestDirectory;
         }
 
         public string getResponseDirectory()
         {
-            return this.responseDirectory;
+            return responseDirectory;
         }
 
         public void setCommunication(Communications communication)
@@ -120,7 +124,7 @@ namespace Litle.Sdk
 
         public Communications getCommunication()
         {
-            return this.communication;
+            return communication;
         }
 
         public void setLitleXmlSerializer(litleXmlSerializer litleXmlSerializer)
@@ -130,7 +134,7 @@ namespace Litle.Sdk
 
         public litleXmlSerializer getLitleXmlSerializer()
         {
-            return this.litleXmlSerializer;
+            return litleXmlSerializer;
         }
 
         public void setLitleTime(litleTime litleTime)
@@ -140,7 +144,7 @@ namespace Litle.Sdk
 
         public litleTime getLitleTime()
         {
-            return this.litleTime;
+            return litleTime;
         }
 
         public void setLitleFile(litleFile litleFile)
@@ -150,7 +154,7 @@ namespace Litle.Sdk
 
         public litleFile getLitleFile()
         {
-            return this.litleFile;
+            return litleFile;
         }
 
         public void addBatch(batchRequest litleBatchRequest)
@@ -172,7 +176,7 @@ namespace Litle.Sdk
             {
                 throw new LitleOnlineException("Can not add an RFRRequest to a batch with requests!");
             }
-            else if (numOfRFRRequest >= 1)
+            if (numOfRFRRequest >= 1)
             {
                 throw new LitleOnlineException("Can not add more than one RFRRequest to a batch!");
             }
@@ -183,18 +187,18 @@ namespace Litle.Sdk
 
         public litleResponse sendToLitleWithStream()
         {
-            string requestFilePath = this.Serialize();
-            string batchName = Path.GetFileName(requestFilePath);
+            var requestFilePath = Serialize();
+            var batchName = Path.GetFileName(requestFilePath);
 
-            string responseFilePath = communication.socketStream(requestFilePath, responseDirectory, config);
+            var responseFilePath = communication.socketStream(requestFilePath, responseDirectory, config);
 
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
+            var litleResponse = litleXmlSerializer.DeserializeObjectFromFile(communication, responseFilePath);
             return litleResponse;
         }
 
         public string sendToLitle()
         {
-            string requestFilePath = this.Serialize();
+            var requestFilePath = Serialize();
 
             communication.FtpDropOff(requestDirectory, Path.GetFileName(requestFilePath), config);
             return Path.GetFileName(requestFilePath);
@@ -208,19 +212,18 @@ namespace Litle.Sdk
 
         public litleResponse receiveFromLitle(string batchFileName)
         {
-            litleFile.createDirectory(responseDirectory);
-
             communication.FtpPickUp(responseDirectory + batchFileName, config, batchFileName);
 
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseDirectory + batchFileName);
+            var litleResponse = litleXmlSerializer.DeserializeObjectFromFile(communication,
+                responseDirectory + batchFileName);
             return litleResponse;
         }
 
         public string SerializeBatchRequestToFile(batchRequest litleBatchRequest, string filePath)
         {
-
-            filePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_litleRequest.xml", litleTime);
-            string tempFilePath = litleBatchRequest.Serialize();
+            filePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_litleRequest.xml",
+                litleTime);
+            var tempFilePath = litleBatchRequest.Serialize();
 
             litleFile.AppendFileToFile(filePath, tempFilePath);
 
@@ -229,8 +232,9 @@ namespace Litle.Sdk
 
         public string SerializeRFRRequestToFile(RFRRequest rfrRequest, string filePath)
         {
-            filePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_litleRequest.xml", litleTime);
-            string tempFilePath = rfrRequest.Serialize();
+            filePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_litleRequest.xml",
+                litleTime);
+            var tempFilePath = rfrRequest.Serialize();
 
             litleFile.AppendFileToFile(filePath, tempFilePath);
 
@@ -239,23 +243,27 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.3\"" +
-             " xmlns=\"http://www.litle.com/schema\" " +
-             "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
+            var xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.3\"" +
+                            " xmlns=\"http://www.litle.com/schema\" " +
+                            "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
 
-            string xmlFooter = "\r\n</litleRequest>";
+            var xmlFooter = "\r\n</litleRequest>";
 
             string filePath;
 
-            finalFilePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(finalFilePath), ".xml", litleTime);
+            finalFilePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(finalFilePath), ".xml",
+                litleTime);
             filePath = finalFilePath;
 
             litleFile.AppendLineToFile(finalFilePath, xmlHeader);
+            var a = litleFile.ReadPosition(finalFilePath);
             litleFile.AppendLineToFile(finalFilePath, authentication.Serialize());
+            a = litleFile.ReadPosition(finalFilePath);
 
             if (batchFilePath != null)
             {
                 litleFile.AppendFileToFile(finalFilePath, batchFilePath);
+                a = litleFile.ReadPosition(finalFilePath);
             }
             else
             {
@@ -263,7 +271,7 @@ namespace Litle.Sdk
             }
 
             litleFile.AppendLineToFile(finalFilePath, xmlFooter);
-
+            a = litleFile.ReadPosition(finalFilePath);
             finalFilePath = null;
 
             return filePath;
@@ -276,92 +284,84 @@ namespace Litle.Sdk
                 litleBatchRequest.reportGroup = config["reportGroup"];
             }
         }
-
     }
 
     public class litleFile
     {
-        public virtual string createRandomFile(string fileDirectory, string fileName, string fileExtension, litleTime litleTime)
+        private readonly IDictionary<string, StringBuilder> _cache;
+
+        public litleFile(IDictionary<string, StringBuilder> cache)
+        {
+            _cache = cache;
+        }
+
+        public StringBuilder this[string name]
+        {
+            get { return _cache[name]; }
+        }
+
+        public virtual string createRandomFile(string fileDirectory, string fileName, string fileExtension,
+            litleTime litleTime)
         {
             string filePath = null;
-            if (fileName == null || fileName == String.Empty)
+            if (fileName == null || fileName == string.Empty)
             {
-                if (!Directory.Exists(fileDirectory))
-                {
-                    Directory.CreateDirectory(fileDirectory);
-                }
-
                 fileName = litleTime.getCurrentTime("MM-dd-yyyy_HH-mm-ss-ffff_") + RandomGen.NextString(8);
                 filePath = fileDirectory + fileName + fileExtension;
-
-                using (FileStream fs = new FileStream(filePath, FileMode.Create))
-                {
-                }
             }
             else
             {
                 filePath = fileDirectory + fileName;
             }
-
+            if (_cache.ContainsKey(filePath))
+            {
+                _cache[filePath] = new StringBuilder();
+            }
+            else
+            {
+                _cache.Add(filePath, new StringBuilder());
+            }
             return filePath;
         }
 
         public virtual string AppendLineToFile(string filePath, string lineToAppend)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Append))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                sw.Write(lineToAppend);
-            }
-
+            var ms = _cache[filePath];
+            ms.Append(lineToAppend);
             return filePath;
         }
 
+        public virtual string ReadPosition(string filepath)
+        {
+            var s = _cache[filepath];
+            return s.ToString();
+        }
 
         public virtual string AppendFileToFile(string filePathToAppendTo, string filePathToAppend)
         {
-
-            using (FileStream fs = new FileStream(filePathToAppendTo, FileMode.Append))
-            using (FileStream fsr = new FileStream(filePathToAppend, FileMode.Open))
+            var fs = _cache[filePathToAppendTo];
+            StringBuilder fsr = null;
+            if (filePathToAppend != null)
             {
-                byte[] buffer = new byte[16];
-
-                int bytesRead = 0;
-
-                do
-                {
-                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
-                    fs.Write(buffer, 0, bytesRead);
-                }
-                while (bytesRead > 0);
+                fsr = _cache[filePathToAppend];
+                fs.Append(fsr);
             }
-
-            File.Delete(filePathToAppend);
 
             return filePathToAppendTo;
-        }
-
-        public virtual void createDirectory(string destinationFilePath)
-        {
-            string destinationDirectory = Path.GetDirectoryName(destinationFilePath);
-
-            if (!Directory.Exists(destinationDirectory))
-            {
-                Directory.CreateDirectory(destinationDirectory);
-            }
         }
     }
 
     public static class RandomGen
     {
-        private static RNGCryptoServiceProvider _global = new RNGCryptoServiceProvider();
+        private static readonly RNGCryptoServiceProvider _global = new RNGCryptoServiceProvider();
         private static Random _local;
+
         public static int NextInt()
         {
-            Random inst = _local;
+            var inst = _local;
             if (inst == null)
             {
-                byte[] buffer = new byte[8];
+                var buffer = new byte[8];
                 _global.GetBytes(buffer);
                 _local = inst = new Random(BitConverter.ToInt32(buffer, 0));
             }
@@ -371,11 +371,11 @@ namespace Litle.Sdk
 
         public static string NextString(int length)
         {
-            string result = "";
+            var result = "";
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
-                result += Convert.ToChar(NextInt() % ('Z' - 'A') + 'A');
+                result += Convert.ToChar(NextInt()%('Z' - 'A') + 'A');
             }
 
             return result;
@@ -384,10 +384,9 @@ namespace Litle.Sdk
 
     public class litleTime
     {
-        public virtual String getCurrentTime(String format)
+        public virtual string getCurrentTime(string format)
         {
             return DateTime.Now.ToString(format);
         }
     }
-
 }
