@@ -193,7 +193,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("iwp1.lowell.litle.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("websenseproxy")]
         public string proxyHost {
             get {
                 return ((string)(this["proxyHost"]));
