@@ -1,4 +1,4 @@
-Vantiv eCommerce Online .NET SDK
+Vantiv eCommerce .NET SDK
 =====================
 
 About Vantiv eCommerce
