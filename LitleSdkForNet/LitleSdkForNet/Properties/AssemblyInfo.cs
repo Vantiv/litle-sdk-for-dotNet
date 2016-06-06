@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Litle & Co.")]
 [assembly: AssemblyProduct("LitleSdkForNet")]
-[assembly: AssemblyCopyright("Copyright © Litle & Co. 2012")]
+[assembly: AssemblyCopyright("Copyright © Vantiv eCommerce 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
