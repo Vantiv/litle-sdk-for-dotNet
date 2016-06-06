@@ -37,7 +37,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>/C:DotNetSdkBuild\xml10\dotNetSDKKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>dotNetSDKKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
