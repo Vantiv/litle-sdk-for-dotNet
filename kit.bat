@@ -3,8 +3,8 @@ IF "%1"==[] (
 	exit /b
 )
 
-copy LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForDotNet.dll .\
-copy LitleSdkForNet\LitleSdkForNet\bin\Debug\LitleSdkForDotNet.dll.config .\
-"c:\Program Files\WinRAR\winrar.exe" a LitleSdkForDotNet-%1.zip CHANGELOG LICENSE LitleSdkForDotNet.dll LitleSdkForDotNet.dll.config README.md
-del LitleSdkForDotNet.dll
-del LitleSdkForDotNet.dll.config
+copy LitleSdkForNet\LitleSdkForNet\bin\Release\LitleSdkForNet.dll .\
+copy LitleSdkForNet\LitleSdkForNet\bin\Release\LitleSdkForNet.dll.config .\
+"C:\Program Files\7-Zip\7z.exe" a LitleSdkForNet-%1.zip CHANGELOG LICENSE LitleSdkForNet.dll LitleSdkForNet.dll.config README.md
+del LitleSdkForNet.dll
+del LitleSdkForNet.dll.config
