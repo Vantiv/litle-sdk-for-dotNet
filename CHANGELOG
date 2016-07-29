@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Varsion 9.3.3
+*Feature: adding signed dlls and signing our dll
+
 ==Version 9.3.2
 HTTP timeout is set to 500ms
 Add RecycleEngineActiveFlag
