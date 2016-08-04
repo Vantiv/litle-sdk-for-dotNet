@@ -4523,6 +4523,7 @@ namespace Litle.Sdk
         public deactivateReversalResponse deactivateReversalResponse;
         public loadReversalResponse loadReversalResponse;
         public unloadReversalResponse unloadReversalResponse;
+        public fraudCheckResponse fraudCheckResponse;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]

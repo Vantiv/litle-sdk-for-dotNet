@@ -42,6 +42,7 @@ namespace Litle.Sdk
         public activateReversal activateReversal;
         public deactivateReversal deactivateReversal;
         public unloadReversal unloadReversal;
+        public fraudCheck fraudCheck;
 
         public string Serialize()
         {
@@ -78,6 +79,7 @@ namespace Litle.Sdk
             else if (activateReversal != null) xml += activateReversal.Serialize();
             else if (deactivateReversal != null) xml += deactivateReversal.Serialize();
             else if (unloadReversal != null) xml += unloadReversal.Serialize();
+            else if (fraudCheck != null) xml += fraudCheck.Serialize();
             xml += "\r\n</litleOnlineRequest>";
 
             return xml;
@@ -3643,11 +3645,18 @@ namespace Litle.Sdk
 
         public override string Serialize()
         {
-            string xml = "";
-            if (advancedFraudChecks != null) xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "</advancedFraudChecks>";
+            string xml = "\r\n<fraudCheck";
+            xml += " id=\"" + SecurityElement.Escape(id) + "\"";
+                if (customerId != null)
+                {
+                    xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
+                }
+            xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (advancedFraudChecks != null) xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
             if (billToAddressSet) xml += "\r\n<billToAddress>" + billToAddressField.Serialize() + "</billToAddress>";
             if (shipToAddressSet) xml += "\r\n<shipToAddress>" + shipToAddressField.Serialize() + "</shipToAddress>";
             if (amountSet) xml += "\r\n<amount>" + amountField.ToString() + "</amount>";
+            xml += "\r\n</fraudCheck>";
             return xml;
         }
     }

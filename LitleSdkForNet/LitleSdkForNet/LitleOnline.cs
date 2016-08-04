@@ -374,6 +374,17 @@ namespace Litle.Sdk
             return unloadReversalResponse;
         }
 
+        public fraudCheckResponse FraudCheck(fraudCheck fraudCheck)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(fraudCheck);
+            request.fraudCheck = fraudCheck;
+
+            litleOnlineResponse response = sendToLitle(request);
+            fraudCheckResponse fraudCheckResponse = (fraudCheckResponse)response.fraudCheckResponse;
+            return fraudCheckResponse;
+        }
+
         private litleOnlineRequest createLitleOnlineRequest()
         {
             litleOnlineRequest request = new litleOnlineRequest();
