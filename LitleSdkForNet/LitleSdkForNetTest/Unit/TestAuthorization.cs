@@ -485,6 +485,7 @@ namespace Litle.Sdk.Test.Unit
 <deviceReviewStatus>ReviewStatus</deviceReviewStatus>
 <deviceReputationScore>800</deviceReputationScore>
 <triggeredRule>rule triggered</triggeredRule>
+<triggeredRule>rule triggered 2</triggeredRule>
 </advancedFraudResults>
 </fraudResult>
 </authorizationResponse>

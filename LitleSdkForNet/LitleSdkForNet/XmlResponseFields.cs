@@ -4252,6 +4252,7 @@ namespace Litle.Sdk
         public unloadReversalResponse unloadReversalResponse;
         public queryTransactionResponse queryTransactionResponse;
         public queryTransactionUnavailableResponse queryTransactionUnavailableResponse;
+        public fraudCheckResponse fraudCheckResponse;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
