@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -14,10 +11,10 @@ namespace Litle.Sdk
         private Dictionary<string, string> config;
         private Communications communication;
         private litleXmlSerializer litleXmlSerializer;
-        private int numOfLitleBatchRequest = 0;
-        private int numOfRFRRequest = 0;
-        public string finalFilePath = null;
-        private string batchFilePath = null;
+        private int numOfLitleBatchRequest;
+        private int numOfRFRRequest;
+        public string finalFilePath;
+        private string batchFilePath;
         private string requestDirectory;
         private string responseDirectory;
         private litleTime litleTime;
@@ -28,27 +25,25 @@ namespace Litle.Sdk
          */
         public litleRequest()
         {
-            config = new Dictionary<string, string>
-            {
-                ["url"] = Properties.Settings.Default.url,
-                ["reportGroup"] = Properties.Settings.Default.reportGroup,
-                ["username"] = Properties.Settings.Default.username,
-                ["printxml"] = Properties.Settings.Default.printxml,
-                ["timeout"] = Properties.Settings.Default.timeout,
-                ["proxyHost"] = Properties.Settings.Default.proxyHost,
-                ["merchantId"] = Properties.Settings.Default.merchantId,
-                ["password"] = Properties.Settings.Default.password,
-                ["proxyPort"] = Properties.Settings.Default.proxyPort,
-                ["sftpUrl"] = Properties.Settings.Default.sftpUrl,
-                ["sftpUsername"] = Properties.Settings.Default.sftpUsername,
-                ["sftpPassword"] = Properties.Settings.Default.sftpPassword,
-                ["knownHostsFile"] = Properties.Settings.Default.knownHostsFile,
-                ["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl,
-                ["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort,
-                ["requestDirectory"] = Properties.Settings.Default.requestDirectory,
-                ["responseDirectory"] = Properties.Settings.Default.responseDirectory
-            };
-
+            config = new Dictionary<string, string>();
+            
+            config["url"] = Properties.Settings.Default.url;
+            config["reportGroup"] = Properties.Settings.Default.reportGroup;
+            config["username"] = Properties.Settings.Default.username;
+            config["printxml"] = Properties.Settings.Default.printxml;
+            config["timeout"] = Properties.Settings.Default.timeout;
+            config["proxyHost"] = Properties.Settings.Default.proxyHost;
+            config["merchantId"] = Properties.Settings.Default.merchantId;
+            config["password"] = Properties.Settings.Default.password;
+            config["proxyPort"] = Properties.Settings.Default.proxyPort;
+            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
+            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
+            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            config["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl;
+            config["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
+            config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+            config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
             initializeRequest();
         }
@@ -77,7 +72,7 @@ namespace Litle.Sdk
          * requestDirectory
          * responseDirectory
          */
-        public litleRequest(Dictionary<String, String> config)
+        public litleRequest(Dictionary<string, string> config)
         {
             this.config = config;
 

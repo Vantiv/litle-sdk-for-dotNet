@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk
 {
-    public partial class litleOnlineRequest
+    public class litleOnlineRequest
     {
 
         public string merchantId;
@@ -46,7 +46,9 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"9.3\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" 
+                + merchantId + "\" version=\"9.3\" merchantSdk=\"" 
+                + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -87,17 +89,17 @@ namespace Litle.Sdk
     }
 
 
-    public partial class authentication
+    public class authentication
     {
         public string user;
         public string password;
-        public String Serialize()
+        public string Serialize()
         {
             return "\r\n<authentication>\r\n<user>" + SecurityElement.Escape(user) + "</user>\r\n<password>" + SecurityElement.Escape(password) + "</password>\r\n</authentication>";
         }
     }
 
-    public partial class customerInfo
+    public class customerInfo
     {
 
         public string ssn;
