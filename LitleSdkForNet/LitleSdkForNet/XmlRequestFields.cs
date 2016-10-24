@@ -559,6 +559,7 @@ namespace Litle.Sdk
             set { this.payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
         }
         public string payPalNotes;
+        public pinType pin;
 
         public override string Serialize()
         {
@@ -581,6 +582,7 @@ namespace Litle.Sdk
             if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
             if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderComplete>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderComplete>";
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
+            if (pin != null) xml += pin.Serialize();
             xml += "\r\n</capture>";
 
             return xml;
@@ -1392,6 +1394,31 @@ namespace Litle.Sdk
         }
         public advancedFraudChecksType advancedFraudChecks;
         public wallet wallet;
+        private processingType processingTypeField;
+        private bool processingTypeSet;
+
+        public processingType processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value; processingTypeSet = true; }
+        }
+
+        private string originalNetworkTransactionIdField;
+        private bool originalNetworkTransactionIdSet;
+        public string originalNetworkTransactionId
+        {
+            get { return originalNetworkTransactionIdField; }
+            set { originalNetworkTransactionIdField = value; originalNetworkTransactionIdSet = true; }
+        }
+    
+        private long originalTransactionAmountField;
+        private bool originalTxnAmountSet;
+
+        public long originalTransactionAmount
+        {
+            get { return originalTransactionAmountField; }
+            set { originalTransactionAmountField = value; originalTxnAmountSet = true; }
+        }
 
         public override String Serialize()
         {
@@ -1515,6 +1542,18 @@ namespace Litle.Sdk
                 if (wallet != null)
                 {
                     xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
+                }
+                if (processingTypeSet)
+                {
+                    xml += "\r\n<processingType>" + processingType + "</processingType>";
+                }
+                if (originalNetworkTransactionIdSet)
+                {
+                    xml += "\r\n<originalNetworkId>" + originalNetworkTransactionId + "</originalNetworkId>";
+                }
+                if (originalTxnAmountSet)
+                {
+                    xml += "\r\n<originalTransactinAmount>" + originalTransactionAmount + "</originalTransactinAmount>";
                 }
             }
             
@@ -1816,6 +1855,15 @@ namespace Litle.Sdk
             }
         }
 
+        private processingType processingTypeField;
+        private bool processingTypeSet;
+
+        public processingType processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value; processingTypeSet = true; }
+        }
+
         public override String Serialize()
         {
             string xml = "\r\n<forceCapture";
@@ -1879,6 +1927,10 @@ namespace Litle.Sdk
                 xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
             }
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (processingTypeSet)
+            {
+                xml += "\r\n<processingType>" + processingType + "<processingType>";
+            }
             xml += "\r\n</forceCapture>";
             return xml;
         }
@@ -1911,6 +1963,7 @@ namespace Litle.Sdk
         public cardTokenType token;
         public cardPaypageType paypage;
         public customBilling customBilling;
+
         private govtTaxTypeEnum taxTypeField;
         private bool taxTypeSet;
         public govtTaxTypeEnum taxType
@@ -1918,25 +1971,44 @@ namespace Litle.Sdk
             get { return this.taxTypeField; }
             set { this.taxTypeField = value; this.taxTypeSet = true; }
         }
+
         public billMeLaterRequest billMeLaterRequest;
         public enhancedData enhancedData;
         public processingInstructions processingInstructions;
         public pos pos;
         public amexAggregatorData amexAggregatorData;
         public merchantDataType merchantData;
+
         private bool debtRepaymentField;
         private bool debtRepaymentSet;
         public bool debtRepayment
         {
-            get
-            {
-                return this.debtRepaymentField;
-            }
-            set
-            {
-                this.debtRepaymentField = value;
-                this.debtRepaymentSet = true;
-            }
+            get { return this.debtRepaymentField; }
+            set { this.debtRepaymentField = value; this.debtRepaymentSet = true; }
+        }
+
+        private processingType processingTypeField;
+        private bool processingTypeSet;
+        public processingType processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value; processingTypeSet = true; }
+        }
+
+        private string originalNetworkTransactionIdField;
+        private bool originalNetworkTransactionIdSet;
+        public string originalNetworkTransactionId
+        {
+            get { return originalNetworkTransactionIdField; }
+            set { originalNetworkTransactionIdField = value; originalNetworkTransactionIdSet = true; }
+        }
+
+        private long originalTransactionAmountField;
+        private bool originalTransactionAmountSet;
+        public long originalTransactionAmount
+        {
+            get { return originalTransactionAmountField; }
+            set { originalTransactionAmountField = value; originalTransactionAmountSet = true; }
         }
 
         public override String Serialize()
@@ -2011,6 +2083,18 @@ namespace Litle.Sdk
                 xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
             }
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (processingTypeSet)
+            {
+                xml += "\r\n<processingType>" + processingType + "</processingType>";
+            }
+            if (originalNetworkTransactionIdSet)
+            {
+                xml += "\r\n<originalNetworkTransactionId>" + originalNetworkTransactionId + "</originalNetworkTransactionId>";
+            }
+            if (originalTransactionAmountSet)
+            {
+                xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
+            }
             xml += "\r\n</captureGivenAuth>";
             return xml;
         }
@@ -3120,6 +3204,7 @@ namespace Litle.Sdk
         public string expDate;
         public string track;
         public string cardValidationNum;
+        public pinType pin;
 
         public string Serialize()
         {
@@ -3144,6 +3229,22 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
             }
+            return xml;
+        }
+    }
+
+    public class pinType
+    {
+        public string pin
+        {
+            get { return pin; }
+            set { pin = value; }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            xml += "\r\n<pin>" + pin + "</pin>";
             return xml;
         }
     }
@@ -3595,7 +3696,15 @@ namespace Litle.Sdk
 
     public enum walletWalletSourceType
     {
-        MasterPass
+        MasterPass,
+        VisaCheckout
+    }
+
+    public enum processingType
+    {
+        accountFunding,
+        initialRecurring,
+        initialInstallment
     }
 
     public partial class fraudCheck : transactionTypeWithReportGroup
