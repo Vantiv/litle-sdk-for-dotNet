@@ -126,6 +126,32 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
+        public void SaleWithMasterCard_withProcessingTypeAndNetworkTxnId()
+        {
+            var saleObj = new sale
+            {
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingType.accountFunding,
+                originalNetworkTransactionId = "12345678912345",
+                originalTransactionAmount = 1492
+            };
+            var cardObj = new cardType
+            {
+                type = methodOfPaymentTypeEnum.VI,
+                number = "5400700000000000",
+                expDate = "1210"
+            };
+            saleObj.card = cardObj;
+
+            var responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            Assert.Null(responseObj.networkTransactionId);
+        }
+
+        [Test]
         public void SimpleSaleWithMpos()
         {
             sale saleObj = new sale();
@@ -180,7 +206,7 @@ namespace Litle.Sdk.Test.Functional
             applepay.header = applepayHeaderType;
             applepay.data = "user";
             applepay.signature = "sign";
-            applepay.version = "1";
+            applepay.version = "12345";
             saleObj.applepay = applepay;
             wallet wallet = new Sdk.wallet();
             wallet.walletSourceTypeId = "123";
