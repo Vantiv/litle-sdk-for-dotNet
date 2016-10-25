@@ -47,7 +47,7 @@ namespace Litle.Sdk
         public string Serialize()
         {
             string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" 
-                + merchantId + "\" version=\"9.3\" merchantSdk=\"" 
+                + merchantId + "\" version=\"9.10\" merchantSdk=\"" 
                 + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
@@ -914,6 +914,7 @@ namespace Litle.Sdk
         public merchantDataType merchantData;
         public String payPalNotes;
         public String actionReason;
+        public pinType pin;
 
         public override string Serialize()
         {
@@ -967,6 +968,10 @@ namespace Litle.Sdk
             }
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
             if (actionReason != null) xml += "\r\n<actionReason>" + SecurityElement.Escape(actionReason) + "</actionReason>";
+            if (pin != null)
+            {
+                xml += pin.Serialize();
+            }
             xml += "\r\n</credit>";
             return xml;
         }
@@ -1549,11 +1554,11 @@ namespace Litle.Sdk
                 }
                 if (originalNetworkTransactionIdSet)
                 {
-                    xml += "\r\n<originalNetworkId>" + originalNetworkTransactionId + "</originalNetworkId>";
+                    xml += "\r\n<originalNetworkTransactionId>" + originalNetworkTransactionId + "</originalNetworkTransactionId>";
                 }
                 if (originalTxnAmountSet)
                 {
-                    xml += "\r\n<originalTransactinAmount>" + originalTransactionAmount + "</originalTransactinAmount>";
+                    xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
                 }
             }
             
@@ -1678,6 +1683,30 @@ namespace Litle.Sdk
         public advancedFraudChecksType advancedFraudChecks;
         public wallet wallet;
 
+        private processingType processingTypeField;
+        private bool processingTypeSet;
+        public processingType processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value; processingTypeSet = true; }
+        }
+
+        private string originalNetworkTransactionIdField;
+        private bool originalNetworkTxnSet;
+        public string originalNetworkTransactionId
+        {
+            get { return originalNetworkTransactionIdField;}
+            set { originalNetworkTransactionIdField = value; originalNetworkTxnSet = true; }
+        }
+
+        private long originalTransactionAmountField;
+        private bool originalTxnAmountSet;
+        public long originalTransactionAmount
+        {
+            get { return originalTransactionAmountField; }
+            set { originalTransactionAmountField = value; originalTxnAmountSet = true; }
+        }
+
         public override String Serialize()
         {
             string xml = "\r\n<sale";
@@ -1797,6 +1826,18 @@ namespace Litle.Sdk
             if (wallet != null)
             {
                 xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
+            }
+            if (processingTypeSet)
+            {
+                xml += "\r\n<processingType>" + processingType + "</processingType>";
+            }
+            if (originalNetworkTxnSet)
+            {
+                xml += "\r\n<originalNetworkTransactionId>" + originalNetworkTransactionId + "</originalNetworkTransactionId>";
+            }
+            if (originalTxnAmountSet)
+            {
+                xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
             }
             xml += "\r\n</sale>";
             return xml;
@@ -2780,6 +2821,7 @@ namespace Litle.Sdk
         public static readonly orderSourceType recurringtel = new orderSourceType("recurringtel");
         public static readonly orderSourceType echeckppd = new orderSourceType("echeckppd");
         public static readonly orderSourceType applepay = new orderSourceType("applepay");
+        public static readonly orderSourceType androidpay = new orderSourceType("androidpay");
 
         private orderSourceType(String value) { this.value = value; }
         public string Serialize() { return value; }

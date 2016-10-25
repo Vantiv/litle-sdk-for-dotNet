@@ -16,10 +16,11 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpLitle()
         {
             config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            //config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "http://barnold-vm4:8081/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
+            config.Add("version", "9.10.0");
             config.Add("timeout", "5000");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
@@ -51,6 +52,98 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }
+
+        [Test]
+        public void SimpleAuthWithMasterCard()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.MC;
+            card.number = "540000000000000000";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333"; //This needs to compile too            
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+            Assert.Null(response.networkTransactionId);
+        }
+
+        [Test]
+        public void SimpleAuthWithCard_CardSuffixResponse()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            authorization.processingType = processingType.accountFunding;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "410070000000000000";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333"; //This needs to compile too            
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+            Assert.AreEqual("123456", response.cardSuffix);
+        }
+
+        [Test]
+        public void SimpleAuthWithCard_networkTxnId()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            authorization.processingType = processingType.initialInstallment;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "410080000000000000";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333"; //This needs to compile too            
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+            Assert.AreEqual("63225578415568556365452427825", response.networkTransactionId);
+        }
+
+        [Test]
+        public void SimpleAuthWithCard_origTxnIdAndAmount()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            authorization.originalNetworkTransactionId = "123456789012345678901234567890";
+            authorization.originalTransactionAmount = 2500;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "410000000000000000";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333"; //This needs to compile too            
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
+
         [Test]
         public void SimpleAuthWithMpos()
         {
@@ -66,12 +159,12 @@ namespace Litle.Sdk.Test.Functional
             mpos.track1Status = 0;
             mpos.track2Status = 0;
             authorization.mpos = mpos; //This needs to compile
-       
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }
-         [Test]
+
+        [Test]
         public void AuthWithAmpersand()
         {
             authorization authorization = new authorization();
@@ -94,7 +187,8 @@ namespace Litle.Sdk.Test.Functional
              authorization.card = card;
              authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
-         }
+        }
+
         [Test]
         public void simpleAuthWithPaypal()
         {
@@ -117,7 +211,31 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
-        public void simpleAuthWithApplepayAndSecondaryAmountAndWallet()
+        public void simpleAuthWithAndroidPay()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "123456";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.androidpay;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            authorization.card = card; //This needs to compile
+
+            customBilling cb = new customBilling();
+            cb.phone = "1112223333"; //This needs to compile too            
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("01", response.androidpayResponse.expMonth);
+            Assert.AreEqual("2050", response.androidpayResponse.expYear);
+            Assert.IsNotEmpty(response.androidpayResponse.cryptogram);
+        }
+
+        [Test]
+        public void simpleAuthWithApplepayAndSecondaryAmountAndWallet_MasterPass()
         {
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -134,12 +252,43 @@ namespace Litle.Sdk.Test.Functional
             applepay.header = applepayHeaderType;
             applepay.data = "user";
             applepay.signature = "sign";
-            applepay.version = "1";
+            applepay.version = "12345";
             authorization.applepay = applepay;
 
             wallet wallet = new wallet();
             wallet.walletSourceTypeId = "123";
             wallet.walletSourceType = walletWalletSourceType.MasterPass;
+            authorization.wallet = wallet;
+
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Insufficient Funds", response.message);
+            Assert.AreEqual("110", response.applepayResponse.transactionAmount);
+        }
+
+        [Test]
+        public void simpleAuthWithApplepayAndSecondaryAmountAndWallet_VisaCheckout()
+        {
+            authorization authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "123456";
+            authorization.amount = 110;
+            authorization.secondaryAmount = 50;
+            authorization.orderSource = orderSourceType.applepay;
+            applepayType applepay = new applepayType();
+            applepayHeaderType applepayHeaderType = new applepayHeaderType();
+            applepayHeaderType.applicationData = "454657413164";
+            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.transactionId = "1234";
+            applepay.header = applepayHeaderType;
+            applepay.data = "user";
+            applepay.signature = "sign";
+            applepay.version = "12345";
+            authorization.applepay = applepay;
+
+            wallet wallet = new wallet();
+            wallet.walletSourceTypeId = "123";
+            wallet.walletSourceType = walletWalletSourceType.VisaCheckout;
             authorization.wallet = wallet;
 
             authorizationResponse response = litle.Authorize(authorization);

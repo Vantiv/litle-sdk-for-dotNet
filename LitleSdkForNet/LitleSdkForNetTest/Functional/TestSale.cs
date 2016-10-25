@@ -15,10 +15,11 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            //config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "http://barnold-vm4:8081/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
+            config.Add("version", "9.10");
             config.Add("timeout", "5000");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
@@ -46,6 +47,82 @@ namespace Litle.Sdk.Test.Functional
 
             saleResponse responseObj = litle.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+        [Test]
+        public void SaleWithCard_AndroidpayResponse()
+        {
+            var saleObj = new sale
+            {
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.androidpay
+            };
+            var cardObj = new cardType
+            {
+                type = methodOfPaymentTypeEnum.VI,
+                number = "4100000000000000",
+                expDate = "1210"
+            };
+            saleObj.card = cardObj;
+
+            var responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            Assert.AreEqual("01", responseObj.androidpayResponse.expMonth);
+            Assert.AreEqual("2050", responseObj.androidpayResponse.expYear);
+        }
+
+        [Test]
+        public void SaleWithCard_withProcessingTypeAndCardSuffixResponse()
+        {
+            var saleObj = new sale
+            {
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingType.accountFunding,
+                originalNetworkTransactionId = "12345678912345",
+                originalTransactionAmount = 1492
+            };
+            var cardObj = new cardType
+            {
+                type = methodOfPaymentTypeEnum.VI,
+                number = "4100700000000000",
+                expDate = "1210"
+            };
+            saleObj.card = cardObj;
+
+            var responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            Assert.AreEqual("123456", responseObj.cardSuffix);
+        }
+
+        [Test]
+        public void SaleWithCard_withProcessingTypeAndNetworkTxnId()
+        {
+            var saleObj = new sale
+            {
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingType.accountFunding,
+                originalNetworkTransactionId = "12345678912345",
+                originalTransactionAmount = 1492
+            };
+            var cardObj = new cardType
+            {
+                type = methodOfPaymentTypeEnum.VI,
+                number = "4100700000000000",
+                expDate = "1210"
+            };
+            saleObj.card = cardObj;
+
+            var responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            Assert.AreEqual("63225578415568556365452427825", responseObj.networkTransactionId);
         }
 
         [Test]

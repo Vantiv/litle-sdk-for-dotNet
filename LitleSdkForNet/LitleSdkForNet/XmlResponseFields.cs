@@ -552,6 +552,22 @@ namespace Litle.Sdk
         public string triggeredRule;
     }
 
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class cardSuffixType
+    {
+        private string cardSuffixField;
+
+        public string cardSuffix
+        {
+            get { return cardSuffixField; }
+            set { cardSuffixField = value; }
+        }
+    }
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.SerializableAttribute()]
@@ -1654,6 +1670,8 @@ namespace Litle.Sdk
 
         private applepayResponse applepayResponseField;
 
+        private androidpayResponse androidpayResponseField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -1797,6 +1815,12 @@ namespace Litle.Sdk
                 this.applepayResponseField = value;
             }
         }
+
+        public androidpayResponse androidpayResponse
+        {
+            get { return androidpayResponseField; }
+            set { androidpayResponseField = value; }
+        }
     }
 
     /// <remarks/>
@@ -1936,6 +1960,12 @@ namespace Litle.Sdk
         private giftCardResponse giftCardResponseField;
 
         private applepayResponse applepayResponseField;
+
+        private string cardSuffixField;
+
+        private androidpayResponse androidpayResponseField;
+
+        private string networkTransactionIdField;
 
         /// <remarks/>
         public long litleTxnId
@@ -2211,6 +2241,24 @@ namespace Litle.Sdk
             {
                 this.applepayResponseField = value;
             }
+        }
+
+        public string cardSuffix
+        {
+            get { return cardSuffixField; }
+            set { cardSuffixField = value; }
+        }
+
+        public androidpayResponse androidpayResponse
+        {
+            get { return androidpayResponseField; }
+            set { androidpayResponseField = value; }
+        }
+
+        public string networkTransactionId
+        {
+            get { return networkTransactionIdField; }
+            set { networkTransactionIdField = value; }
         }
     }
     
@@ -3365,6 +3413,12 @@ namespace Litle.Sdk
 
         private bool duplicateFieldSpecified;
 
+        private string cardSuffixField;
+
+        private androidpayResponse androidpayResponseField;
+
+        private string networkTransactionIdField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -3667,6 +3721,24 @@ namespace Litle.Sdk
             {
                 this.duplicateFieldSpecified = value;
             }
+        }
+
+        public string cardSuffix
+        {
+            get { return cardSuffixField; }
+            set { cardSuffixField = value; }
+        }
+
+        public androidpayResponse androidpayResponse
+        {
+            get { return androidpayResponseField; }
+            set { androidpayResponseField = value; }
+        }
+
+        public string networkTransactionId
+        {
+            get { return networkTransactionIdField; }
+            set { networkTransactionIdField = value; }
         }
     }
 
@@ -6105,10 +6177,10 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     public partial class giftCardResponse
     {
-        public String availableBalance;
-        public String beginningBalance;
-        public String endingBalance;
-        public String cashBackAmount;
+        public string availableBalance;
+        public string beginningBalance;
+        public string endingBalance;
+        public string cashBackAmount;
     }
 
         /// <remarks/>
@@ -6118,8 +6190,9 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     public partial class virtualGiftCardResponseType
     {
-        public String accountNumber;
-        public String cardValidationNum;
+        public string accountNumber;
+        public string cardValidationNum;
+        public string pin;
     }
 
         /// <remarks/>
@@ -6493,6 +6566,61 @@ namespace Litle.Sdk
             set
             {
                 this.eciIndicatorField = value;
+            }
+        }
+    }
+
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class androidpayResponse
+    {
+
+        private string expMonthField;
+
+        private string expYearField;
+
+        private byte[] cryptogramField;
+
+        /// <remarks/>
+        public string expYear
+        {
+            get
+            {
+                return expYearField;
+            }
+            set
+            {
+                expYearField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string expMonth
+        {
+            get
+            {
+                return expMonthField;
+            }
+            set
+            {
+                expMonthField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] cryptogram
+        {
+            get
+            {
+                return cryptogramField;
+            }
+            set
+            {
+                cryptogramField = value;
             }
         }
     }
