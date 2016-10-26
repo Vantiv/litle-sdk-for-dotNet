@@ -12,7 +12,7 @@ namespace Litle.Sdk
         public string merchantId;
         public string reportGroup;
 
-        public Dictionary<String, String> config;
+        public Dictionary<string, string> config;
 
         public string batchFilePath;
         private string tempBatchFilePath;
@@ -85,7 +85,7 @@ namespace Litle.Sdk
 
         public batchRequest()
         {
-            config = new Dictionary<String, String>();
+            config = new Dictionary<string, string>();
 
             config["url"] = Properties.Settings.Default.url;
             config["reportGroup"] = Properties.Settings.Default.reportGroup;
@@ -106,7 +106,7 @@ namespace Litle.Sdk
             initializeRequest();
         }
 
-        public batchRequest(Dictionary<String, String> config)
+        public batchRequest(Dictionary<string, string> config)
         {
             this.config = config;
 
@@ -995,11 +995,11 @@ namespace Litle.Sdk
             }
         }
 
-        public String Serialize()
+        public string Serialize()
         {
-            string xmlHeader = generateXmlHeader();
+            var xmlHeader = generateXmlHeader();
 
-            string xmlFooter = "</batchRequest>\r\n";
+            const string xmlFooter = "</batchRequest>\r\n";
 
             batchFilePath = litleFile.createRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
 
@@ -1314,11 +1314,11 @@ namespace Litle.Sdk
         private string requestDirectory;
         private string responseDirectory;
 
-        private Dictionary<String, String> config;
+        private Dictionary<string, string> config;
 
         public RFRRequest()
         {
-            config = new Dictionary<String, String>();
+            config = new Dictionary<string, string>();
 
             config["url"] = Properties.Settings.Default.url;
             config["reportGroup"] = Properties.Settings.Default.reportGroup;
@@ -1343,7 +1343,7 @@ namespace Litle.Sdk
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
         }
 
-        public RFRRequest(Dictionary<String, String> config)
+        public RFRRequest(Dictionary<string, string> config)
         {
             this.config = config;
 
@@ -1369,7 +1369,7 @@ namespace Litle.Sdk
             return this.responseDirectory;
         }
 
-        public void setConfig(Dictionary<String, String> config)
+        public void setConfig(Dictionary<string, string> config)
         {
             this.config = config;
         }

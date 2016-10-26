@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Security;
 using System.Xml.Serialization;
 
@@ -112,40 +111,40 @@ namespace Litle.Sdk
         private bool customerTypeSet;
         public customerInfoCustomerType customerType
         {
-            get { return this.customerTypeField; }
-            set { this.customerTypeField = value; customerTypeSet = true; }
+            get { return customerTypeField; }
+            set { customerTypeField = value; customerTypeSet = true; }
         }
 
         private long incomeAmountField;
         private bool incomeAmountSet;
         public long incomeAmount
         {
-            get { return this.incomeAmountField; }
-            set { this.incomeAmountField = value; incomeAmountSet = true; }
+            get { return incomeAmountField; }
+            set { incomeAmountField = value; incomeAmountSet = true; }
         }
 
         private currencyCodeEnum incomeCurrencyField;
         private bool incomeCurrencySet;
         public currencyCodeEnum incomeCurrency
         {
-            get { return this.incomeCurrencyField; }
-            set { this.incomeCurrencyField = value; incomeCurrencySet = true; }
+            get { return incomeCurrencyField; }
+            set { incomeCurrencyField = value; incomeCurrencySet = true; }
         }
 
         private bool customerCheckingAccountField;
         private bool customerCheckingAccountSet;
         public bool customerCheckingAccount
         {
-            get { return this.customerCheckingAccountField; }
-            set { this.customerCheckingAccountField = value; customerCheckingAccountSet = true; }
+            get { return customerCheckingAccountField; }
+            set { customerCheckingAccountField = value; customerCheckingAccountSet = true; }
         }
 
         private bool customerSavingAccountField;
         private bool customerSavingAccountSet;
         public bool customerSavingAccount
         {
-            get { return this.customerSavingAccountField; }
-            set { this.customerSavingAccountField = value; customerSavingAccountSet = true; }
+            get { return customerSavingAccountField; }
+            set { customerSavingAccountField = value; customerSavingAccountSet = true; }
         }
 
         public string employerName;
@@ -156,16 +155,16 @@ namespace Litle.Sdk
         private bool residenceStatusSet;
         public customerInfoResidenceStatus residenceStatus
         {
-            get { return this.residenceStatusField; }
-            set { this.residenceStatusField = value; residenceStatusSet = true; }
+            get { return residenceStatusField; }
+            set { residenceStatusField = value; residenceStatusSet = true; }
         }
 
         private int yearsAtResidenceField;
         private bool yearsAtResidenceSet;
         public int yearsAtResidence
         {
-            get { return this.yearsAtResidenceField; }
-            set { this.yearsAtResidenceField = value; yearsAtResidenceSet = true; }
+            get { return yearsAtResidenceField; }
+            set { yearsAtResidenceField = value; yearsAtResidenceSet = true; }
         }
 
         private int yearsAtEmployerField;
@@ -174,19 +173,19 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.yearsAtEmployerField;
+                return yearsAtEmployerField;
             }
             set
             {
-                this.yearsAtEmployerField = value;
-                this.yearsAtEmployerSet = true;
+                yearsAtEmployerField = value;
+                yearsAtEmployerSet = true;
             }
         }
 
 
         public customerInfo()
         {
-            this.incomeCurrency = currencyCodeEnum.USD;
+            incomeCurrency = currencyCodeEnum.USD;
         }
 
         public string Serialize()
@@ -293,43 +292,43 @@ namespace Litle.Sdk
         private bool salesTaxSet;
         public long salesTax
         {
-            get { return this.salesTaxField; }
-            set { this.salesTaxField = value; this.salesTaxSet = true; }
+            get { return salesTaxField; }
+            set { salesTaxField = value; salesTaxSet = true; }
         }
         private enhancedDataDeliveryType deliveryTypeField;
         private bool deliveryTypeSet;
         public enhancedDataDeliveryType deliveryType
         {
-            get { return this.deliveryTypeField; }
-            set { this.deliveryTypeField = value; this.deliveryTypeSet = true; }
+            get { return deliveryTypeField; }
+            set { deliveryTypeField = value; deliveryTypeSet = true; }
         }
         public bool taxExemptField;
         public bool taxExemptSet;
         public bool taxExempt
         {
-            get { return this.taxExemptField; }
-            set { this.taxExemptField = value; this.taxExemptSet = true; }
+            get { return taxExemptField; }
+            set { taxExemptField = value; taxExemptSet = true; }
         }
         private long discountAmountField;
         private bool discountAmountSet;
         public long discountAmount
         {
-            get { return this.discountAmountField; }
-            set { this.discountAmountField = value; this.discountAmountSet = true; }
+            get { return discountAmountField; }
+            set { discountAmountField = value; discountAmountSet = true; }
         }
         private long shippingAmountField;
         private bool shippingAmountSet;
         public long shippingAmount
         {
-            get { return this.shippingAmountField; }
-            set { this.shippingAmountField = value; this.shippingAmountSet = true; }
+            get { return shippingAmountField; }
+            set { shippingAmountField = value; shippingAmountSet = true; }
         }
         private long dutyAmountField;
         private bool dutyAmountSet;
         public long dutyAmount
         {
-            get { return this.dutyAmountField; }
-            set { this.dutyAmountField = value; this.dutyAmountSet = true; }
+            get { return dutyAmountField; }
+            set { dutyAmountField = value; dutyAmountSet = true; }
         }
         public string shipFromPostalCode;
         public string destinationPostalCode;
@@ -337,16 +336,16 @@ namespace Litle.Sdk
         private bool destinationCountryCodeSet;
         public countryTypeEnum destinationCountry
         {
-            get { return this.destinationCountryCodeField; }
-            set { this.destinationCountryCodeField = value; this.destinationCountryCodeSet = true; }
+            get { return destinationCountryCodeField; }
+            set { destinationCountryCodeField = value; destinationCountryCodeSet = true; }
         }
         public string invoiceReferenceNumber;
         private DateTime orderDateField;
         private bool orderDateSet;
         public DateTime orderDate
         {
-            get { return this.orderDateField; }
-            set { this.orderDateField = value; this.orderDateSet = true; }
+            get { return orderDateField; }
+            set { orderDateField = value; orderDateSet = true; }
         }
         public List<detailTax> detailTaxes;
         public List<lineItemData> lineItems;
@@ -414,8 +413,8 @@ namespace Litle.Sdk
         private bool itemSequenceNumberSet;
         public int itemSequenceNumber
         {
-            get { return this.itemSeqenceNumberField; }
-            set { this.itemSeqenceNumberField = value; this.itemSequenceNumberSet = true; }
+            get { return itemSeqenceNumberField; }
+            set { itemSeqenceNumberField = value; itemSequenceNumberSet = true; }
         }
         public string itemDescription;
         public string productCode;
@@ -425,29 +424,29 @@ namespace Litle.Sdk
         private bool taxAmountSet;
         public long taxAmount
         {
-            get { return this.taxAmountField; }
-            set { this.taxAmountField = value; this.taxAmountSet = true; }
+            get { return taxAmountField; }
+            set { taxAmountField = value; taxAmountSet = true; }
         }
         private long lineItemTotalField;
         private bool lineItemTotalSet;
         public long lineItemTotal
         {
-            get { return this.lineItemTotalField; }
-            set { this.lineItemTotalField = value; this.lineItemTotalSet = true; }
+            get { return lineItemTotalField; }
+            set { lineItemTotalField = value; lineItemTotalSet = true; }
         }
         private long lineItemTotalWithTaxField;
         private bool lineItemTotalWithTaxSet;
         public long lineItemTotalWithTax
         {
-            get { return this.lineItemTotalWithTaxField; }
-            set { this.lineItemTotalWithTaxField = value; this.lineItemTotalWithTaxSet = true; }
+            get { return lineItemTotalWithTaxField; }
+            set { lineItemTotalWithTaxField = value; lineItemTotalWithTaxSet = true; }
         }
         private long itemDiscountAmountField;
         private bool itemDiscountAmountSet;
         public long itemDiscountAmount
         {
-            get { return this.itemDiscountAmountField; }
-            set { this.itemDiscountAmountField = value; this.itemDiscountAmountSet = true; }
+            get { return itemDiscountAmountField; }
+            set { itemDiscountAmountField = value; itemDiscountAmountSet = true; }
         }
         public string commodityCode;
         public string unitCost;
@@ -488,23 +487,23 @@ namespace Litle.Sdk
         private bool taxIncludedInTotalSet;
         public bool taxIncludedInTotal
         {
-            get { return this.taxIncludedInTotalField; }
-            set { this.taxIncludedInTotalField = value; this.taxIncludedInTotalSet = true; }
+            get { return taxIncludedInTotalField; }
+            set { taxIncludedInTotalField = value; taxIncludedInTotalSet = true; }
         }
         private long taxAmountField;
         private bool taxAmountSet;
         public long taxAmount
         {
-            get { return this.taxAmountField; }
-            set { this.taxAmountField = value; this.taxAmountSet = true; }
+            get { return taxAmountField; }
+            set { taxAmountField = value; taxAmountSet = true; }
         }
         public string taxRate;
         private taxTypeIdentifierEnum taxTypeIdentifierField;
         private bool taxTypeIdentifierSet;
         public taxTypeIdentifierEnum taxTypeIdentifier
         {
-            get { return this.taxTypeIdentifierField; }
-            set { this.taxTypeIdentifierField = value; this.taxTypeIdentifierSet = true; }
+            get { return taxTypeIdentifierField; }
+            set { taxTypeIdentifierField = value; taxTypeIdentifierSet = true; }
         }
         public string cardAcceptorTaxId;
 
@@ -527,8 +526,8 @@ namespace Litle.Sdk
         protected bool partialSet;
         public bool partial
         {
-            get { return this.partialField; }
-            set { this.partialField = value; partialSet = true; }
+            get { return partialField; }
+            set { partialField = value; partialSet = true; }
         }
     }
 
@@ -539,15 +538,15 @@ namespace Litle.Sdk
         private bool amountSet;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return surchargeAmountField; }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
         public enhancedData enhancedData;
         public processingInstructions processingInstructions;
@@ -555,8 +554,8 @@ namespace Litle.Sdk
         private bool payPalOrderCompleteSet;
         public bool payPalOrderComplete
         {
-            get { return this.payPalOrderCompleteField; }
-            set { this.payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
+            get { return payPalOrderCompleteField; }
+            set { payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
         }
         public string payPalNotes;
 
@@ -602,22 +601,22 @@ namespace Litle.Sdk
         private bool litleTxnIdSet;
         public long litleTxnId
         {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+            get { return litleTxnIdField; }
+            set { litleTxnIdField = value; litleTxnIdSet = true; }
         }
         private long amountField;
         private bool amountSet;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
         private bool secondaryAmountSet;
         private long secondaryAmountField;
         public long secondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return secondaryAmountField; }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
         public customBilling customBilling;
         public string orderId;
@@ -677,22 +676,22 @@ namespace Litle.Sdk
         private bool litleTxnIdSet;
         public long litleTxnId
         {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+            get { return litleTxnIdField; }
+            set { litleTxnIdField = value; litleTxnIdSet = true; }
         }
         private long amountField;
         private bool amountSet;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
         private bool secondaryAmountSet;
         private long secondaryAmountField;
         public long secondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return secondaryAmountField; }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
         public customBilling customBilling;
         public string orderId;
@@ -700,8 +699,8 @@ namespace Litle.Sdk
         private bool verifySet;
         public bool verify
         {
-            get { return this.verifyField; }
-            set { this.verifyField = value; verifySet = true; }
+            get { return verifyField; }
+            set { verifyField = value; verifySet = true; }
         }
         public orderSourceType orderSource;
         public contact billToAddress;
@@ -755,16 +754,16 @@ namespace Litle.Sdk
         private bool litleTxnIdSet;
         public long litleTxnId
         {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+            get { return litleTxnIdField; }
+            set { litleTxnIdField = value; litleTxnIdSet = true; }
         }
         public string orderId;
         private long amountField;
         private bool amountSet;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
         public orderSourceType orderSource;
         public contact billToAddress;
@@ -873,29 +872,29 @@ namespace Litle.Sdk
         private bool litleTxnIdSet;
         public long litleTxnId
         {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+            get { return litleTxnIdField; }
+            set { litleTxnIdField = value; litleTxnIdSet = true; }
         }
         private long amountField;
         private bool amountSet;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
         private bool secondaryAmountSet;
         private long secondaryAmountField;
         public long secondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return secondaryAmountField; }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return surchargeAmountField; }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
         public customBilling customBilling;
         public enhancedData enhancedData;
@@ -912,15 +911,15 @@ namespace Litle.Sdk
         private bool taxTypeSet;
         public taxTypeIdentifierEnum taxType
         {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; taxTypeSet = true; }
+            get { return taxTypeField; }
+            set { taxTypeField = value; taxTypeSet = true; }
         }
         public billMeLaterRequest billMeLaterRequest;
         public pos pos;
         public amexAggregatorData amexAggregatorData;
         public merchantDataType merchantData;
-        public String payPalNotes;
-        public String actionReason;
+        public string payPalNotes;
+        public string actionReason;
         public pinType pin;
 
         public override string Serialize()
@@ -990,8 +989,8 @@ namespace Litle.Sdk
         private bool accTypeSet;
         public echeckAccountTypeEnum accType
         {
-            get { return this.accTypeField; }
-            set { this.accTypeField = value; accTypeSet = true; }
+            get { return accTypeField; }
+            set { accTypeField = value; accTypeSet = true; }
         }
 
         public string accNum;
@@ -1023,8 +1022,8 @@ namespace Litle.Sdk
         private bool accTypeSet;
         public echeckAccountTypeEnum accType
         {
-            get { return this.accTypeField; }
-            set { this.accTypeField = value; accTypeSet = true; }
+            get { return accTypeField; }
+            set { accTypeField = value; accTypeSet = true; }
         }
         public string checkNum;
 
@@ -1047,24 +1046,24 @@ namespace Litle.Sdk
         private bool capabilitySet;
         public posCapabilityTypeEnum capability
         {
-            get { return this.capabilityField; }
-            set { this.capabilityField = value; capabilitySet = true; }
+            get { return capabilityField; }
+            set { capabilityField = value; capabilitySet = true; }
         }
 
         private posEntryModeTypeEnum entryModeField;
         private bool entryModeSet;
         public posEntryModeTypeEnum entryMode
         {
-            get { return this.entryModeField; }
-            set { this.entryModeField = value; entryModeSet = true; }
+            get { return entryModeField; }
+            set { entryModeField = value; entryModeSet = true; }
         }
 
         private posCardholderIdTypeEnum cardholderIdField;
         private bool cardholderIdSet;
         public posCardholderIdTypeEnum cardholderId
         {
-            get { return this.cardholderIdField; }
-            set { this.cardholderIdField = value; cardholderIdSet = true; }
+            get { return cardholderIdField; }
+            set { cardholderIdField = value; cardholderIdSet = true; }
         }
         public string terminalId;
 
@@ -1072,8 +1071,8 @@ namespace Litle.Sdk
         private bool catLevelSet;
         public posCatLevelEnum catLevel
         {
-            get { return this.catLevelField; }
-            set { this.catLevelField = value; catLevelSet = true; }
+            get { return catLevelField; }
+            set { catLevelField = value; catLevelSet = true; }
         }
 
         public string Serialize()
@@ -1132,8 +1131,8 @@ namespace Litle.Sdk
         private bool typeSet;
         public methodOfPaymentTypeEnum type
         {
-            get { return this.typeField; }
-            set { this.typeField = value; typeSet = true; }
+            get { return typeField; }
+            set { typeField = value; typeSet = true; }
         }
 
         public string Serialize()
@@ -1155,8 +1154,8 @@ namespace Litle.Sdk
         private bool typeSet;
         public methodOfPaymentTypeEnum type
         {
-            get { return this.typeField; }
-            set { this.typeField = value; typeSet = true; }
+            get { return typeField; }
+            set { typeField = value; typeSet = true; }
         }
 
         public string Serialize()
@@ -1175,30 +1174,30 @@ namespace Litle.Sdk
         private bool bmlMerchantIdSet;
         public long bmlMerchantId
         {
-            get { return this.bmlMerchantIdField; }
-            set { this.bmlMerchantIdField = value; bmlMerchantIdSet = true; }
+            get { return bmlMerchantIdField; }
+            set { bmlMerchantIdField = value; bmlMerchantIdSet = true; }
         }
         private long bmlProductTypeField;
         private bool bmlProductTypeSet;
         public long bmlProductType
         {
-            get { return this.bmlProductTypeField; }
-            set { this.bmlProductTypeField = value; bmlProductTypeSet = true; }
+            get { return bmlProductTypeField; }
+            set { bmlProductTypeField = value; bmlProductTypeSet = true; }
         }
         private int termsAndConditionsField;
         private bool termsAndConditionsSet;
         public int termsAndConditions
         {
-            get { return this.termsAndConditionsField; }
-            set { this.termsAndConditionsField = value; termsAndConditionsSet = true; }
+            get { return termsAndConditionsField; }
+            set { termsAndConditionsField = value; termsAndConditionsSet = true; }
         }
         public string preapprovalNumber;
         private int merchantPromotionalCodeField;
         private bool merchantPromotionalCodeSet;
         public int merchantPromotionalCode
         {
-            get { return this.merchantPromotionalCodeField; }
-            set { this.merchantPromotionalCodeField = value; merchantPromotionalCodeSet = true; }
+            get { return merchantPromotionalCodeField; }
+            set { merchantPromotionalCodeField = value; merchantPromotionalCodeSet = true; }
         }
         public string virtualAuthenticationKeyPresenceIndicator;
         public string virtualAuthenticationKeyData;
@@ -1206,8 +1205,8 @@ namespace Litle.Sdk
         private bool itemCategoryCodeSet;
         public int itemCategoryCode
         {
-            get { return this.itemCategoryCodeField; }
-            set { this.itemCategoryCodeField = value; itemCategoryCodeSet = true; }
+            get { return itemCategoryCodeField; }
+            set { itemCategoryCodeField = value; itemCategoryCodeSet = true; }
         }
 
         public string Serialize()
@@ -1263,8 +1262,8 @@ namespace Litle.Sdk
         private bool bypassVelocityCheckSet;
         public bool bypassVelocityCheck
         {
-            get { return this.bypassVelocityCheckField; }
-            set { this.bypassVelocityCheckField = value; this.bypassVelocityCheckSet = true; }
+            get { return bypassVelocityCheckField; }
+            set { bypassVelocityCheckField = value; bypassVelocityCheckSet = true; }
         }
 
         public string Serialize()
@@ -1309,12 +1308,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.litleTxnIdField;
+                return litleTxnIdField;
             }
             set
             {
-                this.litleTxnIdField = value;
-                this.litleTxnIdSet = true;
+                litleTxnIdField = value;
+                litleTxnIdSet = true;
             }
         }
         public string orderId;
@@ -1323,15 +1322,15 @@ namespace Litle.Sdk
         private long secondaryAmountField;
         public long secondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return secondaryAmountField; }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return surchargeAmountField; }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
         public orderSourceType orderSource;
         public customerInfo customerInfo;
@@ -1352,8 +1351,8 @@ namespace Litle.Sdk
         private bool taxTypeSet;
         public govtTaxTypeEnum taxType
         {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; this.taxTypeSet = true; }
+            get { return taxTypeField; }
+            set { taxTypeField = value; taxTypeSet = true; }
         }
         public enhancedData enhancedData;
         public amexAggregatorData amexAggregatorData;
@@ -1363,12 +1362,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.allowPartialAuthField;
+                return allowPartialAuthField;
             }
             set
             {
-                this.allowPartialAuthField = value;
-                this.allowPartialAuthSet = true;
+                allowPartialAuthField = value;
+                allowPartialAuthSet = true;
             }
         }
         public healthcareIIAS healthcareIIAS;
@@ -1381,12 +1380,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.fraudFilterOverrideField;
+                return fraudFilterOverrideField;
             }
             set
             {
-                this.fraudFilterOverrideField = value;
-                this.fraudFilterOverrideSet = true;
+                fraudFilterOverrideField = value;
+                fraudFilterOverrideSet = true;
             }
         }
         public recurringRequest recurringRequest;
@@ -1396,12 +1395,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.debtRepaymentField;
+                return debtRepaymentField;
             }
             set
             {
-                this.debtRepaymentField = value;
-                this.debtRepaymentSet = true;
+                debtRepaymentField = value;
+                debtRepaymentSet = true;
             }
         }
         public advancedFraudChecksType advancedFraudChecks;
@@ -1432,7 +1431,7 @@ namespace Litle.Sdk
             set { originalTransactionAmountField = value; originalTxnAmountSet = true; }
         }
 
-        public override String Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<authorization";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
@@ -1583,12 +1582,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.litleTxnIdField;
+                return litleTxnIdField;
             }
             set
             {
-                this.litleTxnIdField = value;
-                this.litleTxnIdSet = true;
+                litleTxnIdField = value;
+                litleTxnIdSet = true;
             }
         }
         public string orderId;
@@ -1597,15 +1596,15 @@ namespace Litle.Sdk
         private long secondaryAmountField;
         public long secondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return secondaryAmountField; }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return surchargeAmountField; }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
         public orderSourceType orderSource;
         public customerInfo customerInfo;
@@ -1624,8 +1623,8 @@ namespace Litle.Sdk
         private bool taxTypeSet;
         public govtTaxTypeEnum taxType
         {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; this.taxTypeSet = true; }
+            get { return taxTypeField; }
+            set { taxTypeField = value; taxTypeSet = true; }
         }
         public enhancedData enhancedData;
         public processingInstructions processingInstructions;
@@ -1634,8 +1633,8 @@ namespace Litle.Sdk
         private bool payPalOrderCompleteSet;
         public bool payPalOrderComplete
         {
-            get { return this.payPalOrderCompleteField; }
-            set { this.payPalOrderCompleteField = value; this.payPalOrderCompleteSet = true; }
+            get { return payPalOrderCompleteField; }
+            set { payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
         }
         public string payPalNotes;
         public amexAggregatorData amexAggregatorData;
@@ -1645,12 +1644,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.allowPartialAuthField;
+                return allowPartialAuthField;
             }
             set
             {
-                this.allowPartialAuthField = value;
-                this.allowPartialAuthSet = true;
+                allowPartialAuthField = value;
+                allowPartialAuthSet = true;
             }
         }
         public healthcareIIAS healthcareIIAS;
@@ -1663,12 +1662,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.fraudFilterOverrideField;
+                return fraudFilterOverrideField;
             }
             set
             {
-                this.fraudFilterOverrideField = value;
-                this.fraudFilterOverrideSet = true;
+                fraudFilterOverrideField = value;
+                fraudFilterOverrideSet = true;
             }
         }
         public recurringRequest recurringRequest;
@@ -1679,12 +1678,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.debtRepaymentField;
+                return debtRepaymentField;
             }
             set
             {
-                this.debtRepaymentField = value;
-                this.debtRepaymentSet = true;
+                debtRepaymentField = value;
+                debtRepaymentSet = true;
             }
         }
         public advancedFraudChecksType advancedFraudChecks;
@@ -1714,7 +1713,7 @@ namespace Litle.Sdk
             set { originalTransactionAmountField = value; originalTxnAmountSet = true; }
         }
 
-        public override String Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<sale";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
@@ -1851,7 +1850,7 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class forceCapture : transactionTypeWithReportGroup
+    public class forceCapture : transactionTypeWithReportGroup
     {
         public string orderId;
         public long amount;
@@ -1859,15 +1858,15 @@ namespace Litle.Sdk
         private long secondaryAmountField;
         public long secondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return secondaryAmountField; }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return surchargeAmountField; }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
         public orderSourceType orderSource;
         public contact billToAddress;
@@ -1880,8 +1879,8 @@ namespace Litle.Sdk
         private bool taxTypeSet;
         public govtTaxTypeEnum taxType
         {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; this.taxTypeSet = true; }
+            get { return taxTypeField; }
+            set { taxTypeField = value; taxTypeSet = true; }
         }
         public enhancedData enhancedData;
         public processingInstructions processingInstructions;
@@ -1892,29 +1891,21 @@ namespace Litle.Sdk
         private bool debtRepaymentSet;
         public bool debtRepayment
         {
-            get
-            {
-                return this.debtRepaymentField;
-            }
-            set
-            {
-                this.debtRepaymentField = value;
-                this.debtRepaymentSet = true;
-            }
+            get { return debtRepaymentField; }
+            set { debtRepaymentField = value; debtRepaymentSet = true; }
         }
 
         private processingType processingTypeField;
         private bool processingTypeSet;
-
         public processingType processingType
         {
             get { return processingTypeField; }
             set { processingTypeField = value; processingTypeSet = true; }
         }
 
-        public override String Serialize()
+        public override string Serialize()
         {
-            string xml = "\r\n<forceCapture";
+            var xml = "\r\n<forceCapture";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -1977,14 +1968,14 @@ namespace Litle.Sdk
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
             if (processingTypeSet)
             {
-                xml += "\r\n<processingType>" + processingType + "<processingType>";
+                xml += "\r\n<processingType>" + processingType + "</processingType>";
             }
             xml += "\r\n</forceCapture>";
             return xml;
         }
     }
 
-    public partial class captureGivenAuth : transactionTypeWithReportGroup
+    public class captureGivenAuth : transactionTypeWithReportGroup
     {
         public string orderId;
         public authInformation authInformation;
@@ -1993,15 +1984,15 @@ namespace Litle.Sdk
         private long secondaryAmountField;
         public long secondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return secondaryAmountField; }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return surchargeAmountField; }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
         public orderSourceType orderSource;
         public contact billToAddress;
@@ -2016,8 +2007,8 @@ namespace Litle.Sdk
         private bool taxTypeSet;
         public govtTaxTypeEnum taxType
         {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; this.taxTypeSet = true; }
+            get { return taxTypeField; }
+            set { taxTypeField = value; taxTypeSet = true; }
         }
 
         public billMeLaterRequest billMeLaterRequest;
@@ -2031,8 +2022,8 @@ namespace Litle.Sdk
         private bool debtRepaymentSet;
         public bool debtRepayment
         {
-            get { return this.debtRepaymentField; }
-            set { this.debtRepaymentField = value; this.debtRepaymentSet = true; }
+            get { return debtRepaymentField; }
+            set { debtRepaymentField = value; debtRepaymentSet = true; }
         }
 
         private processingType processingTypeField;
@@ -2059,9 +2050,9 @@ namespace Litle.Sdk
             set { originalTransactionAmountField = value; originalTransactionAmountSet = true; }
         }
 
-        public override String Serialize()
+        public override string Serialize()
         {
-            string xml = "\r\n<captureGivenAuth";
+            var xml = "\r\n<captureGivenAuth";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -2156,16 +2147,16 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.subscriptionIdField;
+                return subscriptionIdField;
             }
             set
             {
-                this.subscriptionIdField = value;
-                this.subscriptionIdSet = true;
+                subscriptionIdField = value;
+                subscriptionIdSet = true;
             }
         }
 
-        public override String Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<cancelSubscription>";
             if (subscriptionIdSet) xml += "\r\n<subscriptionId>" + subscriptionIdField + "</subscriptionId>";
@@ -2174,8 +2165,8 @@ namespace Litle.Sdk
         }
     }
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    [SerializableAttribute()]
+    [XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
     public enum intervalType
     {
         ANNUAL,
@@ -2185,8 +2176,8 @@ namespace Litle.Sdk
         WEEKLY
     }
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
+    [SerializableAttribute()]
+    [XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
     public enum trialIntervalType
     {
         MONTH,
@@ -2202,8 +2193,8 @@ namespace Litle.Sdk
         private bool descriptionSet;
         public string description
         {
-            get { return this.descriptionField; }
-            set { this.descriptionField = value; this.descriptionSet = true; }
+            get { return descriptionField; }
+            set { descriptionField = value; descriptionSet = true; }
         }
 
         public intervalType intervalType;
@@ -2213,35 +2204,35 @@ namespace Litle.Sdk
         public bool numberOfPaymentsSet;
         public int numberOfPayments
         {
-            get { return this.numberOfPaymentsField; }
-            set { this.numberOfPaymentsField = value; this.numberOfPaymentsSet = true; }
+            get { return numberOfPaymentsField; }
+            set { numberOfPaymentsField = value; numberOfPaymentsSet = true; }
         }
 
         public int trialNumberOfIntervalsField;
         public bool trialNumberOfIntervalsSet;
         public int trialNumberOfIntervals
         {
-            get { return this.trialNumberOfIntervalsField; }
-            set { this.trialNumberOfIntervalsField = value; this.trialNumberOfIntervalsSet = true; }
+            get { return trialNumberOfIntervalsField; }
+            set { trialNumberOfIntervalsField = value; trialNumberOfIntervalsSet = true; }
         }
 
         private trialIntervalType trialIntervalTypeField;
         private bool trialIntervalTypeSet;
         public trialIntervalType trialIntervalType 
         {
-            get { return this.trialIntervalTypeField; }
-            set { this.trialIntervalTypeField = value; this.trialIntervalTypeSet = true; }
+            get { return trialIntervalTypeField; }
+            set { trialIntervalTypeField = value; trialIntervalTypeSet = true; }
         }
 
         private bool activeField;
         private bool activeSet;
         public bool active
         {
-            get { return this.activeField; }
-            set { this.activeField = value; this.activeSet = true; }
+            get { return activeField; }
+            set { activeField = value; activeSet = true; }
         }
 
-        public override String Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<createPlan>";
             xml += "\r\n<planCode>" + SecurityElement.Escape(planCode) + "</planCode>";
@@ -2266,11 +2257,11 @@ namespace Litle.Sdk
         private bool activeSet;
         public bool active
         {
-            get { return this.activeField; }
-            set { this.activeField = value; this.activeSet = true; }
+            get { return activeField; }
+            set { activeField = value; activeSet = true; }
         }
 
-        public override String Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<updatePlan>";
             xml += "\r\n<planCode>" + SecurityElement.Escape(planCode) + "</planCode>";
@@ -2287,12 +2278,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.subscriptionIdField;
+                return subscriptionIdField;
             }
             set
             {
-                this.subscriptionIdField = value;
-                this.subscriptionIdSet = true;
+                subscriptionIdField = value;
+                subscriptionIdSet = true;
             }
         }
 
@@ -2307,12 +2298,12 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.billingDateField;
+                return billingDateField;
             }
             set
             {
-                this.billingDateField = value;
-                this.billingDateSet = true;
+                billingDateField = value;
+                billingDateSet = true;
             }
         }
 
@@ -2333,7 +2324,7 @@ namespace Litle.Sdk
             deleteAddOns = new List<deleteAddOn>();
         }
 
-        public override String Serialize()
+        public override string Serialize()
         {
             string xml = "\r\n<updateSubscription>";
             if (subscriptionIdSet) xml += "\r\n<subscriptionId>" + subscriptionIdField + "</subscriptionId>";
@@ -2394,8 +2385,8 @@ namespace Litle.Sdk
         private bool authAmountSet;
         public long authAmount
         {
-            get { return this.authAmountField; }
-            set { this.authAmountField = value; this.authAmountSet = true; }
+            get { return authAmountField; }
+            set { authAmountField = value; authAmountSet = true; }
         }
 
         public string Serialize()
@@ -2434,8 +2425,8 @@ namespace Litle.Sdk
         private bool recycleBySet;
         public recycleByTypeEnum recycleBy
         {
-            get { return this.recycleByField; }
-            set { this.recycleByField = value; this.recycleBySet = true; }
+            get { return recycleByField; }
+            set { recycleByField = value; recycleBySet = true; }
         }
         public string recycleId;
 
@@ -2457,8 +2448,8 @@ namespace Litle.Sdk
         private bool finalPaymentSet;
         public bool finalPayment
         {
-            get { return this.finalPaymentField; }
-            set { this.finalPaymentField = value; this.finalPaymentSet = true; }
+            get { return finalPaymentField; }
+            set { finalPaymentField = value; finalPaymentSet = true; }
         }
 
         public string Serialize()
@@ -2499,32 +2490,32 @@ namespace Litle.Sdk
         private bool nameSet;
         public string name
         {
-            get { return this.nameField; }
-            set { this.nameField = value; this.nameSet = true; }
+            get { return nameField; }
+            set { nameField = value; nameSet = true; }
         }
 
         private long amountField;
         private bool amountSet;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; this.amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
 
         private DateTime startDateField;
         private bool startDateSet;
         public DateTime startDate
         {
-            get { return this.startDateField; }
-            set { this.startDateField = value; this.startDateSet = true; }
+            get { return startDateField; }
+            set { startDateField = value; startDateSet = true; }
         }
 
         private DateTime endDateField;
         private bool endDateSet;
         public DateTime endDate
         {
-            get { return this.endDateField; }
-            set { this.endDateField = value; this.endDateSet = true; }
+            get { return endDateField; }
+            set { endDateField = value; endDateSet = true; }
         }
 
         public string Serialize()
@@ -2579,32 +2570,32 @@ namespace Litle.Sdk
         private bool nameSet;
         public string name
         {
-            get { return this.nameField; }
-            set { this.nameField = value; this.nameSet = true; }
+            get { return nameField; }
+            set { nameField = value; nameSet = true; }
         }
 
         private long amountField;
         private bool amountSet;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; this.amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
 
         private DateTime startDateField;
         private bool startDateSet;
         public DateTime startDate
         {
-            get { return this.startDateField; }
-            set { this.startDateField = value; this.startDateSet = true; }
+            get { return startDateField; }
+            set { startDateField = value; startDateSet = true; }
         }
 
         private DateTime endDateField;
         private bool endDateSet;
         public DateTime endDate
         {
-            get { return this.endDateField; }
-            set { this.endDateField = value; this.endDateSet = true; }
+            get { return endDateField; }
+            set { endDateField = value; endDateSet = true; }
         }
 
         public string Serialize()
@@ -2639,22 +2630,22 @@ namespace Litle.Sdk
         private int numberOfPaymentsField;
         public int numberOfPayments
         {
-            get { return this.numberOfPaymentsField; }
-            set { this.numberOfPaymentsField = value; this.numberOfPaymentsSet = true; }
+            get { return numberOfPaymentsField; }
+            set { numberOfPaymentsField = value; numberOfPaymentsSet = true; }
         }
         private bool startDateSet;
         private DateTime startDateField;
         public DateTime startDate
         {
-            get { return this.startDateField; }
-            set { this.startDateField = value; this.startDateSet = true; }
+            get { return startDateField; }
+            set { startDateField = value; startDateSet = true; }
         }
         private bool amountSet;
         private long amountField;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; this.amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
 
         public List<createDiscount> createDiscounts;
@@ -2697,24 +2688,24 @@ namespace Litle.Sdk
         private bool prepaidSet;
         public bool prepaid
         {
-            get { return this.prepaidField; }
-            set { this.prepaidField = value; this.prepaidSet = true; }
+            get { return prepaidField; }
+            set { prepaidField = value; prepaidSet = true; }
         }
 
         private bool internationalField;
         private bool internationalSet;
         public bool international
         {
-            get { return this.internationalField; }
-            set { this.internationalField = value; this.internationalSet = true; }
+            get { return internationalField; }
+            set { internationalField = value; internationalSet = true; }
         }
 
         private bool chargebackField;
         private bool chargebackSet;
         public bool chargeback
         {
-            get { return this.chargebackField; }
-            set { this.chargebackField = value; this.chargebackSet = true; }
+            get { return chargebackField; }
+            set { chargebackField = value; chargebackSet = true; }
         }
 
         public string Serialize()
@@ -2735,8 +2726,8 @@ namespace Litle.Sdk
         private bool IIASFlagSet;
         public IIASFlagType IIASFlag
         {
-            get { return this.IIASFlagField; }
-            set { this.IIASFlagField = value; this.IIASFlagSet = true; }
+            get { return IIASFlagField; }
+            set { IIASFlagField = value; IIASFlagSet = true; }
         }
 
         public string Serialize()
@@ -2767,40 +2758,40 @@ namespace Litle.Sdk
         private bool totalHealthcareAmountSet;
         public int totalHealthcareAmount
         {
-            get { return this.totalHealthcareAmountField; }
-            set { this.totalHealthcareAmountField = value; this.totalHealthcareAmountSet = true; }
+            get { return totalHealthcareAmountField; }
+            set { totalHealthcareAmountField = value; totalHealthcareAmountSet = true; }
         }
 
         private int RxAmountField;
         private bool RxAmountSet;
         public int RxAmount
         {
-            get { return this.RxAmountField; }
-            set { this.RxAmountField = value; this.RxAmountSet = true; }
+            get { return RxAmountField; }
+            set { RxAmountField = value; RxAmountSet = true; }
         }
 
         private int visionAmountField;
         private bool visionAmountSet;
         public int visionAmount
         {
-            get { return this.visionAmountField; }
-            set { this.visionAmountField = value; this.visionAmountSet = true; }
+            get { return visionAmountField; }
+            set { visionAmountField = value; visionAmountSet = true; }
         }
 
         private int clinicOtherAmountField;
         private bool clinicOtherAmountSet;
         public int clinicOtherAmount
         {
-            get { return this.clinicOtherAmountField; }
-            set { this.clinicOtherAmountField = value; this.clinicOtherAmountSet = true; }
+            get { return clinicOtherAmountField; }
+            set { clinicOtherAmountField = value; clinicOtherAmountSet = true; }
         }
 
         private int dentalAmountField;
         private bool dentalAmountSet;
         public int dentalAmount
         {
-            get { return this.dentalAmountField; }
-            set { this.dentalAmountField = value; this.dentalAmountSet = true; }
+            get { return dentalAmountField; }
+            set { dentalAmountField = value; dentalAmountSet = true; }
         }
 
         public string Serialize()
@@ -2830,7 +2821,7 @@ namespace Litle.Sdk
         public static readonly orderSourceType applepay = new orderSourceType("applepay");
         public static readonly orderSourceType androidpay = new orderSourceType("androidpay");
 
-        private orderSourceType(String value) { this.value = value; }
+        private orderSourceType(string value) { this.value = value; }
         public string Serialize() { return value; }
         private string value;
     }
@@ -2853,8 +2844,8 @@ namespace Litle.Sdk
         private bool countrySpecified;
         public countryTypeEnum country
         {
-            get { return this.countryField; }
-            set { this.countryField = value; countrySpecified = true; }
+            get { return countryField; }
+            set { countryField = value; countrySpecified = true; }
         }
         public string email;
         public string phone;
@@ -3138,15 +3129,15 @@ namespace Litle.Sdk
 
     public partial class fraudCheckType
     {
-        public String authenticationValue;
-        public String authenticationTransactionId;
-        public String customerIpAddress;
+        public string authenticationValue;
+        public string authenticationTransactionId;
+        public string customerIpAddress;
         private bool authenticatedByMerchantField;
         private bool authenticatedByMerchantSet;
         public bool authenticatedByMerchant
         {
-            get { return this.authenticatedByMerchantField; }
-            set { this.authenticatedByMerchantField = value; authenticatedByMerchantSet = true; }
+            get { return authenticatedByMerchantField; }
+            set { authenticatedByMerchantField = value; authenticatedByMerchantSet = true; }
         }
 
         public string Serialize()
@@ -3166,36 +3157,36 @@ namespace Litle.Sdk
         private string customAttribute1Field;
         private bool customAttribute1Set;
         public string customAttribute1 { 
-            get { return this.customAttribute1Field; } 
-            set { this.customAttribute1Field = value; customAttribute1Set = true; } 
+            get { return customAttribute1Field; } 
+            set { customAttribute1Field = value; customAttribute1Set = true; } 
         }
         private string customAttribute2Field;
         private bool customAttribute2Set;
         public string customAttribute2
         {
-            get { return this.customAttribute2Field; }
-            set { this.customAttribute2Field = value; customAttribute2Set = true; }
+            get { return customAttribute2Field; }
+            set { customAttribute2Field = value; customAttribute2Set = true; }
         }
         private string customAttribute3Field;
         private bool customAttribute3Set;
         public string customAttribute3
         {
-            get { return this.customAttribute3Field; }
-            set { this.customAttribute3Field = value; customAttribute3Set = true; }
+            get { return customAttribute3Field; }
+            set { customAttribute3Field = value; customAttribute3Set = true; }
         }
         private string customAttribute4Field;
         private bool customAttribute4Set;
         public string customAttribute4
         {
-            get { return this.customAttribute4Field; }
-            set { this.customAttribute4Field = value; customAttribute4Set = true; }
+            get { return customAttribute4Field; }
+            set { customAttribute4Field = value; customAttribute4Set = true; }
         }
         private string customAttribute5Field;
         private bool customAttribute5Set;
         public string customAttribute5
         {
-            get { return this.customAttribute5Field; }
-            set { this.customAttribute5Field = value; customAttribute5Set = true; }
+            get { return customAttribute5Field; }
+            set { customAttribute5Field = value; customAttribute5Set = true; }
         }
 
         public string Serialize()
@@ -3302,17 +3293,17 @@ namespace Litle.Sdk
     {
         public int accountNumberLength
         {
-            get { return this.accountNumberLengthField; }
-            set { this.accountNumberLengthField = value; accountNumberLengthSet = true; }
+            get { return accountNumberLengthField; }
+            set { accountNumberLengthField = value; accountNumberLengthSet = true; }
         }
         private int accountNumberLengthField;
         private bool accountNumberLengthSet;
 
         public string giftCardBin;
 
-        public String Serialize()
+        public string Serialize()
         {
-            String xml = "";
+            string xml = "";
             if (accountNumberLengthSet) xml += "\r\n<accountNumberLength>" + accountNumberLengthField + "</accountNumberLength>";
             if (giftCardBin != null) xml += "\r\n<giftCardBin>" + SecurityElement.Escape(giftCardBin) + "</giftCardBin>";
             return xml;
@@ -3327,15 +3318,15 @@ namespace Litle.Sdk
         private bool amountSet;
         public long amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return amountField; }
+            set { amountField = value; amountSet = true; }
         }
         private bool surchargeAmountSet;
         private long surchargeAmountField;
         public long surchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return surchargeAmountField; }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
         public string payPalNotes;
         public string actionReason;
@@ -3437,9 +3428,9 @@ namespace Litle.Sdk
         {
             merchantId = Properties.Settings.Default.merchantId;
         }
-        public accountUpdateFileRequestData(Dictionary<String,String> config) 
+        public accountUpdateFileRequestData(Dictionary<string,string> config) 
         {
-            this.merchantId = config["merchantId"];
+            merchantId = config["merchantId"];
         }
         public DateTime postDay; //yyyy-MM-dd
 
@@ -3581,7 +3572,7 @@ namespace Litle.Sdk
 
     public partial class loadReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public string litleTxnId;
 
         public override string Serialize()
         {
@@ -3600,7 +3591,7 @@ namespace Litle.Sdk
 
     public partial class unloadReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public string litleTxnId;
 
         public override string Serialize()
         {
@@ -3619,7 +3610,7 @@ namespace Litle.Sdk
 
     public partial class deactivateReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public string litleTxnId;
 
         public override string Serialize()
         {
@@ -3638,7 +3629,7 @@ namespace Litle.Sdk
 
     public partial class activateReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public string litleTxnId;
 
         public override string Serialize()
         {
@@ -3657,7 +3648,7 @@ namespace Litle.Sdk
 
     public partial class refundReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public string litleTxnId;
 
         public override string Serialize()
         {
@@ -3676,7 +3667,7 @@ namespace Litle.Sdk
 
     public partial class depositReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public string litleTxnId;
 
         public override string Serialize()
         {
@@ -3767,11 +3758,11 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.billToAddressField;
+                return billToAddressField;
             }
             set
             {
-                this.billToAddressField = value; this.billToAddressSet = true;
+                billToAddressField = value; billToAddressSet = true;
             }
         }
 
@@ -3781,11 +3772,11 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.shipToAddressField;
+                return shipToAddressField;
             }
             set
             {
-                this.shipToAddressField = value; this.shipToAddressSet = true;
+                shipToAddressField = value; shipToAddressSet = true;
             }
         }
 
@@ -3795,11 +3786,11 @@ namespace Litle.Sdk
         {
             get
             {
-                return this.amountField;
+                return amountField;
             }
             set
             {
-                this.amountField = value; this.amountSet = true;
+                amountField = value; amountSet = true;
             }
         }
 
