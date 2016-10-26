@@ -15,8 +15,8 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            //config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("url", "http://barnold-vm4:8081/sandbox/communicator/online");
+            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "9.10");
