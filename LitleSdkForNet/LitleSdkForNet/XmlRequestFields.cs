@@ -559,7 +559,14 @@ namespace Litle.Sdk
             set { this.payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
         }
         public string payPalNotes;
-        public pinType pin;
+
+        private string pinField;
+        private bool pinSet;
+        public string pin
+        {
+            get { return pinField; }
+            set { pinField = value; pinSet = true; }
+        }
 
         public override string Serialize()
         {
@@ -582,7 +589,7 @@ namespace Litle.Sdk
             if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
             if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderComplete>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderComplete>";
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
-            if (pin != null) xml += pin.Serialize();
+            if (pinSet) xml += "\r\n<pin>" + pin + "</pin>";
             xml += "\r\n</capture>";
 
             return xml;
