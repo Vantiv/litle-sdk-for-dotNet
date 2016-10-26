@@ -254,7 +254,37 @@ namespace Litle.Sdk
             }
 
             JSch jsch = new JSch();
+
+            if (printxml)
+            {
+                // grab the contents fo the knownhosts file and print
+                var hostFile = File.ReadAllText(knownHostsFile);
+                Console.WriteLine("known host contents: " + hostFile);
+            }
+            
             jsch.setKnownHosts(knownHostsFile);
+
+            // setup for diagnostic
+            // Get the KnownHosts repository from JSchs
+            HostKeyRepository hkr = jsch.getHostKeyRepository();
+            HostKey[] hks = hkr.getHostKey();
+            HostKey hk;
+            if (printxml)
+            {
+                // Print all knownhosts and keys  
+                if (hks != null)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Host keys in " + hkr.getKnownHostsRepositoryID() + ":");
+                    foreach (HostKey t in hks)
+                    {
+                        hk = t;
+                        Console.WriteLine("local HostKey host: <" + hk.getHost() + "> type: <" + hk.getType() + "> fingerprint: <" + hk.getFingerPrint(jsch) + ">");
+                    }
+                    Console.WriteLine("");
+                }
+            }
+           
 
             Session session = jsch.getSession(username, url);
             session.setPassword(password);
@@ -263,13 +293,21 @@ namespace Litle.Sdk
             {
                 session.connect();
 
+                // more diagnostic code for troubleshooting sFTP connection errors
+                if (printxml)
+                {
+                    // Print the host key info of the connected server:
+                    hk = session.getHostKey();
+                    Console.WriteLine("remote HostKey host: <" + hk.getHost() + "> type: <" + hk.getType() + "> fingerprint: <" + hk.getFingerPrint(jsch) + ">");
+                }
+                
                 channel = session.openChannel("sftp");
                 channel.connect();
                 channelSftp = (ChannelSftp)channel;
             }
             catch (SftpException e)
             {
-                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection",e);
+                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
             }
             catch (JSchException e)
             {

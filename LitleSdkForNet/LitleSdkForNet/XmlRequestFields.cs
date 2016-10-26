@@ -866,7 +866,7 @@ namespace Litle.Sdk
     }
 
 
-    public partial class credit : transactionTypeWithReportGroup
+    public class credit : transactionTypeWithReportGroup
     {
         private long litleTxnIdField;
         private bool litleTxnIdSet;
@@ -920,7 +920,14 @@ namespace Litle.Sdk
         public merchantDataType merchantData;
         public string payPalNotes;
         public string actionReason;
-        public pinType pin;
+
+        private string pinField;
+        private bool pinSet;
+        public string pin
+        {
+            get { return pinField; }
+            set { pinField = value; pinSet = true; }
+        }
 
         public override string Serialize()
         {
@@ -943,6 +950,7 @@ namespace Litle.Sdk
                 if (enhancedData != null) xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "</enhancedData>";
                 if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "</processingInstructions>";
                 if (pos != null) xml += "\r\n<pos>" + pos.Serialize() + "</pos>";
+                if (pinSet) { xml += "\r\n<pin>" + pin + "</pin>"; }
             }
             else
             {
@@ -974,10 +982,6 @@ namespace Litle.Sdk
             }
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
             if (actionReason != null) xml += "\r\n<actionReason>" + SecurityElement.Escape(actionReason) + "</actionReason>";
-            if (pin != null)
-            {
-                xml += pin.Serialize();
-            }
             xml += "\r\n</credit>";
             return xml;
         }
@@ -3720,15 +3724,14 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class wallet
+    public class wallet
     {
         public walletWalletSourceType walletSourceType;
         public string walletSourceTypeId;
 
         public string Serialize()
         {
-            string xml = "";
-            if (walletSourceType != null) xml += "\r\n<walletSourceType>" + walletSourceType + "</walletSourceType>";
+            var xml = "\r\n<walletSourceType>" + walletSourceType + "</walletSourceType>";
             if (walletSourceTypeId != null) xml += "\r\n<walletSourceTypeId>" + SecurityElement.Escape(walletSourceTypeId) + "</walletSourceTypeId>";
             return xml;
         } 

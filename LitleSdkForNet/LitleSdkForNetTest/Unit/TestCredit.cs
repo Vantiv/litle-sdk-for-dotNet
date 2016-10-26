@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
-using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
 
@@ -10,214 +8,277 @@ using System.Text.RegularExpressions;
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestCredit
+    internal class TestCredit
     {
         
-        private LitleOnline litle;
+        private LitleOnline _litle;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            litle = new LitleOnline();
+            _litle = new LitleOnline();
         }
 
         [Test]
         public void TestActionReasonOnOrphanedRefund()
         {
-            credit credit = new credit();
-            credit.orderId = "12344";
-            credit.amount = 2;
-            credit.orderSource = orderSourceType.ecommerce;
-            credit.reportGroup = "Planets";
-            credit.actionReason = "SUSPECT_FRAUD";
-           
+            var credit = new credit
+            {
+                orderId = "12344",
+                amount = 2,
+                orderSource = orderSourceType.ecommerce,
+                reportGroup = "Planets",
+                actionReason = "SUSPECT_FRAUD"
+            };
+
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<actionReason>SUSPECT_FRAUD</actionReason>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<actionReason>SUSPECT_FRAUD</actionReason>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
      
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestOrderSource_Set()
         {
-            credit credit = new credit();
-            credit.orderId = "12344";
-            credit.amount = 2;
-            credit.orderSource = orderSourceType.ecommerce;
-            credit.reportGroup = "Planets";
+            var credit = new credit
+            {
+                orderId = "12344",
+                amount = 2,
+                orderSource = orderSourceType.ecommerce,
+                reportGroup = "Planets"
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<credit.*<amount>2</amount>.*<orderSource>ecommerce</orderSource>.*</credit>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<credit.*<amount>2</amount>.*<orderSource>ecommerce</orderSource>.*</credit>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestSecondaryAmount_Orphan()
         {
-            credit credit = new credit();
-            credit.amount = 2;
-            credit.secondaryAmount = 1;
-            credit.orderId = "3";
-            credit.orderSource = orderSourceType.ecommerce;
-            credit.reportGroup = "Planets";
+            var credit = new credit
+            {
+                amount = 2,
+                secondaryAmount = 1,
+                orderId = "3",
+                orderSource = orderSourceType.ecommerce,
+                reportGroup = "Planets"
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<orderId>3</orderId>\r\n<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<orderId>3</orderId>\r\n<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestSecondaryAmount_Tied()
         {
-            credit credit = new credit();
-            credit.amount = 2;
-            credit.secondaryAmount = 1;
-            credit.litleTxnId = 3;
-            credit.processingInstructions = new processingInstructions();
-            credit.reportGroup = "Planets";
+            var credit = new credit
+            {
+                amount = 2,
+                secondaryAmount = 1,
+                litleTxnId = 3,
+                processingInstructions = new processingInstructions(),
+                reportGroup = "Planets"
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<process.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<process.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestSurchargeAmount_Tied()
         {
-            credit credit = new credit();
-            credit.amount = 2;
-            credit.surchargeAmount = 1;
-            credit.litleTxnId = 3;
-            credit.processingInstructions = new processingInstructions();
-            credit.reportGroup = "Planets";
+            var credit = new credit
+            {
+                amount = 2,
+                surchargeAmount = 1,
+                litleTxnId = 3,
+                processingInstructions = new processingInstructions(),
+                reportGroup = "Planets"
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<process.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<process.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestSurchargeAmount_TiedOptional()
         {
-            credit credit = new credit();
-            credit.amount = 2;
-            credit.litleTxnId = 3;
-            credit.reportGroup = "Planets";
-            credit.processingInstructions = new processingInstructions();
+            var credit = new credit
+            {
+                amount = 2,
+                litleTxnId = 3,
+                reportGroup = "Planets",
+                processingInstructions = new processingInstructions()
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<processi.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<processi.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestSurchargeAmount_Orphan()
         {
-            credit credit = new credit();
-            credit.amount = 2;
-            credit.surchargeAmount = 1;
-            credit.orderId = "3";
-            credit.orderSource = orderSourceType.ecommerce;
-            credit.reportGroup = "Planets";
+            var credit = new credit
+            {
+                amount = 2,
+                surchargeAmount = 1,
+                orderId = "3",
+                orderSource = orderSourceType.ecommerce,
+                reportGroup = "Planets"
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<orderId>3</orderId>\r\n<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<orderId>3</orderId>\r\n<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestSurchargeAmount_OrphanOptional()
         {
-            credit credit = new credit();
-            credit.amount = 2;
-            credit.orderId = "3";
-            credit.orderSource = orderSourceType.ecommerce;
-            credit.reportGroup = "Planets";
+            var credit = new credit
+            {
+                amount = 2,
+                orderId = "3",
+                orderSource = orderSourceType.ecommerce,
+                reportGroup = "Planets"
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<orderId>3</orderId>\r\n<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<orderId>3</orderId>\r\n<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestPos_Tied()
         {
-            credit credit = new credit();
-            credit.amount = 2;
-            credit.pos = new pos();
-            credit.pos.terminalId = "abc123";
-            credit.litleTxnId = 3;
-            credit.reportGroup = "Planets";
-            credit.payPalNotes = "notes";
+            var credit = new credit
+            {
+                amount = 2,
+                pos = new pos {terminalId = "abc123"},
+                litleTxnId = 3,
+                reportGroup = "Planets",
+                payPalNotes = "notes"
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<pos>\r\n<terminalId>abc123</terminalId></pos>\r\n<payPalNotes>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<pos>\r\n<terminalId>abc123</terminalId></pos>\r\n<payPalNotes>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
         [Test]
         public void TestPos_TiedOptional()
         {
-            credit credit = new credit();
-            credit.amount = 2;
-            credit.litleTxnId = 3;
-            credit.reportGroup = "Planets";
-            credit.payPalNotes = "notes";
+            var credit = new credit
+            {
+                amount = 2,
+                litleTxnId = 3,
+                reportGroup = "Planets",
+                payPalNotes = "notes"
+            };
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<payPalNotes>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<payPalNotes>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.Credit(credit);
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
         }
 
+        [Test]
+        public void TestCredit_withPin()
+        {
+            var credit = new credit
+            {
+                litleTxnId = 55,
+                orderId = "12344",
+                amount = 2,
+                reportGroup = "Planets",
+                pin = "1234"
+            };
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<credit.*<amount>2</amount>.*\r\n<pin>1234</pin>.*</credit>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
+        }
+
+        [Test]
+        public void TestCredit_withPinNotSent()
+        {
+            var credit = new credit
+            {
+                orderId = "12344",
+                amount = 2,
+                reportGroup = "Planets",
+                orderSource = orderSourceType.ecommerce,
+                // w/o a litleTxnId we should not send the pin element
+                pin = "1234"
+            };
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<credit.*<amount>2</amount>.*\r\n<orderSource>ecommerce</orderSource>.*</credit>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Credit(credit);
+        }
 
     }
 }
