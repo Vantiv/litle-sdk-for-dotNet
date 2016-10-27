@@ -1,72 +1,71 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    class TestEcheckSale
+    internal class TestEcheckSale
     {
-        private LitleOnline litle;
+        private LitleOnline _litle;
 
         [TestFixtureSetUp]
-        public void setUp()
+        public void SetUp()
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "5000");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
-            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
-            config.Add("logFile", Properties.Settings.Default.logFile);
-            config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(config);
+            var config = new Dictionary<string, string>
+            {
+                {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+                {"reportGroup", "Default Report Group"},
+                {"username", "DOTNET"},
+                {"version", "8.13"},
+                {"timeout", "5000"},
+                {"merchantId", "101"},
+                {"password", "TESTCASE"},
+                {"printxml", "true"},
+                {"proxyHost", Properties.Settings.Default.proxyHost},
+                {"proxyPort", Properties.Settings.Default.proxyPort},
+                {"logFile", Properties.Settings.Default.logFile},
+                {"neuterAccountNums", "true"}
+            };
+            _litle = new LitleOnline(config);
         }
 
         [Test]
         public void SimpleEcheckSaleWithEcheck()
         {
-            echeckSale echeckSaleObj = new echeckSale();
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+            var echeckSaleObj = new echeckSale
+            {
+                amount = 123456,
+                orderId = "12345",
+                orderSource = orderSourceType.ecommerce,
+                echeck = new echeckType
+                {
+                    accType = echeckAccountTypeEnum.Checking,
+                    accNum = "12345657890",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                },
+                billToAddress = new contact
+                {
+                    name = "Bob",
+                    city = "lowell",
+                    state = "MA",
+                    email = "litle.com"
+                }
+            };
 
-            echeckType echeckTypeObj = new echeckType();
-            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
-            echeckTypeObj.accNum = "12345657890";
-            echeckTypeObj.routingNum = "123456789";
-            echeckTypeObj.checkNum = "123455";
-            
-            contact contactObj = new contact();
-            contactObj.name = "Bob";
-            contactObj.city = "lowell";
-            contactObj.state = "MA";
-            contactObj.email = "litle.com";
-
-            echeckSaleObj.echeck = echeckTypeObj;
-            echeckSaleObj.billToAddress = contactObj;
-
-            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+           var response = _litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void NoAmount()
         {
-            echeckSale echeckSaleObj = new echeckSale();
-            echeckSaleObj.reportGroup = "Planets";
-            
+            var echeckSaleObj = new echeckSale {reportGroup = "Planets"};
+
             try
             {
-                //expected exception;
-                echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+                _litle.EcheckSale(echeckSaleObj);
+                Assert.Fail("Exception Expected!");
             }
             catch (LitleOnlineException e)
             {
@@ -77,87 +76,92 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void EcheckSaleWithShipTo()
         {
-            echeckSale echeckSaleObj = new echeckSale();
-            echeckSaleObj.reportGroup = "Planets";
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.verify = true;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+            var contact = new contact
+            {
+                name = "Bob",
+                city = "lowell",
+                state = "MA",
+                email = "litle.com"
+            };
 
-            echeckType echeckTypeObj = new echeckType();
-            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
-            echeckTypeObj.accNum = "12345657890";
-            echeckTypeObj.routingNum = "123456789";
-            echeckTypeObj.checkNum = "123455";
+            var echeckSaleObj = new echeckSale
+            {
+                reportGroup = "Planets",
+                amount = 123456,
+                verify = true,
+                orderId = "12345",
+                orderSource = orderSourceType.ecommerce,
+                echeck = new echeckType
+                {
+                    accType = echeckAccountTypeEnum.Checking,
+                    accNum = "12345657890",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                },
+                billToAddress = contact,
+                shipToAddress = contact
+            };
 
-            contact contactObj = new contact();
-            contactObj.name = "Bob";
-            contactObj.city = "lowell";
-            contactObj.state = "MA";
-            contactObj.email = "litle.com";
-
-            echeckSaleObj.echeck = echeckTypeObj;
-            echeckSaleObj.billToAddress = contactObj;
-            echeckSaleObj.shipToAddress = contactObj;
-
-            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            var response = _litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void EcheckSaleWithEcheckToken()
         {
-            echeckSale echeckSaleObj = new echeckSale();
-            echeckSaleObj.reportGroup = "Planets";
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.verify = true;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+            var echeckSaleObj = new echeckSale
+            {
+                reportGroup = "Planets",
+                amount = 123456,
+                verify = true,
+                orderId = "12345",
+                orderSource = orderSourceType.ecommerce,
+                token = new echeckTokenType
+                {
+                    accType = echeckAccountTypeEnum.Checking,
+                    litleToken = "1234565789012",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                },
+                customBilling = new customBilling
+                {
+                    phone = "123456789",
+                    descriptor = "good"
+                },
+                billToAddress = new contact
+                {
+                    name = "Bob",
+                    city = "lowell",
+                    state = "MA",
+                    email = "litle.com"
+                }
+            };
 
-            echeckTokenType echeckTokenTypeObj = new echeckTokenType();
-            echeckTokenTypeObj.accType = echeckAccountTypeEnum.Checking;
-            echeckTokenTypeObj.litleToken = "1234565789012";
-            echeckTokenTypeObj.routingNum = "123456789";
-            echeckTokenTypeObj.checkNum = "123455";
-
-            customBilling customBillingObj = new customBilling();
-            customBillingObj.phone = "123456789";
-            customBillingObj.descriptor = "good";
-
-            contact contactObj = new contact();
-            contactObj.name = "Bob";
-            contactObj.city = "lowell";
-            contactObj.state = "MA";
-            contactObj.email = "litle.com";
-
-            echeckSaleObj.token = echeckTokenTypeObj;
-            echeckSaleObj.customBilling = customBillingObj;
-            echeckSaleObj.billToAddress = contactObj;
-
-            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            var response = _litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void EcheckSaleMissingBilling()
         {
-            echeckSale echeckSaleObj = new echeckSale();
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
-
-            echeckType echeckTypeObj = new echeckType();
-            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
-            echeckTypeObj.accNum = "12345657890";
-            echeckTypeObj.routingNum = "123456789";
-            echeckTypeObj.checkNum = "123455";
-
-            echeckSaleObj.echeck = echeckTypeObj;
+            var echeckSaleObj = new echeckSale
+            {
+                amount = 123456,
+                orderId = "12345",
+                orderSource = orderSourceType.ecommerce,
+                echeck = new echeckType
+                {
+                    accType = echeckAccountTypeEnum.Checking,
+                    accNum = "12345657890",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                }
+            };
 
             try
             {
-                //expected exception;
-                echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+                _litle.EcheckSale(echeckSaleObj);
+                Assert.Fail("Exception expected!");
             }
             catch (LitleOnlineException e)
             {
@@ -168,54 +172,59 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleEcheckSale()
         {
-            echeckSale echeckSaleObj = new echeckSale();
-            echeckSaleObj.reportGroup = "Planets";
-            echeckSaleObj.litleTxnId = 123456789101112;
-            echeckSaleObj.amount = 12;
+            var echeckSaleObj = new echeckSale
+            {
+                reportGroup = "Planets",
+                litleTxnId = 123456789101112,
+                amount = 12
+            };
 
-            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            var response = _litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void SimpleEcheckSaleWithSecondaryAmountWithOrderId()
         {
-            echeckSale echeckSaleObj = new echeckSale();
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.secondaryAmount = 50;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+            var echeckSaleObj = new echeckSale
+            {
+                amount = 123456,
+                secondaryAmount = 50,
+                orderId = "12345",
+                orderSource = orderSourceType.ecommerce,
+                echeck = new echeckType
+                {
+                    accType = echeckAccountTypeEnum.CorpSavings,
+                    accNum = "12345657890",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                },
+                billToAddress = new contact
+                {
+                    name = "Bob",
+                    city = "lowell",
+                    state = "MA",
+                    email = "litle.com"
+                }
+            };
 
-            echeckType echeckTypeObj = new echeckType();
-            echeckTypeObj.accType = echeckAccountTypeEnum.CorpSavings;
-            echeckTypeObj.accNum = "12345657890";
-            echeckTypeObj.routingNum = "123456789";
-            echeckTypeObj.checkNum = "123455";
-
-            contact contactObj = new contact();
-            contactObj.name = "Bob";
-            contactObj.city = "lowell";
-            contactObj.state = "MA";
-            contactObj.email = "litle.com";
-
-            echeckSaleObj.echeck = echeckTypeObj;
-            echeckSaleObj.billToAddress = contactObj;
-
-            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            var response = _litle.EcheckSale(echeckSaleObj);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void SimpleEcheckSaleWithSecondaryAmount()
         {
-            echeckSale echeckSaleObj = new echeckSale();
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.secondaryAmount = 50;
-            echeckSaleObj.litleTxnId = 1234565L;
+            var echeckSaleObj = new echeckSale
+            {
+                amount = 123456,
+                secondaryAmount = 50,
+                litleTxnId = 1234565L
+            };
             try
             {
-                ////expected exception;
-                echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+                _litle.EcheckSale(echeckSaleObj);
+                Assert.Fail("Exception expected!");
             }
             catch (LitleOnlineException e)
             {
