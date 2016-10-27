@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Litle.Sdk;
-using Moq;
-using System.Text.RegularExpressions;
 
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestCommunications
+    internal class TestCommunications
     {
-        private Communications objectUnderTest;
+        private Communications _objectUnderTest;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            objectUnderTest = new Communications();
+            _objectUnderTest = new Communications();
         }
 
         [Test]
         public void TestSettingProxyPropertiesToNullShouldTurnOffProxy()
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("proxyHost", null);
-            config.Add("proxyPort", null);
+            var config = new Dictionary<string, string> {{"proxyHost", null}, {"proxyPort", null}};
 
-            Assert.IsFalse(objectUnderTest.isProxyOn(config));
+            Assert.IsFalse(_objectUnderTest.IsProxyOn(config));
         }
 
 
