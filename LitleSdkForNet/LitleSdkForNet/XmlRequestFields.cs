@@ -3241,18 +3241,18 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class cardType
+    public class cardType
     {
         public methodOfPaymentTypeEnum type;
         public string number;
         public string expDate;
         public string track;
         public string cardValidationNum;
-        public pinType pin;
+        public string pin;
 
         public string Serialize()
         {
-            string xml = "";
+            var xml = "";
             if (track == null)
             {
                 xml += "\r\n<type>" + methodOfPaymentSerializer.Serialize(type) + "</type>";
@@ -3273,25 +3273,29 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
             }
+            if (pin != null)
+            {
+                xml += "\r\n<pin>" + pin + "</pin>";
+            }
             return xml;
         }
     }
 
-    public class pinType
-    {
-        public string pin
-        {
-            get { return pin; }
-            set { pin = value; }
-        }
-
-        public string Serialize()
-        {
-            string xml = "";
-            xml += "\r\n<pin>" + pin + "</pin>";
-            return xml;
-        }
-    }
+//    public class pinType
+//    {
+//        public string pin
+//        {
+//            get { return pin; }
+//            set { pin = value; }
+//        }
+//
+//        public string Serialize()
+//        {
+//            string xml = "";
+//            xml += "\r\n<pin>" + pin + "</pin>";
+//            return xml;
+//        }
+//    }
 
     public partial class virtualGiftCardType
     {
