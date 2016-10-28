@@ -1,7 +1,16 @@
 = LitleOnline CHANGELOG
 
-==Varsion 9.3.3
-*Feature: adding signed dlls and signing our dll
+==Version 9.10.0
+* Feature: updated to use XML v9.10
+* Feature: pin support
+* Feature: added processingType element
+* Feature: added originalNetworkTransactionId
+* Feature: added originalTransactionAmount
+* Feature: AndroidPay support
+* Feature: added wallet source: VisaCheckout
+
+==Version 9.3.3
+* Feature: adding signed dlls and signing our dll
 
 ==Version 9.3.2
 HTTP timeout is set to 500ms
