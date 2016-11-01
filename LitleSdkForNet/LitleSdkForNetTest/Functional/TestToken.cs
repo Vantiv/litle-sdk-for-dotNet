@@ -91,7 +91,7 @@ namespace Litle.Sdk.Test.Functional
                 {
                     data = "user",
                     signature = "sign",
-                    version = "1",
+                    version = "12345",
                     header = new applepayHeaderType
                     {
                         applicationData = "454657413164",
