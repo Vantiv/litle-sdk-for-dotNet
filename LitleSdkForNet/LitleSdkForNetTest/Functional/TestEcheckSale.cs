@@ -93,7 +93,7 @@ namespace Litle.Sdk.Test.Functional
                 orderSource = orderSourceType.ecommerce,
                 echeck = new echeckType
                 {
-                    accType = echeckAccountTypeEnum.Checking,
+                    accType = echeckAccountTypeEnum.CorpSavings,
                     accNum = "12345657890",
                     routingNum = "123456789",
                     checkNum = "123455"
@@ -118,7 +118,7 @@ namespace Litle.Sdk.Test.Functional
                 orderSource = orderSourceType.ecommerce,
                 token = new echeckTokenType
                 {
-                    accType = echeckAccountTypeEnum.Checking,
+                    accType = echeckAccountTypeEnum.CorpSavings,
                     litleToken = "1234565789012",
                     routingNum = "123456789",
                     checkNum = "123455"
