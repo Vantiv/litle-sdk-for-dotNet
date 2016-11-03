@@ -17,7 +17,7 @@ namespace Litle.Sdk.Test.Functional
                 {"url", "https://www.testlitle.com/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
-                {"version", "9.10.0"},
+                {"version", "9.10"},
                 {"timeout", "5000"},
                 {"merchantId", "101"},
                 {"password", "TESTCASE"},

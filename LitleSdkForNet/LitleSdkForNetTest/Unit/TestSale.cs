@@ -33,7 +33,7 @@ namespace Litle.Sdk.Test.Unit
             var mock = new Mock<Communications>();
 
             mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<fraudFilterOverride>false</fraudFilterOverride>.*", RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
      
             var mockedCommunication = mock.Object;
             _litle.setCommunication(mockedCommunication);
