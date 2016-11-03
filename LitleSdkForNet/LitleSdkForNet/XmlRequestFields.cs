@@ -1036,9 +1036,11 @@ namespace Litle.Sdk
             string xml = "";
             if (litleToken != null) xml += "\r\n<litleToken>" + SecurityElement.Escape(litleToken) + "</litleToken>";
             if (routingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(routingNum) + "</routingNum>";
+            string accTypeName = accTypeField.ToString();
             XmlEnumAttribute[] attributes =
                 (XmlEnumAttribute[])typeof(echeckAccountTypeEnum).GetMember(accTypeField.ToString())[0].GetCustomAttributes(typeof(XmlEnumAttribute), false);
-            if (accTypeSet) xml += "\r\n<accType>" + attributes[0].Name + "</accType>";
+            if (attributes.Length > 0) accTypeName = attributes[0].Name;
+            if (accTypeSet) xml += "\r\n<accType>" + accTypeName + "</accType>";
             if (checkNum != null) xml += "\r\n<checkNum>" + SecurityElement.Escape(checkNum) + "</checkNum>";
             return xml;
         }

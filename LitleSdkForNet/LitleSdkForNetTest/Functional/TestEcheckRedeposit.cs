@@ -29,7 +29,6 @@ namespace Litle.Sdk.Test.Functional
             _litle = new LitleOnline(config);
         }
 
-
         [Test]
         public void SimpleEcheckRedeposit() {
             var echeckredeposit = new echeckRedeposit {litleTxnId = 123456};
