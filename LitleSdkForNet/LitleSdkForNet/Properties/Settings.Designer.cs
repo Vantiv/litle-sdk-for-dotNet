@@ -181,7 +181,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://barnold-vm4:8081/sandbox/communicator/online")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://testlitle.com/sandbox/communicator/online")]
         public string url {
             get {
                 return ((string)(this["url"]));

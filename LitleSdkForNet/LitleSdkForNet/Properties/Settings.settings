@@ -42,7 +42,7 @@
       <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="url" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://barnold-vm4:8081/sandbox/communicator/online</Value>
+      <Value Profile="(Default)">http://testlitle.com/sandbox/communicator/online</Value>
     </Setting>
     <Setting Name="proxyHost" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
