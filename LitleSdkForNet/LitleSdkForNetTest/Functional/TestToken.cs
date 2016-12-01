@@ -82,7 +82,7 @@ namespace Litle.Sdk.Test.Functional
             applepay.header = applepayHeaderType;
             applepay.data = "user";
             applepay.signature = "sign";
-            applepay.version = "1";
+            applepay.version = "12345";
             registerTokenRequest.applepay = applepay;
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
             StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
