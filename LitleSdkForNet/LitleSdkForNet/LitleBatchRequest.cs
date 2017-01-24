@@ -24,9 +24,12 @@ namespace Litle.Sdk
         private int numAuthorization;
         private int numAccountUpdates;
         private int numCapture;
+        private int numGiftCardCapture;
         private int numCredit;
+        private int numGiftCardCredit;
         private int numSale;
         private int numAuthReversal;
+        private int numGiftCardAuthReversal;
         private int numEcheckCredit;
         private int numEcheckVerification;
         private int numEcheckSale;
@@ -60,8 +63,11 @@ namespace Litle.Sdk
 
         private long sumOfAuthorization;
         private long sumOfAuthReversal;
+        private long sumOfGiftCardAuthReversal;
         private long sumOfCapture;
+        private long sumOfGiftCardCapture;
         private long sumOfCredit;
+        private long sumOfGiftCardCredit;
         private long sumOfSale;
         private long sumOfForceCapture;
         private long sumOfEcheckSale;
@@ -124,9 +130,12 @@ namespace Litle.Sdk
 
             numAuthorization = 0;
             numAuthReversal = 0;
+            numGiftCardAuthReversal = 0;
             numCapture = 0;
             numCaptureGivenAuth = 0;
+            numGiftCardCapture = 0;
             numCredit = 0;
+            numGiftCardCredit = 0;
             numEcheckCredit = 0;
             numEcheckRedeposit = 0;
             numEcheckPreNoteSale = 0;
@@ -153,8 +162,11 @@ namespace Litle.Sdk
 
             sumOfAuthorization = 0;
             sumOfAuthReversal = 0;
+            sumOfGiftCardAuthReversal = 0;
             sumOfCapture = 0;
+            sumOfGiftCardCapture = 0;
             sumOfCredit = 0;
+            sumOfGiftCardCredit = 0;
             sumOfSale = 0;
             sumOfForceCapture = 0;
             sumOfEcheckSale = 0;
@@ -218,9 +230,20 @@ namespace Litle.Sdk
             return numCapture;
         }
 
+        public int getGiftCardCapture()
+        {
+            return numGiftCardCapture;
+        }
+
+
         public int getNumCredit()
         {
             return numCredit;
+        }
+
+        public int getNumGiftCardCredit()
+        {
+            return numGiftCardCredit;
         }
 
         public int getNumSale()
@@ -231,6 +254,11 @@ namespace Litle.Sdk
         public int getNumAuthReversal()
         {
             return numAuthReversal;
+        }
+
+        public int getNumGiftCardAuthReversal()
+        {
+            return numGiftCardAuthReversal;
         }
 
         public int getNumEcheckCredit()
@@ -408,14 +436,29 @@ namespace Litle.Sdk
             return sumOfAuthReversal;
         }
 
+        public long getSumOfGiftCardAuthReversal()
+        {
+            return sumOfGiftCardAuthReversal;
+        }
+
         public long getSumOfCapture()
         {
             return sumOfCapture;
         }
 
+        public long getSumOfGiftCardCapture()
+        {
+            return sumOfGiftCardCapture;
+        }
+
         public long getSumOfCredit()
         {
             return sumOfCredit;
+        }
+
+        public long getSumOfGiftCardCredit()
+        {
+            return sumOfGiftCardCredit;
         }
 
         public long getSumOfSale()
@@ -530,6 +573,20 @@ namespace Litle.Sdk
             }
         }
 
+        public void addGiftCardCapture(giftCardCapture giftCardCapture)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numGiftCardCapture++;
+                sumOfGiftCardCapture += giftCardCapture.captureAmount;
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, giftCardCapture);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
         public void addCredit(credit credit)
         {
             if (numAccountUpdates == 0)
@@ -538,6 +595,21 @@ namespace Litle.Sdk
                 sumOfCredit += credit.amount;
                 fillInReportGroup(credit);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, credit);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addGiftCardCredit(giftCardCredit giftCardCredit)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numGiftCardCredit++;
+                sumOfGiftCardCredit += giftCardCredit.creditAmount;
+                fillInReportGroup(giftCardCredit);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, giftCardCredit);
             }
             else
             {
@@ -568,6 +640,22 @@ namespace Litle.Sdk
                 sumOfAuthReversal += authReversal.amount;
                 fillInReportGroup(authReversal);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authReversal);
+            }
+            else
+            {
+                throw new LitleOnlineException(accountUpdateErrorMessage);
+            }
+        }
+
+        public void addGiftCardAuthReversal(giftCardAuthReversal giftCardAuthReversal)
+        {
+            if (numAccountUpdates == 0)
+            {
+                numGiftCardAuthReversal++;
+                sumOfGiftCardAuthReversal += giftCardAuthReversal.originalAmount;
+                fillInReportGroup(giftCardAuthReversal);
+                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, giftCardAuthReversal);
+
             }
             else
             {
@@ -1051,10 +1139,22 @@ namespace Litle.Sdk
                 xmlHeader += "authReversalAmount=\"" + sumOfAuthReversal + "\"\r\n";
             }
 
+            if (numGiftCardAuthReversal != 0)
+            {
+                xmlHeader += "numGiftCardAuthReversals=\"" + numGiftCardAuthReversal + "\"\r\n";
+                xmlHeader += "giftCardAuthReversalOriginalAmount=\"" + sumOfGiftCardAuthReversal + "\"\r\n";
+            }
+
             if (numCapture != 0)
             {
                 xmlHeader += "numCaptures=\"" + numCapture + "\"\r\n";
                 xmlHeader += "captureAmount=\"" + sumOfCapture + "\"\r\n";
+            }
+
+            if (numGiftCardCapture != 0)
+            {
+                xmlHeader += "numGiftCardCaptures=\"" + numGiftCardCapture + "\"\r\n";
+                xmlHeader += "giftCardCaptureAmount=\"" + sumOfGiftCardCapture + "\"\r\n";
             }
 
             if (numCredit != 0)
@@ -1062,6 +1162,12 @@ namespace Litle.Sdk
 
                 xmlHeader += "numCredits=\"" + numCredit + "\"\r\n";
                 xmlHeader += "creditAmount=\"" + sumOfCredit + "\"\r\n";
+            }
+
+            if (numGiftCardCredit != 0)
+            {
+                xmlHeader += "numGiftCardCredits=\"" + numGiftCardCredit + "\"\r\n";
+                xmlHeader += "giftCardCreditAmount=\"" + sumOfGiftCardCredit + "\"\r\n";
             }
 
             if (numForceCapture != 0)
@@ -1254,7 +1360,7 @@ namespace Litle.Sdk
                 xmlHeader += "physicalCheckDebitAmount=\"" + physicalCheckDebitAmount + "\"\r\n";
             }
 
-            xmlHeader += "merchantSdk=\"DotNet;10.1\"\r\n";
+            xmlHeader += "merchantSdk=\"DotNet;11.0\"\r\n";
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
@@ -1321,7 +1427,10 @@ namespace Litle.Sdk
                 && numSubmerchantDebit == 0
                 && numReserveDebit == 0
                 && numVendorDebit == 0
-                && numPhysicalCheckDebit == 0;
+                && numPhysicalCheckDebit == 0
+                && numGiftCardAuthReversal == 0
+                && numGiftCardCapture == 0
+                && numGiftCardCredit == 0;
 
             return result;
         }
@@ -1711,6 +1820,8 @@ namespace Litle.Sdk
 
         public echeckType accountInfo { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<submerchantCredit ";
@@ -1728,13 +1839,14 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-
             if (accountInfo != null)
             {
                 xml += "\r\n<accountInfo>";
                 xml += accountInfo.Serialize();
                 xml += "</accountInfo>";
             }
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</submerchantCredit>";
 
@@ -1751,6 +1863,8 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<payFacCredit ";
@@ -1766,6 +1880,8 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</payFacCredit>";
 
@@ -1782,6 +1898,8 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<reserveCredit ";
@@ -1797,6 +1915,8 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</reserveCredit>";
 
@@ -1817,6 +1937,8 @@ namespace Litle.Sdk
 
         public echeckType accountInfo { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<vendorCredit ";
@@ -1834,13 +1956,14 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-
             if (accountInfo != null)
             {
                 xml += "\r\n<accountInfo>";
                 xml += accountInfo.Serialize();
                 xml += "</accountInfo>";
             }
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</vendorCredit>";
 
@@ -1857,6 +1980,8 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<physicalCheckCredit ";
@@ -1872,6 +1997,8 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</physicalCheckCredit>";
 
@@ -1892,6 +2019,8 @@ namespace Litle.Sdk
 
         public echeckType accountInfo { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<submerchantDebit ";
@@ -1909,13 +2038,14 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-
             if (accountInfo != null)
             {
                 xml += "\r\n<accountInfo>";
                 xml += accountInfo.Serialize();
                 xml += "</accountInfo>";
             }
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</submerchantDebit>";
 
@@ -1932,6 +2062,8 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<payFacDebit ";
@@ -1947,6 +2079,8 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</payFacDebit>";
 
@@ -1963,6 +2097,8 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<reserveDebit ";
@@ -1978,6 +2114,8 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</reserveDebit>";
 
@@ -1998,6 +2136,8 @@ namespace Litle.Sdk
 
         public echeckType accountInfo { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<vendorDebit ";
@@ -2015,13 +2155,14 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-
             if (accountInfo != null)
             {
                 xml += "\r\n<accountInfo>";
                 xml += accountInfo.Serialize();
                 xml += "</accountInfo>";
             }
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</vendorDebit>";
 
@@ -2038,6 +2179,8 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
+        public string customIdentifier { get; set; }
+
         public override string Serialize()
         {
             string xml = "\r\n<physicalCheckDebit ";
@@ -2053,6 +2196,8 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
+            if (customIdentifier != null)
+                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</physicalCheckDebit>";
 

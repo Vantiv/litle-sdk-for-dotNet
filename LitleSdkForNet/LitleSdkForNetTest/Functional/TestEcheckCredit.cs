@@ -21,17 +21,21 @@ namespace Litle.Sdk.Test.Functional
         public void simpleEcheckCredit()
         {
             echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.id = "1";
+            echeckcredit.reportGroup = "Planets";
             echeckcredit.amount = 12L;
             echeckcredit.litleTxnId = 123456789101112L;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
 
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void noLitleTxnId()
         {
             echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.id = "1";
+            echeckcredit.reportGroup = "Planets";
             try
             {
                 litle.EcheckCredit(echeckcredit);
@@ -47,6 +51,8 @@ namespace Litle.Sdk.Test.Functional
         public void echeckCreditWithEcheck()
         {
             echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.id = "1";
+            echeckcredit.reportGroup = "Planets";
             echeckcredit.amount = 12L;
             echeckcredit.orderId = "12345";
             echeckcredit.orderSource = orderSourceType.ecommerce;
@@ -63,13 +69,15 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void echeckCreditWithToken()
         {
             echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.id = "1";
+            echeckcredit.reportGroup = "Planets";
             echeckcredit.amount = 12L;
             echeckcredit.orderId = "12345";
             echeckcredit.orderSource = orderSourceType.ecommerce;
@@ -86,13 +94,15 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void missingBilling()
         {
             echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.id = "1";
+            echeckcredit.reportGroup = "Planets";
             echeckcredit.amount = 12L;
             echeckcredit.orderId = "12345";
             echeckcredit.orderSource = orderSourceType.ecommerce;
@@ -117,6 +127,8 @@ namespace Litle.Sdk.Test.Functional
         public void echeckCreditWithSecondaryAmountWithOrderIdAndCcdPaymentInfo()
         {
             echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.id = "1";
+            echeckcredit.reportGroup = "Planets";
             echeckcredit.amount = 12L;
             echeckcredit.secondaryAmount = 50;
             echeckcredit.orderId = "12345";
@@ -135,18 +147,20 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void echeckCreditWithSecondaryAmountWithLitleTxnId()
         {
             echeckCredit echeckcredit = new echeckCredit();
+            echeckcredit.id = "1";
+            echeckcredit.reportGroup = "Planets";
             echeckcredit.amount = 12L;
             echeckcredit.secondaryAmount = 50;
             echeckcredit.litleTxnId = 12345L;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
     }
 }

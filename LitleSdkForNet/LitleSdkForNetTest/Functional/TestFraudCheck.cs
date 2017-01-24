@@ -36,6 +36,8 @@ namespace Litle.Sdk.Test.Functional
         public void TestCustomAttribute7TriggeredRules()
         {
             fraudCheck fraudCheck = new fraudCheck();
+            fraudCheck.id = "1";
+            fraudCheck.reportGroup = "Planets";
             advancedFraudChecksType advancedFraudCheck = new advancedFraudChecksType();
             fraudCheck.advancedFraudChecks = advancedFraudCheck;
             advancedFraudCheck.threatMetrixSessionId = "123";
@@ -57,6 +59,8 @@ namespace Litle.Sdk.Test.Functional
         public void TestFraudCheckWithAddressAndAmount()
         {
             fraudCheck fraudCheck = new fraudCheck();
+            fraudCheck.id = "1";
+            fraudCheck.reportGroup = "Planets";
             advancedFraudChecksType advancedFraudCheck = new advancedFraudChecksType();
             contact billToAddress = new contact();
             contact shipToAddresss = new contact();
@@ -85,7 +89,7 @@ namespace Litle.Sdk.Test.Functional
 
             fraudCheckResponse fraudCheckResponse = litle.FraudCheck(fraudCheck);
             Assert.NotNull(fraudCheckResponse);
-            Assert.AreEqual("Transaction Received", fraudCheckResponse.message);
+            Assert.AreEqual("Call Discover", fraudCheckResponse.message);
             Assert.AreEqual("fail", fraudCheckResponse.advancedFraudResults.deviceReviewStatus);
 
         }

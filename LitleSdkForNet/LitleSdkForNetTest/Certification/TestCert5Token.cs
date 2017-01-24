@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Certification
         public void test50()
         {
             registerTokenRequestType request = new registerTokenRequestType();
+            request.id = "1";
             request.orderId = "50";
             request.accountNumber = "4457119922390123";
 
@@ -49,6 +50,7 @@ namespace Litle.Sdk.Test.Certification
         public void test51()
         {
             registerTokenRequestType request = new registerTokenRequestType();
+            request.id = "1";
             request.orderId = "51";
             request.accountNumber = "4457119999999999";
 
@@ -61,6 +63,7 @@ namespace Litle.Sdk.Test.Certification
         public void test52()
         {
             registerTokenRequestType request = new registerTokenRequestType();
+            request.id = "1";
             request.orderId = "52";
             request.accountNumber = "4457119922390123";
 
@@ -76,6 +79,7 @@ namespace Litle.Sdk.Test.Certification
         public void test53()
         {
             registerTokenRequestType request = new registerTokenRequestType();
+            request.id = "1";
             request.orderId = "53";
             echeckForTokenType echeck = new echeckForTokenType();
             echeck.accNum = "1099999998";
@@ -94,6 +98,7 @@ namespace Litle.Sdk.Test.Certification
         public void test54()
         {
             registerTokenRequestType request = new registerTokenRequestType();
+            request.id = "1";
             request.orderId = "54";
             echeckForTokenType echeck = new echeckForTokenType();
             echeck.accNum = "1022222102";
@@ -109,6 +114,7 @@ namespace Litle.Sdk.Test.Certification
         public void test55()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "55";
             auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
@@ -132,6 +138,7 @@ namespace Litle.Sdk.Test.Certification
         public void test56()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "56";
             auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
@@ -151,6 +158,7 @@ namespace Litle.Sdk.Test.Certification
         public void test57()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "57";
             auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
@@ -174,6 +182,7 @@ namespace Litle.Sdk.Test.Certification
         public void test59()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "59";
             auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
@@ -191,6 +200,7 @@ namespace Litle.Sdk.Test.Certification
         public void test60()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "60";
             auth.amount = 15000;
             auth.orderSource = orderSourceType.ecommerce;
@@ -208,6 +218,7 @@ namespace Litle.Sdk.Test.Certification
         public void test61()
         {
             echeckSale sale = new echeckSale();
+            sale.id = "1";
             sale.orderId = "61";
             sale.amount = 15000;
             sale.orderSource = orderSourceType.ecommerce;
@@ -232,6 +243,7 @@ namespace Litle.Sdk.Test.Certification
         public void test62()
         {
             echeckSale sale = new echeckSale();
+            sale.id = "1";
             sale.orderId = "62";
             sale.amount = 15000;
             sale.orderSource = orderSourceType.ecommerce;
@@ -257,6 +269,7 @@ namespace Litle.Sdk.Test.Certification
         public void test63()
         {
             echeckSale sale = new echeckSale();
+            sale.id = "1";
             sale.orderId = "63";
             sale.amount = 15000;
             sale.orderSource = orderSourceType.ecommerce;

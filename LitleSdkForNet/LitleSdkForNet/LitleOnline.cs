@@ -81,6 +81,17 @@ namespace Litle.Sdk
             return reversalResponse;
         }
 
+        public giftCardAuthReversalResponse GiftCardAuthReversal(giftCardAuthReversal giftCard)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(giftCard);
+            request.giftCardAuthReversal = giftCard;
+
+            litleOnlineResponse response = sendToLitle(request);
+            giftCardAuthReversalResponse giftCardAuthReversalResponse = (giftCardAuthReversalResponse)response.giftCardAuthReversalResponse;
+            return giftCardAuthReversalResponse;
+        }
+
         public captureResponse Capture(capture capture)
         {
             litleOnlineRequest request = createLitleOnlineRequest();
@@ -90,6 +101,17 @@ namespace Litle.Sdk
             litleOnlineResponse response = sendToLitle(request);
             captureResponse captureResponse = (captureResponse)response.captureResponse;
             return captureResponse;
+        }
+
+        public giftCardCaptureResponse GiftCardCapture(giftCardCapture giftCardCapture)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(giftCardCapture);
+            request.giftCardCapture = giftCardCapture;
+
+            litleOnlineResponse response = sendToLitle(request);
+            giftCardCaptureResponse giftCardCaptureResponse = (giftCardCaptureResponse)response.giftCardCaptureResponse;
+            return giftCardCaptureResponse;
         }
 
         public captureGivenAuthResponse CaptureGivenAuth(captureGivenAuth captureGivenAuth)
@@ -112,6 +134,17 @@ namespace Litle.Sdk
             litleOnlineResponse response = sendToLitle(request);
             creditResponse creditResponse = (creditResponse)response.creditResponse;
             return creditResponse;
+        }
+
+        public giftCardCreditResponse GiftCardCredit(giftCardCredit giftCardCredit)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            fillInReportGroup(giftCardCredit);
+            request.giftCardCredit = giftCardCredit;
+
+            litleOnlineResponse response = sendToLitle(request);
+            giftCardCreditResponse giftCardCreditResponse = (giftCardCreditResponse)response.giftCardCreditResponse;
+            return giftCardCreditResponse;
         }
 
         public echeckCreditResponse EcheckCredit(echeckCredit echeckCredit)
@@ -407,7 +440,7 @@ namespace Litle.Sdk
         {
             litleOnlineRequest request = new litleOnlineRequest();
             request.merchantId = config["merchantId"];
-            request.merchantSdk = "DotNet;10.1";
+            request.merchantSdk = "DotNet;11.0";
             authentication authentication = new authentication();
             authentication.password = config["password"];
             authentication.user = config["username"];

@@ -36,6 +36,7 @@ namespace Litle.Sdk.Test.Certification
         {
            
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "1";
             authorization.amount = 10010;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -62,28 +63,32 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
             capture capture = new capture();
+            capture.id = response.id;
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("001", captureResponse.response);
-            Assert.AreEqual("Transaction Received", captureResponse.message);
+            Assert.AreEqual("000", captureResponse.response);
+            Assert.AreEqual("Approved", captureResponse.message);
 
             credit credit = new credit();
+            credit.id = captureResponse.id;
             credit.litleTxnId = captureResponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
-            voidTxn newvoid = new voidTxn(); 
+            voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void Test1AVS()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "1";
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -114,6 +119,7 @@ namespace Litle.Sdk.Test.Certification
         public void test1Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "1";
             sale.amount = 10010;
             sale.orderSource = orderSourceType.ecommerce;
@@ -140,23 +146,26 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
             credit credit = new credit();
+            credit.id = response.id;
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001",voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000",voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test2Auth()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "2";
             authorization.amount = 20020;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -187,28 +196,32 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
             capture capture = new capture();
+            capture.id = response.id;
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureresponse = litle.Capture(capture);
-            Assert.AreEqual("001", captureresponse.response);
-            Assert.AreEqual("Transaction Received", captureresponse.message);
+            Assert.AreEqual("000", captureresponse.response);
+            Assert.AreEqual("Approved", captureresponse.message);
 
             credit credit = new credit();
+            credit.id = captureresponse.id;
             credit.litleTxnId = captureresponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001",voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000",voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test2AVS()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "2";
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -244,6 +257,7 @@ namespace Litle.Sdk.Test.Certification
         public void test2Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "2";
             sale.amount = 20020;
             sale.orderSource = orderSourceType.ecommerce;
@@ -274,22 +288,25 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
             credit credit = new credit();
+            credit.id = response.id;
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test3Auth()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "3";
             authorization.amount = 30030;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -316,28 +333,32 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
             capture capture = new capture();
+            capture.id = response.id;
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("001", captureResponse.response);
-            Assert.AreEqual("Transaction Received", captureResponse.message);
+            Assert.AreEqual("000", captureResponse.response);
+            Assert.AreEqual("Approved", captureResponse.message);
 
             credit credit = new credit();
+            credit.id = captureResponse.id;
             credit.litleTxnId = captureResponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test3AVS()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "3";
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -369,6 +390,7 @@ namespace Litle.Sdk.Test.Certification
         public void test3Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "3";
             sale.amount = 30030;
             sale.orderSource = orderSourceType.ecommerce;
@@ -395,22 +417,25 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
             credit credit = new credit();
+            credit.id = response.id;
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test4Auth()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "4";
             authorization.amount = 40040;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -436,28 +461,32 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("12", response.fraudResult.avsResult);
 
             capture capture = new capture();
+            capture.id = response.id;
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureresponse = litle.Capture(capture);
-            Assert.AreEqual("001", captureresponse.response);
-            Assert.AreEqual("Transaction Received", captureresponse.message);
+            Assert.AreEqual("000", captureresponse.response);
+            Assert.AreEqual("Approved", captureresponse.message);
 
             credit credit = new credit();
+            credit.id = captureresponse.id;
             credit.litleTxnId = captureresponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test4AVS()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "4";
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -487,6 +516,7 @@ namespace Litle.Sdk.Test.Certification
         public void test4Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "4";
             sale.amount = 40040;
             sale.orderSource = orderSourceType.ecommerce;
@@ -512,22 +542,25 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("12", response.fraudResult.avsResult);
 
             credit credit = new credit();
+            credit.id = response.id;
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test5Auth()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "5";
             authorization.amount = 50050;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -549,28 +582,32 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("N", response.fraudResult.cardValidationResult);
 
             capture capture = new capture();
+            capture.id = response.id;
             capture.litleTxnId = response.litleTxnId;
             captureResponse captureresponse = litle.Capture(capture);
-            Assert.AreEqual("001", captureresponse.response);
-            Assert.AreEqual("Transaction Received", captureresponse.message);
+            Assert.AreEqual("000", captureresponse.response);
+            Assert.AreEqual("Approved", captureresponse.message);
 
             credit credit = new credit();
+            credit.id = captureresponse.id;
             credit.litleTxnId = captureresponse.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test5AVS()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "5";
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -596,6 +633,7 @@ namespace Litle.Sdk.Test.Certification
         public void test5Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "5";
             sale.amount = 50050;
             sale.orderSource = orderSourceType.ecommerce;
@@ -617,22 +655,25 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("N", response.fraudResult.cardValidationResult);
 
             credit credit = new credit();
+            credit.id = response.id;
             credit.litleTxnId = response.litleTxnId;
             creditResponse creditResponse = litle.Credit(credit);
-            Assert.AreEqual("001", creditResponse.response);
-            Assert.AreEqual("Transaction Received", creditResponse.message);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = creditResponse.id;
             newvoid.litleTxnId = creditResponse.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
         public void test6Auth()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "6";
             authorization.amount = 60060;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -662,6 +703,7 @@ namespace Litle.Sdk.Test.Certification
         public void test6Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "6";
             sale.amount = 60060;
             sale.orderSource = orderSourceType.ecommerce;
@@ -687,16 +729,18 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("P", response.fraudResult.cardValidationResult);
 
             voidTxn newvoid = new voidTxn();
+            newvoid.id = response.id;
             newvoid.litleTxnId = response.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("001", voidResponse.response);
-            Assert.AreEqual("Transaction Received", voidResponse.message);
+            Assert.AreEqual("360", voidResponse.response);
+            Assert.AreEqual("No transaction found with specified litleTxnId", voidResponse.message);
         }
 
         [Test]
         public void test7Auth()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "7";
             authorization.amount = 70070;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -726,6 +770,7 @@ namespace Litle.Sdk.Test.Certification
         public void test7AVS()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "7";
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -755,6 +800,7 @@ namespace Litle.Sdk.Test.Certification
         public void test7Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "7";
             sale.amount = 70070;
             sale.orderSource = orderSourceType.ecommerce;
@@ -784,6 +830,7 @@ namespace Litle.Sdk.Test.Certification
         public void test8Auth()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "8";
             authorization.amount = 80080;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -813,6 +860,7 @@ namespace Litle.Sdk.Test.Certification
         public void test8AVS()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "8";
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -842,6 +890,7 @@ namespace Litle.Sdk.Test.Certification
         public void test8Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "8";
             sale.amount = 80080;
             sale.orderSource = orderSourceType.ecommerce;
@@ -871,6 +920,7 @@ namespace Litle.Sdk.Test.Certification
         public void test9Auth()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "9";
             authorization.amount = 90090;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -899,6 +949,7 @@ namespace Litle.Sdk.Test.Certification
         public void test9AVS()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "9";
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -927,6 +978,7 @@ namespace Litle.Sdk.Test.Certification
         public void test9Sale()
         {
             sale sale = new sale();
+            sale.id = "1";
             sale.orderId = "9";
             sale.amount = 90090;
             sale.orderSource = orderSourceType.ecommerce;
@@ -955,6 +1007,7 @@ namespace Litle.Sdk.Test.Certification
         public void test10()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "10";
             authorization.amount = 40000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -975,6 +1028,7 @@ namespace Litle.Sdk.Test.Certification
         public void test11()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "11";
             authorization.amount = 60000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -995,6 +1049,7 @@ namespace Litle.Sdk.Test.Certification
         public void test12()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "12";
             authorization.amount = 50000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -1015,6 +1070,7 @@ namespace Litle.Sdk.Test.Certification
         public void test13()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "13";
             authorization.amount = 15000;
             authorization.orderSource = orderSourceType.ecommerce;

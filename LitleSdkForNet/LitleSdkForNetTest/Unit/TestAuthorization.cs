@@ -571,5 +571,47 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(true, authorizationResponse.recycling.recycleEngineActive);
         }
 
+        [Test]
+        public void TestOriginalTransaction()
+        {
+            authorization auth = new authorization();
+            auth.originalNetworkTransactionId = "123456789";
+            auth.originalTransactionAmount = 12;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<originalNetworkTransactionId>123456789</originalNetworkTransactionId>.*?<originalTransactionAmount>12</originalTransactionAmount>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+        }
+
+        [Test]
+        public void TestOriginalTransactionWithPin()
+        {
+            authorization auth = new authorization();
+            auth.originalNetworkTransactionId = "123456789";
+            auth.originalTransactionAmount = 12;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.MC;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            card.pin = "1234";
+            auth.card = card;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<card>\r\n<type>MC</type>\r\n<number>414100000000000000</number>\r\n<expDate>1210</expDate>\r\n<pin>1234</pin>\r\n</card>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+               .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+        }
+
     }
 }

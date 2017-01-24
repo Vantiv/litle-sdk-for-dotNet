@@ -1805,5 +1805,95 @@ namespace Litle.Sdk.Test.Unit
             mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
         }
+
+        [Test]
+        public void testGiftCardAuthReversal()
+        {
+            var giftCardAuthReversal = new giftCardAuthReversal
+            {
+                id = "1",
+                reportGroup = "Planets",
+                card = new giftCardCardType
+                {
+                    type = methodOfPaymentTypeEnum.GC,
+                    number = "4100000000000002",
+                    expDate = "1210"
+                },
+                originalRefCode = "123",
+                originalAmount = 12345,
+                originalTxnTime = DateTime.Now,
+                originalSystemTraceId = 1234,
+                originalSequenceNumber = "OneTime"
+            };
+
+            var mockLitleResponse = new Mock<litleResponse>();
+            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns(@"
+ <giftCardAuthReversalResponse id='1' reportGroup='Planets' customerId=''>
+<litleTxnId>522547723741503000</litleTxnId>
+<response>000</response>
+<responseTime>2017-01-24T16:11:31</responseTime>
+<message>Approved</message>
+<postDate>2017-01-24</postDate>
+<giftCardResponse>
+<txnTime>2017-01-24T16:11:31</txnTime>
+<systemTraceId>0</systemTraceId>
+<sequenceNumber>12</sequenceNumber>
+</giftCardResponse>
+</giftCardAuthReversalResponse>")
+                .Returns(@"
+ <giftCardAuthReversalResponse id='1' reportGroup='Planets' customerId=''>
+<litleTxnId>522547723741503001</litleTxnId>
+<response>000</response>
+<responseTime>2017-01-24T16:11:31</responseTime>
+<message>Approved</message>
+<postDate>2017-01-24</postDate>
+<giftCardResponse>
+<txnTime>2017-01-24T16:11:31</txnTime>
+<systemTraceId>0</systemTraceId>
+<sequenceNumber>12</sequenceNumber>
+</giftCardResponse>
+</giftCardAuthReversalResponse>");
+
+            batchResponse mockLitleBatchResponse = new batchResponse();
+            mockLitleBatchResponse.setgiftCardAuthReversalResponseReader(mockXmlReader.Object);
+
+            mockLitleResponse.Setup(litleResponse => litleResponse.nextBatchResponse()).Returns(mockLitleBatchResponse);
+            litleResponse mockedLitleResponse = mockLitleResponse.Object;
+
+            mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
+
+            Communications mockedCommunication = mockCommunications.Object;
+            litle.setCommunication(mockedCommunication);
+
+            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+
+            litleFile mockedLitleFile = mockLitleFile.Object;
+            litle.setLitleFile(mockedLitleFile);
+
+            litle.setLitleTime(mockLitleTime.Object);
+
+            batchRequest litleBatchRequest = new batchRequest();
+            litleBatchRequest.setLitleFile(mockedLitleFile);
+            litleBatchRequest.setLitleTime(mockLitleTime.Object);
+            litleBatchRequest.addGiftCardAuthReversal(giftCardAuthReversal);
+            litleBatchRequest.addGiftCardAuthReversal(giftCardAuthReversal);
+            litle.addBatch(litleBatchRequest);
+
+            string batchFileName = litle.sendToLitle();
+            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
+
+            Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
+            Assert.AreEqual(522547723741503000, actualLitleBatchResponse.nextGiftCardAuthReversalResponse().litleTxnId);
+            Assert.AreEqual(522547723741503001, actualLitleBatchResponse.nextGiftCardAuthReversalResponse().litleTxnId);
+            Assert.IsNull(actualLitleBatchResponse.nextGiftCardAuthReversalResponse());
+
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
+        }
     }
 }

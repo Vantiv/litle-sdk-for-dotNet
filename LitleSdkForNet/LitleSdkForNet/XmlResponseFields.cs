@@ -1911,6 +1911,10 @@ namespace Litle.Sdk
 
         private applepayResponse applepayResponseField;
 
+        private androidpayResponse androidpayResponseField;
+
+        private string networkTransactionIdField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -2199,6 +2203,31 @@ namespace Litle.Sdk
             }
         }
 
+        /// <remarks/>
+        public androidpayResponse androidpayResponse
+        {
+            get
+            {
+                return this.androidpayResponseField;
+            }
+            set
+            {
+                this.androidpayResponseField = value;
+            }
+        }
+
+        public string networkTransactionId
+        {
+            get
+            {
+                return this.networkTransactionIdField;
+            }
+            set
+            {
+                this.networkTransactionIdField = value;
+            }
+        }
+
     }
     
     /// <remarks/>
@@ -2208,6 +2237,7 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+
     public partial class cancelSubscriptionResponse
     {
         private string subscriptionIdField;
@@ -2461,6 +2491,8 @@ namespace Litle.Sdk
 
         private bool virtualAccountNumberFieldSpecified;
 
+        private networkRespnse networkResponseField;
+
         /// <remarks/>
         public enhancedAuthResponseFundingSource fundingSource
         {
@@ -2566,6 +2598,18 @@ namespace Litle.Sdk
             set
             {
                 this.virtualAccountNumberFieldSpecified = value;
+            }
+        }
+
+        public networkRespnse networkResponse
+        {
+            get
+            {
+                return this.networkResponseField;
+            }
+            set
+            {
+                this.networkResponseField = value;
             }
         }
     }
@@ -2716,9 +2760,6 @@ namespace Litle.Sdk
 
         private string messageField;
 
-        public giftCardResponse giftCardResponse;
-
-
         /// <remarks/>
         public long litleTxnId
         {
@@ -2808,10 +2849,132 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class captureResponse : transactionTypeWithReportGroup
+
+    public partial class giftCardAuthReversalResponse : transactionTypeWithReportGroup
     {
-        public giftCardResponse giftCardResponse;
-        public fraudResult fraudResult;
+        private long litleTxnIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private System.DateTime postDateField;
+
+        private bool postDateFieldSpecified;
+
+        private string messageField;
+
+        private giftCardResponse giftCardResponseField;
+
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
+        public System.DateTime postDate
+        {
+            get
+            {
+                return this.postDateField;
+            }
+            set
+            {
+                this.postDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool postDateSpecified
+        {
+            get
+            {
+                return this.postDateFieldSpecified;
+            }
+            set
+            {
+                this.postDateFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        public giftCardResponse giftCardResponse
+        {
+            get
+            {
+                return this.giftCardResponseField;
+            }
+            set
+            {
+                this.giftCardResponseField = value;
+            }
+        }
+
+
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+
+    public partial class captureResponse : transactionTypeWithReportGroup
+{
+        // public giftCardResponse giftCardResponse;
+
+       
 
         private long litleTxnIdField;
 
@@ -2826,6 +2989,8 @@ namespace Litle.Sdk
         private string messageField;
 
         private accountUpdater accountUpdaterField;
+
+        private fraudResult fraudResultField;
 
         /// <remarks/>
         public long litleTxnId
@@ -2920,6 +3085,18 @@ namespace Litle.Sdk
             }
         }
 
+        public fraudResult fraudResult
+        {
+            get
+            {
+                return this.fraudResultField;
+            }
+            set
+            {
+                this.fraudResultField = value;
+            }
+        }
+
     }
 
     /// <remarks/>
@@ -2929,10 +3106,161 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+
+    public partial class giftCardCaptureResponse : transactionTypeWithReportGroup
+    {
+
+        private long litleTxnIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private System.DateTime postDateField;
+
+        private bool postDateFieldSpecified;
+
+        private string messageField;
+
+        private accountUpdater accountUpdaterField;
+
+        public fraudResult fraudResultField;
+        // Do I need a getter and setter method
+        private giftCardResponse giftCardResponseField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
+        public System.DateTime postDate
+        {
+            get
+            {
+                return this.postDateField;
+            }
+            set
+            {
+                this.postDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool postDateSpecified
+        {
+            get
+            {
+                return this.postDateFieldSpecified;
+            }
+            set
+            {
+                this.postDateFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        public accountUpdater accountUpdater
+        {
+            get
+            {
+                return this.accountUpdaterField;
+            }
+            set
+            {
+                this.accountUpdaterField = value;
+            }
+        }
+
+        public fraudResult fraudResult
+        {
+            get
+            {
+                return this.fraudResultField;
+            }
+            set
+            {
+                this.fraudResultField = value;
+            }
+        }
+
+        public giftCardResponse giftCardResponse
+        {
+            get
+            {
+                return this.giftCardResponseField;
+            }
+            set
+            {
+                this.giftCardResponseField = value;
+            }
+        }
+
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+
     public partial class forceCaptureResponse : transactionTypeWithReportGroup
     {
         public giftCardResponse giftCardResponse;
+
         public fraudResult fraudResult;
+
         private long litleTxnIdField;
 
         private string responseField;
@@ -3229,9 +3557,15 @@ namespace Litle.Sdk
 
         private applepayResponse applepayResponseField;
 
+        private androidpayResponse androidpayResponseField;
+
+        private sepaDirectDebitResponse sepaDirectDebitResponseField;
+
         private bool duplicateField;
 
         private bool duplicateFieldSpecified;
+
+        private string networkTransactionIdField;
 
         /// <remarks/>
         public long litleTxnId
@@ -3524,6 +3858,32 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
+        public androidpayResponse androidpayResponse
+        {
+            get
+            {
+                return this.androidpayResponseField;
+            }
+            set
+            {
+                this.androidpayResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public sepaDirectDebitResponse sepaDirectDebitResponse
+        {
+            get
+            {
+                return this.sepaDirectDebitResponseField;
+            }
+            set
+            {
+                this.sepaDirectDebitResponseField = value;
+            }
+        }
+
+        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool duplicate
         {
@@ -3550,6 +3910,20 @@ namespace Litle.Sdk
                 this.duplicateFieldSpecified = value;
             }
         }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string networkTransactionId
+        {
+            get
+            {
+                return this.networkTransactionIdField;
+            }
+            set
+            {
+                this.networkTransactionIdField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -3561,8 +3935,6 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class creditResponse : transactionTypeWithReportGroup
     {
-        public fraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
         private long litleTxnIdField;
 
         private string responseField;
@@ -3576,6 +3948,8 @@ namespace Litle.Sdk
         private string messageField;
 
         private tokenResponseType tokenResponseField;
+
+        private fraudResult fraudResultField;
 
         /// <remarks/>
         public long litleTxnId
@@ -3668,6 +4042,166 @@ namespace Litle.Sdk
             set
             {
                 this.tokenResponseField = value;
+            }
+        }
+
+        public fraudResult fraudResult
+        {
+            get
+            {
+                    return this.fraudResultField;
+            }
+            set
+            {
+                    this.fraudResultField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+
+    public partial class giftCardCreditResponse : transactionTypeWithReportGroup
+    {
+        private long litleTxnIdField;
+
+        private string responseField;
+
+        private System.DateTime responseTimeField;
+
+        private System.DateTime postDateField;
+
+        private bool postDateFieldSpecified;
+
+        private string messageField;
+
+        private tokenResponseType tokenResponseField;
+
+        private fraudResult fraudResultField;
+
+        private giftCardResponse giftCardResponseField;
+
+        /// <remarks/>
+        public long litleTxnId
+        {
+            get
+            {
+                return this.litleTxnIdField;
+            }
+            set
+            {
+                this.litleTxnIdField = value;
+            }
+        }
+
+
+        /// <remarks/>
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public System.DateTime responseTime
+        {
+            get
+            {
+                return this.responseTimeField;
+            }
+            set
+            {
+                this.responseTimeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
+        public System.DateTime postDate
+        {
+            get
+            {
+                return this.postDateField;
+            }
+            set
+            {
+                this.postDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool postDateSpecified
+        {
+            get
+            {
+                return this.postDateFieldSpecified;
+            }
+            set
+            {
+                this.postDateFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        public tokenResponseType tokenResponse
+        {
+            get
+            {
+                return this.tokenResponseField;
+            }
+            set
+            {
+                this.tokenResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public fraudResult fraudResult
+        {
+            get
+            {
+                return this.fraudResultField;
+            }
+            set
+            {
+                this.fraudResultField = value;
+            }
+        }
+
+        public giftCardResponse giftCardResponse
+        {
+            get
+            {
+                return this.giftCardResponseField;
+            }
+            set
+            {
+                this.giftCardResponseField = value;
             }
         }
     }
@@ -4221,10 +4755,13 @@ namespace Litle.Sdk
         private string versionField;
 
         public authReversalResponse authReversalResponse;
+        public giftCardAuthReversalResponse giftCardAuthReversalResponse;
         public authorizationResponse authorizationResponse;
         public captureGivenAuthResponse captureGivenAuthResponse;
         public captureResponse captureResponse;
+        public giftCardCaptureResponse giftCardCaptureResponse;
         public creditResponse creditResponse;
+        public giftCardCreditResponse giftCardCreditResponse;
         public echeckCreditResponse echeckCreditResponse;
         public echeckRedepositResponse echeckRedepositResponse;
         public echeckSalesResponse echeckSalesResponse;
@@ -4427,10 +4964,13 @@ namespace Litle.Sdk
         private XmlReader accountUpdateResponseReader;
         private XmlReader authorizationResponseReader;
         private XmlReader authReversalResponseReader;
+        private XmlReader giftCardAuthReversalResponseReader;
         private XmlReader captureResponseReader;
+        private XmlReader giftCardCaptureResponseReader;
         private XmlReader captureGivenAuthResponseReader;
-        private XmlReader creditResponseReader;
         private XmlReader forceCaptureResponseReader;
+        private XmlReader creditResponseReader;
+        private XmlReader giftCardCreditResponseReader;
         private XmlReader echeckCreditResponseReader;
         private XmlReader echeckRedepositResponseReader;
         private XmlReader echeckSalesResponseReader;
@@ -4485,9 +5025,24 @@ namespace Litle.Sdk
             this.authReversalResponseReader = xmlReader;
         }
 
+        public void setgiftCardAuthReversalResponseReader(XmlReader xmlReader)
+        {
+            this.giftCardAuthReversalResponseReader = xmlReader;
+        }
+
         public void setCaptureResponseReader(XmlReader xmlReader)
         {
             this.captureResponseReader = xmlReader;
+        }
+
+        public void setForceCaptureResponseReader(XmlReader xmlReader)
+        {
+            this.forceCaptureResponseReader = xmlReader;
+        }
+
+        public void setGiftCardCaptureResponseReader(XmlReader xmlReader)
+        {
+            this.giftCardCaptureResponseReader = xmlReader;
         }
 
         public void setCaptureGivenAuthResponseReader(XmlReader xmlReader)
@@ -4500,9 +5055,9 @@ namespace Litle.Sdk
             this.creditResponseReader = xmlReader;
         }
 
-        public void setForceCaptureResponseReader(XmlReader xmlReader)
+        public void setGiftCardCreditResponseReader (XmlReader xmlReader)
         {
-            this.forceCaptureResponseReader = xmlReader;
+            this.giftCardCreditResponseReader = xmlReader;
         }
 
         public void setEcheckCreditResponseReader(XmlReader xmlReader)
@@ -4661,9 +5216,12 @@ namespace Litle.Sdk
             accountUpdateResponseReader = new XmlTextReader(filePath);
             authorizationResponseReader = new XmlTextReader(filePath);
             authReversalResponseReader = new XmlTextReader(filePath);
+            giftCardAuthReversalResponseReader = new XmlTextReader(filePath);
             captureResponseReader = new XmlTextReader(filePath);
+            giftCardCaptureResponseReader = new XmlTextReader(filePath);
             captureGivenAuthResponseReader = new XmlTextReader(filePath);
             creditResponseReader = new XmlTextReader(filePath);
+            giftCardCreditResponseReader = new XmlTextReader(filePath);
             forceCaptureResponseReader = new XmlTextReader(filePath);
             echeckCreditResponseReader = new XmlTextReader(filePath);
             echeckRedepositResponseReader = new XmlTextReader(filePath);
@@ -4707,9 +5265,17 @@ namespace Litle.Sdk
             {
                 authReversalResponseReader.Close();
             }
+            if (!giftCardAuthReversalResponseReader.ReadToFollowing("giftCardAuthReversalResponse"))
+            {
+                giftCardAuthReversalResponseReader.Close();
+            }
             if (!captureResponseReader.ReadToFollowing("captureResponse"))
             {
                 captureResponseReader.Close();
+            }
+            if (!giftCardCaptureResponseReader.ReadToFollowing("giftCardCaptureResponse"))
+            {
+                giftCardCaptureResponseReader.Close();
             }
             if (!captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
             {
@@ -4718,6 +5284,10 @@ namespace Litle.Sdk
             if (!creditResponseReader.ReadToFollowing("creditResponse"))
             {
                 creditResponseReader.Close();
+            }
+            if (!giftCardCreditResponseReader.ReadToFollowing("giftCardCreditResponse"))
+            {
+                giftCardCreditResponseReader.Close();
             }
             if (!forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
             {
@@ -4900,6 +5470,26 @@ namespace Litle.Sdk
             return null;
         }
 
+        virtual public giftCardAuthReversalResponse nextGiftCardAuthReversalResponse()
+        {
+            if (giftCardAuthReversalResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = giftCardAuthReversalResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(giftCardAuthReversalResponse));
+                StringReader reader = new StringReader(response);
+                giftCardAuthReversalResponse i = (giftCardAuthReversalResponse)serializer.Deserialize(reader);
+
+                if (!giftCardAuthReversalResponseReader.ReadToFollowing("giftCardAuthReversalResponse"))
+                {
+                    giftCardAuthReversalResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
         virtual public captureResponse nextCaptureResponse()
         {
             if (captureResponseReader.ReadState != ReadState.Closed)
@@ -4912,6 +5502,26 @@ namespace Litle.Sdk
                 if (!captureResponseReader.ReadToFollowing("captureResponse"))
                 {
                     captureResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public giftCardCaptureResponse nextGiftCardCaptureResponse()
+        {
+            if (giftCardCaptureResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = giftCardCaptureResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(giftCardCaptureResponse));
+                StringReader reader = new StringReader(response);
+                giftCardCaptureResponse i = (giftCardCaptureResponse)serializer.Deserialize(reader);
+
+                if (!giftCardCaptureResponseReader.ReadToFollowing("giftCardCaptureResponse"))
+                {
+                    giftCardCaptureResponseReader.Close();
                 }
 
                 return i;
@@ -4952,6 +5562,26 @@ namespace Litle.Sdk
                 if (!creditResponseReader.ReadToFollowing("creditResponse"))
                 {
                     creditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public giftCardCreditResponse nextGiftCardCreditResponse()
+        {
+            if (giftCardCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = giftCardCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(giftCardCreditResponse));
+                StringReader reader = new StringReader(response);
+                giftCardCreditResponse i = (giftCardCreditResponse)serializer.Deserialize(reader);
+
+                if (!giftCardCreditResponseReader.ReadToFollowing("giftCardCreditResponse"))
+                {
+                    giftCardCreditResponseReader.Close();
                 }
 
                 return i;
@@ -5802,6 +6432,10 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     public partial class giftCardResponse
     {
+        public DateTime txnTime;
+        public string refCode;
+        public int systemTraceId;
+        public string sequenceNumber;
         public String availableBalance;
         public String beginningBalance;
         public String endingBalance;
@@ -5817,6 +6451,7 @@ namespace Litle.Sdk
     {
         public String accountNumber;
         public String cardValidationNum;
+        public string pin;
     }
 
         /// <remarks/>
@@ -6333,6 +6968,125 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute("echeckPreNoteSaleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+
+
+    public partial class androidpayResponse
+    {
+        private string cryptogramField;
+
+        private string expMonthField;
+
+        private string expYearField;
+
+        private string eciIndicatorField;
+
+        public string cryptogram
+        {
+            get
+            {
+                return this.cryptogramField;
+            }
+            set
+            {
+                this.cryptogramField = value;
+            }
+        }
+
+        public string expMonth
+        {
+            get
+            {
+                return this.expMonthField;
+            }
+            set
+            {
+                this.expMonthField = value;
+            }
+        }
+
+        public string expYear
+        {
+            get
+            {
+                return this.expYearField;
+            }
+            set
+            {
+                this.expYearField = value;
+            }
+        }
+
+        public string eciIndicator
+        {
+            get
+            {
+                return this.eciIndicatorField;
+            }
+            set
+            {
+                this.eciIndicatorField = value;
+            }
+        }
+    }
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute("echeckPreNoteSaleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+
+    public partial class sepaDirectDebitResponse
+    {
+        private string redirectUrlField;
+
+        private string redirectTokenField;
+
+        private string mandateReferenceField;
+
+        public string redirectUrl
+        {
+            get
+            {
+                return this.redirectUrlField;
+            }
+            set
+            {
+                this.redirectUrlField = value;
+            }
+        }
+        public string redirectToken
+        {
+            get
+            {
+                return this.redirectTokenField;
+            }
+            set
+            {
+                this.redirectTokenField = value;
+            }
+        }
+        public string mandateReference
+        {
+            get
+            {
+                return this.mandateReferenceField;
+            }
+            set
+            {
+                this.mandateReferenceField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute("echeckPreNoteSaleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+
     public partial class echeckPreNoteSaleResponse : transactionTypeWithReportGroup
     {
 
@@ -7553,9 +8307,11 @@ namespace Litle.Sdk
         [XmlArray("results_max10")]
         [XmlArrayItem("authorizationResponse", typeof(authorizationResponse))]
         [XmlArrayItem("captureResponse", typeof(captureResponse))]
+        [XmlArrayItem("giftCardCaptureResponse", typeof(giftCardCaptureResponse))]
         [XmlArrayItem("recurringResponse", typeof(recurringResponse))]
         [XmlArrayItem("registerTokenResponse", typeof(registerTokenResponse))]
         [XmlArrayItem("authReversalResponse", typeof(authReversalResponse))]
+        [XmlArrayItem("giftCardAuthReversalResponse", typeof(giftCardAuthReversalResponse))]
         [XmlArrayItem("captureGivenAuthResponse", typeof(captureGivenAuthResponse))]
         [XmlArrayItem("updateCardValidationNumOnTokenResponse", typeof(updateCardValidationNumOnTokenResponse))]
         [XmlArrayItem("cancelSubscriptionResponse", typeof(cancelSubscriptionResponse))]
@@ -7573,6 +8329,7 @@ namespace Litle.Sdk
         [XmlArrayItem("vendorDebitResponse", typeof(vendorDebitResponse))]
         [XmlArrayItem("reserveDebitResponse", typeof(reserveDebitResponse))]
         [XmlArrayItem("creditResponse", typeof(creditResponse))]
+        [XmlArrayItem("giftCardCreditResponse", typeof(giftCardCreditResponse))]
         [XmlArrayItem("forceCaptureResponse", typeof(forceCaptureResponse))]
         [XmlArrayItem("echeckCreditResponse", typeof(echeckCreditResponse))]
         [XmlArrayItem("echeckRedepositResponse", typeof(echeckRedepositResponse))]
@@ -7648,6 +8405,135 @@ namespace Litle.Sdk
             set
             {
                 this.messageField = value;
+            }
+        }
+    }
+
+    public partial class networkRespnse
+    {
+        private string endpointField;
+        private networkField networkFieldField;
+
+        public string endpoint
+        {
+            get
+            {
+                return this.endpointField;
+            }
+            set
+            {
+                this.endpointField = value;
+            }
+        }
+
+        public networkField networkField
+        {
+            get
+            {
+                return this.networkFieldField;
+            }
+            set
+            {
+                this.networkFieldField = value;
+            }
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+
+    public partial class networkField
+    {
+        private string fieldValueField;
+        private networkSubField networkSubFieldField;
+        private int fieldNumberField;
+        private string fieldNameField;
+
+        public string fieldValue
+        {
+            get
+            {
+                return this.fieldValueField;
+            }
+            set
+            {
+                this.fieldValueField = value;
+            }
+        }
+
+        public networkSubField networkSubField
+        {
+            get
+            {
+                return this.networkSubFieldField;
+            }
+            set
+            {
+                this.networkSubFieldField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int fieldNumber
+        {
+            get
+            {
+                return this.fieldNumberField;
+            }
+            set
+            {
+                this.fieldNumberField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string fieldName
+        {
+            get
+            {
+                return this.fieldNameField;
+            }
+            set
+            {
+                this.fieldNameField = value;
+            }
+        }
+    }
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+
+    public partial class networkSubField
+    {
+        private string fieldValueField;
+        private int fieldNumberField;
+
+        public string fieldValue
+        {
+            get
+            {
+                return this.fieldValueField;
+            }
+            set
+            {
+                this.fieldValueField = value;
+            }
+        }
+
+        public int fieldNumber
+        {
+            get
+            {
+                return this.fieldNumberField;
+            }
+            set
+            {
+                this.fieldNumberField = value;
             }
         }
     }

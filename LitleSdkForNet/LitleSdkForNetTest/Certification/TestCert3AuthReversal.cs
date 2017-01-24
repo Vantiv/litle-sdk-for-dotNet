@@ -18,7 +18,7 @@ namespace Litle.Sdk.Test.Certification
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
+            config.Add("version", "11.0");
             config.Add("timeout", "500");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Certification
         public void test32()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "32";
             auth.amount = 10010;
             auth.orderSource = orderSourceType.ecommerce;
@@ -60,23 +61,26 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", authorizeResponse.fraudResult.cardValidationResult);
 
             capture capture = new capture();
+            capture.id = authorizeResponse.id;
             capture.litleTxnId = authorizeResponse.litleTxnId;
             capture.amount = 5005;
             captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("001", captureResponse.response);
-            Assert.AreEqual("Transaction Received", captureResponse.message);
+            Assert.AreEqual("000", captureResponse.response);
+            Assert.AreEqual("Approved", captureResponse.message);
 
             authReversal reversal = new authReversal();
-            reversal.litleTxnId = authorizeResponse.litleTxnId;
+            reversal.id = authorizeResponse.id;
+            reversal.litleTxnId = 320000000000000000;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("001", reversalResponse.response);
-            Assert.AreEqual("Transaction Received", reversalResponse.message);
+            Assert.AreEqual("000", reversalResponse.response);
+            Assert.AreEqual("Approved", reversalResponse.message);
         }
 
         [Test]
         public void test33()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "33";
             auth.amount = 20020;
             auth.orderSource = orderSourceType.ecommerce;
@@ -107,16 +111,19 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", authorizeResponse.fraudResult.cardValidationResult);
 
             authReversal reversal = new authReversal();
+            reversal.id = authorizeResponse.id;
             reversal.litleTxnId = authorizeResponse.litleTxnId;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("001", reversalResponse.response);
-            Assert.AreEqual("Transaction Received", reversalResponse.message);
+            Assert.AreEqual("000", reversalResponse.response);
+            Assert.AreEqual("Approved", reversalResponse.message);
         }
 
         [Test]
         public void test34()
         {
             authorization auth = new authorization();
+            auth.id = "1";
+            //auth.litleTxnId = 12345678000L;
             auth.orderId = "34";
             auth.amount = 30030;
             auth.orderSource = orderSourceType.ecommerce;
@@ -143,16 +150,18 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("M", authorizeResponse.fraudResult.cardValidationResult);
 
             authReversal reversal = new authReversal();
+            reversal.id = authorizeResponse.id;
             reversal.litleTxnId = authorizeResponse.litleTxnId;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("001", reversalResponse.response);
-            Assert.AreEqual("Transaction Received", reversalResponse.message);
+            Assert.AreEqual("000", reversalResponse.response);
+            Assert.AreEqual("Approved", reversalResponse.message);
         }
 
         [Test]
         public void test35()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "35";
             auth.amount = 40040;
             auth.orderSource = orderSourceType.ecommerce;
@@ -177,24 +186,27 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("12", authorizeResponse.fraudResult.avsResult);
 
             capture capture = new capture();
+            capture.id = authorizeResponse.id;
             capture.litleTxnId = authorizeResponse.litleTxnId;
             capture.amount = 20020;
             captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("001", captureResponse.response);
-            Assert.AreEqual("Transaction Received", captureResponse.message);
+            Assert.AreEqual("000", captureResponse.response);
+            Assert.AreEqual("Approved", captureResponse.message);
 
             authReversal reversal = new authReversal();
+            reversal.id = capture.id;
             reversal.litleTxnId = authorizeResponse.litleTxnId;
             reversal.amount = 20020;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("001", reversalResponse.response);
-            Assert.AreEqual("Transaction Received", reversalResponse.message);
+            Assert.AreEqual("000", reversalResponse.response);
+            Assert.AreEqual("Approved", reversalResponse.message);
         }
 
         [Test]
         public void test36()
         {
             authorization auth = new authorization();
+            auth.id = "1";
             auth.orderId = "36";
             auth.amount = 20500;
             auth.orderSource = orderSourceType.ecommerce;
@@ -209,11 +221,12 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("Approved", authorizeResponse.message);
 
             authReversal reversal = new authReversal();
-            reversal.litleTxnId = authorizeResponse.litleTxnId;
+            reversal.id = authorizeResponse.id;
+            reversal.litleTxnId = 360000000000000000;
             reversal.amount = 10000;
             authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("001", reversalResponse.response);
-            Assert.AreEqual("Transaction Received", reversalResponse.message);
+            Assert.AreEqual("000", reversalResponse.response);
+            Assert.AreEqual("Approved", reversalResponse.message);
         }            
     }
 }

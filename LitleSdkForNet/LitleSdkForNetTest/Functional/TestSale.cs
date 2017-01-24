@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleSaleWithCard()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
@@ -52,6 +53,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleSaleWithMpos()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
@@ -72,6 +74,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleSaleWithPayPal()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
@@ -89,6 +92,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleSaleWithApplepayAndSecondaryAmountAndWallet()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 110;
             saleObj.secondaryAmount = 50;
             saleObj.litleTxnId = 123456;
@@ -119,6 +123,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleSaleWithInvalidFraudCheck()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
@@ -140,6 +145,47 @@ namespace Litle.Sdk.Test.Functional
             {
                 Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
             }
+        }
+
+        [Test]
+        public void SimpleSaleWithDirectDebit()
+        {
+            sale saleObj = new sale();
+            saleObj.id = "1";
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            sepaDirectDebitType directDebitObj = new sepaDirectDebitType();
+            directDebitObj.mandateProvider = mandateProviderType.Merchant;
+            directDebitObj.sequenceType = sequenceTypeType.FirstRecurring;
+            directDebitObj.iban = "123456789123456789";
+            saleObj.sepaDirectDebit = directDebitObj;
+            
+            saleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+        [Test]
+        public void SimpleSaleWithProcessTypeNetIdTranAmt()
+        {
+            sale saleObj = new sale();
+            saleObj.id = "1";
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            cardType cardObj = new cardType();
+            cardObj.type = methodOfPaymentTypeEnum.VI;
+            cardObj.number = "4100000000000000";
+            cardObj.expDate = "1210";
+            saleObj.card = cardObj;
+            saleObj.processingType = processingTypeEnum.initialRecurring;
+            saleObj.originalNetworkTransactionId = "123456789123456789123456789";
+            saleObj.originalTransactionAmount = 12;
+
+            saleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
         }
     }
 }

@@ -7,14 +7,15 @@ using Litle.Sdk;
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    class TestAuthReversal
+    class TestActivate
     {
         private LitleOnline litle;
+        private Dictionary<string, string> config;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
+            config = new Dictionary<string, string>();
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
@@ -31,31 +32,28 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
-        public void SimpleAuthReversal()
+        public void SimpleActivate()
         {
-            authReversal reversal = new authReversal();
-            reversal.id = "1";
-            reversal.reportGroup = "Planets";
-            reversal.litleTxnId = 12345678000L;
-            reversal.amount = 106;
-            reversal.payPalNotes = "Notes";
+            activate activate = new activate();
+            activate.id = "1";
+            activate.reportGroup = "Planets";
+            activate.orderId = "12344";
+            activate.amount = 1500;
+            activate.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.GC;
+            card.number = "414100000000000000";
+            card.cardValidationNum = "123";
+            card.expDate = "1215";
+            activate.card = card;
+            virtualGiftCardType virtualGiftCard = new virtualGiftCardType();
+            virtualGiftCard.accountNumberLength = 123;
+            virtualGiftCard.giftCardBin = "123";
+            activate.virtualGiftCard = virtualGiftCard;
 
-            authReversalResponse response = litle.AuthReversal(reversal);
-            Assert.AreEqual("Approved", response.message);
+            activateResponse response = litle.Activate(activate);
+            Assert.AreEqual("000", response.response);
         }
-            
-        [Test]
-        public void testAuthReversalHandleSpecialCharacters()
-        {
-            authReversal reversal = new authReversal();
-            reversal.id = "1";
-            reversal.reportGroup = "Planets";
-            reversal.litleTxnId = 12345678000L;
-            reversal.amount = 106;
-            reversal.payPalNotes = "<'&\">";
 
-            authReversalResponse response = litle.AuthReversal(reversal);
-            Assert.AreEqual("Approved", response.message);
-    }
     }
 }

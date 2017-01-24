@@ -390,7 +390,7 @@ namespace Litle.Sdk.Test.Functional
                 authReversalResponse authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
                 while (authReversalResponse != null)
                 {
-                    Assert.AreEqual("001", authReversalResponse.response);
+                    Assert.AreEqual("000", authReversalResponse.response);
 
                     authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
                 }
@@ -398,7 +398,7 @@ namespace Litle.Sdk.Test.Functional
                 captureResponse captureResponse = litleBatchResponse.nextCaptureResponse();
                 while (captureResponse != null)
                 {
-                    Assert.AreEqual("001", captureResponse.response);
+                    Assert.AreEqual("000", captureResponse.response);
 
                     captureResponse = litleBatchResponse.nextCaptureResponse();
                 }
@@ -406,7 +406,7 @@ namespace Litle.Sdk.Test.Functional
                 captureGivenAuthResponse captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
                 while (captureGivenAuthResponse != null)
                 {
-                    Assert.AreEqual("001", captureGivenAuthResponse.response);
+                    Assert.AreEqual("000", captureGivenAuthResponse.response);
 
                     captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
                 }
@@ -414,7 +414,7 @@ namespace Litle.Sdk.Test.Functional
                 creditResponse creditResponse = litleBatchResponse.nextCreditResponse();
                 while (creditResponse != null)
                 {
-                    Assert.AreEqual("001", creditResponse.response);
+                    Assert.AreEqual("000", creditResponse.response);
 
                     creditResponse = litleBatchResponse.nextCreditResponse();
                 }
@@ -422,7 +422,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckCreditResponse echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
                 while (echeckCreditResponse != null)
                 {
-                    Assert.AreEqual("001", echeckCreditResponse.response);
+                    Assert.AreEqual("000", echeckCreditResponse.response);
 
                     echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
                 }
@@ -430,7 +430,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckRedepositResponse echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
                 while (echeckRedepositResponse != null)
                 {
-                    Assert.AreEqual("001", echeckRedepositResponse.response);
+                    Assert.AreEqual("000", echeckRedepositResponse.response);
 
                     echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
                 }
@@ -1245,16 +1245,16 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void PFIFInstructionTxnTest()
         {
-            
+
             Dictionary<string, string> configOverride = new Dictionary<string, string>();
             configOverride["url"] = Properties.Settings.Default.url;
             configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
-            configOverride["username"] = "SDKV10";
+            configOverride["username"] = "SDKTEAM";
             configOverride["printxml"] = Properties.Settings.Default.printxml;
             configOverride["timeout"] = Properties.Settings.Default.timeout;
             configOverride["proxyHost"] = Properties.Settings.Default.proxyHost;
-            configOverride["merchantId"] = "0180-xml10";
-            configOverride["password"] = "x3Km7hd";
+            configOverride["merchantId"] = "1288791";
+            configOverride["password"] = "V3r5K6v7";
             configOverride["proxyPort"] = Properties.Settings.Default.proxyPort;
             configOverride["sftpUrl"] = Properties.Settings.Default.sftpUrl;
             configOverride["sftpUsername"] = Properties.Settings.Default.sftpUsername;
@@ -1270,19 +1270,22 @@ namespace Litle.Sdk.Test.Functional
             batchRequest litleBatchRequest = new batchRequest(configOverride);
 
             echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Corporate;
+            echeck.accType = echeckAccountTypeEnum.Checking;
             echeck.accNum = "1092969901";
             echeck.routingNum = "011075150";
             echeck.checkNum = "123455";
-  
 
-            submerchantCredit submerchantCredit = new submerchantCredit();
-            submerchantCredit.fundingSubmerchantId = "123456";
-            submerchantCredit.submerchantName = "merchant";
-            submerchantCredit.fundsTransferId = "123467";
-            submerchantCredit.amount = 106L;
-            submerchantCredit.accountInfo = echeck;
-            submerchantCredit.id = "id";
+
+            var submerchantCredit = new submerchantCredit
+            {
+                fundingSubmerchantId = "123456",
+                submerchantName = "merchant",
+                fundsTransferId = "123467",
+                amount = 106L,
+                accountInfo = echeck,
+                id = "id",
+                customIdentifier = "123",
+            };
             litleBatchRequest.addSubmerchantCredit(submerchantCredit);
 
             payFacCredit payFacCredit = new payFacCredit();
@@ -1290,6 +1293,7 @@ namespace Litle.Sdk.Test.Functional
             payFacCredit.fundsTransferId = "123467";
             payFacCredit.amount = 107L;
             payFacCredit.id = "id";
+            payFacCredit.customIdentifier = "123";
             litleBatchRequest.addPayFacCredit(payFacCredit);
 
             reserveCredit reserveCredit = new reserveCredit();
@@ -1297,6 +1301,7 @@ namespace Litle.Sdk.Test.Functional
             reserveCredit.fundsTransferId = "123467";
             reserveCredit.amount = 107L;
             reserveCredit.id = "id";
+            reserveCredit.customIdentifier = "123";
             litleBatchRequest.addReserveCredit(reserveCredit);
 
             vendorCredit vendorCredit = new vendorCredit();
@@ -1306,6 +1311,7 @@ namespace Litle.Sdk.Test.Functional
             vendorCredit.amount = 106L;
             vendorCredit.accountInfo = echeck;
             vendorCredit.id = "id";
+            vendorCredit.customIdentifier = "123";
             litleBatchRequest.addVendorCredit(vendorCredit);
 
             physicalCheckCredit physicalCheckCredit = new physicalCheckCredit();
@@ -1313,6 +1319,7 @@ namespace Litle.Sdk.Test.Functional
             physicalCheckCredit.fundsTransferId = "123467";
             physicalCheckCredit.amount = 107L;
             physicalCheckCredit.id = "id";
+            physicalCheckCredit.customIdentifier = "123";
             litleBatchRequest.addPhysicalCheckCredit(physicalCheckCredit);
 
             submerchantDebit submerchantDebit = new submerchantDebit();
@@ -1322,6 +1329,7 @@ namespace Litle.Sdk.Test.Functional
             submerchantDebit.amount = 106L;
             submerchantDebit.accountInfo = echeck;
             submerchantDebit.id = "id";
+            submerchantDebit.customIdentifier = "123";
             litleBatchRequest.addSubmerchantDebit(submerchantDebit);
 
             payFacDebit payFacDebit = new payFacDebit();
@@ -1329,6 +1337,7 @@ namespace Litle.Sdk.Test.Functional
             payFacDebit.fundsTransferId = "123467";
             payFacDebit.amount = 107L;
             payFacDebit.id = "id";
+            payFacDebit.customIdentifier = "123";
             litleBatchRequest.addPayFacDebit(payFacDebit);
 
             reserveDebit reserveDebit = new reserveDebit();
@@ -1336,6 +1345,7 @@ namespace Litle.Sdk.Test.Functional
             reserveDebit.fundsTransferId = "123467";
             reserveDebit.amount = 107L;
             reserveDebit.id = "id";
+            reserveDebit.customIdentifier = "123";
             litleBatchRequest.addReserveDebit(reserveDebit);
 
             vendorDebit vendorDebit = new vendorDebit();
@@ -1345,6 +1355,7 @@ namespace Litle.Sdk.Test.Functional
             vendorDebit.amount = 106L;
             vendorDebit.accountInfo = echeck;
             vendorDebit.id = "id";
+            vendorCredit.customIdentifier = "123";
             litleBatchRequest.addVendorDebit(vendorDebit);
 
             physicalCheckDebit physicalCheckDebit = new physicalCheckDebit();
@@ -1352,6 +1363,7 @@ namespace Litle.Sdk.Test.Functional
             physicalCheckDebit.fundsTransferId = "123467";
             physicalCheckDebit.amount = 107L;
             physicalCheckDebit.id = "id";
+            physicalCheckDebit.customIdentifier = "123";
             litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
 
             litleOverride.addBatch(litleBatchRequest);

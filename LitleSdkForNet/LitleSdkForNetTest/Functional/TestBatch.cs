@@ -396,7 +396,7 @@ namespace Litle.Sdk.Test.Functional
                 authReversalResponse authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
                 while (authReversalResponse != null)
                 {
-                    Assert.AreEqual("001", authReversalResponse.response);
+                    Assert.AreEqual("000", authReversalResponse.response);
 
                     authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
                 }
@@ -404,7 +404,7 @@ namespace Litle.Sdk.Test.Functional
                 captureResponse captureResponse = litleBatchResponse.nextCaptureResponse();
                 while (captureResponse != null)
                 {
-                    Assert.AreEqual("001", captureResponse.response);
+                    Assert.AreEqual("000", captureResponse.response);
 
                     captureResponse = litleBatchResponse.nextCaptureResponse();
                 }
@@ -412,7 +412,7 @@ namespace Litle.Sdk.Test.Functional
                 captureGivenAuthResponse captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
                 while (captureGivenAuthResponse != null)
                 {
-                    Assert.AreEqual("001", captureGivenAuthResponse.response);
+                    Assert.AreEqual("000", captureGivenAuthResponse.response);
 
                     captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
                 }
@@ -420,7 +420,7 @@ namespace Litle.Sdk.Test.Functional
                 creditResponse creditResponse = litleBatchResponse.nextCreditResponse();
                 while (creditResponse != null)
                 {
-                    Assert.AreEqual("001", creditResponse.response);
+                    Assert.AreEqual("000", creditResponse.response);
 
                     creditResponse = litleBatchResponse.nextCreditResponse();
                 }
@@ -428,7 +428,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckCreditResponse echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
                 while (echeckCreditResponse != null)
                 {
-                    Assert.AreEqual("001", echeckCreditResponse.response);
+                    Assert.AreEqual("000", echeckCreditResponse.response);
 
                     echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
                 }
@@ -436,7 +436,7 @@ namespace Litle.Sdk.Test.Functional
                 echeckRedepositResponse echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
                 while (echeckRedepositResponse != null)
                 {
-                    Assert.AreEqual("001", echeckRedepositResponse.response);
+                    Assert.AreEqual("000", echeckRedepositResponse.response);
 
                     echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
                 }

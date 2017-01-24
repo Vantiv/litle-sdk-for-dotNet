@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Certification
         public void test37()
         {
             echeckVerification verification = new echeckVerification();
+            verification.id = "1";
             verification.orderId = "37";
             verification.amount = 3001;
             verification.orderSource = orderSourceType.telephone;
@@ -56,6 +57,7 @@ namespace Litle.Sdk.Test.Certification
         public void test38()
         {
             echeckVerification verification = new echeckVerification();
+            verification.id = "1";
             verification.orderId = "38";
             verification.amount = 3002;
             verification.orderSource = orderSourceType.telephone;
@@ -79,6 +81,7 @@ namespace Litle.Sdk.Test.Certification
         public void test39()
         {
             echeckVerification verification = new echeckVerification();
+            verification.id = "1";
             verification.orderId = "39";
             verification.amount = 3003;
             verification.orderSource = orderSourceType.telephone;
@@ -103,6 +106,7 @@ namespace Litle.Sdk.Test.Certification
         public void test40()
         {
             echeckVerification verification = new echeckVerification();
+            verification.id = "1";
             verification.orderId = "40";
             verification.amount = 3004;
             verification.orderSource = orderSourceType.telephone;
@@ -127,6 +131,7 @@ namespace Litle.Sdk.Test.Certification
         public void test41()
         {
             echeckSale sale = new echeckSale();
+            sale.id = "1";
             sale.orderId = "41";
             sale.amount = 2008;
             sale.orderSource = orderSourceType.telephone;
@@ -150,6 +155,7 @@ namespace Litle.Sdk.Test.Certification
         public void test42()
         {
             echeckSale sale = new echeckSale();
+            sale.id = "1";
             sale.orderId = "42";
             sale.amount = 2004;
             sale.orderSource = orderSourceType.telephone;
@@ -172,6 +178,7 @@ namespace Litle.Sdk.Test.Certification
         public void test43()
         {
             echeckSale sale = new echeckSale();
+            sale.id = "1";
             sale.orderId = "43";
             sale.amount = 2007;
             sale.orderSource = orderSourceType.telephone;
@@ -195,6 +202,7 @@ namespace Litle.Sdk.Test.Certification
         public void test44()
         {
             echeckSale sale = new echeckSale();
+            sale.id = "1";
             sale.orderId = "44";
             sale.amount = 2009;
             sale.orderSource = orderSourceType.telephone;
@@ -218,6 +226,7 @@ namespace Litle.Sdk.Test.Certification
         public void test45()
         {
             echeckCredit credit = new echeckCredit();
+            credit.id = "1";
             credit.orderId = "45";
             credit.amount = 1001;
             credit.orderSource = orderSourceType.telephone;
@@ -232,14 +241,15 @@ namespace Litle.Sdk.Test.Certification
             credit.echeck = echeck;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("001", response.response);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("301", response.response);
+            Assert.AreEqual("Invalid Account Number", response.message);
         }
 
         [Test]
         public void test46()
         {
             echeckCredit credit = new echeckCredit();
+            credit.id = "1";
             credit.orderId = "46";
             credit.amount = 1003;
             credit.orderSource = orderSourceType.telephone;
@@ -255,14 +265,15 @@ namespace Litle.Sdk.Test.Certification
             credit.echeck = echeck;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("001", response.response);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("000", response.response);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void test47()
         {
             echeckCredit credit = new echeckCredit();
+            credit.id = "1";
             credit.orderId = "47";
             credit.amount = 1007;
             credit.orderSource = orderSourceType.telephone;
@@ -278,30 +289,32 @@ namespace Litle.Sdk.Test.Certification
             credit.echeck = echeck;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("001", response.response);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("000", response.response);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void test48()
         {
             echeckCredit credit = new echeckCredit();
+            credit.id = "1";
             credit.litleTxnId = 430000000000000001L;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("001", response.response);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("000", response.response);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void test49()
         {
             echeckCredit credit = new echeckCredit();
+            credit.id = "1";
             credit.litleTxnId = 2L;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("001", response.response);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("360", response.response);
+            Assert.AreEqual("No transaction found with specified litleTxnId", response.message);
         }
             
     }

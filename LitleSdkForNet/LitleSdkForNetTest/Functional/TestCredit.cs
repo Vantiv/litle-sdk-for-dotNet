@@ -34,6 +34,8 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleCreditWithCard()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
             creditObj.amount = 106;
             creditObj.orderId = "2111";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -41,17 +43,18 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
-            
             creditObj.card = card;
             
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void SimpleCreditWithMpos()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
             creditObj.amount = 106;
             creditObj.orderId = "2111";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -64,13 +67,15 @@ namespace Litle.Sdk.Test.Functional
             creditObj.mpos = mpos;
 
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void SimpleCreditWithPaypal()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
             creditObj.amount = 106;
             creditObj.orderId = "123456";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -80,13 +85,15 @@ namespace Litle.Sdk.Test.Functional
             creditObj.paypal = payPalObj;
 
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void PaypalNotes()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
             creditObj.amount = 106;
             creditObj.orderId = "123456";
             creditObj.payPalNotes = "Hello";
@@ -100,13 +107,15 @@ namespace Litle.Sdk.Test.Functional
             creditObj.card = card;
             
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void ProcessingInstructionAndAmexData()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
             creditObj.amount = 2000;
             creditObj.orderId = "12344";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -124,13 +133,15 @@ namespace Litle.Sdk.Test.Functional
             creditObj.card = card;
 
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void SimpleCreditWithCardAndSpecialCharacters()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
             creditObj.amount = 106;
             creditObj.orderId = "<&'>";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -142,7 +153,25 @@ namespace Litle.Sdk.Test.Functional
             creditObj.card = card;
 
             creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void SimpleCreditWithPin()
+        {
+            credit creditObj = new credit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
+            creditObj.litleTxnId = 123456000;
+            creditObj.pin = "1234";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000001";
+            card.expDate = "1210";
+            creditObj.card = card;
+
+            creditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.message);
         }
     }
 }

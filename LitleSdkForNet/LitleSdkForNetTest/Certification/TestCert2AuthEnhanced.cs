@@ -35,6 +35,7 @@ namespace Litle.Sdk.Test.Certification
         public void test14()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "14";
             authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -57,6 +58,7 @@ namespace Litle.Sdk.Test.Certification
         public void test15()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "15";
             authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -79,6 +81,7 @@ namespace Litle.Sdk.Test.Certification
         public void test16()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "16";
             authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -101,6 +104,7 @@ namespace Litle.Sdk.Test.Certification
         public void test17()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "17";
             authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -123,6 +127,7 @@ namespace Litle.Sdk.Test.Certification
         public void test18()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "18";
             authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -145,6 +150,7 @@ namespace Litle.Sdk.Test.Certification
         public void test19()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "19";
             authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -167,6 +173,7 @@ namespace Litle.Sdk.Test.Certification
         public void test20()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "20";
             authorization.amount = 3000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -189,6 +196,7 @@ namespace Litle.Sdk.Test.Certification
         public void test21()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "21";
             authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -208,6 +216,7 @@ namespace Litle.Sdk.Test.Certification
         public void test22()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "22";
             authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -227,6 +236,7 @@ namespace Litle.Sdk.Test.Certification
         public void test23()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "23";
             authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -247,6 +257,7 @@ namespace Litle.Sdk.Test.Certification
         public void test24()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "24";
             authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -267,6 +278,7 @@ namespace Litle.Sdk.Test.Certification
         public void test25()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "25";
             authorization.amount = 5000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -287,6 +299,7 @@ namespace Litle.Sdk.Test.Certification
         public void test26()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "26";
             authorization.amount = 18698;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -312,6 +325,7 @@ namespace Litle.Sdk.Test.Certification
         public void test27()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "27";
             authorization.amount = 18698;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -338,6 +352,7 @@ namespace Litle.Sdk.Test.Certification
         public void test28()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "28";
             authorization.amount = 15000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -364,6 +379,7 @@ namespace Litle.Sdk.Test.Certification
         public void test29()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "29";
             authorization.amount = 18699;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -393,6 +409,7 @@ namespace Litle.Sdk.Test.Certification
         public void test30()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "30";
             authorization.amount = 20000;
             authorization.orderSource = orderSourceType.ecommerce;
@@ -422,6 +439,7 @@ namespace Litle.Sdk.Test.Certification
         public void test31()
         {
             authorization authorization = new authorization();
+            authorization.id = "1";
             authorization.orderId = "31";
             authorization.amount = 25000;
             authorization.orderSource = orderSourceType.ecommerce;

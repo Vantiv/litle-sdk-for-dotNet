@@ -49,6 +49,8 @@ namespace Litle.Sdk.Test.Unit
             credit.amount = 2;
             credit.orderSource = orderSourceType.ecommerce;
             credit.reportGroup = "Planets";
+            // credit.pin = "1234";
+            // .*<pin>1234</pin>
 
             var mock = new Mock<Communications>();
 
@@ -212,6 +214,30 @@ namespace Litle.Sdk.Test.Unit
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>3</litleTxnId>\r\n<amount>2</amount>\r\n<payPalNotes>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Credit(credit);
+        }
+
+        [Test]
+        public void TestCreditWithPin()
+        {
+            credit credit = new credit();
+            credit.id = "1";
+            credit.reportGroup = "planets";
+            credit.litleTxnId = 123456000;
+            credit.pin = "1234";
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000001";
+            card.expDate = "1210";
+            credit.card = card;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<credit.*<pin>1234</pin>.*</credit>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);

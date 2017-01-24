@@ -317,12 +317,31 @@ namespace Litle.Sdk.Test.Unit
             var mock = new Mock<Communications>();
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<activate.*?<orderId>2</orderId>.*?</activate>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><activateResponse><litleTxnId>123</litleTxnId></activateResponse></litleOnlineResponse>");
+                .Returns(@"
+<litleOnlineResponse version=""11.0"" xmlns=""http://www.litle.com/schema""
+response=""0"" message=""ValidFormat"">
+<activateResponse id=""1"" reportGroup=""Planets"">
+<litleTxnId>82919789861357149</litleTxnId>
+<response>000</response>
+<responseTime>2017-01-23T19:31:10</responseTime>
+<message>InvalidAccountNumber</message>
+<postDate>2017-01-24</postDate>
+<fraudResult/>
+<virtualGiftCardResponse>
+<accountNumber>123456</accountNumber>
+<cardValidationNum>123456</cardValidationNum>
+<pin>1234</pin>
+</virtualGiftCardResponse>
+</activateResponse>
+</litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             activateResponse activateResponse = litle.Activate(activate);
-            Assert.AreEqual(123, activateResponse.litleTxnId);
+            Assert.AreEqual(82919789861357149, activateResponse.litleTxnId);
+            Assert.AreEqual("123456", activateResponse.virtualGiftCardResponse.accountNumber);
+            Assert.AreEqual("123456", activateResponse.virtualGiftCardResponse.cardValidationNum);
+            Assert.AreEqual("1234", activateResponse.virtualGiftCardResponse.pin);
         }
 
         [Test]

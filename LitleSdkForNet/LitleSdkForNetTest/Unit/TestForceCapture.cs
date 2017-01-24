@@ -128,6 +128,26 @@ namespace Litle.Sdk.Test.Unit
             litle.ForceCapture(forceCapture);
         }
 
+        [Test]
+        public void TestProcessingType()
+        {
+            forceCapture capture = new forceCapture();
+            capture.amount = 2;
+            capture.orderSource = orderSourceType.ecommerce;
+            capture.reportGroup = "Planets";
+            capture.processingType = processingTypeEnum.initialRecurring;
+            
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>\r\n<processingType>initialRecurring</processingType>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.ForceCapture(capture);
+        }
+
 
 
     }

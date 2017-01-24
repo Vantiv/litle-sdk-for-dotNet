@@ -302,5 +302,53 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             litle.Sale(sale);
         }
+
+        [Test]
+        public void SimpleSaleWithDirectDebit()
+        {
+            sale sale = new sale();
+            sale.id = "1";
+            sale.amount = 106;
+            sale.litleTxnId = 123456;
+            sale.orderId = "12344";
+            sale.orderSource = orderSourceType.ecommerce;
+            sepaDirectDebitType directDebitObj = new sepaDirectDebitType();
+            directDebitObj.mandateProvider = mandateProviderType.Merchant;
+            directDebitObj.sequenceType = sequenceTypeType.FirstRecurring;
+            directDebitObj.iban = "123456789123456789";
+            sale.sepaDirectDebit = directDebitObj;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<sepaDirectDebit>\r\n<mandateProvider>Merchant</mandateProvider>\r\n<sequenceType>FirstRecurring</sequenceType>\r\n<iban>123456789123456789</iban>\r\n</sepaDirectDebit>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Sale(sale);
+        }
+
+        [Test]
+        public void SimpleSaleWithProcessTypeNetIdTranAmt()
+        {
+            sale sale = new sale();
+            sale.id = "1";
+            sale.amount = 106;
+            sale.litleTxnId = 123456;
+            sale.orderId = "12344";
+            sale.orderSource = orderSourceType.ecommerce;
+            sale.processingType = processingTypeEnum.accountFunding;
+            sale.originalNetworkTransactionId = "Test";
+            sale.originalTransactionAmount = 123;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<processingType>accountFunding</processingType>\r\n<originalNetworkTransactionId>Test</originalNetworkTransactionId>\r\n<originalTransactionAmount>123</originalTransactionAmount>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Sale(sale);
+        }
     }
 }

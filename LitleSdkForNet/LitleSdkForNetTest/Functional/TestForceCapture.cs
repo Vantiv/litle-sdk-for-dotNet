@@ -33,16 +33,18 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleForceCaptureWithCard() {
             forceCapture forcecapture = new forceCapture();
+            forcecapture.id = "1";
             forcecapture.amount = 106;
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000000";
+            card.number = "4100000000000001";
             card.expDate = "1210";
             forcecapture.card = card;
+            forcecapture.processingType = processingTypeEnum.accountFunding;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
@@ -55,17 +57,19 @@ namespace Litle.Sdk.Test.Functional
             mpos.track1Status = 0;
             mpos.track2Status = 0;
             forceCapture forcecapture = new forceCapture();
+            forcecapture.id = "1";
             forcecapture.amount = 322;
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
             forcecapture.mpos = mpos;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void simpleForceCaptureWithToken() {
             forceCapture forcecapture = new forceCapture();
+            forcecapture.id = "1";
             forcecapture.amount = 106;
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
@@ -76,7 +80,7 @@ namespace Litle.Sdk.Test.Functional
             token.type = methodOfPaymentTypeEnum.VI;
             forcecapture.token = token;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message); ;
+            Assert.AreEqual("Approved", response.message); ;
         }
             
     }

@@ -41,6 +41,7 @@ namespace Litle.Sdk.Test.Unit
         public void simpleForceCaptureWithSecondaryAmount()
         {
             forceCapture forcecapture = new forceCapture();
+            forcecapture.id = "1";
             forcecapture.amount = 106;
             forcecapture.secondaryAmount = 50;
             forcecapture.orderId = "12344";
@@ -51,7 +52,7 @@ namespace Litle.Sdk.Test.Unit
             card.expDate = "1210";
             forcecapture.card = card;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
     }
 }

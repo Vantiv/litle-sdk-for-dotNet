@@ -31,6 +31,9 @@ namespace Litle.Sdk.Test.Unit
             Assert.NotNull(authorizationResponse.giftCardResponse);
         }
 
+        // CES: Commenting this out because AuthReversal no longer uses giftCardResponse
+        
+        /*
         [Test]
         public void TestAuthReversalResponseContainsGiftCardResponse()
         {
@@ -41,7 +44,22 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.NotNull(authReversalResponse.giftCardResponse);
         }
+        */
 
+        [Test]
+        public void TestgiftCardAuthReversalResponseContainsGiftCardResponse()
+        {
+            String xml = "<giftCardAuthReversalResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></giftCardAuthReversalResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(giftCardAuthReversalResponse));
+            StringReader reader = new StringReader(xml);
+            giftCardAuthReversalResponse giftCardAuthReversalResponse = (giftCardAuthReversalResponse)serializer.Deserialize(reader);
+
+            Assert.NotNull(giftCardAuthReversalResponse.giftCardResponse);
+        }
+
+        // CES: Commenting this out because captureResponse no longer uses giftCardResponse
+        // I will add a test for giftCardCapture
+        /*
         [Test]
         public void TestCaptureResponseContainsGiftCardResponse()
         {
@@ -52,6 +70,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.NotNull(captureResponse.giftCardResponse);
         }
+        */
 
         [Test]
         public void TestCaptureResponseContainsFraudResult()
@@ -119,16 +138,17 @@ namespace Litle.Sdk.Test.Unit
             Assert.NotNull(saleResponse.giftCardResponse);
         }
 
-        [Test]
-        public void TestCreditResponseContainsGiftCardResponse()
-        {
-            String xml = "<creditResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></creditResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(creditResponse));
-            StringReader reader = new StringReader(xml);
-            creditResponse creditResponse = (creditResponse)serializer.Deserialize(reader);
+        // Gift card response is now its own class
+        //[Test]
+        //public void TestCreditResponseContainsGiftCardResponse()
+        //{
+        //    String xml = "<creditResponse xmlns=\"http://www.litle.com/schema\"><giftCardResponse></giftCardResponse></creditResponse>";
+        //    XmlSerializer serializer = new XmlSerializer(typeof(creditResponse));
+        //    StringReader reader = new StringReader(xml);
+        //    creditResponse creditResponse = (creditResponse)serializer.Deserialize(reader);
 
-            Assert.NotNull(creditResponse.giftCardResponse);
-        }
+        //    Assert.NotNull(creditResponse.giftCardResponse);
+        //}
 
         [Test]
         public void TestCreditResponseContainsFraudResult()
@@ -362,11 +382,40 @@ namespace Litle.Sdk.Test.Unit
             Assert.IsNull(enhancedAuthResponse.affluence);
         }
 
+        //        [Test]
+        //        public void TestAuthReversalResponseCanContainGiftCardResponse()
+        //        {
+        //            String xml = @"
+        //<authReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+        //<litleTxnId>1</litleTxnId>
+        //<orderId>2</orderId>
+        //<response>000</response>
+        //<responseTime>2013-09-05T14:23:45</responseTime>
+        //<postDate>2013-09-05</postDate>
+        //<message>Foo</message>
+        //<giftCardResponse>
+        //<availableBalance>5</availableBalance>
+        //</giftCardResponse>
+        //</authReversalResponse>";
+        //            XmlSerializer serializer = new XmlSerializer(typeof(authReversalResponse));
+        //            StringReader reader = new StringReader(xml);
+        //            authReversalResponse authReversalResponse = (authReversalResponse)serializer.Deserialize(reader);
+        //            Assert.AreEqual("theId", authReversalResponse.id);
+        //            Assert.AreEqual("theCustomerId", authReversalResponse.customerId);
+        //            Assert.AreEqual("theReportGroup", authReversalResponse.reportGroup);
+        //            Assert.AreEqual(1, authReversalResponse.litleTxnId);
+        //            Assert.AreEqual("000", authReversalResponse.response);
+        //            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), authReversalResponse.responseTime);
+        //            Assert.AreEqual(new DateTime(2013, 9, 5), authReversalResponse.postDate);
+        //            Assert.AreEqual("Foo", authReversalResponse.message);
+        //            Assert.AreEqual("5", authReversalResponse.giftCardResponse.availableBalance);
+        //        }
+
         [Test]
-        public void TestAuthReversalResponseCanContainGiftCardResponse()
+        public void TestgiftCardAuthReversalResponseCanContainGiftCardResponse()
         {
             String xml = @"
-<authReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
+<giftCardAuthReversalResponse xmlns=""http://www.litle.com/schema"" id=""theId"" customerId=""theCustomerId"" reportGroup=""theReportGroup"">
 <litleTxnId>1</litleTxnId>
 <orderId>2</orderId>
 <response>000</response>
@@ -376,19 +425,19 @@ namespace Litle.Sdk.Test.Unit
 <giftCardResponse>
 <availableBalance>5</availableBalance>
 </giftCardResponse>
-</authReversalResponse>";
-            XmlSerializer serializer = new XmlSerializer(typeof(authReversalResponse));
+</giftCardAuthReversalResponse>";
+            XmlSerializer serializer = new XmlSerializer(typeof(giftCardAuthReversalResponse));
             StringReader reader = new StringReader(xml);
-            authReversalResponse authReversalResponse = (authReversalResponse)serializer.Deserialize(reader);
-            Assert.AreEqual("theId", authReversalResponse.id);
-            Assert.AreEqual("theCustomerId", authReversalResponse.customerId);
-            Assert.AreEqual("theReportGroup", authReversalResponse.reportGroup);
-            Assert.AreEqual(1, authReversalResponse.litleTxnId);
-            Assert.AreEqual("000", authReversalResponse.response);
-            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), authReversalResponse.responseTime);
-            Assert.AreEqual(new DateTime(2013, 9, 5), authReversalResponse.postDate);
-            Assert.AreEqual("Foo", authReversalResponse.message);
-            Assert.AreEqual("5", authReversalResponse.giftCardResponse.availableBalance);
+            giftCardAuthReversalResponse giftCardAuthReversalResponse = (giftCardAuthReversalResponse)serializer.Deserialize(reader);
+            Assert.AreEqual("theId", giftCardAuthReversalResponse.id);
+            Assert.AreEqual("theCustomerId", giftCardAuthReversalResponse.customerId);
+            Assert.AreEqual("theReportGroup", giftCardAuthReversalResponse.reportGroup);
+            Assert.AreEqual(1, giftCardAuthReversalResponse.litleTxnId);
+            Assert.AreEqual("000", giftCardAuthReversalResponse.response);
+            Assert.AreEqual(new DateTime(2013, 9, 5, 14, 23, 45), giftCardAuthReversalResponse.responseTime);
+            Assert.AreEqual(new DateTime(2013, 9, 5), giftCardAuthReversalResponse.postDate);
+            Assert.AreEqual("Foo", giftCardAuthReversalResponse.message);
+            Assert.AreEqual("5", giftCardAuthReversalResponse.giftCardResponse.availableBalance);
         }
 
         [Test]

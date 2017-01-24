@@ -107,6 +107,10 @@
     <Compile Include="Certification\TestCert4Echeck.cs" />
     <Compile Include="Certification\TestCert5Token.cs" />
     <Compile Include="Certification\TestCert1Base.cs" />
+    <Compile Include="Functional\TestActivate.cs" />
+    <Compile Include="Functional\TestGiftCardCredit.cs" />
+    <Compile Include="Functional\TestGiftCardCapture.cs" />
+    <Compile Include="Functional\TestGiftCardParentReversal.cs" />
     <Compile Include="Functional\TestQueryTransaction.cs" />
     <Compile Include="Functional\TestBatchStream.cs" />
     <Compile Include="Functional\TestBatch.cs" />
@@ -125,15 +129,14 @@
     <Compile Include="Functional\TestAuth.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Functional\TestGiftCardAuthReversal.cs" />
     <Compile Include="Unit\TestAdvancedFraudCheck.cs" />
+    <Compile Include="Unit\TestGiftCardCredit.cs" />
+    <Compile Include="Unit\TestGiftCardCapture.cs" />
     <Compile Include="Unit\TestCommunications.cs" />
+    <Compile Include="Unit\TestGiftCardAuthReversal.cs" />
+    <Compile Include="Unit\TestGiftCardParentReversal.cs" />
     <Compile Include="Unit\TestQueryTransactionRequest.cs" />
-    <Compile Include="Unit\TestUnloadReversal.cs" />
-    <Compile Include="Unit\TestLoadReversal.cs" />
-    <Compile Include="Unit\TestDeactivateReversal.cs" />
-    <Compile Include="Unit\TestActivateReversal.cs" />
-    <Compile Include="Unit\TestRefundReversal.cs" />
-    <Compile Include="Unit\TestDepositReversal.cs" />
     <Compile Include="Unit\TestXmlFieldsUnserializer.cs" />
     <Compile Include="Unit\TestCancelSubscription.cs" />
     <Compile Include="Unit\TestUpdateSubscription.cs" />
@@ -160,6 +163,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

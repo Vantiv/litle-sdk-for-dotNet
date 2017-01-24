@@ -34,54 +34,65 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleCapture()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "Notes";
+            capture.pin = "1234";
 
             captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void simpleCaptureWithPartial()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.partial = true;
             capture.payPalNotes = "Notes";
 
             captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void complexCapture()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "Notes";
+            capture.pin = "1234";
             enhancedData enhanceddata = new enhancedData();
             enhanceddata.customerReference = "Litle";
             enhanceddata.salesTax = 50;
             enhanceddata.deliveryType = enhancedDataDeliveryType.TBD;
             capture.enhancedData = enhanceddata;
             capture.payPalOrderComplete = true;
+            customBilling customBilling = new customBilling();
+            customBilling.phone = "51312345678";
+            customBilling.city = "Lowell";
+            customBilling.url = "test.com";
+            customBilling.descriptor = "Nothing";
             captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void SimpleCaptureWithSpecial()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "<'&\">";
 
             captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
     }
 }

@@ -34,6 +34,8 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleEcheckVerification()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.id = "1";
+            echeckVerificationObject.reportGroup = "Planets";
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
             echeckVerificationObject.orderSource = orderSourceType.ecommerce;
@@ -61,6 +63,8 @@ namespace Litle.Sdk.Test.Functional
         public void EcheckVerificationWithEcheckToken()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.id = "1";
+            echeckVerificationObject.reportGroup = "Planets";
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
             echeckVerificationObject.orderSource = orderSourceType.ecommerce;
@@ -88,6 +92,7 @@ namespace Litle.Sdk.Test.Functional
         public void TestMissingBillingField()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.id = "1";
             echeckVerificationObject.reportGroup = "Planets";
             echeckVerificationObject.amount = 123;
             echeckVerificationObject.orderId = "12345";
