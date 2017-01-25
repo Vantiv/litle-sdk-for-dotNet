@@ -1249,12 +1249,12 @@ namespace Litle.Sdk.Test.Functional
             Dictionary<string, string> configOverride = new Dictionary<string, string>();
             configOverride["url"] = Properties.Settings.Default.url;
             configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
-            configOverride["username"] = "SDKTEAM";
+            configOverride["username"] = Properties.Settings.Default.username;
             configOverride["printxml"] = Properties.Settings.Default.printxml;
             configOverride["timeout"] = Properties.Settings.Default.timeout;
             configOverride["proxyHost"] = Properties.Settings.Default.proxyHost;
-            configOverride["merchantId"] = "1288791";
-            configOverride["password"] = "V3r5K6v7";
+            configOverride["merchantId"] = Properties.Settings.Default.merchantId;
+            configOverride["password"] = Properties.Settings.Default.password;
             configOverride["proxyPort"] = Properties.Settings.Default.proxyPort;
             configOverride["sftpUrl"] = Properties.Settings.Default.sftpUrl;
             configOverride["sftpUsername"] = Properties.Settings.Default.sftpUsername;

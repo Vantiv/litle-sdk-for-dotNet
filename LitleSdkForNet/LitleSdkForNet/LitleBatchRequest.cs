@@ -579,6 +579,7 @@ namespace Litle.Sdk
             {
                 numGiftCardCapture++;
                 sumOfGiftCardCapture += giftCardCapture.captureAmount;
+                fillInReportGroup(giftCardCapture);
                 tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, giftCardCapture);
             }
             else

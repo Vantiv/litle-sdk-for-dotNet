@@ -5025,7 +5025,7 @@ namespace Litle.Sdk
             this.authReversalResponseReader = xmlReader;
         }
 
-        public void setgiftCardAuthReversalResponseReader(XmlReader xmlReader)
+        public void setGiftCardAuthReversalResponseReader(XmlReader xmlReader)
         {
             this.giftCardAuthReversalResponseReader = xmlReader;
         }

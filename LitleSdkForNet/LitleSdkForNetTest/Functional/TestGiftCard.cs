@@ -7,14 +7,15 @@ using Litle.Sdk;
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    class TestGiftCardCapture
+    class TestGiftCard
     {
         private LitleOnline litle;
+        private Dictionary<string, string> config;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
+            config = new Dictionary<string, string>();
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
@@ -31,7 +32,29 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
-        public void simpleGiftCardCapture()
+        public void TestGiftCardAuthReversal()
+        {
+            giftCardAuthReversal giftCard = new giftCardAuthReversal();
+            giftCard.id = "1";
+            giftCard.reportGroup = "Planets";
+            giftCard.litleTxnId = 123;
+            giftCardCardType card = new giftCardCardType();
+            card.type = methodOfPaymentTypeEnum.GC;
+            card.number = "414100000000000000";
+            card.expDate = "1210";
+            giftCard.card = card;
+            giftCard.originalRefCode = "abc123";
+            giftCard.originalAmount = 500;
+            giftCard.originalTxnTime = DateTime.Now;
+            giftCard.originalSystemTraceId = 123;
+            giftCard.originalSequenceNumber = "123456";
+
+            giftCardAuthReversalResponse response = litle.GiftCardAuthReversal(giftCard);
+            Assert.AreEqual("000", response.response);
+        }
+
+        [Test]
+        public void TestGiftCardCapture()
         {
             giftCardCapture giftCardCapture = new giftCardCapture();
             giftCardCapture.id = "1";
@@ -53,7 +76,7 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
-        public void simpleGiftCardWithPartial()
+        public void TestGiftCardCapturePartial()
         {
             giftCardCapture giftCardCapture = new giftCardCapture();
             giftCardCapture.id = "1";
@@ -68,6 +91,43 @@ namespace Litle.Sdk.Test.Functional
             giftCardCapture.partial = true;
 
             giftCardCaptureResponse response = litle.GiftCardCapture(giftCardCapture);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void TestGiftCardCreditWithTxnId()
+        {
+            giftCardCredit creditObj = new giftCardCredit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
+            creditObj.litleTxnId = 123456000;
+            creditObj.creditAmount = 106;
+            giftCardCardType card = new giftCardCardType();
+            card.type = methodOfPaymentTypeEnum.GC;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            creditObj.card = card;
+
+            giftCardCreditResponse response = litle.GiftCardCredit(creditObj);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void TestGiftCardCreditWithOrderId()
+        {
+            giftCardCredit creditObj = new giftCardCredit();
+            creditObj.id = "1";
+            creditObj.reportGroup = "planets";
+            creditObj.creditAmount = 106;
+            creditObj.orderId = "2111";
+            creditObj.orderSource = orderSourceType.echeckppd;
+            giftCardCardType card = new giftCardCardType();
+            card.type = methodOfPaymentTypeEnum.GC;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            creditObj.card = card;
+
+            giftCardCreditResponse response = litle.GiftCardCredit(creditObj);
             Assert.AreEqual("Approved", response.message);
         }
     }

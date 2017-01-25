@@ -1830,8 +1830,7 @@ namespace Litle.Sdk.Test.Unit
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
-                .Returns(@"
- <giftCardAuthReversalResponse id='1' reportGroup='Planets' customerId=''>
+                .Returns(@"<giftCardAuthReversalResponse xmlns='http://www.litle.com/schema'>
 <litleTxnId>522547723741503000</litleTxnId>
 <response>000</response>
 <responseTime>2017-01-24T16:11:31</responseTime>
@@ -1843,8 +1842,7 @@ namespace Litle.Sdk.Test.Unit
 <sequenceNumber>12</sequenceNumber>
 </giftCardResponse>
 </giftCardAuthReversalResponse>")
-                .Returns(@"
- <giftCardAuthReversalResponse id='1' reportGroup='Planets' customerId=''>
+                .Returns(@"<giftCardAuthReversalResponse xmlns='http://www.litle.com/schema'>
 <litleTxnId>522547723741503001</litleTxnId>
 <response>000</response>
 <responseTime>2017-01-24T16:11:31</responseTime>
@@ -1858,7 +1856,7 @@ namespace Litle.Sdk.Test.Unit
 </giftCardAuthReversalResponse>");
 
             batchResponse mockLitleBatchResponse = new batchResponse();
-            mockLitleBatchResponse.setgiftCardAuthReversalResponseReader(mockXmlReader.Object);
+            mockLitleBatchResponse.setGiftCardAuthReversalResponseReader(mockXmlReader.Object);
 
             mockLitleResponse.Setup(litleResponse => litleResponse.nextBatchResponse()).Returns(mockLitleBatchResponse);
             litleResponse mockedLitleResponse = mockLitleResponse.Object;
@@ -1891,6 +1889,266 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual(522547723741503000, actualLitleBatchResponse.nextGiftCardAuthReversalResponse().litleTxnId);
             Assert.AreEqual(522547723741503001, actualLitleBatchResponse.nextGiftCardAuthReversalResponse().litleTxnId);
             Assert.IsNull(actualLitleBatchResponse.nextGiftCardAuthReversalResponse());
+
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
+        }
+
+        [Test]
+        public void testGiftCardCapture()
+        {
+            var giftCardCapture = new giftCardCapture
+            {
+                id = "1",
+                reportGroup = "Planets",
+                captureAmount = 123,
+                card = new giftCardCardType
+                {
+                    type = methodOfPaymentTypeEnum.GC,
+                    number = "4100000000000002",
+                    expDate = "1210"
+                },
+                originalRefCode = "123",
+                originalAmount = 12345,
+                originalTxnTime = DateTime.Now
+            };
+
+            var mockLitleResponse = new Mock<litleResponse>();
+            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns(@"<giftCardCaptureResponse xmlns='http://www.litle.com/schema'>
+<litleTxnId>522547723741503000</litleTxnId>
+<response>000</response>
+<responseTime>2017-01-24T16:11:31</responseTime>
+<message>Approved</message>
+<postDate>2017-01-24</postDate>
+<giftCardResponse>
+<txnTime>2017-01-24T16:11:31</txnTime>
+<systemTraceId>0</systemTraceId>
+<sequenceNumber>12</sequenceNumber>
+</giftCardResponse>
+</giftCardCaptureResponse>")
+                .Returns(@"<giftCardCaptureResponse xmlns='http://www.litle.com/schema'>
+<litleTxnId>522547723741503001</litleTxnId>
+<response>000</response>
+<responseTime>2017-01-24T16:11:31</responseTime>
+<message>Approved</message>
+<postDate>2017-01-24</postDate>
+<giftCardResponse>
+<txnTime>2017-01-24T16:11:31</txnTime>
+<systemTraceId>0</systemTraceId>
+<sequenceNumber>12</sequenceNumber>
+</giftCardResponse>
+</giftCardCaptureResponse>");
+
+            batchResponse mockLitleBatchResponse = new batchResponse();
+            mockLitleBatchResponse.setGiftCardCaptureResponseReader(mockXmlReader.Object);
+
+            mockLitleResponse.Setup(litleResponse => litleResponse.nextBatchResponse()).Returns(mockLitleBatchResponse);
+            litleResponse mockedLitleResponse = mockLitleResponse.Object;
+
+            mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
+
+            Communications mockedCommunication = mockCommunications.Object;
+            litle.setCommunication(mockedCommunication);
+
+            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+
+            litleFile mockedLitleFile = mockLitleFile.Object;
+            litle.setLitleFile(mockedLitleFile);
+
+            litle.setLitleTime(mockLitleTime.Object);
+
+            batchRequest litleBatchRequest = new batchRequest();
+            litleBatchRequest.setLitleFile(mockedLitleFile);
+            litleBatchRequest.setLitleTime(mockLitleTime.Object);
+            litleBatchRequest.addGiftCardCapture(giftCardCapture);
+            litleBatchRequest.addGiftCardCapture(giftCardCapture);
+            litle.addBatch(litleBatchRequest);
+
+            string batchFileName = litle.sendToLitle();
+            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
+
+            Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
+            Assert.AreEqual(522547723741503000, actualLitleBatchResponse.nextGiftCardCaptureResponse().litleTxnId);
+            Assert.AreEqual(522547723741503001, actualLitleBatchResponse.nextGiftCardCaptureResponse().litleTxnId);
+            Assert.IsNull(actualLitleBatchResponse.nextGiftCardCaptureResponse());
+
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
+        }
+
+        [Test]
+        public void testGiftCardCreditWithTxnId()
+        {
+            var giftCardCredit = new giftCardCredit
+            {
+                id = "1",
+                reportGroup = "Planets",
+                litleTxnId = 123456000,
+                creditAmount = 123,
+                card = new giftCardCardType
+                {
+                    type = methodOfPaymentTypeEnum.GC,
+                    number = "4100000000000002",
+                    expDate = "1210"
+                }
+            };
+
+            var mockLitleResponse = new Mock<litleResponse>();
+            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns(@"<giftCardCreditResponse xmlns='http://www.litle.com/schema'>
+<litleTxnId>522547723741503000</litleTxnId>
+<response>000</response>
+<responseTime>2017-01-24T16:11:31</responseTime>
+<message>Approved</message>
+<postDate>2017-01-24</postDate>
+<giftCardResponse>
+<txnTime>2017-01-24T16:11:31</txnTime>
+<systemTraceId>0</systemTraceId>
+<sequenceNumber>12</sequenceNumber>
+</giftCardResponse>
+</giftCardCreditResponse>")
+                .Returns(@"<giftCardCreditResponse xmlns='http://www.litle.com/schema'>
+<litleTxnId>522547723741503001</litleTxnId>
+<response>000</response>
+<responseTime>2017-01-24T16:11:31</responseTime>
+<message>Approved</message>
+<postDate>2017-01-24</postDate>
+<giftCardResponse>
+<txnTime>2017-01-24T16:11:31</txnTime>
+<systemTraceId>0</systemTraceId>
+<sequenceNumber>12</sequenceNumber>
+</giftCardResponse>
+</giftCardCreditResponse>");
+
+            batchResponse mockLitleBatchResponse = new batchResponse();
+            mockLitleBatchResponse.setGiftCardCreditResponseReader(mockXmlReader.Object);
+
+            mockLitleResponse.Setup(litleResponse => litleResponse.nextBatchResponse()).Returns(mockLitleBatchResponse);
+            litleResponse mockedLitleResponse = mockLitleResponse.Object;
+
+            mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
+
+            Communications mockedCommunication = mockCommunications.Object;
+            litle.setCommunication(mockedCommunication);
+
+            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+
+            litleFile mockedLitleFile = mockLitleFile.Object;
+            litle.setLitleFile(mockedLitleFile);
+
+            litle.setLitleTime(mockLitleTime.Object);
+
+            batchRequest litleBatchRequest = new batchRequest();
+            litleBatchRequest.setLitleFile(mockedLitleFile);
+            litleBatchRequest.setLitleTime(mockLitleTime.Object);
+            litleBatchRequest.addGiftCardCredit(giftCardCredit);
+            litleBatchRequest.addGiftCardCredit(giftCardCredit);
+            litle.addBatch(litleBatchRequest);
+
+            string batchFileName = litle.sendToLitle();
+            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
+
+            Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
+            Assert.AreEqual(522547723741503000, actualLitleBatchResponse.nextGiftCardCreditResponse().litleTxnId);
+            Assert.AreEqual(522547723741503001, actualLitleBatchResponse.nextGiftCardCreditResponse().litleTxnId);
+            Assert.IsNull(actualLitleBatchResponse.nextGiftCardCreditResponse());
+
+            mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
+            mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));
+        }
+
+        [Test]
+        public void testGiftCardCreditWithOrderId()
+        {
+            var giftCardCredit = new giftCardCredit
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "2111",
+                creditAmount = 123,
+                orderSource = orderSourceType.ecommerce,
+                card = new giftCardCardType
+                {
+                    type = methodOfPaymentTypeEnum.GC,
+                    number = "4100000000000002",
+                    expDate = "1210"
+                }
+            };
+
+            var mockLitleResponse = new Mock<litleResponse>();
+            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+
+            mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
+                .Returns(@"<giftCardCreditResponse xmlns='http://www.litle.com/schema'>
+<litleTxnId>522547723741503000</litleTxnId>
+<orderId>2111</orderId>
+<response>000</response>
+<responseTime>2017-01-24T16:11:31</responseTime>
+<message>Approved</message>
+<postDate>2017-01-24</postDate>
+<giftCardResponse>
+<txnTime>2017-01-24T16:11:31</txnTime>
+<systemTraceId>0</systemTraceId>
+<sequenceNumber>12</sequenceNumber>
+</giftCardResponse>
+</giftCardCreditResponse>")
+                .Returns(@"<giftCardCreditResponse xmlns='http://www.litle.com/schema'>
+<litleTxnId>522547723741503001</litleTxnId>
+<orderId>2111</orderId>
+<response>000</response>
+<responseTime>2017-01-24T16:11:31</responseTime>
+<message>Approved</message>
+<postDate>2017-01-24</postDate>
+<giftCardResponse>
+<txnTime>2017-01-24T16:11:31</txnTime>
+<systemTraceId>0</systemTraceId>
+<sequenceNumber>12</sequenceNumber>
+</giftCardResponse>
+</giftCardCreditResponse>");
+
+            batchResponse mockLitleBatchResponse = new batchResponse();
+            mockLitleBatchResponse.setGiftCardCreditResponseReader(mockXmlReader.Object);
+
+            mockLitleResponse.Setup(litleResponse => litleResponse.nextBatchResponse()).Returns(mockLitleBatchResponse);
+            litleResponse mockedLitleResponse = mockLitleResponse.Object;
+
+            mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
+
+            Communications mockedCommunication = mockCommunications.Object;
+            litle.setCommunication(mockedCommunication);
+
+            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+
+            litleFile mockedLitleFile = mockLitleFile.Object;
+            litle.setLitleFile(mockedLitleFile);
+
+            litle.setLitleTime(mockLitleTime.Object);
+
+            batchRequest litleBatchRequest = new batchRequest();
+            litleBatchRequest.setLitleFile(mockedLitleFile);
+            litleBatchRequest.setLitleTime(mockLitleTime.Object);
+            litleBatchRequest.addGiftCardCredit(giftCardCredit);
+            litleBatchRequest.addGiftCardCredit(giftCardCredit);
+            litle.addBatch(litleBatchRequest);
+
+            string batchFileName = litle.sendToLitle();
+            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
+
+            Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
+            Assert.AreEqual(522547723741503000, actualLitleBatchResponse.nextGiftCardCreditResponse().litleTxnId);
+            Assert.AreEqual(522547723741503001, actualLitleBatchResponse.nextGiftCardCreditResponse().litleTxnId);
+            Assert.IsNull(actualLitleBatchResponse.nextGiftCardCreditResponse());
 
             mockCommunications.Verify(Communications => Communications.FtpDropOff(It.IsAny<String>(), mockFileName, It.IsAny<Dictionary<String, String>>()));
             mockCommunications.Verify(Communications => Communications.FtpPickUp(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>(), mockFileName));

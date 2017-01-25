@@ -109,6 +109,24 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addAuthReversal(reversal2);
 
+            // Prelive is not yet sup to take giftCardAuthReversal
+            
+            //giftCardAuthReversal giftCardAuthReversal = new giftCardAuthReversal();
+            //giftCardAuthReversal.id = "id";
+            //giftCardAuthReversal.litleTxnId = 12345678000L;
+            //giftCardCardType giftCardCardTypeAuthReversal = new giftCardCardType();
+            //giftCardCardTypeAuthReversal.type = methodOfPaymentTypeEnum.GC;
+            //giftCardCardTypeAuthReversal.number = "4100000000000001";
+            //giftCardCardTypeAuthReversal.expDate = "1210";
+            //giftCardAuthReversal.card = giftCardCardTypeAuthReversal;
+            //giftCardAuthReversal.originalRefCode = "123456";
+            //giftCardAuthReversal.originalAmount = 1000;
+            //giftCardAuthReversal.originalTxnTime = DateTime.Now;
+            //giftCardAuthReversal.originalSystemTraceId = 123;
+            //giftCardAuthReversal.originalSequenceNumber = "123456";
+
+            //litleBatchRequest.addGiftCardAuthReversal(giftCardAuthReversal);
+
             capture capture = new capture();
             capture.litleTxnId = 123456000;
             capture.amount = 106;
@@ -124,6 +142,23 @@ namespace Litle.Sdk.Test.Functional
             capture2.id = "id";
 
             litleBatchRequest.addCapture(capture2);
+
+            // Prelive is not yet sup to take giftCardCapture
+
+            //giftCardCapture giftCardCapture = new giftCardCapture();
+            //giftCardCapture.id = "id";
+            //giftCardCapture.litleTxnId = 12345678000L;
+            //giftCardCapture.captureAmount = 123456;
+            //giftCardCardType giftCardCardTypeCapture = new giftCardCardType();
+            //giftCardCardTypeCapture.type = methodOfPaymentTypeEnum.GC;
+            //giftCardCardTypeCapture.number = "4100000000000001";
+            //giftCardCardTypeCapture.expDate = "1210";
+            //giftCardCapture.card = giftCardCardTypeCapture;
+            //giftCardCapture.originalRefCode = "123456";
+            //giftCardCapture.originalAmount = 1000;
+            //giftCardCapture.originalTxnTime = DateTime.Now;
+
+            //litleBatchRequest.addGiftCardCapture(giftCardCapture);
 
             captureGivenAuth capturegivenauth = new captureGivenAuth();
             capturegivenauth.amount = 106;
@@ -172,6 +207,22 @@ namespace Litle.Sdk.Test.Functional
             creditObj2.id = "id";
 
             litleBatchRequest.addCredit(creditObj2);
+
+            // Prelive is not yet sup to take giftCardCredit
+
+            //giftCardCredit giftCardCredit = new giftCardCredit();
+            //giftCardCredit.id = "id";
+            //giftCardCredit.litleTxnId = 12345678000L;
+            //giftCardCredit.creditAmount = 123456;
+            //giftCardCardType giftCardCardTypeCredit = new giftCardCardType();
+            //giftCardCardTypeCredit.type = methodOfPaymentTypeEnum.GC;
+            //giftCardCardTypeCredit.number = "4100000000000001";
+            //giftCardCardTypeCredit.expDate = "1210";
+            //giftCardCredit.card = giftCardCardTypeCredit;
+            //giftCardCredit.orderId = "123456";
+            //giftCardCredit.orderSource = orderSourceType.ecommerce;
+
+            //litleBatchRequest.addGiftCardCredit(giftCardCredit);
 
             echeckCredit echeckcredit = new echeckCredit();
             echeckcredit.amount = 12L;
@@ -401,6 +452,14 @@ namespace Litle.Sdk.Test.Functional
                     authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
                 }
 
+                //giftCardAuthReversalResponse giftCardAuthReversalResponse = litleBatchResponse.nextGiftCardAuthReversalResponse();
+                //while (giftCardAuthReversal != null)
+                //{
+                //    Assert.AreEqual("000", giftCardAuthReversalResponse.response);
+
+                //    giftCardAuthReversalResponse = litleBatchResponse.nextGiftCardAuthReversalResponse();
+                //}
+
                 captureResponse captureResponse = litleBatchResponse.nextCaptureResponse();
                 while (captureResponse != null)
                 {
@@ -408,6 +467,15 @@ namespace Litle.Sdk.Test.Functional
 
                     captureResponse = litleBatchResponse.nextCaptureResponse();
                 }
+
+                //giftCardCaptureResponse giftCardCaptureResponse = litleBatchResponse.nextGiftCardCaptureResponse();
+                //while (giftCardCaptureResponse != null)
+                //{
+                //    Assert.AreEqual("000", giftCardCaptureResponse.response);
+
+                //    giftCardCaptureResponse = litleBatchResponse.nextGiftCardCaptureResponse();
+                //}
+
 
                 captureGivenAuthResponse captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
                 while (captureGivenAuthResponse != null)
@@ -424,6 +492,14 @@ namespace Litle.Sdk.Test.Functional
 
                     creditResponse = litleBatchResponse.nextCreditResponse();
                 }
+
+                //giftCardCreditResponse giftCardCreditResponse = litleBatchResponse.nextGiftCardCreditResponse();
+                //while (giftCardCreditResponse != null)
+                //{
+                //    Assert.AreEqual("000", giftCardCreditResponse.response);
+
+                //    giftCardCreditResponse = litleBatchResponse.nextGiftCardCreditResponse();
+                //}
 
                 echeckCreditResponse echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
                 while (echeckCreditResponse != null)
