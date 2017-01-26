@@ -18,10 +18,10 @@
       <Value Profile="(Default)">C:\Litle\dll\knownhosts</Value>
     </Setting>
     <Setting Name="sftpUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)">dotnet</Value>
+      <Value Profile="(Default)">sdk10</Value>
     </Setting>
     <Setting Name="sftpPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">dotnet</Value>
+      <Value Profile="(Default)">4Nk7Ft5O</Value>
     </Setting>
     <Setting Name="onlineBatchUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">prelive.litle.com</Value>
@@ -51,13 +51,13 @@
       <Value Profile="(Default)">8080</Value>
     </Setting>
     <Setting Name="username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">dotnet</Value>
+      <Value Profile="(Default)">SDKTEAM</Value>
     </Setting>
     <Setting Name="password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">dotnet</Value>
+      <Value Profile="(Default)">V3r5K6v7</Value>
     </Setting>
     <Setting Name="merchantId" Type="System.String" Scope="User">
-      <Value Profile="(Default)">011</Value>
+      <Value Profile="(Default)">1288791</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -186,7 +186,7 @@ namespace Litle.Sdk
             string requestFilePath = this.Serialize();
             string batchName = Path.GetFileName(requestFilePath);
 
-            string responseFilePath = communication.socketStream(requestFilePath, responseDirectory, config);
+            string responseFilePath = communication.SocketStream(requestFilePath, responseDirectory, config);
 
             litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
             return litleResponse;

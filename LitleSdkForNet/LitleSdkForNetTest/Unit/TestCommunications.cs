@@ -27,7 +27,7 @@ namespace Litle.Sdk.Test.Unit
             config.Add("proxyHost", null);
             config.Add("proxyPort", null);
 
-            Assert.IsFalse(objectUnderTest.isProxyOn(config));
+            Assert.IsFalse(objectUnderTest.IsProxyOn(config));
         }
 
 
