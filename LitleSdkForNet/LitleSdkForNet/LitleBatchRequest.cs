@@ -998,8 +998,7 @@ namespace Litle.Sdk
         public string Serialize()
         {
             var xmlHeader = generateXmlHeader();
-
-            const string xmlFooter = "</batchRequest>\r\n";
+            var xmlFooter = generateXmlFooter();
 
             batchFilePath = litleFile.createRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
 
@@ -1235,6 +1234,13 @@ namespace Litle.Sdk
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
+        }
+
+        public string generateXmlFooter()
+        {
+            const string xmlFooter = "</batchRequest>\r\n";
+
+            return xmlFooter;
         }
 
         private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionRequest element)

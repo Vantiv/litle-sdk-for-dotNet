@@ -236,11 +236,8 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.10\"" +
-             " xmlns=\"http://www.litle.com/schema\" " +
-             "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
-
-            string xmlFooter = "\r\n</litleRequest>";
+            string xmlHeader = generateXmlHeader();
+            string xmlFooter = generateXmlFooter();
 
             string filePath;
 
@@ -264,6 +261,22 @@ namespace Litle.Sdk
             finalFilePath = null;
 
             return filePath;
+        }
+
+        public string generateXmlHeader()
+        {
+            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.10\"" +
+             " xmlns=\"http://www.litle.com/schema\" " +
+             "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
+
+            return xmlHeader;
+        }
+
+        public string generateXmlFooter()
+        {
+            const string xmlFooter = "\r\n</litleRequest>";
+
+            return xmlFooter;
         }
 
         private void fillInReportGroup(batchRequest litleBatchRequest)
