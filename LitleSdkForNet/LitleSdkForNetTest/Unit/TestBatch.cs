@@ -1408,7 +1408,7 @@ namespace Litle.Sdk.Test.Unit
             activate activate = new activate();
             activate.orderId = "theOrderId";
             activate.orderSource = orderSourceType.ecommerce;
-            activate.card = new cardType();
+            activate.card = new giftCardCardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
@@ -1462,7 +1462,7 @@ namespace Litle.Sdk.Test.Unit
             deactivate deactivate = new deactivate();
             deactivate.orderId = "theOrderId";
             deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            deactivate.card = new giftCardCardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
@@ -1516,7 +1516,7 @@ namespace Litle.Sdk.Test.Unit
             load load = new load();
             load.orderId = "theOrderId";
             load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            load.card = new giftCardCardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
@@ -1570,7 +1570,7 @@ namespace Litle.Sdk.Test.Unit
             unload unload = new unload();
             unload.orderId = "theOrderId";
             unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            unload.card = new giftCardCardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
@@ -1624,7 +1624,7 @@ namespace Litle.Sdk.Test.Unit
             balanceInquiry balanceInquiry = new balanceInquiry();
             balanceInquiry.orderId = "theOrderId";
             balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            balanceInquiry.card = new giftCardCardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();

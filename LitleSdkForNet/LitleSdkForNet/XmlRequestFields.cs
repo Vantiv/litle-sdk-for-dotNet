@@ -759,6 +759,7 @@ namespace Litle.Sdk
             set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
         }
         public customBilling customBilling;
+        public string customIdentifier;
         public string orderId;
         private bool verifyField;
         private bool verifySet;
@@ -3722,7 +3723,7 @@ namespace Litle.Sdk
         public string orderId;
         public long amount;
         public orderSourceType orderSource;
-        public cardType card;
+        public giftCardCardType card;
         public virtualGiftCardType virtualGiftCard;
 
         public override string Serialize()
@@ -3748,7 +3749,7 @@ namespace Litle.Sdk
     {
         public string orderId;
         public orderSourceType orderSource;
-        public cardType card;
+        public giftCardCardType card;
 
         public override string Serialize()
         {
@@ -3772,7 +3773,7 @@ namespace Litle.Sdk
         public string orderId;
         public long amount;
         public orderSourceType orderSource;
-        public cardType card;
+        public giftCardCardType card;
 
         public override string Serialize()
         {
@@ -3797,7 +3798,7 @@ namespace Litle.Sdk
         public string orderId;
         public long amount;
         public orderSourceType orderSource;
-        public cardType card;
+        public giftCardCardType card;
 
         public override string Serialize()
         {
@@ -3821,7 +3822,7 @@ namespace Litle.Sdk
     {
         public string orderId;
         public orderSourceType orderSource;
-        public cardType card;
+        public giftCardCardType card;
 
         public override string Serialize()
         {

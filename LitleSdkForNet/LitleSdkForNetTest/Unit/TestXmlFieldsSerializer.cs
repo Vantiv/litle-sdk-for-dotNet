@@ -474,7 +474,7 @@ namespace Litle.Sdk.Test.Unit
             activate.orderSource = orderSourceType.ecommerce;
             activate.id = "theId";
             activate.reportGroup = "theReportGroup";
-            activate.card = new cardType();
+            activate.card = new giftCardCardType();
 
             String actual = activate.Serialize();
             String expected = @"
@@ -532,7 +532,7 @@ namespace Litle.Sdk.Test.Unit
             deactivate deactivate = new deactivate();
             deactivate.orderId = "12345";
             deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            deactivate.card = new giftCardCardType();
             deactivate.id = "theId";
             deactivate.reportGroup = "theReportGroup";
 
@@ -554,7 +554,7 @@ namespace Litle.Sdk.Test.Unit
             deactivate deactivate = new deactivate();
             deactivate.orderId = "12345";
             deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            deactivate.card = new giftCardCardType();
             deactivate.id = "theId";
             deactivate.reportGroup = "theReportGroup";
 
@@ -577,7 +577,7 @@ namespace Litle.Sdk.Test.Unit
             load.orderId = "12345";
             load.amount = 200;
             load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            load.card = new giftCardCardType();
             load.id = "theId";
             load.reportGroup = "theReportGroup";
 
@@ -601,7 +601,7 @@ namespace Litle.Sdk.Test.Unit
             load.orderId = "12345";
             load.amount = 200;
             load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            load.card = new giftCardCardType();
             load.id = "theId";
             load.reportGroup = "theReportGroup";
 
@@ -625,7 +625,7 @@ namespace Litle.Sdk.Test.Unit
             unload.orderId = "12345";
             unload.amount = 200;
             unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            unload.card = new giftCardCardType();
             unload.id = "theId";
             unload.reportGroup = "theReportGroup";
 
@@ -649,7 +649,7 @@ namespace Litle.Sdk.Test.Unit
             unload.orderId = "12345";
             unload.amount = 200;
             unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            unload.card = new giftCardCardType();
             unload.id = "theId";
             unload.reportGroup = "theReportGroup";
 
@@ -672,7 +672,7 @@ namespace Litle.Sdk.Test.Unit
             balanceInquiry balanceInquiry = new balanceInquiry();
             balanceInquiry.orderId = "12345";
             balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            balanceInquiry.card = new giftCardCardType();
             balanceInquiry.id = "theId";
             balanceInquiry.reportGroup = "theReportGroup";
 
@@ -694,7 +694,7 @@ namespace Litle.Sdk.Test.Unit
             balanceInquiry balanceInquiry = new balanceInquiry();
             balanceInquiry.orderId = "12345";
             balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            balanceInquiry.card = new giftCardCardType();
             balanceInquiry.id = "theId";
             balanceInquiry.reportGroup = "theReportGroup";
 

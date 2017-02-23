@@ -181,7 +181,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.testlitle.com/sandbox/communicator/online")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://prelive.litle.com/vap/communicator/online")]
         public string url {
             get {
                 return ((string)(this["url"]));
@@ -193,7 +193,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("iwp1.lowell.litle.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string proxyHost {
             get {
                 return ((string)(this["proxyHost"]));

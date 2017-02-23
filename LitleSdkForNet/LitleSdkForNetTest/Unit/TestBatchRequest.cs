@@ -439,7 +439,7 @@ merchantId=""01234"">
             activate activate = new activate();
             activate.amount = 500;
             activate.orderSource = orderSourceType.ecommerce;
-            activate.card = new cardType();
+            activate.card = new giftCardCardType();
 
             batchRequest.addActivate(activate);
 
@@ -455,7 +455,7 @@ merchantId=""01234"">
         {
             deactivate deactivate = new deactivate();
             deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            deactivate.card = new giftCardCardType();
 
             batchRequest.addDeactivate(deactivate);
 
@@ -471,7 +471,7 @@ merchantId=""01234"">
             load load = new load();
             load.amount = 600;
             load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            load.card = new giftCardCardType();
 
             batchRequest.addLoad(load);
 
@@ -488,7 +488,7 @@ merchantId=""01234"">
             unload unload = new unload();
             unload.amount = 700;
             unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            unload.card = new giftCardCardType();
 
             batchRequest.addUnload(unload);
 
@@ -504,7 +504,7 @@ merchantId=""01234"">
         {
             balanceInquiry balanceInquiry = new balanceInquiry();
             balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            balanceInquiry.card = new giftCardCardType();
 
             batchRequest.addBalanceInquiry(balanceInquiry);
 

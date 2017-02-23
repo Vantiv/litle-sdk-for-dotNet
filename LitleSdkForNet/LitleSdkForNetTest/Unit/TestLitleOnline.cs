@@ -312,7 +312,7 @@ namespace Litle.Sdk.Test.Unit
             activate activate = new activate();
             activate.orderId = "2";
             activate.orderSource = orderSourceType.ecommerce;
-            activate.card = new cardType();
+            activate.card = new giftCardCardType();
 
             var mock = new Mock<Communications>();
 
@@ -350,7 +350,7 @@ response=""0"" message=""ValidFormat"">
             deactivate deactivate = new deactivate();
             deactivate.orderId = "2";
             deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            deactivate.card = new giftCardCardType();
 
             var mock = new Mock<Communications>();
 
@@ -369,7 +369,7 @@ response=""0"" message=""ValidFormat"">
             load load = new load();
             load.orderId = "2";
             load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            load.card = new giftCardCardType();
 
             var mock = new Mock<Communications>();
 
@@ -388,7 +388,7 @@ response=""0"" message=""ValidFormat"">
             unload unload = new unload();
             unload.orderId = "2";
             unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            unload.card = new giftCardCardType();
 
             var mock = new Mock<Communications>();
 
@@ -407,7 +407,7 @@ response=""0"" message=""ValidFormat"">
             balanceInquiry balanceInquiry = new balanceInquiry();
             balanceInquiry.orderId = "2";
             balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            balanceInquiry.card = new giftCardCardType();
 
             var mock = new Mock<Communications>();
 

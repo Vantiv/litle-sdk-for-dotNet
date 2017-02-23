@@ -40,12 +40,26 @@ namespace Litle.Sdk.Test.Functional
             activate.orderId = "12344";
             activate.amount = 1500;
             activate.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
+            giftCardCardType card = new giftCardCardType();
             card.type = methodOfPaymentTypeEnum.GC;
             card.number = "414100000000000000";
             card.cardValidationNum = "123";
             card.expDate = "1215";
             activate.card = card;
+
+            activateResponse response = litle.Activate(activate);
+            Assert.AreEqual("000", response.response);
+        }
+
+        [Test]
+        public void VirtualGiftCardActivate()
+        {
+            activate activate = new activate();
+            activate.id = "1";
+            activate.reportGroup = "Planets";
+            activate.orderId = "12344";
+            activate.amount = 1500;
+            activate.orderSource = orderSourceType.ecommerce;
             virtualGiftCardType virtualGiftCard = new virtualGiftCardType();
             virtualGiftCard.accountNumberLength = 123;
             virtualGiftCard.giftCardBin = "123";
