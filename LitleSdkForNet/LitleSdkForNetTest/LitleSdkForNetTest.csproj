@@ -107,6 +107,10 @@
     <Compile Include="Certification\TestCert4Echeck.cs" />
     <Compile Include="Certification\TestCert5Token.cs" />
     <Compile Include="Certification\TestCert1Base.cs" />
+    <Compile Include="Functional\TestBalanceInquiry.cs" />
+    <Compile Include="Functional\TestUnload.cs" />
+    <Compile Include="Functional\TestLoad.cs" />
+    <Compile Include="Functional\TestDeactivate.cs" />
     <Compile Include="Functional\TestActivate.cs" />
     <Compile Include="Functional\TestBatchRequest.cs" />
     <Compile Include="Functional\TestGiftCardParentReversal.cs" />

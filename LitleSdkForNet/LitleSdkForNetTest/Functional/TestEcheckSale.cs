@@ -60,6 +60,73 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
+        public void EcheckSaleWithLitleTxnId()
+        {
+            echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
+            echeckSaleObj.reportGroup = "Planets";
+            echeckSaleObj.litleTxnId = 1234;
+            echeckSaleObj.amount = 123456;
+
+            customBilling customBillingObj = new customBilling();
+            customBillingObj.phone = "123456789";
+            customBillingObj.descriptor = "good";
+
+            echeckSaleObj.customBilling = customBillingObj;
+            echeckSaleObj.customIdentifier = "ident";
+            echeckSaleObj.orderId = "12345";
+
+            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+        }
+
+        [Test]
+        public void EcheckSaleWithOrderId()
+        {
+            echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
+            echeckSaleObj.reportGroup = "Planets";
+            echeckSaleObj.orderId = "1";
+            echeckSaleObj.verify = true;
+            echeckSaleObj.amount = 1234;
+            echeckSaleObj.secondaryAmount = 123456;
+            echeckSaleObj.orderSource = orderSourceType.ecommerce;
+
+            contact contactObj = new contact();
+            contactObj.name = "Bob";
+            contactObj.city = "lowell";
+            contactObj.state = "MA";
+            contactObj.email = "litle.com";
+
+            echeckType echeckTypeObj = new echeckType();
+            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
+            echeckTypeObj.accNum = "12345657890";
+            echeckTypeObj.routingNum = "123456789";
+            echeckTypeObj.checkNum = "123455";
+
+            customBilling customBillingObj = new customBilling();
+            customBillingObj.phone = "123456789";
+            customBillingObj.descriptor = "good";
+
+            merchantDataType merchantDataObj = new merchantDataType();
+            merchantDataObj.affiliate = "Affiliate";
+            merchantDataObj.campaign = "campaign";
+            merchantDataObj.merchantGroupingId = "Merchant Group ID";
+
+            echeckSaleObj.customIdentifier = "ident";
+            echeckSaleObj.orderId = "12345";
+
+            echeckSaleObj.billToAddress = contactObj;
+            echeckSaleObj.shipToAddress = contactObj;
+            echeckSaleObj.customBilling = customBillingObj;
+            echeckSaleObj.echeck = echeckTypeObj;
+            echeckSaleObj.merchantData = merchantDataObj;
+
+            echeckSalesResponse response = litle.EcheckSale(echeckSaleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", response.message);
+        }
+
+        [Test]
         public void NoAmount()
         {
             echeckSale echeckSaleObj = new echeckSale();

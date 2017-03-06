@@ -30,8 +30,7 @@ namespace Litle.Sdk.Test.Functional
                 id = "id",
                 fundingSubmerchantId = "123456789",
                 fundsTransferId = "123467",
-                amount = 107L,
-                customIdentifier = "abc123"
+                amount = 107L
             };
             litleBatchRequest.addPayFacCredit(payFacCredit);
 
@@ -40,8 +39,7 @@ namespace Litle.Sdk.Test.Functional
                 id = "id",
                 fundingSubmerchantId = "123456789",
                 fundsTransferId = "123467",
-                amount = 107L,
-                customIdentifier = "abc123"
+                amount = 107L
             };
             litleBatchRequest.addPayFacDebit(payFacDebit);
 
@@ -88,8 +86,7 @@ namespace Litle.Sdk.Test.Functional
                 id = "id",
                 fundingSubmerchantId = "123456789",
                 fundsTransferId = "123467",
-                amount = 107L,
-                customIdentifier = "abc123"
+                amount = 107L
             };
             litleBatchRequest.addReserveCredit(reserveCredit);
 
@@ -98,8 +95,7 @@ namespace Litle.Sdk.Test.Functional
                 id = "id",
                 fundingSubmerchantId = "123456789",
                 fundsTransferId = "123467",
-                amount = 107L,
-                customIdentifier = "abc123"
+                amount = 107L
             };
             litleBatchRequest.addReserveDebit(reserveDebit);
 
@@ -117,8 +113,7 @@ namespace Litle.Sdk.Test.Functional
                     routingNum = "011075150",
                     checkNum = "123456789",
                     ccdPaymentInformation = "description"
-                },
-                customIdentifier = "abc123"
+                }
             };
             litleBatchRequest.addVendorCredit(vendorCredit);
 
@@ -136,8 +131,7 @@ namespace Litle.Sdk.Test.Functional
                     routingNum = "011075150",
                     checkNum = "123456789",
                     ccdPaymentInformation = "description"
-                },
-                customIdentifier = "abc123"
+                }
             };
             litleBatchRequest.addVendorDebit(vendorDebit);
 
@@ -146,8 +140,7 @@ namespace Litle.Sdk.Test.Functional
                 id = "id",
                 fundingSubmerchantId = "123456789",
                 fundsTransferId = "123467",
-                amount = 107L,
-                customIdentifier = "abc123"
+                amount = 107L
             };
             litleBatchRequest.addPhysicalCheckCredit(physicalCheckCredit);
 
@@ -156,8 +149,7 @@ namespace Litle.Sdk.Test.Functional
                 id = "id",
                 fundingSubmerchantId = "123456789",
                 fundsTransferId = "123467",
-                amount = 107L,
-                customIdentifier = "abc123"
+                amount = 107L
             };
             litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
 

@@ -10,11 +10,25 @@ namespace Litle.Sdk.Test.Functional
     class TestEcheckCredit
     {
         private LitleOnline litle;
+        private Dictionary<string, string> config;
 
         [TestFixtureSetUp]
-        public void beforeClass()
+        public void SetUpLitle()
         {
-            litle = new LitleOnline();
+            config = new Dictionary<string, string>();
+            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("reportGroup", "Default Report Group");
+            config.Add("username", "DOTNET");
+            config.Add("version", "8.13");
+            config.Add("timeout", "65");
+            config.Add("merchantId", "101");
+            config.Add("password", "TESTCASE");
+            config.Add("printxml", "true");
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
+            config.Add("logFile", Properties.Settings.Default.logFile);
+            config.Add("neuterAccountNums", "true");
+            litle = new LitleOnline(config);
         }
 
         [Test]
@@ -68,6 +82,7 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.state = "MA";
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
+            echeckcredit.customIdentifier = "CustomIdent";
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
             Assert.AreEqual("Approved", response.message);
         }
@@ -159,6 +174,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.amount = 12L;
             echeckcredit.secondaryAmount = 50;
             echeckcredit.litleTxnId = 12345L;
+            echeckcredit.customIdentifier = "CustomIdent";
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
             Assert.AreEqual("Approved", response.message);
         }

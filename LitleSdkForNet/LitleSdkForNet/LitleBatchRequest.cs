@@ -1864,8 +1864,6 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
-        public string customIdentifier { get; set; }
-
         public override string Serialize()
         {
             string xml = "\r\n<payFacCredit ";
@@ -1881,8 +1879,6 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-            if (customIdentifier != null)
-                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</payFacCredit>";
 
@@ -1899,8 +1895,6 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
-        public string customIdentifier { get; set; }
-
         public override string Serialize()
         {
             string xml = "\r\n<reserveCredit ";
@@ -1916,8 +1910,6 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-            if (customIdentifier != null)
-                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</reserveCredit>";
 
@@ -1937,8 +1929,6 @@ namespace Litle.Sdk
         public long? amount { get; set; }
 
         public echeckType accountInfo { get; set; }
-
-        public string customIdentifier { get; set; }
 
         public override string Serialize()
         {
@@ -1963,8 +1953,6 @@ namespace Litle.Sdk
                 xml += accountInfo.Serialize();
                 xml += "</accountInfo>";
             }
-            if (customIdentifier != null)
-                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</vendorCredit>";
 
@@ -1981,8 +1969,6 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
-        public string customIdentifier { get; set; }
-
         public override string Serialize()
         {
             string xml = "\r\n<physicalCheckCredit ";
@@ -1998,8 +1984,6 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-            if (customIdentifier != null)
-                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</physicalCheckCredit>";
 
@@ -2063,8 +2047,6 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
-        public string customIdentifier { get; set; }
-
         public override string Serialize()
         {
             string xml = "\r\n<payFacDebit ";
@@ -2080,8 +2062,6 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-            if (customIdentifier != null)
-                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</payFacDebit>";
 
@@ -2098,8 +2078,6 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
-        public string customIdentifier { get; set; }
-
         public override string Serialize()
         {
             string xml = "\r\n<reserveDebit ";
@@ -2115,8 +2093,6 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-            if (customIdentifier != null)
-                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</reserveDebit>";
 
@@ -2136,8 +2112,6 @@ namespace Litle.Sdk
         public long? amount { get; set; }
 
         public echeckType accountInfo { get; set; }
-
-        public string customIdentifier { get; set; }
 
         public override string Serialize()
         {
@@ -2162,8 +2136,6 @@ namespace Litle.Sdk
                 xml += accountInfo.Serialize();
                 xml += "</accountInfo>";
             }
-            if (customIdentifier != null)
-                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</vendorDebit>";
 
@@ -2180,8 +2152,6 @@ namespace Litle.Sdk
 
         public long? amount { get; set; }
 
-        public string customIdentifier { get; set; }
-
         public override string Serialize()
         {
             string xml = "\r\n<physicalCheckDebit ";
@@ -2197,8 +2167,6 @@ namespace Litle.Sdk
                 xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
             if (amount != null)
                 xml += "\r\n<amount>" + amount + "</amount>";
-            if (customIdentifier != null)
-                xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
 
             xml += "\r\n</physicalCheckDebit>";
 

@@ -350,5 +350,74 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             litle.Sale(sale);
         }
+
+        [Test]
+        public void SimpleSaleWithIdealResponse()
+        {
+            sale sale = new sale();
+            sale.id = "1";
+            sale.amount = 106;
+            sale.litleTxnId = 123456;
+            sale.orderId = "12344";
+            sale.orderSource = orderSourceType.ecommerce;
+            idealType idealTypeObj = new idealType();
+            idealTypeObj.preferredLanguage = countryTypeEnum.US;
+            sale.ideal = idealTypeObj;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<ideal>\r\n<preferredLanguage>US</preferredLanguage>\r\n</ideal>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Sale(sale);
+        }
+
+        [Test]
+        public void SimpleSaleWithGiropayResponse()
+        {
+            sale sale = new sale();
+            sale.id = "1";
+            sale.amount = 106;
+            sale.litleTxnId = 123456;
+            sale.orderId = "12344";
+            sale.orderSource = orderSourceType.ecommerce;
+            giropayType giropayTypeObj = new giropayType();
+            giropayTypeObj.preferredLanguage = countryTypeEnum.US;
+            sale.giropay = giropayTypeObj;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<giropay>\r\n<preferredLanguage>US</preferredLanguage>\r\n</giropay>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Sale(sale);
+        }
+
+        [Test]
+        public void SimpleSaleWithSofortResponse()
+        {
+            sale sale = new sale();
+            sale.id = "1";
+            sale.amount = 106;
+            sale.litleTxnId = 123456;
+            sale.orderId = "12344";
+            sale.orderSource = orderSourceType.ecommerce;
+            sofortType sofortTypeObj = new sofortType();
+            sofortTypeObj.preferredLanguage = countryTypeEnum.US;
+            sale.sofort = sofortTypeObj;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<sofort>\r\n<preferredLanguage>US</preferredLanguage>\r\n</sofort>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Sale(sale);
+        }
     }
 }

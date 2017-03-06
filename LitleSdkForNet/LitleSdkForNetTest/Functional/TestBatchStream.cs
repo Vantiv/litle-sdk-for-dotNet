@@ -1293,7 +1293,6 @@ namespace Litle.Sdk.Test.Functional
             payFacCredit.fundsTransferId = "123467";
             payFacCredit.amount = 107L;
             payFacCredit.id = "id";
-            payFacCredit.customIdentifier = "123";
             litleBatchRequest.addPayFacCredit(payFacCredit);
 
             reserveCredit reserveCredit = new reserveCredit();
@@ -1301,7 +1300,6 @@ namespace Litle.Sdk.Test.Functional
             reserveCredit.fundsTransferId = "123467";
             reserveCredit.amount = 107L;
             reserveCredit.id = "id";
-            reserveCredit.customIdentifier = "123";
             litleBatchRequest.addReserveCredit(reserveCredit);
 
             vendorCredit vendorCredit = new vendorCredit();
@@ -1311,7 +1309,6 @@ namespace Litle.Sdk.Test.Functional
             vendorCredit.amount = 106L;
             vendorCredit.accountInfo = echeck;
             vendorCredit.id = "id";
-            vendorCredit.customIdentifier = "123";
             litleBatchRequest.addVendorCredit(vendorCredit);
 
             physicalCheckCredit physicalCheckCredit = new physicalCheckCredit();
@@ -1319,7 +1316,6 @@ namespace Litle.Sdk.Test.Functional
             physicalCheckCredit.fundsTransferId = "123467";
             physicalCheckCredit.amount = 107L;
             physicalCheckCredit.id = "id";
-            physicalCheckCredit.customIdentifier = "123";
             litleBatchRequest.addPhysicalCheckCredit(physicalCheckCredit);
 
             submerchantDebit submerchantDebit = new submerchantDebit();
@@ -1337,7 +1333,6 @@ namespace Litle.Sdk.Test.Functional
             payFacDebit.fundsTransferId = "123467";
             payFacDebit.amount = 107L;
             payFacDebit.id = "id";
-            payFacDebit.customIdentifier = "123";
             litleBatchRequest.addPayFacDebit(payFacDebit);
 
             reserveDebit reserveDebit = new reserveDebit();
@@ -1345,7 +1340,6 @@ namespace Litle.Sdk.Test.Functional
             reserveDebit.fundsTransferId = "123467";
             reserveDebit.amount = 107L;
             reserveDebit.id = "id";
-            reserveDebit.customIdentifier = "123";
             litleBatchRequest.addReserveDebit(reserveDebit);
 
             vendorDebit vendorDebit = new vendorDebit();
@@ -1355,7 +1349,6 @@ namespace Litle.Sdk.Test.Functional
             vendorDebit.amount = 106L;
             vendorDebit.accountInfo = echeck;
             vendorDebit.id = "id";
-            vendorCredit.customIdentifier = "123";
             litleBatchRequest.addVendorDebit(vendorDebit);
 
             physicalCheckDebit physicalCheckDebit = new physicalCheckDebit();
@@ -1363,7 +1356,6 @@ namespace Litle.Sdk.Test.Functional
             physicalCheckDebit.fundsTransferId = "123467";
             physicalCheckDebit.amount = 107L;
             physicalCheckDebit.id = "id";
-            physicalCheckDebit.customIdentifier = "123";
             litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
 
             litleOverride.addBatch(litleBatchRequest);

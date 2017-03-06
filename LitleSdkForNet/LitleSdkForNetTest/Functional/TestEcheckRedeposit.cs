@@ -52,6 +52,7 @@ namespace Litle.Sdk.Test.Functional
             echeck.accNum = "12345657890";
             echeck.routingNum = "123456789";
             echeck.checkNum = "123455";
+            echeckredeposit.customIdentifier = "CustomIdent";
 
             echeckredeposit.echeck = echeck;
             echeckRedepositResponse response = litle.EcheckRedeposit(echeckredeposit);

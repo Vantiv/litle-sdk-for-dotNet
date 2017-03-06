@@ -160,6 +160,7 @@ namespace Litle.Sdk.Test.Functional
             directDebitObj.mandateProvider = mandateProviderType.Merchant;
             directDebitObj.sequenceType = sequenceTypeType.FirstRecurring;
             directDebitObj.iban = "123456789123456789";
+            directDebitObj.preferredLanguage = countryTypeEnum.US;
             saleObj.sepaDirectDebit = directDebitObj;
             
             saleResponse responseObj = litle.Sale(saleObj);
@@ -183,6 +184,57 @@ namespace Litle.Sdk.Test.Functional
             saleObj.processingType = processingTypeEnum.initialRecurring;
             saleObj.originalNetworkTransactionId = "123456789123456789123456789";
             saleObj.originalTransactionAmount = 12;
+
+            saleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+        [Test]
+        public void SimpleSaleWithIdealResponse()
+        {
+            sale saleObj = new sale();
+            saleObj.id = "1";
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            idealType idealTypeObj = new idealType();
+            idealTypeObj.preferredLanguage = countryTypeEnum.US;
+            saleObj.ideal = idealTypeObj;
+
+            saleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+        [Test]
+        public void SimpleSaleWithGiropayResponse()
+        {
+            sale saleObj = new sale();
+            saleObj.id = "1";
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            giropayType giropayTypeObj = new giropayType();
+            giropayTypeObj.preferredLanguage = countryTypeEnum.US;
+            saleObj.giropay = giropayTypeObj;
+
+            saleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+        [Test]
+        public void SimpleSaleWithSofortResponse()
+        {
+            sale saleObj = new sale();
+            saleObj.id = "1";
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            sofortType sofortTypeObj = new sofortType();
+            sofortTypeObj.preferredLanguage = countryTypeEnum.US;
+            saleObj.sofort = sofortTypeObj;
 
             saleResponse responseObj = litle.Sale(saleObj);
             StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);

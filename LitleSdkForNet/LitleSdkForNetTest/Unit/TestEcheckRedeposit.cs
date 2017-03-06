@@ -30,6 +30,7 @@ namespace Litle.Sdk.Test.Unit
             echeckRedeposit.merchantData.campaign = "camp";
             echeckRedeposit.merchantData.affiliate = "affil";
             echeckRedeposit.merchantData.merchantGroupingId = "mgi";
+            echeckRedeposit.customIdentifier = "customIdent";
            
             var mock = new Mock<Communications>();
 

@@ -684,6 +684,7 @@ namespace Litle.Sdk
             set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
         }
         public customBilling customBilling;
+        public string customIdentifier;
         public string orderId;
         public orderSourceType orderSource;
         public contact billToAddress;
@@ -717,6 +718,7 @@ namespace Litle.Sdk
                 if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
                 if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
                 if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
+                if (customIdentifier != null) xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
             }
             else
             {
@@ -729,6 +731,7 @@ namespace Litle.Sdk
                 else if (echeckToken != null) xml += "\r\n<echeckToken>" + echeckToken.Serialize() + "</echeckToken>";
                 if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
                 if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
+                if (customIdentifier != null) xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
             }
             xml += "\r\n</echeckCredit>";
             return xml;
@@ -793,6 +796,7 @@ namespace Litle.Sdk
                 // let sandbox do the validation for secondaryAmount
                 if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
                 if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
+                if (customIdentifier != null) xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
             }
             else
             {
@@ -807,6 +811,7 @@ namespace Litle.Sdk
                 else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
                 if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
                 if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
+                if (customIdentifier != null) xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
             }
             xml += "\r\n</echeckSale>";
             return xml;
@@ -816,13 +821,6 @@ namespace Litle.Sdk
 
     public partial class echeckVerification : transactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
-        private bool litleTxnIdSet;
-        public long litleTxnId
-        {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
-        }
         public string orderId;
         private long amountField;
         private bool amountSet;
@@ -848,7 +846,6 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
             xml += ">";
 
-            if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
             xml += "\r\n<orderId>" + orderId + "</orderId>";
             if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
             if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
@@ -1391,6 +1388,7 @@ namespace Litle.Sdk
         public echeckType echeck;
         public echeckTokenType token;
         public merchantDataType merchantData;
+        public string customIdentifier;
 
         public override string Serialize()
         {
@@ -1405,6 +1403,7 @@ namespace Litle.Sdk
             if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
             else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
             if (merchantData != null) { xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>"; }
+            if (customIdentifier != null) xml += "\r\n<customIdentifier>" + customIdentifier + "</customIdentifier>";
             xml += "\r\n</echeckRedeposit>";
             return xml;
         }
@@ -1739,6 +1738,9 @@ namespace Litle.Sdk
         public cardPaypageType paypage;
         public applepayType applepay;
         public sepaDirectDebitType sepaDirectDebit;
+        public idealType ideal;
+        public giropayType giropay;
+        public sofortType sofort;
         public billMeLaterRequest billMeLaterRequest;
         public fraudCheckType cardholderAuthentication;
         public customBilling customBilling;
@@ -1901,6 +1903,18 @@ namespace Litle.Sdk
             else if (sepaDirectDebit != null)
             {
                 xml += "\r\n<sepaDirectDebit>" + sepaDirectDebit.Serialize() + "\r\n</sepaDirectDebit>";
+            }
+            else if (ideal != null)
+            {
+                xml += "\r\n<ideal>" + ideal.Serialize() + "\r\n</ideal>";
+            }
+            else if (giropay != null)
+            {
+                xml += "\r\n<giropay>" + giropay.Serialize() + "\r\n</giropay>";
+            }
+            else if (sofort != null)
+            {
+                xml += "\r\n<sofort>" + sofort.Serialize() + "\r\n</sofort>";
             }
             if (billMeLaterRequest != null)
             {
@@ -4386,35 +4400,6 @@ public partial class sepaDirectDebitType
         public string origId;
         public actionTypeEnum origActionType;
         public long origLitleTxnId;
-        public string origOrderIdField;
-        private bool origOrderIdSet;
-        public string origAccountNumberField;
-        private bool origAccountNumberSet;
-
-        public string origOrderId
-        {
-            get
-            {
-                return this.origOrderIdField;
-            }
-            set
-            {
-                this.origOrderIdField = value; this.origOrderIdSet = true;
-            }
-        }
-
-        public string origAccountNumber
-        {
-            get
-            {
-                return this.origAccountNumberField;
-            }
-            set
-            {
-                this.origAccountNumberField = value; this.origAccountNumberSet = true;
-            }
-        }
-
 
         public override string Serialize()
         {
@@ -4426,14 +4411,9 @@ public partial class sepaDirectDebitType
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-
-
             xml += "\r\n<origId>" + SecurityElement.Escape(origId) + "</origId>";
             xml += "\r\n<origActionType>" + origActionType + "</origActionType>";
             if (origLitleTxnId != 0) xml += "\r\n<origLitleTxnId>" + origLitleTxnId + "</origLitleTxnId>";
-            if (origOrderIdSet) xml += "\r\n<origOrderId>" + SecurityElement.Escape(origOrderIdField) + "</origOrderId>";
-            if (origAccountNumberSet) xml += "\r\n<origAccountNumber>" + SecurityElement.Escape(origAccountNumberField) + "</origAccountNumber>";
-
             xml += "\r\n</queryTransaction>";
             return xml;
         }
@@ -4461,4 +4441,89 @@ public partial class sepaDirectDebitType
         X
        
     }
+
+    public class idealType
+    {
+        public countryTypeEnum preferredLanguageField;
+        public bool preferredLanguageSet;
+        public countryTypeEnum preferredLanguage
+        {
+            get
+            {
+                return this.preferredLanguageField;
+            }
+            set
+            {
+                this.preferredLanguageField = value;
+                this.preferredLanguageSet = true;
+            }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (preferredLanguageSet)
+            {
+                xml += "\r\n<preferredLanguage>" + preferredLanguage + "</preferredLanguage>";
+            }
+            return xml;
+        }
+    }
+
+    public class giropayType
+    {
+        public countryTypeEnum preferredLanguageField;
+        public bool preferredLanguageSet;
+        public countryTypeEnum preferredLanguage
+        {
+            get
+            {
+                return this.preferredLanguageField;
+            }
+            set
+            {
+                this.preferredLanguageField = value;
+                this.preferredLanguageSet = true;
+            }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (preferredLanguageSet)
+            {
+                xml += "\r\n<preferredLanguage>" + preferredLanguage + "</preferredLanguage>";
+            }
+            return xml;
+        }
+    }
+
+    public class sofortType
+    {
+        public countryTypeEnum preferredLanguageField;
+        public bool preferredLanguageSet;
+        public countryTypeEnum preferredLanguage
+        {
+            get
+            {
+                return this.preferredLanguageField;
+            }
+            set
+            {
+                this.preferredLanguageField = value;
+                this.preferredLanguageSet = true;
+            }
+        }
+
+        public string Serialize()
+        {
+            string xml = "";
+            if (preferredLanguageSet)
+            {
+                xml += "\r\n<preferredLanguage>" + preferredLanguage + "</preferredLanguage>";
+            }
+            return xml;
+        }
+    }
+
 }
