@@ -85,7 +85,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sdk10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("dotnet")]
         public string sftpUsername {
             get {
                 return ((string)(this["sftpUsername"]));
@@ -97,7 +97,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4Nk7Ft5O")]
+        [global::System.Configuration.DefaultSettingValueAttribute("dotnet")]
         public string sftpPassword {
             get {
                 return ((string)(this["sftpPassword"]));
@@ -217,7 +217,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SDKTEAM")]
+        [global::System.Configuration.DefaultSettingValueAttribute("dotnet")]
         public string username {
             get {
                 return ((string)(this["username"]));
@@ -229,7 +229,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("V3r5K6v7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("dotnet")]
         public string password {
             get {
                 return ((string)(this["password"]));
