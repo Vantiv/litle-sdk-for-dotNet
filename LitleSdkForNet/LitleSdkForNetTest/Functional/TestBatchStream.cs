@@ -4,6 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
 using System.IO;
+using System.Threading;
 
 namespace Litle.Sdk.Test.Functional
 {
@@ -31,7 +32,7 @@ namespace Litle.Sdk.Test.Functional
             invalidConfig["sftpUsername"] = Properties.Settings.Default.sftpUrl;
             invalidConfig["sftpPassword"] = Properties.Settings.Default.sftpPassword;
             invalidConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            
+
 
             invalidSftpConfig = new Dictionary<String, String>();
             invalidSftpConfig["url"] = Properties.Settings.Default.url;
@@ -47,7 +48,7 @@ namespace Litle.Sdk.Test.Functional
             invalidSftpConfig["sftpUsername"] = "badSftpUsername";
             invalidSftpConfig["sftpPassword"] = "badSftpPassword";
             invalidSftpConfig["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            
+
         }
 
         [SetUp]
@@ -70,7 +71,7 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
-            authorization.card = card;       
+            authorization.card = card;
 
             litleBatchRequest.addAuthorization(authorization);
 
@@ -83,7 +84,7 @@ namespace Litle.Sdk.Test.Functional
             card2.type = methodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
-            authorization2.card = card2; 
+            authorization2.card = card2;
 
             litleBatchRequest.addAuthorization(authorization2);
 
@@ -565,7 +566,7 @@ namespace Litle.Sdk.Test.Functional
             accountUpdateFileRequestData.postDay = DateTime.Now;
             rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
 
-            litleRfr.addRFRRequest(rfrRequest);            
+            litleRfr.addRFRRequest(rfrRequest);
 
             try
             {
@@ -827,7 +828,7 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
-            authorization.card = card;     
+            authorization.card = card;
 
             litleBatchRequest.addAuthorization(authorization);
 
@@ -840,7 +841,7 @@ namespace Litle.Sdk.Test.Functional
             card2.type = methodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
-            authorization2.card = card2; 
+            authorization2.card = card2;
 
             litleBatchRequest.addAuthorization(authorization2);
 
@@ -1165,9 +1166,8 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
-        public void PFIFInstructionTxnTest()
+        public async void PFIFInstructionTxnTestAsync()
         {
-            
             Dictionary<string, string> configOverride = new Dictionary<string, string>();
             configOverride["url"] = Properties.Settings.Default.url;
             configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
@@ -1189,6 +1189,51 @@ namespace Litle.Sdk.Test.Functional
 
             litleRequest litleOverride = new litleRequest(configOverride);
 
+            batchRequest litleBatchRequest = CompilePFIFInstructions(configOverride);
+
+            litleOverride.addBatch(litleBatchRequest);
+
+            CancellationTokenSource source = new CancellationTokenSource();
+            litleResponse litleResponse = await litleOverride.sendToLitleWithStreamAsync(source.Token);
+
+            AssetPFIFInstructionTxnResponse(litleResponse);
+        }
+
+        [Test]
+        public void PFIFInstructionTxnTest()
+        {
+            Dictionary<string, string> configOverride = new Dictionary<string, string>();
+            configOverride["url"] = Properties.Settings.Default.url;
+            configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
+            configOverride["username"] = "BATCHSDKA";
+            configOverride["printxml"] = Properties.Settings.Default.printxml;
+            configOverride["timeout"] = Properties.Settings.Default.timeout;
+            configOverride["proxyHost"] = Properties.Settings.Default.proxyHost;
+            configOverride["merchantId"] = "0180";
+            configOverride["password"] = "certpass";
+            configOverride["proxyPort"] = Properties.Settings.Default.proxyPort;
+            configOverride["sftpUrl"] = Properties.Settings.Default.sftpUrl;
+            configOverride["sftpUsername"] = Properties.Settings.Default.sftpUsername;
+            configOverride["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+            configOverride["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+            configOverride["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl;
+            configOverride["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
+            configOverride["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+            configOverride["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+
+            litleRequest litleOverride = new litleRequest(configOverride);
+
+            batchRequest litleBatchRequest = CompilePFIFInstructions(configOverride);
+
+            litleOverride.addBatch(litleBatchRequest);
+
+            litleResponse litleResponse = litleOverride.sendToLitleWithStream();
+
+            AssetPFIFInstructionTxnResponse(litleResponse);
+        }
+
+        private batchRequest CompilePFIFInstructions(Dictionary<string,string> configOverride)
+        {
             batchRequest litleBatchRequest = new batchRequest(configOverride);
 
             echeckType echeck = new echeckType();
@@ -1265,10 +1310,11 @@ namespace Litle.Sdk.Test.Functional
             physicalCheckDebit.amount = 107L;
             litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
 
-            litleOverride.addBatch(litleBatchRequest);
+            return litleBatchRequest;
+        }
 
-            litleResponse litleResponse = litleOverride.sendToLitleWithStream();
-
+        private void AssetPFIFInstructionTxnResponse(litleResponse litleResponse)
+        {
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
             Assert.AreEqual("Valid Format", litleResponse.message);
