@@ -508,7 +508,7 @@ namespace Litle.Sdk.Test.Unit
 
             var mock = new Mock<Communications>();
             mock.Setup(communications => communications.HttpPost(It.IsAny<string>(), It.IsAny<Dictionary<string, string>>()))
-                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><orderId>123</orderId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='9.12' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><orderId>123</orderId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
 
             var mockedCommunication = mock.Object;
             _litle.setCommunication(mockedCommunication);
@@ -521,7 +521,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestAdvancedFraudResponse()
         {
-            const string xmlResponse = @"<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
+            const string xmlResponse = @"<litleOnlineResponse version='9.12' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
 <authorizationResponse>
 <litleTxnId>123</litleTxnId>
 <fraudResult>
@@ -572,7 +572,7 @@ namespace Litle.Sdk.Test.Unit
 
             var mock = new Mock<Communications>();
             mock.Setup(communications => communications.HttpPost(It.IsAny<string>(), It.IsAny<Dictionary<string, string>>()))
-                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='9.12' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             var mockedCommunication = mock.Object;
             _litle.setCommunication(mockedCommunication);
@@ -585,7 +585,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecycleEngineActive()
         {
-            const string xmlResponse = @"<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
+            const string xmlResponse = @"<litleOnlineResponse version='9.12' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
 <authorizationResponse>
 <litleTxnId>123</litleTxnId>
 <fraudResult>
@@ -630,7 +630,7 @@ namespace Litle.Sdk.Test.Unit
             var mock = new Mock<Communications>();
 
             mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>androidpay</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse><message>Approved</message><androidpayResponse><cryptogram>aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ0K</cryptogram><expMonth>01</expMonth><expYear>2050</expYear></androidpayResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='9.12' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse><message>Approved</message><androidpayResponse><cryptogram>aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ0K</cryptogram><expMonth>01</expMonth><expYear>2050</expYear></androidpayResponse></litleOnlineResponse>");
 
             var mockedCommunication = mock.Object;
             _litle.setCommunication(mockedCommunication);
@@ -652,7 +652,7 @@ namespace Litle.Sdk.Test.Unit
             var mock = new Mock<Communications>();
 
             mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<amount>584</amount>\r\n<orderSource>ecommerce</orderSource>\r\n<originalNetworkTransactionId>1234567890123456978901234567890</originalNetworkTransactionId>\r\n<originalTransactionAmount>6478</originalTransactionAmount>.*", RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId>><message>Approved</message></authorizationResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='9.12' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId>><message>Approved</message></authorizationResponse></litleOnlineResponse>");
 
             var mockedCommunication = mock.Object;
             _litle.setCommunication(mockedCommunication);
@@ -673,7 +673,7 @@ namespace Litle.Sdk.Test.Unit
             var mock = new Mock<Communications>();
 
             mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<amount>584</amount>\r\n<orderSource>ecommerce</orderSource>\r\n<processingType>initialInstallment</processingType>.*", RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns("<litleOnlineResponse version='9.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId>><message>Approved</message></authorizationResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='9.12' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId>><message>Approved</message></authorizationResponse></litleOnlineResponse>");
 
             var mockedCommunication = mock.Object;
             _litle.setCommunication(mockedCommunication);

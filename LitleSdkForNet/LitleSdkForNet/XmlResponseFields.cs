@@ -3419,6 +3419,10 @@ namespace Litle.Sdk
 
         private string networkTransactionIdField;
 
+        private sepaDirectDebitResponse sepaDirectDebitResponseField;
+
+        private idealResponse idealResponseField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -3739,6 +3743,114 @@ namespace Litle.Sdk
         {
             get { return networkTransactionIdField; }
             set { networkTransactionIdField = value; }
+        }
+
+        /// <remarks/>
+        public sepaDirectDebitResponse sepaDirectDebitResponse
+        {
+            get
+            {
+                return this.sepaDirectDebitResponseField;
+            }
+            set
+            {
+                this.sepaDirectDebitResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public idealResponse idealResponse
+        {
+            get
+            {
+                return this.idealResponseField;
+            }
+            set
+            {
+                this.idealResponseField = value;
+            }
+        }
+    }
+
+    public partial class sepaDirectDebitResponse
+    {
+        private string redirectUrlField;
+        private string redirectTokenField;
+        private string mandateReferenceField;
+
+        public string redirectUrl
+        {
+            get
+            {
+                return this.redirectUrlField;
+            }
+            set
+            {
+                this.redirectUrlField = value;
+            }
+        }
+        public string redirectToken
+        {
+            get
+            {
+                return this.redirectTokenField;
+            }
+            set
+            {
+                this.redirectTokenField = value;
+            }
+        }
+        public string mandateReference
+        {
+            get
+            {
+                return this.mandateReferenceField;
+            }
+            set
+            {
+                this.mandateReferenceField = value;
+            }
+        }
+    }
+
+    public partial class idealResponse
+    {
+        private string redirectUrlField;
+        private string redirectTokenField;
+        private string paymentPurposeField;
+
+        public string redirectUrl
+        {
+            get
+            {
+                return this.redirectUrlField;
+            }
+            set
+            {
+                this.redirectUrlField = value;
+            }
+        }
+        public string redirectToken
+        {
+            get
+            {
+                return this.redirectTokenField;
+            }
+            set
+            {
+                this.redirectTokenField = value;
+            }
+        }
+        public string paymentPurpose
+        {
+            get
+            {
+                return this.paymentPurposeField;
+            }
+            set
+            {
+                this.paymentPurposeField = value;
+            }
         }
     }
 
@@ -6584,6 +6696,7 @@ namespace Litle.Sdk
 
         private byte[] cryptogramField;
 
+        private string eciIndicatorField;
         /// <remarks/>
         public string expYear
         {
@@ -6621,6 +6734,19 @@ namespace Litle.Sdk
             set
             {
                 cryptogramField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string eciIndicator
+        {
+            get
+            {
+                return this.eciIndicatorField;
+            }
+            set
+            {
+                this.eciIndicatorField = value;
             }
         }
     }

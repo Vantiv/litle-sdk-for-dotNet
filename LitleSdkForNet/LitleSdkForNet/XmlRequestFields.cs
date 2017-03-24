@@ -46,7 +46,7 @@ namespace Litle.Sdk
         public string Serialize()
         {
             string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" 
-                + merchantId + "\" version=\"9.10\" merchantSdk=\"" 
+                + merchantId + "\" version=\"9.12\" merchantSdk=\"" 
                 + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
@@ -1624,7 +1624,9 @@ namespace Litle.Sdk
         public cardTokenType token;
         public cardPaypageType paypage;
         public applepayType applepay;
-        public billMeLaterRequest billMeLaterRequest;
+		public sepaDirectDebitType sepaDirectDebit;
+		public idealType ideal;
+		public billMeLaterRequest billMeLaterRequest;
         public fraudCheckType cardholderAuthentication;
         public customBilling customBilling;
         private govtTaxTypeEnum taxTypeField;
@@ -1771,6 +1773,14 @@ namespace Litle.Sdk
             else if (applepay != null)
             {
                 xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
+            }
+            else if (sepaDirectDebit != null)
+            {
+                xml += "\r\n<sepaDirectDebit>" + sepaDirectDebit.Serialize() + "\r\n</sepaDirectDebit>";
+            }
+            else if (ideal != null)
+            {
+                xml += "\r\n<ideal>" + ideal.Serialize() + "\r\n</ideal>";
             }
             if (billMeLaterRequest != null)
             {
@@ -3714,7 +3724,83 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class applepayHeaderType
+	public partial class sepaDirectDebitType
+	{
+		public string mandateProvider;
+		private sequenceType sequenceTypeCodeField;
+		private bool sequenceTypeCodeSet;
+		public sequenceType sequenceType
+		{
+			get { return sequenceTypeCodeField; }
+			set { sequenceTypeCodeField = value; sequenceTypeCodeSet = true; }
+		}
+		public string mandateReference;
+		public string mandateUrl;
+        private DateTime mandateSignatureDateField;
+        private bool mandateSignatureDateSet;
+        public DateTime mandateSignatureDate
+        {
+            get
+            {
+                return mandateSignatureDateField;
+            }
+            set
+            {
+                mandateSignatureDateField = value;
+                mandateSignatureDateSet = true;
+            }
+        }
+
+
+        public string iban;
+		private countryTypeEnum preferredLanguageCodeField;
+		private bool preferredLanguageCodeSet;
+		public countryTypeEnum preferredLanguage
+		{
+			get { return preferredLanguageCodeField; }
+			set { preferredLanguageCodeField = value; preferredLanguageCodeSet = true; }
+		}
+		public string Serialize()
+		{
+			string xml = "";
+			if (mandateProvider != null) xml += "\r\n<mandateProvider>" + SecurityElement.Escape(mandateProvider) + "</mandateProvider>";
+			if (sequenceTypeCodeSet) xml += "\r\n<sequenceType>" + sequenceTypeCodeField + "</sequenceType>";
+			if (mandateReference != null) xml += "\r\n<mandateReference>" + SecurityElement.Escape(mandateReference) + "</mandateReference>";
+			if (mandateUrl != null) xml += "\r\n<mandateUrl>" + SecurityElement.Escape(mandateUrl) + "</mandateUrl>";
+			if (mandateSignatureDateSet) xml += "\r\n<mandateSignatureDate>" + XmlUtil.toXsdDate(mandateSignatureDateField) + "</mandateSignatureDate>";
+			if (iban != null) xml += "\r\n<iban>" + SecurityElement.Escape(iban) + "</iban>";
+			if (preferredLanguageCodeSet) xml += "\r\n<preferredLanguage>" + preferredLanguageCodeField + "</preferredLanguage>";
+			return xml;
+		}
+	}
+
+	public enum sequenceType
+	{
+		OneTime,
+		FirstRecurring,
+		SubsequentRecurring,
+		FinalRecurring
+	}
+
+	public partial class idealType
+	{
+		private countryTypeEnum preferredLanguageCodeField;
+		private bool preferredLanguageCodeSet;
+		public countryTypeEnum preferredLanguage
+		{
+			get { return preferredLanguageCodeField; }
+			set { preferredLanguageCodeField = value; preferredLanguageCodeSet = true; }
+		}
+		public string Serialize()
+		{
+			string xml = "";
+			if (preferredLanguageCodeSet) xml += "\r\n<preferredLanguage>" + preferredLanguageCodeField + "</preferredLanguage>";
+			return xml;
+		}
+	}
+
+
+	public partial class applepayHeaderType
     {
         public string applicationData;
         public string ephemeralPublicKey;

@@ -16,7 +16,7 @@ namespace Litle.Sdk.Test.Functional
                 {"url", "https://www.testlitle.com/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
-                {"version", "9.10"},
+                {"version", "9.12"},
                 {"timeout", "5000"},
                 {"merchantId", "101"},
                 {"password", "TESTCASE"},
@@ -261,5 +261,48 @@ namespace Litle.Sdk.Test.Functional
                 Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
+
+		[Test]
+		public void SimpleSaleWithsepaDirectDebit()
+		{
+			var saleObj = new sale
+			{
+				amount = 106,
+				litleTxnId = 123456,
+				orderId = "12344",
+				orderSource = orderSourceType.ecommerce,
+				sepaDirectDebit = new sepaDirectDebitType
+				{
+					iban = "SepaDirectDebit Iban",
+					mandateProvider = "Merchant",
+					sequenceType = sequenceType.OneTime
+				},
+			};
+
+            var responseObj = _litle.Sale(saleObj);
+            Assert.AreEqual("http://redirect.url.vantiv.com", responseObj.sepaDirectDebitResponse.redirectUrl);
+            Assert.AreEqual("jj2d1d372osmmt7tb8epm0a99q", responseObj.sepaDirectDebitResponse.redirectToken);
+        }
+
+        [Test]
+        public void SimpleSaleWithideal()
+        {
+            var saleObj = new sale
+            {
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                ideal = new idealType
+                {
+                    preferredLanguage = countryTypeEnum.AD,
+                },
+            };
+
+            var responseObj = _litle.Sale(saleObj);
+            Assert.AreEqual("http://redirect.url.vantiv.com", responseObj.idealResponse.redirectUrl);
+            Assert.AreEqual("jj2d1d372osmmt7tb8epm0a99q", responseObj.idealResponse.redirectToken);
+        }
+
     }
 }

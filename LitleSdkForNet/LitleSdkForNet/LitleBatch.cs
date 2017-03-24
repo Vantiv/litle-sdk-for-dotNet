@@ -265,7 +265,7 @@ namespace Litle.Sdk
 
         public string generateXmlHeader()
         {
-            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.10\"" +
+            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.12\"" +
              " xmlns=\"http://www.litle.com/schema\" " +
              "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
 
