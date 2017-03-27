@@ -36,13 +36,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestBatchRequestContainsMerchantSdkAttribute()
         {
-            var mockConfig = new Dictionary<string, string>
-            {
-                ["merchantId"] = "01234",
-                ["requestDirectory"] = "C:\\MockRequests",
-                ["responseDirectory"] = "C:\\MockResponses"
-            };
+            var mockConfig = new Dictionary<string, string>();
 
+            mockConfig["merchantId"] = "01234";
+            mockConfig["requestDirectory"] = "C:\\MockRequests";
+            mockConfig["responseDirectory"] = "C:\\MockResponses";
 
             _batchRequest = new batchRequest(mockConfig);
 
@@ -58,27 +56,25 @@ merchantId=""01234"">
         [Test]
         public void TestInitialization()
         {
-            var mockConfig = new Dictionary<string, string>
-            {
-                ["url"] = "https://www.mockurl.com",
-                ["reportGroup"] = "Mock Report Group",
-                ["username"] = "mockUser",
-                ["printxml"] = "false",
-                ["timeout"] = "35",
-                ["proxyHost"] = "www.mockproxy.com",
-                ["merchantId"] = "MOCKID",
-                ["password"] = "mockPassword",
-                ["proxyPort"] = "3000",
-                ["sftpUrl"] = "www.mockftp.com",
-                ["sftpUsername"] = "mockFtpUser",
-                ["sftpPassword"] = "mockFtpPassword",
-                ["knownHostsFile"] = "C:\\MockKnownHostsFile",
-                ["onlineBatchUrl"] = "www.mockbatch.com",
-                ["onlineBatchPort"] = "4000",
-                ["requestDirectory"] = "C:\\MockRequests",
-                ["responseDirectory"] = "C:\\MockResponses"
-            };
+            var mockConfig = new Dictionary<string, string>();
 
+            mockConfig["url"] = "https://www.mockurl.com";
+            mockConfig["reportGroup"] = "Mock Report Group";
+            mockConfig["username"] = "mockUser";
+            mockConfig["printxml"] = "false";
+            mockConfig["timeout"] = "35";
+            mockConfig["proxyHost"] = "www.mockproxy.com";
+            mockConfig["merchantId"] = "MOCKID";
+            mockConfig["password"] = "mockPassword";
+            mockConfig["proxyPort"] = "3000";
+            mockConfig["sftpUrl"] = "www.mockftp.com";
+            mockConfig["sftpUsername"] = "mockFtpUser";
+            mockConfig["sftpPassword"] = "mockFtpPassword";
+            mockConfig["knownHostsFile"] = "C:\\MockKnownHostsFile";
+            mockConfig["onlineBatchUrl"] = "www.mockbatch.com";
+            mockConfig["onlineBatchPort"] = "4000";
+            mockConfig["requestDirectory"] = "C:\\MockRequests";
+            mockConfig["responseDirectory"] = "C:\\MockResponses";
 
             _batchRequest = new batchRequest(mockConfig);
 
@@ -92,19 +88,15 @@ merchantId=""01234"">
         [Test]
         public void TestAddAuthorization()
         {
-            var authorization = new authorization
-            {
-                reportGroup = "Planets",
-                orderId = "12344",
-                amount = 106,
-                orderSource = orderSourceType.ecommerce
-            };
-            var card = new cardType
-            {
-                type = methodOfPaymentTypeEnum.VI,
-                number = "4100000000000002",
-                expDate = "1210"
-            };
+            var authorization = new authorization();
+            authorization.reportGroup = "Planets";
+            authorization.orderId = "12344";
+            authorization.amount = 106;
+            authorization.orderSource = orderSourceType.ecommerce;
+            var card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000002";
+            card.expDate = "1210";
             authorization.card = card;
 
             _batchRequest.addAuthorization(authorization);
