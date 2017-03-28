@@ -97,7 +97,7 @@ namespace Litle.Sdk
                 Log(xmlRequest,logFile, neuter);
             }
 
-            req.ContentType = "text/xml";
+            req.ContentType = "text/xml; charset=UTF-8";
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 10000;
             req.ServicePoint.Expect100Continue = false;
