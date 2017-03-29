@@ -1,49 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
-using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    class TestQueryTransaction
+    internal class TestQueryTransaction
     {
-        private LitleOnline litle;
-        private Dictionary<string, string> config;
+        private LitleOnline _litle;
+        private Dictionary<string, string> _config;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "65");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
-            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
-            config.Add("logFile", Properties.Settings.Default.logFile);
-            config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(config);
+            _config = new Dictionary<string, string>
+            {
+                {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+                {"reportGroup", "Default Report Group"},
+                {"username", "DOTNET"},
+                {"version", "11.0"},
+                {"timeout", "5000"},
+                {"merchantId", "101"},
+                {"password", "TESTCASE"},
+                {"printxml", "true"},
+                {"proxyHost", Properties.Settings.Default.proxyHost},
+                {"proxyPort", Properties.Settings.Default.proxyPort},
+                {"logFile", Properties.Settings.Default.logFile},
+                {"neuterAccountNums", "true"}
+            };
+
+            _litle = new LitleOnline(_config);
         }
 
         [Test]
         public void SimpleQueryTransaction()
         {
-            queryTransaction query = new queryTransaction();
-            query.id = "myId";
-            query.reportGroup = "myReportGroup";
-            query.origId = "Deposit1";
-            query.origActionType = actionTypeEnum.D;
-            query.origLitleTxnId = 54321;
+            var query = new queryTransaction
+            {
+                id = "myId",
+                reportGroup = "myReportGroup",
+                origId = "Deposit1",
+                origActionType = actionTypeEnum.D,
+                origLitleTxnId = 54321
+            };
 
-
-            transactionTypeWithReportGroup response = litle.queryTransaction(query);
-            queryTransactionResponse queryResponse = (queryTransactionResponse)response;
+            var response = _litle.queryTransaction(query);
+            var queryResponse = (queryTransactionResponse)response;
 
             Assert.NotNull(queryResponse);
             Assert.AreEqual("000", queryResponse.response);
@@ -55,16 +56,17 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleQueryTransaction_MultipleResponses()
         {
-            queryTransaction query = new queryTransaction();
-            query.id = "myId";
-            query.reportGroup = "myReportGroup";
-            query.origId = "Auth2";
-            query.origActionType = actionTypeEnum.A;
-            query.origLitleTxnId = 54321;
+            var query = new queryTransaction
+            {
+                id = "myId",
+                reportGroup = "myReportGroup",
+                origId = "Auth2",
+                origActionType = actionTypeEnum.A,
+                origLitleTxnId = 54321
+            };
 
-
-            transactionTypeWithReportGroup response = litle.queryTransaction(query);
-            queryTransactionResponse queryResponse = (queryTransactionResponse)response;
+            var response = _litle.queryTransaction(query);
+            var queryResponse = (queryTransactionResponse)response;
 
             Assert.NotNull(queryResponse);
             Assert.AreEqual("000", queryResponse.response);
@@ -82,16 +84,17 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void testQueryTransactionUnavailableResponse()
         {
-            queryTransaction query = new queryTransaction();
-            query.id = "myId";
-            query.reportGroup = "myReportGroup";
-            query.origId = "Auth";
-            query.origActionType = actionTypeEnum.A;
-            query.origLitleTxnId = 54321;
+            var query = new queryTransaction
+            {
+                id = "myId",
+                reportGroup = "myReportGroup",
+                origId = "Auth",
+                origActionType = actionTypeEnum.A,
+                origLitleTxnId = 54321
+            };
 
-
-            transactionTypeWithReportGroup response = litle.queryTransaction(query);
-            queryTransactionUnavailableResponse queryResponse = (queryTransactionUnavailableResponse)response;
+            var response = _litle.queryTransaction(query);
+            var queryResponse = (queryTransactionUnavailableResponse)response;
 
             Assert.AreEqual("152", queryResponse.response);
             Assert.AreEqual("Original transaction found but response not yet available", queryResponse.message);
@@ -100,16 +103,17 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void testQueryTransactionNotFoundResponse()
         {
-            queryTransaction query = new queryTransaction();
-            query.id = "myId";
-            query.reportGroup = "myReportGroup";
-            query.origId = "Auth0";
-            query.origActionType = actionTypeEnum.A;
-            query.origLitleTxnId = 54321;
+            var query = new queryTransaction
+            {
+                id = "myId",
+                reportGroup = "myReportGroup",
+                origId = "Auth0",
+                origActionType = actionTypeEnum.A,
+                origLitleTxnId = 54321
+            };
 
-
-            transactionTypeWithReportGroup response = litle.queryTransaction(query);
-            queryTransactionResponse queryResponse = (queryTransactionResponse)response;
+            var response = _litle.queryTransaction(query);
+            var queryResponse = (queryTransactionResponse)response;
 
             Assert.AreEqual("151", queryResponse.response);
             Assert.AreEqual("Original transaction not found", queryResponse.message);
