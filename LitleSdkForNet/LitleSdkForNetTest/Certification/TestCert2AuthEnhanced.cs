@@ -318,8 +318,7 @@ namespace Litle.Sdk.Test.Certification
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("341", response.response);
-            Assert.AreEqual("Invalid healthcare amounts", response.message);
-        }
+         }
 
         [Test]
         public void test27()
@@ -345,7 +344,6 @@ namespace Litle.Sdk.Test.Certification
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("341", response.response);
-            Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
         [Test]
@@ -402,7 +400,6 @@ namespace Litle.Sdk.Test.Certification
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("341", response.response);
-            Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
         [Test]
@@ -432,7 +429,6 @@ namespace Litle.Sdk.Test.Certification
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("341", response.response);
-            Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
         [Test]

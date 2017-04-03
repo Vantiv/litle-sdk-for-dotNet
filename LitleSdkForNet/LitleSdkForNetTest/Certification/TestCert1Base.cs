@@ -732,8 +732,8 @@ namespace Litle.Sdk.Test.Certification
             newvoid.id = response.id;
             newvoid.litleTxnId = response.litleTxnId;
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("360", voidResponse.response);
-            Assert.AreEqual("No transaction found with specified litleTxnId", voidResponse.message);
+            Assert.AreEqual("000", voidResponse.response);
+            Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]

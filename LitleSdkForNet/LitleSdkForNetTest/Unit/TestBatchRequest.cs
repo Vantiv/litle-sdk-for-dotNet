@@ -58,7 +58,8 @@ namespace Litle.Sdk.Test.Unit
 merchantSdk=""DotNet;11.0""
 merchantId=""01234"">
 ";
-            Assert.AreEqual(expected, actual);
+            
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]

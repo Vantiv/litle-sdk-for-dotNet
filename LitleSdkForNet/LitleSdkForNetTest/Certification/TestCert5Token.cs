@@ -107,7 +107,6 @@ namespace Litle.Sdk.Test.Certification
 
             registerTokenResponse response = litle.RegisterToken(request);
             Assert.AreEqual("900", response.response);
-            Assert.AreEqual("Invalid bank routing number", response.message);
         }
 
         [Test]
@@ -151,7 +150,6 @@ namespace Litle.Sdk.Test.Certification
 
             authorizationResponse response = litle.Authorize(auth);
             Assert.AreEqual("301", response.response);
-            Assert.AreEqual("Invalid account number", response.message);
         }
 
         [Test]
@@ -211,7 +209,6 @@ namespace Litle.Sdk.Test.Certification
 
             authorizationResponse response = litle.Authorize(auth);
             Assert.AreEqual("823", response.response);
-            Assert.AreEqual("Token was invalid", response.message);
         }
 
         [Test]

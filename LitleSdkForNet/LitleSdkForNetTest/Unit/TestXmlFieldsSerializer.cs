@@ -85,7 +85,7 @@ namespace Litle.Sdk.Test.Unit
 <startDate>2013-09-03</startDate>
 <endDate>2013-09-04</endDate>
 </createDiscount>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace Litle.Sdk.Test.Unit
 <startDate>2013-09-04</startDate>
 <endDate>2013-09-05</endDate>
 </createAddOn>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace Litle.Sdk.Test.Unit
 
             String actual = update.Serialize();
             String expected = "\r\n<updateSubscription>\r\n<subscriptionId>12345</subscriptionId>\r\n<planCode>abcdefg</planCode>\r\n<billToAddress>\r\n<name>Greg Dake</name>\r\n<city>Lowell</city>\r\n<state>MA</state>\r\n<email>sdksupport@litle.com</email>\r\n</billToAddress>\r\n<card>\r\n<type>VI</type>\r\n<number>4100000000000001</number>\r\n<expDate>1215</expDate>\r\n</card>\r\n<billingDate>2002-10-09</billingDate>\r\n</updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -163,7 +163,7 @@ namespace Litle.Sdk.Test.Unit
 
             String actual = update.Serialize();
             String expected = "\r\n<updateSubscription>\r\n<subscriptionId>12345</subscriptionId>\r\n</updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -207,7 +207,7 @@ namespace Litle.Sdk.Test.Unit
 <endDate>2013-09-04</endDate>
 </createDiscount>
 </updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -251,7 +251,7 @@ namespace Litle.Sdk.Test.Unit
 <endDate>2013-09-04</endDate>
 </updateDiscount>
 </updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -279,7 +279,7 @@ namespace Litle.Sdk.Test.Unit
 <discountCode>2</discountCode>
 </deleteDiscount>
 </updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -323,7 +323,7 @@ namespace Litle.Sdk.Test.Unit
 <endDate>2013-09-05</endDate>
 </createAddOn>
 </updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -367,7 +367,7 @@ namespace Litle.Sdk.Test.Unit
 <endDate>2013-09-05</endDate>
 </updateAddOn>
 </updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -395,7 +395,7 @@ namespace Litle.Sdk.Test.Unit
 <addOnCode>2</addOnCode>
 </deleteAddOn>
 </updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -414,7 +414,7 @@ namespace Litle.Sdk.Test.Unit
 <litleToken>123456</litleToken>
 </token>
 </updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -433,7 +433,7 @@ namespace Litle.Sdk.Test.Unit
 <paypageRegistrationId>abc123</paypageRegistrationId>
 </paypage>
 </updateSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
 
@@ -448,7 +448,7 @@ namespace Litle.Sdk.Test.Unit
 <cancelSubscription>
 <subscriptionId>12345</subscriptionId>
 </cancelSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -462,7 +462,7 @@ namespace Litle.Sdk.Test.Unit
 <cancelSubscription>
 <subscriptionId>12345</subscriptionId>
 </cancelSubscription>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -486,7 +486,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </activate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -509,7 +509,7 @@ namespace Litle.Sdk.Test.Unit
 <virtualGiftCard>
 </virtualGiftCard>
 </activate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -523,7 +523,7 @@ namespace Litle.Sdk.Test.Unit
             String expected = @"
 <accountNumberLength>16</accountNumberLength>
 <giftCardBin>123456</giftCardBin>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -545,7 +545,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </deactivate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -567,7 +567,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </deactivate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -591,7 +591,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </load>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -615,7 +615,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </load>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -639,7 +639,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </unload>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -663,7 +663,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </unload>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -685,7 +685,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </balanceInquiry>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -707,7 +707,7 @@ namespace Litle.Sdk.Test.Unit
 <type>MC</type>
 </card>
 </balanceInquiry>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -737,7 +737,7 @@ namespace Litle.Sdk.Test.Unit
 <trialIntervalType>MONTH</trialIntervalType>
 <active>true</active>
 </createPlan>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
 
@@ -758,7 +758,7 @@ namespace Litle.Sdk.Test.Unit
 <intervalType>ANNUAL</intervalType>
 <amount>100</amount>
 </createPlan>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -774,7 +774,7 @@ namespace Litle.Sdk.Test.Unit
 <planCode>abc</planCode>
 <active>true</active>
 </updatePlan>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -790,7 +790,7 @@ namespace Litle.Sdk.Test.Unit
 <subscriptionId>123</subscriptionId>
 <recurringTxnId>456</recurringTxnId>
 <finalPayment>true</finalPayment>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -810,7 +810,7 @@ namespace Litle.Sdk.Test.Unit
 <amount>200</amount>
 <startDate>2013-09-05</startDate>
 <endDate>2013-09-06</endDate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -830,7 +830,7 @@ namespace Litle.Sdk.Test.Unit
 <amount>200</amount>
 <startDate>2013-09-05</startDate>
 <endDate>2013-09-06</endDate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -842,7 +842,7 @@ namespace Litle.Sdk.Test.Unit
             String actual = ud.Serialize();
             String expected = @"
 <discountCode>1</discountCode>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -854,7 +854,7 @@ namespace Litle.Sdk.Test.Unit
             String actual = ud.Serialize();
             String expected = @"
 <discountCode>1</discountCode>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -874,7 +874,7 @@ namespace Litle.Sdk.Test.Unit
 <amount>100</amount>
 <startDate>2013-09-05</startDate>
 <endDate>2013-09-06</endDate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -894,7 +894,7 @@ namespace Litle.Sdk.Test.Unit
 <amount>100</amount>
 <startDate>2013-09-05</startDate>
 <endDate>2013-09-06</endDate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -906,7 +906,7 @@ namespace Litle.Sdk.Test.Unit
             String actual = uao.Serialize();
             String expected = @"
 <addOnCode>1</addOnCode>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -918,7 +918,7 @@ namespace Litle.Sdk.Test.Unit
             String actual = dao.Serialize();
             String expected = @"
 <addOnCode>1</addOnCode>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
 
         [Test]
@@ -934,7 +934,7 @@ namespace Litle.Sdk.Test.Unit
 <type></type>
 <number>4100000000000001</number>
 <expDate>1250</expDate>";
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
     }
 }

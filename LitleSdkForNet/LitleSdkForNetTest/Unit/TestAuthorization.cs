@@ -368,7 +368,7 @@ namespace Litle.Sdk.Test.Unit
 </cardholderAuthentication>
 </authorization>";
 
-            Assert.AreEqual(expectedResult, auth.Serialize());
+            Assert.AreEqual(Regex.Replace(expectedResult, @"\s+", String.Empty), Regex.Replace(auth.Serialize(), @"\s+", String.Empty));
 
             var mock = new Mock<Communications>();
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<authorization id=\".*>.*<customerIpAddress>192.168.1.1</customerIpAddress>.*</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
@@ -415,7 +415,7 @@ namespace Litle.Sdk.Test.Unit
 </billMeLaterRequest>
 </authorization>";
 
-            Assert.AreEqual(expectedResult, auth.Serialize());
+            Assert.AreEqual(Regex.Replace(expectedResult, @"\s+", String.Empty), Regex.Replace(auth.Serialize(), @"\s+", String.Empty));
 
             var mock = new Mock<Communications>();
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<authorization id=\".*>.*<billMeLaterRequest>\r\n<virtualAuthenticationKeyPresenceIndicator>Presence</virtualAuthenticationKeyPresenceIndicator>\r\n<virtualAuthenticationKeyData>Data</virtualAuthenticationKeyData>\r\n</billMeLaterRequest>.*</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
@@ -460,7 +460,7 @@ namespace Litle.Sdk.Test.Unit
 </advancedFraudChecks>
 </authorization>";
             string test = auth.Serialize();
-            Assert.AreEqual(expectedResult, auth.Serialize());
+            Assert.AreEqual(Regex.Replace(expectedResult, @"\s+", String.Empty), Regex.Replace(auth.Serialize(), @"\s+", String.Empty));
 
             var mock = new Mock<Communications>();
             mock.Setup(Communications => Communications.HttpPost(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>()))
@@ -523,7 +523,7 @@ namespace Litle.Sdk.Test.Unit
 </pos>
 </authorization>";
 
-            Assert.AreEqual(expectedResult, auth.Serialize());
+            Assert.AreEqual(Regex.Replace(expectedResult, @"\s+", String.Empty), Regex.Replace(auth.Serialize(), @"\s+", String.Empty));
 
             var mock = new Mock<Communications>();
             mock.Setup(Communications => Communications.HttpPost(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>()))

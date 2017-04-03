@@ -18,10 +18,10 @@
       <Value Profile="(Default)">C:\Litle\dll\knownhosts</Value>
     </Setting>
     <Setting Name="sftpUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)">sdk10</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="sftpPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">4Nk7Ft5O</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="onlineBatchUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">prelive.litle.com</Value>
@@ -36,28 +36,28 @@
       <Value Profile="(Default)">C:\Litle\</Value>
     </Setting>
     <Setting Name="logFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">null</Value>
+      <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="neuterAccountNums" Type="System.String" Scope="User">
       <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="url" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://prelive.litle.com/vap/communicator/online</Value>
+      <Value Profile="(Default)">https://www.testlitle.com/sandbox/communicator/online</Value>
     </Setting>
     <Setting Name="proxyHost" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="proxyPort" Type="System.String" Scope="User">
-      <Value Profile="(Default)">8080</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">SDKTEAM</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V3r5K6v7</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="merchantId" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1288791</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
