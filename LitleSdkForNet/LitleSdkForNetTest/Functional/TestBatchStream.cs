@@ -494,7 +494,7 @@ namespace Litle.Sdk.Test.Functional
                 updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
                 while (updateCardValidationNumOnTokenResponse != null)
                 {
-                    Assert.AreEqual("821", updateCardValidationNumOnTokenResponse.response);
+                    Assert.AreEqual("823", updateCardValidationNumOnTokenResponse.response);
 
                     updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
                 }
