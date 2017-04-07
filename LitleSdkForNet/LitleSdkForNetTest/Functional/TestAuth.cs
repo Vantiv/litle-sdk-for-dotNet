@@ -494,5 +494,35 @@ namespace Litle.Sdk.Test.Functional
             var response = _litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }
+
+        [Test]
+        public void TestWithFraudCheck()
+        {
+            _config.Remove("printxml");
+
+            var authorization = new authorization
+            {
+                reportGroup = "Planets",
+                orderId = "18",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                cardholderAuthentication = new fraudCheckType
+                {
+                   authenticationValue = "aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==",
+                   authenticationTransactionId = "11223344",
+                   customerIpAddress = "8.8.8.8",
+                   authenticatedByMerchant = true
+                }
+            };
+
+            var response = _litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
     }
 }
