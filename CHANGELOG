@@ -1,9 +1,9 @@
 = LitleOnline CHANGELOG
 
-==Version 9.12.2 (Apr 7, 2017)
+==Version 9.12.1 (Apr 7, 2017)
 * Bug fix: properly serialize boolean for fraudCheck 
 
-==Version 9.12.1
+==Version 9.12.0
 *Feature: updated to use XML v9.12
 
 ==Version 9.10.0
