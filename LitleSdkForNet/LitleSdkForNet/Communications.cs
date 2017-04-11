@@ -107,6 +107,7 @@ namespace Litle.Sdk
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 10000;
             req.ServicePoint.Expect100Continue = false;
+            req.KeepAlive = false;
             if (isProxyOn(config))
             {
                 WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
