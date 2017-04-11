@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.29.2 (Apr 11, 2017)
+* Bug fix: remove Keep-alive header on HTTP request
+
 == Version 8.29.1
 HTTP timeout set to 500ms
 Add RecycleEngineActive flag
