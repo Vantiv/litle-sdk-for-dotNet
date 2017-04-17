@@ -469,7 +469,7 @@ namespace Litle.Sdk.Test.Functional
                 var giftCardCaptureResponse = litleBatchResponse.nextGiftCardCaptureResponse();
                 while (giftCardCaptureResponse != null)
                 {
-                    Assert.AreEqual("301", giftCardCaptureResponse.response);
+                    Assert.NotNull(giftCardCaptureResponse.response);
 
                     giftCardCaptureResponse = litleBatchResponse.nextGiftCardCaptureResponse();
                 }
