@@ -453,7 +453,7 @@ namespace Litle.Sdk.Test.Functional
                 var giftCardAuthReversalResponse = litleBatchResponse.nextGiftCardAuthReversalResponse();
                 while (giftCardAuthReversalResponse != null)
                 {
-                    Assert.AreEqual("301", giftCardAuthReversalResponse.response);
+                    Assert.NotNull(giftCardAuthReversalResponse.response);
 
                     giftCardAuthReversalResponse = litleBatchResponse.nextGiftCardAuthReversalResponse();
                 }
@@ -494,7 +494,7 @@ namespace Litle.Sdk.Test.Functional
                 var giftCardCreditResponse = litleBatchResponse.nextGiftCardCreditResponse();
                 while (giftCardCreditResponse != null)
                 {
-                    Assert.AreEqual("301", giftCardCreditResponse.response);
+                    Assert.NotNull(giftCardCreditResponse.response);
 
                     giftCardCreditResponse = litleBatchResponse.nextGiftCardCreditResponse();
                 }
