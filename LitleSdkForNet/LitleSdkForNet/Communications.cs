@@ -54,11 +54,12 @@ namespace Litle.Sdk
                 {
                     NeuterXml(ref logMessage);
                 }
-                var logWriter = new StreamWriter(logFile, true);
-                var time = DateTime.Now;
-                logWriter.WriteLine(time.ToString(CultureInfo.InvariantCulture));
-                logWriter.WriteLine(logMessage + "\r\n");
-                logWriter.Close();
+                using (var logWriter = new StreamWriter(logFile, true))
+                {
+                    var time = DateTime.Now;
+                    logWriter.WriteLine(time.ToString(CultureInfo.InvariantCulture));
+                    logWriter.WriteLine(logMessage + "\r\n");
+                }
             }
         }
 
