@@ -1,20 +1,14 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using System.Xml.XPath;
 using System.Net;
 using Tamir.SharpSsh.jsch;
-using Tamir.SharpSsh;
-using System.Timers;
 using System.Net.Sockets;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
-using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Litle.Sdk
@@ -41,17 +35,19 @@ namespace Litle.Sdk
 
         public void neuterXML(ref string inputXml)
         {
+            const string pattern1 = "(?i)<number>.*?</number>";
+            const string pattern2 = "(?i)<accNum>.*?</accNum>";
+            const string pattern3 = "(?i)<track>.*?</<track>";
 
-            string pattern1 = "(?i)<number>.*?</number>";
-            string pattern2 = "(?i)<accNum>.*?</accNum>";
-
-            Regex rgx1 = new Regex(pattern1);
-            Regex rgx2 = new Regex(pattern2);
+            var rgx1 = new Regex(pattern1);
+            var rgx2 = new Regex(pattern2);
+            var rgx3 = new Regex(pattern3);
             inputXml = rgx1.Replace(inputXml, "<number>xxxxxxxxxxxxxxxx</number>");
             inputXml = rgx2.Replace(inputXml, "<accNum>xxxxxxxxxx</accNum>");
+            inputXml = rgx3.Replace(inputXml, "<track>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</track>");
         }
         
-        public void log(String logMessage, String logFile, bool neuter)
+        public void log(string logMessage, string logFile, bool neuter)
         {
             lock (_synLock)
             {
@@ -59,15 +55,15 @@ namespace Litle.Sdk
                 {
                     neuterXML(ref logMessage);
                 }
-                StreamWriter logWriter = new StreamWriter(logFile, true);
-                DateTime time = DateTime.Now;
+                var logWriter = new StreamWriter(logFile, true);
+                var time = DateTime.Now;
                 logWriter.WriteLine(time.ToString());
                 logWriter.WriteLine(logMessage + "\r\n");
                 logWriter.Close();
             }
         }
 
-        virtual public string HttpPost(string xmlRequest, Dictionary<String, String> config)
+        public virtual string HttpPost(string xmlRequest, Dictionary<string, string> config)
         {
             string logFile = null;
             if (config.ContainsKey("logFile"))
@@ -75,17 +71,17 @@ namespace Litle.Sdk
                 logFile = config["logFile"];
             }
             
-            string uri = config["url"];
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls; 
-            System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
+            var uri = config["url"];
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls; 
+            var req = (HttpWebRequest)WebRequest.Create(uri);
             
-            bool neuter = false;
+            var neuter = false;
             if (config.ContainsKey("neuterAccountNums"))
             {
                 neuter = ("true".Equals(config["neuterAccountNums"]));
             }
 
-            bool printxml = false;
+            var printxml = false;
             if (config.ContainsKey("printxml"))
             {
                 if("true".Equals(config["printxml"])) {
@@ -110,7 +106,7 @@ namespace Litle.Sdk
             req.KeepAlive = false;
             if (isProxyOn(config))
             {
-                WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
+                var myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
                 myproxy.BypassProxyOnLocal = true;
                 req.Proxy = myproxy;
             }
@@ -124,13 +120,13 @@ namespace Litle.Sdk
 
 
             // read response
-            System.Net.WebResponse resp = req.GetResponse();
+            var resp = req.GetResponse();
             if (resp == null)
             {
                 return null;
             }
             string xmlResponse;
-            using (var reader = new System.IO.StreamReader(resp.GetResponseStream()))
+            using (var reader = new StreamReader(resp.GetResponseStream()))
             {
                 xmlResponse = reader.ReadToEnd().Trim();
             }
@@ -148,14 +144,14 @@ namespace Litle.Sdk
             return xmlResponse;
         }
 
-        public bool isProxyOn(Dictionary<String,String> config) {
+        public bool isProxyOn(Dictionary<string,string> config) {
             return config.ContainsKey("proxyHost") && config["proxyHost"] != null && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"] != null && config["proxyPort"].Length > 0;
         }
 
-        virtual public string socketStream(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<String, String> config)
+        public virtual string socketStream(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<string, string> config)
         {
-            string url = config["onlineBatchUrl"];
-            int port = Int32.Parse(config["onlineBatchPort"]);
+            var url = config["onlineBatchUrl"];
+            var port = int.Parse(config["onlineBatchPort"]);
             TcpClient tcpClient = null;
             SslStream sslStream = null;
 
@@ -184,9 +180,9 @@ namespace Litle.Sdk
                 Console.WriteLine("Using XML File: " + xmlRequestFilePath);
             }
 
-            using (FileStream readFileStream = new FileStream(xmlRequestFilePath, FileMode.Open))
+            using (var readFileStream = new FileStream(xmlRequestFilePath, FileMode.Open))
             {
-                int bytesRead = -1;
+                var bytesRead = -1;
                 byte[] byteBuffer;
 
                 do
@@ -199,8 +195,8 @@ namespace Litle.Sdk
                 } while (bytesRead != 0);
             }
 
-            string batchName = Path.GetFileName(xmlRequestFilePath);
-            string destinationDirectory = Path.GetDirectoryName(xmlResponseDestinationDirectory);
+            var batchName = Path.GetFileName(xmlRequestFilePath);
+            var destinationDirectory = Path.GetDirectoryName(xmlResponseDestinationDirectory);
             if (!Directory.Exists(destinationDirectory))
             {
                 Directory.CreateDirectory(destinationDirectory);
@@ -211,11 +207,11 @@ namespace Litle.Sdk
                 Console.WriteLine("Writing to XML File: " + xmlResponseDestinationDirectory + batchName);
             }
 
-            using (FileStream writeFileStream = new FileStream(xmlResponseDestinationDirectory + batchName, FileMode.Create))
+            using (var writeFileStream = new FileStream(xmlResponseDestinationDirectory + batchName, FileMode.Create))
             {
                 char[] charBuffer;
                 byte[] byteBuffer;
-                int bytesRead = 0;
+                var bytesRead = 0;
 
                 do
                 {
@@ -234,18 +230,18 @@ namespace Litle.Sdk
             return xmlResponseDestinationDirectory + batchName;
         }
 
-        virtual public void FtpDropOff(string fileDirectory, string fileName, Dictionary<String, String> config)
+        public virtual void FtpDropOff(string fileDirectory, string fileName, Dictionary<string, string> config)
         {
             ChannelSftp channelSftp = null;
             Channel channel;
 
-            string url = config["sftpUrl"];
-            string username = config["sftpUsername"];
-            string password = config["sftpPassword"];
-            string knownHostsFile = config["knownHostsFile"];
-            string filePath = fileDirectory + fileName;
+            var url = config["sftpUrl"];
+            var username = config["sftpUsername"];
+            var password = config["sftpPassword"];
+            var knownHostsFile = config["knownHostsFile"];
+            var filePath = fileDirectory + fileName;
 
-            bool printxml = config["printxml"] == "true";
+            var printxml = config["printxml"] == "true";
             if (printxml)
             {
                 Console.WriteLine("Sftp Url: " + url);
@@ -254,10 +250,10 @@ namespace Litle.Sdk
                 Console.WriteLine("Known hosts file path: " + knownHostsFile);
             }
 
-            JSch jsch = new JSch();
+            var jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);
 
-            Session session = jsch.getSession(username, url);
+            var session = jsch.getSession(username, url);
             session.setPassword(password);
 
             try
@@ -300,10 +296,10 @@ namespace Litle.Sdk
             session.disconnect();
         }
 
-        virtual public void FtpPoll(string fileName, int timeout, Dictionary<string, string> config)
+        public virtual void FtpPoll(string fileName, int timeout, Dictionary<string, string> config)
         {
             fileName = fileName + ".asc";
-            bool printxml = config["printxml"] == "true";
+            var printxml = config["printxml"] == "true";
             if (printxml)
             {
                 Console.WriteLine("Polling for outbound result file.  Timeout set to " + timeout + "ms. File to wait for is " + fileName);
@@ -311,15 +307,15 @@ namespace Litle.Sdk
             ChannelSftp channelSftp = null;
             Channel channel;
 
-            string url = config["sftpUrl"];
-            string username = config["sftpUsername"];
-            string password = config["sftpPassword"];
-            string knownHostsFile = config["knownHostsFile"];
+            var url = config["sftpUrl"];
+            var username = config["sftpUsername"];
+            var password = config["sftpPassword"];
+            var knownHostsFile = config["knownHostsFile"];
 
-            JSch jsch = new JSch();
+            var jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);
 
-            Session session = jsch.getSession(username, url);
+            var session = jsch.getSession(username, url);
             session.setPassword(password);
 
             try
@@ -337,7 +333,7 @@ namespace Litle.Sdk
 
             //check if file exists
             SftpATTRS sftpATTRS = null;
-            Stopwatch stopWatch = new Stopwatch();
+            var stopWatch = new Stopwatch();
             stopWatch.Start();
             do
             {
@@ -364,22 +360,22 @@ namespace Litle.Sdk
             } while (sftpATTRS == null && stopWatch.Elapsed.TotalMilliseconds <= timeout);
         }
 
-        virtual public void FtpPickUp(string destinationFilePath, Dictionary<String, String> config, string fileName)
+        public virtual void FtpPickUp(string destinationFilePath, Dictionary<string, string> config, string fileName)
         {
             ChannelSftp channelSftp = null;
             Channel channel;
 
-            bool printxml = config["printxml"] == "true";
+            var printxml = config["printxml"] == "true";
 
-            string url = config["sftpUrl"];
-            string username = config["sftpUsername"];
-            string password = config["sftpPassword"];
-            string knownHostsFile = config["knownHostsFile"];
+            var url = config["sftpUrl"];
+            var username = config["sftpUsername"];
+            var password = config["sftpPassword"];
+            var knownHostsFile = config["knownHostsFile"];
 
-            JSch jsch = new JSch();
+            var jsch = new JSch();
             jsch.setKnownHosts(knownHostsFile);
 
-            Session session = jsch.getSession(username, url);
+            var session = jsch.getSession(username, url);
             session.setPassword(password);
 
             try

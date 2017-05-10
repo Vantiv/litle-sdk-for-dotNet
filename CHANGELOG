@@ -1,11 +1,14 @@
 = LitleOnline CHANGELOG
 
+== Version 8.29.3 (May 10, 2017)
+* Feature: add neuter for track data in log file
+
 == Version 8.29.2 (Apr 11, 2017)
 * Bug fix: remove Keep-alive header on HTTP request
 
 == Version 8.29.1
-HTTP timeout set to 500ms
-Add RecycleEngineActive flag
+* Feature: HTTP timeout set to 500ms
+* Feature: Add RecycleEngineActive flag
 
 == Version 8.29.0
 * Bugfix: Load proxy from setting file and adding constructor for accountUpdateFileRequestData and adding test cases
