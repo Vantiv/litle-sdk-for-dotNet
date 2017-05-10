@@ -39,11 +39,14 @@ namespace Litle.Sdk
 
             const string pattern1 = "(?i)<number>.*?</number>";
             const string pattern2 = "(?i)<accNum>.*?</accNum>";
+            const string pattern3 = "(?i)<track>.*?</<track>";
 
             var rgx1 = new Regex(pattern1);
             var rgx2 = new Regex(pattern2);
+            var rgx3 = new Regex(pattern3);
             inputXml = rgx1.Replace(inputXml, "<number>xxxxxxxxxxxxxxxx</number>");
             inputXml = rgx2.Replace(inputXml, "<accNum>xxxxxxxxxx</accNum>");
+            inputXml = rgx3.Replace(inputXml, "<track>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</track>");
         }
         
         public void Log(string logMessage, string logFile, bool neuter)
