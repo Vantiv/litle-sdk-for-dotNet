@@ -17,7 +17,24 @@ namespace Litle.Sdk
     public class Communications
     {
         private static readonly object SynLock = new object();
+<<<<<<< HEAD
 
+=======
+        public event EventHandler HttpAction;
+        
+        private void OnHttpAction(RequestType requestType, string xmlPayload, bool neuter)
+        {
+            if (HttpAction != null)
+            {
+                if (neuter)
+                {
+                    NeuterXml(ref xmlPayload);
+                }
+
+                HttpAction(this, new HttpActionEventArgs(requestType, xmlPayload));
+            }
+        }
+>>>>>>> ccba455... Making sure the HttpAction event respects the neuter flag
 
         public static bool ValidateServerCertificate(
              object sender,
@@ -87,11 +104,14 @@ namespace Litle.Sdk
             var printxml = false;
             if (config.ContainsKey("printxml"))
             {
-                if("true".Equals(config["printxml"])) {
+                if("true".Equals(config["printxml"])) 
+                {
                     printxml = true;
                 }
             }
-            if(printxml) {
+
+            if (printxml) 
+            {
                 Console.WriteLine(xmlRequest);
                 Console.WriteLine(logFile);
             }
@@ -99,7 +119,7 @@ namespace Litle.Sdk
             //log request
             if (logFile != null)
             {
-                Log(xmlRequest,logFile, neuter);
+                Log(xmlRequest, logFile, neuter);
             }
 
             req.ContentType = "text/xml";
@@ -116,6 +136,11 @@ namespace Litle.Sdk
                 req.Proxy = myproxy;
             }
 
+<<<<<<< HEAD
+=======
+            OnHttpAction(RequestType.Request, xmlRequest, neuter);
+
+>>>>>>> ccba455... Making sure the HttpAction event respects the neuter flag
             // submit http request
             using (var writer = new StreamWriter(req.GetRequestStream()))
             {
@@ -140,10 +165,15 @@ namespace Litle.Sdk
                 Console.WriteLine(xmlResponse);
             }
 
+<<<<<<< HEAD
+=======
+            OnHttpAction(RequestType.Response, xmlResponse, neuter);
+
+>>>>>>> ccba455... Making sure the HttpAction event respects the neuter flag
             //log response
             if (logFile != null)
             {
-                Log(xmlResponse,logFile,neuter);
+                Log(xmlResponse, logFile, neuter);
             }
 
             return xmlResponse;
