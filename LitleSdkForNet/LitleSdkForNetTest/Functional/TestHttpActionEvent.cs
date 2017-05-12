@@ -50,13 +50,21 @@ namespace Litle.Sdk.Test.Functional
                 }
             };
 
-            var capture = new capture
+            var forcecapture = new forceCapture
             {
-                litleTxnId = 123456000,
-                amount = 106
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
             };
 
-            _litle.Capture(capture);
+            _litle.ForceCapture(forcecapture);
+
             Assert.AreEqual(httpActionCount, 2);
             Assert.AreEqual(requestCount, 1);
             Assert.AreEqual(responseCount, 1);
