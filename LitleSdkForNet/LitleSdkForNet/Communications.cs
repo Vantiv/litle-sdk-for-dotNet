@@ -13,10 +13,19 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk
 {
+
     public class Communications
     {
         private static readonly object SynLock = new object();
-
+        public event EventHandler HttpAction;
+        
+        private void OnHttpAction(RequestType requestType, string xmlPayload)
+        {
+            if (HttpAction != null)
+            {
+                HttpAction(this, new HttpActionEventArgs(requestType, xmlPayload));
+            }
+        }
 
         public static bool ValidateServerCertificate(
              object sender,
@@ -115,6 +124,8 @@ namespace Litle.Sdk
                 req.Proxy = myproxy;
             }
 
+            OnHttpAction(RequestType.Request, xmlRequest);
+
             // submit http request
             using (var writer = new StreamWriter(req.GetRequestStream()))
             {
@@ -132,6 +143,8 @@ namespace Litle.Sdk
             {
                 Console.WriteLine(xmlResponse);
             }
+
+            OnHttpAction(RequestType.Response, xmlResponse);
 
             //log response
             if (logFile != null)
@@ -450,4 +463,22 @@ namespace Litle.Sdk
             public string IdentityFile;
         }
     }
+
+    public enum RequestType
+    {
+        Request, Response
+    }
+
+    public class HttpActionEventArgs : EventArgs
+    {
+        public RequestType RequestType { get; set; }
+        public string XmlPayload;
+
+        public HttpActionEventArgs(RequestType requestType, string xmlPayload)
+        {
+            RequestType = requestType;
+            XmlPayload = xmlPayload;
+        }
+    }
+
 }

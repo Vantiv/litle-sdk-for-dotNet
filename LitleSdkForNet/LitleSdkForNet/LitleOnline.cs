@@ -54,6 +54,12 @@ namespace Litle.Sdk
             communication = new Communications();
         }
 
+        public event EventHandler HttpAction
+        {
+            add { communication.HttpAction += value; }
+            remove { communication.HttpAction -= value; }
+        }
+
         public void setCommunication(Communications communication)
         {
             this.communication = communication;

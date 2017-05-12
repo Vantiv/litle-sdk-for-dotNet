@@ -87,6 +87,7 @@
     <Compile Include="Certification\TestCert4Echeck.cs" />
     <Compile Include="Certification\TestCert5Token.cs" />
     <Compile Include="Certification\TestCert1Base.cs" />
+    <Compile Include="Functional\TestHttpActionEvent.cs" />
     <Compile Include="Functional\TestUTF8.cs" />
     <Compile Include="Functional\TestBatchStream.cs" />
     <Compile Include="Functional\TestBatch.cs" />
