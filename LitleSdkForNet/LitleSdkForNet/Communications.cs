@@ -37,7 +37,7 @@ namespace Litle.Sdk
         {
             const string pattern1 = "(?i)<number>.*?</number>";
             const string pattern2 = "(?i)<accNum>.*?</accNum>";
-            const string pattern3 = "(?i)<track>.*?</<track>";
+            const string pattern3 = "(?i)<track>.*?</track>";
 
             var rgx1 = new Regex(pattern1);
             var rgx2 = new Regex(pattern2);
