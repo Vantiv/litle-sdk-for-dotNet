@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+==Version 9.12.2 (May 19, 2017)
+* Feature: add neutering of track data
+* Feature: merge [pull request](https://github.com/LitleCo/litle-sdk-for-dotNet/pull/43#issuecomment-302479228) from @hyeomans
+
 ==Version 9.12.1 (Apr 7, 2017)
 * Bug fix: properly serialize boolean for fraudCheck 
 
