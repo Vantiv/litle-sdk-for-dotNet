@@ -13,10 +13,24 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk
 {
+
     public class Communications
     {
         private static readonly object SynLock = new object();
+        public event EventHandler HttpAction;
+        
+        private void OnHttpAction(RequestType requestType, string xmlPayload, bool neuter)
+        {
+            if (HttpAction != null)
+            {
+                if (neuter)
+                {
+                    NeuterXml(ref xmlPayload);
+                }
 
+                HttpAction(this, new HttpActionEventArgs(requestType, xmlPayload));
+            }
+        }
 
         public static bool ValidateServerCertificate(
              object sender,
@@ -86,11 +100,14 @@ namespace Litle.Sdk
             var printxml = false;
             if (config.ContainsKey("printxml"))
             {
-                if("true".Equals(config["printxml"])) {
+                if("true".Equals(config["printxml"])) 
+                {
                     printxml = true;
                 }
             }
-            if(printxml) {
+
+            if (printxml) 
+            {
                 Console.WriteLine(xmlRequest);
                 Console.WriteLine(logFile);
             }
@@ -98,7 +115,7 @@ namespace Litle.Sdk
             //log request
             if (logFile != null)
             {
-                Log(xmlRequest,logFile, neuter);
+                Log(xmlRequest, logFile, neuter);
             }
 
             req.ContentType = "text/xml; charset=UTF-8";
@@ -114,6 +131,8 @@ namespace Litle.Sdk
                 };
                 req.Proxy = myproxy;
             }
+
+            OnHttpAction(RequestType.Request, xmlRequest, neuter);
 
             // submit http request
             using (var writer = new StreamWriter(req.GetRequestStream()))
@@ -133,10 +152,12 @@ namespace Litle.Sdk
                 Console.WriteLine(xmlResponse);
             }
 
+            OnHttpAction(RequestType.Response, xmlResponse, neuter);
+
             //log response
             if (logFile != null)
             {
-                Log(xmlResponse,logFile,neuter);
+                Log(xmlResponse, logFile, neuter);
             }
 
             return xmlResponse;
@@ -450,4 +471,22 @@ namespace Litle.Sdk
             public string IdentityFile;
         }
     }
+
+    public enum RequestType
+    {
+        Request, Response
+    }
+
+    public class HttpActionEventArgs : EventArgs
+    {
+        public RequestType RequestType { get; set; }
+        public string XmlPayload;
+
+        public HttpActionEventArgs(RequestType requestType, string xmlPayload)
+        {
+            RequestType = requestType;
+            XmlPayload = xmlPayload;
+        }
+    }
+
 }
