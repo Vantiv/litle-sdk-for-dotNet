@@ -3,7 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Text;
 using System.Net;
 using Tamir.SharpSsh.jsch;
 using System.Net.Sockets;
@@ -17,9 +16,7 @@ namespace Litle.Sdk
     public class Communications
     {
         private static readonly object SynLock = new object();
-<<<<<<< HEAD
 
-=======
         public event EventHandler HttpAction;
         
         private void OnHttpAction(RequestType requestType, string xmlPayload, bool neuter)
@@ -34,7 +31,7 @@ namespace Litle.Sdk
                 HttpAction(this, new HttpActionEventArgs(requestType, xmlPayload));
             }
         }
->>>>>>> ccba455... Making sure the HttpAction event respects the neuter flag
+
 
         public static bool ValidateServerCertificate(
              object sender,
@@ -136,11 +133,8 @@ namespace Litle.Sdk
                 req.Proxy = myproxy;
             }
 
-<<<<<<< HEAD
-=======
             OnHttpAction(RequestType.Request, xmlRequest, neuter);
 
->>>>>>> ccba455... Making sure the HttpAction event respects the neuter flag
             // submit http request
             using (var writer = new StreamWriter(req.GetRequestStream()))
             {
@@ -165,11 +159,8 @@ namespace Litle.Sdk
                 Console.WriteLine(xmlResponse);
             }
 
-<<<<<<< HEAD
-=======
             OnHttpAction(RequestType.Response, xmlResponse, neuter);
 
->>>>>>> ccba455... Making sure the HttpAction event respects the neuter flag
             //log response
             if (logFile != null)
             {
@@ -479,8 +470,25 @@ namespace Litle.Sdk
 
         }
 
-      
-        public struct SshConnectionInfo
+        public enum RequestType
+        {
+            Request, Response
+        }
+        
+        public class HttpActionEventArgs : EventArgs
+        {
+            public RequestType RequestType { get; set; }
+            public string XmlPayload;
+    
+            public HttpActionEventArgs(RequestType requestType, string xmlPayload)
+            {
+                RequestType = requestType;
+                XmlPayload = xmlPayload;
+            }
+        }
+
+
+public struct SshConnectionInfo
         {
             public string Host;
             public string User;

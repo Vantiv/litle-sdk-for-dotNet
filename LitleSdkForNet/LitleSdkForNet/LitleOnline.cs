@@ -9,7 +9,7 @@ namespace Litle.Sdk
 {
     public class LitleOnline : ILitleOnline
     {
-        private Dictionary<String, String> config;
+        private Dictionary<string, string> config;
         private Communications communication;
 
         /**
@@ -17,7 +17,7 @@ namespace Litle.Sdk
          */
         public LitleOnline()
         {
-            config = new Dictionary<String, String>();
+            config = new Dictionary<string, string>();
             config["url"] = Properties.Settings.Default.url;
             config["reportGroup"] = Properties.Settings.Default.reportGroup;
             config["username"] = Properties.Settings.Default.username;
@@ -48,10 +48,16 @@ namespace Litle.Sdk
          * proxyPort
          * printxml (possible values "true" and "false" - defaults to false)
          */
-        public LitleOnline(Dictionary<String, String> config)
+        public LitleOnline(Dictionary<string, string> config)
         {
             this.config = config;
             communication = new Communications();
+        }
+
+        public event EventHandler HttpAction
+        {
+            add => communication.HttpAction += value;
+            remove => communication.HttpAction -= value;
         }
 
         public void setCommunication(Communications communication)
@@ -467,7 +473,7 @@ namespace Litle.Sdk
             }
         }
 
-        public static String SerializeObject(litleOnlineRequest req)
+        public static string SerializeObject(litleOnlineRequest req)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineRequest));
             MemoryStream ms = new MemoryStream();

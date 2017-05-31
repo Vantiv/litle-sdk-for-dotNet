@@ -32,39 +32,32 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void TestHttpEvents()
         {
-            int requestCount = 0;
-            int responseCount = 0;
-            int httpActionCount = 0;
+            var requestCount = 0;
+            var responseCount = 0;
+            var httpActionCount = 0;
 
             _litle.HttpAction += (sender, args) =>
             {
-                var eventArgs = (HttpActionEventArgs)args;
+                var eventArgs = (Communications.HttpActionEventArgs)args;
                 httpActionCount++;
-                if (eventArgs.RequestType == RequestType.Request)
+                if (eventArgs.RequestType == Communications.RequestType.Request)
                 {
                     requestCount++;
                 }
-                else if (eventArgs.RequestType == RequestType.Response)
+                else if (eventArgs.RequestType == Communications.RequestType.Response)
                 {
                     responseCount++;
                 }
             };
 
-            var forcecapture = new forceCapture
+            var capture = new capture
             {
+                litleTxnId = 123456000,
                 amount = 106,
-                orderId = "12344",
-                orderSource = orderSourceType.ecommerce,
-                card = new cardType
-                {
-                    type = methodOfPaymentTypeEnum.VI,
-                    number = "4100000000000001",
-                    expDate = "1210"
-                }
+                id = "1"
             };
 
-            _litle.ForceCapture(forcecapture);
-
+            _litle.Capture(capture);
             Assert.AreEqual(httpActionCount, 2);
             Assert.AreEqual(requestCount, 1);
             Assert.AreEqual(responseCount, 1);
