@@ -56,8 +56,8 @@ namespace Litle.Sdk
 
         public event EventHandler HttpAction
         {
-            add => communication.HttpAction += value;
-            remove => communication.HttpAction -= value;
+            add { communication.HttpAction += value; }
+            remove { communication.HttpAction -= value; }
         }
 
         public void setCommunication(Communications communication)
