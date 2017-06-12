@@ -45,21 +45,13 @@ namespace Litle.Sdk.Test.Functional
                 card = new cardType
                 {
                     type = methodOfPaymentTypeEnum.VI,
-                    number = "41",
+                    number = "414100000000000000",
                     expDate = "1210"
                 },
                 customBilling = new customBilling { phone = "1112223333" }
             };
-            authorizationResponse response = null;
-            try
-            {
-                response = _litle.Authorize(authorization);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Full Exception: " + e);
-            }
-            
+            var response = _litle.Authorize(authorization);
+
             Assert.AreEqual("000", response.response);
         }
 
