@@ -8,7 +8,7 @@ namespace Litle.Sdk
 {
     public class LitleOnline : ILitleOnline
     {
-        private Dictionary<string, string> config;
+        private Dictionary<string, string> _config;
         private Communications _communication;
 
         /**
@@ -16,21 +16,20 @@ namespace Litle.Sdk
          */
         public LitleOnline()
         {
-            config = new Dictionary<string, string>
-            {
-                ["url"] = Properties.Settings.Default.url,
-                ["reportGroup"] = Properties.Settings.Default.reportGroup,
-                ["username"] = Properties.Settings.Default.username,
-                ["printxml"] = Properties.Settings.Default.printxml,
-                ["timeout"] = Properties.Settings.Default.timeout,
-                ["proxyHost"] = Properties.Settings.Default.proxyHost,
-                ["merchantId"] = Properties.Settings.Default.merchantId,
-                ["password"] = Properties.Settings.Default.password,
-                ["proxyPort"] = Properties.Settings.Default.proxyPort,
-                ["logFile"] = Properties.Settings.Default.logFile,
-                ["neuterAccountNums"] = Properties.Settings.Default.neuterAccountNums
-            };
+            _config = new Dictionary<string, string>();
+            _config["url"] = Properties.Settings.Default.url;
+            _config["reportGroup"] = Properties.Settings.Default.reportGroup;
+            _config["username"] = Properties.Settings.Default.username;
+            _config["printxml"] = Properties.Settings.Default.printxml;
+            _config["timeout"] = Properties.Settings.Default.timeout;
+            _config["proxyHost"] = Properties.Settings.Default.proxyHost;
+            _config["merchantId"] = Properties.Settings.Default.merchantId;
+            _config["password"] = Properties.Settings.Default.password;
+            _config["proxyPort"] = Properties.Settings.Default.proxyPort;
+            _config["logFile"] = Properties.Settings.Default.logFile;
+            _config["neuterAccountNums"] = Properties.Settings.Default.neuterAccountNums;
             _communication = new Communications();
+            
         }
 
         /**
@@ -51,7 +50,7 @@ namespace Litle.Sdk
          */
         public LitleOnline(Dictionary<string, string> config)
         {
-            this.config = config;
+            this._config = config;
             _communication = new Communications();
         }
 
@@ -446,11 +445,11 @@ namespace Litle.Sdk
         private litleOnlineRequest CreateLitleOnlineRequest()
         {
             var request = new litleOnlineRequest();
-            request.merchantId = config["merchantId"];
+            request.merchantId = _config["merchantId"];
             request.merchantSdk = "DotNet;11.0.1";
             var authentication = new authentication();
-            authentication.password = config["password"];
-            authentication.user = config["username"];
+            authentication.password = _config["password"];
+            authentication.user = _config["username"];
             request.authentication = authentication;
             return request;
         }
@@ -458,7 +457,7 @@ namespace Litle.Sdk
         private litleOnlineResponse sendToLitle(litleOnlineRequest request)
         {
             var xmlRequest = request.Serialize();
-            var xmlResponse = _communication.HttpPost(xmlRequest,config);
+            var xmlResponse = _communication.HttpPost(xmlRequest,_config);
             try
             {
                 var litleOnlineResponse = DeserializeObject(xmlResponse);
@@ -495,7 +494,7 @@ namespace Litle.Sdk
         {
             if (txn.reportGroup == null)
             {
-                txn.reportGroup = config["reportGroup"];
+                txn.reportGroup = _config["reportGroup"];
             }
         }
 
@@ -503,7 +502,7 @@ namespace Litle.Sdk
         {
             if (txn.reportGroup == null)
             {
-                txn.reportGroup = config["reportGroup"];
+                txn.reportGroup = _config["reportGroup"];
             }
         }
     }
