@@ -30,10 +30,10 @@
       <Value Profile="(Default)">101</Value>
     </Setting>
     <Setting Name="sftpUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">prelive.litle.com</Value>
+      <Value Profile="(Default)">payments.vantivprelive.com</Value>
     </Setting>
     <Setting Name="knownHostsFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Litle\dll\knownhosts</Value>
+      <Value Profile="(Default)">C:\Vantiv\dll\knownhosts</Value>
     </Setting>
     <Setting Name="sftpUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">dotnet</Value>
@@ -42,16 +42,16 @@
       <Value Profile="(Default)">dotnet</Value>
     </Setting>
     <Setting Name="onlineBatchUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">prelive.litle.com</Value>
+      <Value Profile="(Default)">payments.vantivprelive.com</Value>
     </Setting>
     <Setting Name="onlineBatchPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">15000</Value>
     </Setting>
     <Setting Name="requestDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Litle\</Value>
+      <Value Profile="(Default)">C:\Vantiv\</Value>
     </Setting>
     <Setting Name="responseDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Litle\</Value>
+      <Value Profile="(Default)">C:\Vantiv\</Value>
     </Setting>
     <Setting Name="logFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">null</Value>
