@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Functional
@@ -44,13 +45,21 @@ namespace Litle.Sdk.Test.Functional
                 card = new cardType
                 {
                     type = methodOfPaymentTypeEnum.VI,
-                    number = "414100000000000000",
+                    number = "41",
                     expDate = "1210"
                 },
                 customBilling = new customBilling { phone = "1112223333" }
             };
-
-            var response = _litle.Authorize(authorization);
+            authorizationResponse response = null;
+            try
+            {
+                response = _litle.Authorize(authorization);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Full Exception: " + e);
+            }
+            
             Assert.AreEqual("000", response.response);
         }
 

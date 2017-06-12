@@ -12,7 +12,7 @@ namespace Litle.Sdk.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -61,7 +61,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("prelive.litle.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("payments.vantivprelive.com")]
         public string sftpUrl {
             get {
                 return ((string)(this["sftpUrl"]));
@@ -73,7 +73,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Litle\\dll\\knownhosts")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Vantiv\\dll\\knownhosts")]
         public string knownHostsFile {
             get {
                 return ((string)(this["knownHostsFile"]));
@@ -109,7 +109,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("prelive.litle.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("payments.vantivprelive.com")]
         public string onlineBatchUrl {
             get {
                 return ((string)(this["onlineBatchUrl"]));
@@ -133,7 +133,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Litle\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Vantiv\\")]
         public string requestDirectory {
             get {
                 return ((string)(this["requestDirectory"]));
@@ -145,7 +145,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Litle\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Vantiv\\")]
         public string responseDirectory {
             get {
                 return ((string)(this["responseDirectory"]));
