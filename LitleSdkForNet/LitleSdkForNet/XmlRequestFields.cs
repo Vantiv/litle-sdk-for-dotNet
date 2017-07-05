@@ -513,7 +513,15 @@ namespace Litle.Sdk
             if (taxIncludedInTotalSet) xml += "\r\n<taxIncludedInTotal>" + taxIncludedInTotalField.ToString().ToLower() + "</taxIncludedInTotal>";
             if (taxAmountSet) xml += "\r\n<taxAmount>" + taxAmountField + "</taxAmount>";
             if (taxRate != null) xml += "\r\n<taxRate>" + SecurityElement.Escape(taxRate) + "</taxRate>";
-            if (taxTypeIdentifierSet) xml += "\r\n<taxTypeIdentifier>" + taxTypeIdentifierField + "</taxTypeIdentifier>";
+            if (taxTypeIdentifierSet)
+            {
+                Type type = taxTypeIdentifierField.GetType();
+                System.Reflection.FieldInfo info = type.GetField(Enum.GetName(typeof(taxTypeIdentifierEnum), taxTypeIdentifierField));
+                XmlEnumAttribute att = (XmlEnumAttribute)info.GetCustomAttributes(typeof(XmlEnumAttribute), false)[0];
+                //If there is an xmlattribute defined, return the name
+
+                xml += "\r\n<taxTypeIdentifier>" + att.Name + "</taxTypeIdentifier>";
+            }
             if (cardAcceptorTaxId != null) xml += "\r\n<cardAcceptorTaxId>" + SecurityElement.Escape(cardAcceptorTaxId) + "</cardAcceptorTaxId>";
             return xml;
         }
