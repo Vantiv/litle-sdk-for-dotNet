@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.0.2 (July 6, 2017)
+* BugFix: Fix serialization issue with taxTypeIdentifierEnum
+
 ==Version 11.0.1 (May 26, 2017)
 * Feature: additional FTP debug output
 
