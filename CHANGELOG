@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.29.4 (July, 6 2017)
+* Bugfix: Fix serialization issue with taxTypeIdentifierEnum
+
 == Version 8.29.3 (May 10, 2017)
 * Feature: add neuter for track data in log file
 
