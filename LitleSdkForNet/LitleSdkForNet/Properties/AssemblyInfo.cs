@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("LitleSdkForNet")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Vantiv")]
+[assembly: AssemblyCompany("Vantiv eCommerce")]
 [assembly: AssemblyProduct("LitleSdkForNet")]
 [assembly: AssemblyCopyright("Copyright © Vantiv 2017")]
 [assembly: AssemblyTrademark("")]
