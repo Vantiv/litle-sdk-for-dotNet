@@ -1371,7 +1371,7 @@ namespace Litle.Sdk
             }
             if (sameDayFunding)
             {
-                xmlHeader += "sameDayFunding=\"" + sameDayFunding + "\"\r\n";
+                xmlHeader += "sameDayFunding=" + sameDayFunding + "\r\n";
             }
 
             xmlHeader += "merchantSdk=\"DotNet;11.1.0\"\r\n";
