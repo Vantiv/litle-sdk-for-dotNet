@@ -25,6 +25,7 @@ namespace Litle.Sdk.Test.Functional
         {
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.SameDayFunding(true);
+            litleBatchRequest.id = "123";
 
             var payFacCredit = new payFacCredit
             {
