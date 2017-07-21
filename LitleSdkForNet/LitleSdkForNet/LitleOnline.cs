@@ -446,7 +446,7 @@ namespace Litle.Sdk
         {
             var request = new litleOnlineRequest();
             request.merchantId = _config["merchantId"];
-            request.merchantSdk = "DotNet;11.0.2";
+            request.merchantSdk = "DotNet;11.1.0";
             var authentication = new authentication();
             authentication.password = _config["password"];
             authentication.user = _config["username"];

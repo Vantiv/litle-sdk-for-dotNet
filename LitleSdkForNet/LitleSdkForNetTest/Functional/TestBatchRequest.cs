@@ -11,8 +11,8 @@ namespace Litle.Sdk.Test.Functional
     class TestBatchRequest
     {
         private litleRequest litle;
-        private Dictionary<String, String> invalidConfig;
-        private Dictionary<String, String> invalidSftpConfig;
+        private Dictionary<string, string> invalidConfig;
+        private Dictionary<string, string> invalidSftpConfig;
 
         [SetUp]
         public void setUpBeforeTest()
@@ -24,6 +24,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleBatch()
         {
             batchRequest litleBatchRequest = new batchRequest();
+            litleBatchRequest.SameDayFunding(true);
 
             var payFacCredit = new payFacCredit
             {
