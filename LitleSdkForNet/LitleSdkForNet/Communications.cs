@@ -120,7 +120,7 @@ namespace Litle.Sdk
 
             req.ContentType = "text/xml; charset=UTF-8";
             req.Method = "POST";
-            req.ServicePoint.MaxIdleTime = 10000;
+            req.ServicePoint.MaxIdleTime = 8000;
             req.ServicePoint.Expect100Continue = false;
             req.KeepAlive = false;
             if (IsProxyOn(config))
