@@ -14,7 +14,7 @@ namespace Litle.Sdk.Test.Functional
         {
             _config = new Dictionary<string, string>
             {
-                {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+                {"url", "https://www.testvantivcnp.com/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "BATCHSDKA"},
                 {"version", "9.12"},

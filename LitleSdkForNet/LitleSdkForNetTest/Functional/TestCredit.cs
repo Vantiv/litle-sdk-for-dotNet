@@ -13,7 +13,7 @@ namespace Litle.Sdk.Test.Functional
         {
             var config = new Dictionary<string, string>
             {
-                {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+                {"url", "https://www.testvantivcnp.com/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
                 {"version", "9.12"},
