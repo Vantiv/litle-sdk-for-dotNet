@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="url" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://www.testlitle.com/sandbox/communicator/online</Value>
+      <Value Profile="(Default)">https://www.testvantivcnp.com/sandbox/communicator/online</Value>
     </Setting>
     <Setting Name="reportGroup" Type="System.String" Scope="User">
       <Value Profile="(Default)">Default Report Group</Value>
