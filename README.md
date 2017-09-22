@@ -81,6 +81,6 @@ using Litle.Sdk;
     Message: Approved
     Litle Transaction ID: <your-numeric-litle-txn-id>
 
-More examples can be found here [.Net Gists](https://gist.github.com/search?q=.net+sdk+Litle) or [Here](http://litleco.github.io/dotnet/) or in [Functional and Unit Tests] (https://github.com/Vantiv/litle-sdk-for-dotNet/tree/master/LitleSdkForNet/LitleSdkForNetTest)
+More examples can be found here [.Net Gists](https://gist.github.com/search?q=.net+sdk+Litle) or [Here](http://litleco.github.io/dotnet/) or in [Functional and Unit Tests] (https://github.com/Vantiv/litle-sdk-for-dotNet/tree/11.0/LitleSdkForNet/LitleSdkForNetTest)
 
 Please contact Vantiv eCommerce with any further questions.   You can reach us at sdksupport@Vantiv.com.
