@@ -19,7 +19,7 @@ This SDK is implemented to support the .NET plaform, including C#, VB.NET and Ma
 
 See LICENSE file for details on using this software.
 
-Source Code available from : https://github.com/LitleCo/litle-sdk-for-dotNet
+Source Code available from : https://github.com/Vantiv/litle-sdk-for-dotNet
 
 Please contact [Vantiv eCommerce](http://developer.vantiv.com/community/ecommerce) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at sdksupport@Vantiv.com
 
@@ -28,7 +28,7 @@ Setup
 
 1.) To install it, just copy LitleSdkForDotNet.dll into your Visual Studio referernces. 
 
-2.) You can configure it statically by modifying LitleSdkForDotNet.dll.config or at runtime using the LitleOnline(Dictionary) constructor. If you are just trying it out, the username, password and merchant id don't matter, and you should choose the sandbox url at https://www.testlitle.com/sandbox/communicator/online.
+2.) You can configure it statically by modifying LitleSdkForDotNet.dll.config or at runtime using the LitleOnline(Dictionary) constructor. If you are just trying it out, the username, password and merchant id don't matter, and you should choose the sandbox url at https://www.testvantivcnp.com/sandbox/communicator/online.
 
 3.) Create a c# class similar to:  
 
@@ -81,6 +81,6 @@ using Litle.Sdk;
     Message: Approved
     Litle Transaction ID: <your-numeric-litle-txn-id>
 
-More examples can be found here [.Net Gists](https://gist.github.com/search?q=.net+sdk+Litle) or [Here](http://litleco.github.io/dotnet/) or in [Functional and Unit Tests] (https://github.com/LitleCo/litle-sdk-for-dotNet/tree/master/LitleSdkForNet/LitleSdkForNetTest)
+More examples can be found here [.Net Gists](https://gist.github.com/search?q=.net+sdk+Litle) or [Here](http://litleco.github.io/dotnet/) or in [Functional and Unit Tests] (https://github.com/Vantiv/litle-sdk-for-dotNet/tree/master/LitleSdkForNet/LitleSdkForNetTest)
 
 Please contact Vantiv eCommerce with any further questions.   You can reach us at sdksupport@Vantiv.com.
