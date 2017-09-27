@@ -35,13 +35,14 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleAuthWithCard()
         {
             authorization authorization = new authorization();
+            authorization.id = "101010";
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "414100000000000000";
+            card.number = "4100521234567000";
             card.expDate = "1210";
             authorization.card = card; //This needs to compile
 
@@ -50,11 +51,13 @@ namespace Litle.Sdk.Test.Functional
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
+            Assert.AreEqual("P", response.fraudResult.cardValidationResult);
         }
         [Test]
         public void SimpleAuthWithMpos()
         {
             authorization authorization = new authorization();
+            authorization.id = "2";
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
             authorization.amount = 200;
@@ -75,8 +78,10 @@ namespace Litle.Sdk.Test.Functional
         public void AuthWithAmpersand()
         {
             authorization authorization = new authorization();
-            authorization.orderId = "1";
+            authorization.id = "rrggbb";
+            authorization.orderId = "1985";
             authorization.amount = 10010;
+            authorization.reportGroup = "Planets";
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
             contact.name = "John & Jane Smith";
@@ -90,15 +95,16 @@ namespace Litle.Sdk.Test.Functional
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4457010000000009";
             card.expDate = "0112";
-             card.cardValidationNum = "349";
-             authorization.card = card;
-             authorizationResponse response = litle.Authorize(authorization);
+            card.cardValidationNum = "349";
+            authorization.card = card;
+            authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
          }
         [Test]
         public void simpleAuthWithPaypal()
         {
             authorization authorization = new authorization();
+            authorization.id = "3";
             authorization.reportGroup = "Planets";
             authorization.orderId = "123456";
             authorization.amount = 106;
@@ -120,6 +126,7 @@ namespace Litle.Sdk.Test.Functional
         public void simpleAuthWithApplepayAndSecondaryAmountAndWallet()
         {
             authorization authorization = new authorization();
+            authorization.id = "4";
             authorization.reportGroup = "Planets";
             authorization.orderId = "123456";
             authorization.amount = 110;
@@ -151,6 +158,7 @@ namespace Litle.Sdk.Test.Functional
         public void posWithoutCapabilityAndEntryMode()
         {
             authorization authorization = new authorization();
+            authorization.id = "5";
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
             authorization.amount = 106;
@@ -207,6 +215,7 @@ namespace Litle.Sdk.Test.Functional
         public void testAuthHandleSpecialCharacters()
         {
             authorization authorization = new authorization();
+            authorization.id = "6";
             authorization.reportGroup = "<'&\">";
             authorization.orderId = "123456";
             authorization.amount = 106;
@@ -230,6 +239,7 @@ namespace Litle.Sdk.Test.Functional
             config.Remove("logFile");
 
             authorization authorization = new authorization();
+            authorization.id = "7";
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
             authorization.amount = 106;
@@ -250,6 +260,7 @@ namespace Litle.Sdk.Test.Functional
             config.Remove("neuterAccountNums");
 
             authorization authorization = new authorization();
+            authorization.id = "8";
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
             authorization.amount = 106;
@@ -270,6 +281,7 @@ namespace Litle.Sdk.Test.Functional
             config.Remove("printxml");
 
             authorization authorization = new authorization();
+            authorization.id = "9";
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
             authorization.amount = 106;
@@ -290,6 +302,7 @@ namespace Litle.Sdk.Test.Functional
             config.Remove("printxml");
 
             authorization authorization = new authorization();
+            authorization.id = "10";
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
             authorization.amount = 106;
