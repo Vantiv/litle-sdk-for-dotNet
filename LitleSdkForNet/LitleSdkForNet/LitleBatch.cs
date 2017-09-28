@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Litle.Sdk
 {
@@ -26,7 +28,7 @@ namespace Litle.Sdk
         public litleRequest()
         {
             config = new Dictionary<string, string>();
-            
+
             config["url"] = Properties.Settings.Default.url;
             config["reportGroup"] = Properties.Settings.Default.reportGroup;
             config["username"] = Properties.Settings.Default.username;
@@ -181,11 +183,20 @@ namespace Litle.Sdk
         public litleResponse sendToLitleWithStream()
         {
             string requestFilePath = this.Serialize();
-            string batchName = Path.GetFileName(requestFilePath);
 
             string responseFilePath = communication.SocketStream(requestFilePath, responseDirectory, config);
 
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
+            litleResponse litleResponse = (litleResponse) litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
+            return litleResponse;
+        }
+
+        public async Task<litleResponse> sendToLitleWithStreamAsync(CancellationToken cancellationToken)
+        {
+            string requestFilePath = await this.SerializeAsync(cancellationToken);
+
+            string responseFilePath = await communication.SocketStreamAsync(requestFilePath, responseDirectory, config, cancellationToken);
+
+            litleResponse litleResponse = (litleResponse) litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
             return litleResponse;
         }
 
@@ -196,7 +207,6 @@ namespace Litle.Sdk
             communication.FtpDropOff(requestDirectory, Path.GetFileName(requestFilePath), config);
             return Path.GetFileName(requestFilePath);
         }
-
 
         public void blockAndWaitForResponse(string fileName, int timeOut)
         {
@@ -209,7 +219,7 @@ namespace Litle.Sdk
 
             communication.FtpPickUp(responseDirectory + batchFileName, config, batchFileName);
 
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseDirectory + batchFileName);
+            litleResponse litleResponse = (litleResponse) litleXmlSerializer.DeserializeObjectFromFile(responseDirectory + batchFileName);
             return litleResponse;
         }
 
@@ -234,17 +244,36 @@ namespace Litle.Sdk
             return filePath;
         }
 
+        public async Task<string> SerializeAsync(CancellationToken cancellationToken)
+        {
+            finalFilePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(finalFilePath), ".xml", litleTime);
+            string filePath = finalFilePath;
+
+            await litleFile.AppendLineToFileAsync(finalFilePath, generateXmlHeader());
+            await litleFile.AppendLineToFileAsync(finalFilePath, authentication.Serialize());
+
+            if (batchFilePath != null)
+            {
+                await litleFile.AppendFileToFileAsync(finalFilePath, batchFilePath, cancellationToken);
+            }
+            else
+            {
+                throw new LitleOnlineException("No batch was added to the LitleBatch!");
+            }
+
+            await litleFile.AppendLineToFileAsync(finalFilePath, generateXmlFooter());
+
+            finalFilePath = null;
+
+            return filePath;
+        }
+
         public string Serialize()
         {
-            string xmlHeader = generateXmlHeader();
-            string xmlFooter = generateXmlFooter();
-
-            string filePath;
-
             finalFilePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(finalFilePath), ".xml", litleTime);
-            filePath = finalFilePath;
+            string filePath = finalFilePath;
 
-            litleFile.AppendLineToFile(finalFilePath, xmlHeader);
+            litleFile.AppendLineToFile(finalFilePath, generateXmlHeader());
             litleFile.AppendLineToFile(finalFilePath, authentication.Serialize());
 
             if (batchFilePath != null)
@@ -256,7 +285,7 @@ namespace Litle.Sdk
                 throw new LitleOnlineException("No batch was added to the LitleBatch!");
             }
 
-            litleFile.AppendLineToFile(finalFilePath, xmlFooter);
+            litleFile.AppendLineToFile(finalFilePath, generateXmlFooter());
 
             finalFilePath = null;
 
@@ -327,6 +356,16 @@ namespace Litle.Sdk
             return filePath;
         }
 
+        public virtual async Task<string> AppendLineToFileAsync(string filePath, string lineToAppend)
+        {
+            using (var fs = new FileStream(filePath, FileMode.Append))
+            using (var sw = new StreamWriter(fs))
+            {
+                await sw.WriteAsync(lineToAppend);
+            }
+
+            return filePath;
+        }
 
         public virtual string AppendFileToFile(string filePathToAppendTo, string filePathToAppend)
         {
@@ -342,6 +381,29 @@ namespace Litle.Sdk
                 {
                     bytesRead = fsr.Read(buffer, 0, buffer.Length);
                     fs.Write(buffer, 0, bytesRead);
+                }
+                while (bytesRead > 0);
+            }
+
+            File.Delete(filePathToAppend);
+
+            return filePathToAppendTo;
+        }
+
+        public virtual async Task<string> AppendFileToFileAsync(string filePathToAppendTo, string filePathToAppend, CancellationToken cancellationToken)
+        {
+
+            using (var fs = new FileStream(filePathToAppendTo, FileMode.Append))
+            using (var fsr = new FileStream(filePathToAppend, FileMode.Open))
+            {
+                byte[] buffer = new byte[16];
+
+                int bytesRead = 0;
+
+                do
+                {
+                    bytesRead = await fsr.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
+                    await fs.WriteAsync(buffer, 0, bytesRead, cancellationToken);
                 }
                 while (bytesRead > 0);
             }
