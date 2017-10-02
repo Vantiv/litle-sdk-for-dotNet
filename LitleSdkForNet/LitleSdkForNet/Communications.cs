@@ -1,24 +1,26 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Net;
-using Tamir.SharpSsh.jsch;
-using System.Net.Sockets;
 using System.Net.Security;
+using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using Tamir.SharpSsh.jsch;
 
 namespace Litle.Sdk
 {
 
-    public class Communications
+	public class Communications
     {
         private static readonly object SynLock = new object();
         public event EventHandler HttpAction;
-        
+
         private void OnHttpAction(RequestType requestType, string xmlPayload, bool neuter)
         {
             if (HttpAction != null)
@@ -60,7 +62,7 @@ namespace Litle.Sdk
             inputXml = rgx2.Replace(inputXml, "<accNum>xxxxxxxxxx</accNum>");
             inputXml = rgx3.Replace(inputXml, "<track>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</track>");
         }
-        
+
         public void Log(string logMessage, string logFile, bool neuter)
         {
             lock (SynLock)
@@ -79,18 +81,28 @@ namespace Litle.Sdk
             }
         }
 
+        public virtual Task<string> HttpPostAsync(string xmlRequest, Dictionary<string, string> config, CancellationToken cancellationToken)
+        {
+            return HttpPostCoreAsync(xmlRequest, config, cancellationToken);
+        }
+
         public virtual string HttpPost(string xmlRequest, Dictionary<string, string> config)
+        {
+            return HttpPostCoreAsync(xmlRequest, config, CancellationToken.None).Result;
+        }
+
+        private async Task<string> HttpPostCoreAsync(string xmlRequest, Dictionary<string, string> config, CancellationToken cancellationToken)
         {
             string logFile = null;
             if (config.ContainsKey("logFile"))
             {
                 logFile = config["logFile"];
             }
-            
+
             var uri = config["url"];
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls; 
-            var req = (HttpWebRequest)WebRequest.Create(uri);
-            
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            var request = (HttpWebRequest) WebRequest.Create(uri);
+
             var neuter = false;
             if (config.ContainsKey("neuterAccountNums"))
             {
@@ -100,13 +112,13 @@ namespace Litle.Sdk
             var printxml = false;
             if (config.ContainsKey("printxml"))
             {
-                if("true".Equals(config["printxml"])) 
+                if ("true".Equals(config["printxml"]))
                 {
                     printxml = true;
                 }
             }
 
-            if (printxml) 
+            if (printxml)
             {
                 Console.WriteLine(xmlRequest);
                 Console.WriteLine(logFile);
@@ -118,34 +130,34 @@ namespace Litle.Sdk
                 Log(xmlRequest, logFile, neuter);
             }
 
-            req.ContentType = "text/xml; charset=UTF-8";
-            req.Method = "POST";
-            req.ServicePoint.MaxIdleTime = 8000;
-            req.ServicePoint.Expect100Continue = false;
-            req.KeepAlive = false;
+            request.ContentType = "text/xml; charset=UTF-8";
+            request.Method = "POST";
+            request.ServicePoint.MaxIdleTime = 8000;
+            request.ServicePoint.Expect100Continue = false;
+            request.KeepAlive = false;
             if (IsProxyOn(config))
             {
                 var myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]))
                 {
                     BypassProxyOnLocal = true
                 };
-                req.Proxy = myproxy;
+                request.Proxy = myproxy;
             }
 
             OnHttpAction(RequestType.Request, xmlRequest, neuter);
 
             // submit http request
-            using (var writer = new StreamWriter(req.GetRequestStream()))
+            using (var writer = new StreamWriter(await request.GetRequestStreamAsync().ConfigureAwait(false)))
             {
                 writer.Write(xmlRequest);
             }
-            
+
             // read response
-            var resp = req.GetResponse();
+            var response = await request.GetResponseAsync().ConfigureAwait(false);
             string xmlResponse;
-            using (var reader = new StreamReader(resp.GetResponseStream()))
+            using (var reader = new StreamReader(response.GetResponseStream()))
             {
-                xmlResponse = reader.ReadToEnd().Trim();
+                xmlResponse = (await reader.ReadToEndAsync().ConfigureAwait(false)).Trim();
             }
             if (printxml)
             {
@@ -163,11 +175,12 @@ namespace Litle.Sdk
             return xmlResponse;
         }
 
-        public bool IsProxyOn(Dictionary<string,string> config) {
+        public bool IsProxyOn(Dictionary<string, string> config)
+        {
             return config.ContainsKey("proxyHost") && config["proxyHost"] != null && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"] != null && config["proxyPort"].Length > 0;
         }
 
-        public virtual string SocketStream(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<string, string> config)
+        public virtual async Task<string> SocketStreamAsync(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<string, string> config, CancellationToken cancellationToken)
         {
             var url = config["onlineBatchUrl"];
             var port = int.Parse(config["onlineBatchPort"]);
@@ -186,12 +199,12 @@ namespace Litle.Sdk
 
             try
             {
-                sslStream.AuthenticateAsClient(url);
+                await sslStream.AuthenticateAsClientAsync(url).ConfigureAwait(false);
             }
             catch (AuthenticationException e)
             {
                 tcpClient.Close();
-                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed", e);
+                throw new LitleOnlineException("Error establishing a network connection - SSL Authentication failed", e);
             }
 
             if ("true".Equals(config["printxml"]))
@@ -206,10 +219,10 @@ namespace Litle.Sdk
                 do
                 {
                     var byteBuffer = new byte[1024 * sizeof(char)];
-                    bytesRead = readFileStream.Read(byteBuffer, 0, byteBuffer.Length);
+                    bytesRead = await readFileStream.ReadAsync(byteBuffer, 0, byteBuffer.Length, cancellationToken).ConfigureAwait(false);
 
-                    sslStream.Write(byteBuffer, 0, bytesRead);
-                    sslStream.Flush();
+                    await sslStream.WriteAsync(byteBuffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
+                    await sslStream.FlushAsync(cancellationToken).ConfigureAwait(false);
                 } while (bytesRead != 0);
             }
 
@@ -229,9 +242,9 @@ namespace Litle.Sdk
                 do
                 {
                     var byteBuffer = new byte[1024 * sizeof(char)];
-                    bytesRead = sslStream.Read(byteBuffer, 0, byteBuffer.Length);
+                    bytesRead = await sslStream.ReadAsync(byteBuffer, 0, byteBuffer.Length, cancellationToken).ConfigureAwait(false);
 
-                    writeFileStream.Write(byteBuffer, 0, bytesRead);
+                    await writeFileStream.WriteAsync(byteBuffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
                 } while (bytesRead > 0);
             }
 
@@ -239,6 +252,11 @@ namespace Litle.Sdk
             sslStream.Close();
 
             return xmlResponseDestinationDirectory + batchName;
+        }
+
+        public virtual string SocketStream(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<string, string> config)
+        {
+            return SocketStreamAsync(xmlRequestFilePath, xmlResponseDestinationDirectory, config, CancellationToken.None).Result;
         }
 
         public virtual void FtpDropOff(string fileDirectory, string fileName, Dictionary<string, string> config)
@@ -268,7 +286,7 @@ namespace Litle.Sdk
                 var hostFile = File.ReadAllText(knownHostsFile);
                 Console.WriteLine("known host contents: " + hostFile);
             }
-            
+
             jsch.setKnownHosts(knownHostsFile);
 
             // setup for diagnostic
@@ -291,7 +309,6 @@ namespace Litle.Sdk
                     Console.WriteLine("");
                 }
             }
-           
 
             var session = jsch.getSession(username, url);
             session.setPassword(password);
@@ -307,10 +324,10 @@ namespace Litle.Sdk
                     hk = session.getHostKey();
                     Console.WriteLine("remote HostKey host: <" + hk.getHost() + "> type: <" + hk.getType() + "> fingerprint: <" + hk.getFingerPrint(jsch) + ">");
                 }
-                
+
                 var channel = session.openChannel("sftp");
                 channel.connect();
-                channelSftp = (ChannelSftp)channel;
+                channelSftp = (ChannelSftp) channel;
             }
             catch (SftpException e)
             {
@@ -371,7 +388,7 @@ namespace Litle.Sdk
 
                 var channel = session.openChannel("sftp");
                 channel.connect();
-                channelSftp = (ChannelSftp)channel;
+                channelSftp = (ChannelSftp) channel;
             }
             catch (SftpException e)
             {
@@ -430,7 +447,7 @@ namespace Litle.Sdk
 
                 var channel = session.openChannel("sftp");
                 channel.connect();
-                channelSftp = (ChannelSftp)channel;
+                channelSftp = (ChannelSftp) channel;
             }
             catch (SftpException e)
             {
@@ -462,7 +479,6 @@ namespace Litle.Sdk
 
         }
 
-      
         public struct SshConnectionInfo
         {
             public string Host;

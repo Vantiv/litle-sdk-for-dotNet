@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using System.IO;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Litle.Sdk
 {
-    public class LitleOnline : ILitleOnline
+	public class LitleOnline : ILitleOnline
     {
         private Dictionary<String, String> config;
         private Communications communication;
@@ -65,330 +66,204 @@ namespace Litle.Sdk
             this.communication = communication;
         }
 
+        public Task<authorizationResponse> AuthorizeAsync(authorization auth, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.authorizationResponse, auth, cancellationToken);
+        }
+
         public authorizationResponse Authorize(authorization auth)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();          
-            fillInReportGroup(auth);
-            request.authorization = auth;
+            return SendRequest(response => response.authorizationResponse, auth);
+        }
 
-            litleOnlineResponse response = sendToLitle(request);
-            authorizationResponse authResponse = (authorizationResponse)response.authorizationResponse;
-            return authResponse;
+        public Task<authReversalResponse> AuthReversalAsync(authReversal reversal, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.authReversalResponse, reversal, cancellationToken);
         }
 
         public authReversalResponse AuthReversal(authReversal reversal)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(reversal);
-            request.authReversal = reversal;
+            return SendRequest(response => response.authReversalResponse, reversal);
+        }
 
-            litleOnlineResponse response = sendToLitle(request);
-            authReversalResponse reversalResponse = (authReversalResponse)response.authReversalResponse;
-            return reversalResponse;
+        public Task<captureResponse> CaptureAsync(capture capture, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.captureResponse, capture, cancellationToken);
         }
 
         public captureResponse Capture(capture capture)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(capture);
-            request.capture = capture;
-
-            litleOnlineResponse response = sendToLitle(request);
-            captureResponse captureResponse = (captureResponse)response.captureResponse;
-            return captureResponse;
+            return SendRequest(response => response.captureResponse, capture);
         }
 
         public captureGivenAuthResponse CaptureGivenAuth(captureGivenAuth captureGivenAuth)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(captureGivenAuth);
-            request.captureGivenAuth = captureGivenAuth;
-
-            litleOnlineResponse response = sendToLitle(request);
-            captureGivenAuthResponse captureGivenAuthResponse = (captureGivenAuthResponse)response.captureGivenAuthResponse;
-            return captureGivenAuthResponse;
+            return SendRequest(response => response.captureGivenAuthResponse, captureGivenAuth);
         }
 
         public creditResponse Credit(credit credit)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(credit);
-            request.credit = credit;
+            return SendRequest(response => response.creditResponse, credit);
+        }
 
-            litleOnlineResponse response = sendToLitle(request);
-            creditResponse creditResponse = (creditResponse)response.creditResponse;
-            return creditResponse;
+        public Task<echeckCreditResponse> EcheckCreditAsync(echeckCredit echeckCredit, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.echeckCreditResponse, echeckCredit, cancellationToken);
         }
 
         public echeckCreditResponse EcheckCredit(echeckCredit echeckCredit)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(echeckCredit);
-            request.echeckCredit = echeckCredit;
-
-            litleOnlineResponse response = sendToLitle(request);
-            echeckCreditResponse echeckCreditResponse = (echeckCreditResponse)response.echeckCreditResponse;
-            return echeckCreditResponse;
+            return SendRequest(response => response.echeckCreditResponse, echeckCredit);
         }
 
         public echeckRedepositResponse EcheckRedeposit(echeckRedeposit echeckRedeposit)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(echeckRedeposit);
-            request.echeckRedeposit = echeckRedeposit;
+            return SendRequest(response => response.echeckRedepositResponse, echeckRedeposit);
+        }
 
-            litleOnlineResponse response = sendToLitle(request);
-            echeckRedepositResponse echeckRedepositResponse = (echeckRedepositResponse)response.echeckRedepositResponse;
-            return echeckRedepositResponse;
+        public Task<echeckSalesResponse> EcheckSaleAsync(echeckSale echeckSale, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.echeckSalesResponse, echeckSale, cancellationToken);
         }
 
         public echeckSalesResponse EcheckSale(echeckSale echeckSale)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(echeckSale);
-            request.echeckSale = echeckSale;
-
-            litleOnlineResponse response = sendToLitle(request);
-            echeckSalesResponse echeckSalesResponse = (echeckSalesResponse)response.echeckSalesResponse;
-            return echeckSalesResponse;
+            return SendRequest(response => response.echeckSalesResponse, echeckSale);
         }
 
         public echeckVerificationResponse EcheckVerification(echeckVerification echeckVerification)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(echeckVerification);
-            request.echeckVerification = echeckVerification;
+            return SendRequest(response => response.echeckVerificationResponse, echeckVerification);
+        }
 
-            litleOnlineResponse response = sendToLitle(request);
-            echeckVerificationResponse echeckVerificationResponse = (echeckVerificationResponse)response.echeckVerificationResponse;
-            return echeckVerificationResponse;
+        public Task<echeckVerificationResponse> EcheckVerificationAsync(echeckVerification echeckVerification, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.echeckVerificationResponse, echeckVerification, cancellationToken);
         }
 
         public forceCaptureResponse ForceCapture(forceCapture forceCapture)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(forceCapture);
-            request.forceCapture = forceCapture;
-
-            litleOnlineResponse response = sendToLitle(request);
-            forceCaptureResponse forceCaptureResponse = (forceCaptureResponse)response.forceCaptureResponse;
-            return forceCaptureResponse;
+            return SendRequest(response => response.forceCaptureResponse, forceCapture);
         }
 
         public saleResponse Sale(sale sale)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(sale);
-            request.sale = sale;
+            return SendRequest(response => response.saleResponse, sale);
+        }
 
-            litleOnlineResponse response = sendToLitle(request);
-            saleResponse saleResponse = (saleResponse)response.saleResponse;
-            return saleResponse;
+        public Task<registerTokenResponse> RegisterTokenAsync(registerTokenRequestType tokenRequest, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.registerTokenResponse, tokenRequest, cancellationToken);
         }
 
         public registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(tokenRequest);
-            request.registerTokenRequest = tokenRequest;
-
-            litleOnlineResponse response = sendToLitle(request);
-            registerTokenResponse registerTokenResponse = (registerTokenResponse)response.registerTokenResponse;
-            return registerTokenResponse;
+            return SendRequest(response => response.registerTokenResponse, tokenRequest);
         }
 
         public litleOnlineResponseTransactionResponseVoidResponse DoVoid(voidTxn v)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(v);
-            request.voidTxn = v;
+            return SendRequest(response => response.voidResponse, v);
+        }
 
-            litleOnlineResponse response = sendToLitle(request);
-            litleOnlineResponseTransactionResponseVoidResponse voidResponse = (litleOnlineResponseTransactionResponseVoidResponse)response.voidResponse;
-            return voidResponse;
+        public Task<litleOnlineResponseTransactionResponseEcheckVoidResponse> EcheckVoidAsync(echeckVoid v, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.echeckVoidResponse, v, cancellationToken);
         }
 
         public litleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoid(echeckVoid v)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(v);
-            request.echeckVoid = v;
-
-            litleOnlineResponse response = sendToLitle(request);
-            litleOnlineResponseTransactionResponseEcheckVoidResponse voidResponse = (litleOnlineResponseTransactionResponseEcheckVoidResponse)response.echeckVoidResponse;
-            return voidResponse;
+            return SendRequest(response => response.echeckVoidResponse, v);
         }
 
         public updateCardValidationNumOnTokenResponse UpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(updateCardValidationNumOnToken);
-            request.updateCardValidationNumOnToken = updateCardValidationNumOnToken;
-
-            litleOnlineResponse response = sendToLitle(request);
-            updateCardValidationNumOnTokenResponse updateResponse = (updateCardValidationNumOnTokenResponse)response.updateCardValidationNumOnTokenResponse;
-            return updateResponse;
+            return SendRequest(response => response.updateCardValidationNumOnTokenResponse, updateCardValidationNumOnToken);
         }
 
         public cancelSubscriptionResponse CancelSubscription(cancelSubscription cancelSubscription)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.cancelSubscription = cancelSubscription;
-
-            litleOnlineResponse response = sendToLitle(request);
-            cancelSubscriptionResponse cancelResponse = (cancelSubscriptionResponse)response.cancelSubscriptionResponse;
-            return cancelResponse;
+            return SendRequest(response => response.cancelSubscriptionResponse, cancelSubscription);
         }
 
         public updateSubscriptionResponse UpdateSubscription(updateSubscription updateSubscription)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.updateSubscription = updateSubscription;
-
-            litleOnlineResponse response = sendToLitle(request);
-            updateSubscriptionResponse updateResponse = (updateSubscriptionResponse)response.updateSubscriptionResponse;
-            return updateResponse;
+            return SendRequest(response => response.updateSubscriptionResponse, updateSubscription);
         }
 
         public activateResponse Activate(activate activate)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.activate = activate;
-
-            litleOnlineResponse response = sendToLitle(request);
-            activateResponse activateResponse = response.activateResponse;
-            return activateResponse;
+            return SendRequest(response => response.activateResponse, activate);
         }
 
         public deactivateResponse Deactivate(deactivate deactivate)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.deactivate = deactivate;
-
-            litleOnlineResponse response = sendToLitle(request);
-            deactivateResponse deactivateResponse = response.deactivateResponse;
-            return deactivateResponse;
+            return SendRequest(response => response.deactivateResponse, deactivate);
         }
 
         public loadResponse Load(load load)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.load = load;
-
-            litleOnlineResponse response = sendToLitle(request);
-            loadResponse loadResponse = response.loadResponse;
-            return loadResponse;
+            return SendRequest(response => response.loadResponse, load);
         }
 
         public unloadResponse Unload(unload unload)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.unload = unload;
+            return SendRequest(response => response.unloadResponse, unload);
+        }
 
-            litleOnlineResponse response = sendToLitle(request);
-            unloadResponse unloadResponse = response.unloadResponse;
-            return unloadResponse;
+        public Task<balanceInquiryResponse> BalanceInquiryAsync(balanceInquiry balanceInquiry, CancellationToken cancellationToken)
+        {
+            return SendRequestAsync(response => response.balanceInquiryResponse, balanceInquiry, cancellationToken);
         }
 
         public balanceInquiryResponse BalanceInquiry(balanceInquiry balanceInquiry)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.balanceInquiry = balanceInquiry;
-
-            litleOnlineResponse response = sendToLitle(request);
-            balanceInquiryResponse balanceInquiryResponse = response.balanceInquiryResponse;
-            return balanceInquiryResponse;
+            return SendRequest(response => response.balanceInquiryResponse, balanceInquiry);
         }
 
         public createPlanResponse CreatePlan(createPlan createPlan)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.createPlan = createPlan;
-
-            litleOnlineResponse response = sendToLitle(request);
-            createPlanResponse createPlanResponse = response.createPlanResponse;
-            return createPlanResponse;
+            return SendRequest(response => response.createPlanResponse, createPlan);
         }
 
         public updatePlanResponse UpdatePlan(updatePlan updatePlan)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.updatePlan = updatePlan;
-
-            litleOnlineResponse response = sendToLitle(request);
-            updatePlanResponse updatePlanResponse = response.updatePlanResponse;
-            return updatePlanResponse;
+            return SendRequest(response => response.updatePlanResponse, updatePlan);
         }
 
         public refundReversalResponse RefundReversal(refundReversal refundReversal)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.refundReversal = refundReversal;
-
-            litleOnlineResponse response = sendToLitle(request);
-            refundReversalResponse refundReversalResponse = response.refundReversalResponse;
-            return refundReversalResponse;
+            return SendRequest(response => response.refundReversalResponse, refundReversal);
         }
 
         public depositReversalResponse DepositReversal(depositReversal depositReversal)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.depositReversal = depositReversal;
-
-            litleOnlineResponse response = sendToLitle(request);
-            depositReversalResponse depositReversalResponse = response.depositReversalResponse;
-            return depositReversalResponse;
+            return SendRequest(response => response.depositReversalResponse, depositReversal);
         }
 
         public activateReversalResponse ActivateReversal(activateReversal activateReversal)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.activateReversal = activateReversal;
-
-            litleOnlineResponse response = sendToLitle(request);
-            activateReversalResponse activateReversalResponse = response.activateReversalResponse;
-            return activateReversalResponse;
+            return SendRequest(response => response.activateReversalResponse, activateReversal);
         }
 
         public deactivateReversalResponse DeactivateReversal(deactivateReversal deactivateReversal)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.deactivateReversal = deactivateReversal;
-
-            litleOnlineResponse response = sendToLitle(request);
-            deactivateReversalResponse deactivateReversalResponse = response.deactivateReversalResponse;
-            return deactivateReversalResponse;
+            return SendRequest(response => response.deactivateReversalResponse, deactivateReversal);
         }
 
         public loadReversalResponse LoadReversal(loadReversal loadReversal)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.loadReversal = loadReversal;
-
-            litleOnlineResponse response = sendToLitle(request);
-            loadReversalResponse loadReversalResponse = response.loadReversalResponse;
-            return loadReversalResponse;
+            return SendRequest(response => response.loadReversalResponse, loadReversal);
         }
 
         public unloadReversalResponse UnloadReversal(unloadReversal unloadReversal)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            request.unloadReversal = unloadReversal;
-
-            litleOnlineResponse response = sendToLitle(request);
-            unloadReversalResponse unloadReversalResponse = response.unloadReversalResponse;
-            return unloadReversalResponse;
+            return SendRequest(response => response.unloadReversalResponse, unloadReversal);
         }
 
         public fraudCheckResponse FraudCheck(fraudCheck fraudCheck)
         {
-            litleOnlineRequest request = createLitleOnlineRequest();
-            fillInReportGroup(fraudCheck);
-            request.fraudCheck = fraudCheck;
-
-            litleOnlineResponse response = sendToLitle(request);
-            fraudCheckResponse fraudCheckResponse = (fraudCheckResponse)response.fraudCheckResponse;
-            return fraudCheckResponse;
+            return SendRequest(response => response.fraudCheckResponse, fraudCheck);
         }
 
         private litleOnlineRequest createLitleOnlineRequest()
@@ -403,10 +278,149 @@ namespace Litle.Sdk
             return request;
         }
 
+        private async Task<litleOnlineResponse> sendToLitleAsync(litleOnlineRequest request, CancellationToken cancellationToken)
+        {
+            string xmlRequest = request.Serialize();
+            string xmlResponse = await communication.HttpPostAsync(xmlRequest, config, cancellationToken).ConfigureAwait(false);
+            return DeserializeResponse(xmlResponse);
+        }
+
         private litleOnlineResponse sendToLitle(litleOnlineRequest request)
         {
             string xmlRequest = request.Serialize();
-            string xmlResponse = communication.HttpPost(xmlRequest,config);
+            string xmlResponse = communication.HttpPost(xmlRequest, config);
+            return DeserializeResponse(xmlResponse);
+        }
+
+        private T SendRequest<T>(Func<litleOnlineResponse, T> getResponse, transactionRequest transaction)
+        {
+            var request = CreateRequest(transaction);
+
+            litleOnlineResponse response = sendToLitle(request);
+            return getResponse(response);
+        }
+
+        private async Task<T> SendRequestAsync<T>(Func<litleOnlineResponse, T> getResponse, transactionRequest transaction, CancellationToken cancellationToken)
+        {
+            var request = CreateRequest(transaction);
+
+            litleOnlineResponse response = await sendToLitleAsync(request, cancellationToken).ConfigureAwait(false);
+            return getResponse(response);
+        }
+
+        private litleOnlineRequest CreateRequest(transactionRequest transaction)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+
+            if (transaction is transactionTypeWithReportGroup txn)
+                fillInReportGroup(txn);
+            else if (transaction is transactionTypeWithReportGroupAndPartial txnPartial)
+                fillInReportGroup(txnPartial);
+
+            switch (transaction)
+            {
+            case authorization auth:
+                request.authorization = auth;
+                break;
+            case authReversal authReversal:
+                request.authReversal = authReversal;
+                break;
+            case capture capture:
+                request.capture = capture;
+                break;
+            case captureGivenAuth captureGivenAuth:
+                request.captureGivenAuth = captureGivenAuth;
+                break;
+            case credit cred:
+                request.credit = cred;
+                break;
+            case echeckCredit eCred:
+                request.echeckCredit = eCred;
+                break;
+            case echeckRedeposit eCheckRedeposit:
+                request.echeckRedeposit = eCheckRedeposit;
+                break;
+            case echeckSale eSale:
+                request.echeckSale = eSale;
+                break;
+            case echeckVerification eVerify:
+                request.echeckVerification = eVerify;
+                break;
+            case forceCapture fCapture:
+                request.forceCapture = fCapture;
+                break;
+            case sale s:
+                request.sale = s;
+                break;
+            case registerTokenRequestType token:
+                request.registerTokenRequest = token;
+                break;
+            case voidTxn v:
+                request.voidTxn = v;
+                break;
+            case echeckVoid eVoid:
+                request.echeckVoid = eVoid;
+                break;
+            case updateCardValidationNumOnToken updateCard:
+                request.updateCardValidationNumOnToken = updateCard;
+                break;
+            case cancelSubscription cancelSub:
+                request.cancelSubscription = cancelSub;
+                break;
+            case updateSubscription updateSub:
+                request.updateSubscription = updateSub;
+                break;
+            case activate act:
+                request.activate = act;
+                break;
+            case deactivate deAct:
+                request.deactivate = deAct;
+                break;
+            case load l:
+                request.load = l;
+                break;
+            case unload ul:
+                request.unload = ul;
+                break;
+            case balanceInquiry bal:
+                request.balanceInquiry = bal;
+                break;
+            case createPlan cPlan:
+                request.createPlan = cPlan;
+                break;
+            case updatePlan uPlan:
+                request.updatePlan = uPlan;
+                break;
+            case refundReversal refRev:
+                request.refundReversal = refRev;
+                break;
+            case depositReversal depRev:
+                request.depositReversal = depRev;
+                break;
+            case activateReversal actRev:
+                request.activateReversal = actRev;
+                break;
+            case deactivateReversal deRev:
+                request.deactivateReversal = deRev;
+                break;
+            case loadReversal lRev:
+                request.loadReversal = lRev;
+                break;
+            case unloadReversal ulRev:
+                request.unloadReversal = ulRev;
+                break;
+            case fraudCheck fraud:
+                request.fraudCheck = fraud;
+                break;
+            default:
+                throw new NotImplementedException($"Support for type: {transaction.GetType().Name} not implemented.");
+            }
+
+            return request;
+        }
+
+        private litleOnlineResponse DeserializeResponse(string xmlResponse)
+        {
             try
             {
                 litleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);
@@ -434,7 +448,7 @@ namespace Litle.Sdk
         {
             XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineResponse));
             StringReader reader = new StringReader(response);
-            litleOnlineResponse i = (litleOnlineResponse)serializer.Deserialize(reader);
+            litleOnlineResponse i = (litleOnlineResponse) serializer.Deserialize(reader);
             return i;
 
         }// deserialize the object
@@ -459,19 +473,26 @@ namespace Litle.Sdk
     public interface ILitleOnline
     {
         authorizationResponse Authorize(authorization auth);
+        Task<authorizationResponse> AuthorizeAsync(authorization auth, CancellationToken cancellationToken);
         authReversalResponse AuthReversal(authReversal reversal);
+        Task<authReversalResponse> AuthReversalAsync(authReversal reversal, CancellationToken cancellationToken);
         captureResponse Capture(capture capture);
+        Task<captureResponse> CaptureAsync(capture capture, CancellationToken cancellationToken);
         captureGivenAuthResponse CaptureGivenAuth(captureGivenAuth captureGivenAuth);
         creditResponse Credit(credit credit);
         echeckCreditResponse EcheckCredit(echeckCredit echeckCredit);
+        Task<echeckCreditResponse> EcheckCreditAsync(echeckCredit echeckCredit, CancellationToken cancellationToken);
         echeckRedepositResponse EcheckRedeposit(echeckRedeposit echeckRedeposit);
         echeckSalesResponse EcheckSale(echeckSale echeckSale);
+        Task<echeckSalesResponse> EcheckSaleAsync(echeckSale echeckSale, CancellationToken cancellationToken);
         echeckVerificationResponse EcheckVerification(echeckVerification echeckVerification);
         forceCaptureResponse ForceCapture(forceCapture forceCapture);
         saleResponse Sale(sale sale);
         registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest);
+        Task<registerTokenResponse> RegisterTokenAsync(registerTokenRequestType tokenRequest, CancellationToken cancellationToken);
         litleOnlineResponseTransactionResponseVoidResponse DoVoid(voidTxn v);
         litleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoid(echeckVoid v);
+        Task<litleOnlineResponseTransactionResponseEcheckVoidResponse> EcheckVoidAsync(echeckVoid v, CancellationToken cancellationToken);
         updateCardValidationNumOnTokenResponse UpdateCardValidationNumOnToken(updateCardValidationNumOnToken update);
     }
 }
