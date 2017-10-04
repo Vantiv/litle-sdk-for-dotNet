@@ -448,7 +448,7 @@ namespace Litle.Sdk
                 request.fraudCheck = fraud;
                 break;
             default:
-                throw new NotImplementedException($"Support for type: {transaction.GetType().Name} not implemented.");
+                throw new NotImplementedException("Support for type: " + transaction.GetType().Name + " not implemented.");
             }
 
             return request;
