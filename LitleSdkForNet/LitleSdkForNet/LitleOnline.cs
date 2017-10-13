@@ -347,13 +347,13 @@ namespace Litle.Sdk
         {
             litleOnlineRequest request = createLitleOnlineRequest();
 
-            if (transaction is transactionTypeWithReportGroup txn)
+            if (transaction is transactionTypeWithReportGroup)
             {
-                fillInReportGroup(txn);
+                fillInReportGroup((transactionTypeWithReportGroup)transaction);
             }
-            else if (transaction is transactionTypeWithReportGroupAndPartial txnPartial)
+            else if (transaction is transactionTypeWithReportGroupAndPartial)
             {
-                fillInReportGroup(txnPartial);
+                fillInReportGroup((transactionTypeWithReportGroupAndPartial)transaction);
             }
 
             switch (transaction)
