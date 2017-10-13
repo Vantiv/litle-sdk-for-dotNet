@@ -359,100 +359,165 @@ namespace Litle.Sdk
             switch (transaction)
             {
             case authorization auth:
-                request.authorization = auth;
-                break;
-            case authReversal authReversal:
-                request.authReversal = authReversal;
-                break;
-            case capture capture:
-                request.capture = capture;
-                break;
-            case captureGivenAuth captureGivenAuth:
-                request.captureGivenAuth = captureGivenAuth;
-                break;
-            case credit cred:
-                request.credit = cred;
-                break;
-            case echeckCredit eCred:
-                request.echeckCredit = eCred;
-                break;
-            case echeckRedeposit eCheckRedeposit:
-                request.echeckRedeposit = eCheckRedeposit;
-                break;
-            case echeckSale eSale:
-                request.echeckSale = eSale;
-                break;
-            case echeckVerification eVerify:
-                request.echeckVerification = eVerify;
-                break;
-            case forceCapture fCapture:
-                request.forceCapture = fCapture;
-                break;
-            case sale s:
-                request.sale = s;
-                break;
-            case registerTokenRequestType token:
-                request.registerTokenRequest = token;
-                break;
-            case voidTxn v:
-                request.voidTxn = v;
-                break;
-            case echeckVoid eVoid:
-                request.echeckVoid = eVoid;
-                break;
-            case updateCardValidationNumOnToken updateCard:
-                request.updateCardValidationNumOnToken = updateCard;
-                break;
-            case cancelSubscription cancelSub:
-                request.cancelSubscription = cancelSub;
-                break;
-            case updateSubscription updateSub:
-                request.updateSubscription = updateSub;
-                break;
-            case activate act:
-                request.activate = act;
-                break;
-            case deactivate deAct:
-                request.deactivate = deAct;
-                break;
-            case load l:
-                request.load = l;
-                break;
-            case unload ul:
-                request.unload = ul;
-                break;
-            case balanceInquiry bal:
-                request.balanceInquiry = bal;
-                break;
-            case createPlan cPlan:
-                request.createPlan = cPlan;
-                break;
-            case updatePlan uPlan:
-                request.updatePlan = uPlan;
-                break;
-            case refundReversal refRev:
-                request.refundReversal = refRev;
-                break;
-            case depositReversal depRev:
-                request.depositReversal = depRev;
-                break;
-            case activateReversal actRev:
-                request.activateReversal = actRev;
-                break;
-            case deactivateReversal deRev:
-                request.deactivateReversal = deRev;
-                break;
-            case loadReversal lRev:
-                request.loadReversal = lRev;
-                break;
-            case unloadReversal ulRev:
-                request.unloadReversal = ulRev;
-                break;
-            case fraudCheck fraud:
-                request.fraudCheck = fraud;
-                break;
-            default:
-                throw new NotImplementedException("Support for type: " + transaction.GetType().Name + " not implemented.");
+                {
+                    request.authorization = auth;
+                    break;
+                }
+                case authReversal authReversal:
+                {
+                    request.authReversal = authReversal;
+                    break;
+                }
+                case capture capture:
+                {
+                    request.capture = capture;
+                    break;
+                }
+                case captureGivenAuth captureGivenAuth:
+                {
+                    request.captureGivenAuth = captureGivenAuth;
+                    break;
+                }
+                case credit cred:
+                {
+                    request.credit = cred;
+                    break;
+                }
+                case echeckCredit eCred:
+                {
+                    request.echeckCredit = eCred;
+                    break;
+                }
+                case echeckRedeposit eCheckRedeposit:
+                {
+                    request.echeckRedeposit = eCheckRedeposit;
+                    break;
+                }
+                case echeckSale eSale:
+                {
+                    request.echeckSale = eSale;
+                    break;
+                }
+                case echeckVerification eVerify:
+                {
+                    request.echeckVerification = eVerify;
+                    break;
+                }
+                case forceCapture fCapture:
+                {
+                    request.forceCapture = fCapture;
+                    break;
+                }
+                case sale s:
+                {
+                    request.sale = s;
+                    break;
+                }
+                case registerTokenRequestType token:
+                {
+                    request.registerTokenRequest = token;
+                    break;
+                }
+                case voidTxn v:
+                {
+                    request.voidTxn = v;
+                    break;
+                }
+                case echeckVoid eVoid:
+                {
+                    request.echeckVoid = eVoid;
+                    break;
+                }
+                case updateCardValidationNumOnToken updateCard:
+                {
+                    request.updateCardValidationNumOnToken = updateCard;
+                    break;
+                }
+                case cancelSubscription cancelSub:
+                {
+                    request.cancelSubscription = cancelSub;
+                    break;
+                }
+                case updateSubscription updateSub:
+                {
+                    request.updateSubscription = updateSub;
+                    break;
+                }
+                case activate act:
+                {
+                    request.activate = act;
+                    break;
+                }
+                case deactivate deAct:
+                {
+                    request.deactivate = deAct;
+                    break;
+                }
+                case load l:
+                {
+                    request.load = l;
+                    break;
+                }
+                case unload ul:
+                {
+                    request.unload = ul;
+                    break;
+                }
+                case balanceInquiry bal:
+                {
+                    request.balanceInquiry = bal;
+                    break;
+                }
+                case createPlan cPlan:
+                {
+                    request.createPlan = cPlan;
+                    break;
+                }
+                case updatePlan uPlan:
+                {
+                    request.updatePlan = uPlan;
+                    break;
+                }
+                case refundReversal refRev:
+                {
+                    request.refundReversal = refRev;
+                    break;
+                }
+                case depositReversal depRev:
+                {
+                    request.depositReversal = depRev;
+                    break;
+                }
+                case activateReversal actRev:
+                {
+                    request.activateReversal = actRev;
+                    break;
+                }
+                case deactivateReversal deRev:
+                {
+                    request.deactivateReversal = deRev;
+                    break;
+                }
+                case loadReversal lRev:
+                {
+                    request.loadReversal = lRev;
+                    break;
+                }
+                case unloadReversal ulRev:
+                {
+                    request.unloadReversal = ulRev;
+                    break;
+                }
+                case fraudCheck fraud:
+                {
+                    request.fraudCheck = fraud;
+                    break;
+                }
+                default:
+                {
+                    throw new NotImplementedException("Support for type: " + transaction.GetType().Name +
+                                                      " not implemented.");
+                }
             }
 
             return request;
