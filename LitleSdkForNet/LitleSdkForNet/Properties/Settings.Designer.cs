@@ -85,7 +85,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sdk1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DotNet")]
         public string sftpUsername {
             get {
                 return ((string)(this["sftpUsername"]));
@@ -97,7 +97,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Up5Gp5I6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DotNet")]
         public string sftpPassword {
             get {
                 return ((string)(this["sftpPassword"]));
@@ -217,7 +217,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BATCHSDKA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DotNet")]
         public string username {
             get {
                 return ((string)(this["username"]));
@@ -229,7 +229,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("certpass")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DotNet")]
         public string password {
             get {
                 return ((string)(this["password"]));
@@ -241,7 +241,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0180")]
+        [global::System.Configuration.DefaultSettingValueAttribute("011")]
         public string merchantId {
             get {
                 return ((string)(this["merchantId"]));

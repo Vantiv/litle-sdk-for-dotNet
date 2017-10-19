@@ -18,10 +18,10 @@
       <Value Profile="(Default)">C:\Vantiv\dll\knownhosts</Value>
     </Setting>
     <Setting Name="sftpUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)">sdk1</Value>
+      <Value Profile="(Default)">DotNet</Value>
     </Setting>
     <Setting Name="sftpPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Up5Gp5I6</Value>
+      <Value Profile="(Default)">DotNet</Value>
     </Setting>
     <Setting Name="onlineBatchUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">payments.vantivprelive.com</Value>
@@ -51,13 +51,13 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BATCHSDKA</Value>
+      <Value Profile="(Default)">DotNet</Value>
     </Setting>
     <Setting Name="password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">certpass</Value>
+      <Value Profile="(Default)">DotNet</Value>
     </Setting>
     <Setting Name="merchantId" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0180</Value>
+      <Value Profile="(Default)">011</Value>
     </Setting>
   </Settings>
 </SettingsFile>
