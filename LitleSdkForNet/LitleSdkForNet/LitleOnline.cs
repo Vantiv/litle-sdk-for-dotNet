@@ -356,169 +356,170 @@ namespace Litle.Sdk
                 fillInReportGroup((transactionTypeWithReportGroupAndPartial)transaction);
             }
 
-            switch (transaction)
-            {
-            case authorization auth:
+            
+
+                if(transaction is authorization auth) 
                 {
+                   
                     request.authorization = auth;
-                    break;
+                   
                 }
-                case authReversal authReversal:
+               else if (transaction is authReversal authReversal)
                 {
                     request.authReversal = authReversal;
-                    break;
+                    
                 }
-                case capture capture:
+                else if(transaction is capture capture)
                 {
                     request.capture = capture;
-                    break;
+                   
                 }
-                case captureGivenAuth captureGivenAuth:
+                else if(transaction is captureGivenAuth captureGivenAuth)
                 {
                     request.captureGivenAuth = captureGivenAuth;
-                    break;
+                    
                 }
-                case credit cred:
+                else if(transaction is credit cred)
                 {
                     request.credit = cred;
-                    break;
+                   
                 }
-                case echeckCredit eCred:
+                else if(transaction is echeckCredit eCred)
                 {
                     request.echeckCredit = eCred;
-                    break;
+                    
                 }
-                case echeckRedeposit eCheckRedeposit:
+                else if(transaction is echeckRedeposit eCheckRedeposit)
                 {
                     request.echeckRedeposit = eCheckRedeposit;
-                    break;
+                   
                 }
-                case echeckSale eSale:
+                else if(transaction is echeckSale eSale)
                 {
                     request.echeckSale = eSale;
-                    break;
+                   
                 }
-                case echeckVerification eVerify:
+                else if(transaction is echeckVerification eVerify)
                 {
                     request.echeckVerification = eVerify;
-                    break;
+                   
                 }
-                case forceCapture fCapture:
+                else if(transaction is forceCapture fCapture)
                 {
                     request.forceCapture = fCapture;
-                    break;
+                    
                 }
-                case sale s:
+                else if(transaction is  sale s)
                 {
                     request.sale = s;
-                    break;
+                    
                 }
-                case registerTokenRequestType token:
+                else if(transaction is registerTokenRequestType token)
                 {
                     request.registerTokenRequest = token;
-                    break;
+                   
                 }
-                case voidTxn v:
+                else if(transaction is voidTxn v)
                 {
                     request.voidTxn = v;
-                    break;
+                    
                 }
-                case echeckVoid eVoid:
+                else if(transaction is echeckVoid eVoid)
                 {
                     request.echeckVoid = eVoid;
-                    break;
+                    
                 }
-                case updateCardValidationNumOnToken updateCard:
+                else if(transaction is updateCardValidationNumOnToken updateCard)
                 {
                     request.updateCardValidationNumOnToken = updateCard;
-                    break;
+                    
                 }
-                case cancelSubscription cancelSub:
+                else if(transaction is cancelSubscription cancelSub)
                 {
                     request.cancelSubscription = cancelSub;
-                    break;
+                  
                 }
-                case updateSubscription updateSub:
+                else if(transaction is updateSubscription updateSub)
                 {
                     request.updateSubscription = updateSub;
-                    break;
+                  
                 }
-                case activate act:
+                else if(transaction is activate act)
                 {
                     request.activate = act;
-                    break;
+                    
                 }
-                case deactivate deAct:
+                else if(transaction is deactivate deAct)
                 {
                     request.deactivate = deAct;
-                    break;
+                   
                 }
-                case load l:
+                else if(transaction is load l)
                 {
                     request.load = l;
-                    break;
+                   
                 }
-                case unload ul:
+                else if(transaction is unload ul)
                 {
                     request.unload = ul;
-                    break;
+                   
                 }
-                case balanceInquiry bal:
+                else if(transaction is balanceInquiry bal)
                 {
                     request.balanceInquiry = bal;
-                    break;
+                   
                 }
-                case createPlan cPlan:
+                else if(transaction is createPlan cPlan)
                 {
                     request.createPlan = cPlan;
-                    break;
+                   
                 }
-                case updatePlan uPlan:
+                else if(transaction is updatePlan uPlan)
                 {
                     request.updatePlan = uPlan;
-                    break;
+                    
                 }
-                case refundReversal refRev:
+                else if(transaction is refundReversal refRev)
                 {
                     request.refundReversal = refRev;
-                    break;
+                   
                 }
-                case depositReversal depRev:
+                else if(transaction is depositReversal depRev)
                 {
                     request.depositReversal = depRev;
-                    break;
+                   
                 }
-                case activateReversal actRev:
+                else if(transaction is activateReversal actRev)
                 {
                     request.activateReversal = actRev;
-                    break;
+                    
                 }
-                case deactivateReversal deRev:
+                else if(transaction is deactivateReversal deRev)
                 {
                     request.deactivateReversal = deRev;
-                    break;
+                    
                 }
-                case loadReversal lRev:
+                else if(transaction is loadReversal lRev)
                 {
                     request.loadReversal = lRev;
-                    break;
+                  
                 }
-                case unloadReversal ulRev:
+                else if(transaction is unloadReversal ulRev)
                 {
                     request.unloadReversal = ulRev;
-                    break;
+                    
                 }
-                case fraudCheck fraud:
+                else if(transaction is fraudCheck fraud)
                 {
                     request.fraudCheck = fraud;
-                    break;
+                   
                 }
-                default:
+                else
                 {
                     throw new NotImplementedException("Support for type: " + transaction.GetType().Name +
                                                       " not implemented.");
-                }
-            }
+               }
+          
 
             return request;
         }

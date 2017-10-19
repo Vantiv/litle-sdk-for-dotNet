@@ -47,7 +47,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testAuthReversal()
+        public void TestAuthReversal()
         {
             authReversal authreversal = new authReversal();
             authreversal.litleTxnId = 12345678000;
@@ -67,12 +67,14 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testCapture()
+        public void TestCapture()
         {
-            capture caputure = new capture();
-            caputure.litleTxnId = 123456000;
-            caputure.amount = 106;
-            caputure.payPalNotes = "Notes";
+            capture caputure = new capture
+            {
+                litleTxnId = 123456000,
+                amount = 106,
+                payPalNotes = "Notes"
+            };
 
 
             var mock = new Mock<Communications>();
@@ -87,9 +89,9 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testCaptureGivenAuth()
+        public void TestCaptureGivenAuth()
         {
-            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            var capturegivenauth = new captureGivenAuth();
             capturegivenauth.orderId = "12344";
             capturegivenauth.amount = 106;
             authInformation authinfo = new authInformation();
@@ -116,7 +118,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testCredit()
+        public void TestCredit()
         {
             credit credit = new credit();
             credit.orderId = "12344";
@@ -140,7 +142,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testEcheckCredit()
+        public void TestEcheckCredit()
         {
             echeckCredit echeckcredit = new echeckCredit();
             echeckcredit.amount = 12;
@@ -158,7 +160,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testEcheckRedeposit()
+        public void TestEcheckRedeposit()
         {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
@@ -175,7 +177,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testEcheckSale()
+        public void TestEcheckSale()
         {
             echeckSale echecksale = new echeckSale();
             echecksale.orderId = "12345";
@@ -207,7 +209,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testEcheckVerification()
+        public void TestEcheckVerification()
         {
             echeckVerification echeckverification = new echeckVerification();
             echeckverification.orderId = "12345";
@@ -239,7 +241,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testForceCapture()
+        public void TestForceCapture()
         {
             forceCapture forcecapture = new forceCapture();
             forcecapture.orderId = "12344";
@@ -263,7 +265,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testSale()
+        public void TestSale()
         {
             sale sale = new sale();
             sale.orderId = "12344";
@@ -287,7 +289,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testToken()
+        public void TestToken()
         {
             registerTokenRequestType token = new registerTokenRequestType();
             token.orderId = "12344";
@@ -307,7 +309,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testActivate()
+        public void TestActivate()
         {
             activate activate = new activate();
             activate.orderId = "2";
@@ -326,7 +328,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testDeactivate()
+        public void TestDeactivate()
         {
             deactivate deactivate = new deactivate();
             deactivate.orderId = "2";
@@ -345,7 +347,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testLoad()
+        public void TestLoad()
         {
             load load = new load();
             load.orderId = "2";
@@ -364,7 +366,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testUnload()
+        public void TestUnload()
         {
             unload unload = new unload();
             unload.orderId = "2";
@@ -383,7 +385,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testBalanceInquiry()
+        public void TestBalanceInquiry()
         {
             balanceInquiry balanceInquiry = new balanceInquiry();
             balanceInquiry.orderId = "2";
@@ -402,7 +404,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testCreatePlan()
+        public void TestCreatePlan()
         {
             createPlan createPlan = new createPlan();
             createPlan.planCode = "theCode";
@@ -419,7 +421,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testUpdatePlan()
+        public void TestUpdatePlan()
         {
             updatePlan updatePlan = new updatePlan();
             updatePlan.planCode = "theCode";
@@ -436,7 +438,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testLitleOnlineException()
+        public void TestLitleOnlineException()
         {
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -467,7 +469,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testInvalidOperationException()
+        public void TestInvalidOperationException()
         {
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -498,7 +500,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testDefaultReportGroup()
+        public void TestDefaultReportGroup()
         {
             authorization authorization = new authorization();
             authorization.orderId = "12344";
@@ -522,7 +524,7 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testSetMerchantSdk()
+        public void TestSetMerchantSdk()
         {
 
         }
