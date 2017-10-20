@@ -367,9 +367,9 @@ namespace Litle.Sdk
                     request.authReversal = (authReversal) transaction;
                     
                 }
-                else if(transaction is capture capture)
+                else if(transaction is capture)
                 {
-                    request.capture = capture;
+                    request.capture = (capture) transaction;
                    
                 }
                 else if(transaction is captureGivenAuth )
