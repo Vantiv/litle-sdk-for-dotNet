@@ -358,15 +358,13 @@ namespace Litle.Sdk
 
             
 
-                if(transaction is authorization auth) 
+                if(transaction is authorization) 
                 {
-                   
-                    request.authorization = auth;
-                   
+                    request.authorization = (authorization) transaction;
                 }
-               else if (transaction is authReversal authReversal)
+               else if (transaction is authReversal )
                 {
-                    request.authReversal = authReversal;
+                    request.authReversal = (authReversal) transaction;
                     
                 }
                 else if(transaction is capture capture)
@@ -374,151 +372,151 @@ namespace Litle.Sdk
                     request.capture = capture;
                    
                 }
-                else if(transaction is captureGivenAuth captureGivenAuth)
+                else if(transaction is captureGivenAuth )
                 {
-                    request.captureGivenAuth = captureGivenAuth;
+                    request.captureGivenAuth = (captureGivenAuth) transaction;
                     
                 }
-                else if(transaction is credit cred)
+                else if(transaction is credit )
                 {
-                    request.credit = cred;
+                    request.credit = (credit) transaction;
                    
                 }
-                else if(transaction is echeckCredit eCred)
+                else if(transaction is echeckCredit )
                 {
-                    request.echeckCredit = eCred;
+                    request.echeckCredit = (echeckCredit) transaction;
                     
                 }
-                else if(transaction is echeckRedeposit eCheckRedeposit)
+                else if(transaction is echeckRedeposit )
                 {
-                    request.echeckRedeposit = eCheckRedeposit;
+                    request.echeckRedeposit = (echeckRedeposit) transaction;
                    
                 }
-                else if(transaction is echeckSale eSale)
+                else if(transaction is echeckSale )
                 {
-                    request.echeckSale = eSale;
+                    request.echeckSale = (echeckSale) transaction;
                    
                 }
-                else if(transaction is echeckVerification eVerify)
+                else if(transaction is echeckVerification )
                 {
-                    request.echeckVerification = eVerify;
+                    request.echeckVerification = (echeckVerification) transaction;
                    
                 }
-                else if(transaction is forceCapture fCapture)
+                else if(transaction is forceCapture )
                 {
-                    request.forceCapture = fCapture;
+                    request.forceCapture = (forceCapture) transaction;
                     
                 }
-                else if(transaction is  sale s)
+                else if(transaction is  sale )
                 {
-                    request.sale = s;
+                    request.sale = (sale) transaction;
                     
                 }
-                else if(transaction is registerTokenRequestType token)
+                else if(transaction is registerTokenRequestType )
                 {
-                    request.registerTokenRequest = token;
+                    request.registerTokenRequest = (registerTokenRequestType) transaction;
                    
                 }
-                else if(transaction is voidTxn v)
+                else if(transaction is voidTxn)
                 {
-                    request.voidTxn = v;
+                    request.voidTxn = (voidTxn) transaction;
                     
                 }
-                else if(transaction is echeckVoid eVoid)
+                else if(transaction is echeckVoid )
                 {
-                    request.echeckVoid = eVoid;
+                    request.echeckVoid = (echeckVoid) transaction;
                     
                 }
-                else if(transaction is updateCardValidationNumOnToken updateCard)
+                else if(transaction is updateCardValidationNumOnToken )
                 {
-                    request.updateCardValidationNumOnToken = updateCard;
+                    request.updateCardValidationNumOnToken = (updateCardValidationNumOnToken) transaction;
                     
                 }
-                else if(transaction is cancelSubscription cancelSub)
+                else if(transaction is cancelSubscription )
                 {
-                    request.cancelSubscription = cancelSub;
+                    request.cancelSubscription = (cancelSubscription) transaction;
                   
                 }
-                else if(transaction is updateSubscription updateSub)
+                else if(transaction is updateSubscription )
                 {
-                    request.updateSubscription = updateSub;
+                    request.updateSubscription = (updateSubscription) transaction;
                   
                 }
-                else if(transaction is activate act)
+                else if(transaction is activate )
                 {
-                    request.activate = act;
+                    request.activate = (activate) transaction;
                     
                 }
-                else if(transaction is deactivate deAct)
+                else if(transaction is deactivate )
                 {
-                    request.deactivate = deAct;
+                    request.deactivate = (deactivate) transaction;
                    
                 }
-                else if(transaction is load l)
+                else if(transaction is load)
                 {
-                    request.load = l;
+                    request.load = (load) transaction;
                    
                 }
-                else if(transaction is unload ul)
+                else if(transaction is unload)
                 {
-                    request.unload = ul;
+                    request.unload = (unload) transaction;
                    
                 }
-                else if(transaction is balanceInquiry bal)
+                else if(transaction is balanceInquiry)
                 {
-                    request.balanceInquiry = bal;
+                    request.balanceInquiry = (balanceInquiry) transaction;
                    
                 }
-                else if(transaction is createPlan cPlan)
+                else if(transaction is createPlan)
                 {
-                    request.createPlan = cPlan;
+                    request.createPlan = (createPlan) transaction;
                    
                 }
-                else if(transaction is updatePlan uPlan)
+                else if(transaction is updatePlan)
                 {
-                    request.updatePlan = uPlan;
+                    request.updatePlan = (updatePlan) transaction;
                     
                 }
-                else if(transaction is refundReversal refRev)
+                else if(transaction is refundReversal)
                 {
-                    request.refundReversal = refRev;
+                    request.refundReversal = (refundReversal) transaction;
                    
                 }
-                else if(transaction is depositReversal depRev)
+                else if(transaction is depositReversal)
                 {
-                    request.depositReversal = depRev;
+                    request.depositReversal = (depositReversal) transaction;
                    
                 }
-                else if(transaction is activateReversal actRev)
+                else if(transaction is activateReversal)
                 {
-                    request.activateReversal = actRev;
+                    request.activateReversal = (activateReversal) transaction;
                     
                 }
-                else if(transaction is deactivateReversal deRev)
+                else if(transaction is deactivateReversal)
                 {
-                    request.deactivateReversal = deRev;
+                    request.deactivateReversal = (deactivateReversal) transaction;
                     
                 }
-                else if(transaction is loadReversal lRev)
+                else if(transaction is loadReversal)
                 {
-                    request.loadReversal = lRev;
+                    request.loadReversal = (loadReversal) transaction;
                   
                 }
-                else if(transaction is unloadReversal ulRev)
+                else if(transaction is unloadReversal)
                 {
-                    request.unloadReversal = ulRev;
+                    request.unloadReversal = (unloadReversal) transaction;
                     
                 }
-                else if(transaction is fraudCheck fraud)
+                else if(transaction is fraudCheck)
                 {
-                    request.fraudCheck = fraud;
+                    request.fraudCheck = (fraudCheck) transaction;
                    
                 }
                 else
                 {
                     throw new NotImplementedException("Support for type: " + transaction.GetType().Name +
                                                       " not implemented.");
-               }
+                }
           
 
             return request;
