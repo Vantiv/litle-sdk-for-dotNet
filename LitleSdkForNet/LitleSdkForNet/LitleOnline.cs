@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -303,27 +304,32 @@ namespace Litle.Sdk
 
         private litleOnlineRequest createLitleOnlineRequest()
         {
-            litleOnlineRequest request = new litleOnlineRequest();
-            request.merchantId = config["merchantId"];
-            request.merchantSdk = "DotNet;9.12.4";
-            authentication authentication = new authentication();
-            authentication.password = config["password"];
-            authentication.user = config["username"];
+            litleOnlineRequest request = new litleOnlineRequest
+            {
+                merchantId = config["merchantId"],
+                merchantSdk = "DotNet;9.12.4"
+            };
+            authentication authentication = new authentication
+            {
+                password = config["password"],
+                user = config["username"]
+            };
             request.authentication = authentication;
             return request;
         }
 
         private async Task<litleOnlineResponse> sendToLitleAsync(litleOnlineRequest request, CancellationToken cancellationToken)
         {
-            string xmlRequest = request.Serialize();
-            string xmlResponse = await communication.HttpPostAsync(xmlRequest, config, cancellationToken).ConfigureAwait(false);
+            var xmlRequest = request.Serialize();
+            var xmlResponse = await communication.HttpPostAsync(xmlRequest, config, cancellationToken).ConfigureAwait(false);
             return DeserializeResponse(xmlResponse);
         }
 
         private litleOnlineResponse sendToLitle(litleOnlineRequest request)
         {
-            string xmlRequest = request.Serialize();
-            string xmlResponse = communication.HttpPost(xmlRequest, config);
+            var xmlRequest = request.Serialize();
+            var xmlResponse = communication.HttpPost(xmlRequest, config);
+
             return DeserializeResponse(xmlResponse);
         }
 
@@ -349,15 +355,12 @@ namespace Litle.Sdk
 
             if (transaction is transactionTypeWithReportGroup)
             {
-                fillInReportGroup((transactionTypeWithReportGroup)transaction);
+                FillInReportGroup((transactionTypeWithReportGroup)transaction);
             }
             else if (transaction is transactionTypeWithReportGroupAndPartial)
             {
-                fillInReportGroup((transactionTypeWithReportGroupAndPartial)transaction);
+                FillInReportGroup((transactionTypeWithReportGroupAndPartial)transaction);
             }
-
-            
-
                 if(transaction is authorization) 
                 {
                     request.authorization = (authorization) transaction;
@@ -365,172 +368,150 @@ namespace Litle.Sdk
                else if (transaction is authReversal )
                 {
                     request.authReversal = (authReversal) transaction;
-                    
                 }
                 else if(transaction is capture)
                 {
                     request.capture = (capture) transaction;
-                   
                 }
                 else if(transaction is captureGivenAuth )
                 {
                     request.captureGivenAuth = (captureGivenAuth) transaction;
-                    
                 }
                 else if(transaction is credit )
                 {
                     request.credit = (credit) transaction;
-                   
                 }
                 else if(transaction is echeckCredit )
                 {
                     request.echeckCredit = (echeckCredit) transaction;
-                    
                 }
                 else if(transaction is echeckRedeposit )
                 {
                     request.echeckRedeposit = (echeckRedeposit) transaction;
-                   
                 }
                 else if(transaction is echeckSale )
                 {
                     request.echeckSale = (echeckSale) transaction;
-                   
                 }
                 else if(transaction is echeckVerification )
                 {
                     request.echeckVerification = (echeckVerification) transaction;
-                   
                 }
                 else if(transaction is forceCapture )
                 {
                     request.forceCapture = (forceCapture) transaction;
-                    
                 }
                 else if(transaction is  sale )
                 {
                     request.sale = (sale) transaction;
-                    
                 }
                 else if(transaction is registerTokenRequestType )
                 {
                     request.registerTokenRequest = (registerTokenRequestType) transaction;
-                   
                 }
                 else if(transaction is voidTxn)
                 {
                     request.voidTxn = (voidTxn) transaction;
-                    
                 }
                 else if(transaction is echeckVoid )
                 {
                     request.echeckVoid = (echeckVoid) transaction;
-                    
                 }
                 else if(transaction is updateCardValidationNumOnToken )
                 {
                     request.updateCardValidationNumOnToken = (updateCardValidationNumOnToken) transaction;
-                    
                 }
                 else if(transaction is cancelSubscription )
                 {
                     request.cancelSubscription = (cancelSubscription) transaction;
-                  
                 }
                 else if(transaction is updateSubscription )
                 {
                     request.updateSubscription = (updateSubscription) transaction;
-                  
                 }
                 else if(transaction is activate )
                 {
                     request.activate = (activate) transaction;
-                    
                 }
                 else if(transaction is deactivate )
                 {
                     request.deactivate = (deactivate) transaction;
-                   
                 }
                 else if(transaction is load)
                 {
                     request.load = (load) transaction;
-                   
                 }
                 else if(transaction is unload)
                 {
                     request.unload = (unload) transaction;
-                   
                 }
                 else if(transaction is balanceInquiry)
                 {
                     request.balanceInquiry = (balanceInquiry) transaction;
-                   
                 }
                 else if(transaction is createPlan)
                 {
                     request.createPlan = (createPlan) transaction;
-                   
                 }
                 else if(transaction is updatePlan)
                 {
                     request.updatePlan = (updatePlan) transaction;
-                    
                 }
                 else if(transaction is refundReversal)
                 {
                     request.refundReversal = (refundReversal) transaction;
-                   
                 }
                 else if(transaction is depositReversal)
                 {
                     request.depositReversal = (depositReversal) transaction;
-                   
                 }
                 else if(transaction is activateReversal)
                 {
                     request.activateReversal = (activateReversal) transaction;
-                    
                 }
                 else if(transaction is deactivateReversal)
                 {
                     request.deactivateReversal = (deactivateReversal) transaction;
-                    
                 }
                 else if(transaction is loadReversal)
                 {
                     request.loadReversal = (loadReversal) transaction;
-                  
                 }
                 else if(transaction is unloadReversal)
                 {
                     request.unloadReversal = (unloadReversal) transaction;
-                    
                 }
                 else if(transaction is fraudCheck)
                 {
                     request.fraudCheck = (fraudCheck) transaction;
-                   
                 }
                 else
                 {
                     throw new NotImplementedException("Support for type: " + transaction.GetType().Name +
                                                       " not implemented.");
                 }
-          
 
             return request;
         }
 
         private litleOnlineResponse DeserializeResponse(string xmlResponse)
         {
+            // OpenAccess failure responses are returned with a different namespace;
+            // so, we need to clean that up before moving in to deserialization
+            const string pattern = "http://www.litle.com/schema/online";
+            var rgx = new Regex(pattern);
+            if (xmlResponse.Contains(pattern))
+            {
+                xmlResponse = rgx.Replace(xmlResponse, "http://www.litle.com/schema");
+            }
             try
             {
                 litleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);
-                if ("1".Equals(litleOnlineResponse.response))
+                if (!"0".Equals(litleOnlineResponse.response))
                 {
                     throw new LitleOnlineException(litleOnlineResponse.message);
                 }
+
                 return litleOnlineResponse;
             }
             catch (InvalidOperationException ioe)
@@ -539,24 +520,32 @@ namespace Litle.Sdk
             }
         }
 
-        public static String SerializeObject(litleOnlineRequest req)
+        /*
+         * serialize the object
+         */
+        public static string SerializeObject(litleOnlineRequest req)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineRequest));
             MemoryStream ms = new MemoryStream();
             serializer.Serialize(ms, req);
-            return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
-        }// serialize the xml
+            
+            // return string is UTF8 encoded.
+            return Encoding.UTF8.GetString(ms.GetBuffer());
+        }
 
+        /*
+         * deserialize the object
+         */
         public static litleOnlineResponse DeserializeObject(string response)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineResponse));
-            StringReader reader = new StringReader(response);
-            litleOnlineResponse i = (litleOnlineResponse) serializer.Deserialize(reader);
-            return i;
+            var serializer = new XmlSerializer(typeof(litleOnlineResponse));
+            var reader = new StringReader(response);
+            var deserializedResponse = (litleOnlineResponse) serializer.Deserialize(reader);
+            return deserializedResponse;
 
-        }// deserialize the object
+        }
 
-        private void fillInReportGroup(transactionTypeWithReportGroup txn)
+        private void FillInReportGroup(transactionTypeWithReportGroup txn)
         {
             if (txn.reportGroup == null)
             {
@@ -564,7 +553,7 @@ namespace Litle.Sdk
             }
         }
 
-        private void fillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
+        private void FillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
         {
             if (txn.reportGroup == null)
             {
