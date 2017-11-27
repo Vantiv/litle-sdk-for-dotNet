@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Litle.Sdk
 {
@@ -458,10 +459,18 @@ namespace Litle.Sdk
         {
             var xmlRequest = request.Serialize();
             var xmlResponse = _communication.HttpPost(xmlRequest,_config);
+            // OpenAccess failure responses are returned with a different namespace;
+            // so, we need to clean that up before moving in to deserialization
+            const string pattern = "http://www.litle.com/schema/online";
+            var rgx = new Regex(pattern);
+            if (xmlResponse.Contains(pattern))
+            {
+                xmlResponse = rgx.Replace(xmlResponse, "http://www.litle.com/schema");
+            }
             try
             {
                 var litleOnlineResponse = DeserializeObject(xmlResponse);
-                if ("1".Equals(litleOnlineResponse.response))
+                if (!"0".Equals(litleOnlineResponse.response))
                 {
                     throw new LitleOnlineException(litleOnlineResponse.message);
                 }
