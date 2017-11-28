@@ -101,8 +101,9 @@ namespace Litle.Sdk
             }
 
             var uri = config["url"];
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-            var req = (HttpWebRequest) WebRequest.Create(uri);
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11; 
+            var req = (HttpWebRequest)WebRequest.Create(uri);
 
             var neuter = false;
             if (config.ContainsKey("neuterAccountNums"))
