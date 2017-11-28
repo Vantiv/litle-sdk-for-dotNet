@@ -1,24 +1,26 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Net;
-using Tamir.SharpSsh.jsch;
-using System.Net.Sockets;
 using System.Net.Security;
+using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using Tamir.SharpSsh.jsch;
 
 namespace Litle.Sdk
 {
-    public class Communications
+	public class Communications
     {
         private static readonly object SynLock = new object();
 
         public event EventHandler HttpAction;
-        
+
         private void OnHttpAction(RequestType requestType, string xmlPayload, bool neuter)
         {
             if (HttpAction != null)
@@ -62,7 +64,7 @@ namespace Litle.Sdk
             inputXml = rgx2.Replace(inputXml, "<accNum>xxxxxxxxxx</accNum>");
             inputXml = rgx3.Replace(inputXml, "<track>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</track>");
         }
-        
+
         public void Log(string logMessage, string logFile, bool neuter)
         {
             lock (SynLock)
@@ -80,18 +82,29 @@ namespace Litle.Sdk
             }
         }
 
+        public virtual Task<string> HttpPostAsync(string xmlRequest, Dictionary<string, string> config, CancellationToken cancellationToken)
+        {
+            return HttpPostCoreAsync(xmlRequest, config, isAsync: true, cancellationToken: cancellationToken);
+        }
+
         public virtual string HttpPost(string xmlRequest, Dictionary<string, string> config)
+        {
+            return HttpPostCoreAsync(xmlRequest, config, isAsync: false).GetAwaiter().GetResult();
+        }
+
+        private async Task<string> HttpPostCoreAsync(string xmlRequest, Dictionary<string, string> config, bool isAsync, CancellationToken cancellationToken = default(CancellationToken))
         {
             string logFile = null;
             if (config.ContainsKey("logFile"))
             {
                 logFile = config["logFile"];
             }
-            
+
             var uri = config["url"];
+
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11; 
             var req = (HttpWebRequest)WebRequest.Create(uri);
-            
+
             var neuter = false;
             if (config.ContainsKey("neuterAccountNums"))
             {
@@ -101,15 +114,16 @@ namespace Litle.Sdk
             var printxml = false;
             if (config.ContainsKey("printxml"))
             {
-                if("true".Equals(config["printxml"])) 
+                if ("true".Equals(config["printxml"]))
                 {
                     printxml = true;
                 }
             }
 
-            if (printxml) 
+            if (printxml)
             {
                 Console.WriteLine(xmlRequest);
+                Console.WriteLine(logFile);
                 Console.WriteLine(logFile);
             }
 
@@ -136,23 +150,36 @@ namespace Litle.Sdk
             OnHttpAction(RequestType.Request, xmlRequest, neuter);
 
             // submit http request
-            using (var writer = new StreamWriter(req.GetRequestStream()))
+            Stream requestStream = isAsync ?
+                await req.GetRequestStreamAsync().ConfigureAwait(false) :
+                req.GetRequestStream();
+            using (var writer = new StreamWriter(requestStream))
             {
-                writer.Write(xmlRequest);
+                if (isAsync)
+                    await writer.WriteAsync(xmlRequest).ConfigureAwait(false);
+                else
+                    writer.Write(xmlRequest);
             }
 
-
+            cancellationToken.ThrowIfCancellationRequested();
 
             // read response
-            var resp = req.GetResponse();
+            var resp = isAsync ?
+                await req.GetResponseAsync().ConfigureAwait(false) :
+                req.GetResponse();
             if (resp == null)
             {
                 return null;
             }
+
+            cancellationToken.ThrowIfCancellationRequested();
+
             string xmlResponse;
             using (var reader = new StreamReader(resp.GetResponseStream()))
             {
-                xmlResponse = reader.ReadToEnd().Trim();
+                xmlResponse = (isAsync ?
+                    await reader.ReadToEndAsync().ConfigureAwait(false) :
+                    reader.ReadToEnd()).Trim();
             }
             if (printxml)
             {
@@ -170,7 +197,8 @@ namespace Litle.Sdk
             return xmlResponse;
         }
 
-        public bool IsProxyOn(Dictionary<string,string> config) {
+        public bool IsProxyOn(Dictionary<string, string> config)
+        {
             return config.ContainsKey("proxyHost") && config["proxyHost"] != null && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"] != null && config["proxyPort"].Length > 0;
         }
 
@@ -198,7 +226,7 @@ namespace Litle.Sdk
             catch (AuthenticationException e)
             {
                 tcpClient.Close();
-                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed", e);
+                throw new LitleOnlineException("Error establishing a network connection - SSL Authentication failed", e);
             }
 
             if ("true".Equals(config["printxml"]))
@@ -318,11 +346,11 @@ namespace Litle.Sdk
 
                 var channel = session.openChannel("sftp");
                 channel.connect();
-                channelSftp = (ChannelSftp)channel;
+                channelSftp = (ChannelSftp) channel;
             }
             catch (SftpException e)
             {
-                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection",e);
+                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
             }
             catch (JSchException e)
             {
@@ -379,7 +407,7 @@ namespace Litle.Sdk
 
                 var channel = session.openChannel("sftp");
                 channel.connect();
-                channelSftp = (ChannelSftp)channel;
+                channelSftp = (ChannelSftp) channel;
             }
             catch (SftpException e)
             {
@@ -438,7 +466,7 @@ namespace Litle.Sdk
 
                 var channel = session.openChannel("sftp");
                 channel.connect();
-                channelSftp = (ChannelSftp)channel;
+                channelSftp = (ChannelSftp) channel;
             }
             catch (SftpException e)
             {
@@ -474,12 +502,12 @@ namespace Litle.Sdk
         {
             Request, Response
         }
-        
+
         public class HttpActionEventArgs : EventArgs
         {
             public RequestType RequestType { get; set; }
             public string XmlPayload;
-    
+
             public HttpActionEventArgs(RequestType requestType, string xmlPayload)
             {
                 RequestType = requestType;
@@ -487,8 +515,7 @@ namespace Litle.Sdk
             }
         }
 
-
-public struct SshConnectionInfo
+        public struct SshConnectionInfo
         {
             public string Host;
             public string User;
