@@ -389,121 +389,191 @@ namespace Litle.Sdk
 		{
 			litleOnlineRequest request = CreateLitleOnlineRequest();
 
-			if (transaction is transactionTypeWithReportGroup txn)
-				fillInReportGroup(txn);
-			else if (transaction is transactionTypeWithReportGroupAndPartial txnPartial)
-				fillInReportGroup(txnPartial);
-
-			switch (transaction)
+			if (transaction is transactionTypeWithReportGroup)
 			{
-				case authorization auth:
-					request.authorization = auth;
-					break;
-				case authReversal authReversal:
-					request.authReversal = authReversal;
-					break;
-				case capture capture:
-					request.capture = capture;
-					break;
-				case captureGivenAuth captureGivenAuth:
-					request.captureGivenAuth = captureGivenAuth;
-					break;
-				case credit cred:
-					request.credit = cred;
-					break;
-				case echeckCredit eCred:
-					request.echeckCredit = eCred;
-					break;
-				case echeckRedeposit eCheckRedeposit:
-					request.echeckRedeposit = eCheckRedeposit;
-					break;
-				case echeckSale eSale:
-					request.echeckSale = eSale;
-					break;
-				case echeckVerification eVerify:
-					request.echeckVerification = eVerify;
-					break;
-				case forceCapture fCapture:
-					request.forceCapture = fCapture;
-					break;
-				case sale s:
-					request.sale = s;
-					break;
-				case registerTokenRequestType token:
-					request.registerTokenRequest = token;
-					break;
-				case voidTxn v:
-					request.voidTxn = v;
-					break;
-				case echeckVoid eVoid:
-					request.echeckVoid = eVoid;
-					break;
-				case updateCardValidationNumOnToken updateCard:
-					request.updateCardValidationNumOnToken = updateCard;
-					break;
-				case cancelSubscription cancelSub:
-					request.cancelSubscription = cancelSub;
-					break;
-				case updateSubscription updateSub:
-					request.updateSubscription = updateSub;
-					break;
-				case activate act:
-					request.activate = act;
-					break;
-				case deactivate deAct:
-					request.deactivate = deAct;
-					break;
-				case load l:
-					request.load = l;
-					break;
-				case unload ul:
-					request.unload = ul;
-					break;
-				case balanceInquiry bal:
-					request.balanceInquiry = bal;
-					break;
-				case createPlan cPlan:
-					request.createPlan = cPlan;
-					break;
-				case updatePlan uPlan:
-					request.updatePlan = uPlan;
-					break;
-				case refundReversal refRev:
-					request.refundReversal = refRev;
-					break;
-				case depositReversal depRev:
-					request.depositReversal = depRev;
-					break;
-				case activateReversal actRev:
-					request.activateReversal = actRev;
-					break;
-				case deactivateReversal deRev:
-					request.deactivateReversal = deRev;
-					break;
-				case loadReversal lRev:
-					request.loadReversal = lRev;
-					break;
-				case unloadReversal ulRev:
-					request.unloadReversal = ulRev;
-					break;
-				case fraudCheck fraud:
-					request.fraudCheck = fraud;
-					break;
-				case giftCardAuthReversal giftCardAuthReversal:
-					request.giftCardAuthReversal = giftCardAuthReversal;
-					break;
-				case giftCardCapture giftCardCapture:
-					request.giftCardCapture = giftCardCapture;
-					break;
-				case giftCardCredit giftCardCredit:
-					request.giftCardCredit = giftCardCredit;
-					break;
-				case queryTransaction queryTransaction:
-					request.queryTransaction = queryTransaction;
-					break;
-				default:
-					throw new NotImplementedException("Support for type: " + transaction.GetType().Name +
-													  " not implemented.");
+				fillInReportGroup((transactionTypeWithReportGroup)transaction);
+			}
+			else if (transaction is transactionTypeWithReportGroupAndPartial)
+			{
+				fillInReportGroup((transactionTypeWithReportGroupAndPartial)transaction);
+			}
+
+			if (transaction is authorization auth)
+			{
+
+				request.authorization = auth;
+
+			}
+			else if (transaction is authReversal authReversal)
+			{
+				request.authReversal = authReversal;
+
+			}
+			else if (transaction is capture capture)
+			{
+				request.capture = capture;
+
+			}
+			else if (transaction is captureGivenAuth captureGivenAuth)
+			{
+				request.captureGivenAuth = captureGivenAuth;
+
+			}
+			else if (transaction is credit cred)
+			{
+				request.credit = cred;
+
+			}
+			else if (transaction is echeckCredit eCred)
+			{
+				request.echeckCredit = eCred;
+
+			}
+			else if (transaction is echeckRedeposit eCheckRedeposit)
+			{
+				request.echeckRedeposit = eCheckRedeposit;
+
+			}
+			else if (transaction is echeckSale eSale)
+			{
+				request.echeckSale = eSale;
+
+			}
+			else if (transaction is echeckVerification eVerify)
+			{
+				request.echeckVerification = eVerify;
+
+			}
+			else if (transaction is forceCapture fCapture)
+			{
+				request.forceCapture = fCapture;
+
+			}
+			else if (transaction is sale s)
+			{
+				request.sale = s;
+
+			}
+			else if (transaction is registerTokenRequestType token)
+			{
+				request.registerTokenRequest = token;
+
+			}
+			else if (transaction is voidTxn v)
+			{
+				request.voidTxn = v;
+
+			}
+			else if (transaction is echeckVoid eVoid)
+			{
+				request.echeckVoid = eVoid;
+
+			}
+			else if (transaction is updateCardValidationNumOnToken updateCard)
+			{
+				request.updateCardValidationNumOnToken = updateCard;
+
+			}
+			else if (transaction is cancelSubscription cancelSub)
+			{
+				request.cancelSubscription = cancelSub;
+
+			}
+			else if (transaction is updateSubscription updateSub)
+			{
+				request.updateSubscription = updateSub;
+
+			}
+			else if (transaction is activate act)
+			{
+				request.activate = act;
+
+			}
+			else if (transaction is deactivate deAct)
+			{
+				request.deactivate = deAct;
+
+			}
+			else if (transaction is load l)
+			{
+				request.load = l;
+
+			}
+			else if (transaction is unload ul)
+			{
+				request.unload = ul;
+
+			}
+			else if (transaction is balanceInquiry bal)
+			{
+				request.balanceInquiry = bal;
+
+			}
+			else if (transaction is createPlan cPlan)
+			{
+				request.createPlan = cPlan;
+
+			}
+			else if (transaction is updatePlan uPlan)
+			{
+				request.updatePlan = uPlan;
+
+			}
+			else if (transaction is refundReversal refRev)
+			{
+				request.refundReversal = refRev;
+
+			}
+			else if (transaction is depositReversal depRev)
+			{
+				request.depositReversal = depRev;
+
+			}
+			else if (transaction is activateReversal actRev)
+			{
+				request.activateReversal = actRev;
+
+			}
+			else if (transaction is deactivateReversal deRev)
+			{
+				request.deactivateReversal = deRev;
+
+			}
+			else if (transaction is loadReversal lRev)
+			{
+				request.loadReversal = lRev;
+
+			}
+			else if (transaction is unloadReversal ulRev)
+			{
+				request.unloadReversal = ulRev;
+
+			}
+			else if (transaction is fraudCheck fraud)
+			{
+				request.fraudCheck = fraud;
+
+			}
+			else if (transaction is giftCardAuthReversal giftCardAuthReversal)
+			{
+				request.giftCardAuthReversal = giftCardAuthReversal;
+			}
+			else if (transaction is giftCardCapture giftCardCapture)
+			{
+				request.giftCardCapture = giftCardCapture;
+			}
+			else if (transaction is giftCardCredit giftCardCredit)
+			{
+				request.giftCardCredit = giftCardCredit;
+			}
+			else if (transaction is queryTransaction queryTransaction)
+			{
+				request.queryTransaction = queryTransaction;
+			}
+			else
+			{
+				throw new NotImplementedException("Support for type: " + transaction.GetType().Name +
+												  " not implemented.");
 			}
 
 			return request;
