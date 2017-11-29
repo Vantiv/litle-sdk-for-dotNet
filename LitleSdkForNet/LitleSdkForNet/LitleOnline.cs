@@ -389,10 +389,14 @@ namespace Litle.Sdk
 		{
 			litleOnlineRequest request = CreateLitleOnlineRequest();
 
-			if (transaction is transactionTypeWithReportGroup txn)
-				fillInReportGroup(txn);
-			else if (transaction is transactionTypeWithReportGroupAndPartial txnPartial)
-				fillInReportGroup(txnPartial);
+			if (transaction is transactionTypeWithReportGroup)
+			{
+				fillInReportGroup((transactionTypeWithReportGroup)transaction);
+			}
+			else if (transaction is transactionTypeWithReportGroupAndPartial)
+			{
+				fillInReportGroup((transactionTypeWithReportGroupAndPartial)transaction);
+			}
 
 			if (transaction is authorization auth)
 			{
