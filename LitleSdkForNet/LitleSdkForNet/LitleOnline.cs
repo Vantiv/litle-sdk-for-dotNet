@@ -307,7 +307,7 @@ namespace Litle.Sdk
             litleOnlineRequest request = new litleOnlineRequest
             {
                 merchantId = config["merchantId"],
-                merchantSdk = "DotNet;9.12.4"
+                merchantSdk = "DotNet;9.12.6"
             };
             authentication authentication = new authentication
             {
