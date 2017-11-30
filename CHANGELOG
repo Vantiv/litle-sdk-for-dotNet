@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 9.12.6 (Nov 30, 2017)
+* BugFix: Handled namespace issue from backend
+
 == Version 9.12.3 (July 6, 2017)
 * BugFix: Fix serialization issue with taxTypeIdentifierEnum
 
