@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== Version 11.1.1 (Nov 30,2017)
+* Feature: Async support for online transactions
+* BugFix: Handle namespace issue from backend
+
 == Version 11.1.0 (July 21, 2017)
 * Feature: added same day funding for instruction based funding
 * Feature: added checkoutId for token
