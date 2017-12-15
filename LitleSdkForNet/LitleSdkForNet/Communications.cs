@@ -135,6 +135,9 @@ namespace Litle.Sdk
             request.ServicePoint.MaxIdleTime = 8000;
             request.ServicePoint.Expect100Continue = false;
             request.KeepAlive = false;
+
+            
+            request.Timeout = 1;
             if (IsProxyOn(config))
             {
                 var myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]))
@@ -152,8 +155,13 @@ namespace Litle.Sdk
                 writer.Write(xmlRequest);
             }
 
+            cancellationToken.ThrowIfCancellationRequested();
+
             // read response
             var response = await request.GetResponseAsync().ConfigureAwait(false);
+
+            cancellationToken.ThrowIfCancellationRequested();
+
             string xmlResponse;
             using (var reader = new StreamReader(response.GetResponseStream()))
             {

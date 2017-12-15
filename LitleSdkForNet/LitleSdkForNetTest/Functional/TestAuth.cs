@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Functional
@@ -17,7 +21,6 @@ namespace Litle.Sdk.Test.Functional
                 {"url", "https://www.testvantivcnp.com/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
-                {"version", "9.12"},
                 {"timeout", "5000"},
                 {"merchantId", "101"},
                 {"password", "TESTCASE"},
@@ -29,6 +32,84 @@ namespace Litle.Sdk.Test.Functional
             };
             
             _litle = new LitleOnline(_config);
+        }
+
+        [Test]
+        public void SimpleAuthWithCard_Async()
+        {
+            var authorization = new authorization
+            {
+                reportGroup = "Planets",
+                orderId = "1",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+
+            // set the cancellation source and token
+            CancellationTokenSource source = new CancellationTokenSource();
+            CancellationToken token = source.Token;
+            // set the calcellation timeout high so we should never tiemout 
+            source.CancelAfter(50000);
+
+            Task<authorizationResponse> resp = null;
+            try
+            {
+                resp = _litle.AuthorizeAsync(authorization, token);
+            }
+            catch (AggregateException ae)
+            {
+                Console.WriteLine(ae);
+                // we don't expect to timeout
+                Assert.Fail();
+            }
+            
+            Assert.AreEqual("000", resp.Result.response);
+        }
+
+        [Test]
+        public void SimpleAuthWithCard_AsyncTimeOut()
+        {
+            var authorization = new authorization
+            {
+                reportGroup = "Planets",
+                orderId = "1",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+
+            // set the cancellation source and token
+            CancellationTokenSource source = new CancellationTokenSource();
+            CancellationToken token = source.Token;
+            // set the calcellation timeout really low so we aslways tiemout 
+            source.CancelAfter(1);
+
+            try
+            {
+                Task<authorizationResponse> resp = _litle.AuthorizeAsync(authorization, token);
+
+                // this should trigger the async timeout exception, we should not get a response, is we did though, it would be '000' Approved not '100'
+                Assert.Equals("100", resp.Result.response);
+            }
+            catch (AggregateException ae)
+            {
+                Assert.AreEqual("One or more errors occurred.", ae.Message);
+                // grab the inner exception to see we actually cancelled teh task
+                Assert.AreEqual("A task was canceled.", ae.GetBaseException().Message);
+            }
         }
 
         [Test]
