@@ -55,8 +55,14 @@ namespace Litle.Sdk.Test.Functional
 
             Assert.NotNull(fraudCheckResponse);
             Assert.AreEqual(60, fraudCheckResponse.advancedFraudResults.deviceReputationScore);
-            //Assert.AreEqual(7, fraudCheckResponse.advancedFraudResults.triggeredRule.Length);
-            Assert.AreEqual("triggered_rule_1", fraudCheckResponse.advancedFraudResults.triggeredRule);
+            Assert.AreEqual(7, fraudCheckResponse.advancedFraudResults.triggeredRule.Length);
+            Assert.AreEqual("triggered_rule_1", fraudCheckResponse.advancedFraudResults.triggeredRule[0]);
+            Assert.AreEqual("triggered_rule_2", fraudCheckResponse.advancedFraudResults.triggeredRule[1]);
+            Assert.AreEqual("triggered_rule_3", fraudCheckResponse.advancedFraudResults.triggeredRule[2]);
+            Assert.AreEqual("triggered_rule_4", fraudCheckResponse.advancedFraudResults.triggeredRule[3]);
+            Assert.AreEqual("triggered_rule_5", fraudCheckResponse.advancedFraudResults.triggeredRule[4]);
+            Assert.AreEqual("triggered_rule_6", fraudCheckResponse.advancedFraudResults.triggeredRule[5]);
+            Assert.AreEqual("triggered_rule_7", fraudCheckResponse.advancedFraudResults.triggeredRule[6]);
         }
 
         [Test]

@@ -502,7 +502,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
             Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
             Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
-            Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule);
+            Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule[0]);
         }
 
         [Test]
@@ -567,7 +567,7 @@ namespace Litle.Sdk.Test.Unit
             Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
             Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
             Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
-            Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule);
+            Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule[0]);
             Assert.AreEqual(true, authorizationResponse.recycling.recycleEngineActive);
         }
 
