@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 9.12.7 (Jan 24, 2018)
+* BugFix: Fixed handling of multiple triggeredRule
+
 == Version 9.12.6 (Nov 30, 2017)
 * BugFix: Handled namespace issue from backend
 
