@@ -539,17 +539,75 @@ namespace Litle.Sdk
         }
     }
 
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
     public partial class advancedFraudResultsType
     {
-        public string deviceReviewStatus;
-        public int deviceReputationScore;
-        public string triggeredRule;
+
+        private string deviceReviewStatusField;
+
+        private int deviceReputationScoreField;
+
+        private bool deviceReputationScoreFieldSpecified;
+
+        private string[] triggeredRuleField;
+
+        /// <remarks/>
+        public string deviceReviewStatus
+        {
+            get
+            {
+                return this.deviceReviewStatusField;
+            }
+            set
+            {
+                this.deviceReviewStatusField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int deviceReputationScore
+        {
+            get
+            {
+                return this.deviceReputationScoreField;
+            }
+            set
+            {
+                this.deviceReputationScoreField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool deviceReputationScoreSpecified
+        {
+            get
+            {
+                return this.deviceReputationScoreFieldSpecified;
+            }
+            set
+            {
+                this.deviceReputationScoreFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("triggeredRule")]
+        public string[] triggeredRule
+        {
+            get
+            {
+                return this.triggeredRuleField;
+            }
+            set
+            {
+                this.triggeredRuleField = value;
+            }
+        }
     }
 
     /// <remarks/>
