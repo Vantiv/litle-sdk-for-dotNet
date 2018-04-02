@@ -679,5 +679,6 @@ namespace Litle.Sdk
 		Task<transactionTypeWithReportGroup> queryTransactionAsync(queryTransaction queryTransaction, CancellationToken cancellation);
 		updateCardValidationNumOnTokenResponse UpdateCardValidationNumOnToken(updateCardValidationNumOnToken update);
 		Task<updateCardValidationNumOnTokenResponse> UpdateCardValidationNumOnTokenAsync(updateCardValidationNumOnToken update, CancellationToken cancellationToken);
+	    event EventHandler HttpAction;
 	}
 }
