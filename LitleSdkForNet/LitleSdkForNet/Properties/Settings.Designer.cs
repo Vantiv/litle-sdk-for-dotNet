@@ -250,5 +250,52 @@ namespace Litle.Sdk.Properties {
                 this["merchantId"] = value;
             }
         }
+		
+		[global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("false")]
+        public string useEncryption {
+            get {
+                return ((string)(this["useEncryption"]));
+            }
+            set {
+                this["useEncryption"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string vantivPublicKeyId {
+            get {
+                return ((string)(this["vantivPublicKeyId"]));
+            }
+            set {
+                this["vantivPublicKeyId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pgpPassphrase {
+            get {
+                return ((string)(this["pgpPassphrase"]));
+            }
+            set {
+                this["pgpPassphrase"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"C:\Users\charmik.sheth\AppData\Local\GnuPG\bin")]
+        public string gnuPgDir {
+            get {
+                return ((string)(this["GnuPgDir"]));
+            }
+            set {
+                this["GnuPgDir"] = value;
+            }
+        }
     }
 }

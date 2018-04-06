@@ -59,5 +59,17 @@
     <Setting Name="merchantId" Type="System.String" Scope="User">
       <Value Profile="(Default)">011</Value>
     </Setting>
+	<Setting Name="useEncryption" Type="System.String" Scope="User">
+      <Value Profile="(Default)">false</Value>
+    </Setting>
+    <Setting Name="vantivPublicKeyId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="pgpPassphrase" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GnuPgDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
