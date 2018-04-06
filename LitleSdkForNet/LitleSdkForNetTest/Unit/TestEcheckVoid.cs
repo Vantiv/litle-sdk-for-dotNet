@@ -41,6 +41,7 @@ namespace Litle.Sdk.Test.Unit
         public void simpleForceCaptureWithSecondaryAmount()
         {
             forceCapture forcecapture = new forceCapture();
+            forcecapture.id = "1";
             forcecapture.amount = 106;
             forcecapture.secondaryAmount = 50;
             forcecapture.orderId = "12344";

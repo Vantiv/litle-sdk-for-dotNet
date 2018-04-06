@@ -55,7 +55,7 @@ namespace Litle.Sdk.Test.Unit
             String actual = batchRequest.generateXmlHeader();
             String expected = @"
 <batchRequest id=""""
-merchantSdk=""DotNet;10.1""
+merchantSdk=""DotNet;10.8""
 merchantId=""01234"">
 ";
             Assert.AreEqual(expected, actual);
@@ -157,6 +157,7 @@ merchantId=""01234"">
         public void testCapture()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 12345678000;
             capture.amount = 106;
 

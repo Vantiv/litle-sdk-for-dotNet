@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleToken()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.id = "1";
             registerTokenRequest.orderId = "12344";
             registerTokenRequest.accountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
@@ -46,6 +47,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleTokenWithPayPage()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.id = "1";
             registerTokenRequest.orderId = "12344";
             registerTokenRequest.paypageRegistrationId = "1233456789101112";
             registerTokenRequest.reportGroup = "Planets";
@@ -57,6 +59,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleTokenWithEcheck()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.id = "1";
             registerTokenRequest.orderId = "12344";
             echeckForTokenType echeckObj = new echeckForTokenType();
             echeckObj.accNum = "12344565";
@@ -71,6 +74,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleTokenWithApplepay()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.id = "1";
             registerTokenRequest.orderId = "12344";
             registerTokenRequest.reportGroup = "Planets";
             applepayType applepay = new applepayType();
@@ -93,6 +97,7 @@ namespace Litle.Sdk.Test.Functional
         public void TokenEcheckMissingRequiredField()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.id = "1";
             registerTokenRequest.orderId = "12344";
             echeckForTokenType echeckObj = new echeckForTokenType();
             echeckObj.routingNum = "123476545";
@@ -113,6 +118,7 @@ namespace Litle.Sdk.Test.Functional
         public void TestSimpleTokenWithNullableTypeField()
         {
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
+            registerTokenRequest.id = "1";
             registerTokenRequest.orderId = "12344";
             registerTokenRequest.accountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";

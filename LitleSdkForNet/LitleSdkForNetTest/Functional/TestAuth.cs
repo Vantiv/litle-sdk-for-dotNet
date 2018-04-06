@@ -16,7 +16,7 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpLitle()
         {
             config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -35,14 +35,14 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleAuthWithCard()
         {
             authorization authorization = new authorization();
-            authorization.id = "101010";
+            authorization.id = "1";
             authorization.reportGroup = "Planets";
             authorization.orderId = "12344";
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100521234567000";
+            card.number = "414100000000000000";
             card.expDate = "1210";
             authorization.card = card; //This needs to compile
 
@@ -51,8 +51,9 @@ namespace Litle.Sdk.Test.Functional
 
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
-            Assert.AreEqual("P", response.fraudResult.cardValidationResult);
         }
+        
+        
         [Test]
         public void SimpleAuthWithMpos()
         {
@@ -100,6 +101,8 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
          }
+        
+        
         [Test]
         public void simpleAuthWithPaypal()
         {
@@ -121,6 +124,61 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.message);
         }
+        
+        [Test]
+        public void SimpleAuthWithAndroidPayWithVI()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "9",
+                amount = 106,
+                orderSource = orderSourceType.androidpay,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+
+            var response = litle.Authorize(authorization);
+            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("01", response.androidpayResponse.expMonth);
+            Assert.AreEqual("2050", response.androidpayResponse.expYear);
+            Assert.IsNotEmpty(response.androidpayResponse.cryptogram);
+        }
+        
+        [Test]
+        public void SimpleAuthWithAndroidpayWithMC()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.androidpay,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "414100000000000000",
+                    expDate = "1210",
+                    pin = "1234",
+                },
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+            
+
+            var response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+            Assert.AreEqual("aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ0K", response.androidpayResponse.cryptogram);
+            Assert.AreEqual("01", response.androidpayResponse.expMonth);
+            Assert.AreEqual("2050", response.androidpayResponse.expYear);
+        }
+        
 
         [Test]
         public void simpleAuthWithApplepayAndSecondaryAmountAndWallet()
@@ -152,6 +210,31 @@ namespace Litle.Sdk.Test.Functional
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("Insufficient Funds", response.message);
             Assert.AreEqual("110", response.applepayResponse.transactionAmount);
+        }
+        
+        [Test]
+        public void SimpleAuthWithCard_origTxnIdAndAmount()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "5",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                originalNetworkTransactionId = "123456789012345678901234567890",
+                originalTransactionAmount = 2500,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "410000000000000000",
+                    expDate = "1210"
+                },
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+
+            var response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
         }
 
         [Test]
@@ -185,6 +268,94 @@ namespace Litle.Sdk.Test.Functional
                 Assert.True(e.Message.StartsWith("Error validating xml data against the schema"));
             }
         }
+        
+        [Test]
+        public void TestEnhancedAuthResponse()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100322311199000",
+                    expDate = "1210",
+                },
+                originalNetworkTransactionId = "123456789123456789123456789",
+                originalTransactionAmount = 12,
+                processingType = processingTypeEnumType.initialRecurring,
+            };
+
+            var response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+            Assert.AreEqual("63225578415568556365452427825", response.networkTransactionId);
+        }
+        
+        [Test]
+        public void TestEnhancedAuthResponseWithNetworkResponse()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100822311199000",
+                    expDate = "1210",
+                },
+                originalNetworkTransactionId = "123456789123456789123456789",
+                originalTransactionAmount = 12,
+                processingType = processingTypeEnumType.initialInstallment,
+            };
+            var response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+
+            Assert.AreEqual("63225578415568556365452427825", response.networkTransactionId);
+            Assert.AreEqual("visa", response.enhancedAuthResponse.networkResponse.endpoint);
+            Assert.AreEqual(4, response.enhancedAuthResponse.networkResponse.networkField.fieldNumber);
+            Assert.AreEqual("Transaction Amount", response.enhancedAuthResponse.networkResponse.networkField.fieldName);
+            Assert.AreEqual("135798642", response.enhancedAuthResponse.networkResponse.networkField.fieldValue);
+        }
+        
+        
+        [Test]
+        public void TestEnhancedAuthResponseWithProcessingType_initialCOF()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100822311199000",
+                    expDate = "1210",
+                },
+                originalNetworkTransactionId = "123456789123456789123456789",
+                originalTransactionAmount = 12,
+                processingType = processingTypeEnumType.initialCOF,
+            };
+            var response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+
+            Assert.AreEqual("63225578415568556365452427825", response.networkTransactionId);
+            Assert.AreEqual("visa", response.enhancedAuthResponse.networkResponse.endpoint);
+            Assert.AreEqual(4, response.enhancedAuthResponse.networkResponse.networkField.fieldNumber);
+            Assert.AreEqual("Transaction Amount", response.enhancedAuthResponse.networkResponse.networkField.fieldName);
+            Assert.AreEqual("135798642", response.enhancedAuthResponse.networkResponse.networkField.fieldValue);
+        }
+
 
         [Test]
         public void trackData()
@@ -322,6 +493,30 @@ namespace Litle.Sdk.Test.Functional
             authorization.advancedFraudChecks = advancedFraudChecks;
 
             authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
+        
+        [Test]
+        public void SimpleAuthWithCardPin()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "414100000000000000",
+                    expDate = "1210",
+                    pin = "1234",
+                },
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+            
+            var response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }
     }

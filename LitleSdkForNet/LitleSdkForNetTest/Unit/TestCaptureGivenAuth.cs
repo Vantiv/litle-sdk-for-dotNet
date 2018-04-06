@@ -126,6 +126,27 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(captureGivenAuth);
         }
+        
+        [Test]
+        public void TestProcessingType()
+        {
+            captureGivenAuth capture = new captureGivenAuth();
+            capture.amount = 2;
+            capture.orderSource = orderSourceType.ecommerce;
+            capture.reportGroup = "Planets";
+            capture.processingType = processingTypeEnumType.initialRecurring;
+            capture.originalNetworkTransactionId = "abc123";
+            capture.originalTransactionAmount = 1234;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>\r\n<processingType>initialRecurring</processingType>\r\n<originalNetworkTransactionId>abc123</originalNetworkTransactionId>\r\n<originalTransactionAmount>1234</originalTransactionAmount>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='10.8' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.CaptureGivenAuth(capture);
+        }
 
     }
 }

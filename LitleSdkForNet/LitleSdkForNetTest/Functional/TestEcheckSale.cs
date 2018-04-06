@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleEcheckSaleWithEcheck()
         {
             echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
             echeckSaleObj.amount = 123456;
             echeckSaleObj.orderId = "12345";
             echeckSaleObj.orderSource = orderSourceType.ecommerce;
@@ -61,6 +62,7 @@ namespace Litle.Sdk.Test.Functional
         public void NoAmount()
         {
             echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
             echeckSaleObj.reportGroup = "Planets";
             
             try
@@ -78,6 +80,7 @@ namespace Litle.Sdk.Test.Functional
         public void EcheckSaleWithShipTo()
         {
             echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
             echeckSaleObj.reportGroup = "Planets";
             echeckSaleObj.amount = 123456;
             echeckSaleObj.verify = true;
@@ -108,6 +111,7 @@ namespace Litle.Sdk.Test.Functional
         public void EcheckSaleWithEcheckToken()
         {
             echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
             echeckSaleObj.reportGroup = "Planets";
             echeckSaleObj.amount = 123456;
             echeckSaleObj.verify = true;
@@ -142,6 +146,7 @@ namespace Litle.Sdk.Test.Functional
         public void EcheckSaleMissingBilling()
         {
             echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
             echeckSaleObj.amount = 123456;
             echeckSaleObj.orderId = "12345";
             echeckSaleObj.orderSource = orderSourceType.ecommerce;
@@ -169,6 +174,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleEcheckSale()
         {
             echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
             echeckSaleObj.reportGroup = "Planets";
             echeckSaleObj.litleTxnId = 123456789101112;
             echeckSaleObj.amount = 12;
@@ -181,6 +187,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleEcheckSaleWithSecondaryAmountWithOrderId()
         {
             echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
             echeckSaleObj.amount = 123456;
             echeckSaleObj.secondaryAmount = 50;
             echeckSaleObj.orderId = "12345";
@@ -209,6 +216,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleEcheckSaleWithSecondaryAmount()
         {
             echeckSale echeckSaleObj = new echeckSale();
+            echeckSaleObj.id = "1";
             echeckSaleObj.amount = 123456;
             echeckSaleObj.secondaryAmount = 50;
             echeckSaleObj.litleTxnId = 1234565L;

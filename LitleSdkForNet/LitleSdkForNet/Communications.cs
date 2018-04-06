@@ -4,6 +4,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Xml.XPath;
 using System.Net;
@@ -170,7 +171,7 @@ namespace Litle.Sdk
 
             try
             {
-                sslStream.AuthenticateAsClient(url);
+                sslStream.AuthenticateAsClient(url, null, GetBestProtocol(), true);
             }
             catch (AuthenticationException e)
             {
@@ -233,6 +234,12 @@ namespace Litle.Sdk
             return xmlResponseDestinationDirectory + batchName;
         }
 
+        public SslProtocols GetBestProtocol()
+        {
+            var protocols = Enum.GetValues(typeof(SslProtocols)).Cast<SslProtocols>().ToList();
+            return protocols[protocols.Count - 1];
+        }
+
         virtual public void FtpDropOff(string fileDirectory, string fileName, Dictionary<String, String> config)
         {
             ChannelSftp channelSftp = null;
@@ -242,7 +249,7 @@ namespace Litle.Sdk
             string username = config["sftpUsername"];
             string password = config["sftpPassword"];
             string knownHostsFile = config["knownHostsFile"];
-            string filePath = fileDirectory + fileName;
+            string filePath = Path.Combine(fileDirectory, fileName);
 
             bool printxml = config["printxml"] == "true";
             if (printxml)

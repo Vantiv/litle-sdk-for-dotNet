@@ -550,7 +550,21 @@ namespace Litle.Sdk
     {
         public string deviceReviewStatus;
         public int deviceReputationScore;
-        public string triggeredRule;
+        private string[] triggeredRuleField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("triggeredRule")]
+        public string[] triggeredRule
+        {
+            get
+            {
+                return this.triggeredRuleField;
+            }
+            set
+            {
+                this.triggeredRuleField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -1910,6 +1924,10 @@ namespace Litle.Sdk
         private giftCardResponse giftCardResponseField;
 
         private applepayResponse applepayResponseField;
+        
+        private androidpayResponse androidpayResponseField;
+    
+        private string networkTransactionIdField;
 
         /// <remarks/>
         public long litleTxnId
@@ -2198,7 +2216,32 @@ namespace Litle.Sdk
                 this.applepayResponseField = value;
             }
         }
-
+        
+        /// <remarks/>
+        public androidpayResponse androidpayResponse 
+        {
+            get 
+            {
+                return this.androidpayResponseField;
+            }
+            set 
+            {
+                this.androidpayResponseField = value;
+            }
+        }
+    
+        /// <remarks/>
+        public string networkTransactionId 
+        {
+            get 
+            {
+                return this.networkTransactionIdField;
+            }
+            set 
+            {
+                this.networkTransactionIdField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -2435,16 +2478,6 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class enhancedAuthResponse
     {
-        //public string litleTxnId;
-        //public string response;
-        //public string message;
-        //public System.DateTime responseTime;
-        //public tokenResponseType tokenResponse;
-        //public string virtualAccountNumber;
-        //public enhancedAuthResponseFundingSource fundingSource;
-        //public affluenceTypeEnum affluence;
-        //public string issuerCountry;
-
         private enhancedAuthResponseFundingSource fundingSourceField;
 
         private affluenceTypeEnum? affluenceField;
@@ -2460,6 +2493,8 @@ namespace Litle.Sdk
         private bool virtualAccountNumberField;
 
         private bool virtualAccountNumberFieldSpecified;
+        
+        private networkResponse networkResponseField;
 
         /// <remarks/>
         public enhancedAuthResponseFundingSource fundingSource
@@ -2566,6 +2601,19 @@ namespace Litle.Sdk
             set
             {
                 this.virtualAccountNumberFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public networkResponse networkResponse 
+        {
+            get 
+            {
+                return this.networkResponseField;
+            }
+            set 
+            {
+                this.networkResponseField = value;
             }
         }
     }
@@ -3228,6 +3276,12 @@ namespace Litle.Sdk
         private giftCardResponse giftCardResponseField;
 
         private applepayResponse applepayResponseField;
+        
+        private androidpayResponse androidpayResponseField;
+        
+        private sepaDirectDebitResponse sepaDirectDebitResponseField;
+        
+        private string networkTransactionIdField;
 
         private bool duplicateField;
 
@@ -3522,6 +3576,45 @@ namespace Litle.Sdk
                 this.applepayResponseField = value;
             }
         }
+        
+        /// <remarks/>
+        public androidpayResponse androidpayResponse 
+        {
+            get 
+            {
+                return this.androidpayResponseField;
+            }
+            set 
+            {
+                this.androidpayResponseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public sepaDirectDebitResponse sepaDirectDebitResponse 
+        {
+            get 
+            {
+                return this.sepaDirectDebitResponseField;
+            }
+            set 
+            {
+                this.sepaDirectDebitResponseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string networkTransactionId 
+        {
+            get 
+            {
+                return this.networkTransactionIdField;
+            }
+            set 
+            {
+                this.networkTransactionIdField = value;
+            }
+        }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -3548,6 +3641,62 @@ namespace Litle.Sdk
             set
             {
                 this.duplicateFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+    public partial class sepaDirectDebitResponse 
+    {
+    
+        private string redirectUrlField;
+    
+        private string redirectTokenField;
+    
+        private string mandateReferenceField;
+    
+        /// <remarks/>
+        public string redirectUrl 
+        {
+            get 
+            {
+                return this.redirectUrlField;
+            }
+            set 
+            {
+                this.redirectUrlField = value;
+            }
+        }
+    
+        /// <remarks/>
+        public string redirectToken 
+        {
+            get 
+            {
+                return this.redirectTokenField;
+            }
+            set 
+            {
+                this.redirectTokenField = value;
+            }
+        }
+    
+        /// <remarks/>
+        public string mandateReference 
+        {
+            get 
+            {
+                return this.mandateReferenceField;
+            }
+            set 
+            {
+                this.mandateReferenceField = value;
             }
         }
     }
@@ -5592,6 +5741,7 @@ namespace Litle.Sdk
     public class accountUpdateResponse : transactionTypeWithReportGroup
     {
         public long litleTxnId;
+        public string orderId;
         public string response;
         public DateTime responseTime;
         public string message;
@@ -5817,6 +5967,7 @@ namespace Litle.Sdk
     {
         public String accountNumber;
         public String cardValidationNum;
+        public string pin;
     }
 
         /// <remarks/>
@@ -6325,6 +6476,77 @@ namespace Litle.Sdk
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.litle.com/schema", IsNullable=false)]
+    public partial class androidpayResponse 
+    {
+    
+        private string cryptogramField;
+    
+        private string expMonthField;
+    
+        private string expYearField;
+    
+        private string eciIndicatorField;
+    
+        /// <remarks/>
+        public string cryptogram 
+        {
+            get 
+            {
+                return this.cryptogramField;
+            }
+            set 
+            {
+                this.cryptogramField = value;
+            }
+        }
+    
+        /// <remarks/>
+        public string expMonth 
+        {
+            get 
+            {
+                return this.expMonthField;
+            }
+            set 
+            {
+                this.expMonthField = value;
+            }
+        }
+    
+        /// <remarks/>
+        public string expYear 
+        {
+            get 
+            {
+                return this.expYearField;
+            }
+            set 
+            {
+                this.expYearField = value;
+            }
+        }
+    
+        /// <remarks/>
+        public string eciIndicator 
+        {
+            get 
+            {
+                return this.eciIndicatorField;
+            }
+            set 
+            {
+                this.eciIndicatorField = value;
+            }
+        }
+    }
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
@@ -6731,6 +6953,154 @@ namespace Litle.Sdk
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
+    public partial class networkSubField 
+    {
+    
+        private string fieldValueField;
+    
+        private string fieldNumberField;
+    
+        /// <remarks/>
+        public string fieldValue 
+        {
+            get 
+            {
+                return this.fieldValueField;
+            }
+            set 
+            {
+                this.fieldValueField = value;
+            }
+        }
+    
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
+        public string fieldNumber 
+        {
+            get 
+            {
+                return this.fieldNumberField;
+            }
+            set 
+            {
+                this.fieldNumberField = value;
+            }
+        }
+    }
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace="http://www.litle.com/schema")]
+
+    public partial class networkField
+    {
+        private string fieldValueField;
+        private networkSubField networkSubFieldField;
+        private int fieldNumberField;
+        private string fieldNameField;
+
+        public string fieldValue
+        {
+            get
+            {
+                return this.fieldValueField;
+            }
+            set
+            {
+                this.fieldValueField = value;
+            }
+        }
+
+        public networkSubField networkSubField
+        {
+            get
+            {
+                return this.networkSubFieldField;
+            }
+            set
+            {
+                this.networkSubFieldField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int fieldNumber
+        {
+            get
+            {
+                return this.fieldNumberField;
+            }
+            set
+            {
+                this.fieldNumberField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string fieldName
+        {
+            get
+            {
+                return this.fieldNameField;
+            }
+            set
+            {
+                this.fieldNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.litle.com/schema")]
+    public partial class networkResponse 
+    {
+    
+        private string endpointField;
+    
+        private networkField networkFieldField;
+    
+        /// <remarks/>
+        public string endpoint 
+        {
+            get 
+            {
+                return this.endpointField;
+            }
+            set 
+            {
+                this.endpointField = value;
+            }
+        }
+    
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("networkField")]
+        public networkField networkField 
+        {
+            get 
+            {
+                return this.networkFieldField;
+            }
+            set 
+            {
+                this.networkFieldField = value;
+            }
+        }
+    }
+    
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]

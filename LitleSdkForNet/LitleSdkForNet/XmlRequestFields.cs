@@ -47,7 +47,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"10.1\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"10.8\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -559,6 +559,8 @@ namespace Litle.Sdk
             set { this.payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
         }
         public string payPalNotes;
+        public customBilling customBilling;
+        public string pin;
 
         public override string Serialize()
         {
@@ -581,6 +583,8 @@ namespace Litle.Sdk
             if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
             if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderComplete>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderComplete>";
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
+            if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+            if (pin != null) xml += "\r\n<pin>" + pin + "</pin>";
             xml += "\r\n</capture>";
 
             return xml;
@@ -908,6 +912,13 @@ namespace Litle.Sdk
         }
         public billMeLaterRequest billMeLaterRequest;
         public pos pos;
+        private string pinField;
+        private bool pinSet;
+        public string pin
+        {
+            get { return pinField; }
+            set { pinField = value; pinSet = true; }
+        }
         public amexAggregatorData amexAggregatorData;
         public merchantDataType merchantData;
         public String payPalNotes;
@@ -934,6 +945,7 @@ namespace Litle.Sdk
                 if (enhancedData != null) xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "</enhancedData>";
                 if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "</processingInstructions>";
                 if (pos != null) xml += "\r\n<pos>" + pos.Serialize() + "</pos>";
+                if (pinSet) xml += "\r\n<pin>" + pinField + "</pin>";
             }
             else
             {
@@ -1392,6 +1404,45 @@ namespace Litle.Sdk
         }
         public advancedFraudChecksType advancedFraudChecks;
         public wallet wallet;
+        private processingTypeEnumType processingTypeField;
+        private bool processingTypeSet;
+        public processingTypeEnumType processingType
+        {
+            get { return this.processingTypeField; }
+            set
+            {
+                this.processingTypeField = value;
+                this.processingTypeSet = true;
+            }
+        }
+        private string originalNetworkTransactionIdField;
+        private bool originalNetworkTransactionIdSet;
+        public string originalNetworkTransactionId
+        {
+            get
+            {
+                return originalNetworkTransactionIdField;
+            }
+            set
+            {
+                originalNetworkTransactionIdField = value;
+                originalNetworkTransactionIdSet = true;
+            }
+        }
+        private long originalTransactionAmountField;
+        private bool originalTransactionAmountSet;
+        public long originalTransactionAmount
+        {
+            get
+            {
+                return originalTransactionAmountField;
+            }
+            set
+            {
+                originalTransactionAmountField = value;
+                originalTransactionAmountSet = true;
+            }
+        }
 
         public override String Serialize()
         {
@@ -1516,6 +1567,18 @@ namespace Litle.Sdk
                 {
                     xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
                 }
+                if (processingTypeSet)
+                {
+                    xml += "\r\n<processingType>" + processingType + "</processingType>";
+                }
+                if (originalNetworkTransactionIdSet)
+                {
+                    xml += "\r\n<originalNetworkTransactionId>" + originalNetworkTransactionId + "</originalNetworkTransactionId>";
+                }
+                if (originalTransactionAmountSet)
+                {
+                    xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
+                }
             }
             
             xml += "\r\n</authorization>";
@@ -1566,6 +1629,7 @@ namespace Litle.Sdk
         public cardTokenType token;
         public cardPaypageType paypage;
         public applepayType applepay;
+        public sepaDirectDebitType sepaDirectDebit;
         public billMeLaterRequest billMeLaterRequest;
         public fraudCheckType cardholderAuthentication;
         public customBilling customBilling;
@@ -1638,6 +1702,42 @@ namespace Litle.Sdk
         }
         public advancedFraudChecksType advancedFraudChecks;
         public wallet wallet;
+        private processingTypeEnumType processingTypeField;
+        private bool processingTypeSet;
+        public processingTypeEnumType processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value; processingTypeSet = true; }
+        }
+        private string originalNetworkTransactionIdField;
+        private bool originalNetworkTransactionIdSet;
+        public string originalNetworkTransactionId
+        {
+            get
+            {
+                return originalNetworkTransactionIdField;
+            }
+            set
+            {
+                originalNetworkTransactionIdField = value;
+                originalNetworkTransactionIdSet = true;
+            }
+        }
+        private long originalTransactionAmountField;
+        private bool originalTransactionAmountSet;
+        public long originalTransactionAmount
+        {
+            get
+            {
+                return originalTransactionAmountField;
+            }
+            set
+            {
+                originalTransactionAmountField = value;
+                originalTransactionAmountSet = true;
+            }
+        }
+        
 
         public override String Serialize()
         {
@@ -1689,6 +1789,10 @@ namespace Litle.Sdk
             else if (applepay != null)
             {
                 xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
+            }
+            else if (sepaDirectDebit != null)
+            {
+                xml += "\r\n<sepaDirectDebit>" + sepaDirectDebit.Serialize() + "\r\n</sepaDirectDebit>";
             }
             if (billMeLaterRequest != null)
             {
@@ -1759,6 +1863,18 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
             }
+            if (processingTypeSet)
+            {
+                xml += "\r\n<processingType>" + processingType + "</processingType>";
+            }
+            if (originalNetworkTransactionIdSet)
+            {
+                xml += "\r\n<originalNetworkTransactionId>" + originalNetworkTransactionId + "</originalNetworkTransactionId>";
+            }
+            if (originalTransactionAmountSet)
+            {
+                xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
+            }
             xml += "\r\n</sale>";
             return xml;
         }
@@ -1814,6 +1930,13 @@ namespace Litle.Sdk
                 this.debtRepaymentField = value;
                 this.debtRepaymentSet = true;
             }
+        }
+        private processingTypeEnumType processingTypeField;
+        private bool processingTypeSet;
+        public processingTypeEnumType processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value; processingTypeSet = true; }
         }
 
         public override String Serialize()
@@ -1879,6 +2002,10 @@ namespace Litle.Sdk
                 xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
             }
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (processingTypeSet)
+            {
+                xml += "\r\n<processingType>" + processingType + "</processingType>";
+            }
             xml += "\r\n</forceCapture>";
             return xml;
         }
@@ -1936,6 +2063,41 @@ namespace Litle.Sdk
             {
                 this.debtRepaymentField = value;
                 this.debtRepaymentSet = true;
+            }
+        }
+        private processingTypeEnumType processingTypeField;
+        private bool processingTypeSet;
+        public processingTypeEnumType processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value; processingTypeSet = true; }
+        }
+        private string originalNetworkTransactionIdField;
+        private bool originalNetworkTransactionIdSet;
+        public string originalNetworkTransactionId
+        {
+            get
+            {
+                return originalNetworkTransactionIdField;
+            }
+            set
+            {
+                originalNetworkTransactionIdField = value;
+                originalNetworkTransactionIdSet = true;
+            }
+        }
+        private long originalTransactionAmountField;
+        private bool originalTransactionAmountSet;
+        public long originalTransactionAmount
+        {
+            get
+            {
+                return originalTransactionAmountField;
+            }
+            set
+            {
+                originalTransactionAmountField = value;
+                originalTransactionAmountSet = true;
             }
         }
 
@@ -2011,6 +2173,18 @@ namespace Litle.Sdk
                 xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
             }
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (processingTypeSet)
+            {
+                xml += "\r\n<processingType>" + processingType + "</processingType>";
+            }
+            if (originalNetworkTransactionIdSet)
+            {
+                xml += "\r\n<originalNetworkTransactionId>" + originalNetworkTransactionId + "</originalNetworkTransactionId>";
+            }
+            if (originalTransactionAmountSet)
+            {
+                xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
+            }
             xml += "\r\n</captureGivenAuth>";
             return xml;
         }
@@ -2696,6 +2870,7 @@ namespace Litle.Sdk
         public static readonly orderSourceType recurringtel = new orderSourceType("recurringtel");
         public static readonly orderSourceType echeckppd = new orderSourceType("echeckppd");
         public static readonly orderSourceType applepay = new orderSourceType("applepay");
+        public static readonly orderSourceType androidpay = new orderSourceType("androidpay");
 
         private orderSourceType(String value) { this.value = value; }
         public string Serialize() { return value; }
@@ -3120,6 +3295,7 @@ namespace Litle.Sdk
         public string expDate;
         public string track;
         public string cardValidationNum;
+        public string pin;
 
         public string Serialize()
         {
@@ -3143,6 +3319,10 @@ namespace Litle.Sdk
             if (cardValidationNum != null)
             {
                 xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
+            }
+            if (pin != null)
+            {
+                xml += "\r\n<pin>" + pin + "</pin>";
             }
             return xml;
         }
@@ -3668,7 +3848,117 @@ namespace Litle.Sdk
 
     public enum processingTypeEnumType
     {
-        accountFunding
+        accountFunding,
+        initialRecurring,
+        initialInstallment,
+        initialCOF,
+        merchantInitiatedCOF,
+        cardholderInitiatedCOF
+    }
+    
+    public enum mandateProviderType
+    {
+        Merchant,
+        Vantiv
+    }
+
+    public enum sequenceTypeType
+    {
+            OneTime,
+            FirstRecurring,
+            SubsequentRecurring,
+            FinalRecurring
+     }
+
+    public partial class sepaDirectDebitType
+    {
+        public mandateProviderType mandateProvider;
+        public sequenceTypeType sequenceType;
+        public string mandateReferenceField;
+        public bool mandateReferenceSet;
+        public string mandateReference
+        {
+            get
+            {
+                return mandateReferenceField;
+            }
+            set
+            {
+                mandateReferenceField = value;
+                mandateReferenceSet = true;
+            }
+        }
+        public string mandateUrlField;
+        public bool mandateUrlSet;
+        public string mandateUrl
+        {
+            get
+            {
+                return mandateUrlField;
+            }
+            set
+            {
+                mandateUrlField = value;
+                mandateUrlSet = true;
+            }
+        }
+        // CES does this work
+        public DateTime mandateSignatureDateField;
+        public bool mandateSignatureDateSet;
+        public DateTime mandateSignatureDate
+        {
+            get
+            {
+                return mandateSignatureDateField;
+            }
+            set
+            {
+                mandateSignatureDateField = value;
+                mandateSignatureDateSet = true;
+            }
+        }
+        public string iban;
+        public countryTypeEnum preferredLanguageField;
+        public bool preferredLanguageSet;
+        public countryTypeEnum preferredLanguage
+        {
+            get
+            {
+                return preferredLanguageField;
+            }
+            set
+            {
+                preferredLanguageField = value;
+                preferredLanguageSet = true;
+            }
+        }
+        public string Serialize()
+        {
+            var xml = "";
+            xml += "\r\n<mandateProvider>" + mandateProvider + "</mandateProvider>";
+            xml += "\r\n<sequenceType>" + sequenceType + "</sequenceType>";
+            if (mandateReferenceSet)
+            {
+                xml += "\r\n<mandateReference>" + mandateReference + "</mandateReference>";
+            }
+            if (mandateUrlSet)
+            {
+                xml += "\r\n<mandateUrl>" + mandateUrl + "</mandateUrl>";
+            }
+            if (mandateSignatureDateSet)
+            {
+                xml += "\r\n<mandateSignatureDate>" + mandateSignatureDate + "</mandateSignatureDate>";
+            }
+            if (iban != null)
+            {
+                xml += "\r\n<iban>" + iban + "</iban>";
+            }
+            if (preferredLanguageSet)
+            {
+                xml += "\r\n<preferredLanguage>" + preferredLanguage + "</preferredLanguage>";
+            }
+            return xml;
+        }
     }
 
     public partial class queryTransaction : transactionTypeWithReportGroup

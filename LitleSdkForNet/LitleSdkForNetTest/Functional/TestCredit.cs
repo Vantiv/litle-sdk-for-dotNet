@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleCreditWithCard()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
             creditObj.amount = 106;
             creditObj.orderId = "2111";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -52,6 +53,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleCreditWithMpos()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
             creditObj.amount = 106;
             creditObj.orderId = "2111";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -71,6 +73,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleCreditWithPaypal()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
             creditObj.amount = 106;
             creditObj.orderId = "123456";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -87,6 +90,7 @@ namespace Litle.Sdk.Test.Functional
         public void PaypalNotes()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
             creditObj.amount = 106;
             creditObj.orderId = "123456";
             creditObj.payPalNotes = "Hello";
@@ -107,6 +111,7 @@ namespace Litle.Sdk.Test.Functional
         public void ProcessingInstructionAndAmexData()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
             creditObj.amount = 2000;
             creditObj.orderId = "12344";
             creditObj.orderSource = orderSourceType.ecommerce;
@@ -131,6 +136,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleCreditWithCardAndSpecialCharacters()
         {
             credit creditObj = new credit();
+            creditObj.id = "1";
             creditObj.amount = 106;
             creditObj.orderId = "<&'>";
             creditObj.orderSource = orderSourceType.ecommerce;

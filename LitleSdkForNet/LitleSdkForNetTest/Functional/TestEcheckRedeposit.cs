@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleEcheckRedeposit() {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
+            echeckredeposit.id = "1";
             echeckredeposit.litleTxnId = 123456;
             echeckRedepositResponse response = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual("Transaction Received", response.message);
@@ -42,6 +43,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void echeckRedepositWithEcheck() {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
+            echeckredeposit.id = "1";
             echeckredeposit.litleTxnId = 123456;
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
@@ -57,6 +59,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void echeckRedepositWithEcheckToken() {
             echeckRedeposit echeckredeposit = new echeckRedeposit();
+            echeckredeposit.id = "1";
             echeckredeposit.litleTxnId = 123456;
             echeckTokenType echeckToken = new echeckTokenType();
             echeckToken.accType = echeckAccountTypeEnum.Checking;

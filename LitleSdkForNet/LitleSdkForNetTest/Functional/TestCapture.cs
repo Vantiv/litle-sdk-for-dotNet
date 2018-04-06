@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpLitle()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,9 +34,11 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleCapture()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "Notes";
+            capture.pin = "1234";
 
             captureResponse response = litle.Capture(capture);
             Assert.AreEqual("Transaction Received", response.message);
@@ -46,6 +48,7 @@ namespace Litle.Sdk.Test.Functional
         public void simpleCaptureWithPartial()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.partial = true;
@@ -59,9 +62,11 @@ namespace Litle.Sdk.Test.Functional
         public void complexCapture()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "Notes";
+            capture.pin = "1234";
             enhancedData enhanceddata = new enhancedData();
             enhanceddata.customerReference = "Litle";
             enhanceddata.salesTax = 50;
@@ -76,6 +81,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleCaptureWithSpecial()
         {
             capture capture = new capture();
+            capture.id = "1";
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "<'&\">";

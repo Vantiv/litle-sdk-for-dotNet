@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleEcheckVerification()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.id = "1";
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
             echeckVerificationObject.orderSource = orderSourceType.ecommerce;
@@ -61,6 +62,7 @@ namespace Litle.Sdk.Test.Functional
         public void EcheckVerificationWithEcheckToken()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.id = "1";
             echeckVerificationObject.amount = 123456;
             echeckVerificationObject.orderId = "12345";
             echeckVerificationObject.orderSource = orderSourceType.ecommerce;
@@ -88,6 +90,7 @@ namespace Litle.Sdk.Test.Functional
         public void TestMissingBillingField()
         {
             echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.id = "1";
             echeckVerificationObject.reportGroup = "Planets";
             echeckVerificationObject.amount = 123;
             echeckVerificationObject.orderId = "12345";

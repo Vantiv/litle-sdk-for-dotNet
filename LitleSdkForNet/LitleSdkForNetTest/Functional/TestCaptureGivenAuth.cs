@@ -16,7 +16,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleCaptureGivenAuthWithCard() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.id = "1";
             capturegivenauth.amount = 106;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
@@ -48,6 +49,9 @@ namespace Litle.Sdk.Test.Functional
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnumType.accountFunding;
+            capturegivenauth.originalNetworkTransactionId = "abc123";
+            capturegivenauth.originalTransactionAmount = 123456789;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Transaction Received", response.message);
         }
@@ -56,6 +60,7 @@ namespace Litle.Sdk.Test.Functional
         public void simpleCaptureGivenAuthWithMpos()
         {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.id = "1";
             capturegivenauth.amount = 500;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
@@ -79,6 +84,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleCaptureGivenAuthWithToken() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.id = "1";
             capturegivenauth.amount = 106;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
@@ -101,6 +107,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void complexCaptureGivenAuth() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.id = "1";
             capturegivenauth.amount = 106;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
@@ -124,6 +131,9 @@ namespace Litle.Sdk.Test.Functional
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnumType.initialInstallment;
+            capturegivenauth.originalNetworkTransactionId = "abc123";
+            capturegivenauth.originalTransactionAmount = 123456789;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Transaction Received", response.message);
         }
@@ -131,6 +141,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void authInfo() {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.id = "1";
             capturegivenauth.amount = 106;
             capturegivenauth.orderId = "12344";
             authInformation authInfo = new authInformation();
@@ -151,6 +162,9 @@ namespace Litle.Sdk.Test.Functional
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card=card;
+            capturegivenauth.processingType = processingTypeEnumType.initialRecurring;
+            capturegivenauth.originalNetworkTransactionId = "abc123";
+            capturegivenauth.originalTransactionAmount = 123456789;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Transaction Received", response.message);
         }
@@ -159,6 +173,7 @@ namespace Litle.Sdk.Test.Functional
         public void simpleCaptureGivenAuthWithTokenAndSpecialCharacters()
         {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.id = "1";
             capturegivenauth.amount = 106;
             capturegivenauth.orderId = "<'&\">";
             authInformation authInfo = new authInformation();
@@ -182,6 +197,7 @@ namespace Litle.Sdk.Test.Functional
         public void simpleCaptureGivenAuthWithSecondaryAmount()
         {
             captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.id = "1";
             capturegivenauth.amount = 106;
             capturegivenauth.secondaryAmount = 50;
             capturegivenauth.orderId = "12344";
@@ -197,6 +213,9 @@ namespace Litle.Sdk.Test.Functional
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnumType.initialCOF;
+            capturegivenauth.originalNetworkTransactionId = "abc123";
+            capturegivenauth.originalTransactionAmount = 123456789;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Transaction Received", response.message);
         }

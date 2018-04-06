@@ -269,6 +269,7 @@ namespace Litle.Sdk.Test.Unit
         public void testCapture()
         {
             capture capture = new capture();
+            capture.id = "123";
             capture.litleTxnId = 12345678000;
             capture.amount = 106;
 

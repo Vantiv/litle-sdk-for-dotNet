@@ -17,7 +17,7 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpLitle()
         {
             config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -36,6 +36,8 @@ namespace Litle.Sdk.Test.Functional
         public void TestCustomAttribute7TriggeredRules()
         {
             fraudCheck fraudCheck = new fraudCheck();
+            fraudCheck.id = "1";
+            fraudCheck.reportGroup = "Planets";
             advancedFraudChecksType advancedFraudCheck = new advancedFraudChecksType();
             fraudCheck.advancedFraudChecks = advancedFraudCheck;
             advancedFraudCheck.threatMetrixSessionId = "123";
@@ -48,15 +50,22 @@ namespace Litle.Sdk.Test.Functional
             fraudCheckResponse fraudCheckResponse = litle.FraudCheck(fraudCheck);
 
             Assert.NotNull(fraudCheckResponse);
-            Assert.AreEqual(60, fraudCheckResponse.advancedFraudResults.deviceReputationScore);
-            //Assert.AreEqual(7, fraudCheckResponse.advancedFraudResults.triggeredRule.Length);
-            Assert.AreEqual("triggered_rule_1", fraudCheckResponse.advancedFraudResults.triggeredRule);
+            Assert.AreEqual(42, fraudCheckResponse.advancedFraudResults.deviceReputationScore);
+            Assert.AreEqual(7, fraudCheckResponse.advancedFraudResults.triggeredRule.Length);
+            Assert.AreEqual("triggered_rule_1", fraudCheckResponse.advancedFraudResults.triggeredRule[0]);
+            Assert.AreEqual("triggered_rule_2", fraudCheckResponse.advancedFraudResults.triggeredRule[1]);
+            Assert.AreEqual("triggered_rule_3", fraudCheckResponse.advancedFraudResults.triggeredRule[2]);
+            Assert.AreEqual("triggered_rule_4", fraudCheckResponse.advancedFraudResults.triggeredRule[3]);
+            Assert.AreEqual("triggered_rule_5", fraudCheckResponse.advancedFraudResults.triggeredRule[4]);
+            Assert.AreEqual("triggered_rule_6", fraudCheckResponse.advancedFraudResults.triggeredRule[5]);
+            Assert.AreEqual("triggered_rule_7", fraudCheckResponse.advancedFraudResults.triggeredRule[6]);
         }
 
         [Test]
         public void TestFraudCheckWithAddressAndAmount()
         {
             fraudCheck fraudCheck = new fraudCheck();
+            fraudCheck.id = "1";
             advancedFraudChecksType advancedFraudCheck = new advancedFraudChecksType();
             contact billToAddress = new contact();
             contact shipToAddresss = new contact();
@@ -85,8 +94,8 @@ namespace Litle.Sdk.Test.Functional
 
             fraudCheckResponse fraudCheckResponse = litle.FraudCheck(fraudCheck);
             Assert.NotNull(fraudCheckResponse);
-            Assert.AreEqual("Transaction Received", fraudCheckResponse.message);
-            Assert.AreEqual("fail", fraudCheckResponse.advancedFraudResults.deviceReviewStatus);
+            Assert.AreEqual("Call Discover", fraudCheckResponse.message);
+            Assert.AreEqual("pass", fraudCheckResponse.advancedFraudResults.deviceReviewStatus);
 
         }
     }

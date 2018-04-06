@@ -16,7 +16,7 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpLitle()
         {
             config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -46,7 +46,7 @@ namespace Litle.Sdk.Test.Functional
             queryTransactionResponse queryResponse = (queryTransactionResponse)response;
 
             Assert.NotNull(queryResponse);
-            Assert.AreEqual("000", queryResponse.response);
+            Assert.AreEqual("150", queryResponse.response);
             Assert.AreEqual("Original transaction found", queryResponse.message);
             Assert.AreEqual("000", ((captureResponse)queryResponse.results_max10[0]).response);
 
@@ -67,16 +67,9 @@ namespace Litle.Sdk.Test.Functional
             queryTransactionResponse queryResponse = (queryTransactionResponse)response;
 
             Assert.NotNull(queryResponse);
-            Assert.AreEqual("000", queryResponse.response);
+            Assert.AreEqual("150", queryResponse.response);
             Assert.AreEqual("Original transaction found", queryResponse.message);
-            Assert.AreEqual(2, queryResponse.results_max10.Count);
-
-            Assert.AreEqual("000", ((authorizationResponse)queryResponse.results_max10[0]).response);
-            Assert.AreEqual("Approved", ((authorizationResponse)queryResponse.results_max10[0]).message);
-
-            Assert.AreEqual("000", ((authorizationResponse)queryResponse.results_max10[1]).response);
-            Assert.AreEqual("Approved", ((authorizationResponse)queryResponse.results_max10[1]).message);
-
+            Assert.AreEqual(1, queryResponse.results_max10.Count);
         }
 
         [Test]

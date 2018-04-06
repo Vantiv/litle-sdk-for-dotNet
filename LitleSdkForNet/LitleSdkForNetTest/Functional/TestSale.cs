@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleSaleWithCard()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
@@ -45,13 +46,14 @@ namespace Litle.Sdk.Test.Functional
             saleObj.card = cardObj;
 
             saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            StringAssert.AreEqualIgnoringCase("Transaction Received", responseObj.message);
         }
 
         [Test]
         public void SimpleSaleWithMpos()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
@@ -65,13 +67,14 @@ namespace Litle.Sdk.Test.Functional
             saleObj.mpos = mpos;
 
             saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            StringAssert.AreEqualIgnoringCase("Transaction Received", responseObj.message);
         }
 
         [Test]
         public void SimpleSaleWithPayPal()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";
@@ -82,13 +85,63 @@ namespace Litle.Sdk.Test.Functional
             payPalObj.transactionId = "123456";
             saleObj.paypal = payPalObj;
             saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            StringAssert.AreEqualIgnoringCase("Transaction Received", responseObj.message);
+        }
+        
+        [Test]
+        public void SimpleSaleWithDirectDebit()
+        {
+            var saleObj = new sale
+            {
+                id = "1",
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                sepaDirectDebit = new sepaDirectDebitType
+                {
+                    mandateProvider = mandateProviderType.Merchant,
+                    sequenceType = sequenceTypeType.FirstRecurring,
+                    iban = "123456789123456789",
+                    preferredLanguage = countryTypeEnum.US
+                }
+            };
+
+            var responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Transaction Received", responseObj.message);
+        }
+        
+        [Test]
+        public void SimpleSaleWithProcessTypeNetIdTranAmt()
+        {
+            var saleObj = new sale
+            {
+                id = "1",
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000000",
+                    expDate = "1210"
+                },
+
+                processingType = processingTypeEnumType.initialRecurring,
+                originalNetworkTransactionId = "123456789123456789123456789",
+                originalTransactionAmount = 12
+            };
+
+            var responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Transaction Received", responseObj.message);
         }
 
         [Test]
         public void SimpleSaleWithApplepayAndSecondaryAmountAndWallet()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 110;
             saleObj.secondaryAmount = 50;
             saleObj.litleTxnId = 123456;
@@ -119,6 +172,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleSaleWithInvalidFraudCheck()
         {
             sale saleObj = new sale();
+            saleObj.id = "1";
             saleObj.amount = 106;
             saleObj.litleTxnId = 123456;
             saleObj.orderId = "12344";

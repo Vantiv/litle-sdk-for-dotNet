@@ -22,6 +22,27 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void TestSimpleCapture()
+        {
+            capture capture = new capture();
+            capture.litleTxnId = 3;
+            capture.amount = 2;
+            capture.payPalNotes = "note";
+            capture.reportGroup = "Planets";
+            capture.pin = "1234";
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<payPalNotes>note</payPalNotes>\r\n<pin>1234</pin>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='10.8' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureResponse><litleTxnId>123</litleTxnId></captureResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Capture(capture);
+        }
+        
+        
+        [Test]
         public void TestSurchargeAmount()
         {
             capture capture = new capture();

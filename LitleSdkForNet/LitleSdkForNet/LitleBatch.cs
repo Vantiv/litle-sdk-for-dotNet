@@ -47,6 +47,9 @@ namespace Litle.Sdk
             config["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
             config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
             config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+            config["useEncryption"] = Properties.Settings.Default.useEncryption;
+            config["vantivPublicKeyId"] = Properties.Settings.Default.vantivPublicKeyId;
+            config["pgpPassphrase"] = Properties.Settings.Default.pgpPassphrase;
 
             initializeRequest();
         }
@@ -194,10 +197,25 @@ namespace Litle.Sdk
 
         public string sendToLitle()
         {
-            string requestFilePath = this.Serialize();
-
-            communication.FtpDropOff(requestDirectory, Path.GetFileName(requestFilePath), config);
-            return Path.GetFileName(requestFilePath);
+            var useEncryption =  config.ContainsKey("useEncryption")? config["useEncryption"] : "false";
+            var vantivPublicKeyId = config.ContainsKey("vantivPublicKeyId")? config["vantivPublicKeyId"] : "";
+            
+            var requestFilePath = this.Serialize();
+            var batchRequestDir = requestDirectory;
+            var finalRequestFilePath = requestFilePath;
+            if ("true".Equals(useEncryption))
+            {
+                batchRequestDir = Path.Combine(requestDirectory, "encrypted");
+                Console.WriteLine(batchRequestDir);
+                finalRequestFilePath =
+                    Path.Combine(batchRequestDir, Path.GetFileName(requestFilePath) + ".encrypted");
+                litleFile.createDirectory(finalRequestFilePath);
+                PgpHelper.EncryptFile(requestFilePath, finalRequestFilePath, vantivPublicKeyId);
+            }
+            
+            communication.FtpDropOff(batchRequestDir, Path.GetFileName(finalRequestFilePath), config);
+            
+            return Path.GetFileName(finalRequestFilePath);
         }
 
 
@@ -208,11 +226,32 @@ namespace Litle.Sdk
 
         public litleResponse receiveFromLitle(string batchFileName)
         {
+            var useEncryption =  config.ContainsKey("useEncryption")? config["useEncryption"] : "false";
+            var pgpPassphrase = config.ContainsKey("pgpPassphrase")? config["pgpPassphrase"] : "";
+            
             litleFile.createDirectory(responseDirectory);
+            
+            var responseFilePath = Path.Combine(responseDirectory, batchFileName);
+            var batchResponseDir = responseDirectory;
+            var finalResponseFilePath = responseFilePath;
 
-            communication.FtpPickUp(responseDirectory + batchFileName, config, batchFileName);
+            if ("true".Equals(useEncryption))
+            {
+                batchResponseDir = Path.Combine(responseDirectory, "encrypted");
+                finalResponseFilePath =
+                    Path.Combine(batchResponseDir, batchFileName);
+                litleFile.createDirectory(finalResponseFilePath);
+            }
+            communication.FtpPickUp(finalResponseFilePath, config, batchFileName);
 
-            litleResponse litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseDirectory + batchFileName);
+            if ("true".Equals(useEncryption))
+            {
+                responseFilePath = responseFilePath.Replace(".encrypted", "");
+                PgpHelper.DecryptFile(finalResponseFilePath, responseFilePath, pgpPassphrase);
+            }
+
+            var litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
+                        
             return litleResponse;
         }
 
@@ -239,7 +278,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"10.1\"" +
+            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"10.8\"" +
              " xmlns=\"http://www.litle.com/schema\" " +
              "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
 

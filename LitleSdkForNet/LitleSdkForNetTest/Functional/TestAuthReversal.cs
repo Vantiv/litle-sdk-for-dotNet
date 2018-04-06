@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpLitle()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -34,6 +34,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleAuthReversal()
         {
             authReversal reversal = new authReversal();
+            reversal.id = "1";
             reversal.litleTxnId = 12345678000L;
             reversal.amount = 106;
             reversal.payPalNotes = "Notes";
@@ -46,6 +47,7 @@ namespace Litle.Sdk.Test.Functional
         public void testAuthReversalHandleSpecialCharacters()
         {
             authReversal reversal = new authReversal();
+            reversal.id = "1";
             reversal.litleTxnId = 12345678000L;
             reversal.amount = 106;
             reversal.payPalNotes = "<'&\">";

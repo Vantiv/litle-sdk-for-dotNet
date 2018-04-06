@@ -491,14 +491,6 @@ namespace Litle.Sdk.Test.Functional
                     saleResponse = litleBatchResponse.nextSaleResponse();
                 }
 
-                updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
-                while (updateCardValidationNumOnTokenResponse != null)
-                {
-                    Assert.AreEqual("821", updateCardValidationNumOnTokenResponse.response);
-
-                    updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
-                }
-
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
         }
@@ -1242,201 +1234,201 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        [Test]
-        public void PFIFInstructionTxnTest()
-        {
-            
-            Dictionary<string, string> configOverride = new Dictionary<string, string>();
-            configOverride["url"] = Properties.Settings.Default.url;
-            configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
-            configOverride["username"] = "SDKV10";
-            configOverride["printxml"] = Properties.Settings.Default.printxml;
-            configOverride["timeout"] = Properties.Settings.Default.timeout;
-            configOverride["proxyHost"] = Properties.Settings.Default.proxyHost;
-            configOverride["merchantId"] = "0180-xml10";
-            configOverride["password"] = "x3Km7hd";
-            configOverride["proxyPort"] = Properties.Settings.Default.proxyPort;
-            configOverride["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            configOverride["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            configOverride["sftpPassword"] = Properties.Settings.Default.sftpPassword;
-            configOverride["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            configOverride["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl;
-            configOverride["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
-            configOverride["requestDirectory"] = Properties.Settings.Default.requestDirectory;
-            configOverride["responseDirectory"] = Properties.Settings.Default.responseDirectory;
-
-            litleRequest litleOverride = new litleRequest(configOverride);
-
-            batchRequest litleBatchRequest = new batchRequest(configOverride);
-
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Corporate;
-            echeck.accNum = "1092969901";
-            echeck.routingNum = "011075150";
-            echeck.checkNum = "123455";
-  
-
-            submerchantCredit submerchantCredit = new submerchantCredit();
-            submerchantCredit.fundingSubmerchantId = "123456";
-            submerchantCredit.submerchantName = "merchant";
-            submerchantCredit.fundsTransferId = "123467";
-            submerchantCredit.amount = 106L;
-            submerchantCredit.accountInfo = echeck;
-            submerchantCredit.id = "id";
-            litleBatchRequest.addSubmerchantCredit(submerchantCredit);
-
-            payFacCredit payFacCredit = new payFacCredit();
-            payFacCredit.fundingSubmerchantId = "123456";
-            payFacCredit.fundsTransferId = "123467";
-            payFacCredit.amount = 107L;
-            payFacCredit.id = "id";
-            litleBatchRequest.addPayFacCredit(payFacCredit);
-
-            reserveCredit reserveCredit = new reserveCredit();
-            reserveCredit.fundingSubmerchantId = "123456";
-            reserveCredit.fundsTransferId = "123467";
-            reserveCredit.amount = 107L;
-            reserveCredit.id = "id";
-            litleBatchRequest.addReserveCredit(reserveCredit);
-
-            vendorCredit vendorCredit = new vendorCredit();
-            vendorCredit.fundingSubmerchantId = "123456";
-            vendorCredit.vendorName = "merchant";
-            vendorCredit.fundsTransferId = "123467";
-            vendorCredit.amount = 106L;
-            vendorCredit.accountInfo = echeck;
-            vendorCredit.id = "id";
-            litleBatchRequest.addVendorCredit(vendorCredit);
-
-            physicalCheckCredit physicalCheckCredit = new physicalCheckCredit();
-            physicalCheckCredit.fundingSubmerchantId = "123456";
-            physicalCheckCredit.fundsTransferId = "123467";
-            physicalCheckCredit.amount = 107L;
-            physicalCheckCredit.id = "id";
-            litleBatchRequest.addPhysicalCheckCredit(physicalCheckCredit);
-
-            submerchantDebit submerchantDebit = new submerchantDebit();
-            submerchantDebit.fundingSubmerchantId = "123456";
-            submerchantDebit.submerchantName = "merchant";
-            submerchantDebit.fundsTransferId = "123467";
-            submerchantDebit.amount = 106L;
-            submerchantDebit.accountInfo = echeck;
-            submerchantDebit.id = "id";
-            litleBatchRequest.addSubmerchantDebit(submerchantDebit);
-
-            payFacDebit payFacDebit = new payFacDebit();
-            payFacDebit.fundingSubmerchantId = "123456";
-            payFacDebit.fundsTransferId = "123467";
-            payFacDebit.amount = 107L;
-            payFacDebit.id = "id";
-            litleBatchRequest.addPayFacDebit(payFacDebit);
-
-            reserveDebit reserveDebit = new reserveDebit();
-            reserveDebit.fundingSubmerchantId = "123456";
-            reserveDebit.fundsTransferId = "123467";
-            reserveDebit.amount = 107L;
-            reserveDebit.id = "id";
-            litleBatchRequest.addReserveDebit(reserveDebit);
-
-            vendorDebit vendorDebit = new vendorDebit();
-            vendorDebit.fundingSubmerchantId = "123456";
-            vendorDebit.vendorName = "merchant";
-            vendorDebit.fundsTransferId = "123467";
-            vendorDebit.amount = 106L;
-            vendorDebit.accountInfo = echeck;
-            vendorDebit.id = "id";
-            litleBatchRequest.addVendorDebit(vendorDebit);
-
-            physicalCheckDebit physicalCheckDebit = new physicalCheckDebit();
-            physicalCheckDebit.fundingSubmerchantId = "123456";
-            physicalCheckDebit.fundsTransferId = "123467";
-            physicalCheckDebit.amount = 107L;
-            physicalCheckDebit.id = "id";
-            litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
-
-            litleOverride.addBatch(litleBatchRequest);
-
-            litleResponse litleResponse = litleOverride.sendToLitleWithStream();
-
-            Assert.NotNull(litleResponse);
-            Assert.AreEqual("0", litleResponse.response);
-            Assert.AreEqual("Valid Format", litleResponse.message);
-
-            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
-            while (litleBatchResponse != null)
-            {
-                submerchantCreditResponse submerchantCreditResponse = litleBatchResponse.nextSubmerchantCreditResponse();
-                while (submerchantCreditResponse != null)
-                {
-                    Assert.AreEqual("000", submerchantCreditResponse.response);
-                    submerchantCreditResponse = litleBatchResponse.nextSubmerchantCreditResponse();
-                }
-
-                payFacCreditResponse payFacCreditResponse = litleBatchResponse.nextPayFacCreditResponse();
-                while (payFacCreditResponse != null)
-                {
-                    Assert.AreEqual("000", payFacCreditResponse.response);
-                    payFacCreditResponse = litleBatchResponse.nextPayFacCreditResponse();
-                }
-
-                vendorCreditResponse vendorCreditResponse = litleBatchResponse.nextVendorCreditResponse();
-                while (vendorCreditResponse != null)
-                {
-                    Assert.AreEqual("000", vendorCreditResponse.response);
-                    vendorCreditResponse = litleBatchResponse.nextVendorCreditResponse();
-                }
-
-                reserveCreditResponse reserveCreditResponse = litleBatchResponse.nextReserveCreditResponse();
-                while (reserveCreditResponse != null)
-                {
-                    Assert.AreEqual("000", reserveCreditResponse.response);
-                    reserveCreditResponse = litleBatchResponse.nextReserveCreditResponse();
-                }
-
-                physicalCheckCreditResponse physicalCheckCreditResponse = litleBatchResponse.nextPhysicalCheckCreditResponse();
-                while (physicalCheckCreditResponse != null)
-                {
-                    Assert.AreEqual("000", physicalCheckCreditResponse.response);
-                    physicalCheckCreditResponse = litleBatchResponse.nextPhysicalCheckCreditResponse();
-                }
-
-                submerchantDebitResponse submerchantDebitResponse = litleBatchResponse.nextSubmerchantDebitResponse();
-                while (submerchantDebitResponse != null)
-                {
-                    Assert.AreEqual("000", submerchantDebitResponse.response);
-                    submerchantDebitResponse = litleBatchResponse.nextSubmerchantDebitResponse();
-                }
-
-                payFacDebitResponse payFacDebitResponse = litleBatchResponse.nextPayFacDebitResponse();
-                while (payFacDebitResponse != null)
-                {
-                    Assert.AreEqual("000", payFacDebitResponse.response);
-                    payFacDebitResponse = litleBatchResponse.nextPayFacDebitResponse();
-                }
-
-                vendorDebitResponse vendorDebitResponse = litleBatchResponse.nextVendorDebitResponse();
-                while (vendorDebitResponse != null)
-                {
-                    Assert.AreEqual("000", vendorDebitResponse.response);
-                    vendorDebitResponse = litleBatchResponse.nextVendorDebitResponse();
-                }
-
-                reserveDebitResponse reserveDebitResponse = litleBatchResponse.nextReserveDebitResponse();
-                while (reserveDebitResponse != null)
-                {
-                    Assert.AreEqual("000", reserveDebitResponse.response);
-                    reserveDebitResponse = litleBatchResponse.nextReserveDebitResponse();
-                }
-
-                physicalCheckDebitResponse physicalCheckDebitResponse = litleBatchResponse.nextPhysicalCheckDebitResponse();
-                while (physicalCheckDebitResponse != null)
-                {
-                    Assert.AreEqual("000", physicalCheckDebitResponse.response);
-                    physicalCheckDebitResponse = litleBatchResponse.nextPhysicalCheckDebitResponse();
-                }
-
-                litleBatchResponse = litleResponse.nextBatchResponse();
-            }
-        }
+//        [Test]
+//        public void PFIFInstructionTxnTest()
+//        {
+//            
+//            Dictionary<string, string> configOverride = new Dictionary<string, string>();
+//            configOverride["url"] = Properties.Settings.Default.url;
+//            configOverride["reportGroup"] = Properties.Settings.Default.reportGroup;
+//            configOverride["username"] = "SDKV10";
+//            configOverride["printxml"] = Properties.Settings.Default.printxml;
+//            configOverride["timeout"] = Properties.Settings.Default.timeout;
+//            configOverride["proxyHost"] = Properties.Settings.Default.proxyHost;
+//            configOverride["merchantId"] = "0180-xml10";
+//            configOverride["password"] = "x3Km7hd";
+//            configOverride["proxyPort"] = Properties.Settings.Default.proxyPort;
+//            configOverride["sftpUrl"] = Properties.Settings.Default.sftpUrl;
+//            configOverride["sftpUsername"] = Properties.Settings.Default.sftpUsername;
+//            configOverride["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+//            configOverride["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
+//            configOverride["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl;
+//            configOverride["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
+//            configOverride["requestDirectory"] = Properties.Settings.Default.requestDirectory;
+//            configOverride["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+//
+//            litleRequest litleOverride = new litleRequest(configOverride);
+//
+//            batchRequest litleBatchRequest = new batchRequest(configOverride);
+//
+//            echeckType echeck = new echeckType();
+//            echeck.accType = echeckAccountTypeEnum.Corporate;
+//            echeck.accNum = "1092969901";
+//            echeck.routingNum = "011075150";
+//            echeck.checkNum = "123455";
+//  
+//
+//            submerchantCredit submerchantCredit = new submerchantCredit();
+//            submerchantCredit.fundingSubmerchantId = "123456";
+//            submerchantCredit.submerchantName = "merchant";
+//            submerchantCredit.fundsTransferId = "123467";
+//            submerchantCredit.amount = 106L;
+//            submerchantCredit.accountInfo = echeck;
+//            submerchantCredit.id = "id";
+//            litleBatchRequest.addSubmerchantCredit(submerchantCredit);
+//
+//            payFacCredit payFacCredit = new payFacCredit();
+//            payFacCredit.fundingSubmerchantId = "123456";
+//            payFacCredit.fundsTransferId = "123467";
+//            payFacCredit.amount = 107L;
+//            payFacCredit.id = "id";
+//            litleBatchRequest.addPayFacCredit(payFacCredit);
+//
+//            reserveCredit reserveCredit = new reserveCredit();
+//            reserveCredit.fundingSubmerchantId = "123456";
+//            reserveCredit.fundsTransferId = "123467";
+//            reserveCredit.amount = 107L;
+//            reserveCredit.id = "id";
+//            litleBatchRequest.addReserveCredit(reserveCredit);
+//
+//            vendorCredit vendorCredit = new vendorCredit();
+//            vendorCredit.fundingSubmerchantId = "123456";
+//            vendorCredit.vendorName = "merchant";
+//            vendorCredit.fundsTransferId = "123467";
+//            vendorCredit.amount = 106L;
+//            vendorCredit.accountInfo = echeck;
+//            vendorCredit.id = "id";
+//            litleBatchRequest.addVendorCredit(vendorCredit);
+//
+//            physicalCheckCredit physicalCheckCredit = new physicalCheckCredit();
+//            physicalCheckCredit.fundingSubmerchantId = "123456";
+//            physicalCheckCredit.fundsTransferId = "123467";
+//            physicalCheckCredit.amount = 107L;
+//            physicalCheckCredit.id = "id";
+//            litleBatchRequest.addPhysicalCheckCredit(physicalCheckCredit);
+//
+//            submerchantDebit submerchantDebit = new submerchantDebit();
+//            submerchantDebit.fundingSubmerchantId = "123456";
+//            submerchantDebit.submerchantName = "merchant";
+//            submerchantDebit.fundsTransferId = "123467";
+//            submerchantDebit.amount = 106L;
+//            submerchantDebit.accountInfo = echeck;
+//            submerchantDebit.id = "id";
+//            litleBatchRequest.addSubmerchantDebit(submerchantDebit);
+//
+//            payFacDebit payFacDebit = new payFacDebit();
+//            payFacDebit.fundingSubmerchantId = "123456";
+//            payFacDebit.fundsTransferId = "123467";
+//            payFacDebit.amount = 107L;
+//            payFacDebit.id = "id";
+//            litleBatchRequest.addPayFacDebit(payFacDebit);
+//
+//            reserveDebit reserveDebit = new reserveDebit();
+//            reserveDebit.fundingSubmerchantId = "123456";
+//            reserveDebit.fundsTransferId = "123467";
+//            reserveDebit.amount = 107L;
+//            reserveDebit.id = "id";
+//            litleBatchRequest.addReserveDebit(reserveDebit);
+//
+//            vendorDebit vendorDebit = new vendorDebit();
+//            vendorDebit.fundingSubmerchantId = "123456";
+//            vendorDebit.vendorName = "merchant";
+//            vendorDebit.fundsTransferId = "123467";
+//            vendorDebit.amount = 106L;
+//            vendorDebit.accountInfo = echeck;
+//            vendorDebit.id = "id";
+//            litleBatchRequest.addVendorDebit(vendorDebit);
+//
+//            physicalCheckDebit physicalCheckDebit = new physicalCheckDebit();
+//            physicalCheckDebit.fundingSubmerchantId = "123456";
+//            physicalCheckDebit.fundsTransferId = "123467";
+//            physicalCheckDebit.amount = 107L;
+//            physicalCheckDebit.id = "id";
+//            litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
+//
+//            litleOverride.addBatch(litleBatchRequest);
+//
+//            litleResponse litleResponse = litleOverride.sendToLitleWithStream();
+//
+//            Assert.NotNull(litleResponse);
+//            Assert.AreEqual("0", litleResponse.response);
+//            Assert.AreEqual("Valid Format", litleResponse.message);
+//
+//            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
+//            while (litleBatchResponse != null)
+//            {
+//                submerchantCreditResponse submerchantCreditResponse = litleBatchResponse.nextSubmerchantCreditResponse();
+//                while (submerchantCreditResponse != null)
+//                {
+//                    Assert.AreEqual("000", submerchantCreditResponse.response);
+//                    submerchantCreditResponse = litleBatchResponse.nextSubmerchantCreditResponse();
+//                }
+//
+//                payFacCreditResponse payFacCreditResponse = litleBatchResponse.nextPayFacCreditResponse();
+//                while (payFacCreditResponse != null)
+//                {
+//                    Assert.AreEqual("000", payFacCreditResponse.response);
+//                    payFacCreditResponse = litleBatchResponse.nextPayFacCreditResponse();
+//                }
+//
+//                vendorCreditResponse vendorCreditResponse = litleBatchResponse.nextVendorCreditResponse();
+//                while (vendorCreditResponse != null)
+//                {
+//                    Assert.AreEqual("000", vendorCreditResponse.response);
+//                    vendorCreditResponse = litleBatchResponse.nextVendorCreditResponse();
+//                }
+//
+//                reserveCreditResponse reserveCreditResponse = litleBatchResponse.nextReserveCreditResponse();
+//                while (reserveCreditResponse != null)
+//                {
+//                    Assert.AreEqual("000", reserveCreditResponse.response);
+//                    reserveCreditResponse = litleBatchResponse.nextReserveCreditResponse();
+//                }
+//
+//                physicalCheckCreditResponse physicalCheckCreditResponse = litleBatchResponse.nextPhysicalCheckCreditResponse();
+//                while (physicalCheckCreditResponse != null)
+//                {
+//                    Assert.AreEqual("000", physicalCheckCreditResponse.response);
+//                    physicalCheckCreditResponse = litleBatchResponse.nextPhysicalCheckCreditResponse();
+//                }
+//
+//                submerchantDebitResponse submerchantDebitResponse = litleBatchResponse.nextSubmerchantDebitResponse();
+//                while (submerchantDebitResponse != null)
+//                {
+//                    Assert.AreEqual("000", submerchantDebitResponse.response);
+//                    submerchantDebitResponse = litleBatchResponse.nextSubmerchantDebitResponse();
+//                }
+//
+//                payFacDebitResponse payFacDebitResponse = litleBatchResponse.nextPayFacDebitResponse();
+//                while (payFacDebitResponse != null)
+//                {
+//                    Assert.AreEqual("000", payFacDebitResponse.response);
+//                    payFacDebitResponse = litleBatchResponse.nextPayFacDebitResponse();
+//                }
+//
+//                vendorDebitResponse vendorDebitResponse = litleBatchResponse.nextVendorDebitResponse();
+//                while (vendorDebitResponse != null)
+//                {
+//                    Assert.AreEqual("000", vendorDebitResponse.response);
+//                    vendorDebitResponse = litleBatchResponse.nextVendorDebitResponse();
+//                }
+//
+//                reserveDebitResponse reserveDebitResponse = litleBatchResponse.nextReserveDebitResponse();
+//                while (reserveDebitResponse != null)
+//                {
+//                    Assert.AreEqual("000", reserveDebitResponse.response);
+//                    reserveDebitResponse = litleBatchResponse.nextReserveDebitResponse();
+//                }
+//
+//                physicalCheckDebitResponse physicalCheckDebitResponse = litleBatchResponse.nextPhysicalCheckDebitResponse();
+//                while (physicalCheckDebitResponse != null)
+//                {
+//                    Assert.AreEqual("000", physicalCheckDebitResponse.response);
+//                    physicalCheckDebitResponse = litleBatchResponse.nextPhysicalCheckDebitResponse();
+//                }
+//
+//                litleBatchResponse = litleResponse.nextBatchResponse();
+//            }
+//        }
     }
 }

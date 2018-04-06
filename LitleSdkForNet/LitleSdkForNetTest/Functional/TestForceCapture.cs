@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");
@@ -33,15 +33,39 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleForceCaptureWithCard() {
             forceCapture forcecapture = new forceCapture();
+            forcecapture.id = "1";
             forcecapture.amount = 106;
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
+            forcecapture.processingType = processingTypeEnumType.accountFunding;
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4100000000000000";
             card.expDate = "1210";
             forcecapture.card = card;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Transaction Received", response.message);
+        }
+        
+        [Test]
+        public void SimpleForceCaptureWithProcessingTypeEnum()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnumType.initialCOF,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            var response = litle.ForceCapture(forcecapture);
             Assert.AreEqual("Transaction Received", response.message);
         }
 
@@ -55,6 +79,7 @@ namespace Litle.Sdk.Test.Functional
             mpos.track1Status = 0;
             mpos.track2Status = 0;
             forceCapture forcecapture = new forceCapture();
+            forcecapture.id = "1";
             forcecapture.amount = 322;
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
@@ -66,6 +91,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleForceCaptureWithToken() {
             forceCapture forcecapture = new forceCapture();
+            forcecapture.id = "1";
             forcecapture.amount = 106;
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
