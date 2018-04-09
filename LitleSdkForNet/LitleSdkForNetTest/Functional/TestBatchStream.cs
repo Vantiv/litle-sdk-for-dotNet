@@ -541,7 +541,7 @@ namespace Litle.Sdk.Test.Functional
                 while (accountUpdateResponse != null)
                 {
                     Assert.AreEqual("301", accountUpdateResponse.response);
-
+                    Assert.AreEqual("111", accountUpdateResponse.orderId.Substring(0, 3));
                     accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
                 }
                 litleBatchResponse = litleResponse.nextBatchResponse();
@@ -1242,7 +1242,7 @@ namespace Litle.Sdk.Test.Functional
             }
         }
 
-        [Test]
+        /*[Test]
         public void PFIFInstructionTxnTest()
         {
 
@@ -1359,7 +1359,7 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
 
             litleOverride.addBatch(litleBatchRequest);
-
+            
             litleResponse litleResponse = litleOverride.sendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
@@ -1441,6 +1441,6 @@ namespace Litle.Sdk.Test.Functional
 
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
-        }
+        }*/
     }
 }

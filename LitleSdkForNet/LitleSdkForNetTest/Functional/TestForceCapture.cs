@@ -52,6 +52,28 @@ namespace Litle.Sdk.Test.Functional
             var response = _litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message);
         }
+        
+        [Test]
+        public void simpleForceCaptureWithCardVisaCOF()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.initialCOF,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            var response = _litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
 
         [Test]
         public void simpleForceCaptureWithMpos()

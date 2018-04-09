@@ -61,7 +61,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("payments.vantivprelive.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("prelive.litle.com")]
         public string sftpUrl {
             get {
                 return ((string)(this["sftpUrl"]));
@@ -109,7 +109,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("payments.vantivprelive.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("prelive.litle.com")]
         public string onlineBatchUrl {
             get {
                 return ((string)(this["onlineBatchUrl"]));
@@ -181,7 +181,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.testvantivcnp.com/sandbox/communicator/online")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online")]
         public string url {
             get {
                 return ((string)(this["url"]));
@@ -248,6 +248,53 @@ namespace Litle.Sdk.Properties {
             }
             set {
                 this["merchantId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("false")]
+        public string useEncryption {
+            get {
+                return ((string)(this["useEncryption"]));
+            }
+            set {
+                this["useEncryption"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string vantivPublicKeyId {
+            get {
+                return ((string)(this["vantivPublicKeyId"]));
+            }
+            set {
+                this["vantivPublicKeyId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pgpPassphrase {
+            get {
+                return ((string)(this["pgpPassphrase"]));
+            }
+            set {
+                this["pgpPassphrase"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"")]
+        public string gnuPgDir {
+            get {
+                return ((string)(this["GnuPgDir"]));
+            }
+            set {
+                this["GnuPgDir"] = value;
             }
         }
     }

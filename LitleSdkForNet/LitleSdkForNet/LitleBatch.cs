@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace Litle.Sdk
 {
-    public class litleRequest
+    public partial class litleRequest
     {
         private authentication authentication;
         private Dictionary<string, string> config;
@@ -47,6 +47,9 @@ namespace Litle.Sdk
             config["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
             config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
             config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+            config["useEncryption"] = Properties.Settings.Default.useEncryption;
+            config["vantivPublicKeyId"] = Properties.Settings.Default.vantivPublicKeyId;
+            config["pgpPassphrase"] = Properties.Settings.Default.pgpPassphrase;
 
             initializeRequest();
         }
@@ -194,10 +197,25 @@ namespace Litle.Sdk
 
         public string sendToLitle()
         {
+            var useEncryption =  config.ContainsKey("useEncryption")? config["useEncryption"] : "false";
+            var vantivPublicKeyId = config.ContainsKey("vantivPublicKeyId")? config["vantivPublicKeyId"] : "";
+            
             var requestFilePath = this.Serialize();
-
-            communication.FtpDropOff(requestDirectory, Path.GetFileName(requestFilePath), config);
-            return Path.GetFileName(requestFilePath);
+            var batchRequestDir = requestDirectory;
+            var finalRequestFilePath = requestFilePath;
+            if ("true".Equals(useEncryption))
+            {
+                batchRequestDir = Path.Combine(requestDirectory, "encrypted");
+                Console.WriteLine(batchRequestDir);
+                finalRequestFilePath =
+                    Path.Combine(batchRequestDir, Path.GetFileName(requestFilePath) + ".encrypted");
+                litleFile.createDirectory(finalRequestFilePath);
+                PgpHelper.EncryptFile(requestFilePath, finalRequestFilePath, vantivPublicKeyId);
+            }
+            
+            communication.FtpDropOff(batchRequestDir, Path.GetFileName(finalRequestFilePath), config);
+            
+            return Path.GetFileName(finalRequestFilePath);
         }
 
 
@@ -208,11 +226,32 @@ namespace Litle.Sdk
 
         public litleResponse receiveFromLitle(string batchFileName)
         {
+            var useEncryption =  config.ContainsKey("useEncryption")? config["useEncryption"] : "false";
+            var pgpPassphrase = config.ContainsKey("pgpPassphrase")? config["pgpPassphrase"] : "";
+            
             litleFile.createDirectory(responseDirectory);
+            
+            var responseFilePath = Path.Combine(responseDirectory, batchFileName);
+            var batchResponseDir = responseDirectory;
+            var finalResponseFilePath = responseFilePath;
 
-            communication.FtpPickUp(responseDirectory + batchFileName, config, batchFileName);
+            if ("true".Equals(useEncryption))
+            {
+                batchResponseDir = Path.Combine(responseDirectory, "encrypted");
+                finalResponseFilePath =
+                    Path.Combine(batchResponseDir, batchFileName);
+                litleFile.createDirectory(finalResponseFilePath);
+            }
+            communication.FtpPickUp(finalResponseFilePath, config, batchFileName);
 
-            var litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseDirectory + batchFileName);
+            if ("true".Equals(useEncryption))
+            {
+                responseFilePath = responseFilePath.Replace(".encrypted", "");
+                PgpHelper.DecryptFile(finalResponseFilePath, responseFilePath, pgpPassphrase);
+            }
+
+            var litleResponse = (litleResponse)litleXmlSerializer.DeserializeObjectFromFile(responseFilePath);
+                        
             return litleResponse;
         }
 
@@ -275,6 +314,123 @@ namespace Litle.Sdk
             }
         }
 
+    }
+    
+    
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class litleResponse
+    {
+        public string id;
+        public long litleBatchId;
+        public long litleSessionId;
+        public string merchantId;
+        public string response;
+        public string message;
+        public string version;
+
+        private XmlReader originalXmlReader;
+        private XmlReader batchResponseReader;
+        private XmlReader rfrResponseReader;
+        private string filePath;
+
+        public litleResponse()
+        {
+        }
+
+        public litleResponse(string filePath)
+        {
+            XmlTextReader reader = new XmlTextReader(filePath);
+            readXml(reader, filePath);
+        }
+
+        public litleResponse(XmlReader reader, string filePath)
+        {
+            readXml(reader, filePath);
+        }
+
+        public void setBatchResponseReader(XmlReader xmlReader)
+        {
+            this.batchResponseReader = xmlReader;
+        }
+
+        public void setRfrResponseReader(XmlReader xmlReader)
+        {
+            this.rfrResponseReader = xmlReader;
+        }
+
+        public void readXml(XmlReader reader, string filePath)
+        {
+            if (reader.ReadToFollowing("litleResponse"))
+            {
+                version = reader.GetAttribute("version");
+                message = reader.GetAttribute("message");
+                response = reader.GetAttribute("response");
+
+                string rawLitleSessionId = reader.GetAttribute("litleSessionId");
+                if (rawLitleSessionId != null)
+                {
+                    litleSessionId = Int64.Parse(rawLitleSessionId);
+                }
+            }
+            else
+            {
+                reader.Close();
+            }
+
+            this.originalXmlReader = reader;
+            this.filePath = filePath;
+
+            this.batchResponseReader = new XmlTextReader(filePath);
+            if (!batchResponseReader.ReadToFollowing("batchResponse"))
+            {
+                batchResponseReader.Close();
+            }
+
+            this.rfrResponseReader = new XmlTextReader(filePath);
+            if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
+            {
+                rfrResponseReader.Close();
+            }
+
+        }
+
+        virtual public batchResponse nextBatchResponse()
+        {
+            if (batchResponseReader.ReadState != ReadState.Closed)
+            {
+                batchResponse litleBatchResponse = new batchResponse(batchResponseReader, filePath);
+                if (!batchResponseReader.ReadToFollowing("batchResponse"))
+                {
+                    batchResponseReader.Close();
+                }
+
+                return litleBatchResponse;
+            }
+
+            return null;
+        }
+
+        virtual public RFRResponse nextRFRResponse()
+        {
+            if (rfrResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = rfrResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(RFRResponse));
+                StringReader reader = new StringReader(response);
+                RFRResponse rfrResponse = (RFRResponse)serializer.Deserialize(reader);
+
+                if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
+                {
+                    rfrResponseReader.Close();
+                }
+
+                return rfrResponse;
+            }
+
+            return null;
+        }
     }
 
     public class litleFile

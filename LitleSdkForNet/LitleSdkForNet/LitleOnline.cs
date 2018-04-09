@@ -9,6 +9,227 @@ using System.Text.RegularExpressions;
 
 namespace Litle.Sdk
 {
+    
+    public partial class litleOnlineRequest
+    {
+
+        public string merchantId;
+        public string merchantSdk;
+        public bool sameDayFunding;
+        public authentication authentication;
+        public authorization authorization;
+        public capture capture;
+        public giftCardCapture giftCardCapture;
+        public credit credit;
+        public giftCardCredit giftCardCredit;
+        public voidTxn voidTxn;
+        public sale sale;
+        public authReversal authReversal;
+        public giftCardAuthReversal giftCardAuthReversal;
+        public echeckCredit echeckCredit;
+        public echeckVerification echeckVerification;
+        public echeckSale echeckSale;
+        public registerTokenRequestType registerTokenRequest;
+        public forceCapture forceCapture;
+        public captureGivenAuth captureGivenAuth;
+        public echeckRedeposit echeckRedeposit;
+        public echeckVoid echeckVoid;
+        public updateCardValidationNumOnToken updateCardValidationNumOnToken;
+        public updateSubscription updateSubscription;
+        public cancelSubscription cancelSubscription;
+        public activate activate;
+        public deactivate deactivate;
+        public load load;
+        public unload unload;
+        public balanceInquiry balanceInquiry;
+        public createPlan createPlan;
+        public updatePlan updatePlan;
+        public refundReversal refundReversal;
+        public loadReversal loadReversal;
+        public depositReversal depositReversal;
+        public activateReversal activateReversal;
+        public deactivateReversal deactivateReversal;
+        public unloadReversal unloadReversal;
+        public queryTransaction queryTransaction;
+        public fraudCheck fraudCheck;
+        public fastAccessFunding fastAccessFunding;
+	    public submerchantCredit submerchantCredit;
+	    public submerchantDebit submerchantDebit;
+	    public payFacCredit payFacCredit;
+	    public payFacDebit payFacDebit;
+	    public reserveCredit reserveCredit;
+	    public reserveDebit reserveDebit;
+	    public physicalCheckCredit physicalCheckCredit;
+	    public physicalCheckDebit physicalCheckDebit;
+	    public vendorCredit vendorCredit;
+	    public vendorDebit vendorDebit;
+
+        public string Serialize()
+        {
+            var xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId 
+                + "\" version=\"11.4\" merchantSdk=\"" + merchantSdk + "\" sameDayFunding=\""
+                + sameDayFunding.ToString().ToLower() +"\" xmlns=\"http://www.litle.com/schema\">"
+                + authentication.Serialize();
+
+            if (authorization != null) xml += authorization.Serialize();
+            else if (capture != null) xml += capture.Serialize();
+            else if (credit != null) xml += credit.Serialize();
+            else if (voidTxn != null) xml += voidTxn.Serialize();
+            else if (sale != null) xml += sale.Serialize();
+            else if (authReversal != null) xml += authReversal.Serialize();
+            else if (echeckCredit != null) xml += echeckCredit.Serialize();
+            else if (echeckVerification != null) xml += echeckVerification.Serialize();
+            else if (echeckSale != null) xml += echeckSale.Serialize();
+            else if (registerTokenRequest != null) xml += registerTokenRequest.Serialize();
+            else if (forceCapture != null) xml += forceCapture.Serialize();
+            else if (captureGivenAuth != null) xml += captureGivenAuth.Serialize();
+            else if (echeckRedeposit != null) xml += echeckRedeposit.Serialize();
+            else if (echeckVoid != null) xml += echeckVoid.Serialize();
+            else if (updateCardValidationNumOnToken != null) xml += updateCardValidationNumOnToken.Serialize();
+            else if (updateSubscription != null) xml += updateSubscription.Serialize();
+            else if (cancelSubscription != null) xml += cancelSubscription.Serialize();
+            else if (activate != null) xml += activate.Serialize();
+            else if (deactivate != null) xml += deactivate.Serialize();
+            else if (load != null) xml += load.Serialize();
+            else if (unload != null) xml += unload.Serialize();
+            else if (balanceInquiry != null) xml += balanceInquiry.Serialize();
+            else if (createPlan != null) xml += createPlan.Serialize();
+            else if (updatePlan != null) xml += updatePlan.Serialize();
+            else if (refundReversal != null) xml += refundReversal.Serialize();
+            else if (loadReversal != null) xml += loadReversal.Serialize();
+            else if (depositReversal != null) xml += depositReversal.Serialize();
+            else if (activateReversal != null) xml += activateReversal.Serialize();
+            else if (deactivateReversal != null) xml += deactivateReversal.Serialize();
+            else if (unloadReversal != null) xml += unloadReversal.Serialize();
+            else if (queryTransaction != null) xml += queryTransaction.Serialize();
+            else if (fraudCheck != null) xml += fraudCheck.Serialize();
+            else if (giftCardAuthReversal != null) xml += giftCardAuthReversal.Serialize();
+            else if (giftCardCapture != null) xml += giftCardCapture.Serialize();
+            else if (giftCardCredit != null) xml += giftCardCredit.Serialize();
+            else if (fastAccessFunding != null) xml += fastAccessFunding.Serialize();
+	        else if (submerchantCredit != null) xml += submerchantCredit.Serialize();
+	        else if (submerchantDebit != null) xml += submerchantDebit.Serialize();
+	        else if (payFacCredit != null) xml += payFacCredit.Serialize();
+	        else if (payFacDebit != null) xml += payFacDebit.Serialize();
+	        else if (reserveCredit != null) xml += reserveCredit.Serialize();
+	        else if (reserveDebit != null) xml += reserveDebit.Serialize();
+	        else if (physicalCheckCredit != null) xml += physicalCheckCredit.Serialize();
+	        else if (physicalCheckDebit != null) xml += physicalCheckDebit.Serialize();
+	        else if (vendorCredit != null) xml += vendorCredit.Serialize();
+	        else if (vendorDebit != null) xml += vendorDebit.Serialize();
+            xml += "\r\n</litleOnlineRequest>";
+
+            return xml;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class litleOnlineResponse 
+    {
+
+        private string responseField;
+
+        private string messageField;
+
+        private string versionField;
+
+        public authReversalResponse authReversalResponse;
+        public giftCardAuthReversalResponse giftCardAuthReversalResponse;
+        public authorizationResponse authorizationResponse;
+        public captureGivenAuthResponse captureGivenAuthResponse;
+        public captureResponse captureResponse;
+        public giftCardCaptureResponse giftCardCaptureResponse;
+        public creditResponse creditResponse;
+        public giftCardCreditResponse giftCardCreditResponse;
+        public echeckCreditResponse echeckCreditResponse;
+        public echeckRedepositResponse echeckRedepositResponse;
+        public echeckSalesResponse echeckSalesResponse;
+        public echeckVerificationResponse echeckVerificationResponse;
+        public litleOnlineResponseTransactionResponseEcheckVoidResponse echeckVoidResponse;
+        public forceCaptureResponse forceCaptureResponse;
+        public registerTokenResponse registerTokenResponse;
+        public saleResponse saleResponse;
+        public litleOnlineResponseTransactionResponseVoidResponse voidResponse;
+        public updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse;
+        public cancelSubscriptionResponse cancelSubscriptionResponse;
+        public updateSubscriptionResponse updateSubscriptionResponse;
+        public activateResponse activateResponse;
+        public deactivateResponse deactivateResponse;
+        public loadResponse loadResponse;
+        public unloadResponse unloadResponse;
+        public balanceInquiryResponse balanceInquiryResponse;
+        public createPlanResponse createPlanResponse;
+        public updatePlanResponse updatePlanResponse;
+        public refundReversalResponse refundReversalResponse;
+        public depositReversalResponse depositReversalResponse;
+        public activateReversalResponse activateReversalResponse;
+        public deactivateReversalResponse deactivateReversalResponse;
+        public loadReversalResponse loadReversalResponse;
+        public unloadReversalResponse unloadReversalResponse;
+        public queryTransactionResponse queryTransactionResponse;
+        public queryTransactionUnavailableResponse queryTransactionUnavailableResponse;
+        public fraudCheckResponse fraudCheckResponse;
+        public fastAccessFundingResponse fastAccessFundingResponse;
+	    public submerchantCreditResponse submerchantCreditResponse;
+	    public submerchantDebitResponse submerchantDebitResponse;
+	    public payFacCreditResponse payFacCreditResponse;
+	    public payFacDebitResponse payFacDebitResponse;
+	    public reserveCreditResponse reserveCreditResponse;
+	    public reserveDebitResponse reserveDebitResponse;
+	    public physicalCheckCreditResponse physicalCheckCreditResponse;
+	    public physicalCheckDebitResponse physicalCheckDebitResponse;
+	    public vendorCreditResponse vendorCreditResponse;
+	    public vendorDebitResponse vendorDebitResponse;
+        
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string version
+        {
+            get
+            {
+                return this.versionField;
+            }
+            set
+            {
+                this.versionField = value;
+            }
+        }
+    }
+	
 	public class LitleOnline : ILitleOnline
 	{
 		private Dictionary<string, string> _config;
@@ -55,6 +276,115 @@ namespace Litle.Sdk
 		{
 			this._config = config;
 			_communication = new Communications();
+		}
+
+		public fastAccessFundingResponse FastAccessFundingResponse(fastAccessFunding fastAccessFunding)
+		{
+			return SendRequest(response => response.fastAccessFundingResponse, fastAccessFunding);
+		}
+		public Task<fastAccessFundingResponse> FastAccessFundingResponseAsync(fastAccessFunding fastAccessFunding, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.fastAccessFundingResponse, fastAccessFunding, cancellationToken);
+		}
+
+		public submerchantCreditResponse SubmerchantCreditResponse(submerchantCredit submerchantCredit)
+		{
+			return SendRequest(response => response.submerchantCreditResponse, submerchantCredit);
+		}
+
+		public Task<submerchantCreditResponse> SubmerchantCreditResponseAsync(submerchantCredit submerchantCredit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.submerchantCreditResponse, submerchantCredit, cancellationToken);
+		}
+
+		public payFacCreditResponse PayFacCreditResponse(payFacCredit payFacCredit)
+		{
+			return SendRequest(response => response.payFacCreditResponse, payFacCredit);
+		}
+
+		public Task<payFacCreditResponse> PayFacCreditResponseAsync(payFacCredit payFacCredit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.payFacCreditResponse, payFacCredit, cancellationToken);
+		}
+
+		public reserveCreditResponse ReserveCreditResponse(reserveCredit reserveCredit)
+		{
+			return SendRequest(response => response.reserveCreditResponse, reserveCredit);
+		}
+
+		public Task<reserveCreditResponse> ReserveCreditResponseAsync(reserveCredit reserveCredit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.reserveCreditResponse, reserveCredit, cancellationToken);
+		}
+
+		public physicalCheckCreditResponse PhysicalCheckCreditResponse(physicalCheckCredit physicalCheckCredit)
+		{
+			return SendRequest(response => response.physicalCheckCreditResponse, physicalCheckCredit);
+		}
+
+		public Task<physicalCheckCreditResponse> PhysicalCheckCreditResponseAsync(physicalCheckCredit physicalCheckCredit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.physicalCheckCreditResponse, physicalCheckCredit, cancellationToken);
+		}
+
+		public vendorCreditResponse VendorCreditResponse(vendorCredit vendorCredit)
+		{
+			return SendRequest(response => response.vendorCreditResponse, vendorCredit);
+		}
+
+		public Task<vendorCreditResponse> VendorCreditResponseAsync(vendorCredit vendorCredit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.vendorCreditResponse, vendorCredit, cancellationToken);
+		}
+
+		public submerchantDebitResponse SubmerchantDebitResponse(submerchantDebit submerchantDebit)
+		{
+			return SendRequest(response => response.submerchantDebitResponse, submerchantDebit);
+		}
+
+		public Task<submerchantDebitResponse> SubmerchantDebitResponseAsync(submerchantDebit submerchantDebit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.submerchantDebitResponse, submerchantDebit, cancellationToken);
+		}
+
+		public payFacDebitResponse PayFacDebitResponse(payFacDebit payFacDebit)
+		{
+			return SendRequest(response => response.payFacDebitResponse, payFacDebit);
+		}
+
+		public Task<payFacDebitResponse> PayFacDebitResponseAsync(payFacDebit payFacDebit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.payFacDebitResponse, payFacDebit, cancellationToken);
+		}
+
+		public reserveDebitResponse ReserveDebitResponse(reserveDebit reserveDebit)
+		{
+			return SendRequest(response => response.reserveDebitResponse, reserveDebit);
+		}
+
+		public Task<reserveDebitResponse> ReserveDebitResponseAsync(reserveDebit reserveDebit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.reserveDebitResponse, reserveDebit, cancellationToken);
+		}
+
+		public physicalCheckDebitResponse PhysicalCheckDebitResponse(physicalCheckDebit physicalCheckDebit)
+		{
+			return SendRequest(response => response.physicalCheckDebitResponse, physicalCheckDebit);
+		}
+
+		public Task<physicalCheckDebitResponse> PhysicalCheckDebitResponseAsync(physicalCheckDebit physicalCheckDebit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.physicalCheckDebitResponse, physicalCheckDebit, cancellationToken);
+		}
+
+		public vendorDebitResponse VendorDebitResponse(vendorDebit vendorDebit)
+		{
+			return SendRequest(response => response.vendorDebitResponse, vendorDebit);
+		}
+
+		public Task<vendorDebitResponse> VendorDebitResponseAsync(vendorDebit vendorDebit, CancellationToken cancellationToken)
+		{
+			return SendRequestAsync(response => response.vendorDebitResponse, vendorDebit, cancellationToken);
 		}
 
 		public event EventHandler HttpAction
@@ -342,12 +672,12 @@ namespace Litle.Sdk
 		{
 			return SendRequestAsync(response => (transactionTypeWithReportGroup)response.queryTransactionResponse ?? response.queryTransactionUnavailableResponse, queryTransaction, cancellationToken);
 		}
-
+		
 		private litleOnlineRequest CreateLitleOnlineRequest()
 		{
 			var request = new litleOnlineRequest();
 			request.merchantId = _config["merchantId"];
-			request.merchantSdk = "DotNet;11.1.1";
+			request.merchantSdk = "DotNet;11.4.0";
 			var authentication = new authentication();
 			authentication.password = _config["password"];
 			authentication.user = _config["username"];
@@ -570,6 +900,50 @@ namespace Litle.Sdk
 			{
 				request.queryTransaction = (queryTransaction) transaction;
 			}
+			else if (transaction is fastAccessFunding)
+			{
+				request.fastAccessFunding = (fastAccessFunding) transaction;
+			}
+			else if (transaction is submerchantCredit)
+			{
+				request.submerchantCredit = (submerchantCredit) transaction;
+			}
+			else if (transaction is payFacCredit)
+			{
+				request.payFacCredit = (payFacCredit) transaction;
+			}
+			else if (transaction is reserveCredit)
+			{
+				request.reserveCredit = (reserveCredit) transaction;
+			}
+			else if (transaction is physicalCheckCredit)
+			{
+				request.physicalCheckCredit = (physicalCheckCredit) transaction;
+			}
+			else if (transaction is vendorCredit)
+			{
+				request.vendorCredit = (vendorCredit) transaction;
+			}
+			else if (transaction is submerchantDebit)
+			{
+				request.submerchantDebit = (submerchantDebit) transaction;
+			}
+			else if (transaction is payFacDebit)
+			{
+				request.payFacDebit = (payFacDebit) transaction;
+			}
+			else if (transaction is reserveDebit)
+			{
+				request.reserveDebit = (reserveDebit) transaction;
+			}
+			else if (transaction is physicalCheckDebit)
+			{
+				request.physicalCheckDebit = (physicalCheckDebit) transaction;
+			}
+			else if (transaction is vendorDebit)
+			{
+				request.vendorDebit = (vendorDebit) transaction;
+			}
 			else
 			{
 				throw new NotImplementedException("Support for type: " + transaction.GetType().Name +
@@ -679,6 +1053,51 @@ namespace Litle.Sdk
 		Task<transactionTypeWithReportGroup> queryTransactionAsync(queryTransaction queryTransaction, CancellationToken cancellation);
 		updateCardValidationNumOnTokenResponse UpdateCardValidationNumOnToken(updateCardValidationNumOnToken update);
 		Task<updateCardValidationNumOnTokenResponse> UpdateCardValidationNumOnTokenAsync(updateCardValidationNumOnToken update, CancellationToken cancellationToken);
-	    event EventHandler HttpAction;
+		
+		fastAccessFundingResponse FastAccessFundingResponse(fastAccessFunding fastAccessFunding);
+		Task<fastAccessFundingResponse> FastAccessFundingResponseAsync(fastAccessFunding fastAccessFunding,
+			CancellationToken cancellationToken);
+
+		submerchantCreditResponse SubmerchantCreditResponse(submerchantCredit submerchantCredit);
+		Task<submerchantCreditResponse>
+			SubmerchantCreditResponseAsync(submerchantCredit submerchantCredit, CancellationToken cancellationToken);
+		
+		payFacCreditResponse PayFacCreditResponse(payFacCredit payFacCredit);
+		Task<payFacCreditResponse>
+			PayFacCreditResponseAsync(payFacCredit payFacCredit, CancellationToken cancellationToken);
+		
+		reserveCreditResponse ReserveCreditResponse(reserveCredit reserveCredit);
+		Task<reserveCreditResponse>
+			ReserveCreditResponseAsync(reserveCredit reserveCredit, CancellationToken cancellationToken);
+		
+		physicalCheckCreditResponse PhysicalCheckCreditResponse(physicalCheckCredit physicalCheckCredit);
+		Task<physicalCheckCreditResponse>
+			PhysicalCheckCreditResponseAsync(physicalCheckCredit physicalCheckCredit, CancellationToken cancellationToken);
+		
+		vendorCreditResponse VendorCreditResponse(vendorCredit vendorCredit);
+		Task<vendorCreditResponse>
+			VendorCreditResponseAsync(vendorCredit vendorCredit, CancellationToken cancellationToken);
+
+		submerchantDebitResponse SubmerchantDebitResponse(submerchantDebit submerchantDebit);
+		Task<submerchantDebitResponse>
+			SubmerchantDebitResponseAsync(submerchantDebit submerchantDebit, CancellationToken cancellationToken);
+		
+		payFacDebitResponse PayFacDebitResponse(payFacDebit payFacDebit);
+		Task<payFacDebitResponse>
+			PayFacDebitResponseAsync(payFacDebit payFacDebit, CancellationToken cancellationToken);
+		
+		reserveDebitResponse ReserveDebitResponse(reserveDebit reserveDebit);
+		Task<reserveDebitResponse>
+			ReserveDebitResponseAsync(reserveDebit reserveDebit, CancellationToken cancellationToken);
+		
+		physicalCheckDebitResponse PhysicalCheckDebitResponse(physicalCheckDebit physicalCheckDebit);
+		Task<physicalCheckDebitResponse>
+			PhysicalCheckDebitResponseAsync(physicalCheckDebit physicalCheckDebit, CancellationToken cancellationToken);
+		
+		vendorDebitResponse VendorDebitResponse(vendorDebit vendorDebit);
+		Task<vendorDebitResponse>
+			VendorDebitResponseAsync(vendorDebit vendorDebit, CancellationToken cancellationToken);
+		
+		event EventHandler HttpAction;
 	}
 }

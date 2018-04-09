@@ -200,7 +200,42 @@ namespace Litle.Sdk.Test.Functional
             var response = _litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Approved", response.message);
         }
+        [Test]
+        public void authInfoVisaCOF()
+        {
+            var capturegivenauth = new captureGivenAuth
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345,
+                    fraudResult = new fraudResult
+                    {
+                        avsResult = "12",
+                        cardValidationResult = "123",
+                        authenticationResult = "1",
+                        advancedAVSResult = "123"
+                    }
+                },
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000000",
+                    expDate = "1210"
+                },
+                processingType = processingTypeEnum.initialCOF,
+                originalNetworkTransactionId = "abc123",
+                originalTransactionAmount = 123456789,
+            };
 
+            var response = _litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
         [Test]
         public void simpleCaptureGivenAuthWithTokenAndSpecialCharacters()
         {

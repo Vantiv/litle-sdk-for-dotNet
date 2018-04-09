@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
@@ -221,7 +222,7 @@ namespace Litle.Sdk
 
             try
             {
-                sslStream.AuthenticateAsClient(url);
+                sslStream.AuthenticateAsClient(url, null, GetBestProtocol(), true);
             }
             catch (AuthenticationException e)
             {
@@ -272,11 +273,17 @@ namespace Litle.Sdk
                     writeFileStream.Write(byteBuffer, 0, bytesRead);
                 } while (bytesRead > 0);
             }
-
+            Console.WriteLine("Find me:"+ xmlResponseDestinationDirectory + batchName);
             tcpClient.Close();
             sslStream.Close();
 
             return xmlResponseDestinationDirectory + batchName;
+        }
+        
+        public SslProtocols GetBestProtocol()
+        {
+            var protocols = Enum.GetValues(typeof(SslProtocols)).Cast<SslProtocols>().ToList();
+            return protocols[protocols.Count - 1];
         }
 
         public virtual void FtpDropOff(string fileDirectory, string fileName, Dictionary<string, string> config)
@@ -287,14 +294,14 @@ namespace Litle.Sdk
             var username = config["sftpUsername"];
             var password = config["sftpPassword"];
             var knownHostsFile = config["knownHostsFile"];
-            var filePath = fileDirectory + fileName;
+            var filePath = Path.Combine(fileDirectory, fileName);
 
             var printxml = config["printxml"] == "true";
             if (printxml)
             {
                 Console.WriteLine("Sftp Url: " + url);
                 Console.WriteLine("Username: " + username);
-                //Console.WriteLine("Password: " + password);
+                Console.WriteLine("Password: " + password);
                 Console.WriteLine("Known hosts file path: " + knownHostsFile);
             }
 

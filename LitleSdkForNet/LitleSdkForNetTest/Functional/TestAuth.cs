@@ -105,6 +105,30 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
+        public void SimpleAuthWithCard_CardSuffixResponseVisaCOF()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "3",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.initialCOF,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "410070000000000000",
+                    expDate = "1210"
+                },
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+
+            var response = _litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+            Assert.AreEqual("123456", response.cardSuffix);
+        }
+        [Test]
         public void SimpleAuthWithCard_networkTxnId()
         {
             var authorization = new authorization
