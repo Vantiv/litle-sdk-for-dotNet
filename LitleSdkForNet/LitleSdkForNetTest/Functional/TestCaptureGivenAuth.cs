@@ -16,10 +16,10 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testvantivcnp.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
+            config.Add("version", "8.31");
             config.Add("timeout", "65");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
@@ -48,7 +48,141 @@ namespace Litle.Sdk.Test.Functional
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;
+            capturegivenauth.originalNetworkTransactionId = "abc123";
+            capturegivenauth.originalTransactionAmount = 123456789;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void simpleCaptureGivenAuthWithCardAccountFunding() {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnum.accountFunding;
+            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void simpleCaptureGivenAuthWithCardInitialRecurring() {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnum.initialRecurring;
+                captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void simpleCaptureGivenAuthWithCardInitialInstallment() {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnum.initialInstallment;
+                captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void simpleCaptureGivenAuthWithCardInitialCOF() {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnum.initialCOF;
+                captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void simpleCaptureGivenAuthWithCardMerchantInitiatedCOF() {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnum.merchantInitiatedCOF;
+                captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
+        [Test]
+        public void simpleCaptureGivenAuthWithCardCardholderInitatedCOF() {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
+            capturegivenauth.processingType = processingTypeEnum.cardholderInitiatedCOF;
+                captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Approved", response.message);
         }
 

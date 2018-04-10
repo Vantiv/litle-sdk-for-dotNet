@@ -16,10 +16,10 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpLitle()
         {
             config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testvantivcnp.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
+            config.Add("version", "8.31");
             config.Add("timeout", "65");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
@@ -49,7 +49,33 @@ namespace Litle.Sdk.Test.Functional
             customBilling cb = new customBilling();
             cb.phone = "1112223333"; //This needs to compile too            
 
+            authorization.originalNetworkTransactionId = "123456789012345678901234567890";
+            authorization.originalTransactionAmount = 2500;
             authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
+        [Test]
+        public void SimpleAuthWithCard_networkTxnId()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "4",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.accountFunding,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "410080000000000000",
+                    expDate = "1210"
+                },
+                customBilling = new customBilling { phone = "1112223333" },
+                originalNetworkTransactionId = "63225578415568556365452427825"
+            };
+
+            var response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }
         [Test]
@@ -277,6 +303,144 @@ namespace Litle.Sdk.Test.Functional
             authorization.card = card;
 
             authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
+        [Test]
+        public void SimpleAuthWithCardAccountFunding()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                processingType = processingTypeEnum.accountFunding,
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+            var response = litle.Authorize(authorization);
+
+            Assert.AreEqual("000", response.response);
+        }
+        [Test]
+        public void SimpleAuthWithCardInitialRecurring()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                processingType = processingTypeEnum.initialRecurring,
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+            var response = litle.Authorize(authorization);
+
+            Assert.AreEqual("000", response.response);
+        }
+        [Test]
+        public void SimpleAuthWithCardInitialInstallment()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                processingType = processingTypeEnum.initialInstallment,
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+            var response = litle.Authorize(authorization);
+
+            Assert.AreEqual("000", response.response);
+        }
+        [Test]
+        public void SimpleAuthWithCardInitialCOF()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                processingType = processingTypeEnum.initialCOF,
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+            var response = litle.Authorize(authorization);
+
+            Assert.AreEqual("000", response.response);
+        }
+        [Test]
+        public void SimpleAuthWithCardMerchantInitiatedCOF()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                processingType = processingTypeEnum.merchantInitiatedCOF,
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+            var response = litle.Authorize(authorization);
+
+            Assert.AreEqual("000", response.response);
+        }
+        [Test]
+        public void SimpleAuthWithCardCardHolderInitiatedCOF()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "414100000000000000",
+                    expDate = "1210"
+                },
+                processingType = processingTypeEnum.merchantInitiatedCOF,
+                customBilling = new customBilling { phone = "1112223333" }
+            };
+            var response = litle.Authorize(authorization);
+
             Assert.AreEqual("000", response.response);
         }
     }

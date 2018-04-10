@@ -15,10 +15,10 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testvantivcnp.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
+            config.Add("version", "8.31");
             config.Add("timeout", "65");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
@@ -95,6 +95,137 @@ namespace Litle.Sdk.Test.Functional
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message);
         }
-            
+        
+        [Test]
+        public void simpleForceCaptureWithCardAccountFunding()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.accountFunding,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            var response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
+        
+        [Test]
+        public void simpleForceCaptureWithCardInitialRecurring()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.initialRecurring,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            var response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
+        
+        [Test]
+        public void simpleForceCaptureWithCardInitialInstallment()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.initialInstallment,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            var response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
+        
+        [Test]
+        public void simpleForceCaptureWithCardInitialCOF()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.initialCOF,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            var response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
+        
+        [Test]
+        public void simpleForceCaptureWithCardMerchantInitiatedCOF()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.merchantInitiatedCOF,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            var response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
+        
+        [Test]
+        public void simpleForceCaptureWithCardCardholderInitiatedCOF()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.cardholderInitiatedCOF,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
+
+            var response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
     }
 }

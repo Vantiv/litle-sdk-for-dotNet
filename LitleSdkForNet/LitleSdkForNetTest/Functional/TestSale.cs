@@ -15,10 +15,10 @@ namespace Litle.Sdk.Test.Functional
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testvantivcnp.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
+            config.Add("version", "8.31");
             config.Add("timeout", "65");
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
@@ -125,7 +125,7 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
-        public void SimpleSaleWithApplepayAndSecondaryAmount()
+        public void SimpleSaleWithApplepayAndSecondaryAmountAndWallet()
         {
             sale saleObj = new sale();
             saleObj.amount = 110;
@@ -144,6 +144,10 @@ namespace Litle.Sdk.Test.Functional
             applepay.signature = "sign";
             applepay.version = "12345";
             saleObj.applepay = applepay;
+            wallet wallet = new wallet();
+            wallet.walletSourceTypeId = "123";
+            wallet.walletSourceType = walletWalletSourceType.MasterPass;
+            saleObj.wallet = wallet;
             saleResponse responseObj = litle.Sale(saleObj);
             Assert.AreEqual("Insufficient Funds", responseObj.message);
             Assert.AreEqual("110", responseObj.applepayResponse.transactionAmount);

@@ -25,7 +25,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.testvantivcnp.com/sandbox/communicator/online")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online")]
         public string url {
             get {
                 return ((string)(this["url"]));
@@ -49,7 +49,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dotnet")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string username {
             get {
                 return ((string)(this["username"]));
@@ -61,7 +61,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dotnet")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string password {
             get {
                 return ((string)(this["password"]));
@@ -121,7 +121,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("101")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string merchantId {
             get {
                 return ((string)(this["merchantId"]));
@@ -133,7 +133,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("payments.vantivprelive.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("prelive.litle.com")]
         public string sftpUrl {
             get {
                 return ((string)(this["sftpUrl"]));
@@ -157,7 +157,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dotnet")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string sftpUsername {
             get {
                 return ((string)(this["sftpUsername"]));
@@ -169,7 +169,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dotnet")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string sftpPassword {
             get {
                 return ((string)(this["sftpPassword"]));
@@ -181,7 +181,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("payments.vantivprelive.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("prelive.litle.com")]
         public string onlineBatchUrl {
             get {
                 return ((string)(this["onlineBatchUrl"]));

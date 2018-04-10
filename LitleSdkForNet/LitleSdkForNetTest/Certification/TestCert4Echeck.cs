@@ -15,13 +15,13 @@ namespace Litle.Sdk.Test.Certification
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testvantivcnp.com/sandbox/communicator/online");
+            config.Add("url", "https://payments.vantivprelive.com/vap/communicator/online");
             config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "65");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
+            config.Add("username", Properties.Settings.Default.username);
+            config.Add("version", "8.31");
+            config.Add("timeout", "500");
+            config.Add("merchantId", Properties.Settings.Default.merchantId);
+            config.Add("password", Properties.Settings.Default.password);
             config.Add("printxml", "true");
             config.Add("logFile", null);
             config.Add("neuterAccountNums", null);
@@ -96,7 +96,7 @@ namespace Litle.Sdk.Test.Certification
 
             echeckVerificationResponse response = litle.EcheckVerification(verification);
             Assert.AreEqual("950", response.response);
-            Assert.AreEqual("Declined - Negative Information on File", response.message);
+            Assert.AreEqual("Decline - Negative Information on File", response.message);
         }
 
         [Test]
@@ -285,8 +285,26 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test48()
         {
+            echeckSale sale = new echeckSale();
+            sale.orderId = "43";
+            sale.amount = 2007;
+            sale.orderSource = orderSourceType.telephone;
+            contact billToAddress = new contact();
+            billToAddress.firstName = "Peter";
+            billToAddress.lastName = "Green";
+            billToAddress.companyName = "Green Co";
+            sale.billToAddress = billToAddress;
+            echeckType echeck = new echeckType();
+            echeck.accNum = "6099999992";
+            echeck.accType = echeckAccountTypeEnum.Corporate;
+            echeck.routingNum = "211370545";
+            sale.echeck = echeck;
+
+            echeckSalesResponse saleResponse = litle.EcheckSale(sale);
+            
             echeckCredit credit = new echeckCredit();
-            credit.litleTxnId = 430000000000000001L;
+            credit.id = saleResponse.id;
+            credit.litleTxnId = saleResponse.litleTxnId;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
             Assert.AreEqual("000", response.response);
@@ -301,7 +319,7 @@ namespace Litle.Sdk.Test.Certification
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
             Assert.AreEqual("360", response.response);
-            Assert.AreEqual("No transaction found with specified litleTxnId", response.message);
+            Assert.AreEqual("No transaction found with specified transaction Id", response.message);
         }
             
     }

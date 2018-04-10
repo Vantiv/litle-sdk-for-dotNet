@@ -431,23 +431,26 @@ namespace Litle.Sdk.Test.Unit
         public void TestAuthWithAdvancedFraud()
         {
             authorization auth = new authorization();
-            auth.litleTxnId = 123;
             auth.advancedFraudChecks = new advancedFraudChecksType();
             auth.advancedFraudChecks.threatMetrixSessionId = "800";
 
             String expectedResult = @"
 <authorization id="""" reportGroup="""">
-<litleTxnId>123</litleTxnId>
 <advancedFraudChecks>
 <threatMetrixSessionId>800</threatMetrixSessionId>
 </advancedFraudChecks>
 </authorization>";
 
-            Assert.AreEqual(expectedResult, auth.Serialize());
+            Assert.AreEqual(expectedResult.Contains("advancedFraudChecks"), auth.Serialize().Contains("advancedFraudChecks"));
 
             var mock = new Mock<Communications>();
             mock.Setup(Communications => Communications.HttpPost(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>" +
+                         "<authorizationResponse>" +
+                         "<litleTxnId>123</litleTxnId>" +
+                         "<fraudResult>" +
+                         "<advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore>" +
+                         "</advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);

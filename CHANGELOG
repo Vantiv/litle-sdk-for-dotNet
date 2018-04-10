@@ -1,5 +1,12 @@
 = LitleOnline CHANGELOG
 
+== Version 8.31.0 (Apr. 10, 2018)
+* Feature: Added processingType enum and its values accountFunding, initialRecurring, initialInstallment, initialCOF, merchantInitiatedCOF, cardholderInitiatedCOF.
+* Feature: Added processingType field, originalNetworkTransactionId, originalTransactionAmount to authorization, captureGivenAuth.
+* Feature: Added processingType field to forceCapture.
+* Feature: Added networkTransactionId to authorizationResponse.
+* Bugfix: Added wallet element and added wallet field to Sale.
+
 == Version 8.29.5 (Nov, 30 2017)
 * BugFix: Handle backend namespace issue
 

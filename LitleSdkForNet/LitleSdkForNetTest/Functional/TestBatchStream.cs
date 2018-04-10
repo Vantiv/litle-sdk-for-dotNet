@@ -1011,7 +1011,7 @@ namespace Litle.Sdk.Test.Functional
             }
             catch (LitleOnlineException e)
             {
-                Assert.AreEqual("Error establishing a network connection", e.Message);
+                Assert.AreEqual("Error establishing a network connection - SSL Authentication failed", e.Message);
             }
         }
     }

@@ -1992,6 +1992,8 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
     private giftCardResponse giftCardResponseField;
     
     private applepayResponse applepayResponseField;
+
+    private string networkTransactionIdField;
     
     /// <remarks/>
     public long litleTxnId {
@@ -2205,6 +2207,18 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
             this.applepayResponseField = value;
         }
     }
+        
+        public string networkTransactionId
+        {
+            get
+            {
+                return this.networkTransactionIdField;
+            }
+            set
+            {
+                this.networkTransactionIdField = value;
+            }
+        }
 }
     
     /// <remarks/>
@@ -3325,6 +3339,8 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
 
         private bool duplicateFieldSpecified;
 
+        private string networkTransactionIdField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -3626,6 +3642,19 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
             set
             {
                 this.duplicateFieldSpecified = value;
+            }
+        }
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string networkTransactionId
+        {
+            get
+            {
+                return this.networkTransactionIdField;
+            }
+            set
+            {
+                this.networkTransactionIdField = value;
             }
         }
     }

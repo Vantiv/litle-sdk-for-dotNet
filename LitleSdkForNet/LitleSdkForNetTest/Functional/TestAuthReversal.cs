@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpLitle()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testvantivcnp.com/sandbox/communicator/online");
+            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
             config.Add("version", "8.13");

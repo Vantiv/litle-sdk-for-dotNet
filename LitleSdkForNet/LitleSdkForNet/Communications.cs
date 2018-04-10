@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Net;
 using Tamir.SharpSsh.jsch;
@@ -167,12 +168,12 @@ namespace Litle.Sdk
 
             try
             {
-                sslStream.AuthenticateAsClient(url);
+                sslStream.AuthenticateAsClient(url, null, GetBestProtocol(), true);
             }
             catch (AuthenticationException e)
             {
                 tcpClient.Close();
-                throw new LitleOnlineException("Error establishing a network connection - SSL Authencation failed", e);
+                throw new LitleOnlineException("Error establishing a network connection - SSL Authentication failed", e);
             }
 
             if ("true".Equals(config["printxml"]))
@@ -228,6 +229,12 @@ namespace Litle.Sdk
             sslStream.Close();
 
             return xmlResponseDestinationDirectory + batchName;
+        }
+        
+        public SslProtocols GetBestProtocol()
+        {
+            var protocols = Enum.GetValues(typeof(SslProtocols)).Cast<SslProtocols>().ToList();
+            return protocols[protocols.Count - 1];
         }
 
         public virtual void FtpDropOff(string fileDirectory, string fileName, Dictionary<string, string> config)
