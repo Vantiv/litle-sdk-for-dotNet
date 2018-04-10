@@ -42,6 +42,8 @@ namespace Litle.Sdk
                     throw new LitleOnlineException(procResult.error);
                 }
             }
+            
+            Console.WriteLine("Encrypted with public key " + recipientKeyId);
         }
 
         public static void DecryptFile(string inputFileName, string outputFileName, string passphrase)
