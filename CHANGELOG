@@ -1,5 +1,13 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.0 (Apr. 10, 2018)
+* Feature: Added more enum values initialCOF, merchantInitiatedCOF, cardholderInitiatedCOF for processingTypeEnum.
+* Feature: Added submerchantCredit-Debit[Response], payFacCredit-Debit[Response], reserveCredit-Debit[Response], physicalCheckCredit-Debit[Response], vendorCredit-Debit[Response] from TransactionsBatch to Online request.
+* Feature: Added the attribute sameDayFunding to Online Request.
+* Feature: Added fastAccessFunding[Response] to Online Request.
+* Feature: Added orderId to accountUpdateResponse.
+* Feature: Added PGP Encryption for batch request.
+
 == Version 11.1.1 (Nov 30,2017)
 * Feature: Async support for online transactions
 * BugFix: Handle namespace issue from backend
