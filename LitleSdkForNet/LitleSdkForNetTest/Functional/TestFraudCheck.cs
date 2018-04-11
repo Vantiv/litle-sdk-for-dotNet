@@ -105,7 +105,7 @@ namespace Litle.Sdk.Test.Functional
             var fraudCheckResponse = _litle.FraudCheck(fraudCheck);
             Assert.NotNull(fraudCheckResponse);
             Assert.AreEqual("Call Discover", fraudCheckResponse.message);
-            Assert.AreEqual("fail", fraudCheckResponse.advancedFraudResults.deviceReviewStatus);
+            Assert.AreEqual("pass", fraudCheckResponse.advancedFraudResults.deviceReviewStatus);
 
         }
     }

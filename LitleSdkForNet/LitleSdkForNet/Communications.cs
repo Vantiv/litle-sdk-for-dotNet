@@ -217,7 +217,7 @@ namespace Litle.Sdk
             }
             catch (SocketException e)
             {
-                throw new LitleOnlineException("Error establishing a network connection", e);
+                throw new LitleOnlineException("Error establishing a network connection - SSL Authentication failed", e);
             }
 
             try
@@ -301,7 +301,7 @@ namespace Litle.Sdk
             {
                 Console.WriteLine("Sftp Url: " + url);
                 Console.WriteLine("Username: " + username);
-                Console.WriteLine("Password: " + password);
+                //Console.WriteLine("Password: " + password);
                 Console.WriteLine("Known hosts file path: " + knownHostsFile);
             }
 
