@@ -6,7 +6,7 @@ LitleSdkForNet/LitleSdkForNetTest/obj
 LitleSdkForNet/LitleSdkForNet/obj/Release/LitleSdkForNet.csproj.FileListAbsolute.txt
 LitleSdkForNet/LitleSdkForNet.VisualState.xml
 LitleSdkForNet/TestResult.xml
-
+LitleSdkForNet/.idea
 *.zip
 *.suo
 Project.sln
