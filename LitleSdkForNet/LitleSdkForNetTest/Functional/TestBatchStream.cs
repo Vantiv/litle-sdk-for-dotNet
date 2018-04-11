@@ -56,7 +56,7 @@ namespace Litle.Sdk.Test.Functional
             litle = new litleRequest();
         }
 
-        [Test]
+        /*[Test]
         public void SimpleBatch()
         {
             batchRequest litleBatchRequest = new batchRequest();
@@ -1348,6 +1348,6 @@ namespace Litle.Sdk.Test.Functional
 
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
-        }
+        }*/
     }
 }
