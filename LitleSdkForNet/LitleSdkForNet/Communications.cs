@@ -234,7 +234,9 @@ namespace Litle.Sdk
         public SslProtocols GetBestProtocol()
         {
             var protocols = Enum.GetValues(typeof(SslProtocols)).Cast<SslProtocols>().ToList();
-            return protocols[protocols.Count - 1];
+            var bestProtocol = protocols[protocols.Count - 1];
+            Console.WriteLine("Best protocal found is " + bestProtocol);
+            return bestProtocol;
         }
 
         public virtual void FtpDropOff(string fileDirectory, string fileName, Dictionary<string, string> config)
