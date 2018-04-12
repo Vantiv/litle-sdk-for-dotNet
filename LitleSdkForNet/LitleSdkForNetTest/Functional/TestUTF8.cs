@@ -14,10 +14,10 @@ namespace Litle.Sdk.Test.Functional
         {
             _config = new Dictionary<string, string>
             {
-                {"url", "https://www.testvantivcnp.com/sandbox/communicator/online"},
+                {"url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "BATCHSDKA"},
-                {"version", "9.12"},
+                {"version", "9.14"},
                 {"timeout", "5000"},
                 {"merchantId", "0180"},
                 {"password", "certpass"},

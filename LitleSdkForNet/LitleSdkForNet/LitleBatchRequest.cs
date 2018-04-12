@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Security;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Litle.Sdk
 {
@@ -1230,7 +1232,7 @@ namespace Litle.Sdk
                 xmlHeader += "physicalCheckDebitAmount=\"" + physicalCheckDebitAmount + "\"\r\n";
             }
 
-            xmlHeader += "merchantSdk=\"DotNet;9.12.6\"\r\n";
+            xmlHeader += "merchantSdk=\"DotNet;9.14\"\r\n";
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
@@ -1426,620 +1428,1137 @@ namespace Litle.Sdk
             return filePath;
         }
     }
-
-    public partial class echeckPreNoteCredit : transactionTypeWithReportGroup
+    
+    
+    [System.Serializable()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public class batchResponse
     {
+        public string id;
+        public long litleBatchId;
+        public string merchantId;
 
-        private string orderIdField;
+        private XmlReader originalXmlReader;
+        private XmlReader accountUpdateResponseReader;
+        private XmlReader authorizationResponseReader;
+        private XmlReader authReversalResponseReader;
+        private XmlReader captureResponseReader;
+        private XmlReader captureGivenAuthResponseReader;
+        private XmlReader creditResponseReader;
+        private XmlReader forceCaptureResponseReader;
+        private XmlReader echeckCreditResponseReader;
+        private XmlReader echeckRedepositResponseReader;
+        private XmlReader echeckSalesResponseReader;
+        private XmlReader echeckVerificationResponseReader;
+        private XmlReader saleResponseReader;
+        private XmlReader registerTokenResponseReader;
+        private XmlReader updateCardValidationNumOnTokenResponseReader;
+        private XmlReader cancelSubscriptionResponseReader;
+        private XmlReader updateSubscriptionResponseReader;
+        private XmlReader createPlanResponseReader;
+        private XmlReader updatePlanResponseReader;
+        private XmlReader activateResponseReader;
+        private XmlReader deactivateResponseReader;
+        private XmlReader loadResponseReader;
+        private XmlReader echeckPreNoteSaleResponseReader;
+        private XmlReader echeckPreNoteCreditResponseReader;
+        private XmlReader unloadResponseReader;
+        private XmlReader balanceInquiryResponseReader;
+        private XmlReader submerchantCreditResponseReader;
+        private XmlReader payFacCreditResponseReader;
+        private XmlReader vendorCreditResponseReader;
+        private XmlReader reserveCreditResponseReader;
+        private XmlReader physicalCheckCreditResponseReader;
+        private XmlReader submerchantDebitResponseReader;
+        private XmlReader payFacDebitResponseReader;
+        private XmlReader vendorDebitResponseReader;
+        private XmlReader reserveDebitResponseReader;
+        private XmlReader physicalCheckDebitResponseReader;
 
-        private orderSourceType orderSourceField;
-
-        private contact billToAddressField;
-
-        private echeckType echeckField;
-
-        private merchantDataType merchantDataField;
-
-        /// <remarks/>
-        public string orderId
+        public batchResponse()
         {
-            get
+        }
+
+        public batchResponse(XmlReader xmlReader, string filePath)
+        {
+            readXml(xmlReader, filePath);
+        }
+
+        public void setAccountUpdateResponseReader(XmlReader xmlReader)
+        {
+            this.accountUpdateResponseReader = xmlReader;
+        }
+
+        public void setAuthorizationResponseReader(XmlReader xmlReader)
+        {
+            this.authorizationResponseReader = xmlReader;
+        }
+
+        public void setAuthReversalResponseReader(XmlReader xmlReader)
+        {
+            this.authReversalResponseReader = xmlReader;
+        }
+
+        public void setCaptureResponseReader(XmlReader xmlReader)
+        {
+            this.captureResponseReader = xmlReader;
+        }
+
+        public void setCaptureGivenAuthResponseReader(XmlReader xmlReader)
+        {
+            this.captureGivenAuthResponseReader = xmlReader;
+        }
+
+        public void setCreditResponseReader(XmlReader xmlReader)
+        {
+            this.creditResponseReader = xmlReader;
+        }
+
+        public void setForceCaptureResponseReader(XmlReader xmlReader)
+        {
+            this.forceCaptureResponseReader = xmlReader;
+        }
+
+        public void setEcheckCreditResponseReader(XmlReader xmlReader)
+        {
+            this.echeckCreditResponseReader = xmlReader;
+        }
+
+        public void setEcheckRedepositResponseReader(XmlReader xmlReader)
+        {
+            this.echeckRedepositResponseReader = xmlReader;
+        }
+
+        public void setEcheckSalesResponseReader(XmlReader xmlReader)
+        {
+            this.echeckSalesResponseReader = xmlReader;
+        }
+
+        public void setEcheckVerificationResponseReader(XmlReader xmlReader)
+        {
+            this.echeckVerificationResponseReader = xmlReader;
+        }
+
+        public void setSaleResponseReader(XmlReader xmlReader)
+        {
+            this.saleResponseReader = xmlReader;
+        }
+
+        public void setRegisterTokenResponseReader(XmlReader xmlReader)
+        {
+            this.registerTokenResponseReader = xmlReader;
+        }
+
+        public void setUpdateCardValidationNumOnTokenResponseReader(XmlReader xmlReader)
+        {
+            this.updateCardValidationNumOnTokenResponseReader = xmlReader;
+        }
+
+        public void setCancelSubscriptionResponseReader(XmlReader xmlReader)
+        {
+            this.cancelSubscriptionResponseReader = xmlReader;
+        }
+
+        public void setUpdateSubscriptionResponseReader(XmlReader xmlReader)
+        {
+            this.updateSubscriptionResponseReader = xmlReader;
+        }
+
+        public void setCreatePlanResponseReader(XmlReader xmlReader)
+        {
+            this.createPlanResponseReader = xmlReader;
+        }
+
+        public void setUpdatePlanResponseReader(XmlReader xmlReader)
+        {
+            this.updatePlanResponseReader = xmlReader;
+        }
+
+        public void setActivateResponseReader(XmlReader xmlReader)
+        {
+            this.activateResponseReader = xmlReader;
+        }
+
+        public void setDeactivateResponseReader(XmlReader xmlReader)
+        {
+            this.deactivateResponseReader = xmlReader;
+        }
+
+        public void setLoadResponseReader(XmlReader xmlReader)
+        {
+            this.loadResponseReader = xmlReader;
+        }
+
+        public void setEcheckPreNoteSaleResponseReader(XmlReader xmlReader)
+        {
+            this.echeckPreNoteSaleResponseReader = xmlReader;
+        }
+
+        public void setEcheckPreNoteCreditResponseReader(XmlReader xmlReader)
+        {
+            this.echeckPreNoteCreditResponseReader = xmlReader;
+        }
+
+        public void setUnloadResponseReader(XmlReader xmlReader)
+        {
+            this.unloadResponseReader = xmlReader;
+        }
+
+        public void setBalanceInquiryResponseReader(XmlReader xmlReader)
+        {
+            this.balanceInquiryResponseReader = xmlReader;
+        }
+
+        public void setSubmerchantCreditResponseReader(XmlReader xmlReader)
+        {
+            this.submerchantCreditResponseReader = xmlReader;
+        }
+
+        public void setPayFacCreditResponseReader(XmlReader xmlReader)
+        {
+            this.payFacCreditResponseReader = xmlReader;
+        }
+
+        public void setReserveCreditResponseReader(XmlReader xmlReader)
+        {
+            this.reserveCreditResponseReader = xmlReader;
+        }
+
+        public void setVendorCreditResponseReader(XmlReader xmlReader)
+        {
+            this.vendorCreditResponseReader = xmlReader;
+        }
+
+        public void setPhysicalCheckCreditResponseReader(XmlReader xmlReader)
+        {
+            this.physicalCheckCreditResponseReader = xmlReader;
+        }
+
+        public void setSubmerchantDebitResponseReader(XmlReader xmlReader)
+        {
+            this.submerchantDebitResponseReader = xmlReader;
+        }
+
+        public void setPayFacDebitResponseReader(XmlReader xmlReader)
+        {
+            this.payFacDebitResponseReader = xmlReader;
+        }
+
+        public void setReserveDebitResponseReader(XmlReader xmlReader)
+        {
+            this.reserveDebitResponseReader = xmlReader;
+        }
+
+        public void setVendorDebitResponseReader(XmlReader xmlReader)
+        {
+            this.vendorDebitResponseReader = xmlReader;
+        }
+
+        public void setPhysicalCheckDebitResponseReader(XmlReader xmlReader)
+        {
+            this.physicalCheckDebitResponseReader = xmlReader;
+        }
+
+
+        public void readXml(XmlReader reader, string filePath)
+        {
+            id = reader.GetAttribute("id");
+            litleBatchId = Int64.Parse(reader.GetAttribute("litleBatchId"));
+            merchantId = reader.GetAttribute("merchantId");
+
+            originalXmlReader = reader;
+            accountUpdateResponseReader = new XmlTextReader(filePath);
+            authorizationResponseReader = new XmlTextReader(filePath);
+            authReversalResponseReader = new XmlTextReader(filePath);
+            captureResponseReader = new XmlTextReader(filePath);
+            captureGivenAuthResponseReader = new XmlTextReader(filePath);
+            creditResponseReader = new XmlTextReader(filePath);
+            forceCaptureResponseReader = new XmlTextReader(filePath);
+            echeckCreditResponseReader = new XmlTextReader(filePath);
+            echeckRedepositResponseReader = new XmlTextReader(filePath);
+            echeckSalesResponseReader = new XmlTextReader(filePath);
+            echeckVerificationResponseReader = new XmlTextReader(filePath);
+            saleResponseReader = new XmlTextReader(filePath);
+            registerTokenResponseReader = new XmlTextReader(filePath);
+            updateCardValidationNumOnTokenResponseReader = new XmlTextReader(filePath);
+            cancelSubscriptionResponseReader = new XmlTextReader(filePath);
+            updateSubscriptionResponseReader = new XmlTextReader(filePath);
+            createPlanResponseReader = new XmlTextReader(filePath);
+            updatePlanResponseReader = new XmlTextReader(filePath);
+            activateResponseReader = new XmlTextReader(filePath);
+            deactivateResponseReader = new XmlTextReader(filePath);
+            loadResponseReader = new XmlTextReader(filePath);
+            echeckPreNoteSaleResponseReader = new XmlTextReader(filePath);
+            echeckPreNoteCreditResponseReader = new XmlTextReader(filePath);
+            unloadResponseReader = new XmlTextReader(filePath);
+            balanceInquiryResponseReader = new XmlTextReader(filePath);
+            submerchantCreditResponseReader = new XmlTextReader(filePath);
+            payFacCreditResponseReader = new XmlTextReader(filePath);
+            reserveCreditResponseReader = new XmlTextReader(filePath);
+            vendorCreditResponseReader = new XmlTextReader(filePath);
+            physicalCheckCreditResponseReader = new XmlTextReader(filePath);
+            submerchantDebitResponseReader = new XmlTextReader(filePath);
+            payFacDebitResponseReader = new XmlTextReader(filePath);
+            reserveDebitResponseReader = new XmlTextReader(filePath);
+            vendorDebitResponseReader = new XmlTextReader(filePath);
+            physicalCheckDebitResponseReader = new XmlTextReader(filePath);
+
+            if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
             {
-                return this.orderIdField;
+                accountUpdateResponseReader.Close();
             }
-            set
+            if (!authorizationResponseReader.ReadToFollowing("authorizationResponse"))
             {
-                this.orderIdField = value;
+                authorizationResponseReader.Close();
+            }
+            if (!authReversalResponseReader.ReadToFollowing("authReversalResponse"))
+            {
+                authReversalResponseReader.Close();
+            }
+            if (!captureResponseReader.ReadToFollowing("captureResponse"))
+            {
+                captureResponseReader.Close();
+            }
+            if (!captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
+            {
+                captureGivenAuthResponseReader.Close();
+            }
+            if (!creditResponseReader.ReadToFollowing("creditResponse"))
+            {
+                creditResponseReader.Close();
+            }
+            if (!forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
+            {
+                forceCaptureResponseReader.Close();
+            }
+            if (!echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
+            {
+                echeckCreditResponseReader.Close();
+            }
+            if (!echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
+            {
+                echeckRedepositResponseReader.Close();
+            }
+            if (!echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
+            {
+                echeckSalesResponseReader.Close();
+            }
+            if (!echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
+            {
+                echeckVerificationResponseReader.Close();
+            }
+            if (!saleResponseReader.ReadToFollowing("saleResponse"))
+            {
+                saleResponseReader.Close();
+            }
+            if (!registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
+            {
+                registerTokenResponseReader.Close();
+            }
+            if (!updateCardValidationNumOnTokenResponseReader.ReadToFollowing("updateCardValidationNumOnTokenResponse"))
+            {
+                updateCardValidationNumOnTokenResponseReader.Close();
+            }
+            if (!cancelSubscriptionResponseReader.ReadToFollowing("cancelSubscriptionResponse"))
+            {
+                cancelSubscriptionResponseReader.Close();
+            }
+            if (!updateSubscriptionResponseReader.ReadToFollowing("updateSubscriptionResponse"))
+            {
+                updateSubscriptionResponseReader.Close();
+            }
+            if (!createPlanResponseReader.ReadToFollowing("createPlanResponse"))
+            {
+                createPlanResponseReader.Close();
+            }
+            if (!updatePlanResponseReader.ReadToFollowing("updatePlanResponse"))
+            {
+                updatePlanResponseReader.Close();
+            }
+            if (!activateResponseReader.ReadToFollowing("activateResponse"))
+            {
+                activateResponseReader.Close();
+            }
+            if (!loadResponseReader.ReadToFollowing("loadResponse"))
+            {
+                loadResponseReader.Close();
+            }
+            if (!deactivateResponseReader.ReadToFollowing("deactivateResponse"))
+            {
+                deactivateResponseReader.Close();
+            }
+            if (!echeckPreNoteSaleResponseReader.ReadToFollowing("echeckPreNoteSaleResponse"))
+            {
+                echeckPreNoteSaleResponseReader.Close();
+            }
+            if (!echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
+            {
+                echeckPreNoteCreditResponseReader.Close();
+            } if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
+            {
+                unloadResponseReader.Close();
+            }
+            if (!balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
+            {
+                balanceInquiryResponseReader.Close();
+            }
+            if (!submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
+            {
+                submerchantCreditResponseReader.Close();
+            }
+            if (!payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
+            {
+                payFacCreditResponseReader.Close();
+            }
+            if (!vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
+            {
+                vendorCreditResponseReader.Close();
+            }
+            if (!reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
+            {
+                reserveCreditResponseReader.Close();
+            }
+            if (!physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
+            {
+                physicalCheckCreditResponseReader.Close();
+            }
+            if (!submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
+            {
+                submerchantDebitResponseReader.Close();
+            }
+            if (!payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
+            {
+                payFacDebitResponseReader.Close();
+            }
+            if (!vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
+            {
+                vendorDebitResponseReader.Close();
+            }
+            if (!reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
+            {
+                reserveDebitResponseReader.Close();
+            }
+            if (!physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
+            {
+                physicalCheckDebitResponseReader.Close();
             }
         }
 
-        /// <remarks/>
-        public orderSourceType orderSource
+        virtual public accountUpdateResponse nextAccountUpdateResponse()
         {
-            get
+            if (accountUpdateResponseReader.ReadState != ReadState.Closed)
             {
-                return this.orderSourceField;
+                string response = accountUpdateResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(accountUpdateResponse));
+                StringReader reader = new StringReader(response);
+                accountUpdateResponse i = (accountUpdateResponse)serializer.Deserialize(reader);
+
+                if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
+                {
+                    accountUpdateResponseReader.Close();
+                }
+
+                return i;
             }
-            set
-            {
-                this.orderSourceField = value;
-            }
+
+            return null;
         }
 
-        /// <remarks/>
-        public contact billToAddress
+        virtual public authorizationResponse nextAuthorizationResponse()
         {
-            get
+            if (authorizationResponseReader.ReadState != ReadState.Closed)
             {
-                return this.billToAddressField;
+                string response = authorizationResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(authorizationResponse));
+                StringReader reader = new StringReader(response);
+                authorizationResponse i = (authorizationResponse)serializer.Deserialize(reader);
+
+                if (!authorizationResponseReader.ReadToFollowing("authorizationResponse"))
+                {
+                    authorizationResponseReader.Close();
+                }
+
+                return i;
             }
-            set
-            {
-                this.billToAddressField = value;
-            }
+
+            return null;
         }
 
-        /// <remarks/>
-        public echeckType echeck
+        virtual public authReversalResponse nextAuthReversalResponse()
         {
-            get
+            if (authReversalResponseReader.ReadState != ReadState.Closed)
             {
-                return this.echeckField;
+                string response = authReversalResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(authReversalResponse));
+                StringReader reader = new StringReader(response);
+                authReversalResponse i = (authReversalResponse)serializer.Deserialize(reader);
+
+                if (!authReversalResponseReader.ReadToFollowing("authReversalResponse"))
+                {
+                    authReversalResponseReader.Close();
+                }
+
+                return i;
             }
-            set
-            {
-                this.echeckField = value;
-            }
+
+            return null;
         }
 
-        /// <remarks/>
-        public merchantDataType merchantData
+        virtual public captureResponse nextCaptureResponse()
         {
-            get
+            if (captureResponseReader.ReadState != ReadState.Closed)
             {
-                return this.merchantDataField;
+                string response = captureResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(captureResponse));
+                StringReader reader = new StringReader(response);
+                captureResponse i = (captureResponse)serializer.Deserialize(reader);
+
+                if (!captureResponseReader.ReadToFollowing("captureResponse"))
+                {
+                    captureResponseReader.Close();
+                }
+
+                return i;
             }
-            set
-            {
-                this.merchantDataField = value;
-            }
+
+            return null;
         }
 
-        public override string Serialize()
+        virtual public captureGivenAuthResponse nextCaptureGivenAuthResponse()
         {
-            string xml = "\r\n<echeckPreNoteCredit ";
+            if (captureGivenAuthResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = captureGivenAuthResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(captureGivenAuthResponse));
+                StringReader reader = new StringReader(response);
+                captureGivenAuthResponse i = (captureGivenAuthResponse)serializer.Deserialize(reader);
 
-            if (id != null)
-            {
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            }
-            if (customerId != null)
-            {
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            }
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
+                if (!captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
+                {
+                    captureGivenAuthResponseReader.Close();
+                }
 
-            if (orderSource != null)
-            {
-                xml += "\r\n<orderSource>";
-                xml += orderSource.Serialize();
-                xml += "</orderSource>";
+                return i;
             }
 
-            if (billToAddress != null)
-            {
-                xml += "\r\n<billToAddress>";
-                xml += billToAddress.Serialize();
-                xml += "\r\n</billToAddress>";
-            }
-
-            if (echeck != null)
-            {
-                xml += "\r\n<echeck>";
-                xml += echeck.Serialize();
-                xml += "\r\n</echeck>";
-            }
-
-            if (merchantData != null)
-            {
-                xml += "\r\n<merchantData>";
-                xml += merchantData.Serialize();
-                xml += "\r\n</merchantData>";
-            }
-
-            xml += "\r\n</echeckPreNoteCredit>";
-
-            return xml;
+            return null;
         }
+
+        virtual public creditResponse nextCreditResponse()
+        {
+            if (creditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = creditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(creditResponse));
+                StringReader reader = new StringReader(response);
+                creditResponse i = (creditResponse)serializer.Deserialize(reader);
+
+                if (!creditResponseReader.ReadToFollowing("creditResponse"))
+                {
+                    creditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public echeckCreditResponse nextEcheckCreditResponse()
+        {
+            if (echeckCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = echeckCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckCreditResponse));
+                StringReader reader = new StringReader(response);
+                echeckCreditResponse i = (echeckCreditResponse)serializer.Deserialize(reader);
+
+                if (!echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
+                {
+                    echeckCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public echeckRedepositResponse nextEcheckRedepositResponse()
+        {
+            if (echeckRedepositResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = echeckRedepositResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckRedepositResponse));
+                StringReader reader = new StringReader(response);
+                echeckRedepositResponse i = (echeckRedepositResponse)serializer.Deserialize(reader);
+
+                if (!echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
+                {
+                    echeckRedepositResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public echeckSalesResponse nextEcheckSalesResponse()
+        {
+            if (echeckSalesResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = echeckSalesResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckSalesResponse));
+                StringReader reader = new StringReader(response);
+                echeckSalesResponse i = (echeckSalesResponse)serializer.Deserialize(reader);
+
+                if (!echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
+                {
+                    echeckSalesResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public echeckVerificationResponse nextEcheckVerificationResponse()
+        {
+            if (echeckVerificationResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = echeckVerificationResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckVerificationResponse));
+                StringReader reader = new StringReader(response);
+                echeckVerificationResponse i = (echeckVerificationResponse)serializer.Deserialize(reader);
+
+                if (!echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
+                {
+                    echeckVerificationResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public forceCaptureResponse nextForceCaptureResponse()
+        {
+            if (forceCaptureResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = forceCaptureResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(forceCaptureResponse));
+                StringReader reader = new StringReader(response);
+                forceCaptureResponse i = (forceCaptureResponse)serializer.Deserialize(reader);
+
+                if (!forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
+                {
+                    forceCaptureResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public registerTokenResponse nextRegisterTokenResponse()
+        {
+            if (registerTokenResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = registerTokenResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(registerTokenResponse));
+                StringReader reader = new StringReader(response);
+                registerTokenResponse i = (registerTokenResponse)serializer.Deserialize(reader);
+
+                if (!registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
+                {
+                    registerTokenResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public saleResponse nextSaleResponse()
+        {
+            if (saleResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = saleResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(saleResponse));
+                StringReader reader = new StringReader(response);
+                saleResponse i = (saleResponse)serializer.Deserialize(reader);
+
+                if (!saleResponseReader.ReadToFollowing("saleResponse"))
+                {
+                    saleResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public updateCardValidationNumOnTokenResponse nextUpdateCardValidationNumOnTokenResponse()
+        {
+            if (updateCardValidationNumOnTokenResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = updateCardValidationNumOnTokenResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(updateCardValidationNumOnTokenResponse));
+                StringReader reader = new StringReader(response);
+                updateCardValidationNumOnTokenResponse i = (updateCardValidationNumOnTokenResponse)serializer.Deserialize(reader);
+
+                if (!updateCardValidationNumOnTokenResponseReader.ReadToFollowing("updateCardValidationNumOnTokenResponse"))
+                {
+                    updateCardValidationNumOnTokenResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public updateSubscriptionResponse nextUpdateSubscriptionResponse()
+        {
+            if (updateSubscriptionResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = updateSubscriptionResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(updateSubscriptionResponse));
+                StringReader reader = new StringReader(response);
+                updateSubscriptionResponse i = (updateSubscriptionResponse)serializer.Deserialize(reader);
+
+                if (!updateSubscriptionResponseReader.ReadToFollowing("updateSubscriptionResponse"))
+                {
+                    updateSubscriptionResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public cancelSubscriptionResponse nextCancelSubscriptionResponse()
+        {
+            if (cancelSubscriptionResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = cancelSubscriptionResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(cancelSubscriptionResponse));
+                StringReader reader = new StringReader(response);
+                cancelSubscriptionResponse i = (cancelSubscriptionResponse)serializer.Deserialize(reader);
+
+                if (!cancelSubscriptionResponseReader.ReadToFollowing("cancelSubscriptionResponse"))
+                {
+                    cancelSubscriptionResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public createPlanResponse nextCreatePlanResponse()
+        {
+            if (createPlanResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = createPlanResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(createPlanResponse));
+                StringReader reader = new StringReader(response);
+                createPlanResponse i = (createPlanResponse)serializer.Deserialize(reader);
+
+                if (!createPlanResponseReader.ReadToFollowing("createPlanResponse"))
+                {
+                    createPlanResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public updatePlanResponse nextUpdatePlanResponse()
+        {
+            if (updatePlanResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = updatePlanResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(updatePlanResponse));
+                StringReader reader = new StringReader(response);
+                updatePlanResponse i = (updatePlanResponse)serializer.Deserialize(reader);
+
+                if (!updatePlanResponseReader.ReadToFollowing("updatePlanResponse"))
+                {
+                    updatePlanResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public activateResponse nextActivateResponse()
+        {
+            if (activateResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = activateResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(activateResponse));
+                StringReader reader = new StringReader(response);
+                activateResponse i = (activateResponse)serializer.Deserialize(reader);
+
+                if (!activateResponseReader.ReadToFollowing("activateResponse"))
+                {
+                    activateResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public deactivateResponse nextDeactivateResponse()
+        {
+            if (deactivateResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = deactivateResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(deactivateResponse));
+                StringReader reader = new StringReader(response);
+                deactivateResponse i = (deactivateResponse)serializer.Deserialize(reader);
+
+                if (!deactivateResponseReader.ReadToFollowing("deactivateResponse"))
+                {
+                    deactivateResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public echeckPreNoteSaleResponse nextEcheckPreNoteSaleResponse()
+        {
+            if (echeckPreNoteSaleResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = echeckPreNoteSaleResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckPreNoteSaleResponse));
+                StringReader reader = new StringReader(response);
+                echeckPreNoteSaleResponse i = (echeckPreNoteSaleResponse)serializer.Deserialize(reader);
+
+                if (!echeckPreNoteSaleResponseReader.ReadToFollowing("echeckPreNoteSaleResponse"))
+                {
+                    echeckPreNoteSaleResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public echeckPreNoteCreditResponse nextEcheckPreNoteCreditResponse()
+        {
+            if (echeckPreNoteCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = echeckPreNoteCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(echeckPreNoteCreditResponse));
+                StringReader reader = new StringReader(response);
+                echeckPreNoteCreditResponse i = (echeckPreNoteCreditResponse)serializer.Deserialize(reader);
+
+                if (!echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
+                {
+                    echeckPreNoteCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public loadResponse nextLoadResponse()
+        {
+            if (loadResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = loadResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(loadResponse));
+                StringReader reader = new StringReader(response);
+                loadResponse i = (loadResponse)serializer.Deserialize(reader);
+
+                if (!loadResponseReader.ReadToFollowing("loadResponse"))
+                {
+                    loadResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public unloadResponse nextUnloadResponse()
+        {
+            if (unloadResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = unloadResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(unloadResponse));
+                StringReader reader = new StringReader(response);
+                unloadResponse i = (unloadResponse)serializer.Deserialize(reader);
+
+                if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
+                {
+                    unloadResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public balanceInquiryResponse nextBalanceInquiryResponse()
+        {
+            if (balanceInquiryResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = balanceInquiryResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(balanceInquiryResponse));
+                StringReader reader = new StringReader(response);
+                balanceInquiryResponse i = (balanceInquiryResponse)serializer.Deserialize(reader);
+
+                if (!balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
+                {
+                    balanceInquiryResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public submerchantCreditResponse nextSubmerchantCreditResponse()
+        {
+            if (submerchantCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = submerchantCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(submerchantCreditResponse));
+                StringReader reader = new StringReader(response);
+                submerchantCreditResponse i = (submerchantCreditResponse)serializer.Deserialize(reader);
+
+                if (!submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
+                {
+                    submerchantCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public payFacCreditResponse nextPayFacCreditResponse()
+        {
+            if (payFacCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = payFacCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(payFacCreditResponse));
+                StringReader reader = new StringReader(response);
+                payFacCreditResponse i = (payFacCreditResponse)serializer.Deserialize(reader);
+
+                if (!payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
+                {
+                    payFacCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public vendorCreditResponse nextVendorCreditResponse()
+        {
+            if (vendorCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = vendorCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(vendorCreditResponse));
+                StringReader reader = new StringReader(response);
+                vendorCreditResponse i = (vendorCreditResponse)serializer.Deserialize(reader);
+
+                if (!vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
+                {
+                    vendorCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public reserveCreditResponse nextReserveCreditResponse()
+        {
+            if (reserveCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = reserveCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(reserveCreditResponse));
+                StringReader reader = new StringReader(response);
+                reserveCreditResponse i = (reserveCreditResponse)serializer.Deserialize(reader);
+
+                if (!reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
+                {
+                    reserveCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public physicalCheckCreditResponse nextPhysicalCheckCreditResponse()
+        {
+            if (physicalCheckCreditResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = physicalCheckCreditResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(physicalCheckCreditResponse));
+                StringReader reader = new StringReader(response);
+                physicalCheckCreditResponse i = (physicalCheckCreditResponse)serializer.Deserialize(reader);
+
+                if (!physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
+                {
+                    physicalCheckCreditResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public submerchantDebitResponse nextSubmerchantDebitResponse()
+        {
+            if (submerchantDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = submerchantDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(submerchantDebitResponse));
+                StringReader reader = new StringReader(response);
+                submerchantDebitResponse i = (submerchantDebitResponse)serializer.Deserialize(reader);
+
+                if (!submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
+                {
+                    submerchantDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public payFacDebitResponse nextPayFacDebitResponse()
+        {
+            if (payFacDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = payFacDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(payFacDebitResponse));
+                StringReader reader = new StringReader(response);
+                payFacDebitResponse i = (payFacDebitResponse)serializer.Deserialize(reader);
+
+                if (!payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
+                {
+                    payFacDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public vendorDebitResponse nextVendorDebitResponse()
+        {
+            if (vendorDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = vendorDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(vendorDebitResponse));
+                StringReader reader = new StringReader(response);
+                vendorDebitResponse i = (vendorDebitResponse)serializer.Deserialize(reader);
+
+                if (!vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
+                {
+                    vendorDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public reserveDebitResponse nextReserveDebitResponse()
+        {
+            if (reserveDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = reserveDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(reserveDebitResponse));
+                StringReader reader = new StringReader(response);
+                reserveDebitResponse i = (reserveDebitResponse)serializer.Deserialize(reader);
+
+                if (!reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
+                {
+                    reserveDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+
+        virtual public physicalCheckDebitResponse nextPhysicalCheckDebitResponse()
+        {
+            if (physicalCheckDebitResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = physicalCheckDebitResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(physicalCheckDebitResponse));
+                StringReader reader = new StringReader(response);
+                physicalCheckDebitResponse i = (physicalCheckDebitResponse)serializer.Deserialize(reader);
+
+                if (!physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
+                {
+                    physicalCheckDebitResponseReader.Close();
+                }
+
+                return i;
+            }
+
+            return null;
+        }
+    
     }
 
-    public partial class echeckPreNoteSale : transactionTypeWithReportGroup
+
+
+    [System.Serializable()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public class RFRResponse
     {
-
-        private string orderIdField;
-
-        private orderSourceType orderSourceField;
-
-        private contact billToAddressField;
-
-        private echeckType echeckField;
-
-        private merchantDataType merchantDataField;
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public orderSourceType orderSource
-        {
-            get
-            {
-                return this.orderSourceField;
-            }
-            set
-            {
-                this.orderSourceField = value;
-            }
-        }
-
-        /// <remarks/>
-        public contact billToAddress
-        {
-            get
-            {
-                return this.billToAddressField;
-            }
-            set
-            {
-                this.billToAddressField = value;
-            }
-        }
-
-        /// <remarks/>
-        public echeckType echeck
-        {
-            get
-            {
-                return this.echeckField;
-            }
-            set
-            {
-                this.echeckField = value;
-            }
-        }
-
-        /// <remarks/>
-        public merchantDataType merchantData
-        {
-            get
-            {
-                return this.merchantDataField;
-            }
-            set
-            {
-                this.merchantDataField = value;
-            }
-        }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<echeckPreNoteSale ";
-
-            if (id != null)
-            {
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            }
-            if (customerId != null)
-            {
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            }
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-
-            if (orderSource != null)
-            {
-                xml += "\r\n<orderSource>";
-                xml += orderSource.Serialize();
-                xml += "</orderSource>";
-            }
-
-            if (billToAddress != null)
-            {
-                xml += "\r\n<billToAddress>";
-                xml += billToAddress.Serialize();
-                xml += "\r\n</billToAddress>";
-            }
-
-            if (echeck != null)
-            {
-                xml += "\r\n<echeck>";
-                xml += echeck.Serialize();
-                xml += "\r\n</echeck>";
-            }
-
-            if (merchantData != null)
-            {
-                xml += "\r\n<merchantData>";
-                xml += merchantData.Serialize();
-                xml += "\r\n</merchantData>";
-            }
-
-            xml += "\r\n</echeckPreNoteSale>";
-
-            return xml;
-        }
-    }
-
-    public partial class submerchantCredit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string submerchantName { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public echeckType accountInfo { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<submerchantCredit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (submerchantName != null)
-                xml += "\r\n<submerchantName>" + SecurityElement.Escape(submerchantName) + "</submerchantName>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            if (accountInfo != null)
-            {
-                xml += "\r\n<accountInfo>";
-                xml += accountInfo.Serialize();
-                xml += "</accountInfo>";
-            }
-
-            xml += "\r\n</submerchantCredit>";
-
-            return xml;
-        }
-    }
-
-    public partial class payFacCredit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<payFacCredit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            xml += "\r\n</payFacCredit>";
-
-            return xml;
-        }
-    }
-
-    public partial class reserveCredit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<reserveCredit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            xml += "\r\n</reserveCredit>";
-
-            return xml;
-        }
-    }
-
-    public partial class vendorCredit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string vendorName { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public echeckType accountInfo { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<vendorCredit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (vendorName != null)
-                xml += "\r\n<vendorName>" + SecurityElement.Escape(vendorName) + "</vendorName>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            if (accountInfo != null)
-            {
-                xml += "\r\n<accountInfo>";
-                xml += accountInfo.Serialize();
-                xml += "</accountInfo>";
-            }
-
-            xml += "\r\n</vendorCredit>";
-
-            return xml;
-        }
-    }
-
-    public partial class physicalCheckCredit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<physicalCheckCredit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            xml += "\r\n</physicalCheckCredit>";
-
-            return xml;
-        }
-    }
-
-    public partial class submerchantDebit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string submerchantName { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public echeckType accountInfo { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<submerchantDebit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (submerchantName != null)
-                xml += "\r\n<submerchantName>" + SecurityElement.Escape(submerchantName) + "</submerchantName>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            if (accountInfo != null)
-            {
-                xml += "\r\n<accountInfo>";
-                xml += accountInfo.Serialize();
-                xml += "</accountInfo>";
-            }
-
-            xml += "\r\n</submerchantDebit>";
-
-            return xml;
-        }
-    }
-
-    public partial class payFacDebit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<payFacDebit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            xml += "\r\n</payFacDebit>";
-
-            return xml;
-        }
-    }
-
-    public partial class reserveDebit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<reserveDebit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            xml += "\r\n</reserveDebit>";
-
-            return xml;
-        }
-    }
-
-    public partial class vendorDebit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string vendorName { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public echeckType accountInfo { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<vendorDebit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (vendorName != null)
-                xml += "\r\n<vendorName>" + SecurityElement.Escape(vendorName) + "</vendorName>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            if (accountInfo != null)
-            {
-                xml += "\r\n<accountInfo>";
-                xml += accountInfo.Serialize();
-                xml += "</accountInfo>";
-            }
-
-            xml += "\r\n</vendorDebit>";
-
-            return xml;
-        }
-    }
-
-    public partial class physicalCheckDebit : transactionTypeWithReportGroup
-    {
-
-        public string fundingSubmerchantId { get; set; }
-
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
-
-        public override string Serialize()
-        {
-            string xml = "\r\n<physicalCheckDebit ";
-
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
-
-            xml += "\r\n</physicalCheckDebit>";
-
-            return xml;
-        }
+        [XmlAttribute]
+        public string response;
+        [XmlAttribute]
+        public string message;
     }
 }

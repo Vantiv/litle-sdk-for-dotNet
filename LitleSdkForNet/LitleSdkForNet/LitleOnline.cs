@@ -296,6 +296,24 @@ namespace Litle.Sdk
         {
             return SendRequest(response => response.unloadReversalResponse, unloadReversal);
         }
+        
+        public transactionTypeWithReportGroup queryTransaction(queryTransaction queryTransaction)
+        {
+            litleOnlineRequest request = createLitleOnlineRequest();
+            request.queryTransaction = queryTransaction;
+
+            litleOnlineResponse litleresponse = sendToLitle(request);
+            transactionTypeWithReportGroup response = null;
+            if (litleresponse.queryTransactionResponse != null)
+            {
+                response = litleresponse.queryTransactionResponse;
+            }
+            else if (litleresponse.queryTransactionUnavailableResponse != null)
+            {
+                response = litleresponse.queryTransactionUnavailableResponse;
+            }
+            return response;
+        }
 
         public fraudCheckResponse FraudCheck(fraudCheck fraudCheck)
         {
@@ -307,7 +325,7 @@ namespace Litle.Sdk
             litleOnlineRequest request = new litleOnlineRequest
             {
                 merchantId = config["merchantId"],
-                merchantSdk = "DotNet;9.12.6"
+                merchantSdk = "DotNet;9.14"
             };
             authentication authentication = new authentication
             {
@@ -561,7 +579,187 @@ namespace Litle.Sdk
             }
         }
     }
+    
+    
+    public class litleOnlineRequest
+    {
 
+        public string merchantId;
+        public string merchantSdk;
+        public authentication authentication;
+        public authorization authorization;
+        public capture capture;
+        public credit credit;
+        public voidTxn voidTxn;
+        public sale sale;
+        public authReversal authReversal;
+        public echeckCredit echeckCredit;
+        public echeckVerification echeckVerification;
+        public echeckSale echeckSale;
+        public registerTokenRequestType registerTokenRequest;
+        public forceCapture forceCapture;
+        public captureGivenAuth captureGivenAuth;
+        public echeckRedeposit echeckRedeposit;
+        public echeckVoid echeckVoid;
+        public updateCardValidationNumOnToken updateCardValidationNumOnToken;
+        public updateSubscription updateSubscription;
+        public cancelSubscription cancelSubscription;
+        public activate activate;
+        public deactivate deactivate;
+        public load load;
+        public unload unload;
+        public balanceInquiry balanceInquiry;
+        public createPlan createPlan;
+        public updatePlan updatePlan;
+        public refundReversal refundReversal;
+        public loadReversal loadReversal;
+        public depositReversal depositReversal;
+        public activateReversal activateReversal;
+        public deactivateReversal deactivateReversal;
+        public unloadReversal unloadReversal;
+        public queryTransaction queryTransaction;
+        public fraudCheck fraudCheck;
+
+        public string Serialize()
+        {
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" 
+                + merchantId + "\" version=\"9.14\" merchantSdk=\"" 
+                + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+                + authentication.Serialize();
+
+            if (authorization != null) xml += authorization.Serialize();
+            else if (capture != null) xml += capture.Serialize();
+            else if (credit != null) xml += credit.Serialize();
+            else if (voidTxn != null) xml += voidTxn.Serialize();
+            else if (sale != null) xml += sale.Serialize();
+            else if (authReversal != null) xml += authReversal.Serialize();
+            else if (echeckCredit != null) xml += echeckCredit.Serialize();
+            else if (echeckVerification != null) xml += echeckVerification.Serialize();
+            else if (echeckSale != null) xml += echeckSale.Serialize();
+            else if (registerTokenRequest != null) xml += registerTokenRequest.Serialize();
+            else if (forceCapture != null) xml += forceCapture.Serialize();
+            else if (captureGivenAuth != null) xml += captureGivenAuth.Serialize();
+            else if (echeckRedeposit != null) xml += echeckRedeposit.Serialize();
+            else if (echeckVoid != null) xml += echeckVoid.Serialize();
+            else if (updateCardValidationNumOnToken != null) xml += updateCardValidationNumOnToken.Serialize();
+            else if (updateSubscription != null) xml += updateSubscription.Serialize();
+            else if (cancelSubscription != null) xml += cancelSubscription.Serialize();
+            else if (activate != null) xml += activate.Serialize();
+            else if (deactivate != null) xml += deactivate.Serialize();
+            else if (load != null) xml += load.Serialize();
+            else if (unload != null) xml += unload.Serialize();
+            else if (balanceInquiry != null) xml += balanceInquiry.Serialize();
+            else if (createPlan != null) xml += createPlan.Serialize();
+            else if (updatePlan != null) xml += updatePlan.Serialize();
+            else if (refundReversal != null) xml += refundReversal.Serialize();
+            else if (loadReversal != null) xml += loadReversal.Serialize();
+            else if (depositReversal != null) xml += depositReversal.Serialize();
+            else if (activateReversal != null) xml += activateReversal.Serialize();
+            else if (deactivateReversal != null) xml += deactivateReversal.Serialize();
+            else if (unloadReversal != null) xml += unloadReversal.Serialize();
+            else if (queryTransaction != null) xml += queryTransaction.Serialize();
+            else if (fraudCheck != null) xml += fraudCheck.Serialize();
+            xml += "\r\n</litleOnlineRequest>";
+
+            return xml;
+        }
+    }
+    
+    
+     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class litleOnlineResponse 
+    {
+
+        private string responseField;
+
+        private string messageField;
+
+        private string versionField;
+
+        public authReversalResponse authReversalResponse;
+        public authorizationResponse authorizationResponse;
+        public captureGivenAuthResponse captureGivenAuthResponse;
+        public captureResponse captureResponse;
+        public creditResponse creditResponse;
+        public echeckCreditResponse echeckCreditResponse;
+        public echeckRedepositResponse echeckRedepositResponse;
+        public echeckSalesResponse echeckSalesResponse;
+        public echeckVerificationResponse echeckVerificationResponse;
+        public litleOnlineResponseTransactionResponseEcheckVoidResponse echeckVoidResponse;
+        public forceCaptureResponse forceCaptureResponse;
+        public registerTokenResponse registerTokenResponse;
+        public saleResponse saleResponse;
+        public litleOnlineResponseTransactionResponseVoidResponse voidResponse;
+        public updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse;
+        public cancelSubscriptionResponse cancelSubscriptionResponse;
+        public updateSubscriptionResponse updateSubscriptionResponse;
+        public activateResponse activateResponse;
+        public deactivateResponse deactivateResponse;
+        public loadResponse loadResponse;
+        public unloadResponse unloadResponse;
+        public balanceInquiryResponse balanceInquiryResponse;
+        public createPlanResponse createPlanResponse;
+        public updatePlanResponse updatePlanResponse;
+        public refundReversalResponse refundReversalResponse;
+        public depositReversalResponse depositReversalResponse;
+        public activateReversalResponse activateReversalResponse;
+        public deactivateReversalResponse deactivateReversalResponse;
+        public loadReversalResponse loadReversalResponse;
+        public unloadReversalResponse unloadReversalResponse;
+        public queryTransactionResponse queryTransactionResponse;
+        public queryTransactionUnavailableResponse queryTransactionUnavailableResponse;
+        public fraudCheckResponse fraudCheckResponse;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string response
+        {
+            get
+            {
+                return this.responseField;
+            }
+            set
+            {
+                this.responseField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string message
+        {
+            get
+            {
+                return this.messageField;
+            }
+            set
+            {
+                this.messageField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string version
+        {
+            get
+            {
+                return this.versionField;
+            }
+            set
+            {
+                this.versionField = value;
+            }
+        }
+    }
+    
+   
     public interface ILitleOnline
     {
         authorizationResponse Authorize(authorization auth);

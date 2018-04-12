@@ -13,7 +13,7 @@ namespace Litle.Sdk.Test.Functional
         {
             var config = new Dictionary<string, string>
             {
-                { "url", "https://www.testvantivcnp.com/sandbox/communicator/online"},
+                { "url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
                 {"version", "8.13"},
@@ -112,6 +112,27 @@ namespace Litle.Sdk.Test.Functional
             var response = _litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message);
         }
+        
+        [Test]
+        public void SimpleForceCaptureWithProcessingType_initialCOF()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingType.initialCOF,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            };
 
+            var response = _litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
     }
 }

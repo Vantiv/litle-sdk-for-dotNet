@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
@@ -207,7 +208,7 @@ namespace Litle.Sdk
 
             try
             {
-                sslStream.AuthenticateAsClient(url);
+                sslStream.AuthenticateAsClient(url, null, GetBestProtocol(), true);
             }
             catch (AuthenticationException e)
             {
@@ -260,6 +261,12 @@ namespace Litle.Sdk
             sslStream.Close();
 
             return xmlResponseDestinationDirectory + batchName;
+        }
+        
+        public SslProtocols GetBestProtocol()
+        {
+            var protocols = Enum.GetValues(typeof(SslProtocols)).Cast<SslProtocols>().ToList();
+            return protocols[protocols.Count - 1];
         }
 
         public virtual void FtpDropOff(string fileDirectory, string fileName, Dictionary<string, string> config)

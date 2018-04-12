@@ -18,7 +18,7 @@ namespace Litle.Sdk.Test.Functional
         {
             _config = new Dictionary<string, string>
             {
-                {"url", "https://www.testvantivcnp.com/sandbox/communicator/online"},
+                {"url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
                 {"timeout", "5000"},
@@ -604,6 +604,32 @@ namespace Litle.Sdk.Test.Functional
 
             var response = _litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
+        }
+        
+        [Test]
+        public void TestEnhancedAuthResponseWithProcessingType_initialCOF()
+        {
+            var authorization = new authorization
+            {
+                id = "1",
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100822311199000",
+                    expDate = "1210",
+                },
+                originalNetworkTransactionId = "123456789123456789123456789",
+                originalTransactionAmount = 12,
+                processingType = processingType.initialCOF,
+            };
+            var response = _litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+
+            Assert.AreEqual("63225578415568556365452427825", response.networkTransactionId);
         }
     }
 }

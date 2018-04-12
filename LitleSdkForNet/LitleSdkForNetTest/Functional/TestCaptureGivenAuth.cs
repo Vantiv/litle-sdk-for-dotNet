@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         {
             var config = new Dictionary<string, string>
             {
-                {"url", "https://www.testvantivcnp.com/sandbox/communicator/online"},
+                {"url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
                 {"version", "8.13"},
@@ -223,7 +223,8 @@ namespace Litle.Sdk.Test.Functional
                     type = methodOfPaymentTypeEnum.VI,
                     number = "4100000000000000",
                     expDate = "1210"
-                }
+                },
+                processingType = processingType.initialCOF
             };
 
             var response = _litle.CaptureGivenAuth(capturegivenauth);

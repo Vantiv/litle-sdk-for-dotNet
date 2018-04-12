@@ -49,6 +49,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LitleBatchTransactions.cs" />
+    <Compile Include="LitleCommonTransactions.cs" />
+    <Compile Include="LitleOnlineTransactions.cs" />
     <Compile Include="XmlSerializer.cs" />
     <Compile Include="Communications.cs" />
     <Compile Include="LitleBatchRequest.cs" />
@@ -56,9 +59,6 @@
     <Compile Include="LitleOnlineException.cs" />
     <Compile Include="LitleOnline.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="XmlResponseFields.cs" />
-    <Compile Include="XmlFields.cs" />
-    <Compile Include="XmlRequestFields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

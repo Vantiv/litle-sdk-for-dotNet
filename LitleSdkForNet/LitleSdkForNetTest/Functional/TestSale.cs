@@ -13,10 +13,10 @@ namespace Litle.Sdk.Test.Functional
         {
             var config = new Dictionary<string, string>
             {
-                {"url", "https://www.testvantivcnp.com/sandbox/communicator/online"},
+                {"url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online"},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
-                {"version", "9.12"},
+                {"version", "9.14"},
                 {"timeout", "5000"},
                 {"merchantId", "101"},
                 {"password", "TESTCASE"},
@@ -178,7 +178,7 @@ namespace Litle.Sdk.Test.Functional
                 originalTransactionAmount = 1492,
                 card = new cardType
                 {
-                    type = methodOfPaymentTypeEnum.VI,
+                    type = methodOfPaymentTypeEnum.MC,
                     number = "5400700000000000",
                     expDate = "1210"
                 }
@@ -341,6 +341,46 @@ namespace Litle.Sdk.Test.Functional
             var responseObj = _litle.Sale(saleObj);
             Assert.AreEqual("http://redirect.url.vantiv.com", responseObj.idealResponse.redirectUrl);
             Assert.AreEqual("jj2d1d372osmmt7tb8epm0a99q", responseObj.idealResponse.redirectToken);
+        }
+        
+        [Test]
+        public void SimpleSaleWithGiropayResponse()
+        {
+            var saleObj = new sale
+            {
+                id = "1",
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                giropay = new giropayType
+                {
+                    preferredLanguage = countryTypeEnum.US
+                }
+            };
+
+            var responseObj = _litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+        [Test]
+        public void SimpleSaleWithSofortResponse()
+        {
+            var saleObj = new sale
+            {
+                id = "1",
+                amount = 106,
+                litleTxnId = 123456,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                sofort = new sofortType
+                {
+                    preferredLanguage = countryTypeEnum.US
+                }
+            };
+
+            var responseObj = _litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
         }
 
     }

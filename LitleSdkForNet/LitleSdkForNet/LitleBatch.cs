@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Xml.Schema;
 
 namespace Litle.Sdk
 {
@@ -265,7 +270,7 @@ namespace Litle.Sdk
 
         public string generateXmlHeader()
         {
-            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.12\"" +
+            string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.14\"" +
              " xmlns=\"http://www.litle.com/schema\" " +
              "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
 
@@ -359,6 +364,123 @@ namespace Litle.Sdk
             {
                 Directory.CreateDirectory(destinationDirectory);
             }
+        }
+    }
+    
+    
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class litleResponse
+    {
+        public string id;
+        public long litleBatchId;
+        public long litleSessionId;
+        public string merchantId;
+        public string response;
+        public string message;
+        public string version;
+
+        private XmlReader originalXmlReader;
+        private XmlReader batchResponseReader;
+        private XmlReader rfrResponseReader;
+        private string filePath;
+
+        public litleResponse()
+        {
+        }
+
+        public litleResponse(string filePath)
+        {
+            XmlTextReader reader = new XmlTextReader(filePath);
+            readXml(reader, filePath);
+        }
+
+        public litleResponse(XmlReader reader, string filePath)
+        {
+            readXml(reader, filePath);
+        }
+
+        public void setBatchResponseReader(XmlReader xmlReader)
+        {
+            this.batchResponseReader = xmlReader;
+        }
+
+        public void setRfrResponseReader(XmlReader xmlReader)
+        {
+            this.rfrResponseReader = xmlReader;
+        }
+
+        public void readXml(XmlReader reader, string filePath)
+        {
+            if (reader.ReadToFollowing("litleResponse"))
+            {
+                version = reader.GetAttribute("version");
+                message = reader.GetAttribute("message");
+                response = reader.GetAttribute("response");
+
+                string rawLitleSessionId = reader.GetAttribute("litleSessionId");
+                if (rawLitleSessionId != null)
+                {
+                    litleSessionId = Int64.Parse(rawLitleSessionId);
+                }
+            }
+            else
+            {
+                reader.Close();
+            }
+
+            this.originalXmlReader = reader;
+            this.filePath = filePath;
+
+            this.batchResponseReader = new XmlTextReader(filePath);
+            if (!batchResponseReader.ReadToFollowing("batchResponse"))
+            {
+                batchResponseReader.Close();
+            }
+
+            this.rfrResponseReader = new XmlTextReader(filePath);
+            if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
+            {
+                rfrResponseReader.Close();
+            }
+
+        }
+
+        virtual public batchResponse nextBatchResponse()
+        {
+            if (batchResponseReader.ReadState != ReadState.Closed)
+            {
+                batchResponse litleBatchResponse = new batchResponse(batchResponseReader, filePath);
+                if (!batchResponseReader.ReadToFollowing("batchResponse"))
+                {
+                    batchResponseReader.Close();
+                }
+
+                return litleBatchResponse;
+            }
+
+            return null;
+        }
+
+        virtual public RFRResponse nextRFRResponse()
+        {
+            if (rfrResponseReader.ReadState != ReadState.Closed)
+            {
+                string response = rfrResponseReader.ReadOuterXml();
+                XmlSerializer serializer = new XmlSerializer(typeof(RFRResponse));
+                StringReader reader = new StringReader(response);
+                RFRResponse rfrResponse = (RFRResponse)serializer.Deserialize(reader);
+
+                if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
+                {
+                    rfrResponseReader.Close();
+                }
+
+                return rfrResponse;
+            }
+
+            return null;
         }
     }
 

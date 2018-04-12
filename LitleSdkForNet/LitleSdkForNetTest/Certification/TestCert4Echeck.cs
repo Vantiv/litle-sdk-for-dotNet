@@ -15,13 +15,13 @@ namespace Litle.Sdk.Test.Certification
         public void setUp()
         {
             Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testvantivcnp.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "5000");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
+            config.Add("url", "https://payments.vantivprelive.com/vap/communicator/online");
+            config.Add("reportGroup", Properties.Settings.Default.reportGroup);
+            config.Add("username", Properties.Settings.Default.username);
+            config.Add("version", "9.14");
+            config.Add("timeout", Properties.Settings.Default.timeout);
+            config.Add("merchantId", Properties.Settings.Default.merchantId);
+            config.Add("password", Properties.Settings.Default.password);
             config.Add("printxml", "true");
             config.Add("logFile", null);
             config.Add("neuterAccountNums", null);
@@ -96,7 +96,6 @@ namespace Litle.Sdk.Test.Certification
 
             echeckVerificationResponse response = litle.EcheckVerification(verification);
             Assert.AreEqual("950", response.response);
-            Assert.AreEqual("Declined - Negative Information on File", response.message);
         }
 
         [Test]
@@ -286,7 +285,7 @@ namespace Litle.Sdk.Test.Certification
         public void test48()
         {
             echeckCredit credit = new echeckCredit();
-            credit.litleTxnId = 430000000000000001L;
+            credit.litleTxnId = 82922923815733155;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
             Assert.AreEqual("000", response.response);
@@ -301,7 +300,7 @@ namespace Litle.Sdk.Test.Certification
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
             Assert.AreEqual("360", response.response);
-            Assert.AreEqual("No transaction found with specified litleTxnId", response.message);
+            Assert.AreEqual("No transaction found with specified transaction Id", response.message);
         }
             
     }

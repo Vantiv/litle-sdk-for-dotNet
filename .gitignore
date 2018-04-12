@@ -7,6 +7,8 @@ LitleSdkForNet/LitleSdkForNet/obj/Release/LitleSdkForNet.csproj.FileListAbsolute
 LitleSdkForNet/LitleSdkForNet.VisualState.xml
 LitleSdkForNet/TestResult.xml
 LitleSdkForNet/.vs
+LitleSdkForNet/.idea/
+LitleSdkForNet/LitleSdkForNet/Properties/Settings.Designer.cs
 
 *.zip
 *.suo

@@ -88,6 +88,7 @@
     <Compile Include="Certification\TestCert5Token.cs" />
     <Compile Include="Certification\TestCert1Base.cs" />
     <Compile Include="Functional\TestHttpActionEvent.cs" />
+    <Compile Include="Functional\TestQueryTransaction.cs" />
     <Compile Include="Functional\TestUTF8.cs" />
     <Compile Include="Functional\TestBatchStream.cs" />
     <Compile Include="Functional\TestBatch.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\TestAdvancedFraudCheck.cs" />
     <Compile Include="Unit\TestCommunications.cs" />
+    <Compile Include="Unit\TestQueryTransactionRequest.cs" />
     <Compile Include="Unit\TestUnloadReversal.cs" />
     <Compile Include="Unit\TestLoadReversal.cs" />
     <Compile Include="Unit\TestDeactivateReversal.cs" />
