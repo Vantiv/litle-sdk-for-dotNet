@@ -50,7 +50,7 @@ namespace Litle.Sdk.Test.Functional
             fraudCheckResponse fraudCheckResponse = litle.FraudCheck(fraudCheck);
 
             Assert.NotNull(fraudCheckResponse);
-            Assert.AreEqual(42, fraudCheckResponse.advancedFraudResults.deviceReputationScore);
+            Assert.AreEqual(60, fraudCheckResponse.advancedFraudResults.deviceReputationScore);
             Assert.AreEqual(7, fraudCheckResponse.advancedFraudResults.triggeredRule.Length);
             Assert.AreEqual("triggered_rule_1", fraudCheckResponse.advancedFraudResults.triggeredRule[0]);
             Assert.AreEqual("triggered_rule_2", fraudCheckResponse.advancedFraudResults.triggeredRule[1]);
