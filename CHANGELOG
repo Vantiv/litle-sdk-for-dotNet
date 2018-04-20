@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.31.1 (Apr 20, 2018)
+* Bugfix: Remove TLS v1
+
 == Version 8.31.0 (Apr. 10, 2018)
 * Feature: Added processingType enum and its values accountFunding, initialRecurring, initialInstallment, initialCOF, merchantInitiatedCOF, cardholderInitiatedCOF.
 * Feature: Added processingType field, originalNetworkTransactionId, originalTransactionAmount to authorization, captureGivenAuth.
