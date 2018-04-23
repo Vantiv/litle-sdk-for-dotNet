@@ -17,7 +17,7 @@ namespace Litle.Sdk
     public class Communications
     {
         private static readonly object _synLock = new object();
-
+        public static string ContentTypeTextXmlUTF8 = "text/xml; charset=UTF-8";
 
         public static bool ValidateServerCertificate(
              object sender,
@@ -34,7 +34,7 @@ namespace Litle.Sdk
             return false;
         }
 
-        public void neuterXML(ref string inputXml)
+        public void NeuterXML(ref string inputXml)
         {
             const string pattern1 = "(?i)<number>.*?</number>";
             const string pattern2 = "(?i)<accNum>.*?</accNum>";
@@ -48,13 +48,13 @@ namespace Litle.Sdk
             inputXml = rgx3.Replace(inputXml, "<track>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</track>");
         }
         
-        public void log(string logMessage, string logFile, bool neuter)
+        public void Log(string logMessage, string logFile, bool neuter)
         {
             lock (_synLock)
             {
                 if (neuter)
                 {
-                    neuterXML(ref logMessage);
+                    NeuterXML(ref logMessage);
                 }
                 var logWriter = new StreamWriter(logFile, true);
                 var time = DateTime.Now;
@@ -97,18 +97,20 @@ namespace Litle.Sdk
             //log request
             if (logFile != null)
             {
-                log(xmlRequest,logFile, neuter);
+                Log(xmlRequest,logFile, neuter);
             }
 
-            req.ContentType = "text/xml";
+            req.ContentType = ContentTypeTextXmlUTF8;
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 8000;
             req.ServicePoint.Expect100Continue = false;
             req.KeepAlive = false;
-            if (isProxyOn(config))
+            if (IsProxyOn(config))
             {
-                var myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
-                myproxy.BypassProxyOnLocal = true;
+                var myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]))
+                {
+                    BypassProxyOnLocal = true
+                };
                 req.Proxy = myproxy;
             }
 
@@ -139,17 +141,17 @@ namespace Litle.Sdk
             //log response
             if (logFile != null)
             {
-                log(xmlResponse,logFile,neuter);
+                Log(xmlResponse,logFile,neuter);
             }
 
             return xmlResponse;
         }
 
-        public bool isProxyOn(Dictionary<string,string> config) {
+        public bool IsProxyOn(Dictionary<string,string> config) {
             return config.ContainsKey("proxyHost") && config["proxyHost"] != null && config["proxyHost"].Length > 0 && config.ContainsKey("proxyPort") && config["proxyPort"] != null && config["proxyPort"].Length > 0;
         }
 
-        public virtual string socketStream(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<string, string> config)
+        public virtual string SocketStream(string xmlRequestFilePath, string xmlResponseDestinationDirectory, Dictionary<string, string> config)
         {
             var url = config["onlineBatchUrl"];
             var port = int.Parse(config["onlineBatchPort"]);
@@ -255,7 +257,6 @@ namespace Litle.Sdk
             {
                 Console.WriteLine("Sftp Url: " + url);
                 Console.WriteLine("Username: " + username);
-                //Console.WriteLine("Password: " + password);
                 Console.WriteLine("Known hosts file path: " + knownHostsFile);
             }
 
@@ -268,7 +269,6 @@ namespace Litle.Sdk
             try
             {
                 session.connect();
-
                 channel = session.openChannel("sftp");
                 channel.connect();
                 channelSftp = (ChannelSftp)channel;
