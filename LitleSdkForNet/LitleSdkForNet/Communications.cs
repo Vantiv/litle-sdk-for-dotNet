@@ -23,6 +23,7 @@ namespace Litle.Sdk
     public class Communications
     {
         private static readonly object _synLock = new object();
+        public static string ContentTypeTextXmlUTF8 = "text/xml; charset=UTF-8";
 
 
         public static bool ValidateServerCertificate(
@@ -104,7 +105,7 @@ namespace Litle.Sdk
                 log(xmlRequest,logFile, neuter);
             }
 
-            req.ContentType = "text/xml";
+            req.ContentType = ContentTypeTextXmlUTF8;
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 10000;
             req.ServicePoint.Expect100Continue = false;

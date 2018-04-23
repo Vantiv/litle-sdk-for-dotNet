@@ -1,5 +1,7 @@
 = LitleOnline CHANGELOG
 
+* BugFix: Set content-type to text/xml
+
 ==Version 10.8 (April 6, 2018)
 * Feature: Upgraded to XML version 10.8
 * Feature: Added Card on file support for Visa.
