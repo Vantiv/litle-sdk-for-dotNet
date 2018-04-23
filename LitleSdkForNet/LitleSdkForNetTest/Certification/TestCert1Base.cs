@@ -76,6 +76,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -152,7 +154,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -209,6 +212,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -294,6 +299,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = response.litleTxnId;
@@ -346,6 +353,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -423,6 +432,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -474,6 +485,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -548,6 +561,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -595,6 +610,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -661,6 +678,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = creditResponse.litleTxnId;
@@ -728,6 +747,8 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("34", response.fraudResult.avsResult);
             Assert.AreEqual("P", response.fraudResult.cardValidationResult);
 
+            // Add sleep to prevent intermittency
+            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn();
             newvoid.id = "id";
             newvoid.litleTxnId = response.litleTxnId;
