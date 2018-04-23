@@ -1,5 +1,7 @@
 = LitleOnline CHANGELOG
 
+* BugFix: Set content type to text/xml
+
 == Version 11.4.0 (Apr. 10, 2018)
 * Feature: Added more enum values initialCOF, merchantInitiatedCOF, cardholderInitiatedCOF for processingTypeEnum.
 * Feature: Added submerchantCredit-Debit[Response], payFacCredit-Debit[Response], reserveCredit-Debit[Response], physicalCheckCredit-Debit[Response], vendorCredit-Debit[Response] from TransactionsBatch to Online request.
