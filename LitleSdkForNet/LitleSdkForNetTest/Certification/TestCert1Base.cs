@@ -71,7 +71,8 @@ namespace Litle.Sdk.Test.Certification
 
             capture capture = new capture
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             captureResponse captureResponse = litle.Capture(capture);
             Assert.AreEqual("000", captureResponse.response);
@@ -79,17 +80,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = captureResponse.litleTxnId
+                litleTxnId = captureResponse.litleTxnId,
+                id = captureResponse.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidresponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidresponse.response);
@@ -169,18 +170,18 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
@@ -230,7 +231,8 @@ namespace Litle.Sdk.Test.Certification
 
             capture capture = new capture
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             captureResponse captureresponse = litle.Capture(capture);
             Assert.AreEqual("000", captureresponse.response);
@@ -238,17 +240,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = captureresponse.litleTxnId
+                litleTxnId = captureresponse.litleTxnId,
+                id = captureresponse.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
@@ -341,17 +343,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
@@ -395,7 +397,8 @@ namespace Litle.Sdk.Test.Certification
 
             capture capture = new capture
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             captureResponse captureResponse = litle.Capture(capture);
             Assert.AreEqual("000", captureResponse.response);
@@ -403,17 +406,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = captureResponse.litleTxnId
+                litleTxnId = captureResponse.litleTxnId,
+                id = captureResponse.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = response.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidresponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidresponse.response);
@@ -494,17 +497,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
@@ -546,7 +549,8 @@ namespace Litle.Sdk.Test.Certification
 
             capture capture = new capture
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             captureResponse captureresponse = litle.Capture(capture);
             Assert.AreEqual("000", captureresponse.response);
@@ -554,17 +558,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = captureresponse.litleTxnId
+                litleTxnId = captureresponse.litleTxnId,
+                id = captureresponse.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
@@ -641,17 +645,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
@@ -690,7 +694,8 @@ namespace Litle.Sdk.Test.Certification
 
             capture capture = new capture
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             captureResponse captureresponse = litle.Capture(capture);
             Assert.AreEqual("000", captureresponse.response);
@@ -698,17 +703,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = captureresponse.litleTxnId
+                litleTxnId = captureresponse.litleTxnId,
+                id = captureresponse.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
@@ -778,17 +783,17 @@ namespace Litle.Sdk.Test.Certification
 
             credit credit = new credit
             {
-                litleTxnId = response.litleTxnId
+                litleTxnId = response.litleTxnId,
+                id = response.id
             };
             creditResponse creditResponse = litle.Credit(credit);
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            // Add sleep to prevent intermittency
-            System.Threading.Thread.Sleep(70000);
             voidTxn newvoid = new voidTxn
             {
-                litleTxnId = creditResponse.litleTxnId
+                litleTxnId = creditResponse.litleTxnId,
+                id = creditResponse.id
             };
             litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
             Assert.AreEqual("000", voidResponse.response);
