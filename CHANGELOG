@@ -1,5 +1,6 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.1 (Apr 25, 2018)
 * BugFix: Set content type to text/xml
 
 == Version 11.4.0 (Apr. 10, 2018)
