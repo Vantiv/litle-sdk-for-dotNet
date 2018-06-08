@@ -15,10 +15,10 @@ namespace Litle.Sdk.Test.Functional
         {
             _config = new Dictionary<string, string>
             {
-                {"url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online"},
+                {"url", Properties.Settings.Default.url},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
-                {"version", "8.13"},
+                {"version", "11.0"},
                 {"timeout", "5000"},
                 {"merchantId", "101"},
                 {"password", "TESTCASE"},
@@ -99,7 +99,7 @@ namespace Litle.Sdk.Test.Functional
             var fraudCheckResponse = _litle.FraudCheck(fraudCheck);
             Assert.NotNull(fraudCheckResponse);
             Assert.AreEqual("Call Discover", fraudCheckResponse.message);
-            Assert.AreEqual("pass", fraudCheckResponse.advancedFraudResults.deviceReviewStatus);
+            Assert.AreEqual("fail", fraudCheckResponse.advancedFraudResults.deviceReviewStatus);
 
         }
     }

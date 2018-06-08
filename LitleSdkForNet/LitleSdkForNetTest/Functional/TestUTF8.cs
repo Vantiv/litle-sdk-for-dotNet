@@ -14,13 +14,13 @@ namespace Litle.Sdk.Test.Functional
         {
             _config = new Dictionary<string, string>
             {
-                {"url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online"},
+                {"url", Properties.Settings.Default.url},
                 {"reportGroup", "Default Report Group"},
-                {"username", "BATCHSDKA"},
-                {"version", "9.14"},
+                {"username", "DOTNET"},
+                {"version", "11.0"},
                 {"timeout", "5000"},
-                {"merchantId", "0180"},
-                {"password", "certpass"},
+                {"merchantId", "101"},
+                {"password", "TESTCASE"},
                 {"printxml", "true"},
                 {"proxyHost", Properties.Settings.Default.proxyHost},
                 {"proxyPort", Properties.Settings.Default.proxyPort},
