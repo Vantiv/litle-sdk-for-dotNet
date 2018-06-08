@@ -15,7 +15,7 @@ namespace Litle.Sdk.Test.Functional
         {
             _config = new Dictionary<string, string>
             {
-                {"url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online"},
+                {"url", Properties.Settings.Default.url},
                 {"reportGroup", "Default Report Group"},
                 {"username", "DOTNET"},
                 {"version", "11.0"},
@@ -545,7 +545,7 @@ namespace Litle.Sdk.Test.Functional
                 card = new cardType
                 {
                     type = methodOfPaymentTypeEnum.VI,
-                    number = "4100822311199000",
+                    number = "4100300000100000",
                     expDate = "1210",
                 },
                 originalNetworkTransactionId = "123456789123456789123456789",
