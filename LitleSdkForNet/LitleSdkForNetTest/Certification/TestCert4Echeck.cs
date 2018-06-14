@@ -197,8 +197,7 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
         }
-    }
-
+    
         [Test]
         public void test44()
         {
