@@ -188,7 +188,16 @@ namespace Litle.Sdk.Test.Certification
             echeckSalesResponse response = litle.EcheckSale(sale);
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
+
+            // Test 48
+            echeckCredit credit = new echeckCredit();
+            credit.litleTxnId = response.litleTxnId;
+
+            echeckCreditResponse creditResponse = litle.EcheckCredit(credit);
+            Assert.AreEqual("000", creditResponse.response);
+            Assert.AreEqual("Approved", creditResponse.message);
         }
+    }
 
         [Test]
         public void test44()
@@ -275,17 +284,6 @@ namespace Litle.Sdk.Test.Certification
             echeck.accType = echeckAccountTypeEnum.Corporate;
             echeck.routingNum = "211370545";
             credit.echeck = echeck;
-
-            echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-        }
-
-        [Test]
-        public void test48()
-        {
-            echeckCredit credit = new echeckCredit();
-            credit.litleTxnId = 82922923815733155;
 
             echeckCreditResponse response = litle.EcheckCredit(credit);
             Assert.AreEqual("000", response.response);
