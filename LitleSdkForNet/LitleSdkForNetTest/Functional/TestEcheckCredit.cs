@@ -66,7 +66,7 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
@@ -141,7 +141,7 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]

@@ -11,22 +11,26 @@ namespace Litle.Sdk.Test.Functional
     {
         private LitleOnline litle;
 
+        private Dictionary<string, string> config;
+
         [TestFixtureSetUp]
-        public void setUp()
+        public void SetUpLitle()
         {
-            Dictionary<string, string> config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "65");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
-            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
-            config.Add("logFile", Properties.Settings.Default.logFile);
-            config.Add("neuterAccountNums", "true");
+            config = new Dictionary<string, string>
+            {
+                {"url", Properties.Settings.Default.url},
+                {"reportGroup", "Default Report Group"},
+                {"username", "DOTNET"},
+                {"version", "10.0"},
+                {"timeout", "5000"},
+                {"merchantId", "101"},
+                {"password", "TESTCASE"},
+                {"printxml", "true"},
+                {"proxyHost", Properties.Settings.Default.proxyHost},
+                {"proxyPort", Properties.Settings.Default.proxyPort},
+                {"logFile", Properties.Settings.Default.logFile},
+                {"neuterAccountNums", "true"}
+            };
             litle = new LitleOnline(config);
         }
 
@@ -44,7 +48,7 @@ namespace Litle.Sdk.Test.Functional
             card.expDate = "1210";
             forcecapture.card = card;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
         
         [Test]
@@ -66,7 +70,7 @@ namespace Litle.Sdk.Test.Functional
             };
 
             var response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
@@ -85,7 +89,7 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.orderSource = orderSourceType.ecommerce;
             forcecapture.mpos = mpos;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
@@ -102,7 +106,7 @@ namespace Litle.Sdk.Test.Functional
             token.type = methodOfPaymentTypeEnum.VI;
             forcecapture.token = token;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message); ;
+            Assert.AreEqual("Approved", response.message); ;
         }
             
     }
