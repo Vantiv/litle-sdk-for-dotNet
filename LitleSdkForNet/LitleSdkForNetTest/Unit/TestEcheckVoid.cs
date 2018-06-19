@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 using System.Text;
 using NUnit.Framework;
 using Litle.Sdk;
@@ -51,8 +52,28 @@ namespace Litle.Sdk.Test.Unit
             card.number = "4100000000000000";
             card.expDate = "1210";
             forcecapture.card = card;
+
+            var expectedResponse =
+                "<litleOnlineResponse xmlns=\"http://www.litle.com/schema\" version=\"10.8\" response=\"0\" message=\"Valid Format\">" +
+                "<forceCaptureResponse id=\"1\" reportGroup=\"Default Report Group\">" +
+                "<litleTxnId>986922693522351414</litleTxnId>" +
+                "<response>000</response>" +
+                "<responseTime>2018-06-18T20:20:33.092</responseTime>" +
+                "<message>Approved</message>" +
+                "</forceCaptureResponse>" +
+                "</litleOnlineResponse>";
+            
+            var mock = new Mock<Communications>();
+            mock.Setup(Communications =>
+                    Communications.HttpPost(It.IsRegex(".*<forceCapture.*<orderId>12344.*", RegexOptions.Singleline),
+                        It.IsAny<Dictionary<String, String>>()))
+                .Returns(expectedResponse);
+            
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Transaction Received", response.message);
+            Assert.AreEqual("Approved", response.message);
         }
     }
 }
