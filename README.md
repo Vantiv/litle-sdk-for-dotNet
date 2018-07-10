@@ -47,6 +47,7 @@ using Litle.Sdk;
             LitleOnline litle = new LitleOnline();
             sale sale = new sale();
             sale.orderId = "1";
+            sale.id = "1";
             sale.amount = 10010;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
