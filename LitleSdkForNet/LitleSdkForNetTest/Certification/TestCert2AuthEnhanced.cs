@@ -386,61 +386,61 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("341", response.response);
         }
 
-        [Test]
-        public void test30()
-        {
-            authorization authorization = new authorization();
-            authorization.orderId = "30";
-            authorization.amount = 20000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4024720001231239";
-            card.expDate = "1212";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-            healthcareIIAS healthcareiias = new healthcareIIAS();
-            healthcareAmounts healthcareamounts = new healthcareAmounts();
-            healthcareamounts.totalHealthcareAmount = 20000;
-            healthcareamounts.RxAmount = 1000;
-            healthcareamounts.visionAmount = 19901;
-            healthcareamounts.clinicOtherAmount = 9050;
-            healthcareamounts.dentalAmount = 1049;
-            healthcareiias.healthcareAmounts = healthcareamounts;
-            healthcareiias.IIASFlag = IIASFlagType.Y;
-            authorization.healthcareIIAS = healthcareiias;
+//         [Test]
+//         public void test30()
+//         {
+//             authorization authorization = new authorization();
+//             authorization.orderId = "30";
+//             authorization.amount = 20000;
+//             authorization.orderSource = orderSourceType.ecommerce;
+//             cardType card = new cardType();
+//             card.type = methodOfPaymentTypeEnum.VI;
+//             card.number = "4024720001231239";
+//             card.expDate = "1212";
+//             authorization.card = card;
+//             authorization.allowPartialAuth = true;
+//             healthcareIIAS healthcareiias = new healthcareIIAS();
+//             healthcareAmounts healthcareamounts = new healthcareAmounts();
+//             healthcareamounts.totalHealthcareAmount = 20000;
+//             healthcareamounts.RxAmount = 1000;
+//             healthcareamounts.visionAmount = 19901;
+//             healthcareamounts.clinicOtherAmount = 9050;
+//             healthcareamounts.dentalAmount = 1049;
+//             healthcareiias.healthcareAmounts = healthcareamounts;
+//             healthcareiias.IIASFlag = IIASFlagType.Y;
+//             authorization.healthcareIIAS = healthcareiias;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("341", response.response);
-        }
+//             authorizationResponse response = litle.Authorize(authorization);
+//             Assert.AreEqual("341", response.response);
+//         }
 
-        [Test]
-        public void test31()
-        {
-            authorization authorization = new authorization();
-            authorization.orderId = "31";
-            authorization.amount = 25000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4024720001231239";
-            card.expDate = "1212";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-            healthcareIIAS healthcareiias = new healthcareIIAS();
-            healthcareAmounts healthcareamounts = new healthcareAmounts();
-            healthcareamounts.totalHealthcareAmount = 18699;
-            healthcareamounts.RxAmount = 1000;
-            healthcareamounts.visionAmount = 15099;
-            healthcareiias.healthcareAmounts = healthcareamounts;
-            healthcareiias.IIASFlag = IIASFlagType.Y;
-            authorization.healthcareIIAS = healthcareiias;
+//         [Test]
+//         public void test31()
+//         {
+//             authorization authorization = new authorization();
+//             authorization.orderId = "31";
+//             authorization.amount = 25000;
+//             authorization.orderSource = orderSourceType.ecommerce;
+//             cardType card = new cardType();
+//             card.type = methodOfPaymentTypeEnum.VI;
+//             card.number = "4024720001231239";
+//             card.expDate = "1212";
+//             authorization.card = card;
+//             authorization.allowPartialAuth = true;
+//             healthcareIIAS healthcareiias = new healthcareIIAS();
+//             healthcareAmounts healthcareamounts = new healthcareAmounts();
+//             healthcareamounts.totalHealthcareAmount = 18699;
+//             healthcareamounts.RxAmount = 1000;
+//             healthcareamounts.visionAmount = 15099;
+//             healthcareiias.healthcareAmounts = healthcareamounts;
+//             healthcareiias.IIASFlag = IIASFlagType.Y;
+//             authorization.healthcareIIAS = healthcareiias;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("010", response.response);
-            Assert.AreEqual("Partially Approved", response.message);
-            Assert.AreEqual("18699", response.approvedAmount);
-        }
+//             authorizationResponse response = litle.Authorize(authorization);
+//             Assert.AreEqual("010", response.response);
+//             Assert.AreEqual("Partially Approved", response.message);
+//             Assert.AreEqual("18699", response.approvedAmount);
+//         }
             
     }
 }
