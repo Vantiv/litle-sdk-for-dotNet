@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.2 (July 18, 2018)
+*BugFix: Added useEncryption, pgpPassphrase, vantivPublicKeyId, GnuPgDir settings to Settings.Settings file.
+
 == Version 11.4.1 (Apr 25, 2018)
 * BugFix: Set content type to text/xml
 
