@@ -38,10 +38,10 @@ namespace Litle.Sdk.Test.Certification
             authorization authorization = new authorization();
             authorization.id = "id";
             authorization.orderId = "1";
-            authorization.amount = 10010;
+            authorization.amount = 10100;
             authorization.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
-            contact.name = "John Smith";
+            contact.name = "John & Mary Smith";
             contact.addressLine1 = "1 Main St.";
             contact.city = "Burlington";
             contact.state = "MA";
@@ -51,7 +51,7 @@ namespace Litle.Sdk.Test.Certification
             cardType card = new cardType();            
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4457010000000009";
-            card.expDate = "0112";
+            card.expDate = "0121";
             card.cardValidationNum = "349";
             authorization.card = card;
 
@@ -121,10 +121,10 @@ namespace Litle.Sdk.Test.Certification
             sale sale = new sale();
             sale.id = "id";
             sale.orderId = "1";
-            sale.amount = 10010;
+            sale.amount = 10100;
             sale.orderSource = orderSourceType.ecommerce;
             contact contact = new contact();
-            contact.name = "John Smith";
+            contact.name = "John & Mary Smith";
             contact.addressLine1 = "1 Main St.";
             contact.city = "Burlington";
             contact.state = "MA";
@@ -134,7 +134,7 @@ namespace Litle.Sdk.Test.Certification
             cardType card = new cardType();
             card.type = methodOfPaymentTypeEnum.VI;
             card.number = "4457010000000009";
-            card.expDate = "0112";
+            card.expDate = "0121";
             card.cardValidationNum = "349";
             sale.card = card;
 
