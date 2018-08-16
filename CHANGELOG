@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.3
+*BugFix: Fixed networkTransactionId Unmarshalling to null in saleResponse bug.
+
 == Version 11.4.2 (July 18, 2018)
 *BugFix: Added useEncryption, pgpPassphrase, vantivPublicKeyId, GnuPgDir settings to Settings.Settings file.
 
