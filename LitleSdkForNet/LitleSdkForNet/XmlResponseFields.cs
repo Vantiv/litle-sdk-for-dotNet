@@ -3645,7 +3645,6 @@ public partial class authorizationResponse : transactionTypeWithReportGroup {
             }
         }
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string networkTransactionId
         {
             get
