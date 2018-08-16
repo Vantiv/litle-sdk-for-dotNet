@@ -1,6 +1,6 @@
 = LitleOnline CHANGELOG
 
-== Version 11.4.3
+== Version 11.4.3 (Aug 16, 2018)
 *BugFix: Fixed networkTransactionId Unmarshalling to null in saleResponse bug.
 
 == Version 11.4.2 (July 18, 2018)
