@@ -77,6 +77,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             litle.Sale(sale);
         }
+        
 
         [Test]
         public void TestRecurringRequest()
