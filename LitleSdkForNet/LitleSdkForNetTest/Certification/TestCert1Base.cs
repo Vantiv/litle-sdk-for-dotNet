@@ -604,8 +604,7 @@ namespace Litle.Sdk.Test.Certification
             {
                 type = methodOfPaymentTypeEnum.AX,
                 number = "375001000000005",
-                expDate = "0412",
-                cardValidationNum = "758"
+                expDate = "0421",
             };
             authorization.card = card;
 
@@ -658,14 +657,14 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            voidTxn newvoid = new voidTxn
-            {
-                litleTxnId = creditResponse.litleTxnId,
-                id = creditResponse.id
-            };
-            litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            //voidTxn newvoid = new voidTxn
+            //{
+            //    litleTxnId = creditResponse.litleTxnId,
+            //    id = creditResponse.id
+            //};
+            //litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
+            //Assert.AreEqual("000", voidResponse.response);
+            //Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
@@ -716,14 +715,14 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            voidTxn newvoid = new voidTxn
-            {
-                litleTxnId = creditResponse.litleTxnId,
-                id = creditResponse.id
-            };
-            litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            //voidTxn newvoid = new voidTxn
+            //{
+            //    litleTxnId = creditResponse.litleTxnId,
+            //    id = creditResponse.id
+            //};
+            //litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
+            //Assert.AreEqual("000", voidResponse.response);
+            //Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
@@ -796,14 +795,14 @@ namespace Litle.Sdk.Test.Certification
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            voidTxn newvoid = new voidTxn
-            {
-                litleTxnId = creditResponse.litleTxnId,
-                id = creditResponse.id
-            };
-            litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
-            Assert.AreEqual("000", voidResponse.response);
-            Assert.AreEqual("Approved", voidResponse.message);
+            //voidTxn newvoid = new voidTxn
+            //{
+            //    litleTxnId = creditResponse.litleTxnId,
+            //    id = creditResponse.id
+            //};
+            //litleOnlineResponseTransactionResponseVoidResponse voidResponse = litle.DoVoid(newvoid);
+            //Assert.AreEqual("000", voidResponse.response);
+            //Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
