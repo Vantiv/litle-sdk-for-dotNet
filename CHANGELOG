@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.4 (Oct 30, 2018)
+* Feature: Added configurable connection timeout to http requests.
+
 == Version 11.4.3 (Aug 16, 2018)
 *BugFix: Fixed networkTransactionId Unmarshalling to null in saleResponse bug.
 
