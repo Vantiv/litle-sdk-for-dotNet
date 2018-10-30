@@ -140,6 +140,17 @@ namespace Litle.Sdk
             req.ServicePoint.MaxIdleTime = 8000;
             req.ServicePoint.Expect100Continue = false;
             req.KeepAlive = false;
+
+            //set timeout for request if available. #Issue 58
+            //connection timeout is increased 3 times on successful establishment.
+            if(config.ContainsKey("timeout") && config["timeout"] != null && int.Parse(config["timeout"]) > 0)
+            {
+                var timeOut = int.Parse(config["timeout"]);
+                req.Timeout = timeOut;
+                req.ReadWriteTimeout = 3*timeOut;
+            }
+            
+
             if (IsProxyOn(config))
             {
                 var myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]))
