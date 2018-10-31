@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("LitleSdkForNet")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Vantiv eCommerce")]
+[assembly: AssemblyCompany("Worldpay")]
 [assembly: AssemblyProduct("LitleSdkForNet")]
-[assembly: AssemblyCopyright("Copyright © Vantiv eCommerce 2017")]
+[assembly: AssemblyCopyright("Copyright © Worldpay 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("11.4.0")]
-[assembly: AssemblyFileVersion("11.4.0")]
+[assembly: AssemblyVersion("11.4.4")]
+[assembly: AssemblyFileVersion("11.4.4")]
