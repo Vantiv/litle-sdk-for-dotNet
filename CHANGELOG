@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.5 (Oct 31, 2018)
+* BugFix: Version updated in the DLL.
+
 == Version 11.4.4 (Oct 30, 2018)
 * Feature: Added configurable connection timeout to http requests.
 
