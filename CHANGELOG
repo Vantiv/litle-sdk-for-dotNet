@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.5
+* Updated version
+
 == Version 11.4.4 (Oct 30, 2018)
 * Feature: Added configurable connection timeout to http requests.
 
