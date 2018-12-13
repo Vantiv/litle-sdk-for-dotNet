@@ -3279,7 +3279,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
             }
-            if (processingTypeSet)
+            if (processingTypeSet && processingType != processingType.undefined)
             {
                 xml += "\r\n<processingType>" + processingType + "</processingType>";
             }
@@ -8607,6 +8607,7 @@ namespace Litle.Sdk
     
     public enum processingType
     {
+        undefined,
         accountFunding,
         initialRecurring,
         initialInstallment,

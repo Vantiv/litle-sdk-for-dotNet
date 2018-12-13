@@ -396,5 +396,26 @@ namespace Litle.Sdk.Test.Unit
             _litle.setCommunication(mockedCommunication);
             _litle.Sale(sale);
         }
+
+        [Test]
+        public void TestProcessingTypeWithUndefined()
+        {
+            var sale = new sale
+            {
+                amount = 584,
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingType.undefined,
+                reportGroup = "Planets"
+            };
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(communications => communications.HttpPost(It.IsRegex(".*<amount>584</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
+                .Returns("<litleOnlineResponse version='9.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId>><message>Approved</message></saleResponse></litleOnlineResponse>");
+
+            var mockedCommunication = mock.Object;
+            _litle.setCommunication(mockedCommunication);
+            _litle.Sale(sale);
+        }
     }
 }
