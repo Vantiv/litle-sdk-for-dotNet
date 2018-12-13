@@ -1,5 +1,11 @@
 = LitleOnline CHANGELOG
 
+== Version 9.14.2 (December 13 2018)
+* the default value of processingType is replaced from accountFunding to undefined
+
+
+== Version 9.14.1 (November 27 2018)
+
 == Version 9.14.0 (April 12 2018)
 * Feature: Upgraded to XML version 9.14
 * Feature: Added Card on file support for Visa
