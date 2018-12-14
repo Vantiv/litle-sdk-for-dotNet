@@ -55,7 +55,7 @@ namespace Litle.Sdk.Test.Unit
             var actual = batchRequest.generateXmlHeader();
             var expected = @"
 <batchRequest id=""""
-merchantSdk=""DotNet;11.4.5""
+merchantSdk=""DotNet;11.4.6""
 merchantId=""01234"">
 ";
             
