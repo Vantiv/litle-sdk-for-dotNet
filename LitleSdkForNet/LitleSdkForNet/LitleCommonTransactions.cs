@@ -2623,7 +2623,7 @@ namespace Litle.Sdk
                 {
                     xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
                 }
-                if (processingTypeSet)
+                if (processingTypeSet && processingType != processingType.undefined)
                 {
                     xml += "\r\n<processingType>" + processingType + "</processingType>";
                 }
@@ -2824,7 +2824,7 @@ namespace Litle.Sdk
                 xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
             }
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
-            if (processingTypeSet)
+            if (processingTypeSet && processingType != processingType.undefined)
             {
                 xml += "\r\n<processingType>" + processingType + "</processingType>";
             }
@@ -2981,7 +2981,7 @@ namespace Litle.Sdk
                 xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
             }
             if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
-            if (processingTypeSet)
+            if (processingTypeSet && processingType != processingType.undefined)
             {
                 xml += "\r\n<processingType>" + processingType + "</processingType>";
             }
