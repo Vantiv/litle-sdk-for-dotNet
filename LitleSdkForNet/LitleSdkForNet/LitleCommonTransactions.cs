@@ -2417,7 +2417,7 @@ namespace Litle.Sdk
                 {
                     xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
                 }
-                if (processingTypeSet)
+                if (processingTypeSet && processingType != processingTypeEnum.undefined)
                 {
                     xml += "\r\n<processingType>" + processingType + "</processingType>";
                 }
@@ -2811,7 +2811,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
             }
-            if (processingTypeSet)
+            if (processingTypeSet && processingType != processingTypeEnum.undefined)
             {
                 xml += "\r\n<processingType>" + processingType + "</processingType>";
             }
@@ -2985,7 +2985,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
             }
-            if (processingTypeSet)
+            if (processingTypeSet && processingType != processingTypeEnum.undefined)
             {
                 xml += "\r\n<processingType>" + processingType + "</processingType>";
             }
@@ -3293,7 +3293,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
             }
-            if (processingTypeSet)
+            if (processingTypeSet && processingType != processingTypeEnum.undefined)
             {
                 xml += "\r\n<processingType>" + processingType + "</processingType>";
             }
@@ -9005,6 +9005,7 @@ namespace Litle.Sdk
 
     public enum processingTypeEnum
     {
+        undefined,
         accountFunding,
         initialRecurring,
         initialInstallment,

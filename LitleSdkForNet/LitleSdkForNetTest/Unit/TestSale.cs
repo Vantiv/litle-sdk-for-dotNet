@@ -353,6 +353,29 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
+        public void SimpleSaleWithUndefinedProcessType()
+        {
+            sale sale = new sale();
+            sale.id = "1";
+            sale.amount = 106;
+            sale.litleTxnId = 123456;
+            sale.orderId = "12344";
+            sale.orderSource = orderSourceType.ecommerce;
+            sale.processingType = processingTypeEnum.undefined;
+            sale.originalNetworkTransactionId = "Test";
+            sale.originalTransactionAmount = 123;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<originalNetworkTransactionId>Test</originalNetworkTransactionId>\r\n<originalTransactionAmount>123</originalTransactionAmount>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Sale(sale);
+        }
+
+        [Test]
         public void SimpleSaleWithIdealResponse()
         {
             sale sale = new sale();
