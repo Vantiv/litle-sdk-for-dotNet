@@ -1,6 +1,6 @@
 = LitleOnline CHANGELOG
 
-== Version 8.31.3 (Aug 16, 2018)
+== Version 8.31.4 (Dec 14, 2018)
 * the default value of processingType is replaced from accountFunding to undefined.
 
 == Version 8.31.3 (Aug 16, 2018)

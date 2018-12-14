@@ -55,7 +55,7 @@ namespace Litle.Sdk.Test.Unit
             String actual = batchRequest.generateXmlHeader();
             String expected = @"
 <batchRequest id=""""
-merchantSdk=""DotNet;8.31.0""
+merchantSdk=""DotNet;8.31.4""
 merchantId=""01234"">
 ";
             Assert.AreEqual(expected, actual);
