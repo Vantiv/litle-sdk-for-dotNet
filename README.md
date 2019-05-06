@@ -30,9 +30,9 @@ Setup
 
 2.) You can configure it statically by modifying LitleSdkForDotNet.dll.config or at runtime using the LitleOnline(Dictionary) constructor. If you are just trying it out, the username, password and merchant id don't matter, and you should choose the sandbox url at https://www.testvantivcnp.com/sandbox/communicator/online.
 
-3.) Create a c# class similar to:  
+3.) Create a C# class similar to:  
 
-```c#
+```C#
 using System;
 using System.Collections.Generic;
 using System.Linq;
