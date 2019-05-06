@@ -26,7 +26,7 @@ Please contact [Vantiv eCommerce](http://developer.vantiv.com/community/ecommerc
 Setup
 -----
 
-1.) To install it, just copy LitleSdkForDotNet.dll into your Visual Studio referernces. 
+1.) To install it, just copy LitleSdkForDotNet.dll into your Visual Studio references. 
 
 2.) You can configure it statically by modifying LitleSdkForDotNet.dll.config or at runtime using the LitleOnline(Dictionary) constructor. If you are just trying it out, the username, password and merchant id don't matter, and you should choose the sandbox url at https://www.testvantivcnp.com/sandbox/communicator/online.
 
