@@ -13,6 +13,7 @@ namespace Litle.Sdk.Test.Functional
         private litleRequest _litle;
         private Dictionary<string, string> _invalidConfig;
         private Dictionary<string, string> _invalidSftpConfig;
+        private string preliveStatus;
 
         [TestFixtureSetUp]
         public void SetUp()
@@ -58,11 +59,17 @@ namespace Litle.Sdk.Test.Functional
         public void SetUpBeforeTest()
         {
             _litle = new litleRequest();
+            this.preliveStatus = Environment.GetEnvironmentVariable("preliveStatus");
         }
 
         [Test]
         public void SimpleBatch()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             var litleBatchRequest = new batchRequest();
 
             var authorization = new authorization
@@ -586,6 +593,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void AccountUpdateBatch()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             var litleBatchRequest = new batchRequest();
 
             var accountUpdate1 = new accountUpdate();
@@ -634,6 +646,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void RFRBatch()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             var litleBatchRequest = new batchRequest();
             litleBatchRequest.id = "1234567A";
 
@@ -711,6 +728,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void NullBatchData()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             var litleBatchRequest = new batchRequest();
 
             var authorization = new authorization();
@@ -938,6 +960,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             var litleIC = new litleRequest(_invalidConfig);
 
             var litleBatchRequest = new batchRequest();
@@ -1194,6 +1221,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidSftpCredientialsBatch()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             var litleIsc = new litleRequest(_invalidSftpConfig);
 
             var litleBatchRequest = new batchRequest();
@@ -1446,6 +1478,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleBatchWithSpecialCharacters()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             var litleBatchRequest = new batchRequest();
 
             var authorization = new authorization();
