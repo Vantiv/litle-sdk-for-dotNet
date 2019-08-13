@@ -72,7 +72,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="GnuPgDir" Type="System.String" Scope="User">
-      <Value Profile="(Default)"> />
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
