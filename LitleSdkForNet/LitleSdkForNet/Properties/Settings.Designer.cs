@@ -61,7 +61,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("payments.vantivprelive.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("prelive.litle.com")]
         public string sftpUrl {
             get {
                 return ((string)(this["sftpUrl"]));
@@ -302,7 +302,7 @@ namespace Litle.Sdk.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string GnuPgDir {
+        public string gnuPgDir {
             get {
                 return ((string)(this["GnuPgDir"]));
             }
