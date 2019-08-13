@@ -13,6 +13,7 @@ namespace Litle.Sdk.Test.Functional
         private litleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
+        private string preliveStatus;
 
         [TestFixtureSetUp]
         public void setUp()
@@ -54,6 +55,7 @@ namespace Litle.Sdk.Test.Functional
         public void setUpBeforeTest()
         {
             litle = new litleRequest();
+            this.preliveStatus = Environment.GetEnvironmentVariable("preliveStatus");
         }
 
         // [Test]
@@ -542,6 +544,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void nullBatchData()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
@@ -769,6 +776,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
+            if (this.preliveStatus.Equals("down"))
+            {
+                Assert.Ignore();
+            }
+
             batchRequest litleBatchRequest = new batchRequest();
 
             authorization authorization = new authorization();
