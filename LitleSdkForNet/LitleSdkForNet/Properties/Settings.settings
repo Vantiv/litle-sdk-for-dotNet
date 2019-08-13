@@ -36,9 +36,12 @@
       <Value Profile="(Default)">C:\Vantiv\</Value>
     </Setting>
     <Setting Name="logFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">true</Value>
+      <Value Profile="(Default)">C:\Vantiv\test.log</Value>
     </Setting>
     <Setting Name="neuterAccountNums" Type="System.String" Scope="User">
+      <Value Profile="(Default)">true</Value>
+    </Setting>
+    <Setting Name="neuterUserCredentials" Type="System.String" Scope="User">
       <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="url" Type="System.String" Scope="User">
@@ -60,7 +63,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="useEncryption" Type="System.String" Scope="User">
-      <Value Profile="(Default)">false</Value>
+      <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="vantivPublicKeyId" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -69,7 +72,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="GnuPgDir" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">C:\Vantiv\</Value>
     </Setting>
   </Settings>
 </SettingsFile>
