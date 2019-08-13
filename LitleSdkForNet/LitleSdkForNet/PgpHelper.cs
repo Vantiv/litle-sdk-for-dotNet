@@ -16,7 +16,7 @@ namespace Litle.Sdk
     public class PgpHelper
     {
         private const int Success = 0;
-        private static string GpgPath = "C:/Vantiv/";//Properties.Settings.Default.gnuPgDir;
+        private static string GpgPath = Properties.Settings.Default.gnuPgDir;
         private const string GpgExecutable = "gpg.exe";
         private const string GpgConfExecutable = "gpgconf.exe";
         
