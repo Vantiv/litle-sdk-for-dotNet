@@ -25,7 +25,8 @@ namespace Litle.Sdk.Test.Functional
                 {"proxyHost", Properties.Settings.Default.proxyHost},
                 {"proxyPort", Properties.Settings.Default.proxyPort},
                 {"logFile", Properties.Settings.Default.logFile},
-                {"neuterAccountNums", "true"}
+                {"neuterAccountNums", "true"},
+                {"neuterUserCredentials", "true"}
             };
 
             _litle = new LitleOnline(_config);

@@ -41,6 +41,9 @@
     <Setting Name="neuterAccountNums" Type="System.String" Scope="User">
       <Value Profile="(Default)">true</Value>
     </Setting>
+    <Setting Name="neuterUserCredentials" Type="System.String" Scope="User">
+      <Value Profile="(Default)">true</Value>
+    </Setting>
     <Setting Name="url" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://www.testvantivcnp.com/sandbox/communicator/online</Value>
     </Setting>

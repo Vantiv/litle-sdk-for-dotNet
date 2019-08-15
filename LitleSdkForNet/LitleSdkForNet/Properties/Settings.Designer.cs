@@ -12,7 +12,7 @@ namespace Litle.Sdk.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -109,7 +109,7 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("prelive.litle.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("payments.vantivprelive.com")]
         public string onlineBatchUrl {
             get {
                 return ((string)(this["onlineBatchUrl"]));
@@ -181,7 +181,19 @@ namespace Litle.Sdk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.testvantivcnp.com/sandbox/new/sandbox/communicator/online")]
+        [global::System.Configuration.DefaultSettingValueAttribute("true")]
+        public string neuterUserCredentials {
+            get {
+                return ((string)(this["neuterUserCredentials"]));
+            }
+            set {
+                this["neuterUserCredentials"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.testvantivcnp.com/sandbox/communicator/online")]
         public string url {
             get {
                 return ((string)(this["url"]));
@@ -286,9 +298,10 @@ namespace Litle.Sdk.Properties {
                 this["pgpPassphrase"] = value;
             }
         }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string gnuPgDir {
             get {
                 return ((string)(this["GnuPgDir"]));

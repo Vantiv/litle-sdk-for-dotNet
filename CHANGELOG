@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.7 (August 15, 2019)
+* BugFix: Fixed the masking of accountNumber
+* Feature: Added neuterUserCredentials to mask the User credentials in logged XML
+
 == Version 11.4.6 (December 14, 2018)
 * the default value of processingType is changed from accountFunding to undefined
 

@@ -252,6 +252,7 @@ namespace Litle.Sdk
 			_config["proxyPort"] = Properties.Settings.Default.proxyPort;
 			_config["logFile"] = Properties.Settings.Default.logFile;
 			_config["neuterAccountNums"] = Properties.Settings.Default.neuterAccountNums;
+            _config["neuterUserCredentials"] = Properties.Settings.Default.neuterUserCredentials;
 			_communication = new Communications();
 
 		}
