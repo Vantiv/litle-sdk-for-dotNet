@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.8 (August 22, 2019)
+* BugFix: merchantSdk field in generated xml request is synced. 
+
 == Version 11.4.7 (August 15, 2019)
 * BugFix: Fixed the masking of accountNumber
 * Feature: Added neuterUserCredentials to mask the User credentials in logged XML
