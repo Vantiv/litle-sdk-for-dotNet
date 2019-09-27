@@ -137,8 +137,6 @@ namespace Litle.Sdk
             request.ServicePoint.Expect100Continue = false;
             request.KeepAlive = false;
 
-            
-            request.Timeout = 1;
             if (IsProxyOn(config))
             {
                 var myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]))
