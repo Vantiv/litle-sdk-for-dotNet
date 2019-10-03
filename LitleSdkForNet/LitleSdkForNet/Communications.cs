@@ -109,6 +109,16 @@ namespace Litle.Sdk
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 10000;
             req.ServicePoint.Expect100Continue = false;
+            
+            //set timeout for request if available. #Issue 58
+            //connection timeout is increased 3 times on successful establishment.
+            if(config.ContainsKey("timeout") && config["timeout"] != null && int.Parse(config["timeout"]) > 0)
+            {
+                var timeOut = int.Parse(config["timeout"]);
+                req.Timeout = timeOut;
+                req.ReadWriteTimeout = 3*timeOut;
+            }
+            
             if (isProxyOn(config))
             {
                 WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));
