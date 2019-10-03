@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 9.14.4 (Oct 3, 2019)
+* BugFix: Fixed custom timeout not being used
+
 == Version 9.14.3 (September 27 2019)
 * BugFix: Removed line setting the timeout to 1ms
 
