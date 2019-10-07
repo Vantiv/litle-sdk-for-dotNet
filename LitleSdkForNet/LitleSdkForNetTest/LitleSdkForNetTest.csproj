@@ -100,6 +100,7 @@
     <Compile Include="Functional\TestForceCapture.cs" />
     <Compile Include="Functional\TestEcheckRedeposit.cs" />
     <Compile Include="Functional\TestSale.cs" />
+    <Compile Include="Functional\TestTimeout.cs" />
     <Compile Include="Functional\TestToken.cs" />
     <Compile Include="Functional\TestAuth.cs" />
     <Compile Include="Program.cs" />
