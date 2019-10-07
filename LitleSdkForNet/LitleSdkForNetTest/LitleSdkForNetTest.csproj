@@ -117,6 +117,7 @@
     <Compile Include="Functional\TestReserve.cs" />
     <Compile Include="Functional\TestSubmerchant.cs" />
     <Compile Include="Functional\TestSubscriptionTxns.cs" />
+    <Compile Include="Functional\TestTimeout.cs" />
     <Compile Include="Functional\TestUnload.cs" />
     <Compile Include="Functional\TestLoad.cs" />
     <Compile Include="Functional\TestDeactivate.cs" />
