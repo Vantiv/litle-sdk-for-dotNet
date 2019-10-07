@@ -89,7 +89,100 @@ namespace Litle.Sdk
 
         public virtual string HttpPost(string xmlRequest, Dictionary<string, string> config)
         {
-            return HttpPostCoreAsync(xmlRequest, config, CancellationToken.None).Result;
+            string logFile = null;
+            if (config.ContainsKey("logFile"))
+            {
+                logFile = config["logFile"];
+            }
+
+            var uri = config["url"];
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+            var req = (HttpWebRequest) WebRequest.Create(uri);
+
+            var neuter = false;
+            if (config.ContainsKey("neuterAccountNums"))
+            {
+                neuter = ("true".Equals(config["neuterAccountNums"]));
+            }
+
+            var printxml = false;
+            if (config.ContainsKey("printxml"))
+            {
+                if ("true".Equals(config["printxml"]))
+                {
+                    printxml = true;
+                }
+            }
+
+            if (printxml)
+            {
+                Console.WriteLine(xmlRequest);
+                Console.WriteLine(logFile);
+            }
+
+            //log request
+            if (logFile != null)
+            {
+                Log(xmlRequest, logFile, neuter);
+            }
+
+            req.ContentType = "text/xml; charset=UTF-8";
+            req.Method = "POST";
+            req.ServicePoint.MaxIdleTime = 8000;
+            req.ServicePoint.Expect100Continue = false;
+            req.KeepAlive = true;
+
+            if (config.ContainsKey("timeout")) {
+                try {
+                    req.Timeout = Convert.ToInt32(config["timeout"]);
+                }
+                catch (FormatException e) {
+                    // If timeout setting contains non-numeric
+                    // characters, we will fall back to 1 minute
+                    // default timeout.
+                    req.Timeout = 60000;
+                }
+            }
+            
+            if (IsProxyOn(config))
+            {
+                var myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]))
+                {
+                    BypassProxyOnLocal = true
+                };
+                req.Proxy = myproxy;
+            }
+
+            OnHttpAction(RequestType.Request, xmlRequest, neuter);
+
+            // submit http request
+            using (var writer = new StreamWriter(req.GetRequestStream()))
+            {
+                writer.Write(xmlRequest);
+            }
+
+            // read response
+            var response = req.GetResponse();
+
+            string xmlResponse;
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                xmlResponse = reader.ReadToEnd().Trim();
+            }
+            if (printxml)
+            {
+                Console.WriteLine(xmlResponse);
+            }
+
+            OnHttpAction(RequestType.Response, xmlResponse, neuter);
+
+            //log response
+            if (logFile != null)
+            {
+                Log(xmlResponse, logFile, neuter);
+            }
+
+            return xmlResponse;
         }
 
         private async Task<string> HttpPostCoreAsync(string xmlRequest, Dictionary<string, string> config, CancellationToken cancellationToken)
@@ -137,13 +230,16 @@ namespace Litle.Sdk
             request.ServicePoint.Expect100Continue = false;
             request.KeepAlive = false;
 
-            //set timeout for request if available. #Issue 58
-            //connection timeout is increased 3 times on successful establishment.
-            if(config.ContainsKey("timeout") && config["timeout"] != null && int.Parse(config["timeout"]) > 0)
-            {
-                var timeOut = int.Parse(config["timeout"]);
-                request.Timeout = timeOut;
-                request.ReadWriteTimeout = 3*timeOut;
+            if (config.ContainsKey("timeout")) {
+                try {
+                    request.Timeout = Convert.ToInt32(config["timeout"]);
+                }
+                catch (FormatException e) {
+                    // If timeout setting contains non-numeric
+                    // characters, we will fall back to 1 minute
+                    // default timeout.
+                    request.Timeout = 60000;
+                }
             }
             
             if (IsProxyOn(config))
