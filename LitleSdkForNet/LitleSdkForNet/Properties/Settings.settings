@@ -9,7 +9,7 @@
       <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="timeout" Type="System.String" Scope="User">
-      <Value Profile="(Default)">500</Value>
+      <Value Profile="(Default)">5000</Value>
     </Setting>
     <Setting Name="sftpUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">payments.vantivprelive.com</Value>
