@@ -20,7 +20,7 @@ namespace Litle.Sdk.Test.Certification
                 { "reportGroup", "Default Report Group" },
                 { "username", Properties.Settings.Default.username },
                 { "version", "8.31" },
-                { "timeout", "500" },
+                { "timeout", "20000" },
                 { "merchantId", Properties.Settings.Default.merchantId },
                 { "password", Properties.Settings.Default.password },
                 { "printxml", "true" },
