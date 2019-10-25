@@ -1,6 +1,6 @@
 = LitleOnline CHANGELOG
 
-== Version 11.4.9 (October 7, 2019)
+== Version 11.4.9 (October 25, 2019)
 * BugFix: Fixed timeout not being used in non-async methods
 
 == Version 11.4.8 (August 22, 2019)
