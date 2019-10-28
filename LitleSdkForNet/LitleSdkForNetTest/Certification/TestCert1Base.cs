@@ -502,7 +502,6 @@ namespace Litle.Sdk.Test.Certification
             card.type = methodOfPaymentTypeEnum.AX;
             card.number = "375001000000005";
             card.expDate = "0412";
-            card.cardValidationNum = "758";
             authorization.card = card;
 
             authorizationResponse response = litle.Authorize(authorization);
