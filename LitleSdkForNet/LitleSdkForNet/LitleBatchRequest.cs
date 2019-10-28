@@ -1254,7 +1254,7 @@ namespace Litle.Sdk
                 xmlHeader += "physicalCheckDebitAmount=\"" + physicalCheckDebitAmount + "\"\r\n";
             }
 
-            xmlHeader += "merchantSdk=\"DotNet;10.8\"\r\n";
+            xmlHeader += "merchantSdk=\"DotNet;10.8.4\"\r\n";
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
