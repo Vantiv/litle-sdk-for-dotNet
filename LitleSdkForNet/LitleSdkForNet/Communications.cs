@@ -109,6 +109,19 @@ namespace Litle.Sdk
             req.Method = "POST";
             req.ServicePoint.MaxIdleTime = 10000;
             req.ServicePoint.Expect100Continue = false;
+            
+            if (config.ContainsKey("timeout")) {
+                try {
+                    req.Timeout = Convert.ToInt32(config["timeout"]);
+                }
+                catch (FormatException e) {
+                    // If timeout setting contains non-numeric
+                    // characters, we will fall back to 1 minute
+                    // default timeout.
+                    req.Timeout = 60000;
+                }
+            }
+            
             if (isProxyOn(config))
             {
                 WebProxy myproxy = new WebProxy(config["proxyHost"], int.Parse(config["proxyPort"]));

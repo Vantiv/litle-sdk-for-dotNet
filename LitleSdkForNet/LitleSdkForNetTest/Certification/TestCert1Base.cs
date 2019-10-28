@@ -19,7 +19,7 @@ namespace Litle.Sdk.Test.Certification
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", Properties.Settings.Default.username);
             config.Add("version", "10.8");
-            config.Add("timeout", "500");
+            config.Add("timeout", "20000");
             config.Add("merchantId", Properties.Settings.Default.merchantId);
             config.Add("password", Properties.Settings.Default.password);
             config.Add("printxml", "true");
@@ -502,7 +502,6 @@ namespace Litle.Sdk.Test.Certification
             card.type = methodOfPaymentTypeEnum.AX;
             card.number = "375001000000005";
             card.expDate = "0412";
-            card.cardValidationNum = "758";
             authorization.card = card;
 
             authorizationResponse response = litle.Authorize(authorization);
