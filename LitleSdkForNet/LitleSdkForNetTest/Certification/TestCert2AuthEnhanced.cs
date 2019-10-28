@@ -20,7 +20,7 @@ namespace Litle.Sdk.Test.Certification
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", Properties.Settings.Default.username);
             config.Add("version", "10.8");
-            config.Add("timeout", "500");
+            config.Add("timeout", "20000");
             config.Add("merchantId", Properties.Settings.Default.merchantId);
             config.Add("password", Properties.Settings.Default.password);
             config.Add("printxml", "true");
