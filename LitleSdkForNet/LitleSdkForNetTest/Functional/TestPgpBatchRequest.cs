@@ -19,7 +19,7 @@ namespace Litle.Sdk.Test.Functional
         public void SetUp()
         {
             var pgpEnabled = Environment.GetEnvironmentVariable("pgpFunctionalTestsEnabled");
-            if(pgpEnabled != null && pgpEnabled.ToLower.Equals("false"))
+            if(pgpEnabled != null && pgpEnabled.ToLower().Equals("false"))
             {
                 Assert.Ignore("PGP functional tests are disabled");
             }
