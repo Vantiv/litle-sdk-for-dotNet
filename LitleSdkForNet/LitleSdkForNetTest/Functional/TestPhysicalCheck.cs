@@ -58,7 +58,7 @@ namespace Litle.Sdk.Test.Functional
                 id = "1",
                 reportGroup = "Planets",
                 // required child elements.
-                amount = 15121,
+                amount = 1000,
                 fundingSubmerchantId = "value for fundingSubmerchantId",
                 fundsTransferId = "value for fundsTransferId"
             };
