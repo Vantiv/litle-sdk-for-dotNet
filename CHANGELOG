@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.91 (February 14, 2020)
+* BugFix: Fix functional tests that were failing after change in sandbox
+
 == Version 11.4.9 (October 25, 2019)
 * BugFix: Fixed timeout not being used in non-async methods
 
