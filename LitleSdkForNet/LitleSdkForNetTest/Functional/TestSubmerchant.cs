@@ -46,7 +46,7 @@ namespace Litle.Sdk.Test.Functional
                     accNum = "1234",
                     routingNum = "12345678"
                 },
-                amount = 1500,
+                amount = 1000,
                 fundingSubmerchantId = "value for fundingSubmerchantId",
                 fundsTransferId = "value for fundsTransferId",
                 submerchantName = "Vantiv",
@@ -72,7 +72,7 @@ namespace Litle.Sdk.Test.Functional
                     accNum = "1234",
                     routingNum = "12345678"
                 },
-                amount = 1500,
+                amount = 1000,
                 fundingSubmerchantId = "value for fundingSubmerchantId",
                 fundsTransferId = "value for fundsTransferId",
                 submerchantName = "Vantiv",

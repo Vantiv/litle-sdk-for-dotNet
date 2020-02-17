@@ -21,6 +21,11 @@ namespace Litle.Sdk.Test.Functional
         [TestFixtureSetUp]
         public void SetUp()
         {
+            var pgpEnabled = Environment.GetEnvironmentVariable("pgpFunctionalTestsEnabled");
+            if(pgpEnabled != null && pgpEnabled.ToLower().Equals("false"))
+            {
+                Assert.Ignore("PGP functional tests are disabled");
+            }
             _testDir = Path.Combine(Properties.Settings.Default.requestDirectory, "testPgp");
             if (!Directory.Exists(_testDir))
             {
