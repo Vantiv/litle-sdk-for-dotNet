@@ -74,8 +74,8 @@ namespace Litle.Sdk
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
             config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+            config["sftpUsername"] = "badName";//Properties.Settings.Default.sftpUsername;
+            config["sftpPassword"] = "badPass";Properties.Settings.Default.sftpPassword;
             config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
             config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
             config["responseDirectory"] = Properties.Settings.Default.responseDirectory;

@@ -40,8 +40,8 @@ namespace Litle.Sdk
             config["password"] = Properties.Settings.Default.password;
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
             config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
+            config["sftpUsername"] = "faultyCreds";//Properties.Settings.Default.sftpUsername;
+            config["sftpPassword"] = "badPass";//Properties.Settings.Default.sftpPassword;
             config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
             config["onlineBatchUrl"] = Properties.Settings.Default.onlineBatchUrl;
             config["onlineBatchPort"] = Properties.Settings.Default.onlineBatchPort;
