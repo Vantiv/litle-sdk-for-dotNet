@@ -1,14 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitleSdkForNet", "LitleSdkForNet\LitleSdkForNet.csproj", "{4A6E3397-DE37-4F91-A90F-E74C1D91E098}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitleSdkForNetTest", "LitleSdkForNetTest\LitleSdkForNetTest.csproj", "{D0A0B9E4-E555-498D-910D-28C61BD094EF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4A6E3397-DE37-4F91-A90F-E74C1D91E098} = {4A6E3397-DE37-4F91-A90F-E74C1D91E098}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LitleSdkForNet", "LitleSdkForNet\LitleSdkForNet.csproj", "{4A6E3397-DE37-4F91-A90F-E74C1D91E098}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{29B822AC-38E2-4105-AEEB-DE8A4FDD6952}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,19 +30,11 @@ Global
 		{4A6E3397-DE37-4F91-A90F-E74C1D91E098}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4A6E3397-DE37-4F91-A90F-E74C1D91E098}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4A6E3397-DE37-4F91-A90F-E74C1D91E098}.Release|x86.ActiveCfg = Release|Any CPU
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Debug|Any CPU.Build.0 = Debug|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Debug|x86.ActiveCfg = Debug|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Debug|x86.Build.0 = Debug|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Release|Any CPU.ActiveCfg = Release|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Release|Mixed Platforms.Build.0 = Release|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Release|x86.ActiveCfg = Release|x86
-		{D0A0B9E4-E555-498D-910D-28C61BD094EF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8980669-2DB1-411F-AFBD-534BA79DE5E8}
 	EndGlobalSection
 EndGlobal
