@@ -11,3 +11,4 @@ LitleSdkForNet/.idea
 *.zip
 *.suo
 Project.sln
+/LitleSdkForNet/packages/SSH.NET.2020.0.2

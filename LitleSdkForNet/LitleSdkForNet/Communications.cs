@@ -12,7 +12,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Tamir.SharpSsh.jsch;
+using Renci.SshNet;
+using Renci.SshNet.Sftp;
+using Renci.SshNet.Common;
 
 namespace Litle.Sdk
 {
@@ -423,12 +425,11 @@ namespace Litle.Sdk
 
         public virtual void FtpDropOff(string fileDirectory, string fileName, Dictionary<string, string> config)
         {
-            ChannelSftp channelSftp;
+            SftpClient sftpClient;
 
             var url = config["sftpUrl"];
             var username = config["sftpUsername"];
             var password = config["sftpPassword"];
-            var knownHostsFile = config["knownHostsFile"];
             var filePath = Path.Combine(fileDirectory, fileName);
 
             var printxml = config["printxml"] == "true";
@@ -436,65 +437,20 @@ namespace Litle.Sdk
             {
                 Console.WriteLine("Sftp Url: " + url);
                 Console.WriteLine("Username: " + username);
-                //Console.WriteLine("Password: " + password);
-                Console.WriteLine("Known hosts file path: " + knownHostsFile);
+                // Console.WriteLine("Password: " + password);
             }
 
-            var jsch = new JSch();
-            if (printxml)
-            {
-                // grab the contents fo the knownhosts file and print
-                var hostFile = File.ReadAllText(knownHostsFile);
-                Console.WriteLine("known host contents: " + hostFile);
-            }
-
-            jsch.setKnownHosts(knownHostsFile);
-
-            // setup for diagnostic
-            // Get the KnownHosts repository from JSchs
-            var hkr = jsch.getHostKeyRepository();
-            var hks = hkr.getHostKey();
-            HostKey hk;
-            if (printxml)
-            {
-                // Print all knownhosts and keys  
-                if (hks != null)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Host keys in " + hkr.getKnownHostsRepositoryID() + ":");
-                    foreach (var t in hks)
-                    {
-                        hk = t;
-                        Console.WriteLine("local HostKey host: <" + hk.getHost() + "> type: <" + hk.getType() + "> fingerprint: <" + hk.getFingerPrint(jsch) + ">");
-                    }
-                    Console.WriteLine("");
-                }
-            }
-
-            var session = jsch.getSession(username, url);
-            session.setPassword(password);
+            sftpClient = new SftpClient(url, username, password);
 
             try
             {
-                session.connect();
-
-                // more diagnostic code for troubleshooting sFTP connection errors
-                if (printxml)
-                {
-                    // Print the host key info of the connected server:
-                    hk = session.getHostKey();
-                    Console.WriteLine("remote HostKey host: <" + hk.getHost() + "> type: <" + hk.getType() + "> fingerprint: <" + hk.getFingerPrint(jsch) + ">");
-                }
-
-                var channel = session.openChannel("sftp");
-                channel.connect();
-                channelSftp = (ChannelSftp) channel;
+                sftpClient.Connect();
             }
-            catch (SftpException e)
+            catch (SshConnectionException e)
             {
-                throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
+                throw new LitleOnlineException("Error occured while establishing an SFTP connection", e);
             }
-            catch (JSchException e)
+            catch (SshAuthenticationException e)
             {
                 throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
             }
@@ -505,21 +461,30 @@ namespace Litle.Sdk
                 {
                     Console.WriteLine("Dropping off local file " + filePath + " to inbound/" + fileName + ".prg");
                 }
-                channelSftp.put(filePath, "inbound/" + fileName + ".prg", ChannelSftp.OVERWRITE);
+
+                FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
+                sftpClient.UploadFile(fileStream, "inbound/" + fileName + ".prg");
+                fileStream.Close();
                 if (printxml)
                 {
-                    Console.WriteLine("File copied - renaming from inbound/" + fileName + ".prg to inbound/" + fileName + ".asc");
+                    Console.WriteLine("File copied - renaming from inbound/" + fileName + ".prg to inbound/" +
+                                      fileName + ".asc");
                 }
-                channelSftp.rename("inbound/" + fileName + ".prg", "inbound/" + fileName + ".asc");
+
+                sftpClient.RenameFile("inbound/" + fileName + ".prg", "inbound/" + fileName + ".asc");
             }
-            catch (SftpException e)
+            catch (SshConnectionException e)
             {
                 throw new LitleOnlineException("Error occured while attempting to upload and save the file to SFTP", e);
             }
-
-            channelSftp.quit();
-
-            session.disconnect();
+            catch (SshException e)
+            {
+                throw new LitleOnlineException("Error occured while attempting to upload and save the file to SFTP", e);
+            }
+            finally
+            {
+                sftpClient.Disconnect();
+            }
         }
 
         public virtual void FtpPoll(string fileName, int timeout, Dictionary<string, string> config)
@@ -530,34 +495,31 @@ namespace Litle.Sdk
             {
                 Console.WriteLine("Polling for outbound result file.  Timeout set to " + timeout + "ms. File to wait for is " + fileName);
             }
-            ChannelSftp channelSftp;
+
+            SftpClient sftpClient;
 
             var url = config["sftpUrl"];
             var username = config["sftpUsername"];
             var password = config["sftpPassword"];
-            var knownHostsFile = config["knownHostsFile"];
 
-            var jsch = new JSch();
-            jsch.setKnownHosts(knownHostsFile);
-
-            var session = jsch.getSession(username, url);
-            session.setPassword(password);
+            sftpClient = new SftpClient(url, username, password);
 
             try
             {
-                session.connect();
 
-                var channel = session.openChannel("sftp");
-                channel.connect();
-                channelSftp = (ChannelSftp) channel;
+                sftpClient.Connect();
+
             }
-            catch (SftpException e)
+            catch (SshConnectionException e)
+            {
+                throw new LitleOnlineException("Error occured while establishing an SFTP connection", e);
+            }
+            catch (SshAuthenticationException e)
             {
                 throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
             }
 
-            //check if file exists
-            SftpATTRS sftpAttrs = null;
+            SftpFileAttributes sftpAttrs = null;
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             do
@@ -568,49 +530,50 @@ namespace Litle.Sdk
                 }
                 try
                 {
-                    sftpAttrs = channelSftp.lstat("outbound/" + fileName);
+                    sftpAttrs = sftpClient.Get("outbound/" + fileName).Attributes;
                     if (printxml)
                     {
-                        Console.WriteLine("Attrs of file are: " + sftpAttrs);
+                        Console.WriteLine("Attrs of file are: " + getSftpFileAttributes(sftpAttrs));
                     }
                 }
-                catch (SftpException e)
+                catch (SshConnectionException e)
                 {
                     if (printxml)
                     {
-                        Console.WriteLine(e.message);
+                        Console.WriteLine(e.Message);
+                    }
+                    System.Threading.Thread.Sleep(30000);
+                }
+                catch (SftpPathNotFoundException e)
+                {
+                    if (printxml)
+                    {
+                        Console.WriteLine(e.Message);
                     }
                     System.Threading.Thread.Sleep(30000);
                 }
             } while (sftpAttrs == null && stopWatch.Elapsed.TotalMilliseconds <= timeout);
+
+            // Close the connections.
+            sftpClient.Disconnect();
         }
 
         public virtual void FtpPickUp(string destinationFilePath, Dictionary<string, string> config, string fileName)
         {
-            ChannelSftp channelSftp;
+            SftpClient sftpClient;
 
             var printxml = config["printxml"] == "true";
-
             var url = config["sftpUrl"];
             var username = config["sftpUsername"];
             var password = config["sftpPassword"];
-            var knownHostsFile = config["knownHostsFile"];
 
-            var jsch = new JSch();
-            jsch.setKnownHosts(knownHostsFile);
-
-            var session = jsch.getSession(username, url);
-            session.setPassword(password);
+            sftpClient = new SftpClient(url, username, password);
 
             try
             {
-                session.connect();
-
-                var channel = session.openChannel("sftp");
-                channel.connect();
-                channelSftp = (ChannelSftp) channel;
+                sftpClient.Connect();
             }
-            catch (SftpException e)
+            catch (SshConnectionException e)
             {
                 throw new LitleOnlineException("Error occured while attempting to establish an SFTP connection", e);
             }
@@ -622,21 +585,30 @@ namespace Litle.Sdk
                     Console.WriteLine("Picking up remote file outbound/" + fileName + ".asc");
                     Console.WriteLine("Putting it at " + destinationFilePath);
                 }
-                channelSftp.get("outbound/" + fileName + ".asc", destinationFilePath);
+
+                FileStream downloadStream = new FileStream(destinationFilePath, FileMode.Create, FileAccess.ReadWrite);
+                sftpClient.DownloadFile("outbound/" + fileName + ".asc", downloadStream);
+                downloadStream.Close();
                 if (printxml)
                 {
                     Console.WriteLine("Removing remote file output/" + fileName + ".asc");
                 }
-                channelSftp.rm("outbound/" + fileName + ".asc");
+
+                sftpClient.Delete("outbound/" + fileName + ".asc");
             }
-            catch (SftpException e)
+            catch (SshConnectionException e)
             {
-                throw new LitleOnlineException("Error occured while attempting to retrieve and save the file from SFTP", e);
+                throw new LitleOnlineException("Error occured while attempting to retrieve and save the file from SFTP",
+                    e);
             }
-
-            channelSftp.quit();
-
-            session.disconnect();
+            catch (SftpPathNotFoundException e)
+            {
+                throw new LitleOnlineException("Error occured while attempting to locate desired SFTP file path", e);
+            }
+            finally
+            {
+                sftpClient.Disconnect();
+            }
 
         }
 
@@ -663,6 +635,16 @@ namespace Litle.Sdk
             public string User;
             public string Pass;
             public string IdentityFile;
+        }
+
+        private String getSftpFileAttributes(SftpFileAttributes sftpAttrs)
+        {
+            String permissions = sftpAttrs.GetBytes().ToString();
+            return "Permissions: " + permissions
+                                   + " | UserID: " + sftpAttrs.UserId
+                                   + " | GroupID: " + sftpAttrs.GroupId
+                                   + " | Size: " + sftpAttrs.Size
+                                   + " | LastEdited: " + sftpAttrs.LastWriteTime.ToString();
         }
     }
 }
