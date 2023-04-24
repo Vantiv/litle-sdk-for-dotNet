@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.10 (April 25, 2023)
+* Feature: Migrated from Tamir.SharpSSH to SSH.NET 
+
 == Version 11.4.91 (February 14, 2020)
 * BugFix: Fix functional tests that were failing after change in sandbox
 
