@@ -589,7 +589,7 @@ namespace Litle.Sdk.Test.Functional
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
         }
-
+                
         [Test]
         public void AccountUpdateBatch()
         {
@@ -1210,11 +1210,11 @@ namespace Litle.Sdk.Test.Functional
             try
             {
                 var litleResponse = litleIC.receiveFromLitle(batchName);
-                Assert.Fail("Fail to throw a connection exception");
+                Assert.Fail("Fail to throw a SftpPathNotFoundException");
             }
             catch (LitleOnlineException e)
             {
-                Assert.AreEqual("Error occured while attempting to retrieve and save the file from SFTP", e.Message);
+                Assert.AreEqual("Error occured while attempting to locate desired SFTP file path", e.Message);
             }
         }
 

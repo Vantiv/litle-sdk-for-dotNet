@@ -21,7 +21,7 @@ See LICENSE file for details on using this software.
 
 Source Code available from : https://github.com/Vantiv/litle-sdk-for-dotNet
 
-Please contact [Vantiv eCommerce](http://developer.vantiv.com/community/ecommerce) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at sdksupport@Vantiv.com
+Please contact [Vantiv eCommerce](http://developer.vantiv.com/community/ecommerce) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at sdksupport@fisglobal.com
 
 Setup
 -----
@@ -84,4 +84,4 @@ using Litle.Sdk;
 
 More examples can be found here [.Net Gists](https://gist.github.com/search?q=.net+sdk+Litle) or [Here](http://litleco.github.io/dotnet/) or in [Functional and Unit Tests] (https://github.com/Vantiv/litle-sdk-for-dotNet/tree/11.0/LitleSdkForNet/LitleSdkForNetTest)
 
-Please contact Vantiv eCommerce with any further questions.   You can reach us at sdksupport@Vantiv.com.
+Please contact Vantiv eCommerce with any further questions.   You can reach us at sdksupport@fisglobal.com.
