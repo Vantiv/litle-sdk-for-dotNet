@@ -93,8 +93,8 @@ namespace Litle.Sdk
             authentication.user = config["username"];
             authentication.password = config["password"];
 
-            requestDirectory = config["requestDirectory"] + "\\Requests\\";
-            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+            requestDirectory = $"{config["requestDirectory"]}{Path.DirectorySeparatorChar}Requests{Path.DirectorySeparatorChar}";
+            responseDirectory = $"{config["responseDirectory"]}{Path.DirectorySeparatorChar}Responses{Path.DirectorySeparatorChar}";
 
             litleXmlSerializer = new litleXmlSerializer();
             litleTime = new litleTime();

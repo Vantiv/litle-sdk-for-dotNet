@@ -126,8 +126,8 @@ namespace Litle.Sdk
 
         private void initializeRequest()
         {
-            requestDirectory = config["requestDirectory"] + "\\Requests\\";
-            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+            requestDirectory = $"{config["requestDirectory"]}{Path.DirectorySeparatorChar}Requests{Path.DirectorySeparatorChar}";
+            responseDirectory = $"{config["responseDirectory"]}{Path.DirectorySeparatorChar}Responses{Path.DirectorySeparatorChar}";
 
             litleFile = new litleFile();
             litleTime = new litleTime();
@@ -1487,8 +1487,8 @@ namespace Litle.Sdk
             litleTime = new litleTime();
             litleFile = new litleFile();
 
-            requestDirectory = config["requestDirectory"] + "\\Requests\\";
-            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+            requestDirectory = $"{config["requestDirectory"]}{Path.DirectorySeparatorChar}Requests{Path.DirectorySeparatorChar}";
+            responseDirectory = $"{config["responseDirectory"]}{Path.DirectorySeparatorChar}Responses{Path.DirectorySeparatorChar}";
         }
 
         public RFRRequest(Dictionary<string, string> config)
@@ -1500,8 +1500,8 @@ namespace Litle.Sdk
 
         private void initializeRequest()
         {
-            requestDirectory = config["requestDirectory"] + "\\Requests\\";
-            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+            requestDirectory = $"{config["requestDirectory"]}{Path.DirectorySeparatorChar}Requests{Path.DirectorySeparatorChar}";
+            responseDirectory = $"{config["responseDirectory"]}{Path.DirectorySeparatorChar}Responses{Path.DirectorySeparatorChar}";
 
             litleFile = new litleFile();
             litleTime = new litleTime();
