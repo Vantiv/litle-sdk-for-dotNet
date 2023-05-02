@@ -1376,7 +1376,7 @@ namespace Litle.Sdk
                 xmlHeader += "sameDayFunding=\"" + sameDayFunding.ToString().ToLower() + "\"\r\n";
             }
 
-            xmlHeader += "merchantSdk=\"DotNet;11.4.9\"\r\n";
+            xmlHeader += "merchantSdk=\"DotNet;11.4.10\"\r\n";
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
