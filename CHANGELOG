@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 11.4.11 (May 04, 2023)
+* Feature: Making path separator OS agnostic
+
 == Version 11.4.10 (April 25, 2023)
 * Feature: Migrated from Tamir.SharpSSH to SSH.NET 
 
