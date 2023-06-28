@@ -1,5 +1,12 @@
 Vantiv eCommerce .NET SDK
 =====================
+<span style="color:red">
+
+### Important Support Note
+</span>
+
+***Worldpay provides SDK updates for releases in the latest major version stream. We do not provide SDK updates to older releases, unless mandated by the card brands. All SDKs are open source, allowing you to update older versions as needed.***
+
 
 #### WARNING:
 ##### All major version changes require recertification to the new version. Once certified for the use of a new version, Vantiv modifies your Merchant Profile, allowing you to submit transaction to the Production Environment using the new version. Updating your code without recertification and modification of your Merchant Profile will result in transaction declines. Please consult you Implementation Analyst for additional information about this process.
