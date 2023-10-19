@@ -336,6 +336,50 @@ namespace Litle.Sdk.Test.Functional
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Approved", response.message);
         }
+        [Test]
+        public void CaptureGivenAuthWithChanges8_32And8_33()
+        {
+            captureGivenAuth capturegivenauth = new captureGivenAuth();
+            capturegivenauth.amount = 106;
+            capturegivenauth.orderId = "12344";
+            authInformation authInfo = new authInformation();
+            DateTime authDate = new DateTime(2002, 10, 9);
+            authInfo.authDate = authDate;
+            authInfo.authCode = "543216";
+            authInfo.authAmount = 12345;
+            capturegivenauth.authInformation = authInfo;
+            capturegivenauth.orderSource = orderSourceType.ecommerce;
+            contact contact = new contact();
+            contact.name = "John & Jane Smith";
+            contact.addressLine1 = "1 Main St.";
+            contact.city = "Burlington";
+            contact.state = "MA";
+            contact.zip = "01803-3747";
+            contact.country = countryTypeEnum.US;
+            capturegivenauth.retailerAddress = contact;
+            additionalCOFData additionalCOFData = new additionalCOFData();
+            additionalCOFData.totalPaymentCount = "35";
+            additionalCOFData.paymentType = paymentTypeEnum.Fixed_Amount;
+            additionalCOFData.uniqueId = "12345wereew233";
+            additionalCOFData.frequencyOfMIT = frequencyOfMITEnum.BiWeekly;
+            additionalCOFData.validationReference = "re3298rhriw4wrw";
+            additionalCOFData.sequenceIndicator = 2;
+            capturegivenauth.additionalCOFData = additionalCOFData;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4100000000000000";
+            card.expDate = "1210";
+            capturegivenauth.card = card;
+            capturegivenauth.originalNetworkTransactionId = "abc123";
+            capturegivenauth.originalTransactionAmount = 123456789;
+            capturegivenauth.merchantCategoryCode = "1234";
+            capturegivenauth.BusinessIndicator = businessIndicatorEnum.consumerBillPayment;
+            capturegivenauth.crypto = true;
+            capturegivenauth.foreignRetailerIndicator = foreignRetailerIndicatorEnum.F;
+            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.message);
+        }
+
 
     }
 }

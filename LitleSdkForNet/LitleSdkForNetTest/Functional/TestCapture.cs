@@ -85,5 +85,16 @@ namespace Litle.Sdk.Test.Functional
             captureResponse response = litle.Capture(capture);
             Assert.AreEqual("Approved", response.message);
         }
+        [Test]
+        public void SimpleCaptureWithforeignRetailerIndicatorEnum()
+        {
+            capture capture = new capture();
+            capture.litleTxnId = 123456000;
+            capture.amount = 106;
+            capture.payPalNotes = "<'&\">";
+            capture.foreignRetailerIndicator = foreignRetailerIndicatorEnum.F;
+            captureResponse response = litle.Capture(capture);
+            Assert.AreEqual("Approved", response.message);
+        }
     }
 }

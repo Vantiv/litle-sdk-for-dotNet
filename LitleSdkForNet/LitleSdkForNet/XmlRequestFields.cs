@@ -409,7 +409,6 @@ namespace Litle.Sdk
     }
     public enum authIndicatorEnum
     {
-        undefined,
         Estimated,
         Incremental,
     }
@@ -626,6 +625,10 @@ namespace Litle.Sdk
             if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
             if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderComplete>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderComplete>";
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
+            if (foreignRetailerIndicatorSet)
+            {
+                xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
+            }
             xml += "\r\n</capture>";
 
             return xml;
@@ -1550,7 +1553,7 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
                 xml += "\r\n<amount>" + amount + "</amount>";
-                 if (authIndicatorEnumSet && authIndicator != authIndicatorEnum.undefined)
+                 if (authIndicatorEnumSet)
                  {
                       xml += "\r\n<authIndicator>" + authIndicator + "</authIndicator>";
                  }
@@ -1685,8 +1688,12 @@ namespace Litle.Sdk
                 {
                     xml += "\r\n<merchantCategoryCode>" + merchantCategoryCode + "</merchantCategoryCode>";
                 }
+                if (businessIndicatorSet)
+                {
+                    xml += "\r\n<businessIndicator>" + businessIndicatorField + "</businessIndicator>";
+                }
                 if (cryptoSet) xml += "\r\n<crypto>" + crypto.ToString().ToLower() + "</crypto>";
-                if (authIndicatorEnumSet && authIndicator != authIndicatorEnum.undefined)
+                if (authIndicatorEnumSet)
                 {
                     xml += "\r\n<authIndicator>" + authIndicator + "</authIndicator>";
                 }
@@ -2042,7 +2049,15 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<merchantCategoryCode>" + merchantCategoryCode + "</merchantCategoryCode>";
             }
+            if (businessIndicatorSet)
+            {
+                xml += "\r\n<businessIndicator>" + businessIndicatorField + "</businessIndicator>";
+            }
             if (cryptoSet) xml += "\r\n<crypto>" + crypto.ToString().ToLower() + "</crypto>";
+            if (foreignRetailerIndicatorSet)
+            {
+                xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
+            }
             xml += "\r\n</sale>";
             return xml;
         }
@@ -2182,6 +2197,10 @@ namespace Litle.Sdk
             if (processingTypeSet && processingType != processingTypeEnum.undefined)
             {
                 xml += "\r\n<processingType>" + processingType + "</processingType>";
+            }
+            if (foreignRetailerIndicatorSet)
+            {
+                xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
             }
             xml += "\r\n</forceCapture>";
             return xml;
@@ -2406,7 +2425,15 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<merchantCategoryCode>" + merchantCategoryCode + "</merchantCategoryCode>";
             }
+            if (businessIndicatorSet)
+            {
+                xml += "\r\n<businessIndicator>" + businessIndicatorField + "</businessIndicator>";
+            }
             if (cryptoSet) xml += "\r\n<crypto>" + crypto.ToString().ToLower() + "</crypto>";
+            if (foreignRetailerIndicatorSet)//12.31
+            {
+                xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
+            }
             xml += "\r\n</captureGivenAuth>";
             return xml;
         }

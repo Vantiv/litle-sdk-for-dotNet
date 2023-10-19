@@ -229,5 +229,28 @@ namespace Litle.Sdk.Test.Functional
             var response = litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message);
         }
+        [Test]
+        public void simpleForceCaptureWithforeignRetailerIndicatorEnum()
+        {
+            var forcecapture = new forceCapture
+            {
+                id = "1",
+                amount = 106,
+                orderId = "12344",
+                orderSource = orderSourceType.ecommerce,
+                processingType = processingTypeEnum.cardholderInitiatedCOF,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                },
+                foreignRetailerIndicator = foreignRetailerIndicatorEnum.F,
+
+            };
+            var response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.message);
+        }
+
     }
 }
