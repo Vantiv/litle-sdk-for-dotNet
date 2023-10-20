@@ -128,7 +128,28 @@ namespace Litle.Sdk.Test.Unit
             litle.ForceCapture(forceCapture);
         }
 
+        [Test]
+        public void TestForceCapture_foreignRetailerIndicator()
+        {
+            forceCapture capture = new forceCapture();
+            capture.amount = 2;
+            capture.secondaryAmount = 1;
+            capture.orderSource = orderSourceType.ecommerce;
+            capture.reportGroup = "Planets";
+            capture.foreignRetailerIndicator = foreignRetailerIndicatorEnum.F;
 
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.ForceCapture(capture);
+        }
+
+
+        
 
     }
 }

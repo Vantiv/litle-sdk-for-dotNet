@@ -126,6 +126,44 @@ namespace Litle.Sdk.Test.Unit
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(captureGivenAuth);
         }
+        [Test]
+        public void TestCaptureGivenAuthv8_32And8_33()
+        {
+            captureGivenAuth capture = new captureGivenAuth();
+            capture.amount = 2;
+            capture.orderSource = orderSourceType.ecommerce;
+            capture.reportGroup = "Planets";
+            contact contact1 = new contact();
+            contact1.name = "John & Jane Smith";
+            contact1.addressLine1 = "1 Main St.";
+            contact1.city = "Burlington";
+            contact1.state = "MA";
+            contact1.zip = "01803-3747";
+            contact1.country = countryTypeEnum.US;
+            contact1.sellerId = "172354";
+            contact1.url = "www.google.com";
+            capture.retailerAddress = contact1;
+            additionalCOFData additionalCOFData = new additionalCOFData();
+            additionalCOFData.totalPaymentCount = "35";
+            additionalCOFData.paymentType = paymentTypeEnum.Fixed_Amount;
+            additionalCOFData.uniqueId = "12345wereew233";
+            additionalCOFData.frequencyOfMIT = frequencyOfMITEnum.BiWeekly;
+            additionalCOFData.validationReference = "re3298rhriw4wrw";
+            additionalCOFData.sequenceIndicator = 2;
+            capture.additionalCOFData = additionalCOFData;
+            capture.merchantCategoryCode = "1234";
+            capture.BusinessIndicator = businessIndicatorEnum.consumerBillPayment;
+            capture.crypto = true;
+            capture.foreignRetailerIndicator = foreignRetailerIndicatorEnum.F;
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.CaptureGivenAuth(capture);
+        }
 
     }
 }

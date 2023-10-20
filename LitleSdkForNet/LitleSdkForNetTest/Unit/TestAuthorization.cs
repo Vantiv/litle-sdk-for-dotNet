@@ -558,5 +558,77 @@ namespace Litle.Sdk.Test.Unit
         }
 
 
+        [Test]
+        public void TestAuthv8_32And8_33()
+        {
+            authorization auth = new authorization();
+            auth.card = new cardType();
+            auth.card.type = methodOfPaymentTypeEnum.VI;
+            auth.card.number = "4100000000000001";
+            auth.card.expDate = "1213";
+            auth.orderId = "12344";
+            auth.amount = 200;
+            auth.orderSource = orderSourceType.ecommerce;
+            auth.billMeLaterRequest = new billMeLaterRequest();
+            auth.billMeLaterRequest.virtualAuthenticationKeyData = "Data";
+            auth.billMeLaterRequest.virtualAuthenticationKeyPresenceIndicator = "Presence";
+            contact contact1 = new contact();
+            contact1.name = "John & Jane Smith";
+            contact1.addressLine1 = "1 Main St.";
+            contact1.city = "Burlington";
+            contact1.state = "MA";
+            contact1.zip = "01803-3747";
+            contact1.country = countryTypeEnum.US;
+            contact1.sellerId = "172354";
+            contact1.url = "www.google.com";
+            auth.retailerAddress = contact1;
+            additionalCOFData additionalCOFData = new additionalCOFData();
+            additionalCOFData.totalPaymentCount = "35";
+            additionalCOFData.paymentType = paymentTypeEnum.Fixed_Amount;
+            additionalCOFData.uniqueId = "12345wereew233";
+            additionalCOFData.frequencyOfMIT = frequencyOfMITEnum.BiWeekly;
+            additionalCOFData.validationReference = "re3298rhriw4wrw";
+            additionalCOFData.sequenceIndicator = 2;
+            auth.additionalCOFData = additionalCOFData;
+            auth.merchantCategoryCode = "1234";
+            auth.BusinessIndicator = businessIndicatorEnum.consumerBillPayment;
+            auth.crypto = true;
+            auth.authIndicator = authIndicatorEnum.Incremental;
+
+            var mock = new Mock<Communications>();
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<authorization id=\".*>.*<amount>200</amount>.*</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.33' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Authorize(auth);
+
+            authorizationResponse authorizationResponse = litle.Authorize(auth);
+
+            Assert.NotNull(authorizationResponse);
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+        }
+
+        [Test]
+        public void TestAuthv8_33LitleTxnIdwithAmountAndAuthIndicator()
+        {
+            authorization auth = new authorization();
+            auth.litleTxnId = 123;
+            auth.amount = 20;
+            auth.authIndicator = authIndicatorEnum.Estimated;
+           
+            var mock = new Mock<Communications>();
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<authorization.*>.*<litleTxnId>123</litleTxnId>.*</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.33' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Authorize(auth);
+
+            authorizationResponse authorizationResponse = litle.Authorize(auth);
+
+            Assert.NotNull(authorizationResponse);
+            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+        }
     }
 }
