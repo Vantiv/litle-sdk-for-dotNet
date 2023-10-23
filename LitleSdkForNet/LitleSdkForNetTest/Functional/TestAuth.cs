@@ -445,5 +445,72 @@ namespace Litle.Sdk.Test.Functional
 
             Assert.AreEqual("000", response.response);
         }
+        [Test]
+        public void AuthWithChanges8_32And8_33()
+        {
+            authorization authorization = new authorization();
+            authorization.orderId = "1";
+            authorization.amount = 10010;
+            authorization.orderSource = orderSourceType.ecommerce;
+            contact contact = new contact();
+            contact.name = "John & Jane Smith";
+            contact.addressLine1 = "1 Main St.";
+            contact.city = "Burlington";
+            contact.state = "MA";
+            contact.zip = "01803-3747";
+            contact.country = countryTypeEnum.US;
+            authorization.billToAddress = contact;
+            contact contact1 = new contact();
+            contact1.name = "John & Jane Smith";
+            contact1.addressLine1 = "1 Main St.";
+            contact1.city = "Burlington";
+            contact1.state = "MA";
+            contact1.zip = "01803-3747";
+            contact1.country = countryTypeEnum.US;
+            contact1.sellerId = "172354";
+            contact1.url = "www.google.com";
+            authorization.retailerAddress = contact1;
+            additionalCOFData additionalCOFData = new additionalCOFData();        
+            additionalCOFData.totalPaymentCount = "35";
+            additionalCOFData.paymentType = paymentTypeEnum.Fixed_Amount;
+            additionalCOFData.uniqueId = "12345wereew233";
+            additionalCOFData.frequencyOfMIT = frequencyOfMITEnum.BiWeekly;
+            additionalCOFData.validationReference = "re3298rhriw4wrw";
+            additionalCOFData.sequenceIndicator = 2;
+            authorization.additionalCOFData = additionalCOFData;
+            cardType card = new cardType();
+            card.type = methodOfPaymentTypeEnum.VI;
+            card.number = "4457010000000009";
+            card.expDate = "0112";
+            card.cardValidationNum = "349";
+            authorization.card = card;
+            mposType mpos = new mposType();
+            mpos.ksn = "77853211300008E00016";
+            mpos.encryptedTrack = "CASE1E185EADD6AFE78C9A214B21313DCD836FDD555FBE3A6C48D141FE80AB9172B963265AFF72111895FE415DEDA162CE8CB7AC4D91EDB611A2AB756AA9CB1A000000000000000000000000000000005A7AAF5E8885A9DB88ECD2430C497003F2646619A2382FFF205767492306AC804E8E64E8EA6981DD";
+            mpos.formatId = "30";
+            mpos.track1Status = 0;
+            mpos.track2Status = 0;
+            authorization.mpos = mpos;
+            authorization.merchantCategoryCode = "1234";
+            authorization.BusinessIndicator = businessIndicatorEnum.consumerBillPayment;
+            authorization.crypto = true;
+            authorization.authIndicator = authIndicatorEnum.Incremental;
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
+
+        [Test]
+        public void AuthWithAuthIndicatorAndAmount()
+        {
+            authorization authorization = new authorization();
+            authorization.litleTxnId = 1254654654;
+            authorization.amount = 1001;
+            authorization.authIndicator = authIndicatorEnum.Incremental;
+            authorization.crypto = true;
+            authorization.merchantCategoryCode = "1234";
+            authorization.BusinessIndicator = businessIndicatorEnum.consumerBillPayment;
+            authorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.response);
+        }
     }
 }

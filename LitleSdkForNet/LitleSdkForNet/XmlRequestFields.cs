@@ -45,7 +45,7 @@ namespace Litle.Sdk
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.31\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"8.33\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
                 + authentication.Serialize();
 
             if (authorization != null) xml += authorization.Serialize();
@@ -390,6 +390,28 @@ namespace Litle.Sdk
             return xml;
         }
     }
+    public enum businessIndicatorEnum
+    {
+
+        /// <remarks/>
+        consumerBillPayment,
+
+        /// <remarks/>
+        buyOnlinePickUpInStore,
+        highRiskSecuritiesPurchase,
+        fundTransfer,
+        walletTransfer,
+    }
+
+    public enum foreignRetailerIndicatorEnum
+    {
+        F,
+    }
+    public enum authIndicatorEnum
+    {
+        Estimated,
+        Incremental,
+    }
 
     public partial class voidTxn : transactionTypeWithReportGroup
     {
@@ -574,6 +596,13 @@ namespace Litle.Sdk
             set { this.payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
         }
         public string payPalNotes;
+        private foreignRetailerIndicatorEnum foreignRetailerIndicatorField;
+        private bool foreignRetailerIndicatorSet;
+        public foreignRetailerIndicatorEnum foreignRetailerIndicator
+        {
+            get { return this.foreignRetailerIndicatorField; }
+            set { this.foreignRetailerIndicatorField = value; this.foreignRetailerIndicatorSet = true; }
+        }
 
         public override string Serialize()
         {
@@ -596,6 +625,10 @@ namespace Litle.Sdk
             if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
             if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderComplete>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderComplete>";
             if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
+            if (foreignRetailerIndicatorSet)
+            {
+                xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
+            }
             xml += "\r\n</capture>";
 
             return xml;
@@ -1370,6 +1403,8 @@ namespace Litle.Sdk
         public customerInfo customerInfo;
         public contact billToAddress;
         public contact shipToAddress;
+        public contact retailerAddress;
+        public additionalCOFData additionalCOFData; 
         public cardType card;
         public mposType mpos;
         public payPal paypal;
@@ -1475,6 +1510,36 @@ namespace Litle.Sdk
             }
         }
 
+        public string merchantCategoryCode;
+        private businessIndicatorEnum businessIndicatorField;
+        private bool businessIndicatorSet;
+        public businessIndicatorEnum BusinessIndicator
+        {
+            get { return this.businessIndicatorField; }
+            set { this.businessIndicatorField = value; this.businessIndicatorSet = true; }
+        }
+        private bool cryptoField;
+        private bool cryptoSet;
+        public bool crypto
+        {
+            get
+            {
+                return this.cryptoField;
+            }
+            set
+            {
+                this.cryptoField = value;
+                this.cryptoSet = true;
+            }
+        }
+        private authIndicatorEnum authIndicatorEnumField;
+        private bool authIndicatorEnumSet;
+        public authIndicatorEnum authIndicator
+        {
+            get { return this.authIndicatorEnumField; }
+            set { this.authIndicatorEnumField = value; this.authIndicatorEnumSet = true; }
+        }
+
         public override String Serialize()
         {
             string xml = "\r\n<authorization";
@@ -1487,6 +1552,11 @@ namespace Litle.Sdk
             if (litleTxnIdSet)
             {
                 xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
+                xml += "\r\n<amount>" + amount + "</amount>";
+                 if (authIndicatorEnumSet)
+                 {
+                      xml += "\r\n<authIndicator>" + authIndicator + "</authIndicator>";
+                 }
             }
             else
             {
@@ -1507,6 +1577,14 @@ namespace Litle.Sdk
                 if (shipToAddress != null)
                 {
                     xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "\r\n</shipToAddress>";
+                }
+                if (retailerAddress != null)
+                {
+                    xml += "\r\n<retailerAddress>" + retailerAddress.Serialize() + "\r\n</retailerAddress>";
+                }
+                if (additionalCOFData != null)
+                {
+                    xml += "\r\n<additionalCOFData>" + additionalCOFData.Serialize() + "\r\n</additionalCOFData>";
                 }
                 if (card != null)
                 {
@@ -1606,6 +1684,19 @@ namespace Litle.Sdk
                 {
                     xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
                 }
+                if (merchantCategoryCode != null)
+                {
+                    xml += "\r\n<merchantCategoryCode>" + merchantCategoryCode + "</merchantCategoryCode>";
+                }
+                if (businessIndicatorSet)
+                {
+                    xml += "\r\n<businessIndicator>" + businessIndicatorField + "</businessIndicator>";
+                }
+                if (cryptoSet) xml += "\r\n<crypto>" + crypto.ToString().ToLower() + "</crypto>";
+                if (authIndicatorEnumSet)
+                {
+                    xml += "\r\n<authIndicator>" + authIndicator + "</authIndicator>";
+                }
             }
             xml += "\r\n</authorization>";
             return xml;
@@ -1667,6 +1758,8 @@ namespace Litle.Sdk
         public customerInfo customerInfo;
         public contact billToAddress;
         public contact shipToAddress;
+        public contact retailerAddress;
+        public additionalCOFData additionalCOFData;
         public cardType card;
         public mposType mpos;
         public payPal paypal;
@@ -1779,7 +1872,38 @@ namespace Litle.Sdk
                 originalTransactionAmountField = value;
                 originalTransactionAmountSet = true;
             }
+
         }
+        public string merchantCategoryCode;
+        private businessIndicatorEnum businessIndicatorField;
+        private bool businessIndicatorSet;
+        public businessIndicatorEnum BusinessIndicator
+        {
+            get { return this.businessIndicatorField; }
+            set { this.businessIndicatorField = value; this.businessIndicatorSet = true; }
+        }
+        private bool cryptoField;
+        private bool cryptoSet;
+        public bool crypto
+        {
+            get
+            {
+                return this.cryptoField;
+            }
+            set
+            {
+                this.cryptoField = value;
+                this.cryptoSet = true;
+            }
+        }
+        private foreignRetailerIndicatorEnum foreignRetailerIndicatorField;
+        private bool foreignRetailerIndicatorSet;
+        public foreignRetailerIndicatorEnum foreignRetailerIndicator
+        {
+            get { return this.foreignRetailerIndicatorField; }
+            set { this.foreignRetailerIndicatorField = value; this.foreignRetailerIndicatorSet = true; }
+        }
+
 
         public override String Serialize()
         {
@@ -1807,6 +1931,14 @@ namespace Litle.Sdk
             if (shipToAddress != null)
             {
                 xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "\r\n</shipToAddress>";
+            }
+            if (retailerAddress != null)
+            {
+                xml += "\r\n<retailerAddress>" + retailerAddress.Serialize() + "\r\n</retailerAddress>";
+            }
+            if (additionalCOFData != null)
+            {
+                xml += "\r\n<additionalCOFData>" + additionalCOFData.Serialize() + "\r\n</additionalCOFData>";
             }
             if (card != null)
             {
@@ -1913,6 +2045,19 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
             }
+            if (merchantCategoryCode != null)
+            {
+                xml += "\r\n<merchantCategoryCode>" + merchantCategoryCode + "</merchantCategoryCode>";
+            }
+            if (businessIndicatorSet)
+            {
+                xml += "\r\n<businessIndicator>" + businessIndicatorField + "</businessIndicator>";
+            }
+            if (cryptoSet) xml += "\r\n<crypto>" + crypto.ToString().ToLower() + "</crypto>";
+            if (foreignRetailerIndicatorSet)
+            {
+                xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
+            }
             xml += "\r\n</sale>";
             return xml;
         }
@@ -1977,6 +2122,14 @@ namespace Litle.Sdk
             get { return processingTypeField; }
             set { processingTypeField = value; processingTypeSet = true; }
         }
+        private foreignRetailerIndicatorEnum foreignRetailerIndicatorField;
+        private bool foreignRetailerIndicatorSet;
+        public foreignRetailerIndicatorEnum foreignRetailerIndicator
+        {
+            get { return this.foreignRetailerIndicatorField; }
+            set { this.foreignRetailerIndicatorField = value; this.foreignRetailerIndicatorSet = true; }
+        }
+
 
         public override String Serialize()
         {
@@ -2045,6 +2198,10 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<processingType>" + processingType + "</processingType>";
             }
+            if (foreignRetailerIndicatorSet)
+            {
+                xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
+            }
             xml += "\r\n</forceCapture>";
             return xml;
         }
@@ -2072,6 +2229,8 @@ namespace Litle.Sdk
         public orderSourceType orderSource;
         public contact billToAddress;
         public contact shipToAddress;
+        public contact retailerAddress;
+        public additionalCOFData additionalCOFData;
         public cardType card;
         public mposType mpos;
         public cardTokenType token;
@@ -2139,6 +2298,36 @@ namespace Litle.Sdk
                 originalTransactionAmountSet = true;
             }
         }
+        public string merchantCategoryCode;
+        private businessIndicatorEnum businessIndicatorField;
+        private bool businessIndicatorSet;
+        public businessIndicatorEnum BusinessIndicator
+        {
+            get { return this.businessIndicatorField; }
+            set { this.businessIndicatorField = value; this.businessIndicatorSet = true; }
+        }
+        private bool cryptoField;
+        private bool cryptoSet;
+        public bool crypto
+        {
+            get
+            {
+                return this.cryptoField;
+            }
+            set
+            {
+                this.cryptoField = value;
+                this.cryptoSet = true;
+            }
+        }
+        private foreignRetailerIndicatorEnum foreignRetailerIndicatorField;
+        private bool foreignRetailerIndicatorSet;
+        public foreignRetailerIndicatorEnum foreignRetailerIndicator
+        {
+            get { return this.foreignRetailerIndicatorField; }
+            set { this.foreignRetailerIndicatorField = value; this.foreignRetailerIndicatorSet = true; }
+        }
+
 
         public override String Serialize()
         {
@@ -2162,6 +2351,14 @@ namespace Litle.Sdk
             if (shipToAddress != null)
             {
                 xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "\r\n</shipToAddress>";
+            }
+            if (retailerAddress != null)
+            {
+                xml += "\r\n<retailerAddress>" + retailerAddress.Serialize() + "\r\n</retailerAddress>";
+            }
+            if (additionalCOFData != null)
+            {
+                xml += "\r\n<additionalCOFData>" + additionalCOFData.Serialize() + "\r\n</additionalCOFData>";
             }
             if (card != null)
             {
@@ -2223,6 +2420,19 @@ namespace Litle.Sdk
             if (originalTransactionAmountSet)
             {
                 xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
+            }
+            if (merchantCategoryCode != null)
+            {
+                xml += "\r\n<merchantCategoryCode>" + merchantCategoryCode + "</merchantCategoryCode>";
+            }
+            if (businessIndicatorSet)
+            {
+                xml += "\r\n<businessIndicator>" + businessIndicatorField + "</businessIndicator>";
+            }
+            if (cryptoSet) xml += "\r\n<crypto>" + crypto.ToString().ToLower() + "</crypto>";
+            if (foreignRetailerIndicatorSet)//12.31
+            {
+                xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
             }
             xml += "\r\n</captureGivenAuth>";
             return xml;
@@ -2938,6 +3148,9 @@ namespace Litle.Sdk
         }
         public string email;
         public string phone;
+        public string sellerId;
+        public string url;
+
 
         public string Serialize()
         {
@@ -2956,6 +3169,8 @@ namespace Litle.Sdk
             if (countrySpecified) xml += "\r\n<country>" + countryField + "</country>";
             if (email != null) xml += "\r\n<email>" + SecurityElement.Escape(email) + "</email>";
             if (phone != null) xml += "\r\n<phone>" + SecurityElement.Escape(phone) + "</phone>";
+            if (sellerId != null) xml += "\r\n<sellerId>" + SecurityElement.Escape(sellerId) + "</sellerId>";
+            if (url != null) xml += "\r\n<url>" + SecurityElement.Escape(url) + "</url>";
             return xml;
         }
     }
@@ -3343,6 +3558,74 @@ namespace Litle.Sdk
         }
 
     }
+    public partial class additionalCOFData
+    {
+        public string totalPaymentCount;
+        private paymentTypeEnum paymentTypeField;
+        private bool paymentTypeSet;
+        public paymentTypeEnum paymentType
+        {
+            get { return paymentTypeField; }
+            set { paymentTypeField = value; paymentTypeSet = true; }
+        }
+        public string uniqueId;
+        private frequencyOfMITEnum frequencyOfMITField;
+        private bool frequencyOfMITSet;
+        public frequencyOfMITEnum frequencyOfMIT
+        {
+            get { return frequencyOfMITField; }
+            set { frequencyOfMITField = value; frequencyOfMITSet = true; }
+        }
+        public string validationReference;
+        private int sequenceIndicatorField;
+        private bool sequenceIndicatorSet;
+        public int sequenceIndicator
+        {
+            get { return sequenceIndicatorField; }
+            set { sequenceIndicatorField = value; sequenceIndicatorSet = true; }
+        }
+
+        public string Serialize()
+        {
+            var xml = "";
+            if (totalPaymentCount != null) xml += "\r\n<totalPaymentCount>" + SecurityElement.Escape(totalPaymentCount) + "</totalPaymentCount>";
+            var accTypeName = paymentTypeField.ToString();
+            var attributes =
+                (XmlEnumAttribute[])typeof(paymentTypeEnum).GetMember(paymentTypeField.ToString())[0].GetCustomAttributes(typeof(XmlEnumAttribute), false);
+            if (attributes.Length > 0) accTypeName = attributes[0].Name;
+
+
+            if (paymentTypeSet) xml += "\r\n<paymentType>" + accTypeName + "</paymentType>";///12.24
+
+            ///if (paymentTypeSet) xml += "\r\n<paymentType>" + paymentTypeField + "</paymentType>";
+            if (uniqueId != null) xml += "\r\n<uniqueId>" + SecurityElement.Escape(uniqueId) + "</uniqueId>";
+            if (frequencyOfMITSet) xml += "\r\n<frequencyOfMIT>" + frequencyOfMITField + "</frequencyOfMIT>";
+            if (validationReference != null) xml += "\r\n<validationReference>" + SecurityElement.Escape(validationReference) + "</validationReference>";
+            if (sequenceIndicatorSet) xml += "\r\n<sequenceIndicator>" + sequenceIndicatorField + "</sequenceIndicator>";
+            return xml;
+        }
+
+    }
+    public enum paymentTypeEnum
+    {
+        [System.Xml.Serialization.XmlEnumAttribute("Fixed Amount")]
+        Fixed_Amount,
+
+        [System.Xml.Serialization.XmlEnumAttribute("Variable Amount")]
+        Variable_Amount,
+    }
+    public enum frequencyOfMITEnum
+    {
+        Daily,
+        Weekly,
+        BiWeekly,
+        Monthly,
+        Quarterly,
+        BiAnnually,
+        Annually,
+        UNSCHEDULED,
+    }
+
 
     public partial class authReversal : transactionTypeWithReportGroup
     {

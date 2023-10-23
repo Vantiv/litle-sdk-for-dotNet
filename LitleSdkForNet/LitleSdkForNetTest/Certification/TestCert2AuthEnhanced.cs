@@ -19,7 +19,7 @@ namespace Litle.Sdk.Test.Certification
             config.Add("url", "https://payments.vantivprelive.com/vap/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", Properties.Settings.Default.username);
-            config.Add("version", "8.31");
+            config.Add("version", "8.33");
             config.Add("timeout", "20000");
             config.Add("merchantId", Properties.Settings.Default.merchantId);
             config.Add("password", Properties.Settings.Default.password);

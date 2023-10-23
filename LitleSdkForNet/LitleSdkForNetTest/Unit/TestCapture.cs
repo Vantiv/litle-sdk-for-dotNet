@@ -60,5 +60,26 @@ namespace Litle.Sdk.Test.Unit
             litle.Capture(capture);
         }
 
+
+        [Test]
+        public void TestCapture_foreignRetailerIndicator()
+        {
+            capture capture = new capture();
+            capture.litleTxnId = 3;
+            capture.amount = 2;
+            capture.surchargeAmount = 1;
+            capture.payPalNotes = "note";
+            capture.reportGroup = "Planets";
+            capture.foreignRetailerIndicator = foreignRetailerIndicatorEnum.F;
+
+            var mock = new Mock<Communications>();
+
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<payPalNotes>note</payPalNotes>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureResponse><litleTxnId>123</litleTxnId></captureResponse></litleOnlineResponse>");
+
+            Communications mockedCommunication = mock.Object;
+            litle.setCommunication(mockedCommunication);
+            litle.Capture(capture);
+        }
     }
 }

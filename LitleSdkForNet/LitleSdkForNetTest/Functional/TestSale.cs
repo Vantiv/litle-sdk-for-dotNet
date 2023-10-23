@@ -154,6 +154,43 @@ namespace Litle.Sdk.Test.Functional
             Assert.AreEqual("Insufficient Funds", responseObj.message);
             Assert.AreEqual("110", responseObj.applepayResponse.transactionAmount);
         }
-            
+        [Test]
+        public void SimpleSaleWithChanges8_32And8_33()
+        {
+            sale saleObj = new sale();
+            saleObj.amount = 106;
+            saleObj.litleTxnId = 123456;
+            saleObj.orderId = "12344";
+            saleObj.orderSource = orderSourceType.ecommerce;
+            contact contact = new contact();
+            contact.name = "John & Jane Smith";
+            contact.addressLine1 = "1 Main St.";
+            contact.city = "Burlington";
+            contact.state = "MA";
+            contact.zip = "01803-3747";
+            contact.country = countryTypeEnum.US;
+            saleObj.retailerAddress = contact;
+            additionalCOFData additionalCOFData = new additionalCOFData();
+            additionalCOFData.totalPaymentCount = "35";
+            additionalCOFData.paymentType = paymentTypeEnum.Fixed_Amount;
+            additionalCOFData.uniqueId = "12345wereew233";
+            additionalCOFData.frequencyOfMIT = frequencyOfMITEnum.BiWeekly;
+            additionalCOFData.validationReference = "re3298rhriw4wrw";
+            additionalCOFData.sequenceIndicator = 2;
+            saleObj.additionalCOFData = additionalCOFData;
+            cardType cardObj = new cardType();
+            cardObj.type = methodOfPaymentTypeEnum.VI;
+            cardObj.number = "4100000000000000";
+            cardObj.expDate = "1210";
+            saleObj.card = cardObj;
+            saleObj.merchantCategoryCode = "1234";
+            saleObj.BusinessIndicator = businessIndicatorEnum.consumerBillPayment;
+            saleObj.crypto = true;
+            saleObj.foreignRetailerIndicator = foreignRetailerIndicatorEnum.F;
+            saleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+        }
+
+
     }
 }
