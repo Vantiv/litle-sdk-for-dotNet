@@ -1,5 +1,25 @@
 = LitleOnline CHANGELOG
 
+== Version 8.33.0 (Oct 23, 2023)
+* Added New Enum -foreignRetailerIndicatorEnum with value F.
+* Added New Enum foreignRetailerIndicatorEnum is added in Capture, forceCapture,captureGivenAuth,sale request.
+* Added New Enum -authIndicatorEnum with value Estimated, Incremental.
+* Added new element amount, authIndicator in authorization
+
+== Version 8.32.0 (Oct 23, 2023)
+* New elements retailerAddress added of type contact in authorization , captureGivenAuth and sale Request. 
+* New elements additionalCOFData added of type additionalCOFData in authorization , captureGivenAuth and sale
+  request.
+* New elements totalPaymentCount, paymentType, uniqueId,frequencyOfMIT,validationReference, sequenceIndicator are added for new element additionalCOFData
+* Added new elements businessIndicator, merchantCategoryCode, crypto in authorization, captureGivenAuth and sale
+  request.
+* Added new subelements SellerId, URL in existing complex type Contact.
+* Added New Enum businessIndicatorEnum with values consumerBillPayment, buyOnlinePickUpInStore,
+  highRiskSecuritiesPurchase, fundTransfer, walletTransfer.
+* Added New Enum paymentTypeEnum with values Fixed Amount, Variable Amount.
+* Added New Enum frequencyOfMITEnum with values Daily, Weekly, BiWeekly, Monthly, Quarterly, BiAnnually,
+  Annually, UNSCHEDULED.
+
 == Version 8.31.5 (Oct 22, 2019)
 * BugFix: Fixed custom timeout not being used
 
