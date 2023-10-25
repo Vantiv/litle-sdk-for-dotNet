@@ -1868,8 +1868,8 @@ namespace Litle.Sdk
                 originalTransactionAmountField = value;
                 originalTransactionAmountSet = true;
             }
-
         }
+        
         public string merchantCategoryCode;
         private businessIndicatorEnum businessIndicatorField;
         private bool businessIndicatorSet;
@@ -1899,7 +1899,6 @@ namespace Litle.Sdk
             get { return this.foreignRetailerIndicatorField; }
             set { this.foreignRetailerIndicatorField = value; this.foreignRetailerIndicatorSet = true; }
         }
-
 
         public override String Serialize()
         {

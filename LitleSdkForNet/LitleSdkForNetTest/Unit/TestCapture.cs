@@ -84,6 +84,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.NotNull(captureResponse);
             Assert.AreEqual(123, captureResponse.litleTxnId);
+
         }
     }
 }

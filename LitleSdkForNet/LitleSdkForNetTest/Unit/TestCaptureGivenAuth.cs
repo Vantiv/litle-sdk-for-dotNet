@@ -165,6 +165,7 @@ namespace Litle.Sdk.Test.Unit
             captureGivenAuthResponse captureGivenAuthResponse= litle.CaptureGivenAuth(capture);
             Assert.NotNull(captureGivenAuthResponse);
             Assert.AreEqual(123, captureGivenAuthResponse.litleTxnId);
+
         }
 
     }
