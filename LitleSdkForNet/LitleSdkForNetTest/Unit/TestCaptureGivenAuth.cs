@@ -158,11 +158,13 @@ namespace Litle.Sdk.Test.Unit
             var mock = new Mock<Communications>();
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+                .Returns("<litleOnlineResponse version='8.33' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
-            litle.CaptureGivenAuth(capture);
+            captureGivenAuthResponse captureGivenAuthResponse= litle.CaptureGivenAuth(capture);
+            Assert.NotNull(captureGivenAuthResponse);
+            Assert.AreEqual(123, captureGivenAuthResponse.litleTxnId);
         }
 
     }

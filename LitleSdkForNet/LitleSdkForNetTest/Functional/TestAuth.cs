@@ -505,10 +505,7 @@ namespace Litle.Sdk.Test.Functional
             authorization authorization = new authorization();
             authorization.litleTxnId = 1254654654;
             authorization.amount = 1001;
-            authorization.authIndicator = authIndicatorEnum.Incremental;
-            authorization.crypto = true;
-            authorization.merchantCategoryCode = "1234";
-            authorization.BusinessIndicator = businessIndicatorEnum.consumerBillPayment;
+            authorization.authIndicator = authIndicatorEnum.Incremental;          
             authorizationResponse response = litle.Authorize(authorization);
             Assert.AreEqual("000", response.response);
         }

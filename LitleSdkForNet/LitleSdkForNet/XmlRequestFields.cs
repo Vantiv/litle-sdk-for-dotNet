@@ -391,12 +391,8 @@ namespace Litle.Sdk
         }
     }
     public enum businessIndicatorEnum
-    {
-
-        /// <remarks/>
-        consumerBillPayment,
-
-        /// <remarks/>
+    {    
+        consumerBillPayment,               
         buyOnlinePickUpInStore,
         highRiskSecuritiesPurchase,
         fundTransfer,
@@ -2430,7 +2426,7 @@ namespace Litle.Sdk
                 xml += "\r\n<businessIndicator>" + businessIndicatorField + "</businessIndicator>";
             }
             if (cryptoSet) xml += "\r\n<crypto>" + crypto.ToString().ToLower() + "</crypto>";
-            if (foreignRetailerIndicatorSet)//12.31
+            if (foreignRetailerIndicatorSet)
             {
                 xml += "\r\n<foreignRetailerIndicator>" + foreignRetailerIndicatorField + "</foreignRetailerIndicator>";
             }
@@ -3593,11 +3589,7 @@ namespace Litle.Sdk
             var attributes =
                 (XmlEnumAttribute[])typeof(paymentTypeEnum).GetMember(paymentTypeField.ToString())[0].GetCustomAttributes(typeof(XmlEnumAttribute), false);
             if (attributes.Length > 0) accTypeName = attributes[0].Name;
-
-
-            if (paymentTypeSet) xml += "\r\n<paymentType>" + accTypeName + "</paymentType>";///12.24
-
-            ///if (paymentTypeSet) xml += "\r\n<paymentType>" + paymentTypeField + "</paymentType>";
+            if (paymentTypeSet) xml += "\r\n<paymentType>" + accTypeName + "</paymentType>";                      
             if (uniqueId != null) xml += "\r\n<uniqueId>" + SecurityElement.Escape(uniqueId) + "</uniqueId>";
             if (frequencyOfMITSet) xml += "\r\n<frequencyOfMIT>" + frequencyOfMITField + "</frequencyOfMIT>";
             if (validationReference != null) xml += "\r\n<validationReference>" + SecurityElement.Escape(validationReference) + "</validationReference>";
@@ -3625,7 +3617,6 @@ namespace Litle.Sdk
         Annually,
         UNSCHEDULED,
     }
-
 
     public partial class authReversal : transactionTypeWithReportGroup
     {
