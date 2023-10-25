@@ -817,7 +817,7 @@ namespace Litle.Sdk
             {
                 xmlHeader += "numBalanceInquirys=\"" + numBalanceInquiries + "\"\r\n";
             }
-            xmlHeader += "merchantSdk=\"DotNet;8.31.5\"\r\n";
+            xmlHeader += "merchantSdk=\"DotNet;8.33.0\"\r\n";
 
             xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
             return xmlHeader;
